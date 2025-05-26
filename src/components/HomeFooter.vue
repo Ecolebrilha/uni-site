@@ -1,7 +1,7 @@
 <template>
   <footer>
     <div class="footer-logo">
-      <img src="@/assets/footerSelo.png" alt="Imagem Selo do footer" class="logo-image">
+      <a href="/unihospitalarsite/"><img src="@/assets/footerSelo.png" alt="Imagem Selo do footer" class="logo-image"></a>
     </div>
     <div class="footer-mensagem">
       <p>© 2025 | Uni Hospitalar Ltda. – Todos os direitos reservados</p>
@@ -31,7 +31,7 @@ footer {
 .footer-logo {
   flex: 1;
   display: flex;
-  justify-content: center; /* Centraliza horizontalmente a logo */
+  justify-content: center;
   align-items: center;
 }
 
@@ -39,6 +39,7 @@ footer {
   background-color: rgba(255, 255, 255, 0.9);
   padding: 5px;
   border-radius: 40%;
+  cursor: pointer;
 }
 
 .logo-image:hover {
@@ -66,25 +67,26 @@ footer {
 }
 
 .company-name {
-  color: #AE2C2A; /* Vermelho da marca */
+  color: #FF5555;
   font-weight: 900;
   transition: color 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .registered-mark {
-  color: #ffcc00; /* Amarelo dourado para o símbolo de marca registrada */
-  font-size: 1em; /* Tamanho igual ao texto */
+  color: #ffffff;
+  font-size: 1em;
   font-weight: bold;
   margin-left: 2px;
   display: inline-block;
 }
 
 .footer-desenvolvedor a:hover .company-name {
-  color: #FF5555; /* Tom mais claro de vermelho ao passar o mouse */
+  color: #AE2C2A;
 }
 
 .footer-desenvolvedor a:hover .registered-mark {
-  color: #ffffff; /* Branco ao passar o mouse */
+  color: #ffffff;
 }
 
 @media (max-width: 1055px) {

@@ -7,7 +7,7 @@
       <div class="parallax-container">
         <div class="overlay"></div>
         <h1 class="hero-title">Política de Privacidade</h1>
-        <div class="hero-subtitle">Seu compromisso com a segurança e proteção de dados</div>
+        <div class="hero-subtitle">Nosso compromisso com a segurança e proteção de dados</div>
       </div>
     </section>
     
