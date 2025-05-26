@@ -34,37 +34,50 @@
           <li><router-link to="/Compliance" exact-active-class="active" @click="closeSidebar">
             <i class="fas fa-shield-alt"></i> Compliance
           </router-link></li>
-          <li class="dropdown">
-            <div class="dropdown-header" @click="toggleDropdown('lgpd')">
-              <router-link to="/LGPD" exact-active-class="active" @click="closeSidebar">
-                <i class="fas fa-lock"></i> LGPD
+          <li class="sidebar-dropdown">
+            <div class="sidebar-dropdown-toggle">
+              <router-link to="/LGPD" class="sidebar-dropdown-main" @click="closeSidebar">
+                <i class="fas fa-lock"></i>
+                <span>LGPD</span>
               </router-link>
-              <i class="fas fa-chevron-down dropdown-icon" :class="{'rotated': openDropdown === 'lgpd'}"></i>
+              <div class="sidebar-dropdown-arrow-container" @click.stop="toggleDropdown('lgpd')">
+                <i class="fas fa-chevron-down sidebar-dropdown-arrow" 
+                   :class="{ 'rotated': openDropdown === 'lgpd' }"></i>
+              </div>
             </div>
-            <ul class="dropdown-content" :class="{'open': openDropdown === 'lgpd'}">
-              <li><router-link to="/PoliticaPrivacidade" exact-active-class="active" @click="closeSidebar">
-                <i class="fas fa-file-alt"></i> Política de Privacidade
-              </router-link></li>
-              <li><router-link to="/TermosLegais" exact-active-class="active" @click="closeSidebar">
-                <i class="fas fa-gavel"></i> Termos Legais de Uso do site
-              </router-link></li>
-            </ul>
+            <div class="sidebar-dropdown-menu" :class="{ 'show': openDropdown === 'lgpd' }">
+              <router-link to="/PoliticaPrivacidade" class="sidebar-dropdown-item" @click="closeSidebar">
+                <i class="fas fa-file-shield"></i>
+                <span class="politica-span">Política de Privacidade</span>
+              </router-link>
+              <router-link to="/TermosLegais" class="sidebar-dropdown-item" @click="closeSidebar">
+                <i class="fas fa-gavel"></i>
+                <span>Termos Legais</span>
+              </router-link>
+            </div>
           </li>
-          <li class="dropdown">
-            <div class="dropdown-header" @click="toggleDropdown('contato')">
-              <router-link to="/Contato" exact-active-class="active" @click="closeSidebar">
-                <i class="fas fa-envelope"></i> Contato
+
+          <li class="sidebar-dropdown">
+            <div class="sidebar-dropdown-toggle">
+              <router-link to="/Contato" class="sidebar-dropdown-main" @click="closeSidebar">
+                <i class="fas fa-envelope"></i>
+                <span>Contato</span>
               </router-link>
-              <i class="fas fa-chevron-down dropdown-icon" :class="{'rotated': openDropdown === 'contato'}"></i>
+              <div class="sidebar-dropdown-arrow-container" @click.stop="toggleDropdown('contato')">
+                <i class="fas fa-chevron-down sidebar-dropdown-arrow" 
+                   :class="{ 'rotated': openDropdown === 'contato' }"></i>
+              </div>
             </div>
-            <ul class="dropdown-content" :class="{'open': openDropdown === 'contato'}">
-              <li><router-link to="/SejaParceiro" exact-active-class="active" @click="closeSidebar">
-                <i class="fas fa-handshake"></i> Seja Nosso Parceiro
-              </router-link></li>
-              <li><router-link to="/TrabalheConosco" exact-active-class="active" @click="closeSidebar">
-                <i class="fas fa-briefcase"></i> Trabalhe Conosco
-              </router-link></li>
-            </ul>
+            <div class="sidebar-dropdown-menu" :class="{ 'show': openDropdown === 'contato' }">
+              <router-link to="/SejaParceiro" class="sidebar-dropdown-item" @click="closeSidebar">
+                <i class="fas fa-handshake"></i>
+                <span class="seja-parceiro-span">Seja Nosso Parceiro</span>
+              </router-link>
+              <!-- <router-link to="/TrabalheConosco" class="sidebar-dropdown-item" @click="closeSidebar">
+                <i class="fas fa-briefcase"></i>
+                <span>Trabalhe Conosco</span>
+              </router-link> -->
+            </div>
           </li>
         </ul>
       </div>
@@ -187,14 +200,14 @@
                   <span class="item-title">Seja Nosso Parceiro</span>
                 </div>
               </router-link>
-              <router-link to="/TrabalheConosco" exact-active-class="active" class="dropdown-item">
+              <!-- <router-link to="/TrabalheConosco" exact-active-class="active" class="dropdown-item">
                 <div class="item-icon">
                   <i class="fas fa-briefcase"></i>
                 </div>
                 <div class="item-content">
                   <span class="item-title">Trabalhe Conosco</span>
                 </div>
-              </router-link>
+              </router-link> -->
             </div>
           </div>
         </li>
@@ -537,7 +550,7 @@ nav ul li.dropdown:hover .dropdown-arrow {
   left: 50%;
   transform: translateX(-50%);
   min-width: 320px;
-  min-height: 180px;
+  min-height: 100px;
   background: linear-gradient(135deg, rgba(173, 64, 62, 0.95), rgba(120, 20, 18, 0.95));
   border-radius: 12px;
   color: white;
@@ -851,43 +864,286 @@ nav ul li.dropdown:hover .dropdown-content {
   padding-left: 25px;
 }
 
-/* Estilo para dropdowns no sidebar */
-.dropdown-header {
+.sidebar-dropdown {
+  margin-bottom: 5px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #ffffff, #f8f9fa);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-dropdown:hover {
+  box-shadow: 0 4px 16px rgba(174, 44, 42, 0.1);
+  transform: translateY(-1px);
+}
+
+.sidebar-dropdown-toggle {
   display: flex;
+  align-items: stretch; /* ALTERADO de center para stretch */
   justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
+  padding: 0;
+  cursor: default;
+  background: transparent;
+  border: none;
+  width: 100%;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  min-height: 50px; /* ADICIONADO */
 }
 
-.dropdown-header a {
-  flex: 1;
+.sidebar-dropdown-toggle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(174, 44, 42, 0.1), transparent);
+  transition: left 0.5s ease;
 }
 
-.dropdown-icon {
-  margin-right: 20px;
-  transition: transform 0.3s ease;
+.sidebar-dropdown-toggle:hover::before {
+  left: 100%;
+}
+
+.sidebar-dropdown-toggle:hover {
+  background: linear-gradient(135deg, rgba(174, 44, 42, 0.05), rgba(174, 44, 42, 0.02));
   color: #AE2C2A;
 }
 
-.dropdown-icon.rotated {
+.sidebar-dropdown-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #2c3e50;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  padding: 16px 20px;
+  flex: 1;
+  border-radius: 12px 0 0 12px;
+  min-height: 50px; /* ADICIONADO */
+  box-sizing: border-box; /* ADICIONADO */
+}
+
+.sidebar-dropdown-main:hover {
+  background: linear-gradient(135deg, rgba(174, 44, 42, 0.05), rgba(174, 44, 42, 0.02));
+  color: #AE2C2A;
+  transform: translateX(3px);
+}
+
+.sidebar-dropdown-main i {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #AE2C2A;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.sidebar-dropdown-main:hover i {
+  transform: scale(1.1);
+  color: #ff5555;
+}
+
+.sidebar-dropdown-arrow {
+  font-size: 14px !important;
+  color: #AE2C2A !important;
+  transition: all 0.3s ease !important;
+  display: inline-block !important;
+  line-height: 1 !important;
+}
+
+.sidebar-dropdown-arrow.rotated {
+  transform: rotate(180deg) !important;
+}
+
+/* Estado ativo do router-link */
+.sidebar-dropdown-main.router-link-active {
+  background: linear-gradient(135deg, rgba(174, 44, 42, 0.15), rgba(174, 44, 42, 0.08));
+  color: #AE2C2A;
+  font-weight: 700;
+}
+
+.sidebar-dropdown-main.router-link-active i {
+  color: #AE2C2A;
+}
+
+/* Remover os efeitos de hover do toggle principal */
+.sidebar-dropdown-toggle::before {
+  display: none;
+}
+
+.sidebar-dropdown-toggle:hover {
+  background: transparent;
+}
+
+.sidebar-dropdown-toggle:hover .sidebar-dropdown-main {
+  color: #AE2C2A;
+  transform: translateX(3px);
+}
+
+.sidebar-dropdown-toggle:hover .sidebar-dropdown-main i {
+  transform: scale(1.1);
+  color: #ff5555;
+}
+
+.sidebar-dropdown-arrow {
+  font-size: 14px;
+  color: #AE2C2A;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+  font-weight: 600;
+  display: block;
+  line-height: 1;
+}
+
+.sidebar-dropdown-arrow.rotated {
+  transform: rotate(180deg);
+  color: #ff5555;
+}
+
+.sidebar-dropdown-menu {
+  max-height: 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f8f9fa, #ffffff);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-top: 1px solid rgba(174, 44, 42, 0.1);
+}
+
+.sidebar-dropdown-menu.show {
+  max-height: 200px;
+  padding: 8px 0;
+}
+
+.sidebar-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px 12px 40px;
+  color: #555;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  border-left: 3px solid transparent;
+}
+
+.sidebar-dropdown-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  transition: width 0.3s ease;
+}
+
+.sidebar-dropdown-item:hover::before {
+  width: 3px;
+}
+
+.sidebar-dropdown-item i {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #AE2C2A;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+
+.sidebar-dropdown-item:hover {
+  background: linear-gradient(135deg, rgba(174, 44, 42, 0.08), rgba(174, 44, 42, 0.03));
+  color: #AE2C2A;
+  padding-left: 45px;
+  transform: translateX(2px);
+}
+
+.sidebar-dropdown-item:hover i {
+  color: #ff5555;
+  transform: scale(1.1);
+}
+
+.sidebar-dropdown-item.router-link-active {
+  background: linear-gradient(135deg, rgba(174, 44, 42, 0.15), rgba(174, 44, 42, 0.08));
+  color: #AE2C2A;
+  font-weight: 600;
+  border-left: 3px solid #AE2C2A;
+}
+
+.sidebar-dropdown-item.router-link-active i {
+  color: #AE2C2A;
+}
+
+.politica-span {
+  font-size: 1.1rem;
+}
+
+/* Animação suave para o texto */
+.sidebar-dropdown-item span {
+  transition: all 0.3s ease;
+}
+
+.sidebar-dropdown-item:hover span {
+  letter-spacing: 0.5px;
+}
+
+.sidebar-dropdown-toggle:active {
+  transform: scale(0.98);
+}
+
+.sidebar-dropdown-arrow-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  cursor: pointer;
+  background: rgba(174, 44, 42, 0.1);
+  border-left: 1px solid rgba(174, 44, 42, 0.2);
+  transition: all 0.3s ease;
+}
+
+.sidebar-dropdown-arrow-container:hover {
+  background: rgba(174, 44, 42, 0.2);
+}
+
+.sidebar-dropdown-arrow {
+  font-size: 16px;
+  color: #AE2C2A;
+  transition: all 0.3s ease;
+}
+
+.sidebar-dropdown-arrow.rotated {
   transform: rotate(180deg);
 }
 
-.dropdown-content.open {
-  max-height: 200px;
+.sidebar-dropdown-arrow-container:hover .sidebar-dropdown-arrow.rotated {
+  transform: rotate(180deg) scale(1.2);
 }
 
-.dropdown-content li {
-  border-bottom: none !important;
+/* Efeito de pulso na seta quando ativa */
+.sidebar-dropdown-arrow-container:active::before {
+  animation: pulse-arrow 0.3s ease;
 }
 
-.dropdown-content li a {
-  padding-left: 55px !important;
-  font-size: 0.9em;
+@keyframes pulse-arrow {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.3); }
+  100% { transform: translate(-50%, -50%) scale(1); }
 }
 
-.dropdown-content li a:hover {
-  padding-left: 60px !important;
+.sidebar-dropdown-arrow-container:active {
+  transform: scale(0.95);
 }
 
 /* Rodapé do sidebar */
@@ -1139,6 +1395,10 @@ nav ul li.dropdown:hover .dropdown-content {
     font-size: 0.95em;
     padding: 12px 20px;
   }
+
+  .politica-span {
+    font-size: 0.85em;
+  }
 }
 
 @media (max-width: 440px) {
@@ -1156,6 +1416,10 @@ nav ul li.dropdown:hover .dropdown-content {
   
   .menu-sidebar {
     width: 260px;
+  }
+
+  .seja-parceiro-span {
+    font-size: 1rem;
   }
 }
 
