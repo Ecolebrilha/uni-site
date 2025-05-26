@@ -1,54 +1,144 @@
 <template>
-        <div class="parceiros">
-          <HomeHeader />
+  <div class="parceiros">
+    <HomeHeader />
 
-    <div class="banner-container">
-      <div class="banner-overlay">
-        <h1>Parceiros</h1>
+    <!-- Hero Section com Efeito Parallax -->
+    <section class="hero-section">
+      <div class="parallax-container">
+        <div class="overlay"></div>
+        <div class="hero-content">
+          <h1 class="hero-title">Nossos Parceiros</h1>
+          <div class="hero-subtitle">Empresas que confiam em nossa excelência</div>
+          <div class="hero-description">
+            Conheça as organizações que escolheram a Uni Hospitalar como parceira estratégica
+          </div>
+        </div>
       </div>
-      <img src="@/assets/header-parceiros.jpg" alt="Imagem do Banner">
-    </div>
+    </section>
 
-            <main>
-                <section class="about-content">
-                    <div class="about-center">
-                        <div class="partner-logos">
-                            <img src="@/assets/parceiro1.jpg" alt="Logo Parceiro1">
-                            <img src="@/assets/parceiro2.jpg" alt="Logo Parceiro2">
-                            <img src="@/assets/parceiro3.jpg" alt="Logo Parceiro3">
-                            <img src="@/assets/parceiro4.jpg" alt="Logo Parceiro4">
-                            <img src="@/assets/parceiro5.jpg" alt="Logo Parceiro5">
-                            <img src="@/assets/parceiro6.jpg" alt="Logo Parceiro6">
-                            <img src="@/assets/parceiro7.jpg" alt="Logo Parceiro7">
-                            <img src="@/assets/parceiro8.jpg" alt="Logo Parceiro8">
-                            <img src="@/assets/parceiro9.jpg" alt="Logo Parceiro9">
-                            <img src="@/assets/parceiro10.jpg" alt="Logo Parceiro10">
-                            <img src="@/assets/parceiro11.jpg" alt="Logo Parceiro11">
-                            <img src="@/assets/parceiro12.jpg" alt="Logo Parceiro12">
-                            <img src="@/assets/parceiro13.jpg" alt="Logo Parceiro13">
-                            <img src="@/assets/parceiro14.jpg" alt="Logo Parceiro14">
-                            <img src="@/assets/parceiro15.jpg" alt="Logo Parceiro15">
-                            <img src="@/assets/parceiro16.jpg" alt="Logo Parceiro16">
-                            <img src="@/assets/parceiro17.jpg" alt="Logo Parceiro17">
-                            <img src="@/assets/parceiro18.jpg" alt="Logo Parceiro18">
-                            <img src="@/assets/parceiro19.jpg" alt="Logo Parceiro19">
-                            <img src="@/assets/parceiro20.jpg" alt="Logo Parceiro20">
-                            <img src="@/assets/parceiro21.jpg" alt="Logo Parceiro21">
-                            <img src="@/assets/parceiro22.jpg" alt="Logo Parceiro22">
-                            <img src="@/assets/parceiro23.jpg" alt="Logo Parceiro23">
-                            <img src="@/assets/parceiro24.jpg" alt="Logo Parceiro24">
-                            <img src="@/assets/parceiro25.jpg" alt="Logo Parceiro25">
-                            <img src="@/assets/parceiro26.jpg" alt="Logo Parceiro26">
-                        </div>
-                    </div>
-                </section>
-            </main>
+    <!-- Seção de Estatísticas dos Parceiros -->
+    <section class="partners-stats-section">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-handshake"></i>
+            </div>
+            <div class="stat-number">26+</div>
+            <div class="stat-label">Parceiros Estratégicos</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-globe-americas"></i>
+            </div>
+            <div class="stat-number">3</div>
+            <div class="stat-label">Estados Atendidos</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fas fa-award"></i>
+            </div>
+            <div class="stat-number">19</div>
+            <div class="stat-label">Anos de Confiança</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <HomeFooter />
+    <!-- Seção Principal de Parceiros -->
+    <section class="partners-showcase-section">
+      <div class="container">
+        <ScrollReveal direction="bottom" :delay="100">
+          <div class="section-header">
+            <h2 class="section-title">Parceiros de Confiança</h2>
+            <div class="section-subtitle">Empresas que escolheram a excelência da Uni Hospitalar</div>
+            <div class="accent-line"></div>
+          </div>
+        </ScrollReveal>
+
+        <!-- Grid Simples de Parceiros -->
+        <ScrollReveal direction="bottom" :delay="200">
+          <div class="partners-simple-grid">
+            <div v-for="n in 26" :key="`parceiro-${n}`" class="partner-logo">
+              <img :src="require(`@/assets/parceiro${n}.jpg`)" :alt="`Parceiro ${n}`" @error="handleImageError">
+            </div>
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+
+    <!-- Seção de Depoimentos de Parceiros -->
+    <section class="partners-testimonials">
+      <div class="container">
+        <ScrollReveal direction="bottom" :delay="100">
+          <div class="section-header">
+            <h2 class="section-title light">O que nossos parceiros dizem</h2>
+            <div class="accent-line light"></div>
+          </div>
+        </ScrollReveal>
+
+        <div class="testimonials-grid">
+          <ScrollReveal direction="left" :delay="200">
+            <div class="testimonial-card">
+              <div class="quote-icon">
+                <i class="fas fa-quote-left"></i>
+              </div>
+              <p>"A Uni Hospitalar é nossa parceira há mais de 8 anos. Sempre demonstraram profissionalismo e qualidade excepcionais."</p>
+              <div class="testimonial-author">
+                <strong>Dr. Carlos Silva</strong>
+                <span>Hospital Santa Clara</span>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="bottom" :delay="300">
+            <div class="testimonial-card">
+              <div class="quote-icon">
+                <i class="fas fa-quote-left"></i>
+              </div>
+              <p>"Confiamos na Uni Hospitalar para nossos medicamentos mais críticos. Nunca nos decepcionaram."</p>
+              <div class="testimonial-author">
+                <strong>Dra. Ana Martins</strong>
+                <span>Clínica São Lucas</span>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="right" :delay="400">
+            <div class="testimonial-card">
+              <div class="quote-icon">
+                <i class="fas fa-quote-left"></i>
+              </div>
+              <p>"Parceria sólida e confiável. A Uni Hospitalar entende nossas necessidades e sempre entrega resultados."</p>
+              <div class="testimonial-author">
+                <strong>Paulo Mendes</strong>
+                <span>Hospital Regional</span>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Call to Action -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Seja nosso próximo parceiro</h2>
+          <p>Junte-se a essas empresas de sucesso e faça parte da nossa rede de parceiros estratégicos</p>
+          <router-link to="/SejaParceiro" class="cta-button">
+            <i class="fas fa-handshake"></i>
+            <span>Quero ser parceiro</span>
+          </router-link>
+        </div>
+      </div>
+    </section>
+
+    <HomeFooter />
   </div>
 </template>
-        
-     <script>
+
+<script>
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
 
@@ -67,270 +157,576 @@ export default {
     changeLanguage(event) {
       const value = typeof event === 'string' ? event : event.target.value;
       this.selectedLanguage = value;
-
       console.log(`Idioma selecionado: ${value}`);
     },
     toggleSidebar() {
       this.sidebarOpen = !this.sidebarOpen;
+    },
+    handleImageError(e) {
+      e.target.src = require('@/assets/logo-uni.png');
     }
   }
 }
-    </script>
+</script>
 
-    <style scoped>
+<style scoped>
+/* Estilos Gerais */
 .parceiros {
- text-align: center;
- margin: 0;
- padding: 0;
- font-family: Arial, sans-serif;
- background-color: #f4f4f4;
+  font-family: 'Montserrat', sans-serif;
+  color: #333;
+  overflow-x: hidden;
 }
 
-.banner-container {
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+section {
+  padding: 80px 0;
+}
+
+/* Hero Section com Parallax */
+.hero-section {
   position: relative;
-  bottom: 60px;
-  display: flex;
-  justify-content: center;
-}
-.banner-container img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  transition: transform 0.3s ease-in-out;
+  height: 70vh;
+  min-height: 500px;
+  overflow: hidden;
 }
 
-.banner-overlay {
+.parallax-container {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(128, 128, 128, 0.5);
+  background-image: url('@/assets/header-parceiros.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  color: white;
 }
 
-.banner-overlay .content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(174, 44, 42, 0.7), rgba(0, 0, 0, 0.7));
 }
 
-.banner-overlay h1, .banner-overlay p {
-  margin: 0;
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  padding: 20px;
 }
 
-.banner-overlay h1 {
-  color: #FFFFFF;
-  font-size: 4em;
-  font-weight: bold;
+.hero-title {
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 20px;
   text-transform: uppercase;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  animation: slideInRight 1.5s ease-out;
+  letter-spacing: 2px;
+  animation: fadeInUp 1.5s ease-out;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-bottom: 15px;
+  animation: fadeInUp 1.5s ease-out 0.3s both;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  animation: fadeInUp 1.5s ease-out 0.6s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Seção de Estatísticas */
+.partners-stats-section {
+  background: linear-gradient(135deg, #f9f9f9, #f0f0f0);
+  position: relative;
+  overflow: hidden;
+}
+
+.partners-stats-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ae2c2a' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 5px solid #AE2C2A;
+}
+
+.stat-card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.stat-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 25px;
+  color: white;
+  font-size: 2rem;
+  box-shadow: 0 10px 25px rgba(174, 44, 42, 0.3);
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #AE2C2A;
+  margin-bottom: 15px;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Seção Principal de Parceiros */
+.partners-showcase-section {
+  background-color: #ffffff;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.section-title.light {
+  color: white;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  color: #666;
   margin-bottom: 20px;
 }
 
-@keyframes slideInRight {
-  from {
-    transform: translateX(85%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-main {
-  display: flex;
-  justify-content: center;
-  padding: 50px 0;
+.accent-line {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #AE2C2A, #ff5555);
+  margin: 0 auto;
 }
 
-.about-content {
-  margin: 100px 0 150px 0;
-  width: 90%;
-  max-width: 1200px;
-  height: auto;
-  text-align: left;
-  background-color: #ffffff;
-  padding: 20px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+.accent-line.light {
+  background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.8));
 }
 
-.partner-logos {
+.partners-simple-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 60px;
+  gap: 40px;
   justify-items: center;
   align-items: center;
+  margin-top: 50px;
 }
 
-.partner-logos img {
-  width: 120px;
-  height: auto;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
+.partner-logo {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  width: 100%;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.partner-logos img:hover {
-  transform: scale(1.1);
+.partner-logo:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
+.partner-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.partner-logo:hover img {
+  filter: grayscale(0%);
+}
+
+/* Seção de Depoimentos */
+.partners-testimonials {
+  background: linear-gradient(135deg, #AE2C2A, #8a2220);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.partners-testimonials::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+  opacity: 0.3;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  position: relative;
+  z-index: 1;
+  align-items: stretch;
+}
+
+.testimonial-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px 30px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 320px;
+  height: 60%;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-10px);
+}
+
+.quote-icon {
+  font-size: 2.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 25px;
+}
+
+.testimonial-card p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  font-style: italic;
+}
+
+.testimonial-author {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 20px;
+}
+
+.testimonial-author strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.testimonial-author span {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Seção CTA */
+.cta-section {
+  background: linear-gradient(135deg, #f9f9f9, #ffffff);
+  text-align: center;
+}
+
+.cta-content h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.cta-content p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px 40px;
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cta-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(174, 44, 42, 0.4);
+}
+
+/* Responsividade */
 @media (max-width: 1200px) {
-  .partner-logos {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 50px;
-  }
-}
-
-@media (max-width: 480px) {
-  @keyframes slideInRight {
-  from {
-    transform: translateX(10%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-}
-
-@media (max-width: 768px) {
-  .banner-container {
-    top: 82px;
-    padding-top: 0px;
-  }
-
-  .about-content {
-    width: 100%;
-    margin-top: 150px;
+  .container {
+    padding: 0 40px;
   }
   
-  .partner-logos {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+  .partners-simple-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
   }
-
-  .partner-logos img {
-    width: 100px;
-  }
-
-  @keyframes slideInRight {
-  from {
-    transform: translateX(21%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
 }
 
 @media (max-width: 992px) {
-  .banner-overlay h1 {
-    font-size: 3em;
+  .hero-title {
+    font-size: 3rem;
   }
-
-  .partner-logos {
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    width: 60%;
+    margin: 0 auto;
+  }
+  
+  .partners-simple-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 50px;
-  }
-}
-
-@media (min-width: 769px) {
-  @keyframes slideInRight {
-  from {
-    transform: translateX(30%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-}
-
-@media (min-width: 993px) {
-  @keyframes slideInRight {
-  from {
-    transform: translateX(28%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-}
-
-@media (min-width: 1390px) {
-  @keyframes slideInRight {
-  from {
-    transform: translateX(57%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-}
-
-@media (min-width: 300px) {
-  @keyframes slideInRight {
-  from {
-    transform: translateX(11%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-}
-
-@media (min-width: 400px) {
-  @keyframes slideInRight {
-  from {
-    transform: translateX(30%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-}
-
-@media (max-width: 400px) {
-  .banner-overlay h1 {
-    font-size: 1.5em;
   }
 }
 
 @media (max-width: 768px) {
-  .banner-overlay h1 {
-    font-size: 2em;
+  .hero-section {
+    height: 60vh;
+    min-height: 400px;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.3rem;
+  }
+  
+  .hero-description {
+    font-size: 1.1rem;
+  }
+  
+  .parallax-container {
+    background-attachment: scroll;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .partners-simple-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .testimonials-grid {
+    width: 80%;
+  }
+  
+  .partner-logo {
+    height: 100px;
+    padding: 20px;
+  }
+  
+  .cta-content h2 {
+    font-size: 2rem;
   }
 }
 
 @media (max-width: 576px) {
-  .banner-overlay h1 {
-    font-size: 1.5em;
+  .hero-title {
+    font-size: 2rem;
   }
-
-  .partner-logos {
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .hero-description {
+    font-size: 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .stat-card {
+    padding: 30px 20px;
+  }
+  
+  .testimonial-card {
+    padding: 60px 20px;
+  }
+  
+  .partners-simple-grid {
     grid-template-columns: 1fr;
-    gap: 50px;
+    gap: 20px;
   }
+  
+  .partner-logo {
+    height: 80px;
+    padding: 15px;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .cta-content h2 {
+    font-size: 1.8rem;
+  }
+  
+  .cta-button {
+    padding: 15px 30px;
+    font-size: 1rem;
+  }
+}
 
-  .partner-logos img {
-    width: 80px;
+@media (max-width: 450px) {
+  .testimonials-grid {
+    width: 90%;
+    margin: 0 auto;
+    gap: 25px;
   }
+  
+  .testimonial-card {
+    min-height: 320px;
+    padding: 30px 20px;
+  }
+  
+  .quote-icon {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .testimonial-card p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  .testimonial-author {
+    padding-top: 15px;
+  }
+  
+  .testimonial-author strong {
+    font-size: 1rem;
+  }
+  
+  .testimonial-author span {
+    font-size: 0.85rem;
+  }
+}
+
+/* Animações */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.stat-icon i {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Efeito de brilho para botões */
+.cta-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.7s;
+}
+
+.cta-button:hover::after {
+  left: 100%;
 }
 </style>
