@@ -1,7 +1,7 @@
 <template>
   <div class="parceiros-page">
     <HomeHeader />
-    
+
     <!-- Hero Section com Efeito Parallax -->
     <section class="hero-section">
       <div class="parallax-container">
@@ -10,7 +10,7 @@
         <div class="hero-subtitle">Faça parte da nossa rede de sucesso</div>
       </div>
     </section>
-    
+
     <!-- Seção Principal de Cadastro -->
     <section class="partner-main">
       <div class="container">
@@ -25,7 +25,7 @@
             Nossa equipe analisará suas informações e entrará em contato em breve.
           </p>
         </ScrollReveal>
-        
+
         <div class="form-container">
           <ScrollReveal direction="up" :delay="200">
             <div class="form-card">
@@ -35,34 +35,23 @@
                 </div>
                 <h3>Formulário de Parceria</h3>
               </div>
-              
+
               <form @submit.prevent="submitForm" class="partner-form">
                 <div class="form-grid">
                   <!-- Nome/Razão Social -->
                   <div class="form-group">
                     <label for="nomeRazaoSocial">Nome / Razão Social</label>
                     <div class="input-clip">
-                      <input
-                        type="text"
-                        id="nomeRazaoSocial"
-                        v-model="formData.nomeRazaoSocial"
-                        class="form-control"
-                        placeholder="Digite o nome ou razão social da empresa"
-                        required
-                      />
+                      <input type="text" id="nomeRazaoSocial" v-model="formData.nomeRazaoSocial" class="form-control"
+                        placeholder="Digite o nome ou razão social da empresa" required />
                     </div>
                   </div>
-                  
+
                   <!-- UF -->
                   <div class="form-group">
                     <label for="uf">UF</label>
                     <div class="input-clip">
-                      <select
-                        id="uf"
-                        v-model="formData.uf"
-                        class="form-control"
-                        required
-                      >
+                      <select id="uf" v-model="formData.uf" class="form-control" required>
                         <option value="" disabled selected>Selecione o estado</option>
                         <option v-for="estado in estados" :key="estado.sigla" :value="estado.sigla">
                           {{ estado.nome }}
@@ -70,17 +59,12 @@
                       </select>
                     </div>
                   </div>
-                  
+
                   <!-- Ramo de Atuação -->
                   <div class="form-group">
                     <label for="ramoAtuacao">Ramo de Atuação</label>
                     <div class="input-clip">
-                      <select
-                        id="ramoAtuacao"
-                        v-model="formData.ramoAtuacao"
-                        class="form-control"
-                        required
-                      >
+                      <select id="ramoAtuacao" v-model="formData.ramoAtuacao" class="form-control" required>
                         <option value="" disabled selected>Selecione o ramo de atuação</option>
                         <option v-for="ramo in ramosAtuacao" :key="ramo" :value="ramo">
                           {{ ramo }}
@@ -88,106 +72,83 @@
                       </select>
                     </div>
                   </div>
-                  
+
                   <!-- CNPJ -->
                   <div class="form-group">
                     <label for="cnpj">CNPJ</label>
-                    <div class="input-clip">
-                      <input
-                        type="text"
-                        id="cnpj"
-                        v-model="formData.cnpj"
-                        v-mask="'##.###.###/####-##'"
-                        class="form-control"
-                        placeholder="00.000.000/0000-00"
-                        @blur="buscarCNPJ"
-                        required
-                      />
+                    <div class="input-clip" :class="{ 'loading': isLoadingCNPJ }">
+                      <input type="text" id="cnpj" v-model="formData.cnpj" class="form-control"
+                        placeholder="00.000.000/0000-00" @input="formatCNPJ" @blur="buscarCNPJ" maxlength="18"
+                        required />
+                      <div v-if="isLoadingCNPJ" class="loading-spinner">
+                        <i class="fas fa-spinner fa-spin"></i>
+                      </div>
+                    </div>
+                    <div v-if="cnpjError" class="field-error">
+                      <i class="fas fa-exclamation-triangle"></i>
+                      {{ cnpjError }}
                     </div>
                   </div>
-                  
+
                   <!-- Email -->
                   <div class="form-group">
                     <label for="email">E-mail</label>
                     <div class="input-clip">
-                      <input
-                        type="email"
-                        id="email"
-                        v-model="formData.email"
-                        class="form-control"
-                        placeholder="exemplo@empresa.com.br"
-                        required
-                      />
+                      <input type="email" id="email" v-model="formData.email" class="form-control"
+                        placeholder="exemplo@empresa.com.br" required />
                     </div>
                   </div>
-                  
+
                   <!-- Celular -->
                   <div class="form-group">
                     <label for="celular">Celular</label>
                     <div class="input-clip">
-                      <input
-                        type="text"
-                        id="celular"
-                        v-model="formData.celular"
-                        v-mask="'(##) #####-####'"
-                        class="form-control"
-                        placeholder="(00) 00000-0000"
-                        :required="!formData.telefoneFixo"
-                      />
+                      <input type="text" id="celular" v-model="formData.celular" class="form-control"
+                        placeholder="(00) 00000-0000" @input="formatCelular" maxlength="15"
+                        :required="!formData.telefoneFixo" />
                     </div>
                   </div>
-                  
+
                   <!-- Telefone Fixo -->
                   <div class="form-group">
                     <label for="telefoneFixo">Telefone Fixo</label>
                     <div class="input-clip">
-                      <input
-                        type="text"
-                        id="telefoneFixo"
-                        v-model="formData.telefoneFixo"
-                        v-mask="'(##) ####-####'"
-                        class="form-control"
-                        placeholder="(00) 0000-0000"
-                        :required="!formData.celular"
-                      />
+                      <input type="text" id="telefoneFixo" v-model="formData.telefoneFixo" class="form-control"
+                        placeholder="(00) 0000-0000" @input="formatTelefoneFixo" maxlength="14"
+                        :required="!formData.celular" />
                     </div>
                   </div>
-                  
+
                   <!-- Endereço -->
                   <div class="form-group">
                     <label for="endereco">Endereço</label>
                     <div class="input-clip">
-                      <input
-                        type="text"
-                        id="endereco"
-                        v-model="formData.endereco"
-                        class="form-control"
-                        placeholder="Endereço completo"
-                        readonly
-                      />
+                      <input type="text" id="endereco" v-model="formData.endereco" class="form-control"
+                        placeholder="Endereço será preenchido automaticamente via CNPJ" readonly />
                     </div>
+                    <small class="field-help">
+                      <i class="fas fa-info-circle"></i>
+                      Este campo será preenchido automaticamente ao informar um CNPJ válido.
+                    </small>
                   </div>
                 </div>
-                
+
                 <!-- Aviso de Termos -->
                 <div class="terms-notice">
                   <div class="notice-content">
                     <i class="fas fa-info-circle notice-icon"></i>
                     <p>
-                      Ao preencher e enviar este formulário, você concorda automaticamente com os nossos 
-                      <router-link to="/PoliticaPrivacidade" target="_blank" class="terms-link">Termos de Privacidade</router-link> 
-                      e 
+                      Ao preencher e enviar este formulário, você concorda automaticamente com os nossos
+                      <router-link to="/PoliticaPrivacidade" target="_blank" class="terms-link">Termos de
+                        Privacidade</router-link>
+                      e
                       <router-link to="/TermosLegais" target="_blank" class="terms-link">Termos Legais</router-link>.
                     </p>
                   </div>
                 </div>
-                
+
                 <div class="form-actions">
-                  <button 
-                    type="submit" 
-                    class="btn-submit"
-                    :disabled="isSubmitting"
-                  >
+                  <button type="submit" class="btn-submit" :disabled="isSubmitting">
                     <span v-if="isSubmitting">
                       <i class="fas fa-spinner fa-spin"></i> Enviando...
                     </span>
@@ -197,20 +158,22 @@
                   </button>
                 </div>
               </form>
-              
+
               <div v-if="showSuccessMessage" class="alert alert-success">
-                <i class="fas fa-check-circle"></i> Sua solicitação foi enviada com sucesso! Entraremos em contato em breve.
+                <i class="fas fa-check-circle"></i> Sua solicitação foi enviada com sucesso! Entraremos em contato em
+                breve.
               </div>
-              
+
               <div v-if="showErrorMessage" class="alert alert-danger">
-                <i class="fas fa-exclamation-circle"></i> Ocorreu um erro ao enviar sua solicitação. Por favor, tente novamente.
+                <i class="fas fa-exclamation-circle"></i> Ocorreu um erro ao enviar sua solicitação. Por favor, tente
+                novamente.
               </div>
             </div>
           </ScrollReveal>
         </div>
       </div>
     </section>
-    
+
     <!-- Seção de Benefícios -->
     <section class="benefits-section">
       <div class="container">
@@ -221,7 +184,7 @@
             <span class="accent-line"></span>
           </div>
         </ScrollReveal>
-        
+
         <div class="benefits-grid">
           <ScrollReveal direction="left" :delay="200">
             <div class="benefit-card">
@@ -232,7 +195,7 @@
               <p>Entregas rápidas e seguras para todo o Norte e Nordeste brasileiro em até 48 horas úteis.</p>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="up" :delay="300">
             <div class="benefit-card">
               <div class="benefit-icon">
@@ -242,7 +205,7 @@
               <p>Acesso a medicamentos e produtos hospitalares de alta qualidade e confiabilidade.</p>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="right" :delay="200">
             <div class="benefit-card">
               <div class="benefit-icon">
@@ -252,7 +215,7 @@
               <p>Construímos parcerias sólidas e duradouras baseadas em confiança e compromisso mútuo.</p>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="left" :delay="400">
             <div class="benefit-card">
               <div class="benefit-icon">
@@ -262,7 +225,7 @@
               <p>Oportunidades de expansão e desenvolvimento de negócios em conjunto.</p>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="up" :delay="500">
             <div class="benefit-card">
               <div class="benefit-icon">
@@ -272,7 +235,7 @@
               <p>Equipe de atendimento especializada para resolver suas necessidades com agilidade.</p>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="right" :delay="400">
             <div class="benefit-card">
               <div class="benefit-icon">
@@ -285,7 +248,7 @@
         </div>
       </div>
     </section>
-    
+
     <HomeFooter />
   </div>
 </template>
@@ -293,16 +256,12 @@
 <script>
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
-import { mask } from 'v-mask';
 
 export default {
   name: 'SejaParceiro',
   components: {
     HomeHeader,
     HomeFooter
-  },
-  directives: {
-    mask
   },
   data() {
     return {
@@ -360,30 +319,254 @@ export default {
       ],
       isSubmitting: false,
       showSuccessMessage: false,
-      showErrorMessage: false
+      showErrorMessage: false,
+      isLoadingCNPJ: false,
+      cnpjError: ''
     };
   },
   methods: {
+    // Formatar CNPJ
+    formatCNPJ(event) {
+      let value = event.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
+
+      // Limita a 14 dígitos
+      if (value.length > 14) {
+        value = value.substring(0, 14);
+      }
+
+      // Aplica a formatação
+      if (value.length <= 2) {
+        // Mantém o valor original
+      } else if (value.length <= 5) {
+        value = value.replace(/(\d{2})(\d+)/, '$1.$2');
+      } else if (value.length <= 8) {
+        value = value.replace(/(\d{2})(\d{3})(\d+)/, '$1.$2.$3');
+      } else if (value.length <= 12) {
+        value = value.replace(/(\d{2})(\d{3})(\d{3})(\d+)/, '$1.$2.$3/$4');
+      } else {
+        value = value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d+)/, '$1.$2.$3/$4-$5');
+      }
+
+      this.formData.cnpj = value;
+    },
+
+    // Formatar Celular
+    formatCelular(event) {
+      let value = event.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
+
+      // Limita a 11 dígitos
+      if (value.length > 11) {
+        value = value.substring(0, 11);
+      }
+
+      // Aplica a formatação
+      if (value.length <= 2) {
+        // Mantém o valor original
+      } else if (value.length <= 7) {
+        value = value.replace(/(\d{2})(\d+)/, '($1) $2');
+      } else {
+        value = value.replace(/(\d{2})(\d{5})(\d+)/, '($1) $2-$3');
+      }
+
+      this.formData.celular = value;
+    },
+
+    // Formatar Telefone Fixo
+    formatTelefoneFixo(event) {
+      let value = event.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
+
+      // Limita a 10 dígitos
+      if (value.length > 10) {
+        value = value.substring(0, 10);
+      }
+
+      // Aplica a formatação
+      if (value.length <= 2) {
+        // Mantém o valor original
+      } else if (value.length <= 6) {
+        value = value.replace(/(\d{2})(\d+)/, '($1) $2');
+      } else {
+        value = value.replace(/(\d{2})(\d{4})(\d+)/, '($1) $2-$3');
+      }
+
+      this.formData.telefoneFixo = value;
+    },
+
+    // Valida se o CNPJ tem formato correto
+    validarCNPJ(cnpj) {
+      cnpj = cnpj.replace(/[^\d]+/g, '');
+
+      if (cnpj.length !== 14) return false;
+
+      // Elimina CNPJs inválidos conhecidos
+      if (/^(\d)\1{13}$/.test(cnpj)) return false;
+
+      // Valida DVs
+      let tamanho = cnpj.length - 2;
+      let numeros = cnpj.substring(0, tamanho);
+      let digitos = cnpj.substring(tamanho);
+      let soma = 0;
+      let pos = tamanho - 7;
+
+      for (let i = tamanho; i >= 1; i--) {
+        soma += numeros.charAt(tamanho - i) * pos--;
+        if (pos < 2) pos = 9;
+      }
+
+      let resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+      if (resultado != digitos.charAt(0)) return false;
+
+      tamanho = tamanho + 1;
+      numeros = cnpj.substring(0, tamanho);
+      soma = 0;
+      pos = tamanho - 7;
+
+      for (let i = tamanho; i >= 1; i--) {
+        soma += numeros.charAt(tamanho - i) * pos--;
+        if (pos < 2) pos = 9;
+      }
+
+      resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+      if (resultado != digitos.charAt(1)) return false;
+
+      return true;
+    },
+
     async buscarCNPJ() {
-      if (this.formData.cnpj && this.formData.cnpj.length === 18) {
-        try {
-          // Remove formatação para consulta
-          const cnpjLimpo = this.formData.cnpj.replace(/[^\d]+/g, '');
-          
-          // Simulando busca de CNPJ (em produção, usar API real)
-          // const response = await fetch(`https://api-publica.speedio.com.br/buscarcnpj?cnpj=${cnpjLimpo}`);
-          console.log(`CNPJ formatado para consulta: ${cnpjLimpo}`);
-          
-          // Simulando resposta para demonstração
-          setTimeout(() => {
-            this.formData.endereco = 'Endereço preenchido automaticamente via API de CNPJ';
-          }, 500);
-        } catch (error) {
-          console.error('Erro ao buscar CNPJ:', error);
+      if (!this.formData.cnpj || this.formData.cnpj.length !== 18) {
+        return;
+      }
+
+      // Remove formatação para validação e consulta
+      const cnpjLimpo = this.formData.cnpj.replace(/[^\d]+/g, '');
+
+      // Valida CNPJ
+      if (!this.validarCNPJ(cnpjLimpo)) {
+        this.cnpjError = 'CNPJ inválido. Verifique os números digitados.';
+        this.formData.endereco = '';
+        this.formData.nomeRazaoSocial = '';
+        return;
+      }
+
+      this.cnpjError = '';
+      this.isLoadingCNPJ = true;
+
+      try {
+        // Primeira tentativa: API BrasilAPI
+        let response = await fetch(`https://brasilapi.com.br/api/cnpj/v1/${cnpjLimpo}`);
+
+        if (!response.ok) {
+          // Segunda tentativa: API ReceitaWS (backup)
+          response = await fetch(`https://www.receitaws.com.br/v1/cnpj/${cnpjLimpo}`);
         }
+
+        if (response.ok) {
+          const data = await response.json();
+
+          // Verifica se a empresa está ativa
+          if (data.status && data.status !== 'OK') {
+            this.cnpjError = 'CNPJ consultado com sucesso, mas empresa pode estar inativa.';
+          }
+
+          // Preenche os dados automaticamente
+          if (data.company_name || data.nome || data.razao_social) {
+            this.formData.nomeRazaoSocial = data.company_name || data.nome || data.razao_social;
+          }
+
+          // Monta o endereço completo
+          let endereco = '';
+
+          // Para BrasilAPI
+          if (data.street || data.logradouro) {
+            endereco += (data.street || data.logradouro);
+            if (data.number || data.numero) {
+              endereco += `, ${data.number || data.numero}`;
+            }
+            if (data.complement || data.complemento) {
+              endereco += `, ${data.complement || data.complemento}`;
+            }
+            if (data.neighborhood || data.bairro) {
+              endereco += `, ${data.neighborhood || data.bairro}`;
+            }
+            if (data.city || data.municipio) {
+              endereco += `, ${data.city || data.municipio}`;
+            }
+            if (data.state || data.uf) {
+              endereco += ` - ${data.state || data.uf}`;
+              // Atualiza o UF automaticamente se não estiver preenchido
+              if (!this.formData.uf) {
+                this.formData.uf = data.state || data.uf;
+              }
+            }
+            if (data.zip_code || data.cep) {
+              endereco += `, CEP: ${data.zip_code || data.cep}`;
+            }
+          }
+
+          this.formData.endereco = endereco;
+
+          // Feedback visual de sucesso
+          this.$nextTick(() => {
+            const enderecoInput = document.getElementById('endereco');
+            if (enderecoInput) {
+              enderecoInput.style.backgroundColor = '#d4edda';
+              enderecoInput.style.borderColor = '#28a745';
+              setTimeout(() => {
+                enderecoInput.style.backgroundColor = '';
+                enderecoInput.style.borderColor = '';
+              }, 2000);
+            }
+          });
+
+        } else {
+          throw new Error('Erro na consulta');
+        }
+
+      } catch (error) {
+        console.error('Erro ao buscar CNPJ:', error);
+
+        // Terceira tentativa: API alternativa
+        try {
+          const response = await fetch(`https://publica.cnpj.ws/cnpj/${cnpjLimpo}`);
+          if (response.ok) {
+            const data = await response.json();
+
+            if (data.razao_social) {
+              this.formData.nomeRazaoSocial = data.razao_social;
+            }
+
+            let endereco = '';
+            if (data.estabelecimento) {
+              const est = data.estabelecimento;
+              if (est.logradouro) {
+                endereco += est.logradouro;
+                if (est.numero) endereco += `, ${est.numero}`;
+                if (est.complemento) endereco += `, ${est.complemento}`;
+                if (est.bairro) endereco += `, ${est.bairro}`;
+                if (est.cidade && est.cidade.nome) endereco += `, ${est.cidade.nome}`;
+                if (est.estado && est.estado.sigla) {
+                  endereco += ` - ${est.estado.sigla}`;
+                  if (!this.formData.uf) {
+                    this.formData.uf = est.estado.sigla;
+                  }
+                }
+                if (est.cep) endereco += `, CEP: ${est.cep}`;
+              }
+            }
+
+            this.formData.endereco = endereco;
+          } else {
+            this.cnpjError = 'Não foi possível consultar o CNPJ. Verifique sua conexão ou tente novamente.';
+          }
+        } catch (secondError) {
+          console.error('Erro na segunda tentativa:', secondError);
+          this.cnpjError = 'Serviço de consulta CNPJ temporariamente indisponível. Preencha o endereço manualmente.';
+        }
+      } finally {
+        this.isLoadingCNPJ = false;
       }
     },
-    
+
     async submitForm() {
       if (!this.formData.celular && !this.formData.telefoneFixo) {
         alert('Por favor, preencha pelo menos um telefone de contato (celular ou fixo).');
@@ -419,12 +602,14 @@ Dados do Formulário:
 - Endereço: ${this.formData.endereco || 'Não informado'}
 
 Solicitação enviada através do formulário "Seja Nosso Parceiro" do site.`,
-            section: 'Comercial - Seja Parceiro'
+            section: 'Comercial - Seja Parceiro',
+            // Email de destino para teste
+        toEmail: 'fernandobastosleite7@gmail.com'
           }),
         });
 
         const result = await response.json();
-        
+
         if (result.success) {
           this.showSuccessMessage = true;
           // Limpar formulário após envio bem-sucedido
@@ -435,7 +620,7 @@ Solicitação enviada através do formulário "Seja Nosso Parceiro" do site.`,
       } catch (error) {
         console.error('Erro ao enviar formulário:', error);
         this.showErrorMessage = true;
-        
+
         // Para fins de demonstração, mostrar mensagem de sucesso mesmo com erro
         setTimeout(() => {
           this.showSuccessMessage = true;
@@ -446,7 +631,7 @@ Solicitação enviada através do formulário "Seja Nosso Parceiro" do site.`,
         this.isSubmitting = false;
       }
     },
-    
+
     resetForm() {
       this.formData = {
         nomeRazaoSocial: '',
@@ -458,6 +643,7 @@ Solicitação enviada através do formulário "Seja Nosso Parceiro" do site.`,
         telefoneFixo: '',
         endereco: ''
       };
+      this.cnpjError = '';
     }
   }
 };
@@ -541,6 +727,7 @@ section {
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -677,82 +864,46 @@ section {
   padding: 2px;
   border: 1px solid #AE2C2A;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  width: 100%; /* Garante que o container ocupe 100% do espaço disponível */
-  box-sizing: border-box; /* Inclui padding e border na largura total */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Estilo para loading no CNPJ */
+.input-clip.loading {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.loading-spinner {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #007bff;
+  font-size: 1.2rem;
 }
 
 .form-control {
-  width: 100%; /* Garante que o input ocupe 100% do container */
+  width: 100%;
   padding: 12px 15px;
   border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 1rem;
   transition: all 0.3s ease;
   background-color: rgba(255, 255, 255, 0.8);
-  box-sizing: border-box; /* Inclui padding e border na largura total */
-  margin: 0; /* Remove margens que podem causar problemas */
+  box-sizing: border-box;
+  margin: 0;
 }
 
-/* Ajuste específico para selects que podem ter comportamento diferente */
+/* Ajuste específico para selects */
 select.form-control {
-  appearance: none; /* Remove a aparência padrão do select */
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 8.825L1.175 4 2.05 3.125 6 7.075 9.95 3.125 10.825 4z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 15px center;
-  padding-right: 40px; /* Espaço para o ícone de seta */
-}
-
-/* Ajuste para o grid do formulário */
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 25px;
-  width: 100%;
-}
-
-.form-group {
-  margin-bottom: 5px;
-  width: 100%; /* Garante que o grupo ocupe 100% do espaço da coluna */
-  box-sizing: border-box;
-}
-
-/* Ajuste para o formulário */
-.partner-form {
-  padding: 40px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Ajuste para o container do formulário */
-.form-card {
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Ajuste para o checkbox que pode ter problemas de alinhamento */
-.custom-checkbox {
-  display: flex;
-  align-items: flex-start; /* Alinha no topo para textos longos */
-  background-color: #f8f9fa;
-  padding: 15px;
-  border-radius: 8px;
-  border: 1px solid #e0e0e0;
-  box-sizing: border-box;
-}
-
-.form-check-input {
-  width: 18px;
-  height: 18px;
-  margin-right: 10px;
-  margin-top: 3px; /* Ajusta o alinhamento vertical com o texto */
-  flex-shrink: 0; /* Impede que o checkbox encolha */
-}
-
-.form-check-label {
-  font-size: 0.95rem;
-  flex: 1; /* Permite que o texto ocupe o espaço restante */
+  padding-right: 40px;
 }
 
 .form-control:focus {
@@ -762,32 +913,68 @@ select.form-control {
   background-color: #fff;
 }
 
-.terms-group {
-  margin: 30px 0;
-}
-
-.custom-checkbox {
+/* Mensagens de erro e ajuda */
+.field-error {
   display: flex;
   align-items: center;
-  background-color: #f8f9fa;
-  padding: 15px;
-  border-radius: 8px;
-  border: 1px solid #e0e0e0;
+  gap: 8px;
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  padding: 8px 12px;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
 }
 
-.form-check-input {
-  width: 18px;
-  height: 18px;
-  margin-right: 10px;
+.field-error i {
+  font-size: 1rem;
 }
 
-.form-check-input:checked {
-  background-color: #AE2C2A;
-  border-color: #AE2C2A;
+.field-help {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #6c757d;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  padding: 8px 12px;
+  background-color: #e9ecef;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
 }
 
-.form-check-label {
+.field-help i {
+  color: #007bff;
+}
+
+/* Aviso de Termos */
+.terms-notice {
+  margin: 30px 0 20px 0;
+  background: linear-gradient(135deg, rgba(174, 44, 42, 0.05), rgba(174, 44, 42, 0.02));
+  border: 1px solid rgba(174, 44, 42, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.notice-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.notice-icon {
+  color: #AE2C2A;
+  font-size: 1.2rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.notice-content p {
+  margin: 0;
   font-size: 0.95rem;
+  line-height: 1.6;
+  color: #555;
 }
 
 .terms-link {
@@ -867,47 +1054,6 @@ select.form-control {
   background-color: #f8d7da;
   color: #721c24;
   border-left: 5px solid #dc3545;
-}
-
-/* Aviso de Termos */
-.terms-notice {
-  margin: 30px 0 20px 0;
-  background: linear-gradient(135deg, rgba(174, 44, 42, 0.05), rgba(174, 44, 42, 0.02));
-  border: 1px solid rgba(174, 44, 42, 0.2);
-  border-radius: 10px;
-  padding: 20px;
-}
-
-.notice-content {
-  display: flex;
-  align-items: flex-start;
-  gap: 15px;
-}
-
-.notice-icon {
-  color: #AE2C2A;
-  font-size: 1.2rem;
-  margin-top: 2px;
-  flex-shrink: 0;
-}
-
-.notice-content p {
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: #555;
-}
-
-.terms-link {
-  color: #AE2C2A;
-  font-weight: 600;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.terms-link:hover {
-  color: #ff5555;
-  text-decoration: underline;
 }
 
 /* Seção de Benefícios */
@@ -1004,24 +1150,24 @@ select.form-control {
   .hero-title {
     font-size: 3rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.3rem;
   }
-  
+
   section {
     padding: 60px 0;
   }
-  
+
   .form-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  
+
   .form-group.full-width {
     grid-column: span 1;
   }
-  
+
   .benefits-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1032,72 +1178,79 @@ select.form-control {
     height: 60vh;
     min-height: 400px;
   }
-  
+
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .section-title h2 {
     font-size: 2rem;
   }
-  
+
   .intro-text {
     font-size: 1.1rem;
   }
-  
+
   .partner-form {
     padding: 20px;
   }
-  
+
   .form-header {
     padding: 20px;
     flex-direction: column;
     text-align: center;
   }
-  
+
   .form-icon {
     width: 60px;
     height: 60px;
     font-size: 2rem;
   }
-  
+
   .form-header h3 {
     font-size: 1.5rem;
   }
-  
+
 }
 
 @media (max-width: 576px) {
   .container {
     padding: 0 20px;
   }
-  
+
   .hero-title {
     font-size: 2rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.1rem;
   }
-  
+
   .section-title h2 {
     font-size: 1.8rem;
   }
-  
+
   .accent-line {
     width: 40px;
   }
-  
+
   .benefits-grid {
     grid-template-columns: 1fr;
   }
-  
-  .custom-checkbox {
-    padding: 10px;
+
+  .field-error,
+  .field-help {
+    font-size: 0.8rem;
+    padding: 6px 10px;
   }
-  
-  .form-check-label {
-    font-size: 0.85rem;
+
+  .notice-content {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .notice-content p {
+    font-size: 0.9rem;
   }
 }
 
@@ -1106,9 +1259,11 @@ select.form-control {
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
+
   100% {
     transform: translateY(0px);
   }
@@ -1123,9 +1278,11 @@ select.form-control {
   0% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0.7);
   }
+
   70% {
     box-shadow: 0 0 0 10px rgba(174, 44, 42, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0);
   }
@@ -1151,9 +1308,108 @@ select.form-control {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Animação de loading para o spinner */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.fa-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Efeito visual para campo preenchido automaticamente */
+.form-control.auto-filled {
+  background-color: #d4edda !important;
+  border-color: #28a745 !important;
+  transition: all 0.3s ease;
+}
+
+/* Estilo para campos readonly */
+.form-control[readonly] {
+  background-color: #f8f9fa;
+  cursor: not-allowed;
+}
+
+/* Melhorias visuais para o loading */
+.input-clip.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(0, 123, 255, 0.1), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Estilo para mensagens de sucesso na consulta CNPJ */
+.cnpj-success {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #28a745;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  padding: 8px 12px;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  border-radius: 4px;
+}
+
+.cnpj-success i {
+  font-size: 1rem;
+}
+
+.form-control:focus {
+  outline: 2px solid #AE2C2A;
+  outline-offset: 2px;
+}
+
+.btn-submit:focus {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* Estilo para campos obrigatórios */
+.form-group label::after {
+  content: ' *';
+  color: #dc3545;
+  font-weight: bold;
+}
+
+/* Estilo para campos opcionais */
+.form-group.optional label::after {
+  content: ' (opcional)';
+  color: #6c757d;
+  font-weight: normal;
+  font-size: 0.85rem;
+}
+
+/* Remove o asterisco dos campos opcionais */
+.form-group.optional label::after {
+  content: ' (opcional)';
 }
 </style>

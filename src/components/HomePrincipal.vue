@@ -432,14 +432,13 @@
           <span class="slider"></span>
         </div>
       </div>
-      <!-- No template, modifique a parte do modal de configurações de cookies -->
+
 <div class="cookie-option">
   <div class="cookie-option-info">
     <h4>Cookies de Análise</h4>
     <p>Nos ajudam a entender como os visitantes interagem com o site.</p>
   </div>
   <div class="cookie-switch">
-    <!-- Certifique-se de que o v-model está correto e o input não está desabilitado -->
     <input type="checkbox" v-model="cookiePreferences.analytics" id="analytics-cookie">
     <label for="analytics-cookie" class="slider"></label>
   </div>
@@ -450,7 +449,6 @@
     <p>Utilizados para exibir anúncios relevantes com base em seus interesses.</p>
   </div>
   <div class="cookie-switch">
-    <!-- Certifique-se de que o v-model está correto e o input não está desabilitado -->
     <input type="checkbox" v-model="cookiePreferences.marketing" id="marketing-cookie">
     <label for="marketing-cookie" class="slider"></label>
   </div>
@@ -552,8 +550,7 @@ showCookieBanner: false,
     },
     
     animateCounters() {
-      // Definir uma duração base para todos os contadores
-      const baseDuration = 6000; // 6 segundos
+      const baseDuration = 6000;
       
       const counters = [
         { ref: this.$refs.yearsCounter, target: 19 },
@@ -562,14 +559,13 @@ showCookieBanner: false,
         { ref: this.$refs.hoursCounter, target: 48 }
       ];
       
-      // Inicializar todos os contadores com zero
+      // Inicializando todos os contadores com zero
       counters.forEach(counter => {
         counter.ref.innerText = '0';
         counter.current = 0;
       });
       
-      // Calcular o número de passos para a animação (60fps por 2.5 segundos)
-      const steps = Math.floor(baseDuration / 16); // ~150 passos
+      const steps = Math.floor(baseDuration / 16);
       let currentStep = 0;
       
       // Função de animação que será chamada a cada frame
@@ -577,36 +573,36 @@ showCookieBanner: false,
         currentStep++;
         const progress = currentStep / steps; // Valor entre 0 e 1
         
-        // Atualizar todos os contadores com base no progresso atual
+        // Atualizando todos os contadores com base no progresso atual
         counters.forEach(counter => {
-          // Usar uma função de easing para desacelerar no final
+          // Usando uma função de easing para desacelerar no final
           const easedProgress = 1 - Math.pow(1 - progress, 3); // Cubic ease-out
           
-          // Calcular o valor atual com base no progresso
+          // Calculando o valor atual com base no progresso
           const value = Math.min(
             Math.floor(counter.target * easedProgress), 
             counter.target
           );
           
-          // Atualizar o texto apenas se o valor mudou
+          // Atualizando o texto apenas se o valor mudou
           if (value !== counter.current) {
             counter.ref.innerText = value;
             counter.current = value;
           }
         });
         
-        // Continuar a animação até atingir o número de passos
+        // Continuando a animação até atingir o número de passos
         if (currentStep < steps) {
           requestAnimationFrame(animate);
         } else {
-          // Garantir que os valores finais estejam corretos
+          // Garantindo que os valores finais estejam corretos
           counters.forEach(counter => {
             counter.ref.innerText = counter.target;
           });
         }
       };
       
-      // Iniciar a animação
+      // Iniciando a animação
       requestAnimationFrame(animate);
     },
     
@@ -643,39 +639,39 @@ showCookieBanner: false,
     toggleSidebar() {
       this.sidebarOpen = !this.sidebarOpen;
     },
-     // Verificar se o usuário já aceitou os cookies
+     // Verifica se o usuário já aceitou os cookies
   checkCookieConsent() {
     const cookieConsent = localStorage.getItem('cookieConsent');
     if (!cookieConsent) {
-      // Se não houver consentimento salvo, mostrar o banner
+      // Se não houver consentimento salvo, mostra o banner
       this.showCookieBanner = true;
     } else {
-      // Se houver consentimento salvo, carregar as preferências
+      // Se houver consentimento salvo, carrega as preferências
       try {
         this.cookiePreferences = JSON.parse(cookieConsent);
       } catch (e) {
-        // Em caso de erro, mostrar o banner novamente
+        // Em caso de erro, mostra o banner novamente
         this.showCookieBanner = true;
       }
     }
   },
   
-  // Aceitar todos os cookies
+  // Aceita todos os cookies
   acceptCookies() {
-    // Definir todas as preferências como true
+    // Define todas as preferências como true
     this.cookiePreferences = {
       essential: true,
       analytics: true,
       marketing: true
     };
     
-    // Salvar as preferências
+    // Salva as preferências
     localStorage.setItem('cookieConsent', JSON.stringify(this.cookiePreferences));
     this.showCookieBanner = false;
     this.applyUserPreferences();
   },
   
-  // Salvar as preferências personalizadas
+  // Salva as preferências personalizadas
   saveCookiePreferences() {
     localStorage.setItem('cookieConsent', JSON.stringify(this.cookiePreferences));
     this.showCookieBanner = false;
@@ -683,25 +679,20 @@ showCookieBanner: false,
     this.applyUserPreferences();
   },
   
-  // Aplicar as preferências do usuário
+  // Aplica as preferências do usuário
   applyUserPreferences() {
-    // Aqui você implementaria a lógica para ativar/desativar cookies com base nas preferências
     
-    // Exemplo: Google Analytics
+    // Google Analytics
     if (this.cookiePreferences.analytics) {
-      // Ativar Google Analytics
       console.log('Analytics cookies enabled');
     } else {
-      // Desativar Google Analytics
       console.log('Analytics cookies disabled');
     }
     
-    // Exemplo: Cookies de marketing
+    // Cookies de marketing
     if (this.cookiePreferences.marketing) {
-      // Ativar cookies de marketing
       console.log('Marketing cookies enabled');
     } else {
-      // Desativar cookies de marketing
       console.log('Marketing cookies disabled');
     }
   }
@@ -711,7 +702,6 @@ showCookieBanner: false,
 
 <style scoped>
 /* Estilos Gerais */
-
 .home {
   font-family: 'Montserrat', sans-serif;
   color: #333;
@@ -878,16 +868,6 @@ section {
   }
   to {
     box-shadow: 0 0 20px rgba(174, 44, 42, 0.9), 0 0 30px rgba(255, 255, 255, 0.3);
-  }
-}
-
-@media (max-width: 768px) {
-  .scroll-indicator {
-    padding: 8px 16px;
-  }
-  
-  .scroll-indicator span {
-    font-size: 14px;
   }
 }
 
@@ -1187,40 +1167,6 @@ input:checked + .slider:before {
 }
 
 /* Media queries para responsividade */
-@media (max-width: 768px) {
-  .cookie-content {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .cookie-icon {
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
-  
-  .cookie-buttons {
-    margin-top: 20px;
-  }
-  
-  .cookie-banner {
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border-radius: 10px 10px 0 0;
-  }
-}
-
-@media (max-width: 576px) {
-  .cookie-buttons {
-    flex-direction: column;
-    width: 100%;
-  }
-  
-  .cookie-accept, .cookie-settings {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-}
 
 /* Seção de Estatísticas */
 .stats-section {
@@ -1338,55 +1284,6 @@ input:checked + .slider:before {
   color: #666;
   text-transform: uppercase;
   letter-spacing: 1px;
-}
-
-@media (max-width: 768px) {
-  .testimonials-slides {
-    min-height: 520px;
-  }
-  
-  .testimonial-content {
-    padding: 30px 50px 70px 50px;
-  }
-  
-  .testimonial-controls {
-    margin-top: -60px;
-  }
-  
-  .control-prev {
-    left: 10px;
-  }
-  
-  .control-next {
-    right: 10px;
-  }
-
-  .stats-section {
-    padding: 80px 0;
-  }
-  
-  .section-header h2 {
-    font-size: 2rem;
-  }
-  
-  .stat-item {
-    min-width: 100%;
-    max-width: 100%;
-  }
-  
-  .stat-icon {
-    width: 70px;
-    height: 70px;
-    font-size: 1.8rem;
-  }
-  
-  .stat-number {
-    font-size: 3rem;
-  }
-  
-  .stat-label {
-    font-size: 1.1rem;
-  }
 }
 
 /* Seção de Cabeçalho para todas as seções */
@@ -1564,46 +1461,6 @@ input:checked + .slider:before {
 
 .service-link:hover i {
   transform: translateX(5px);
-}
-
-/* Responsividade */
-@media (max-width: 1200px) {
-  .stat-item {
-    flex: 0 0 calc(50% - 20px);
-    max-width: calc(50% - 20px);
-  }
-}
-
-@media (max-width: 992px) {
-  .stat-item {
-    min-width: calc(50% - 20px);
-    padding: 30px 20px;
-  }
-}
-
-@media (max-width: 768px) {
-  .services-section {
-    padding: 70px 0;
-  }
-  
-  .section-title {
-    font-size: 2rem;
-  }
-  
-  .services-grid {
-    grid-template-columns: 1fr;
-    gap: 50px;
-  }
-  
-  .service-card {
-    max-width: 450px;
-    margin: 0 auto;
-  }
-
-  .stat-item {
-    min-width: calc(50% - 20px);
-    padding: 40px 30px;
-  }
 }
 
 /* Estilos para a Seção de Depoimentos */
@@ -2186,8 +2043,38 @@ input:checked + .slider:before {
   transform: translateY(-5px);
 }
 
-/* Responsividade */
-@media (max-width: 992px) {
+.primary-button:hover, .cta-button:hover {
+  animation: pulse 1.5s infinite;
+}
+
+/* Efeito de brilho para botões */
+.primary-button, .secondary-button, .cta-button, .submit-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.primary-button::after, .secondary-button::after, .cta-button::after, .submit-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.7s;
+}
+
+.primary-button:hover::after, .secondary-button:hover::after, .cta-button:hover::after, .submit-button:hover::after {
+  left: 100%;
+}
+
+/* Media Queries - Responsividade */
+@media (max-width: 1200px) {
+  .stat-item {
+    flex: 0 0 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+  }
+  
   .quick-contact-container {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -2195,6 +2082,44 @@ input:checked + .slider:before {
   
   .contact-info {
     text-align: center;
+  }
+  
+  .contact-methods {
+    align-items: center;
+  }
+  
+  .branch-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 992px) {
+  .stats-container {
+    flex-wrap: wrap;
+  }
+  
+  .stat-item {
+    flex: 0 0 calc(50% - 30px);
+    min-width: calc(50% - 20px);
+    padding: 30px 20px;
+  }
+  
+  .info-blocks-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  .logo-image {
+    max-width: 70%;
+  }
+  
+  .banner-h2 {
+    font-size: 2.2em;
+  }
+  
+  .banner-p {
+    font-size: 1.2em;
   }
   
   .branch-selector {
@@ -2211,154 +2136,8 @@ input:checked + .slider:before {
 }
 
 @media (max-width: 768px) {
-  .branch-button {
-    padding: 10px 20px;
-    font-size: 0.9rem;
-  }
-  
-  .contact-info h2 {
-    font-size: 1.8rem;
-  }
-  
-  .contact-info p {
-    font-size: 1rem;
-  }
-  
-  .branch-map {
-    height: 300px;
-  }
-}
-
-@media (max-width: 576px) {
-  .testimonials-slides {
-    min-height: 580px;
-  }
-  
-  .testimonial-content {
-    padding: 25px 40px 230px 40px;
-  }
-  
-  .testimonial-controls {
-    margin-top: -225px;
-  }
-  
-  .control-prev, .control-next {
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
-  }
-  
-  .control-prev {
-    left: 5px;
-  }
-  
-  .control-next {
-    right: 5px;
-  }
-
-
-  .branch-selector {
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-  }
-  
-  .branch-button {
-    width: 100%;
-  }
-  
-  .branch-info {
-    padding: 20px;
-  }
-  
-  .contact-method i {
-    width: 35px;
-    height: 35px;
-    font-size: 1.2rem;
-  }
-  
-  .contact-method span {
-    font-size: 0.9rem;
-  }
-  
-  .branch-map {
-    height: 250px;
-  }
-}
-
-/* Media Queries - Responsividade */
-@media (max-width: 1200px) {
-  .hero-title {
-    font-size: 3rem;
-  }
-  
-  .hero-description {
-    font-size: 1.3rem;
-  }
-  
-  .section-title {
-    font-size: 2.2rem;
-  }
-  
-  .quick-contact-container {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  
-  .contact-info {
-    text-align: center;
-  }
-  
-  .contact-methods {
-    align-items: center;
-  }
-}
-
-@media (max-width: 992px) {
-  .hero-title {
-    font-size: 2.5rem;
-  }
-  
-  .hero-description {
-    font-size: 1.2rem;
-  }
-  
-  .stats-container {
-    flex-wrap: wrap;
-  }
-  
-  .stat-item {
-    flex: 0 0 calc(50% - 30px);
-  }
-  
-  .info-blocks-grid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
-
-  .logo-image {
-    max-width: 70%;
-  }
-  
-  .banner-h2 {
-    font-size: 2.2em;
-  }
-  
-  .banner-p {
-    font-size: 1.2em;
-  }
-}
-
-@media (max-width: 768px) {
   section {
     padding: 60px 0;
-  }
-  
-  .hero-title {
-    font-size: 2rem;
-  }
-  
-  .hero-description {
-    font-size: 1.1rem;
   }
   
   .primary-button, .secondary-button, .cta-button {
@@ -2375,37 +2154,24 @@ input:checked + .slider:before {
   }
   
   .stat-item {
-    flex: 0 0 100%;
+    min-width: 60%;
+    max-width: 100%;
   }
   
   .stat-number {
     font-size: 2.5rem;
   }
   
-  .cta-container h2 {
-    font-size: 2rem;
+  .stat-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
   }
   
-  .cta-container p {
+  .stat-label {
     font-size: 1.1rem;
   }
   
-  .contact-info h2 {
-    font-size: 2rem;
-  }
-  
-  .contact-info p {
-    font-size: 1rem;
-  }
-  
-  .contact-form {
-    padding: 30px;
-  }
-  
-  .contact-form h3 {
-    font-size: 1.5rem;
-  }
-
   .hero-section {
     height: 100vh;
   }
@@ -2430,19 +2196,155 @@ input:checked + .slider:before {
   .scroll-indicator span {
     font-size: 14px;
   }
-}
-
-@media (max-width: 576px) {
-  .hero-title {
+  
+  .cookie-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .cookie-icon {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  
+  .cookie-buttons {
+    margin-top: 20px;
+  }
+  
+  .cookie-banner {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .testimonial-content {
+    padding: 30px 50px 140px 50px;
+  }
+  
+  .testimonial-controls {
+    margin-top: -60px;
+  }
+  
+  .control-prev {
+    left: 10px;
+  }
+  
+  .control-next {
+    right: 10px;
+  }
+  
+  .stats-section {
+    padding: 80px 0;
+  }
+  
+  .services-section {
+    padding: 70px 0;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+  
+  .service-card {
+    max-width: 450px;
+    margin: 0 auto;
+  }
+  
+  .branch-button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  
+  .contact-info h2 {
     font-size: 1.8rem;
   }
   
-  .hero-description {
+  .contact-info p {
     font-size: 1rem;
   }
   
-  .hero-logo {
-    max-width: 150px;
+  .branch-map {
+    height: 300px;
+  }
+  
+  .cta-container h2 {
+    font-size: 2rem;
+  }
+  
+  .cta-container p {
+    font-size: 1.1rem;
+  }
+  
+  .contact-form {
+    padding: 30px;
+  }
+  
+  .contact-form h3 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .cookie-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .cookie-accept, .cookie-settings {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .testimonial-content {
+    padding: 25px 40px 230px 40px;
+  }
+  
+  .testimonial-controls {
+    margin-top: 40px;
+  }
+  
+  .control-prev, .control-next {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+  
+  .control-prev {
+    left: 5px;
+  }
+  
+  .control-next {
+    right: 5px;
+  }
+  
+  .branch-selector {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .branch-button {
+    width: 90%;
+  }
+  
+  .branch-info {
+    padding: 20px;
+  }
+  
+  .contact-method i {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+  }
+  
+  .contact-method span {
+    font-size: 0.9rem;
+  }
+  
+  .branch-map {
+    height: 250px;
   }
   
   .section-title {
@@ -2453,20 +2355,12 @@ input:checked + .slider:before {
     font-size: 1rem;
   }
   
-  .service-card {
-    padding: 30px 20px;
-  }
-  
   .service-icon {
     font-size: 2.5rem;
   }
   
   .service-card h3 {
     font-size: 1.3rem;
-  }
-  
-  .testimonial-content {
-    padding: 20px;
   }
   
   .testimonial-text {
@@ -2484,7 +2378,7 @@ input:checked + .slider:before {
   .contact-form {
     padding: 20px;
   }
-
+  
   .logo-image {
     max-width: 90%;
   }
@@ -2497,6 +2391,12 @@ input:checked + .slider:before {
   .banner-p {
     font-size: 1em;
     border-left: 2px solid rgba(255, 255, 255, 0.8);
+  }
+}
+
+@media (max-width: 400px) {
+  .branch-button {
+    font-size: 0.8rem;
   }
 }
 
@@ -2530,28 +2430,4 @@ input:checked + .slider:before {
   }
 }
 
-.primary-button:hover, .cta-button:hover {
-  animation: pulse 1.5s infinite;
-}
-
-/* Efeito de brilho para botões */
-.primary-button, .secondary-button, .cta-button, .submit-button {
-  position: relative;
-  overflow: hidden;
-}
-
-.primary-button::after, .secondary-button::after, .cta-button::after, .submit-button::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.7s;
-}
-
-.primary-button:hover::after, .secondary-button:hover::after, .cta-button:hover::after, .submit-button:hover::after {
-  left: 100%;
-}
 </style>

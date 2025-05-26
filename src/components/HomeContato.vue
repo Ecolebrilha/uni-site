@@ -337,7 +337,7 @@ export default {
         {
           name: 'CD São Paulo',
           city: 'Cotia - SP',
-          icon: 'fas fa-industry',
+          icon: 'fas fa-warehouse',
           address: 'R. Pinhal, 165 - Jardim Sabiá, Cotia - SP',
           cep: '06716-575',
           phone: '+55 (11) 4777-2159',
