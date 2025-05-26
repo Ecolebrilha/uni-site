@@ -21,3 +21,13 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Variáveis de ambiente
+.env
+.env.local
+.env.production
+
+# Arquivos sensíveis
+node_back-end/.env
+# Local Netlify folder
+.netlify

@@ -125,7 +125,7 @@ export default {
       this.showErrorMessage = false;
 
       try {
-        const response = await fetch('http://localhost:3000/send-email', {
+        const response = await fetch('/.netlify/functions/send-email', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
