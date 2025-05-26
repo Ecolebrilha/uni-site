@@ -864,12 +864,6 @@ section {
     width: 40px;
   }
   
-  .cta-button {
-    padding: 12px 30px;
-    font-size: 1rem;
-    width: 100%;
-  }
-  
   .privacy-content h3 {
     font-size: 1.4rem;
   }

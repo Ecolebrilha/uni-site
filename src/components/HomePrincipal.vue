@@ -363,7 +363,8 @@
             </div>
             <div class="contact-method">
               <i class="fas fa-envelope"></i>
-              <span>{{ branches[activeBranch].email }}</span>
+              <a href="mailto:contato@unihospitalar.com.br" class="email-link">
+            {{ branches[activeBranch].email }}</a>
             </div>
             <div class="contact-method">
               <i class="fas fa-map-marker-alt"></i>
@@ -393,7 +394,7 @@
   </div>
 </section>
     <HomeFooter />
-<!-- Adicione este código antes do fechamento da tag </div> principal -->
+    
 <!-- Banner de Cookies -->
 <div class="cookie-banner" v-if="showCookieBanner">
   <div class="cookie-content">
@@ -944,7 +945,8 @@ section {
 .cookie-content {
   display: flex;
   align-items: center;
-  padding: 20px;
+  padding: 25px;
+  min-height: 60px;
 }
 
 .cookie-icon {
@@ -955,11 +957,18 @@ section {
 
 .cookie-text {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px 0;
 }
 
 .cookie-text h3 {
   margin-bottom: 5px;
   color: #333;
+  margin-top: 0;
+  line-height: 1.2;
 }
 
 .cookie-text p {
@@ -971,6 +980,12 @@ section {
 .cookie-text a {
   color: #AE2C2A;
   text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.cookie-text a:hover {
+  color: #D84A48;
+  text-decoration: underline;
 }
 
 .cookie-buttons {
@@ -1325,17 +1340,6 @@ input:checked + .slider:before {
   letter-spacing: 1px;
 }
 
-@media (max-width: 992px) {
-  .stats-container {
-    gap: 20px;
-  }
-  
-  .stat-item {
-    min-width: calc(50% - 20px);
-    padding: 30px 20px;
-  }
-}
-
 @media (max-width: 768px) {
   .testimonials-slides {
     min-height: 520px;
@@ -1563,9 +1567,17 @@ input:checked + .slider:before {
 }
 
 /* Responsividade */
+@media (max-width: 1200px) {
+  .stat-item {
+    flex: 0 0 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+  }
+}
+
 @media (max-width: 992px) {
-  .services-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .stat-item {
+    min-width: calc(50% - 20px);
+    padding: 30px 20px;
   }
 }
 
@@ -1580,12 +1592,17 @@ input:checked + .slider:before {
   
   .services-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 50px;
   }
   
   .service-card {
     max-width: 450px;
     margin: 0 auto;
+  }
+
+  .stat-item {
+    min-width: calc(50% - 20px);
+    padding: 40px 30px;
   }
 }
 
@@ -2107,6 +2124,36 @@ input:checked + .slider:before {
   gap: 15px;
 }
 
+.contact-method a {
+  font-size: 1.1rem;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-method a:hover {
+  color: #AE2C2A;
+  text-decoration: underline;
+}
+
+.email-link {
+  font-size: 1.1rem;
+  color: #333;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  animation: emailPulse 2s infinite;
+  border-radius: 5px;
+  padding: 2px 6px;
+}
+
+.email-link:hover {
+  color: #AE2C2A;
+  background-color: rgba(174, 44, 42, 0.1);
+  transform: scale(1.05);
+  animation: emailPulseHover 1s infinite;
+}
+
 .contact-method i {
   font-size: 1.5rem;
   color: #AE2C2A;
@@ -2282,10 +2329,6 @@ input:checked + .slider:before {
   
   .stat-item {
     flex: 0 0 calc(50% - 30px);
-  }
-  
-  .services-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
   
   .info-blocks-grid {

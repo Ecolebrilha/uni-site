@@ -1,13 +1,13 @@
 <template>
   <footer>
     <div class="footer-logo">
-      <a href="/unihospitalarsite/"><img src="@/assets/footerSelo.png" alt="Imagem Selo do footer" class="logo-image"></a>
+      <a href="/"><img src="@/assets/footerSelo.png" alt="Imagem Selo do footer" class="logo-image"></a>
     </div>
     <div class="footer-mensagem">
       <p>© 2025 | Uni Hospitalar Ltda. – Todos os direitos reservados</p>
     </div>
     <div class="footer-desenvolvedor">
-      <p>Desenvolvido por <a href="/unihospitalarsite/"><span class="company-name">Uni Hospitalar</span> <span class="registered-mark">®</span></a></p>
+      <p>Desenvolvido por <a href="/"><span class="company-name">Uni Hospitalar</span> <span class="registered-mark">®</span></a></p>
     </div>
   </footer>
 </template>

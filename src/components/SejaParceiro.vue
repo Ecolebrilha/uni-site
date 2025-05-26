@@ -936,16 +936,23 @@ select.form-control {
   margin-top: 50px;
   position: relative;
   z-index: 1;
+  align-items: stretch;
+  row-gap: 60px;
 }
 
 .benefit-card {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 15px;
-  padding: 30px;
+  padding: 25px 20px 0px 20px;
   text-align: center;
   backdrop-filter: blur(5px);
   transition: all 0.3s ease;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 280px;
+  height: 100%;
 }
 
 .benefit-card:hover {
@@ -955,14 +962,14 @@ select.form-control {
 }
 
 .benefit-icon {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 20px;
+  margin: 0 auto 15px;
   border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
@@ -974,13 +981,16 @@ select.form-control {
 .benefit-card h3 {
   font-size: 1.3rem;
   font-weight: 700;
-  margin-bottom: 15px;
   color: white;
 }
 
 .benefit-card p {
   color: rgba(255, 255, 255, 0.9);
-  line-height: 1.6;
+  line-height: 1.5;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  margin: 0;
 }
 
 /* Responsividade */

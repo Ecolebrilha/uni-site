@@ -1,6 +1,5 @@
 <template>
   <header :class="{'scrolled': isScrolled}">
-    <!-- Botão de menu com ícone melhorado -->
     <button @click="toggleSidebar" :class="['menu-toggle', { 'scrolled': isScrolled, 'active': sidebarOpen }]">
       <span class="menu-icon"></span>
     </button>

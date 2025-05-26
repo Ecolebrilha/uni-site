@@ -613,6 +613,14 @@ section {
   .principles-grid {
     grid-template-columns: 1fr 1fr;
   }
+
+  .lgpd-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
 }
 
 @media (max-width: 992px) {
@@ -718,7 +726,9 @@ section {
   .cta-button {
     padding: 12px 30px;
     font-size: 1rem;
-    width: 100%;
+    width: 60%;
+    margin: 0 auto;
+    display: block;
   }
   
   .cta-buttons {

@@ -757,7 +757,9 @@ section {
   .cta-button {
     padding: 12px 30px;
     font-size: 1rem;
-    width: 100%;
+    width: 60%;
+    margin: 0 auto;
+    display: block;
   }
   
   .cta-buttons {

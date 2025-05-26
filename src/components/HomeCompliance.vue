@@ -32,7 +32,7 @@
                 <i class="fas fa-balance-scale"></i>
               </div>
               <h3>Integridade</h3>
-              <p>Atuamos com honestidade e ética em todas as nossas relações comerciais e profissionais.</p>
+              <p>Atuamos com honestidade e ética em todas as nossas relações comerciais e profissionais, mantendo sempre os mais altos padrões.</p>
             </div>
           </ScrollReveal>
           
@@ -42,7 +42,7 @@
                 <i class="fas fa-handshake"></i>
               </div>
               <h3>Transparência</h3>
-              <p>Mantemos uma comunicação clara e aberta com todos os nossos stakeholders.</p>
+              <p>Mantemos uma comunicação clara e aberta com todos os nossos stakeholders, promovendo confiança e credibilidade mútua sempre.</p>
             </div>
           </ScrollReveal>
           
@@ -52,7 +52,7 @@
                 <i class="fas fa-check-circle"></i>
               </div>
               <h3>Conformidade</h3>
-              <p>Seguimos rigorosamente todas as leis, regulamentos e normas aplicáveis ao nosso setor.</p>
+              <p>Seguimos rigorosamente todas as leis, regulamentos e normas aplicáveis ao nosso setor farmacêutico e hospitalar com excelência.</p>
             </div>
           </ScrollReveal>
         </div>
@@ -832,7 +832,9 @@ section {
   
   .value-card {
     max-width: 100%;
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
+    display: block;
   }
   
   .conduct-container {
@@ -852,14 +854,24 @@ section {
     flex-direction: column;
   }
   
-    .documents-container {
+  .documents-container {
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
   
   .document-card {
     max-width: 100%;
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .document-icon {
+    margin: 0 auto;
   }
 }
 
@@ -888,12 +900,6 @@ section {
 
   .value-icon {
     font-size: 1.2rem;
-  }
-  
- .document-icon {
-    width: 60px;
-    height: 60px;
-    font-size: 1.8rem;
   }
   
   .value-card h3, .document-content h3 {
@@ -939,7 +945,17 @@ section {
     padding: 12px 15px;
     font-size: 0.9rem;
   }
+
+  .document-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
   
+  .document-icon i {
+    font-size: 1.8rem;
+  }
+
   .cta-button, .document-button {
     padding: 12px 20px;
     font-size: 0.9rem;

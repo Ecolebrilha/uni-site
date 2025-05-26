@@ -654,13 +654,16 @@ section {
 .message-header {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 15px;
   margin-bottom: 20px;
+  width: 100%;
 }
 
 .message-header i {
   font-size: 1.5rem;
   color: #AE2C2A;
+  line-height: 1;
 }
 
 .message-header h4 {
@@ -1117,6 +1120,19 @@ section {
   }
 }
 
+@media (max-width: 725px) {
+  .contact-tabs > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+  
+  .tab-button {
+    width: 100%;
+    min-width: auto;
+  }
+}
+
 @media (max-width: 576px) {
   .container {
     padding: 0 20px;
@@ -1141,6 +1157,12 @@ section {
   .tab-button {
     min-width: 100%;
     margin-bottom: 10px;
+  }
+
+  .contact-tabs > div {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
   }
   
   .contact-info {
@@ -1351,6 +1373,10 @@ section {
       transform: translateX(0);
       opacity: 1;
     }
+  }
+
+  .location-tab {
+    width: 80%;
   }
 }
 
