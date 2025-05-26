@@ -67,145 +67,145 @@
           <div class="contact-content">
             <ScrollReveal direction="right" :delay="300">
               <!-- Suporte -->
-              <div v-if="activeSection === 'SAC'" class="contact-panel">
-                <div class="contact-header">
-                  <div class="contact-icon">
-                    <i class="fas fa-headset"></i>
-                  </div>
-                  <h3>Suporte ao Cliente</h3>
-                </div>
-                
-                <div class="contact-info">
-                  <div class="info-item">
-                    <i class="fas fa-envelope"></i>
-                    <p>contato@unihospitalar.com.br</p>
-                  </div>
-                  <div class="info-item">
-                    <i class="fas fa-phone"></i>
-                    <p>+55 (81) 3472 7201</p>
-                  </div>
-                  <div class="info-item">
-                    <i class="fas fa-clock"></i>
-                    <p>Segunda a Sexta: 8h às 18h</p>
-                  </div>
-                </div>
-                
-                <div class="contact-message">
-                  <div class="message-header">
-                    <i class="fas fa-paper-plane"></i>
-                    <h4>Envie sua mensagem</h4>
-                  </div>
-                  <p>Para enviar sua mensagem, preencha os campos abaixo e em breve retornaremos. Obrigado!</p>
-                  <ContatoFormulario />
-                </div>
-              </div>
-              
-              <!-- Comercial -->
-              <div v-if="activeSection === 'Comercial'" class="contact-panel">
-                <div class="contact-header">
-                  <div class="contact-icon">
-                    <i class="fas fa-shopping-cart"></i>
-                  </div>
-                  <h3>Departamento Comercial</h3>
-                </div>
-                
-                <div class="contact-info">
-                  <div class="info-item">
-                    <i class="fas fa-envelope"></i>
-                    <p>vendas@unihospitalar.com.br</p>
-                  </div>
-                  <div class="info-item">
-                    <i class="fas fa-phone"></i>
-                    <p>+55 (81) 3472 7224</p>
-                  </div>
-                  <div class="info-item">
-                    <i class="fas fa-clock"></i>
-                    <p>Segunda a Sexta: 8h às 18h</p>
-                  </div>
-                </div>
-                
-                <div class="contact-message">
-                  <div class="message-header">
-                    <i class="fas fa-paper-plane"></i>
-                    <h4>Envie sua mensagem</h4>
-                  </div>
-                  <p>Para enviar sua mensagem, preencha os campos abaixo e em breve retornaremos. Obrigado!</p>
-                  <ContatoFormulario />
-                </div>
-              </div>
-              
-              <!-- Licitação -->
-              <div v-if="activeSection === 'Licitação'" class="contact-panel">
-                <div class="contact-header">
-                  <div class="contact-icon">
-                    <i class="fas fa-file-contract"></i>
-                  </div>
-                  <h3>Departamento de Licitação</h3>
-                </div>
-                
-                <div class="contact-info">
-                  <div class="info-item">
-                    <i class="fas fa-envelope"></i>
-                    <p>licitacao@unihospitalar.com.br</p>
-                  </div>
-                  <div class="info-item">
-                    <i class="fas fa-phone"></i>
-                    <p>+55 (81) 3472 7215</p>
-                  </div>
-                  <div class="info-item">
-                    <i class="fas fa-clock"></i>
-                    <p>Segunda a Sexta: 8h às 18h</p>
-                  </div>
-                </div>
-                
-                <div class="contact-message">
-                  <div class="message-header">
-                    <i class="fas fa-paper-plane"></i>
-                    <h4>Envie sua mensagem</h4>
-                  </div>
-                  <p>Para enviar sua mensagem, preencha os campos abaixo e em breve retornaremos. Obrigado!</p>
-                  <ContatoFormulario />
-                </div>
-              </div>
-              
-              <!-- Financeiro -->
-              <div v-if="activeSection === 'Financeiro'" class="contact-panel">
-                <div class="contact-header">
-                  <div class="contact-icon">
-                    <i class="fas fa-chart-line"></i>
-                  </div>
-                  <h3>Departamento Financeiro</h3>
-                </div>
-                
-                <div class="contact-info">
-                  <div class="info-item">
-                    <i class="fas fa-envelope"></i>
-                    <p>financeiro@unihospitalar.com.br</p>
-                  </div>
-                  <div class="info-item">
-                    <i class="fas fa-phone"></i>
-                    <p>+55 (81) 3472 7202</p>
-                  </div>
-                  <div class="info-item">
-                    <i class="fas fa-clock"></i>
-                    <p>Segunda a Sexta: 8h às 18h</p>
-                  </div>
-                </div>
-                
-                <div class="contact-message">
-                  <div class="message-header">
-                    <i class="fas fa-paper-plane"></i>
-                    <h4>Envie sua mensagem</h4>
-                  </div>
-                  <p>Para enviar sua mensagem, preencha os campos abaixo e em breve retornaremos. Obrigado!</p>
-                  <ContatoFormulario />
-                </div>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </div>
-    </section>
+<div v-if="activeSection === 'SAC'" class="contact-panel">
+  <div class="contact-header">
+    <div class="contact-icon">
+      <i class="fas fa-headset"></i>
+    </div>
+    <h3>Suporte ao Cliente</h3>
+  </div>
+  
+  <div class="contact-info">
+    <div class="info-item">
+      <i class="fas fa-envelope"></i>
+      <p>contato@unihospitalar.com.br</p>
+    </div>
+    <div class="info-item">
+      <i class="fas fa-phone"></i>
+      <p>+55 (81) 3472 7201</p>
+    </div>
+    <div class="info-item">
+      <i class="fas fa-clock"></i>
+      <p>Segunda a Sexta: 8h às 18h</p>
+    </div>
+  </div>
+  
+  <div class="contact-message">
+    <div class="message-header">
+      <i class="fas fa-paper-plane"></i>
+      <h4>Envie sua mensagem</h4>
+    </div>
+    <p>Para enviar sua mensagem, preencha os campos abaixo e em breve retornaremos. Obrigado!</p>
+    <ContatoFormulario :activeSection="activeSection" />
+  </div>
+</div>
+
+<!-- Comercial -->
+<div v-if="activeSection === 'Comercial'" class="contact-panel">
+  <div class="contact-header">
+    <div class="contact-icon">
+      <i class="fas fa-shopping-cart"></i>
+    </div>
+    <h3>Departamento Comercial</h3>
+  </div>
+  
+  <div class="contact-info">
+    <div class="info-item">
+      <i class="fas fa-envelope"></i>
+      <p>vendas@unihospitalar.com.br</p>
+    </div>
+    <div class="info-item">
+      <i class="fas fa-phone"></i>
+      <p>+55 (81) 3472 7224</p>
+    </div>
+    <div class="info-item">
+      <i class="fas fa-clock"></i>
+      <p>Segunda a Sexta: 8h às 18h</p>
+    </div>
+  </div>
+  
+  <div class="contact-message">
+    <div class="message-header">
+      <i class="fas fa-paper-plane"></i>
+      <h4>Envie sua mensagem</h4>
+    </div>
+    <p>Para enviar sua mensagem, preencha os campos abaixo e em breve retornaremos. Obrigado!</p>
+    <ContatoFormulario :activeSection="activeSection" />
+  </div>
+</div>
+
+<!-- Licitação -->
+<div v-if="activeSection === 'Licitação'" class="contact-panel">
+  <div class="contact-header">
+    <div class="contact-icon">
+      <i class="fas fa-file-contract"></i>
+    </div>
+    <h3>Departamento de Licitação</h3>
+  </div>
+  
+  <div class="contact-info">
+    <div class="info-item">
+      <i class="fas fa-envelope"></i>
+      <p>licitacao@unihospitalar.com.br</p>
+    </div>
+    <div class="info-item">
+      <i class="fas fa-phone"></i>
+      <p>+55 (81) 3472 7215</p>
+    </div>
+    <div class="info-item">
+      <i class="fas fa-clock"></i>
+      <p>Segunda a Sexta: 8h às 18h</p>
+    </div>
+  </div>
+  
+  <div class="contact-message">
+    <div class="message-header">
+      <i class="fas fa-paper-plane"></i>
+      <h4>Envie sua mensagem</h4>
+    </div>
+    <p>Para enviar sua mensagem, preencha os campos abaixo e em breve retornaremos. Obrigado!</p>
+    <ContatoFormulario :activeSection="activeSection" />
+  </div>
+</div>
+
+<!-- Financeiro -->
+<div v-if="activeSection === 'Financeiro'" class="contact-panel">
+  <div class="contact-header">
+    <div class="contact-icon">
+      <i class="fas fa-chart-line"></i>
+    </div>
+    <h3>Departamento Financeiro</h3>
+  </div>
+  
+  <div class="contact-info">
+    <div class="info-item">
+      <i class="fas fa-envelope"></i>
+      <p>financeiro@unihospitalar.com.br</p>
+    </div>
+    <div class="info-item">
+      <i class="fas fa-phone"></i>
+      <p>+55 (81) 3472 7202</p>
+    </div>
+    <div class="info-item">
+      <i class="fas fa-clock"></i>
+      <p>Segunda a Sexta: 8h às 18h</p>
+    </div>
+  </div>
+  
+  <div class="contact-message">
+    <div class="message-header">
+      <i class="fas fa-paper-plane"></i>
+      <h4>Envie sua mensagem</h4>
+    </div>
+    <p>Para enviar sua mensagem, preencha os campos abaixo e em breve retornaremos. Obrigado!</p>
+    <ContatoFormulario :activeSection="activeSection" />
+  </div>
+</div>
+</ScrollReveal>
+</div>
+</div>
+</div>
+</section>
     
     <!-- Seção de Localização -->
 <section class="location-section">
