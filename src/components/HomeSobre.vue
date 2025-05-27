@@ -3,35 +3,13 @@
     <HomeHeader />
     
     <!-- Hero Section com Parallax -->
-<section class="hero-section">
-  <div class="parallax-container" :class="{ 'loaded': imageLoaded }">
-    <!-- Placeholder enquanto carrega -->
-    <div v-if="!imageLoaded" class="image-placeholder">
-      <div class="loading-content">
-        <div class="loading-spinner">
-          <i class="fas fa-spinner fa-spin"></i>
-        </div>
-        <h1 class="placeholder-title">Nossa História</h1>
-        <p class="placeholder-subtitle">Carregando...</p>
+    <section class="hero-section">
+      <div class="parallax-container">
+        <div class="overlay"></div>
+        <h1 class="hero-title">Nossa História</h1>
+        <div class="hero-subtitle">Conheça a Uni Hospitalar</div>
       </div>
-    </div>
-    
-    <!-- Imagem real -->
-    <div 
-      v-show="imageLoaded"
-      class="hero-background"
-      :style="{ backgroundImage: `url(${heroImageSrc})` }"
-    ></div>
-    
-    <div class="overlay" :class="{ 'visible': imageLoaded }"></div>
-    
-    <div class="hero-content" :class="{ 'visible': imageLoaded }">
-      <h1 class="hero-title">Nossa História</h1>
-      <div class="hero-subtitle">Conheça a Uni Hospitalar</div>
-    </div>
-  </div>
-</section>
-
+    </section>
     
     <!-- Seção de Introdução -->
     <section class="intro-section">
@@ -194,8 +172,6 @@ export default {
     return {
       selectedLanguage: 'pt',
       sidebarOpen: false,
-      imageLoaded: false,
-    heroImageSrc: require('@/assets/header-sobre.jpg'),
       valores: [
         'Ética',
         'Qualidade',
@@ -221,31 +197,15 @@ export default {
     }
   },
   methods: {
-  changeLanguage(event) {
-    const value = typeof event === 'string' ? event : event.target.value;
-    this.selectedLanguage = value;
-    console.log(`Idioma selecionado: ${value}`);
-  },
-  toggleSidebar() {
-    this.sidebarOpen = !this.sidebarOpen;
-  },
-  preloadHeroImage() {
-    const img = new Image();
-    img.onload = () => {
-      setTimeout(() => {
-        this.imageLoaded = true;
-      }, 300);
-    };
-    img.onerror = () => {
-      console.error('Erro ao carregar imagem do hero');
-      this.imageLoaded = true;
-    };
-    img.src = this.heroImageSrc;
+    changeLanguage(event) {
+      const value = typeof event === 'string' ? event : event.target.value;
+      this.selectedLanguage = value;
+      console.log(`Idioma selecionado: ${value}`);
+    },
+    toggleSidebar() {
+      this.sidebarOpen = !this.sidebarOpen;
+    }
   }
-},
-mounted() {
-  this.preloadHeroImage();
-}
 }
 </script>
 
@@ -277,108 +237,21 @@ section {
 }
 
 .parallax-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background-color: #f5f5f5;
-}
-
-/* Placeholder enquanto carrega */
-.image-placeholder {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #AE2C2A, #ff5555);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: pulseGradient 2s ease-in-out infinite alternate;
-}
-
-@keyframes pulseGradient {
-  0% {
-    background: linear-gradient(135deg, #AE2C2A, #ff5555);
-  }
-  100% {
-    background: linear-gradient(135deg, #ff5555, #AE2C2A);
-  }
-}
-
-.loading-content {
-  text-align: center;
-  color: white;
-  z-index: 3;
-}
-
-.loading-spinner {
-  margin-bottom: 20px;
-}
-
-.loading-spinner i {
-  font-size: 3rem;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.placeholder-title {
-  font-size: 3rem;
-  font-weight: 800;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  opacity: 0.9;
-}
-
-.placeholder-subtitle {
-  font-size: 1.2rem;
-  font-weight: 300;
-  margin: 0;
-  opacity: 0.8;
-}
-
-/* Imagem real */
-.hero-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  background-image: url('@/assets/header-sobre.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  opacity: 0;
-  transform: scale(1.1);
-  transition: all 0.8s ease-out;
-}
-
-.parallax-container.loaded .hero-background {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Conteúdo do hero */
-.hero-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   color: white;
-  z-index: 3;
-  opacity: 0;
-  transform: translate(-50%, -50%) translateY(30px);
-  transition: all 0.8s ease-out 0.4s;
-}
-
-.hero-content.visible {
-  opacity: 1;
-  transform: translate(-50%, -50%) translateY(0);
 }
 
 .overlay {
@@ -388,31 +261,26 @@ section {
   width: 100%;
   height: 100%;
   background: linear-gradient(rgba(174, 44, 42, 0.7), rgba(0, 0, 0, 0.7));
-  opacity: 0;
-  transition: opacity 0.6s ease-out 0.2s;
-  z-index: 2;
-}
-
-.overlay.visible {
-  opacity: 1;
 }
 
 .hero-title {
   font-size: 4rem;
   font-weight: 800;
   margin-bottom: 20px;
+  position: relative;
+  z-index: 2;
   text-transform: uppercase;
   letter-spacing: 2px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  animation: fadeInUp 1.5s ease-out;
 }
 
 .hero-subtitle {
   font-size: 1.5rem;
   font-weight: 300;
-  margin: 0;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 2;
+  animation: fadeInUp 1.5s ease-out 0.3s both;
 }
-
 
 @keyframes fadeInUp {
   from {
@@ -953,22 +821,6 @@ section {
     padding: 12px 30px;
     font-size: 1rem;
   }
-
-  .placeholder-title {
-    font-size: 2.5rem;
-  }
-  
-  .placeholder-subtitle {
-    font-size: 1.2rem;
-  }
-  
-  .loading-spinner i {
-    font-size: 2rem;
-  }
-  
-  .hero-background {
-    background-attachment: scroll;
-  }
 }
 
 @media (max-width: 576px) {
@@ -1020,15 +872,4 @@ section {
     font-size: 1.6rem;
   }
 }
-
-@media (max-width: 480px) {
-  .placeholder-title {
-    font-size: 2rem;
-  }
-  
-  .placeholder-subtitle {
-    font-size: 1rem;
-  }
-}
-
 </style>
