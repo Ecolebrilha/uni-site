@@ -6,6 +6,7 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# CRÍTICO: Redirects para SPA
 [[redirects]]
   from = "/*"
   to = "/index.html"
