@@ -1,5 +1,5 @@
 {
-  "name": "functions",
+  "name": "netlify-functions",
   "version": "1.0.0",
   "description": "",
   "main": "send-email.js",
@@ -10,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "nodemailer": "^7.0.3"
+    "nodemailer": "^6.9.8"
   }
 }

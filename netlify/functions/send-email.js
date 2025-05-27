@@ -4,41 +4,33 @@ const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransporter({
   service: 'gmail',
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+    user: process.env.EMAIL_USER || 'fernandobastosleite7@gmail.com',
+    pass: process.env.EMAIL_PASS || 'jhuq bnzz oheo osqk'
   }
 });
 
 // Mapeamento de emails por seção
 const sectionEmails = {
-  'SAC': process.env.EMAIL_SAC || 'fernandobastosleite7@gmail.com',
-  'Comercial': process.env.EMAIL_COMERCIAL || 'fernandobastosleite7@gmail.com',
-  'Licitação': process.env.EMAIL_LICITACAO || 'fernandobastosleite7@gmail.com',
-  'Financeiro': process.env.EMAIL_FINANCEIRO || 'fernandobastosleite7@gmail.com',
-  'Comercial - Seja Parceiro': process.env.EMAIL_COMERCIAL || 'fernandobastosleite7@gmail.com',
-  'Contato - SAC': process.env.EMAIL_SAC || 'fernandobastosleite7@gmail.com',
-  'Contato - Comercial': process.env.EMAIL_COMERCIAL || 'fernandobastosleite7@gmail.com',
-  'Contato - Licitação': process.env.EMAIL_LICITACAO || 'fernandobastosleite7@gmail.com',
-  'Contato - Financeiro': process.env.EMAIL_FINANCEIRO || 'fernandobastosleite7@gmail.com'
+  'SAC': 'fernandobastosleite7@gmail.com',
+  'Comercial': 'fernandobastosleite7@gmail.com',
+  'Licitação': 'fernandobastosleite7@gmail.com',
+  'Financeiro': 'fernandobastosleite7@gmail.com',
+  'Comercial - Seja Parceiro': 'fernandobastosleite7@gmail.com',
+  'Contato - SAC': 'fernandobastosleite7@gmail.com',
+  'Contato - Comercial': 'fernandobastosleite7@gmail.com',
+  'Contato - Licitação': 'fernandobastosleite7@gmail.com',
+  'Contato - Financeiro': 'fernandobastosleite7@gmail.com'
 };
 
 exports.handler = async (event, context) => {
-  // Permitir apenas POST
-  if (event.httpMethod !== 'POST') {
-    return {
-      statusCode: 405,
-      body: JSON.stringify({ error: 'Method not allowed' })
-    };
-  }
-
-  // Headers CORS
+  // Configurar CORS
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS'
   };
 
-  // Handle preflight
+  // Responder a requisições OPTIONS (preflight)
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
@@ -47,8 +39,17 @@ exports.handler = async (event, context) => {
     };
   }
 
+  // Apenas aceitar POST
+  if (event.httpMethod !== 'POST') {
+    return {
+      statusCode: 405,
+      headers,
+      body: JSON.stringify({ error: 'Method not allowed' })
+    };
+  }
+
   try {
-    const { name, email, telefone, empresa, message, section } = JSON.parse(event.body);
+    const { name, email, telefone, empresa, message, section, toEmail } = JSON.parse(event.body);
     
     console.log('📨 Dados recebidos:', {
       name,
@@ -60,16 +61,10 @@ exports.handler = async (event, context) => {
     });
     
     // Determina o email de destino
-    const destinationEmail = sectionEmails[section] || sectionEmails['SAC'];
+    let destinationEmail = toEmail || sectionEmails[section] || sectionEmails['SAC'] || 'fernandobastosleite7@gmail.com';
     
     // Detecta se é do formulário "Seja Parceiro" ou "Contato"
     const isSejaParceiroForm = section === 'Comercial - Seja Parceiro';
-    
-    console.log('🔍 Tipo de formulário detectado:', {
-      section,
-      isSejaParceiroForm,
-      destinationEmail
-    });
     
     let emailTemplate;
     
@@ -126,7 +121,7 @@ exports.handler = async (event, context) => {
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="background-color: #AE2C2A; color: white; padding: 20px; text-align: center;">
             <h2 style="margin: 0;">📧 Nova Mensagem de Contato</h2>
-            <p style="margin: 10px 0 0 0; font-size: 16px;">${section}</p>
+            <p style="margin: 10px 0 0 0; font-size: 16px;">${section || 'Contato Geral'}</p>
           </div>
           
           <div style="padding: 20px; background-color: #f9f9f9;">
@@ -147,10 +142,6 @@ exports.handler = async (event, context) => {
               <tr>
                 <td style="padding: 8px; border-bottom: 1px solid #ddd; font-weight: bold;">Empresa:</td>
                 <td style="padding: 8px; border-bottom: 1px solid #ddd;">${empresa}</td>
-              </tr>
-              <tr>
-                <td style="padding: 8px; border-bottom: 1px solid #ddd; font-weight: bold;">Seção:</td>
-                <td style="padding: 8px; border-bottom: 1px solid #ddd;">${section}</td>
               </tr>
             </table>
           </div>
@@ -174,30 +165,24 @@ exports.handler = async (event, context) => {
     }
     
     const mailOptions = {
-      from: process.env.EMAIL_USER,
+      from: 'fernandobastosleite7@gmail.com',
       to: destinationEmail,
-      subject: `${section} - Novo contato de ${name}`,
+      subject: `${section || 'Contato'} - Novo contato de ${name}`,
       html: emailTemplate
     };
 
-    console.log('📤 Tentando enviar email...', {
-      from: mailOptions.from,
-      to: mailOptions.to,
-      subject: mailOptions.subject
-    });
-
+    console.log('📤 Tentando enviar email...');
     await transporter.sendMail(mailOptions);
     
-    console.log(`✅ Email enviado com sucesso!`);
-    console.log(`📧 Para: ${destinationEmail}`);
-    console.log(`📋 Seção: ${section}`);
-    console.log(`👤 De: ${name} (${email})`);
-    console.log(`📅 Data: ${new Date().toLocaleString('pt-BR')}`);
+    console.log(`✅ Email enviado com sucesso para: ${destinationEmail}`);
     
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ success: true, message: 'Email enviado com sucesso!' })
+      body: JSON.stringify({ 
+        success: true, 
+        message: 'Email enviado com sucesso!' 
+      })
     };
     
   } catch (error) {
