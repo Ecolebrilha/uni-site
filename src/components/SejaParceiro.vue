@@ -568,69 +568,64 @@ export default {
     },
 
     async submitForm() {
-      if (!this.formData.celular && !this.formData.telefoneFixo) {
-        alert('Por favor, preencha pelo menos um telefone de contato (celular ou fixo).');
-        return;
-      }
+  if (!this.formData.celular && !this.formData.telefoneFixo) {
+    alert('Por favor, preencha pelo menos um telefone de contato (celular ou fixo).');
+    return;
+  }
 
-      this.isSubmitting = true;
-      this.showSuccessMessage = false;
-      this.showErrorMessage = false;
+  this.isSubmitting = true;
+  this.showSuccessMessage = false;
+  this.showErrorMessage = false;
 
-      try {
-        // Enviando os dados para o backend
-        const response = await fetch('/.netlify/functions/send-email', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: this.formData.nomeRazaoSocial,
-            email: this.formData.email,
-            telefone: this.formData.celular || this.formData.telefoneFixo,
-            empresa: `${this.formData.ramoAtuacao} - CNPJ: ${this.formData.cnpj}`,
-            message: `Solicitação de cadastro como parceiro/cliente.
+  try {
+    // Usar Formspree
+    const response = await fetch('https://formspree.io/f/xzzrnbbo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: this.formData.nomeRazaoSocial,
+        email: this.formData.email,
+        telefone: this.formData.celular || this.formData.telefoneFixo,
+        empresa: `${this.formData.ramoAtuacao} - CNPJ: ${this.formData.cnpj}`,
+        uf: this.formData.uf,
+        endereco: this.formData.endereco,
+        ramo_atuacao: this.formData.ramoAtuacao,
+        cnpj: this.formData.cnpj,
+        message: `🤝 SOLICITAÇÃO DE PARCERIA - UniHospitalar
 
-Dados do Formulário:
-- Nome/Razão Social: ${this.formData.nomeRazaoSocial}
-- UF: ${this.formData.uf}
-- Ramo de Atuação: ${this.formData.ramoAtuacao}
-- CNPJ: ${this.formData.cnpj}
-- E-mail: ${this.formData.email}
-- Celular: ${this.formData.celular || 'Não informado'}
-- Telefone Fixo: ${this.formData.telefoneFixo || 'Não informado'}
-- Endereço: ${this.formData.endereco || 'Não informado'}
+📋 DADOS DA EMPRESA:
+• Nome/Razão Social: ${this.formData.nomeRazaoSocial}
+• UF: ${this.formData.uf}
+• Ramo de Atuação: ${this.formData.ramoAtuacao}
+• CNPJ: ${this.formData.cnpj}
+• E-mail: ${this.formData.email}
+• Celular: ${this.formData.celular || 'Não informado'}
+• Telefone Fixo: ${this.formData.telefoneFixo || 'Não informado'}
+• Endereço: ${this.formData.endereco || 'Não informado'}
 
-Solicitação enviada através do formulário "Seja Nosso Parceiro" do site.`,
-            section: 'Comercial - Seja Parceiro',
-            // Email de destino para teste
-        toEmail: 'fernandobastosleite7@gmail.com'
-          }),
-        });
+📅 Data: ${new Date().toLocaleString('pt-BR')}
+🌐 Origem: Formulário "Seja Nosso Parceiro" - Site UniHospitalar
 
-        const result = await response.json();
+✅ AÇÃO REQUERIDA: Análise de Parceria (Responder em até 48h)`,
+        _subject: `🤝 Nova Solicitação de Parceria - ${this.formData.nomeRazaoSocial}`
+      }),
+    });
 
-        if (result.success) {
-          this.showSuccessMessage = true;
-          // Limpar formulário após envio bem-sucedido
-          this.resetForm();
-        } else {
-          this.showErrorMessage = true;
-        }
-      } catch (error) {
-        console.error('Erro ao enviar formulário:', error);
-        this.showErrorMessage = true;
-
-        // Para fins de demonstração, mostrar mensagem de sucesso mesmo com erro
-        setTimeout(() => {
-          this.showSuccessMessage = true;
-          this.showErrorMessage = false;
-          this.resetForm();
-        }, 1000);
-      } finally {
-        this.isSubmitting = false;
-      }
-    },
+    if (response.ok) {
+      this.showSuccessMessage = true;
+      this.resetForm();
+    } else {
+      this.showErrorMessage = true;
+    }
+  } catch (error) {
+    console.error('Erro ao enviar formulário:', error);
+    this.showErrorMessage = true;
+  } finally {
+    this.isSubmitting = false;
+  }
+},
 
     resetForm() {
       this.formData = {

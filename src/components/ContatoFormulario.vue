@@ -115,66 +115,59 @@ export default {
     },
     
     async handleSubmit() {
-      if (!this.validatePhoneNumber(this.formData.telefone)) {
-        alert('Número de telefone inválido. Formato esperado: (xx) xxxxx-xxxx ou (xx) xxxx-xxxx');
-        return;
-      }
+  if (!this.validatePhoneNumber(this.formData.telefone)) {
+    alert('Número de telefone inválido. Formato esperado: (xx) xxxxx-xxxx');
+    return;
+  }
 
-      this.isSubmitting = true;
-      this.showSuccessMessage = false;
-      this.showErrorMessage = false;
+  try {
+    // Usar Formspree
+    const response = await fetch('https://formspree.io/f/xpwdvzzv', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: this.formData.name,
+        email: this.formData.email,
+        telefone: this.formData.telefone,
+        empresa: this.formData.empresa,
+        message: `📧 CONTATO - UniHospitalar
 
-      try {
-        const response = await fetch('/.netlify/functions/send-email', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: this.formData.name,
-            email: this.formData.email,
-            telefone: this.formData.telefone,
-            empresa: this.formData.empresa,
-            message: `Contato através do formulário - Seção: ${this.activeSection}
+👤 DADOS DO CONTATO:
+• Nome: ${this.formData.name}
+• E-mail: ${this.formData.email}
+• Telefone: ${this.formData.telefone}
+• Empresa: ${this.formData.empresa}
 
-Dados do contato:
-- Nome: ${this.formData.name}
-- E-mail: ${this.formData.email}
-- Telefone: ${this.formData.telefone}
-- Empresa: ${this.formData.empresa}
-
-Mensagem:
+💬 MENSAGEM:
 ${this.formData.message}
 
-Enviado através da página de contato do site - Seção: ${this.activeSection}`,
-            section: `Contato - ${this.activeSection}`
-            // Removido o toEmail para usar o mapeamento do backend
-          }),
-        });
+📅 Data: ${new Date().toLocaleString('pt-BR')}
+🌐 Origem: Formulário de Contato - Site UniHospitalar
 
-        const result = await response.json();
-        
-        if (result.success) {
-          this.showSuccessMessage = true;
-          // Limpar formulário após envio bem-sucedido
-          this.resetForm();
-        } else {
-          this.showErrorMessage = true;
-        }
-      } catch (error) {
-        console.error('Erro ao enviar o email:', error);
-        this.showErrorMessage = true;
-        
-        // Para fins de demonstração, mostrar mensagem de sucesso mesmo com erro
-        setTimeout(() => {
-          this.showSuccessMessage = true;
-          this.showErrorMessage = false;
-          this.resetForm();
-        }, 1000);
-      } finally {
-        this.isSubmitting = false;
-      }
-    },
+📞 AÇÃO REQUERIDA: Responder Contato (Responder em até 24h)`,
+        _subject: `📧 Novo Contato - ${this.formData.name}`
+      }),
+    });
+
+    if (response.ok) {
+      alert('Mensagem enviada com sucesso!');
+      this.formData = {
+        name: '',
+        email: '',
+        telefone: '',
+        empresa: '',
+        message: ''
+      };
+    } else {
+      alert('Erro ao enviar a mensagem. Tente novamente.');
+    }
+  } catch (error) {
+    alert('Erro ao enviar a mensagem. Tente novamente.');
+    console.error('Erro ao enviar o email:', error);
+  }
+},
     
     resetForm() {
       this.formData = {
