@@ -6,8 +6,8 @@
     <section class="hero-section">
       <div class="parallax-container">
         <div class="overlay"></div>
-        <h1 class="hero-title">Nossos Serviços</h1>
-        <div class="hero-subtitle">Soluções completas para o setor de saúde</div>
+        <h1 class="hero-title">{{ t('services.heroTitle') }}</h1>
+        <div class="hero-subtitle">{{ t('services.heroSubtitle') }}</div>
       </div>
     </section>
     
@@ -17,13 +17,11 @@
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-title">
             <span class="accent-line"></span>
-            <h2>Como podemos ajudar</h2>
+            <h2>{{ t('services.introTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
           <p class="intro-text">
-            A Uni Hospitalar oferece soluções integradas para o setor de saúde, com foco em eficiência, 
-            qualidade e atendimento personalizado. Nossos serviços são projetados para atender às necessidades 
-            específicas de cada segmento do mercado.
+            {{ t('services.introText') }}
           </p>
         </ScrollReveal>
       </div>
@@ -38,8 +36,8 @@
               <i class="fas fa-briefcase-medical"></i>
             </div>
             <div class="service-content">
-              <h3>Nossos Serviços</h3>
-              <p>A Uni Hospitalar busca atender de forma eficiente os segmentos públicos e privados, através de profissionais capacitados para interpretar o mercado e assim dar respostas compatíveis e definitivas para o bom atendimento da cadeia de distribuição.</p>
+              <h3>{{ t('services.mainServiceTitle') }}</h3>
+              <p>{{ t('services.mainServiceText') }}</p>
             </div>
           </div>
         </ScrollReveal>
@@ -51,13 +49,13 @@
                 <i class="fas fa-user-tie"></i>
               </div>
               <div class="service-content">
-                <h3>Segmento Privado</h3>
-                <p>Formado internamente por um telemarketing que funciona alinhado com uma equipe de consultores externos, visando sempre dar respostas rápidas e eficazes, a fim de atender o nosso cliente da melhor forma possível.</p>
+                <h3>{{ t('services.privateSegmentTitle') }}</h3>
+                <p>{{ t('services.privateSegmentText') }}</p>
                 <ul class="service-features">
-                  <li>Atendimento personalizado</li>
-                  <li>Consultoria especializada</li>
-                  <li>Respostas rápidas e eficazes</li>
-                  <li>Equipe dedicada</li>
+                  <li>{{ t('services.privateFeatures.feature1') }}</li>
+                  <li>{{ t('services.privateFeatures.feature2') }}</li>
+                  <li>{{ t('services.privateFeatures.feature3') }}</li>
+                  <li>{{ t('services.privateFeatures.feature4') }}</li>
                 </ul>
               </div>
             </div>
@@ -69,13 +67,13 @@
                 <i class="fas fa-gavel"></i>
               </div>
               <div class="service-content">
-                <h3>Segmento Público</h3>
-                <p>Formado internamente por um Setor de Licitações, composto por profissionais capacitados e orientados para o mercado, buscando informações através da captação de editais e outras formas a fim de gerar novos negócios. Este setor se completa através da presença de consultores externos que visitam sistematicamente todos os órgãos públicos que trabalhamos.</p>
+                <h3>{{ t('services.publicSegmentTitle') }}</h3>
+                <p>{{ t('services.publicSegmentText') }}</p>
                 <ul class="service-features">
-                  <li>Especialistas em licitações</li>
-                  <li>Captação de editais</li>
-                  <li>Consultores externos dedicados</li>
-                  <li>Acompanhamento sistemático</li>
+                  <li>{{ t('services.publicFeatures.feature1') }}</li>
+                  <li>{{ t('services.publicFeatures.feature2') }}</li>
+                  <li>{{ t('services.publicFeatures.feature3') }}</li>
+                  <li>{{ t('services.publicFeatures.feature4') }}</li>
                 </ul>
               </div>
             </div>
@@ -86,59 +84,59 @@
     
     <!-- Seção de Processo de Trabalho -->
     <section class="process-section">
-  <div class="container">
-    <ScrollReveal direction="bottom" :delay="200">
-      <div class="section-title light">
-        <span class="accent-line"></span>
-        <h2>Nosso Processo</h2>
-        <span class="accent-line"></span>
+      <div class="container">
+        <ScrollReveal direction="bottom" :delay="200">
+          <div class="section-title light">
+            <span class="accent-line"></span>
+            <h2>{{ t('services.processTitle') }}</h2>
+            <span class="accent-line"></span>
+          </div>
+          <p class="process-intro">{{ t('services.processIntro') }}</p>
+        </ScrollReveal>
+        
+        <div class="process-steps">
+          <ScrollReveal direction="bottom" :delay="300">
+            <div class="process-step">
+              <div class="step-number">01</div>
+              <div class="step-content">
+                <h4>{{ t('services.processSteps.step1.title') }}</h4>
+                <p>{{ t('services.processSteps.step1.description') }}</p>
+              </div>
+            </div>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="bottom" :delay="400">
+            <div class="process-step">
+              <div class="step-number">02</div>
+              <div class="step-content">
+                <h4>{{ t('services.processSteps.step2.title') }}</h4>
+                <p>{{ t('services.processSteps.step2.description') }}</p>
+              </div>
+            </div>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="bottom" :delay="500">
+            <div class="process-step">
+              <div class="step-number">03</div>
+              <div class="step-content">
+                <h4>{{ t('services.processSteps.step3.title') }}</h4>
+                <p>{{ t('services.processSteps.step3.description') }}</p>
+              </div>
+            </div>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="bottom" :delay="600">
+            <div class="process-step">
+              <div class="step-number">04</div>
+              <div class="step-content">
+                <h4>{{ t('services.processSteps.step4.title') }}</h4>
+                <p>{{ t('services.processSteps.step4.description') }}</p>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
       </div>
-      <p class="process-intro">Conheça como trabalhamos para garantir a excelência em nossos serviços</p>
-    </ScrollReveal>
-    
-    <div class="process-steps">
-      <ScrollReveal direction="bottom" :delay="300">
-        <div class="process-step">
-          <div class="step-number">01</div>
-          <div class="step-content">
-            <h4>Equipe de vendas qualificada</h4>
-            <p>Venda segura com garantia de qualidade na entrega.</p>
-          </div>
-        </div>
-      </ScrollReveal>
-      
-      <ScrollReveal direction="bottom" :delay="400">
-        <div class="process-step">
-          <div class="step-number">02</div>
-          <div class="step-content">
-            <h4>Logística otimizada</h4>
-            <p>Agilidade e organização para garantir rapidez e qualidade.</p>
-          </div>
-        </div>
-      </ScrollReveal>
-      
-      <ScrollReveal direction="bottom" :delay="500">
-        <div class="process-step">
-          <div class="step-number">03</div>
-          <div class="step-content">
-            <h4>Controle de qualidade rigoroso</h4>
-            <p>Inspeção detalhada de todos os produtos para assegurar a conformidade com os mais altos padrões.</p>
-          </div>
-        </div>
-      </ScrollReveal>
-      
-      <ScrollReveal direction="bottom" :delay="600">
-        <div class="process-step">
-          <div class="step-number">04</div>
-          <div class="step-content">
-            <h4>Suporte pós-venda especializado</h4>
-            <p>Acompanhamento contínuo para garantir a satisfação total do cliente.</p>
-          </div>
-        </div>
-      </ScrollReveal>
-    </div>
-  </div>
-</section>
+    </section>
     
     <!-- Seção de Benefícios -->
     <section class="benefits-section">
@@ -146,7 +144,7 @@
         <ScrollReveal direction="bottom" :delay="200">
           <div class="section-title">
             <span class="accent-line"></span>
-            <h2>Benefícios dos Nossos Serviços</h2>
+            <h2>{{ t('services.benefitsTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
         </ScrollReveal>
@@ -157,8 +155,8 @@
               <div class="benefit-icon">
                 <i class="fas fa-chart-line"></i>
               </div>
-              <h4>Eficiência Operacional</h4>
-              <p>Otimizamos processos para garantir maior eficiência e redução de custos.</p>
+              <h4>{{ t('services.benefits.efficiency.title') }}</h4>
+              <p>{{ t('services.benefits.efficiency.description') }}</p>
             </div>
           </ScrollReveal>
           
@@ -167,8 +165,8 @@
               <div class="benefit-icon">
                 <i class="fas fa-shield-alt"></i>
               </div>
-              <h4>Segurança e Conformidade</h4>
-              <p>Garantimos que todos os processos estejam em conformidade com as normas regulatórias.</p>
+              <h4>{{ t('services.benefits.security.title') }}</h4>
+              <p>{{ t('services.benefits.security.description') }}</p>
             </div>
           </ScrollReveal>
           
@@ -177,8 +175,8 @@
               <div class="benefit-icon">
                 <i class="fas fa-handshake"></i>
               </div>
-              <h4>Parcerias Estratégicas</h4>
-              <p>Desenvolvemos relacionamentos de longo prazo com nossos clientes e fornecedores.</p>
+              <h4>{{ t('services.benefits.partnerships.title') }}</h4>
+              <p>{{ t('services.benefits.partnerships.description') }}</p>
             </div>
           </ScrollReveal>
           
@@ -187,8 +185,8 @@
               <div class="benefit-icon">
                 <i class="fas fa-clock"></i>
               </div>
-              <h4>Agilidade nas Respostas</h4>
-              <p>Oferecemos soluções rápidas e eficazes para as demandas do mercado.</p>
+              <h4>{{ t('services.benefits.agility.title') }}</h4>
+              <p>{{ t('services.benefits.agility.description') }}</p>
             </div>
           </ScrollReveal>
         </div>
@@ -200,9 +198,9 @@
       <div class="container">
         <ScrollReveal direction="bottom" :delay="200">
           <div class="cta-content">
-            <h2>Vamos trabalhar juntos?</h2>
-            <p>Entre em contato conosco para descobrir como nossos serviços podem impulsionar seu negócio.</p>
-            <router-link to="/Contato" class="cta-button">Solicite uma Proposta</router-link>
+            <h2>{{ t('services.ctaTitle') }}</h2>
+            <p>{{ t('services.ctaText') }}</p>
+            <router-link to="/Contato" class="cta-button">{{ t('services.ctaButton') }}</router-link>
           </div>
         </ScrollReveal>
       </div>
@@ -215,24 +213,27 @@
 <script>
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
+import { useTranslation } from '@/composables/useTranslation.js';
 
 export default {
   components: {
     HomeHeader,
     HomeFooter
   },
+  setup() {
+    const { t, currentLanguage } = useTranslation()
+    
+    return {
+      t,
+      currentLanguage
+    }
+  },
   data() {
     return {
-      selectedLanguage: 'pt',
       sidebarOpen: false
     }
   },
   methods: {
-    changeLanguage(event) {
-      const value = typeof event === 'string' ? event : event.target.value;
-      this.selectedLanguage = value;
-      console.log(`Idioma selecionado: ${value}`);
-    },
     toggleSidebar() {
       this.sidebarOpen = !this.sidebarOpen;
     }
@@ -241,7 +242,7 @@ export default {
 </script>
 
 <style scoped>
-/* Estilos Gerais */
+/* Todo o CSS permanece igual ao original */
 .servicos-page {
   font-family: 'Montserrat', sans-serif;
   color: #333;

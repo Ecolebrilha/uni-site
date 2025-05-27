@@ -216,20 +216,34 @@
 </template>
 
 <script>
+import { useTranslation } from '@/composables/useTranslation.js';
+
 export default {
   name: 'HomeHeader',
+  setup() {
+    const { t, currentLanguage, setLanguage } = useTranslation();
+    
+    return {
+      t,
+      currentLanguage,
+      setLanguage
+    };
+  },
   data() {
     return {
       sidebarOpen: false,
-      selectedLanguage: 'pt',
       isScrolled: false,
       openDropdown: null
     };
   },
+  computed: {
+    selectedLanguage() {
+      return this.currentLanguage;
+    }
+  },
   methods: {
     toggleSidebar() {
       this.sidebarOpen = !this.sidebarOpen;
-      // Bloquear o scroll do body quando o sidebar estiver aberto
       document.body.style.overflow = this.sidebarOpen ? 'hidden' : '';
     },
     closeSidebar() {
@@ -240,8 +254,7 @@ export default {
       this.openDropdown = this.openDropdown === dropdown ? null : dropdown;
     },
     changeLanguage(lang) {
-      this.selectedLanguage = lang;
-      this.$i18n.locale = lang;
+      this.setLanguage(lang);
     },
     handleScroll() {
       this.isScrolled = window.scrollY > 0;
@@ -256,7 +269,6 @@ export default {
   },
   beforeUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
-    // Garantir que o scroll do body seja restaurado
     document.body.style.overflow = '';
   }
 };
@@ -879,7 +891,7 @@ nav ul li.dropdown:hover .dropdown-content {
 
 .sidebar-dropdown-toggle {
   display: flex;
-  align-items: stretch; /* ALTERADO de center para stretch */
+  align-items: stretch;
   justify-content: space-between;
   padding: 0;
   cursor: default;
@@ -889,7 +901,7 @@ nav ul li.dropdown:hover .dropdown-content {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  min-height: 50px; /* ADICIONADO */
+  min-height: 50px;
 }
 
 .sidebar-dropdown-toggle::before {
@@ -924,8 +936,8 @@ nav ul li.dropdown:hover .dropdown-content {
   padding: 16px 20px;
   flex: 1;
   border-radius: 12px 0 0 12px;
-  min-height: 50px; /* ADICIONADO */
-  box-sizing: border-box; /* ADICIONADO */
+  min-height: 50px;
+  box-sizing: border-box;
 }
 
 .sidebar-dropdown-main:hover {
@@ -1353,6 +1365,7 @@ nav ul li.dropdown:hover .dropdown-content {
     font-size: 0.85rem;
   }
   
+  /* Continuação do CSS */
   .mobile-center-controls .icon-selector span {
     font-size: 0.7em;
   }
@@ -1443,5 +1456,86 @@ nav ul li.dropdown:hover .dropdown-content {
 .menu-overlay.active {
   opacity: 1;
   visibility: visible;
+}
+
+/* Animações adicionais */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.service-icon i, .benefit-icon i {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Animação para os cards de serviços quando em hover */
+.service-card:hover .service-icon {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+/* Animação para os números de etapas */
+.process-step:hover .step-number {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
+
+/* Animação para o botão CTA */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(174, 44, 42, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(174, 44, 42, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(174, 44, 42, 0);
+  }
+}
+
+.cta-button:hover {
+  animation: pulse 1.5s infinite;
+}
+
+/* Ajustes para dispositivos móveis */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.8rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .service-content h3 {
+    font-size: 1.5rem;
+  }
+  
+  .step-content h4 {
+    font-size: 1.2rem;
+  }
+  
+  .benefit-card {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 468px) {
+  .process-step {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .process-steps::before {
+    display: none;
+  }
 }
 </style>
