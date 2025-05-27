@@ -3,292 +3,292 @@
     <HomeHeader />
 
     <!-- Hero Section com Efeito Parallax -->
-<section class="hero-section">
-  <div class="parallax-container">
-    <div class="overlay"></div>
-    <div class="hero-content">
-      <img src="@/assets/logo-uni.png" alt="Logo Uni Hospitalar" class="logo-image">
-      <h2 class="banner-h2">Respeito às relações humanas</h2>
-      <p class="banner-p">O nosso foco está na distribuição <br> de medicamentos hospitalares, <br> oncológicos e excepcionais.</p>
-      <div class="scroll-indicator" @click="scrollToContent">
-        <span>Role para baixo</span>
-        <i class="fas fa-chevron-down"></i>
+    <section class="hero-section">
+      <div class="parallax-container">
+        <div class="overlay"></div>
+        <div class="hero-content">
+          <img src="@/assets/logo-uni.png" alt="Logo Uni Hospitalar" class="logo-image">
+          <h2 class="banner-h2">Respeito às relações humanas</h2>
+          <p class="banner-p">O nosso foco está na distribuição <br> de medicamentos hospitalares, <br> oncológicos e excepcionais.</p>
+          <div class="scroll-indicator" @click="scrollToContent">
+            <span>Role para baixo</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
     <!-- Seção de Estatísticas -->
-<section class="stats-section" ref="statsSection">
-  <div class="container">
-    <div class="section-header">
-      <h2>Nossa Trajetória em Números</h2>
-      <div class="accent-line"></div>
-    </div>
-    <div class="stats-container">
-      <div class="stat-item">
-        <div class="stat-icon">
-          <i class="fas fa-calendar-alt"></i>
+    <section class="stats-section" ref="statsSection">
+      <div class="container">
+        <div class="section-header">
+          <h2>Nossa Trajetória em Números</h2>
+          <div class="accent-line"></div>
         </div>
-        <div class="stat-number">
-          <span ref="yearsCounter" data-target="19">0</span>
-        </div>
-        <div class="stat-label">Anos de Experiência</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-icon">
-          <i class="fas fa-map-marker-alt"></i>
-        </div>
-        <div class="stat-number">
-          <span ref="unitsCounter" data-target="3">0</span>
-        </div>
-        <div class="stat-label">Unidades Estratégicas</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-icon">
-          <i class="fas fa-users"></i>
-        </div>
-        <div class="stat-number">
-          <span ref="clientsCounter" data-target="5000">0</span>+
-        </div>
-        <div class="stat-label">Clientes Satisfeitos</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-icon">
-          <i class="fas fa-truck"></i>
-        </div>
-        <div class="stat-number">
-          <span ref="hoursCounter" data-target="48">0</span>h
-        </div>
-        <div class="stat-label">Entregas Rápidas</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-    <!-- Seção de Serviços e Informações -->
-<section class="services-section">
-  <div class="container">
-    <ScrollReveal direction="bottom" :delay="100">
-      <div class="section-header">
-        <h2 class="section-title">Nossos Serviços</h2>
-        <div class="section-subtitle">Conheça o que oferecemos para você</div>
-        <div class="accent-line"></div>
-      </div>
-    </ScrollReveal>
-    
-    <!-- Cards de serviços - Primeira linha -->
-    <div class="services-grid">
-      <ScrollReveal direction="left" :delay="200">
-        <div class="service-card">
-          <div class="service-image">
-            <img src="@/assets/estoque.jpg" alt="Estoque" @error="handleImageError($event, 'estoque')">
-            <div class="service-overlay"></div>
-          </div>
-          <div class="service-content">
-            <div class="service-icon">
-              <i class="fas fa-warehouse"></i>
+        <div class="stats-container">
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-calendar-alt"></i>
             </div>
-            <h3>ESTOQUE</h3>
-            <p>Nossa área de armazenamento segue rigorosamente as normas exigidas pela Anvisa.</p>
-            <router-link to="/Diferenciais" class="service-link">
-              <span>Saiba mais</span>
-              <i class="fas fa-long-arrow-alt-right"></i>
-            </router-link>
-          </div>
-        </div>
-      </ScrollReveal>
-      
-      <ScrollReveal direction="bottom" :delay="300">
-        <div class="service-card">
-          <div class="service-image">
-            <img src="@/assets/diferenciais.jpg" alt="Diferenciais" @error="handleImageError($event, 'diferenciais')">
-            <div class="service-overlay"></div>
-          </div>
-          <div class="service-content">
-            <div class="service-icon">
-              <i class="fas fa-award"></i>
+            <div class="stat-number">
+              <span ref="yearsCounter" data-target="19">0</span>
             </div>
-            <h3>DIFERENCIAIS</h3>
-            <p>Profissionais preparados e alinhados com a cultura da empresa, somado à linha de produtos e logística.</p>
-            <router-link to="/Diferenciais" class="service-link">
-              <span>Saiba mais</span>
-              <i class="fas fa-long-arrow-alt-right"></i>
-            </router-link>
+            <div class="stat-label">Anos de Experiência</div>
           </div>
-        </div>
-      </ScrollReveal>
-      
-      <ScrollReveal direction="right" :delay="200">
-        <div class="service-card">
-          <div class="service-image">
-            <img src="@/assets/logistica.jpg" alt="Logística" @error="handleImageError($event, 'logistica')">
-            <div class="service-overlay"></div>
-          </div>
-          <div class="service-content">
-            <div class="service-icon">
-              <i class="fas fa-truck-loading"></i>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-map-marker-alt"></i>
             </div>
-            <h3>LOGÍSTICA</h3>
-            <p>Entregas para o Norte e Nordeste em até 48 horas com toda segurança e garantia.</p>
-            <router-link to="/Diferenciais" class="service-link">
-              <span>Saiba mais</span>
-              <i class="fas fa-long-arrow-alt-right"></i>
-            </router-link>
-          </div>
-        </div>
-      </ScrollReveal>
-    </div>
-    
-    <!-- Cards de serviços - Segunda linha -->
-    <div class="services-grid">
-      <ScrollReveal direction="left" :delay="300">
-        <div class="service-card">
-          <div class="service-image">
-            <img src="@/assets/unidade-de-negocios.jpg" alt="Unidade de Negócios">
-            <div class="service-overlay"></div>
-          </div>
-          <div class="service-content">
-            <div class="service-icon">
-              <i class="fas fa-building"></i>
+            <div class="stat-number">
+              <span ref="unitsCounter" data-target="3">0</span>
             </div>
-            <h3>UNIDADE DE NEGÓCIOS</h3>
-            <p>Estamos abrindo uma nova unidade em Fortaleza, na busca pelo melhor atendimento e prestação de serviço.</p>
-            <router-link to="/Diferenciais" class="service-link">
-              <span>Saiba mais</span>
-              <i class="fas fa-long-arrow-alt-right"></i>
-            </router-link>
+            <div class="stat-label">Unidades Estratégicas</div>
           </div>
-        </div>
-      </ScrollReveal>
-      
-      <ScrollReveal direction="bottom" :delay="400">
-        <div class="service-card">
-          <div class="service-image">
-            <img src="@/assets/principais-clientes.jpg" alt="Principais Clientes">
-            <div class="service-overlay"></div>
-          </div>
-          <div class="service-content">
-            <div class="service-icon">
+          <div class="stat-item">
+            <div class="stat-icon">
               <i class="fas fa-users"></i>
             </div>
-            <h3>PRINCIPAIS CLIENTES</h3>
-            <p>Buscando melhor atender as demandas do mercado farmacêutico, atendemos a indústrias e hospitais, públicos e privados e clínicas particulares.</p>
-            <router-link to="/Parceiros" class="service-link">
-              <span>Saiba mais</span>
-              <i class="fas fa-long-arrow-alt-right"></i>
-            </router-link>
-          </div>
-        </div>
-      </ScrollReveal>
-      
-      <ScrollReveal direction="right" :delay="300">
-        <div class="service-card">
-          <div class="service-image">
-            <img src="@/assets/principais-produtos.jpg" alt="Principais Produtos">
-            <div class="service-overlay"></div>
-          </div>
-          <div class="service-content">
-            <div class="service-icon">
-              <i class="fas fa-pills"></i>
+            <div class="stat-number">
+              <span ref="clientsCounter" data-target="5000">0</span>+
             </div>
-            <h3>PRINCIPAIS PRODUTOS</h3>
-            <p>Foco na distribuição e padronização de medicamentos hospitalares, oncológicos e excepcionais, trabalhando em nichos específicos.</p>
-            <router-link to="/Produtos" class="service-link">
-              <span>Saiba mais</span>
-              <i class="fas fa-long-arrow-alt-right"></i>
-            </router-link>
+            <div class="stat-label">Clientes Satisfeitos</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-truck"></i>
+            </div>
+            <div class="stat-number">
+              <span ref="hoursCounter" data-target="48">0</span>h
+            </div>
+            <div class="stat-label">Entregas Rápidas</div>
           </div>
         </div>
-      </ScrollReveal>
-    </div>
-  </div>
-</section>
+      </div>
+    </section>
+
+    <!-- Seção de Serviços e Informações -->
+    <section class="services-section">
+      <div class="container">
+        <ScrollReveal direction="bottom" :delay="100">
+          <div class="section-header">
+            <h2 class="section-title">Nossos Serviços</h2>
+            <div class="section-subtitle">Conheça o que oferecemos para você</div>
+            <div class="accent-line"></div>
+          </div>
+        </ScrollReveal>
+        
+        <!-- Cards de serviços - Primeira linha -->
+        <div class="services-grid">
+          <ScrollReveal direction="left" :delay="200">
+            <div class="service-card">
+              <div class="service-image">
+                <img src="@/assets/estoque.jpg" alt="Estoque" @error="handleImageError($event, 'estoque')">
+                <div class="service-overlay"></div>
+              </div>
+              <div class="service-content">
+                <div class="service-icon">
+                  <i class="fas fa-warehouse"></i>
+                </div>
+                <h3>ESTOQUE</h3>
+                <p>Nossa área de armazenamento segue rigorosamente as normas exigidas pela Anvisa.</p>
+                <router-link to="/Diferenciais" class="service-link">
+                  <span>Saiba mais</span>
+                  <i class="fas fa-long-arrow-alt-right"></i>
+                </router-link>
+              </div>
+            </div>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="bottom" :delay="300">
+            <div class="service-card">
+              <div class="service-image">
+                <img src="@/assets/diferenciais.jpg" alt="Diferenciais" @error="handleImageError($event, 'diferenciais')">
+                <div class="service-overlay"></div>
+              </div>
+              <div class="service-content">
+                <div class="service-icon">
+                  <i class="fas fa-award"></i>
+                </div>
+                <h3>DIFERENCIAIS</h3>
+                <p>Profissionais preparados e alinhados com a cultura da empresa, somado à linha de produtos e logística.</p>
+                <router-link to="/Diferenciais" class="service-link">
+                  <span>Saiba mais</span>
+                  <i class="fas fa-long-arrow-alt-right"></i>
+                </router-link>
+              </div>
+            </div>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="right" :delay="200">
+            <div class="service-card">
+              <div class="service-image">
+                <img src="@/assets/logistica.jpg" alt="Logística" @error="handleImageError($event, 'logistica')">
+                <div class="service-overlay"></div>
+              </div>
+              <div class="service-content">
+                <div class="service-icon">
+                  <i class="fas fa-truck-loading"></i>
+                </div>
+                <h3>LOGÍSTICA</h3>
+                <p>Entregas para o Norte e Nordeste em até 48 horas com toda segurança e garantia.</p>
+                <router-link to="/Diferenciais" class="service-link">
+                  <span>Saiba mais</span>
+                  <i class="fas fa-long-arrow-alt-right"></i>
+                </router-link>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+        
+        <!-- Cards de serviços - Segunda linha -->
+        <div class="services-grid">
+          <ScrollReveal direction="left" :delay="300">
+            <div class="service-card">
+              <div class="service-image">
+                <img src="@/assets/unidade-de-negocios.jpg" alt="Unidade de Negócios">
+                <div class="service-overlay"></div>
+              </div>
+              <div class="service-content">
+                <div class="service-icon">
+                  <i class="fas fa-building"></i>
+                </div>
+                <h3>UNIDADE DE NEGÓCIOS</h3>
+                <p>Estamos abrindo uma nova unidade em Fortaleza, na busca pelo melhor atendimento e prestação de serviço.</p>
+                <router-link to="/Diferenciais" class="service-link">
+                  <span>Saiba mais</span>
+                  <i class="fas fa-long-arrow-alt-right"></i>
+                </router-link>
+              </div>
+            </div>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="bottom" :delay="400">
+            <div class="service-card">
+              <div class="service-image">
+                <img src="@/assets/principais-clientes.jpg" alt="Principais Clientes">
+                <div class="service-overlay"></div>
+              </div>
+              <div class="service-content">
+                <div class="service-icon">
+                  <i class="fas fa-users"></i>
+                </div>
+                <h3>PRINCIPAIS CLIENTES</h3>
+                <p>Buscando melhor atender as demandas do mercado farmacêutico, atendemos a indústrias e hospitais, públicos e privados e clínicas particulares.</p>
+                <router-link to="/Parceiros" class="service-link">
+                  <span>Saiba mais</span>
+                  <i class="fas fa-long-arrow-alt-right"></i>
+                </router-link>
+              </div>
+            </div>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="right" :delay="300">
+            <div class="service-card">
+              <div class="service-image">
+                <img src="@/assets/principais-produtos.jpg" alt="Principais Produtos">
+                <div class="service-overlay"></div>
+              </div>
+              <div class="service-content">
+                <div class="service-icon">
+                  <i class="fas fa-pills"></i>
+                </div>
+                <h3>PRINCIPAIS PRODUTOS</h3>
+                <p>Foco na distribuição e padronização de medicamentos hospitalares, oncológicos e excepcionais, trabalhando em nichos específicos.</p>
+                <router-link to="/Produtos" class="service-link">
+                  <span>Saiba mais</span>
+                  <i class="fas fa-long-arrow-alt-right"></i>
+                </router-link>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
+    </section>
 
     <!-- Seção de Depoimentos -->
-<section class="testimonials-section">
-  <div class="container">
-    <ScrollReveal direction="bottom" :delay="100">
-      <div class="section-header">
-        <h2 class="section-title">O que dizem sobre nós</h2>
-        <div class="section-subtitle">Depoimentos de nossos parceiros e clientes</div>
-        <div class="accent-line"></div>
-      </div>
-    </ScrollReveal>
+    <section class="testimonials-section">
+      <div class="container">
+        <ScrollReveal direction="bottom" :delay="100">
+          <div class="section-header">
+            <h2 class="section-title">O que dizem sobre nós</h2>
+            <div class="section-subtitle">Depoimentos de nossos parceiros e clientes</div>
+            <div class="accent-line"></div>
+          </div>
+        </ScrollReveal>
 
-    <div class="testimonials-slider">
-      <div class="testimonials-slides">
-        <div class="testimonial-slide" :class="{ active: currentTestimonial === 0 }">
-          <div class="testimonial-content">
-            <div class="quote-icon">
-              <i class="fas fa-quote-left"></i>
-            </div>
-            <p class="testimonial-text">A Uni Hospitalar tem sido uma parceira excepcional e confiável. Sua eficiência logística impecável e compromisso inabalável com a qualidade fazem toda a diferença para nossa operação diária.</p>
-            <div class="testimonial-author">
-              <div class="author-avatar">
-                <i class="fas fa-user-md"></i>
+        <div class="testimonials-slider">
+          <div class="testimonials-slides">
+            <div class="testimonial-slide" :class="{ active: currentTestimonial === 0 }">
+              <div class="testimonial-content">
+                <div class="quote-icon">
+                  <i class="fas fa-quote-left"></i>
+                </div>
+                <p class="testimonial-text">A Uni Hospitalar tem sido uma parceira excepcional e confiável. Sua eficiência logística impecável e compromisso inabalável com a qualidade fazem toda a diferença para nossa operação diária.</p>
+                <div class="testimonial-author">
+                  <div class="author-avatar">
+                    <i class="fas fa-user-md"></i>
+                  </div>
+                  <div class="author-info">
+                    <div class="author-name">Dr. Carlos Silva</div>
+                    <div class="author-position">Diretor Médico - Hospital Santa Clara</div>
+                  </div>
+                </div>
               </div>
-              <div class="author-info">
-                <div class="author-name">Dr. Carlos Silva</div>
-                <div class="author-position">Diretor Médico - Hospital Santa Clara</div>
+            </div>
+
+            <div class="testimonial-slide" :class="{ active: currentTestimonial === 1 }">
+              <div class="testimonial-content">
+                <div class="quote-icon">
+                  <i class="fas fa-quote-left"></i>
+                </div>
+                <p class="testimonial-text">Trabalhamos com a Uni Hospitalar há mais de 5 anos e sempre fomos atendidos com excelência. A pontualidade nas entregas e a qualidade dos produtos são impecáveis.</p>
+                <div class="testimonial-author">
+                  <div class="author-avatar">
+                    <i class="fas fa-user-nurse"></i>
+                  </div>
+                  <div class="author-info">
+                    <div class="author-name">Dra. Ana Martins</div>
+                    <div class="author-position">Gerente de Suprimentos - Clínica São Lucas</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-slide" :class="{ active: currentTestimonial === 2 }">
+              <div class="testimonial-content">
+                <div class="quote-icon">
+                  <i class="fas fa-quote-left"></i>
+                </div>
+                <p class="testimonial-text">A equipe da Uni Hospitalar demonstra um profundo conhecimento do setor farmacêutico e sempre nos oferece as melhores soluções para nossas necessidades.</p>
+                <div class="testimonial-author">
+                  <div class="author-avatar">
+                    <i class="fas fa-user-tie"></i>
+                  </div>
+                  <div class="author-info">
+                    <div class="author-name">Paulo Mendes</div>
+                    <div class="author-position">Coordenador de Compras - Hospital Regional</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="testimonial-slide" :class="{ active: currentTestimonial === 1 }">
-          <div class="testimonial-content">
-            <div class="quote-icon">
-              <i class="fas fa-quote-left"></i>
+          <div class="testimonial-controls">
+            <button class="control-prev" @click="prevTestimonial">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="control-indicators">
+              <span class="indicator" :class="{ active: currentTestimonial === 0 }" @click="setTestimonial(0)"></span>
+              <span class="indicator" :class="{ active: currentTestimonial === 1 }" @click="setTestimonial(1)"></span>
+              <span class="indicator" :class="{ active: currentTestimonial === 2 }" @click="setTestimonial(2)"></span>
             </div>
-            <p class="testimonial-text">Trabalhamos com a Uni Hospitalar há mais de 5 anos e sempre fomos atendidos com excelência. A pontualidade nas entregas e a qualidade dos produtos são impecáveis.</p>
-            <div class="testimonial-author">
-              <div class="author-avatar">
-                <i class="fas fa-user-nurse"></i>
-              </div>
-              <div class="author-info">
-                <div class="author-name">Dra. Ana Martins</div>
-                <div class="author-position">Gerente de Suprimentos - Clínica São Lucas</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-slide" :class="{ active: currentTestimonial === 2 }">
-          <div class="testimonial-content">
-            <div class="quote-icon">
-              <i class="fas fa-quote-left"></i>
-            </div>
-            <p class="testimonial-text">A equipe da Uni Hospitalar demonstra um profundo conhecimento do setor farmacêutico e sempre nos oferece as melhores soluções para nossas necessidades.</p>
-            <div class="testimonial-author">
-              <div class="author-avatar">
-                <i class="fas fa-user-tie"></i>
-              </div>
-              <div class="author-info">
-                <div class="author-name">Paulo Mendes</div>
-                <div class="author-position">Coordenador de Compras - Hospital Regional</div>
-              </div>
-            </div>
+            <button class="control-next" @click="nextTestimonial">
+              <i class="fas fa-chevron-right"></i>
+            </button>
           </div>
         </div>
       </div>
-
-      <div class="testimonial-controls">
-        <button class="control-prev" @click="prevTestimonial">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <div class="control-indicators">
-          <span class="indicator" :class="{ active: currentTestimonial === 0 }" @click="setTestimonial(0)"></span>
-          <span class="indicator" :class="{ active: currentTestimonial === 1 }" @click="setTestimonial(1)"></span>
-          <span class="indicator" :class="{ active: currentTestimonial === 2 }" @click="setTestimonial(2)"></span>
-        </div>
-        <button class="control-next" @click="nextTestimonial">
-          <i class="fas fa-chevron-right"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
     <!-- Seção de Parceiros -->
     <section class="partners-section">
@@ -335,130 +335,133 @@
     </section>
 
     <!-- Seção de Contato Rápido -->
-<section class="quick-contact-section">
-  <div class="container">
-    <div class="quick-contact-container">
-      <div class="contact-info">
-        <h2>Entre em contato conosco</h2>
-        <p>Estamos prontos para atender suas necessidades e responder a todas as suas dúvidas.</p>
-        
-        <!-- Botões para selecionar filial -->
-        <div class="branch-selector">
-          <button 
-            v-for="(branch, index) in branches" 
-            :key="index" 
-            @click="setActiveBranch(index)" 
-            :class="['branch-button', { active: activeBranch === index }]"
-          >
-            {{ branch.name }}
-          </button>
-        </div>
-        
-        <!-- Informações da filial selecionada -->
-        <div class="branch-info">
-          <div class="contact-methods">
-            <div class="contact-method">
-              <i class="fas fa-phone-alt"></i>
-              <span>{{ branches[activeBranch].phone }}</span>
+    <section class="quick-contact-section">
+      <div class="container">
+        <div class="quick-contact-container">
+          <div class="contact-info">
+            <h2>Entre em contato conosco</h2>
+            <p>Estamos prontos para atender suas necessidades e responder a todas as suas dúvidas.</p>
+            
+            <!-- Botões para selecionar filial -->
+            <div class="branch-selector">
+              <button 
+                v-for="(branch, index) in branches" 
+                :key="index" 
+                @click="setActiveBranch(index)" 
+                :class="['branch-button', { active: activeBranch === index }]"
+              >
+                {{ branch.name }}
+              </button>
             </div>
-            <div class="contact-method">
-              <i class="fas fa-envelope"></i>
-              <a href="mailto:contato@unihospitalar.com.br" class="email-link">
-            {{ branches[activeBranch].email }}</a>
+            
+            <!-- Informações da filial selecionada -->
+            <div class="branch-info">
+              <div class="contact-methods">
+                <div class="contact-method">
+                  <i class="fas fa-phone-alt"></i>
+                  <span>{{ branches[activeBranch].phone }}</span>
+                </div>
+                <div class="contact-method">
+                  <i class="fas fa-envelope"></i>
+                  <a href="mailto:contato@unihospitalar.com.br" class="email-link">
+                    {{ branches[activeBranch].email }}
+                  </a>
+                </div>
+                <div class="contact-method">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>{{ branches[activeBranch].address }}</span>
+                </div>
+                <div class="contact-method">
+                  <i class="fas fa-clock"></i>
+                  <span>{{ branches[activeBranch].hours }}</span>
+                </div>
+              </div>
             </div>
-            <div class="contact-method">
-              <i class="fas fa-map-marker-alt"></i>
-              <span>{{ branches[activeBranch].address }}</span>
-            </div>
-            <div class="contact-method">
-              <i class="fas fa-clock"></i>
-              <span>{{ branches[activeBranch].hours }}</span>
-            </div>
+          </div>
+          
+          <!-- Mapa da filial selecionada -->
+          <div class="branch-map">
+            <iframe 
+              :src="branches[activeBranch].mapUrl" 
+              width="100%" 
+              height="100%" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
           </div>
         </div>
       </div>
-      
-      <!-- Mapa da filial selecionada -->
-      <div class="branch-map">
-        <iframe 
-          :src="branches[activeBranch].mapUrl" 
-          width="100%" 
-          height="100%" 
-          style="border:0;" 
-          allowfullscreen="" 
-          loading="lazy" 
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
+
     <HomeFooter />
     
-<!-- Banner de Cookies -->
-<div class="cookie-banner" v-if="showCookieBanner">
-  <div class="cookie-content">
-    <div class="cookie-icon">
-      <i class="fas fa-cookie-bite"></i>
-    </div>
-    <div class="cookie-text">
-      <h3>Utilizamos cookies</h3>
-      <p>Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <router-link to="/PoliticaPrivacidade">Política de Privacidade</router-link>.</p>
-    </div>
-    <div class="cookie-buttons">
-      <button class="cookie-accept" @click="acceptCookies">Aceitar</button>
-      <button class="cookie-settings" @click="showCookieSettings = true">Configurações</button>
-    </div>
-  </div>
-</div>
-
-<!-- Modal de Configurações de Cookies -->
-<div class="cookie-settings-modal" v-if="showCookieSettings">
-  <div class="cookie-settings-content">
-    <div class="cookie-settings-header">
-      <h3>Configurações de Cookies</h3>
-      <button class="close-button" @click="showCookieSettings = false">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    <div class="cookie-settings-body">
-      <div class="cookie-option">
-        <div class="cookie-option-info">
-          <h4>Cookies Essenciais</h4>
-          <p>Necessários para o funcionamento básico do site. Não podem ser desativados.</p>
+    <!-- Banner de Cookies -->
+    <div class="cookie-banner" v-if="showCookieBanner">
+      <div class="cookie-content">
+        <div class="cookie-icon">
+          <i class="fas fa-cookie-bite"></i>
         </div>
-        <div class="cookie-switch disabled">
-          <input type="checkbox" checked disabled>
-          <span class="slider"></span>
+        <div class="cookie-text">
+          <h3>Utilizamos cookies</h3>
+          <p>Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <router-link to="/PoliticaPrivacidade">Política de Privacidade</router-link>.</p>
+        </div>
+        <div class="cookie-buttons">
+          <button class="cookie-accept" @click="acceptCookies">Aceitar</button>
+          <button class="cookie-settings" @click="showCookieSettings = true">Configurações</button>
         </div>
       </div>
+    </div>
 
-<div class="cookie-option">
-  <div class="cookie-option-info">
-    <h4>Cookies de Análise</h4>
-    <p>Nos ajudam a entender como os visitantes interagem com o site.</p>
-  </div>
-  <div class="cookie-switch">
-    <input type="checkbox" v-model="cookiePreferences.analytics" id="analytics-cookie">
-    <label for="analytics-cookie" class="slider"></label>
-  </div>
-</div>
-<div class="cookie-option">
-  <div class="cookie-option-info">
-    <h4>Cookies de Marketing</h4>
-    <p>Utilizados para exibir anúncios relevantes com base em seus interesses.</p>
-  </div>
-  <div class="cookie-switch">
-    <input type="checkbox" v-model="cookiePreferences.marketing" id="marketing-cookie">
-    <label for="marketing-cookie" class="slider"></label>
-  </div>
-</div>
+    <!-- Modal de Configurações de Cookies -->
+    <div class="cookie-settings-modal" v-if="showCookieSettings">
+      <div class="cookie-settings-content">
+        <div class="cookie-settings-header">
+          <h3>Configurações de Cookies</h3>
+          <button class="close-button" @click="showCookieSettings = false">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="cookie-settings-body">
+          <div class="cookie-option">
+            <div class="cookie-option-info">
+              <h4>Cookies Essenciais</h4>
+              <p>Necessários para o funcionamento básico do site. Não podem ser desativados.</p>
+            </div>
+            <div class="cookie-switch disabled">
+              <input type="checkbox" checked disabled>
+              <span class="slider"></span>
+            </div>
+          </div>
+
+          <div class="cookie-option">
+            <div class="cookie-option-info">
+              <h4>Cookies de Análise</h4>
+              <p>Nos ajudam a entender como os visitantes interagem com o site.</p>
+            </div>
+            <div class="cookie-switch">
+              <input type="checkbox" v-model="cookiePreferences.analytics" id="analytics-cookie">
+              <label for="analytics-cookie" class="slider"></label>
+            </div>
+          </div>
+
+          <div class="cookie-option">
+            <div class="cookie-option-info">
+              <h4>Cookies de Marketing</h4>
+              <p>Utilizados para exibir anúncios relevantes com base em seus interesses.</p>
+            </div>
+            <div class="cookie-switch">
+              <input type="checkbox" v-model="cookiePreferences.marketing" id="marketing-cookie">
+              <label for="marketing-cookie" class="slider"></label>
+            </div>
+          </div>
+        </div>
+        <div class="cookie-settings-footer">
+          <button class="cookie-save" @click="saveCookiePreferences">Salvar Preferências</button>
+        </div>
+      </div>
     </div>
-    <div class="cookie-settings-footer">
-      <button class="cookie-save" @click="saveCookiePreferences">Salvar Preferências</button>
-    </div>
-  </div>
-</div>
   </div>
 </template>
 
@@ -480,42 +483,40 @@ export default {
     return {
       currentTestimonial: 0,
       testimonialInterval: null,
-      selectedLanguage: 'pt',
-      sidebarOpen: false,
-      activeBranch: 0, // Filial ativa inicialmente (Recife)
+      activeBranch: 0,
       branches: [
-  {
-    name: 'Matriz Recife - Uni Hospitalar',
-    phone: '+55 (81) 3472-7201',
-    email: 'contato@unihospitalar.com.br',
-    address: 'R. Alagoas, 253 - Ipsep, Recife - PE, 51350-560',
-    hours: 'Segunda a Sexta: 8h às 18h',
-    mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.5988857640384!2d-34.8951233!3d-8.0623376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab1be2a5d9b3d7%3A0x9e3e5b0d8d3d8d3d!2sUni%20Hospitalar!5e0!3m2!1spt-BR!2sbr!4v1625151234567!5m2!1spt-BR!2sbr'
-  },
-  {
-    name: 'CD Fortaleza - Uni Ceará',
-    phone: '+55 (81) 3472-7202',
-    email: 'fortaleza@unihospitalar.com.br',
-    address: 'R. Francisco Jose Albuquerque Pereira - Cajazeiras, Fortaleza - CE, 60864-520',
-    hours: 'Segunda a Sexta: 8h às 18h',
-    mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3979.954729928924!2d-38.58232312426936!3d-3.8271872440876074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74c7a7a7a7a7a7%3A0x9e3e5b0d8d3d8d3d!2sR.%20Francisco%20Jose%20Albuquerque%20Pereira%20-%20Cajazeiras%2C%20Fortaleza%20-%20CE%2C%2060864-520!5e0!3m2!1spt-BR!2sbr!4v1625151234567!5m2!1spt-BR!2sbr'
-  },
-  {
-    name: 'CD São Paulo - SP Hospitalar LTDA',
-    phone: '+55 (11) 4777-2159',
-    email: 'sp@unihospitalar.com.br',
-    address: 'R. Pinhal, 165 - Jardim Sabiá, Cotia - SP, 06716-575',
-    hours: 'Segunda a Sexta: 8h às 18h',
-    mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.3963130076986!2d-46.92011492368744!3d-23.55290096159868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cf03b8b1b8b8b9%3A0x9e3e5b0d8d3d8d3d!2sR.%20Pinhal%2C%20165%20-%20Jardim%20Sabi%C3%A1%2C%20Cotia%20-%20SP%2C%2006716-575!5e0!3m2!1spt-BR!2sbr!4v1625151234567!5m2!1spt-BR!2sbr'
-  }
-],
-showCookieBanner: false,
-    showCookieSettings: false,
-    cookiePreferences: {
-      essential: true,
-      analytics: true,
-      marketing: false
-    }
+        {
+          name: 'Matriz Recife - Uni Hospitalar',
+          phone: '+55 (81) 3472-7201',
+          email: 'contato@unihospitalar.com.br',
+          address: 'R. Alagoas, 253 - Ipsep, Recife - PE, 51350-560',
+          hours: 'Segunda a Sexta: 8h às 18h',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.5988857640384!2d-34.8951233!3d-8.0623376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab1be2a5d9b3d7%3A0x9e3e5b0d8d3d8d3d!2sUni%20Hospitalar!5e0!3m2!1spt-BR!2sbr!4v1625151234567!5m2!1spt-BR!2sbr'
+        },
+        {
+          name: 'CD Fortaleza - Uni Ceará',
+          phone: '+55 (81) 3472-7202',
+          email: 'fortaleza@unihospitalar.com.br',
+          address: 'R. Francisco Jose Albuquerque Pereira - Cajazeiras, Fortaleza - CE, 60864-520',
+          hours: 'Segunda a Sexta: 8h às 18h',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3979.954729928924!2d-38.58232312426936!3d-3.8271872440876074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74c7a7a7a7a7a7%3A0x9e3e5b0d8d3d8d3d!2sR.%20Francisco%20Jose%20Albuquerque%20Pereira%20-%20Cajazeiras%2C%20Fortaleza%20-%20CE%2C%2060864-520!5e0!3m2!1spt-BR!2sbr!4v1625151234567!5m2!1spt-BR!2sbr'
+        },
+        {
+          name: 'CD São Paulo - SP Hospitalar LTDA',
+          phone: '+55 (11) 4777-2159',
+          email: 'sp@unihospitalar.com.br',
+          address: 'R. Pinhal, 165 - Jardim Sabiá, Cotia - SP, 06716-575',
+          hours: 'Segunda a Sexta: 8h às 18h',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.3963130076986!2d-46.92011492368744!3d-23.55290096159868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cf03b8b1b8b8b9%3A0x9e3e5b0d8d3d8d3d!2sR.%20Pinhal%2C%20165%20-%20Jardim%20Sabi%C3%A1%2C%20Cotia%20-%20SP%2C%2006716-575!5e0!3m2!1spt-BR!2sbr!4v1625151234567!5m2!1spt-BR!2sbr'
+        }
+      ],
+      showCookieBanner: false,
+      showCookieSettings: false,
+      cookiePreferences: {
+        essential: true,
+        analytics: true,
+        marketing: false
+      }
     };
   },
   mounted() {
@@ -559,7 +560,6 @@ showCookieBanner: false,
         { ref: this.$refs.hoursCounter, target: 48 }
       ];
       
-      // Inicializando todos os contadores com zero
       counters.forEach(counter => {
         counter.ref.innerText = '0';
         counter.current = 0;
@@ -568,41 +568,32 @@ showCookieBanner: false,
       const steps = Math.floor(baseDuration / 16);
       let currentStep = 0;
       
-      // Função de animação que será chamada a cada frame
       const animate = () => {
         currentStep++;
-        const progress = currentStep / steps; // Valor entre 0 e 1
+        const progress = currentStep / steps;
         
-        // Atualizando todos os contadores com base no progresso atual
         counters.forEach(counter => {
-          // Usando uma função de easing para desacelerar no final
-          const easedProgress = 1 - Math.pow(1 - progress, 3); // Cubic ease-out
-          
-          // Calculando o valor atual com base no progresso
+          const easedProgress = 1 - Math.pow(1 - progress, 3);
           const value = Math.min(
             Math.floor(counter.target * easedProgress), 
             counter.target
           );
           
-          // Atualizando o texto apenas se o valor mudou
           if (value !== counter.current) {
             counter.ref.innerText = value;
             counter.current = value;
           }
         });
         
-        // Continuando a animação até atingir o número de passos
         if (currentStep < steps) {
           requestAnimationFrame(animate);
         } else {
-          // Garantindo que os valores finais estejam corretos
           counters.forEach(counter => {
             counter.ref.innerText = counter.target;
           });
         }
       };
       
-      // Iniciando a animação
       requestAnimationFrame(animate);
     },
     
@@ -625,77 +616,56 @@ showCookieBanner: false,
       this.startTestimonialSlider();
     },
     handleImageError(e) {
-      // Fallback para imagem não encontrada
       e.target.src = require('@/assets/logo-uni.png');
     },
     setActiveBranch(index) {
       this.activeBranch = index;
     },
-    changeLanguage(event) {
-      const value = typeof event === 'string' ? event : event.target.value;
-      this.selectedLanguage = value;
-      console.log(`Idioma selecionado: ${value}`);
-    },
-    toggleSidebar() {
-      this.sidebarOpen = !this.sidebarOpen;
-    },
-     // Verifica se o usuário já aceitou os cookies
-  checkCookieConsent() {
-    const cookieConsent = localStorage.getItem('cookieConsent');
-    if (!cookieConsent) {
-      // Se não houver consentimento salvo, mostra o banner
-      this.showCookieBanner = true;
-    } else {
-      // Se houver consentimento salvo, carrega as preferências
-      try {
-        this.cookiePreferences = JSON.parse(cookieConsent);
-      } catch (e) {
-        // Em caso de erro, mostra o banner novamente
+    checkCookieConsent() {
+      const cookieConsent = localStorage.getItem('cookieConsent');
+      if (!cookieConsent) {
         this.showCookieBanner = true;
+      } else {
+        try {
+          this.cookiePreferences = JSON.parse(cookieConsent);
+        } catch (e) {
+          this.showCookieBanner = true;
+        }
+      }
+    },
+    
+    acceptCookies() {
+      this.cookiePreferences = {
+        essential: true,
+        analytics: true,
+        marketing: true
+      };
+      
+      localStorage.setItem('cookieConsent', JSON.stringify(this.cookiePreferences));
+      this.showCookieBanner = false;
+      this.applyUserPreferences();
+    },
+    
+    saveCookiePreferences() {
+      localStorage.setItem('cookieConsent', JSON.stringify(this.cookiePreferences));
+      this.showCookieBanner = false;
+      this.showCookieSettings = false;
+      this.applyUserPreferences();
+    },
+    
+    applyUserPreferences() {
+      if (this.cookiePreferences.analytics) {
+        console.log('Analytics cookies enabled');
+      } else {
+        console.log('Analytics cookies disabled');
+      }
+      
+      if (this.cookiePreferences.marketing) {
+        console.log('Marketing cookies enabled');
+      } else {
+        console.log('Marketing cookies disabled');
       }
     }
-  },
-  
-  // Aceita todos os cookies
-  acceptCookies() {
-    // Define todas as preferências como true
-    this.cookiePreferences = {
-      essential: true,
-      analytics: true,
-      marketing: true
-    };
-    
-    // Salva as preferências
-    localStorage.setItem('cookieConsent', JSON.stringify(this.cookiePreferences));
-    this.showCookieBanner = false;
-    this.applyUserPreferences();
-  },
-  
-  // Salva as preferências personalizadas
-  saveCookiePreferences() {
-    localStorage.setItem('cookieConsent', JSON.stringify(this.cookiePreferences));
-    this.showCookieBanner = false;
-    this.showCookieSettings = false;
-    this.applyUserPreferences();
-  },
-  
-  // Aplica as preferências do usuário
-  applyUserPreferences() {
-    
-    // Google Analytics
-    if (this.cookiePreferences.analytics) {
-      console.log('Analytics cookies enabled');
-    } else {
-      console.log('Analytics cookies disabled');
-    }
-    
-    // Cookies de marketing
-    if (this.cookiePreferences.marketing) {
-      console.log('Marketing cookies enabled');
-    } else {
-      console.log('Marketing cookies disabled');
-    }
-  }
   }
 };
 </script>
@@ -839,335 +809,6 @@ section {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-10px);
-  }
-  60% {
-    transform: translateY(-5px);
-  }
-}
-
-@keyframes glow {
-  from {
-    box-shadow: 0 0 10px rgba(174, 44, 42, 0.6);
-  }
-  to {
-    box-shadow: 0 0 20px rgba(174, 44, 42, 0.9), 0 0 30px rgba(255, 255, 255, 0.3);
-  }
-}
-
-.secondary-header {
-  margin-top: 60px;
-  margin-bottom: 30px;
-}
-
-.secondary-header h3 {
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: #555;
-}
-
-.accent-line.small {
-  width: 50px;
-  height: 2px;
-}
-
-.services-section {
-  background: linear-gradient(to bottom, white 0%, #f9f9f9 100%);
-  padding-bottom: 100px;
-}
-
-.info-blocks-grid {
-  margin-top: 30px;
-}
-
-/* Banner de Cookies */
-.cookie-banner {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  right: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
-  z-index: 999;
-  animation: slideUp 0.5s ease;
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.cookie-content {
-  display: flex;
-  align-items: center;
-  padding: 25px;
-  min-height: 60px;
-}
-
-.cookie-icon {
-  font-size: 2rem;
-  color: #AE2C2A;
-  margin-right: 20px;
-}
-
-.cookie-text {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 10px 0;
-}
-
-.cookie-text h3 {
-  margin-bottom: 5px;
-  color: #333;
-  margin-top: 0;
-  line-height: 1.2;
-}
-
-.cookie-text p {
-  margin: 0;
-  color: #666;
-  font-size: 0.9rem;
-}
-
-.cookie-text a {
-  color: #AE2C2A;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.cookie-text a:hover {
-  color: #D84A48;
-  text-decoration: underline;
-}
-
-.cookie-buttons {
-  display: flex;
-  gap: 10px;
-}
-
-.cookie-accept, .cookie-settings {
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: none;
-}
-
-.cookie-accept {
-  background-color: #AE2C2A;
-  color: white;
-}
-
-.cookie-accept:hover {
-  background-color: #D84A48;
-}
-
-.cookie-settings {
-  background-color: #f1f1f1;
-  color: #333;
-}
-
-.cookie-settings:hover {
-  background-color: #e5e5e5;
-}
-
-/* Modal de Configurações de Cookies */
-.cookie-settings-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.cookie-settings-content {
-  background-color: white;
-  border-radius: 10px;
-  width: 100%;
-  max-width: 600px;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
-}
-
-.cookie-settings-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  border-bottom: 1px solid #eee;
-}
-
-.cookie-settings-header h3 {
-  margin: 0;
-  color: #333;
-}
-
-.close-button {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: #666;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.close-button:hover {
-  color: #333;
-}
-
-.cookie-settings-body {
-  padding: 20px;
-}
-
-.cookie-option {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.cookie-option:last-child {
-  border-bottom: none;
-}
-
-.cookie-option-info {
-  flex: 1;
-}
-
-.cookie-option-info h4 {
-  margin: 0 0 5px 0;
-  color: #333;
-}
-
-.cookie-option-info p {
-  margin: 0;
-  color: #666;
-  font-size: 0.9rem;
-}
-
-.cookie-switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 24px;
-}
-
-.cookie-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: .4s;
-  border-radius: 34px;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 16px;
-  width: 16px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: .4s;
-  border-radius: 50%;
-}
-
-input:checked + .slider {
-  background-color: #AE2C2A;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #AE2C2A;
-}
-
-input:checked + .slider:before {
-  transform: translateX(26px);
-}
-
-.cookie-switch.disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.cookie-settings-footer {
-  padding: 20px;
-  border-top: 1px solid #eee;
-  text-align: right;
-}
-
-.cookie-save {
-  padding: 10px 20px;
-  background-color: #AE2C2A;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.cookie-save:hover {
-  background-color: #D84A48;
-}
-
-/* Media queries para responsividade */
-
 /* Seção de Estatísticas */
 .stats-section {
   background: linear-gradient(135deg, #f9f9f9, #f0f0f0);
@@ -1198,6 +839,21 @@ input:checked + .slider:before {
   margin-bottom: 15px;
   position: relative;
   display: inline-block;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 20px;
 }
 
 .accent-line {
@@ -1286,64 +942,11 @@ input:checked + .slider:before {
   letter-spacing: 1px;
 }
 
-/* Seção de Cabeçalho para todas as seções */
-.section-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.section-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 15px;
-  position: relative;
-  display: inline-block;
-}
-
-.section-subtitle {
-  font-size: 1.2rem;
-  color: #666;
-  margin-bottom: 20px;
-}
-
-.accent-line {
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, #AE2C2A, #ff5555);
-  margin: 0 auto;
-}
-
-/* Estilos para a seção de serviços */
+/* Seção de Serviços */
 .services-section {
   background-color: #f9f9f9;
   padding: 100px 0;
   position: relative;
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.section-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 15px;
-}
-
-.section-subtitle {
-  font-size: 1.2rem;
-  color: #666;
-  margin-bottom: 20px;
-}
-
-.accent-line {
-  height: 4px;
-  width: 80px;
-  background-color: #AE2C2A;
-  margin: 0 auto;
 }
 
 .services-grid {
@@ -1463,7 +1066,7 @@ input:checked + .slider:before {
   transform: translateX(5px);
 }
 
-/* Estilos para a Seção de Depoimentos */
+/* Seção de Depoimentos */
 .testimonials-section {
   background-color: #f9f9f9;
   position: relative;
@@ -1629,10 +1232,6 @@ input:checked + .slider:before {
   animation: none;
 }
 
-.control-prev:active, .control-next:active {
-  transform: translateY(-12px);
-}
-
 .control-indicators {
   display: flex;
   gap: 10px;
@@ -1660,59 +1259,6 @@ input:checked + .slider:before {
   animation: glow 1.5s infinite alternate;
 }
 
-/* Animação de pulso para os botões */
-@keyframes pulse {
-  0% {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transform: translateY(-50%) scale(1);
-  }
-  100% {
-    box-shadow: 0 8px 20px rgba(174, 44, 42, 0.2);
-    transform: translateY(-50%) scale(1.05);
-  }
-}
-
-/* Animação de brilho para o indicador ativo */
-@keyframes glow {
-  0% {
-    box-shadow: 0 0 5px rgba(174, 44, 42, 0.5);
-  }
-  100% {
-    box-shadow: 0 0 10px rgba(174, 44, 42, 0.8), 0 0 15px rgba(174, 44, 42, 0.3);
-  }
-}
-
-/* Animação para os ícones dentro dos botões */
-.control-prev i, .control-next i {
-  transition: transform 0.3s ease;
-}
-
-.control-prev:hover i {
-  animation: slideLeft 0.5s ease infinite alternate;
-}
-
-.control-next:hover i {
-  animation: slideRight 0.5s ease infinite alternate;
-}
-
-@keyframes slideLeft {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-3px);
-  }
-}
-
-@keyframes slideRight {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(3px);
-  }
-}
-
 /* Seção de Parceiros */
 .partners-section {
   background-color: #f9f9f9;
@@ -1727,15 +1273,6 @@ input:checked + .slider:before {
   display: flex;
   gap: 30px;
   animation: scroll 20s linear infinite;
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
 }
 
 .partner-slide {
@@ -1922,7 +1459,6 @@ input:checked + .slider:before {
   line-height: 1.6;
 }
 
-/* Seletor de filiais */
 .branch-selector {
   display: flex;
   gap: 15px;
@@ -1981,6 +1517,23 @@ input:checked + .slider:before {
   gap: 15px;
 }
 
+.contact-method i {
+  font-size: 1.5rem;
+  color: #AE2C2A;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(174, 44, 42, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-method span {
+  font-size: 1.1rem;
+  color: #333;
+}
+
 .contact-method a {
   font-size: 1.1rem;
   color: #333;
@@ -1999,7 +1552,6 @@ input:checked + .slider:before {
   text-decoration: none;
   transition: all 0.3s ease;
   position: relative;
-  animation: emailPulse 2s infinite;
   border-radius: 5px;
   padding: 2px 6px;
 }
@@ -2008,27 +1560,8 @@ input:checked + .slider:before {
   color: #AE2C2A;
   background-color: rgba(174, 44, 42, 0.1);
   transform: scale(1.05);
-  animation: emailPulseHover 1s infinite;
 }
 
-.contact-method i {
-  font-size: 1.5rem;
-  color: #AE2C2A;
-  width: 40px;
-  height: 40px;
-  background-color: rgba(174, 44, 42, 0.1);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.contact-method span {
-  font-size: 1.1rem;
-  color: #333;
-}
-
-/* Mapa */
 .branch-map {
   height: 450px;
   border-radius: 15px;
@@ -2043,17 +1576,358 @@ input:checked + .slider:before {
   transform: translateY(-5px);
 }
 
-.primary-button:hover, .cta-button:hover {
-  animation: pulse 1.5s infinite;
+/* Banner de Cookies */
+.cookie-banner {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  animation: slideUp 0.5s ease;
+}
+
+.cookie-content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 25px;
+  min-height: 60px;
+}
+
+.cookie-icon {
+  font-size: 2rem;
+  color: #AE2C2A;
+  margin-right: 20px;
+}
+
+.cookie-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.cookie-text h3 {
+  margin-bottom: 10px;
+  color: #333;
+  margin-top: 0;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.cookie-text p {
+  margin-bottom: 10px;
+  color: #666;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.cookie-text a {
+  color: #AE2C2A;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.cookie-text a:hover {
+  color: #D84A48;
+  text-decoration: underline;
+}
+
+.cookie-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.cookie-accept, .cookie-settings {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.cookie-accept {
+  background-color: #AE2C2A;
+  color: white;
+}
+
+.cookie-accept:hover {
+  background-color: #D84A48;
+}
+
+.cookie-settings {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.cookie-settings:hover {
+  background-color: #e5e5e5;
+}
+
+/* Modal de Configurações de Cookies */
+.cookie-settings-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.cookie-settings-content {
+  background-color: white;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+}
+
+.cookie-settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.cookie-settings-header h3 {
+  margin: 0;
+  color: #333;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-button:hover {
+  color: #333;
+}
+
+.cookie-settings-body {
+  padding: 20px;
+}
+
+.cookie-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cookie-option:last-child {
+  border-bottom: none;
+}
+
+.cookie-option-info {
+  flex: 1;
+}
+
+.cookie-option-info h4 {
+  margin: 0 0 5px 0;
+  color: #333;
+}
+
+.cookie-option-info p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.cookie-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.cookie-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #AE2C2A;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #AE2C2A;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.cookie-switch.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cookie-settings-footer {
+  padding: 20px;
+  border-top: 1px solid #eee;
+  text-align: right;
+}
+
+.cookie-save {
+  padding: 10px 20px;
+  background-color: #AE2C2A;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cookie-save:hover {
+  background-color: #D84A48;
+}
+
+/* Animações */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px rgba(174, 44, 42, 0.6);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(174, 44, 42, 0.9), 0 0 30px rgba(255, 255, 255, 0.3);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(174, 44, 42, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(174, 44, 42, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(174, 44, 42, 0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.service-icon i, .stat-icon i {
+  animation: float 3s ease-in-out infinite;
 }
 
 /* Efeito de brilho para botões */
-.primary-button, .secondary-button, .cta-button, .submit-button {
+.secondary-button, .cta-button {
   position: relative;
   overflow: hidden;
 }
 
-.primary-button::after, .secondary-button::after, .cta-button::after, .submit-button::after {
+.secondary-button::after, .cta-button::after {
   content: '';
   position: absolute;
   top: 0;
@@ -2064,11 +1938,13 @@ input:checked + .slider:before {
   transition: left 0.7s;
 }
 
-.primary-button:hover::after, .secondary-button:hover::after, .cta-button:hover::after, .submit-button:hover::after {
+.secondary-button:hover::after, .cta-button:hover::after {
   left: 100%;
 }
 
-/* Media Queries - Responsividade */
+/* RESPONSIVIDADE */
+
+/* Tablets e telas médias */
 @media (max-width: 1200px) {
   .stat-item {
     flex: 0 0 calc(50% - 20px);
@@ -2106,10 +1982,6 @@ input:checked + .slider:before {
     padding: 30px 20px;
   }
   
-  .info-blocks-grid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
-  
   .logo-image {
     max-width: 70%;
   }
@@ -2133,16 +2005,16 @@ input:checked + .slider:before {
   .branch-map {
     height: 350px;
   }
+  
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
+/* Smartphones */
 @media (max-width: 768px) {
   section {
     padding: 60px 0;
-  }
-  
-  .primary-button, .secondary-button, .cta-button {
-    padding: 12px 25px;
-    font-size: 0.9rem;
   }
   
   .section-title {
@@ -2276,14 +2148,6 @@ input:checked + .slider:before {
   .cta-container p {
     font-size: 1.1rem;
   }
-  
-  .contact-form {
-    padding: 30px;
-  }
-  
-  .contact-form h3 {
-    font-size: 1.5rem;
-  }
 }
 
 @media (max-width: 576px) {
@@ -2375,10 +2239,6 @@ input:checked + .slider:before {
     font-size: 1rem;
   }
   
-  .contact-form {
-    padding: 20px;
-  }
-  
   .logo-image {
     max-width: 90%;
   }
@@ -2398,36 +2258,176 @@ input:checked + .slider:before {
   .branch-button {
     font-size: 0.8rem;
   }
+  
+  .container {
+    padding: 0 15px;
+  }
+  
+  .stat-item {
+    padding: 25px 20px;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  .stat-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+  
+  .service-content {
+    padding: 25px;
+  }
+  
+  .testimonial-content {
+    padding: 20px 30px 200px 30px;
+  }
+  
+  .cookie-content {
+    padding: 20px;
+  }
+  
+  .cookie-text h3 {
+    font-size: 1.1rem;
+  }
+  
+  .cookie-text p {
+    font-size: 0.8rem;
+  }
 }
 
-/* Animações específicas para elementos */
-@keyframes float {
-  0% {
-    transform: translateY(0px);
+/* Melhorias de acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-.service-icon i, .stat-icon i {
-  animation: float 3s ease-in-out infinite;
-}
-
-/* Efeito de pulsação para botões */
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(174, 44, 42, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(174, 44, 42, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(174, 44, 42, 0);
+  
+  .parallax-container {
+    background-attachment: scroll;
   }
 }
 
+/* Print styles */
+@media print {
+  .cookie-banner,
+  .cookie-settings-modal,
+  .scroll-indicator,
+  .testimonial-controls {
+    display: none !important;
+  }
+  
+  .hero-section {
+    height: auto;
+    min-height: auto;
+  }
+  
+  .parallax-container {
+    background-attachment: scroll;
+    position: relative;
+  }
+  
+  section {
+    page-break-inside: avoid;
+  }
+}
+
+/* Estilos para componente ScrollReveal (se estiver sendo usado) */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.6s ease;
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Estilos para loading states */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid #AE2C2A;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Estilos para estados de erro */
+.error-state {
+  color: #dc3545;
+  text-align: center;
+  padding: 20px;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+/* Estilos para estados de sucesso */
+.success-state {
+  color: #155724;
+  text-align: center;
+  padding: 20px;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+/* Melhorias de performance */
+.service-image img,
+.partner-slide img {
+  will-change: transform;
+}
+
+.stat-item,
+.service-card,
+.testimonial-content {
+  will-change: transform;
+}
+
+/* Estilos para focus states (acessibilidade) */
+button:focus,
+.branch-button:focus,
+.service-link:focus,
+.indicator:focus {
+  outline: 2px solid #AE2C2A;
+  outline-offset: 2px;
+}
+
+/* Estilos para high contrast mode */
+@media (prefers-contrast: high) {
+  .service-overlay {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  
+  .overlay {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  
+  .accent-line {
+    background: #AE2C2A;
+  }
+}
 </style>

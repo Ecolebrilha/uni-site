@@ -1398,6 +1398,10 @@ nav ul li.dropdown:hover .dropdown-content {
   .politica-span {
     font-size: 0.85em;
   }
+
+  .menu-toggle {
+    top: 10px;
+  }
 }
 
 @media (max-width: 440px) {
