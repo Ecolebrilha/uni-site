@@ -33,6 +33,7 @@
       <label for="message">Mensagem:</label>
       <textarea v-model="formData.message" id="message" rows="5" placeholder="Sua mensagem" required></textarea>
     </div>
+    
     <!-- Aviso de Termos -->
     <div class="terms-notice">
       <div class="notice-content">
@@ -45,7 +46,13 @@
         </p>
       </div>
     </div>
-    <button type="submit" class="submit-btn" :disabled="isSubmitting">
+    
+    <!-- Botão com loading -->
+    <button 
+      type="submit" 
+      class="submit-btn"
+      :disabled="isSubmitting"
+    >
       <span v-if="isSubmitting">
         <i class="fas fa-spinner fa-spin"></i> Enviando...
       </span>
@@ -54,13 +61,13 @@
       </span>
     </button>
     
-    <!-- Mensagens de feedback -->
+    <!-- Mensagens de sucesso e erro -->
     <div v-if="showSuccessMessage" class="alert alert-success">
-      <i class="fas fa-check-circle"></i> Mensagem enviada com sucesso! Entraremos em contato em breve.
+      <i class="fas fa-check-circle"></i> Sua mensagem foi enviada com sucesso! Entraremos em contato em breve.
     </div>
     
     <div v-if="showErrorMessage" class="alert alert-danger">
-      <i class="fas fa-exclamation-circle"></i> Erro ao enviar a mensagem. Tente novamente.
+      <i class="fas fa-exclamation-circle"></i> Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente.
     </div>
   </form>
 </template>
@@ -68,12 +75,6 @@
 <script>
 export default {
   name: 'ContatoFormulario',
-  props: {
-    activeSection: {
-      type: String,
-      default: 'SAC'
-    }
-  },
   data() {
     return {
       formData: {
@@ -90,49 +91,47 @@ export default {
   },
   methods: {
     formatPhone(event) {
-      let value = event.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
+      const input = event.target;
+      let value = input.value
+        .replace(/\D/g, '') 
+        .substring(0, 11);
       
-      // Limita a 11 dígitos
-      if (value.length > 11) {
-        value = value.substring(0, 11);
-      }
+      const formattedValue = value
+        .replace(/^(\d{2})(\d)/, '($1) $2')
+        .replace(/(\d{5})(\d)/, '$1-$2');
       
-      // Aplica a formatação
-      if (value.length <= 2) {
-        // Não precisa fazer nada, mantém o valor original
-      } else if (value.length <= 7) {
-        value = value.replace(/(\d{2})(\d+)/, '($1) $2');
-      } else {
-        value = value.replace(/(\d{2})(\d{5})(\d+)/, '($1) $2-$3');
-      }
-      
-      this.formData.telefone = value;
+      input.value = formattedValue;
+      this.formData.telefone = formattedValue;
     },
     
     validatePhoneNumber(phone) {
-      const phonePattern = /^\(\d{2}\) \d{4,5}-\d{4}$/;
+      const phonePattern = /^\(\d{2}\) \d{5}-\d{4}$/;
       return phonePattern.test(phone);
     },
     
     async handleSubmit() {
-  if (!this.validatePhoneNumber(this.formData.telefone)) {
-    alert('Número de telefone inválido. Formato esperado: (xx) xxxxx-xxxx');
-    return;
-  }
+      if (!this.validatePhoneNumber(this.formData.telefone)) {
+        alert('Número de telefone inválido. Formato esperado: (xx) xxxxx-xxxx');
+        return;
+      }
 
-  try {
-    // Usar Formspree
-    const response = await fetch('https://formspree.io/f/xpwdvzzv', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: this.formData.name,
-        email: this.formData.email,
-        telefone: this.formData.telefone,
-        empresa: this.formData.empresa,
-        message: `📧 CONTATO - UniHospitalar
+      this.isSubmitting = true;
+      this.showSuccessMessage = false;
+      this.showErrorMessage = false;
+
+      try {
+        // Usar Formspree
+        const response = await fetch('https://formspree.io/f/xpwdvzzv', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: this.formData.name,
+            email: this.formData.email,
+            telefone: this.formData.telefone,
+            empresa: this.formData.empresa,
+            message: `📧 CONTATO - UniHospitalar
 
 👤 DADOS DO CONTATO:
 • Nome: ${this.formData.name}
@@ -147,43 +146,35 @@ ${this.formData.message}
 🌐 Origem: Formulário de Contato - Site UniHospitalar
 
 📞 AÇÃO REQUERIDA: Responder Contato (Responder em até 24h)`,
-        _subject: `📧 Novo Contato - ${this.formData.name}`
-      }),
-    });
+            _subject: `📧 Novo Contato - ${this.formData.name}`
+          }),
+        });
 
-    if (response.ok) {
-      alert('Mensagem enviada com sucesso!');
-      this.formData = {
-        name: '',
-        email: '',
-        telefone: '',
-        empresa: '',
-        message: ''
-      };
-    } else {
-      alert('Erro ao enviar a mensagem. Tente novamente.');
-    }
-  } catch (error) {
-    alert('Erro ao enviar a mensagem. Tente novamente.');
-    console.error('Erro ao enviar o email:', error);
-  }
-},
-    
-    resetForm() {
-      this.formData = {
-        name: '',
-        email: '',
-        telefone: '',
-        empresa: '',
-        message: ''
-      };
+        if (response.ok) {
+          this.showSuccessMessage = true;
+          // Limpar formulário após sucesso
+          this.formData = {
+            name: '',
+            email: '',
+            telefone: '',
+            empresa: '',
+            message: ''
+          };
+        } else {
+          this.showErrorMessage = true;
+        }
+      } catch (error) {
+        console.error('Erro ao enviar o email:', error);
+        this.showErrorMessage = true;
+      } finally {
+        this.isSubmitting = false;
+      }
     }
   }
 };
 </script>
 
 <style scoped>
-/* Mantendo todos os estilos existentes... */
 .success {
   color: green;
 }
@@ -229,75 +220,6 @@ ${this.formData.message}
   box-shadow: 0 0 8px rgba(174, 44, 42, 0.2);
 }
 
-/* Estilos para mensagens de alerta */
-.alert {
-  margin-top: 20px;
-  padding: 15px 20px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  font-weight: 500;
-  animation: slideInUp 0.5s ease-out;
-}
-
-.alert i {
-  font-size: 1.5rem;
-}
-
-.alert-success {
-  background-color: #d4edda;
-  color: #155724;
-  border-left: 5px solid #28a745;
-}
-
-.alert-danger {
-  background-color: #f8d7da;
-  color: #721c24;
-  border-left: 5px solid #dc3545;
-}
-
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Animação de loading para o spinner */
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.fa-spin {
-  animation: spin 1s linear infinite;
-}
-
-@media (max-width: 512px) {
-  .form-group input,
-  .form-group textarea {
-    font-size: 0.6em;
-  }
-}
-@media (max-width: 350px) {
-  .form-group input,
-  .form-group textarea {
-    font-size: 0.6em;
-  }
-}
-.lbl-box {
-  font-size: 14px;
-  color: #999;
-  line-height: 25px;
-  display: block;
-  margin-bottom: 15px;
-  cursor: default;
-}
 /* Aviso de Termos */
 .terms-notice {
   margin: 30px 0 20px 0;
@@ -339,38 +261,155 @@ ${this.formData.message}
   text-decoration: underline;
 }
 
+/* Botão melhorado */
 .submit-btn {
-  background-color: #AE2C2A;
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
   color: #FFFFFF;
   margin: 40px 0;
-  padding: 12px 24px; 
-  font-size: 12px; 
-  border: none; 
-  border-radius: 5px; 
-  cursor: pointer; 
-  transition: all 0.3s ease; 
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); 
-  text-transform: uppercase; 
-  font-weight: 700; 
+  padding: 14px 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(174, 44, 42, 0.3);
+  text-transform: uppercase;
   letter-spacing: 1px;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
-.submit-btn:hover:not(:disabled) {
-  background-color: #FF5555; 
-  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+
+.submit-btn:hover {
   transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(174, 44, 42, 0.4);
+}
+
+.submit-btn:active {
+  transform: translateY(-1px);
 }
 
 .submit-btn:disabled {
-  background-color: #999;
+  background: #999;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
 }
 
 .submit-btn i {
-  font-size: 1rem;
+  font-size: 1.2rem;
+}
+
+/* Alertas */
+.alert {
+  margin-top: 30px;
+  padding: 15px 20px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-weight: 500;
+  animation: slideInUp 0.5s ease-out;
+}
+
+.alert i {
+  font-size: 1.5rem;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border-left: 5px solid #28a745;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-left: 5px solid #dc3545;
+}
+
+/* Animações */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fa-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .form-group {
+    margin-right: 0;
+  }
+  
+  .submit-btn {
+    padding: 12px 30px;
+    font-size: 1rem;
+  }
+  
+  .terms-notice {
+    padding: 15px;
+  }
+  
+  .notice-content {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 512px) {
+  .form-group input,
+  .form-group textarea {
+    font-size: 0.9em;
+  }
+  
+  .submit-btn {
+    padding: 10px 25px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .form-group input,
+  .form-group textarea {
+    font-size: 0.8em;
+  }
+}
+
+.lbl-box {
+  font-size: 14px;
+  color: #999;
+  line-height: 25px;
+  display: block;
+  margin-bottom: 15px;
+  cursor: default;
+}
+
+.contact-form .form-row:nth-child(1) .form-group {
+  flex: 1;
+  min-width: 0;
+}
+.contact-form .form-row:nth-child(2) .form-group {
+  flex: 1;
+  min-width: 0;
 }
 </style>
