@@ -6,8 +6,8 @@
     <section class="hero-section">
       <div class="parallax-container">
         <div class="overlay"></div>
-        <h1 class="hero-title">Nossos Diferenciais</h1>
-        <div class="hero-subtitle">O que nos torna únicos no mercado</div>
+        <h1 class="hero-title">{{ t('differentials.heroTitle') }}</h1>
+        <div class="hero-subtitle">{{ t('differentials.heroSubtitle') }}</div>
       </div>
     </section>
     
@@ -17,12 +17,11 @@
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-title">
             <span class="accent-line"></span>
-            <h2>Por que escolher a Uni Hospitalar</h2>
+            <h2>{{ t('differentials.introTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
           <p class="intro-text">
-            Nossa excelência é construída sobre pilares sólidos de inovação, qualidade e compromisso.
-            Conheça os diferenciais que fazem da Uni Hospitalar a escolha ideal para suas necessidades.
+            {{ t('differentials.introText') }}
           </p>
         </ScrollReveal>
       </div>
@@ -38,11 +37,11 @@
                 <i class="fas fa-warehouse"></i>
               </div>
               <div class="feature-content">
-                <h3>Gestão de Estoque Inovadora</h3>
-                <p>Nossa gestão de estoque é projetada para garantir a máxima eficiência e controle rigoroso das condições de armazenamento. Com tecnologia de ponta, oferecemos rastreamento em tempo real e automação para evitar desperdícios e melhorar a eficiência operacional.</p>
+                <h3>{{ t('differentials.features.inventory.title') }}</h3>
+                <p>{{ t('differentials.features.inventory.description') }}</p>
                 <ul class="feature-list">
-                  <li><span class="highlight">Tecnologia Avançada:</span> Soluções de rastreamento e monitoramento em tempo real.</li>
-                  <li><span class="highlight">Automação:</span> Redução de erros humanos e aumento da eficiência.</li>
+                  <li><span class="highlight">{{ t('differentials.features.inventory.feature1') }}</span> {{ t('differentials.features.inventory.feature1Description') }}</li>
+                  <li><span class="highlight">{{ t('differentials.features.inventory.feature2') }}</span> {{ t('differentials.features.inventory.feature2Description') }}</li>
                 </ul>
               </div>
             </div>
@@ -54,11 +53,11 @@
                 <i class="fas fa-truck"></i>
               </div>
               <div class="feature-content">
-                <h3>Logística Ágil e Eficiente</h3>
-                <p>A logística é um dos nossos pilares. Nossa estratégia é baseada em soluções que garantem entregas rápidas e precisas, com uma rede bem estruturada que atende às suas necessidades com agilidade.</p>
+                <h3>{{ t('differentials.features.logistics.title') }}</h3>
+                <p>{{ t('differentials.features.logistics.description') }}</p>
                 <ul class="feature-list">
-                  <li><span class="highlight">Rede Ampliada:</span> Cobertura nacional com serviços de entrega rápida.</li>
-                  <li><span class="highlight">Otimização de Rota:</span> Redução de tempo de entrega e custos operacionais.</li>
+                  <li><span class="highlight">{{ t('differentials.features.logistics.feature1') }}</span> {{ t('differentials.features.logistics.feature1Description') }}</li>
+                  <li><span class="highlight">{{ t('differentials.features.logistics.feature2') }}</span> {{ t('differentials.features.logistics.feature2Description') }}</li>
                 </ul>
               </div>
             </div>
@@ -70,11 +69,11 @@
                 <i class="fas fa-building"></i>
               </div>
               <div class="feature-content">
-                <h3>Expansão Estratégica</h3>
-                <p>Estamos em constante expansão para atender melhor às suas necessidades. Nossas unidades de negócios estão localizadas estrategicamente para oferecer um atendimento mais próximo e eficaz.</p>
+                <h3>{{ t('differentials.features.expansion.title') }}</h3>
+                <p>{{ t('differentials.features.expansion.description') }}</p>
                 <ul class="feature-list">
-                  <li><span class="highlight">Novas Localizações:</span> Expansão para áreas com alta demanda.</li>
-                  <li><span class="highlight">Equipe Localizada:</span> Atendimento personalizado e suporte eficiente.</li>
+                  <li><span class="highlight">{{ t('differentials.features.expansion.feature1') }}</span> {{ t('differentials.features.expansion.feature1Description') }}</li>
+                  <li><span class="highlight">{{ t('differentials.features.expansion.feature2') }}</span> {{ t('differentials.features.expansion.feature2Description') }}</li>
                 </ul>
               </div>
             </div>
@@ -86,11 +85,11 @@
                 <i class="fas fa-star"></i>
               </div>
               <div class="feature-content">
-                <h3>Compromisso com a Qualidade</h3>
-                <p>Nosso compromisso com a qualidade vai além dos padrões exigidos. Investimos continuamente em nossa equipe e processos para garantir um serviço superior e satisfatório.</p>
+                <h3>{{ t('differentials.features.quality.title') }}</h3>
+                <p>{{ t('differentials.features.quality.description') }}</p>
                 <ul class="feature-list">
-                  <li><span class="highlight">Treinamento Contínuo:</span> Equipe qualificada e atualizada com as melhores práticas.</li>
-                  <li><span class="highlight">Controle de Qualidade:</span> Monitoramento rigoroso para garantir a excelência.</li>
+                  <li><span class="highlight">{{ t('differentials.features.quality.feature1') }}</span> {{ t('differentials.features.quality.feature1Description') }}</li>
+                  <li><span class="highlight">{{ t('differentials.features.quality.feature2') }}</span> {{ t('differentials.features.quality.feature2Description') }}</li>
                 </ul>
               </div>
             </div>
@@ -105,7 +104,7 @@
         <ScrollReveal direction="bottom" :delay="200">
           <div class="section-title light">
             <span class="accent-line"></span>
-            <h2>Nossos Resultados</h2>
+            <h2>{{ t('differentials.metricsTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
         </ScrollReveal>
@@ -116,8 +115,8 @@
               <div class="metric-icon">
                 <i class="fas fa-shipping-fast"></i>
               </div>
-              <div class="metric-number">98%</div>
-              <div class="metric-label">Entregas no Prazo</div>
+              <div class="metric-number">{{ t('differentials.metrics.delivery.number') }}</div>
+              <div class="metric-label">{{ t('differentials.metrics.delivery.label') }}</div>
             </div>
           </ScrollReveal>
           
@@ -126,8 +125,8 @@
               <div class="metric-icon">
                 <i class="fas fa-check-circle"></i>
               </div>
-              <div class="metric-number">99.7%</div>
-              <div class="metric-label">Precisão de Inventário</div>
+              <div class="metric-number">{{ t('differentials.metrics.accuracy.number') }}</div>
+              <div class="metric-label">{{ t('differentials.metrics.accuracy.label') }}</div>
             </div>
           </ScrollReveal>
           
@@ -136,8 +135,8 @@
               <div class="metric-icon">
                 <i class="fas fa-smile"></i>
               </div>
-              <div class="metric-number">95%</div>
-              <div class="metric-label">Satisfação do Cliente</div>
+              <div class="metric-number">{{ t('differentials.metrics.satisfaction.number') }}</div>
+              <div class="metric-label">{{ t('differentials.metrics.satisfaction.label') }}</div>
             </div>
           </ScrollReveal>
           
@@ -146,8 +145,8 @@
               <div class="metric-icon">
                 <i class="fas fa-map-marked-alt"></i>
               </div>
-              <div class="metric-number">27</div>
-              <div class="metric-label">Estados Atendidos</div>
+              <div class="metric-number">{{ t('differentials.metrics.coverage.number') }}</div>
+              <div class="metric-label">{{ t('differentials.metrics.coverage.label') }}</div>
             </div>
           </ScrollReveal>
         </div>
@@ -160,7 +159,7 @@
         <ScrollReveal direction="bottom" :delay="200">
           <div class="section-title">
             <span class="accent-line"></span>
-            <h2>O que nossos clientes dizem</h2>
+            <h2>{{ t('differentials.testimonialsTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
         </ScrollReveal>
@@ -170,14 +169,14 @@
             <div class="testimonial-card">
               <div class="testimonial-content">
                 <i class="fas fa-quote-left quote-icon"></i>
-                <p>"A Uni Hospitalar se destacou pela qualidade e eficiência. Seus serviços superaram nossas expectativas em todos os aspectos."</p>
+                <p>{{ t('differentials.testimonials.testimonial1.text') }}</p>
                 <div class="testimonial-author">
                   <div class="author-avatar">
-                    <span>AC</span>
+                    <span>{{ t('differentials.testimonials.testimonial1.authorInitials') }}</span>
                   </div>
                   <div class="author-info">
-                    <h4>Ana Costa</h4>
-                    <p>Gerente de Compras</p>
+                    <h4>{{ t('differentials.testimonials.testimonial1.authorName') }}</h4>
+                    <p>{{ t('differentials.testimonials.testimonial1.authorPosition') }}</p>
                   </div>
                 </div>
               </div>
@@ -188,14 +187,14 @@
             <div class="testimonial-card">
               <div class="testimonial-content">
                 <i class="fas fa-quote-left quote-icon"></i>
-                <p>"A logística é impecável. Recebemos nossos produtos sempre no prazo e em perfeito estado."</p>
+                <p>{{ t('differentials.testimonials.testimonial2.text') }}</p>
                 <div class="testimonial-author">
                   <div class="author-avatar">
-                    <span>CO</span>
+                    <span>{{ t('differentials.testimonials.testimonial2.authorInitials') }}</span>
                   </div>
                   <div class="author-info">
-                    <h4>Carlos Oliveira</h4>
-                    <p>Diretor de Operações</p>
+                    <h4>{{ t('differentials.testimonials.testimonial2.authorName') }}</h4>
+                    <p>{{ t('differentials.testimonials.testimonial2.authorPosition') }}</p>
                   </div>
                 </div>
               </div>
@@ -210,9 +209,9 @@
       <div class="container">
         <ScrollReveal direction="bottom" :delay="200">
           <div class="cta-content">
-            <h2>Pronto para experimentar a diferença?</h2>
-            <p>Entre em contato conosco e descubra como nossos diferenciais podem beneficiar seu negócio.</p>
-            <router-link to="/Contato" class="cta-button">Fale Conosco</router-link>
+            <h2>{{ t('differentials.ctaTitle') }}</h2>
+            <p>{{ t('differentials.ctaText') }}</p>
+            <router-link to="/Contato" class="cta-button">{{ t('differentials.ctaButton') }}</router-link>
           </div>
         </ScrollReveal>
       </div>
@@ -225,24 +224,27 @@
 <script>
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
+import { useDifferentialsTranslation } from '@/composables/useDifferentialsTranslation.js';
 
 export default {
   components: {
     HomeHeader,
     HomeFooter
   },
+  setup() {
+    const { t, currentLanguage } = useDifferentialsTranslation()
+    
+    return {
+      t,
+      currentLanguage
+    }
+  },
   data() {
     return {
-      selectedLanguage: 'pt',
       sidebarOpen: false
     }
   },
   methods: {
-    changeLanguage(event) {
-      const value = typeof event === 'string' ? event : event.target.value;
-      this.selectedLanguage = value;
-      console.log(`Idioma selecionado: ${value}`);
-    },
     toggleSidebar() {
       this.sidebarOpen = !this.sidebarOpen;
     }

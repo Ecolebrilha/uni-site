@@ -1596,7 +1596,7 @@ section {
   align-items: center;
   flex-direction: column;
   text-align: center;
-  padding: 25px;
+  padding: 10px;
   min-height: 60px;
 }
 
@@ -2076,18 +2076,15 @@ input:checked + .slider:before {
   
   .cookie-icon {
     margin-right: 0;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
   
   .cookie-buttons {
-    margin-top: 20px;
+    margin-top: 5px;
   }
   
   .cookie-banner {
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border-radius: 10px 10px 0 0;
+    border-radius: 10px;
   }
   
   .testimonial-content {
@@ -2153,7 +2150,7 @@ input:checked + .slider:before {
 @media (max-width: 576px) {
   .cookie-buttons {
     flex-direction: column;
-    width: 100%;
+    width: 55%;
   }
   
   .cookie-accept, .cookie-settings {

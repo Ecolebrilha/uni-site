@@ -6,8 +6,8 @@
     <section class="hero-section">
       <div class="parallax-container">
         <div class="overlay"></div>
-        <h1 class="hero-title">Compliance</h1>
-        <div class="hero-subtitle">Integridade e Transparência</div>
+        <h1 class="hero-title">{{ t('compliance.heroTitle') }}</h1>
+        <div class="hero-subtitle">{{ t('compliance.heroSubtitle') }}</div>
       </div>
     </section>
     
@@ -17,11 +17,11 @@
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-title">
             <span class="accent-line"></span>
-            <h2>Compliance e Código de Conduta</h2>
+            <h2>{{ t('compliance.overviewTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
           <p class="intro-text">
-            O nosso compromisso é com a integridade, transparência e conformidade. Explore o Código de Conduta que guia as práticas éticas da Uni Hospitalar e garante o respeito às normas e regulamentos aplicáveis.
+            {{ t('compliance.overviewText') }}
           </p>
         </ScrollReveal>
         
@@ -31,8 +31,8 @@
               <div class="value-icon">
                 <i class="fas fa-balance-scale"></i>
               </div>
-              <h3>Integridade</h3>
-              <p>Atuamos com honestidade e ética em todas as nossas relações comerciais e profissionais, mantendo sempre os mais altos padrões.</p>
+              <h3>{{ t('compliance.values.integrity.title') }}</h3>
+                <p>{{ t('compliance.values.integrity.description') }}</p>
             </div>
           </ScrollReveal>
           
@@ -41,8 +41,8 @@
               <div class="value-icon">
                 <i class="fas fa-handshake"></i>
               </div>
-              <h3>Transparência</h3>
-              <p>Mantemos uma comunicação clara e aberta com todos os nossos stakeholders, promovendo confiança e credibilidade mútua sempre.</p>
+              <h3>{{ t('compliance.values.transparency.title') }}</h3>
+                <p>{{ t('compliance.values.transparency.description') }}</p>
             </div>
           </ScrollReveal>
           
@@ -51,8 +51,8 @@
               <div class="value-icon">
                 <i class="fas fa-check-circle"></i>
               </div>
-              <h3>Conformidade</h3>
-              <p>Seguimos rigorosamente todas as leis, regulamentos e normas aplicáveis ao nosso setor farmacêutico e hospitalar com excelência.</p>
+              <h3>{{ t('compliance.values.compliance.title') }}</h3>
+                <p>{{ t('compliance.values.compliance.description') }}</p>
             </div>
           </ScrollReveal>
         </div>
@@ -65,7 +65,7 @@
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-title">
             <span class="accent-line"></span>
-            <h2>Nosso Código de Conduta</h2>
+            <h2>{{ t('compliance.conductTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
         </ScrollReveal>
@@ -73,29 +73,29 @@
         <div class="conduct-container">
           <ScrollReveal direction="left" :delay="200">
             <div class="conduct-image">
-  <img src="@/assets/compliance.jpg" alt="Código de Conduta" />
+  <img src="@/assets/compliance.jpg" alt="Compliance" />
 </div>
           </ScrollReveal>
           
           <ScrollReveal direction="right" :delay="300">
             <div class="conduct-content">
-              <h3><i class="fas fa-book"></i> Código de Conduta</h3>
-              <p>Nosso Código de Conduta é um guia para todos os colaboradores, parceiros e fornecedores, assegurando um comportamento ético em todas as nossas atividades.</p>
+              <h3><i class="fas fa-book"></i> {{ t('compliance.conductSectionTitle') }}</h3>
+              <p>{{ t('compliance.conductText') }}</p>
               
               <div class="conduct-links">
                 <router-link to="/CondutaEtica" class="conduct-link">
                   <i class="fas fa-check"></i>
-                  <span>Conduta Ética e Integridade</span>
+                  <span>{{ t('compliance.conductLinks.ethics') }}</span>
                 </router-link>
                 
                 <router-link to="/ResponsabilidadeSocial" class="conduct-link">
                   <i class="fas fa-globe"></i>
-                  <span>Responsabilidade Social e Sustentabilidade</span>
+                  <span>{{ t('compliance.conductLinks.socialResponsibility') }}</span>
                 </router-link>
                 
                 <router-link to="/DireitosHumanos" class="conduct-link">
                   <i class="fas fa-hands-helping"></i>
-                  <span>Respeito aos Direitos Humanos</span>
+                  <span>{{ t('compliance.conductLinks.humanRights') }}</span>
                 </router-link>
               </div>
             </div>
@@ -110,11 +110,11 @@
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-title light">
             <span class="accent-line"></span>
-            <h2>Políticas e Regulamentos</h2>
+            <h2>{{ t('compliance.policiesTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
           <p class="intro-text light">
-            Acesse nossas políticas que reforçam o compromisso com a conformidade e a ética.
+            {{ t('compliance.policiesIntro') }}
           </p>
         </ScrollReveal>
         
@@ -125,9 +125,9 @@
                 <i class="fas fa-lock"></i>
               </div>
               <div class="policy-content">
-                <h3>Política de Segurança de Dados</h3>
-                <p>Protegemos todas as informações sensíveis e dados pessoais conforme as legislações vigentes.</p>
-                <router-link to="/SegurancaDados" class="policy-link">Saiba mais <i class="fas fa-arrow-right"></i></router-link>
+                <h3>{{ t('compliance.policies.dataSecurity.title') }}</h3>
+                <p>{{ t('compliance.policies.dataSecurity.description') }}</p>
+                <router-link to="/SegurancaDados" class="policy-link">{{ t('compliance.learnMore') }} <i class="fas fa-arrow-right"></i></router-link>
               </div>
             </div>
           </ScrollReveal>
@@ -138,9 +138,9 @@
                 <i class="fas fa-ban"></i>
               </div>
               <div class="policy-content">
-                <h3>Práticas Antissuborno</h3>
-                <p>Mantemos tolerância zero contra qualquer forma de corrupção ou suborno em nossas operações.</p>
-                <router-link to="/PraticasAntissuborno" class="policy-link">Saiba mais <i class="fas fa-arrow-right"></i></router-link>
+                <h3>{{ t('compliance.policies.antiBribery.title') }}</h3>
+                <p>{{ t('compliance.policies.antiBribery.description') }}</p>
+                <router-link to="/PraticasAntissuborno" class="policy-link">{{ t('compliance.learnMore') }} <i class="fas fa-arrow-right"></i></router-link>
               </div>
             </div>
           </ScrollReveal>
@@ -151,9 +151,9 @@
                 <i class="fas fa-gavel"></i>
               </div>
               <div class="policy-content">
-                <h3>Conformidade com Normas Setoriais</h3>
-                <p>Seguimos rigorosamente todas as normas e regulamentações específicas do setor de saúde.</p>
-                <router-link to="/NormasSetoriais" class="policy-link">Saiba mais <i class="fas fa-arrow-right"></i></router-link>
+                <h3>{{ t('compliance.policies.sectorCompliance.title') }}</h3>
+                <p>{{ t('compliance.policies.sectorCompliance.description') }}</p>
+                <router-link to="/NormasSetoriais" class="policy-link">{{ t('compliance.learnMore') }} <i class="fas fa-arrow-right"></i></router-link>
               </div>
             </div>
           </ScrollReveal>
@@ -167,11 +167,11 @@
         <div class="corrective-container">
           <ScrollReveal direction="left" :delay="200">
             <div class="corrective-content">
-              <h3><i class="fas fa-exclamation-triangle"></i> Instruções para Ações Corretivas</h3>
-              <p>Identificou alguma irregularidade? Veja como proceder e entre em contato com nosso departamento para uma melhor orientação.</p>
-              <p>A Uni Hospitalar mantém canais de comunicação abertos para relatos de possíveis violações ao nosso Código de Conduta ou políticas internas. Todos os relatos são tratados com confidencialidade e seriedade.</p>
+              <h3><i class="fas fa-exclamation-triangle"></i> {{ t('compliance.correctiveTitle') }}</h3>
+              <p>{{ t('compliance.correctiveText1') }}</p>
+              <p>{{ t('compliance.correctiveText2') }}</p>
               <router-link to="/Contato" class="cta-button">
-                <i class="fas fa-phone"></i> Entre em Contato
+                <i class="fas fa-phone"></i> {{ t('compliance.correctiveButton') }}
               </router-link>
             </div>
           </ScrollReveal>
@@ -191,11 +191,11 @@
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-title">
             <span class="accent-line"></span>
-            <h2>Documentos Legais</h2>
+            <h2>{{ t('compliance.documentsTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
           <p class="intro-text">
-            Acesse documentos completos como políticas de privacidade, termos de uso, entre outros.
+            {{ t('compliance.documentsIntro') }}
           </p>
         </ScrollReveal>
         
@@ -206,10 +206,10 @@
                 <i class="fas fa-user-shield"></i>
               </div>
               <div class="document-content">
-                <h3>Política de Privacidade</h3>
-                <p>Nossa política de privacidade detalha como coletamos, usamos e protegemos seus dados pessoais.</p>
+                <h3>{{ t('compliance.documents.privacy.title') }}</h3>
+                <p>{{ t('compliance.documents.privacy.description') }}</p>
                 <router-link to="/PoliticaPrivacidade" class="document-button">
-                  <i class="fas fa-file-alt"></i> Acessar Documento
+                  <i class="fas fa-file-alt"></i> {{ t('compliance.documents.privacy.button') }}
                 </router-link>
               </div>
             </div>
@@ -221,10 +221,10 @@
                 <i class="fas fa-file-contract"></i>
               </div>
               <div class="document-content">
-                <h3>Termos Legais de Uso</h3>
-                <p>Nossos termos de uso estabelecem as regras e condições para utilização de nossos serviços e plataformas.</p>
+                <h3>{{ t('compliance.documents.terms.title') }}</h3>
+                <p>{{ t('compliance.documents.terms.description') }}</p>
                 <router-link to="/TermosLegais" class="document-button">
-                  <i class="fas fa-file-alt"></i> Acessar Documento
+                  <i class="fas fa-file-alt"></i> {{ t('compliance.documents.terms.button') }}
                 </router-link>
               </div>
             </div>
@@ -240,12 +240,20 @@
 <script>
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
+import { useComplianceTranslation } from '@/composables/useComplianceTranslation.js';
 
 export default {
-  name: 'CompliancePage',
   components: {
     HomeHeader,
     HomeFooter
+  },
+  setup() {
+    const { t, currentLanguage } = useComplianceTranslation()
+    
+    return {
+      t,
+      currentLanguage
+    }
   },
   data() {
     return {

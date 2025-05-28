@@ -217,16 +217,37 @@
 
 <script>
 import { useTranslation } from '@/composables/useTranslation.js';
+import { useDifferentialsTranslation } from '@/composables/useDifferentialsTranslation.js';
+import { useAboutTranslation } from '@/composables/useAboutTranslation.js';
+import { useProductsTranslation } from '@/composables/useProductsTranslation.js';
+import { useComplianceTranslation } from '@/composables/useComplianceTranslation.js';
+import { useLGPDTranslation } from '@/composables/useLGPDTranslation.js';
+import { usePrivacyPolicyTranslation } from '@/composables/usePrivacyPolicyTranslation.js';
+import { useTermsTranslation } from '@/composables/useTermsTranslation.js';
 
 export default {
   name: 'HomeHeader',
   setup() {
     const { t, currentLanguage, setLanguage } = useTranslation();
+    const { setLanguage: setDifferentialsLanguage } = useDifferentialsTranslation();
+    const { setLanguage: setAboutLanguage } = useAboutTranslation();
+    const { setLanguage: setProductsLanguage } = useProductsTranslation();
+    const { setLanguage: setComplianceLanguage } = useComplianceTranslation();
+    const { setLanguage: setLGPDLanguage } = useLGPDTranslation();
+    const { setLanguage: setPrivacyPolicyLanguage } = usePrivacyPolicyTranslation();
+    const { setLanguage: setTermsLanguage } = useTermsTranslation();
     
     return {
       t,
       currentLanguage,
-      setLanguage
+      setLanguage,
+      setDifferentialsLanguage,
+      setAboutLanguage,
+      setProductsLanguage,
+      setComplianceLanguage,
+      setLGPDLanguage,
+      setPrivacyPolicyLanguage,
+      setTermsLanguage
     };
   },
   data() {
@@ -255,6 +276,13 @@ export default {
     },
     changeLanguage(lang) {
       this.setLanguage(lang);
+      this.setDifferentialsLanguage(lang);
+      this.setAboutLanguage(lang);
+      this.setProductsLanguage(lang);
+      this.setComplianceLanguage(lang);
+      this.setLGPDLanguage(lang);
+      this.setPrivacyPolicyLanguage(lang);
+      this.setTermsLanguage(lang);
     },
     handleScroll() {
       this.isScrolled = window.scrollY > 0;
@@ -273,6 +301,7 @@ export default {
   }
 };
 </script>
+
 
 <style>
 header {

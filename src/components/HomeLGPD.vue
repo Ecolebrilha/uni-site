@@ -6,8 +6,8 @@
     <section class="hero-section">
       <div class="parallax-container">
         <div class="overlay"></div>
-        <h1 class="hero-title">LGPD</h1>
-        <div class="hero-subtitle">Lei Geral de Proteção de Dados</div>
+        <h1 class="hero-title">{{ t('lgpd.heroTitle') }}</h1>
+        <div class="hero-subtitle">{{ t('lgpd.heroSubtitle') }}</div>
       </div>
     </section>
     
@@ -17,14 +17,12 @@
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-title">
             <span class="accent-line"></span>
-            <h2>Protegendo seus dados com responsabilidade</h2>
+            <h2>{{ t('lgpd.introTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
-          <h3 class="subtitle">Nosso compromisso com a segurança e a LGPD</h3>
+          <h3 class="subtitle">{{ t('lgpd.introSubtitle') }}</h3>
           <p class="intro-text">
-            Na Uni Hospitalar, valorizamos a segurança e a privacidade dos nossos clientes, parceiros e
-            colaboradores. Estamos comprometidos com a proteção dos seus dados pessoais e com o cumprimento
-            da Lei Geral de Proteção de Dados.
+            {{ t('lgpd.introText') }}
           </p>
         </ScrollReveal>
       </div>
@@ -41,10 +39,7 @@
               </div>
               <div class="lgpd-content">
                 <p>
-                  Somos a Uni Hospitalar, uma empresa dedicada à excelência em serviços de
-                  saúde e comprometida com a proteção dos seus dados pessoais. Valorizamos
-                  a segurança e a privacidade dos nossos clientes, parceiros e
-                  colaboradores.
+                  {{ t('lgpd.cards.card1.text') }}
                 </p>
               </div>
             </div>
@@ -57,11 +52,7 @@
               </div>
               <div class="lgpd-content">
                 <p>
-                  Na Uni Hospitalar, reconhecemos a importância da Lei Geral de Proteção
-                  de Dados (LGPD) e reafirmamos nosso compromisso em tratar seus dados
-                  pessoais com responsabilidade e transparência. Implementamos medidas
-                  rigorosas de segurança para garantir que suas informações estejam
-                  protegidas.
+                  {{ t('lgpd.cards.card2.text') }}
                 </p>
               </div>
             </div>
@@ -74,17 +65,14 @@
               </div>
               <div class="lgpd-content">
                 <p>
-                  Para mais detalhes sobre como tratamos seus dados, você pode acessar
-                  nossa Política de Privacidade e os Termos Legais de Uso do nosso site.
-                  Esses documentos explicam de forma clara e detalhada como utilizamos,
-                  armazenamos e protegemos suas informações.
+                  {{ t('lgpd.cards.card3.text') }}
                 </p>
                 <div class="lgpd-buttons">
                   <router-link to="/PoliticaPrivacidade">
-                    <button class="policy-button">Política de Privacidade</button>
+                    <button class="policy-button">{{ t('lgpd.cards.card3.privacyButton') }}</button>
                   </router-link>
                   <router-link to="/TermosLegais">
-                    <button class="terms-button">Termos Legais de Uso</button>
+                    <button class="terms-button">{{ t('lgpd.cards.card3.termsButton') }}</button>
                   </router-link>
                 </div>
               </div>
@@ -98,12 +86,10 @@
               </div>
               <div class="lgpd-content">
                 <p>
-                  Caso tenha dúvidas sobre como seus dados são tratados ou precise de mais
-                  informações, entre em contato conosco. Estamos à disposição para
-                  esclarecer qualquer questão.
+                  {{ t('lgpd.cards.card4.text') }}
                 </p>
                 <router-link to="/Contato">
-                  <button class="contact-button">FALE CONOSCO</button>
+                  <button class="contact-button">{{ t('lgpd.cards.card4.contactButton') }}</button>
                 </router-link>
               </div>
             </div>
@@ -118,7 +104,7 @@
         <ScrollReveal direction="bottom" :delay="200">
           <div class="section-title light">
             <span class="accent-line"></span>
-            <h2>Nossos Princípios</h2>
+            <h2>{{ t('lgpd.principlesTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
         </ScrollReveal>
@@ -129,28 +115,28 @@
               <div class="principle-icon">
                 <i class="fas fa-check-circle"></i>
               </div>
-              <h4>Finalidade</h4>
-              <p>Tratamento para propósitos legítimos, específicos e explícitos.</p>
+              <h4>{{ t('lgpd.principles.finality.title') }}</h4>
+              <p>{{ t('lgpd.principles.finality.description') }}</p>
             </div>
           </ScrollReveal>
           
           <ScrollReveal direction="bottom" :delay="400">
             <div class="principle-item">
               <div class="principle-icon">
-                <i class="fas fa-balance-scale"></i>
+                <i class="fas fa-hand-holding-heart"></i>
               </div>
-              <h4>Adequação</h4>
-              <p>Compatibilidade do tratamento com as finalidades informadas.</p>
+              <h4>{{ t('lgpd.principles.adequacy.title') }}</h4>
+              <p>{{ t('lgpd.principles.adequacy.description') }}</p>
             </div>
           </ScrollReveal>
           
           <ScrollReveal direction="bottom" :delay="500">
             <div class="principle-item">
-              <div class="principle-icon">
-                <i class="fas fa-hand-holding-heart"></i>
+<div class="principle-icon">
+                <i class="fas fa-hand-paper"></i>
               </div>
-              <h4>Necessidade</h4>
-              <p>Limitação do tratamento ao mínimo necessário para suas finalidades.</p>
+              <h4>{{ t('lgpd.principles.necessity.title') }}</h4>
+              <p>{{ t('lgpd.principles.necessity.description') }}</p>
             </div>
           </ScrollReveal>
           
@@ -159,8 +145,8 @@
               <div class="principle-icon">
                 <i class="fas fa-user-shield"></i>
               </div>
-              <h4>Segurança</h4>
-              <p>Medidas técnicas e administrativas adequadas para proteção dos dados.</p>
+              <h4>{{ t('lgpd.principles.security.title') }}</h4>
+              <p>{{ t('lgpd.principles.security.description') }}</p>
             </div>
           </ScrollReveal>
         </div>
@@ -172,11 +158,15 @@
       <div class="container">
         <ScrollReveal direction="bottom" :delay="200">
           <div class="cta-content">
-            <h2>Seus dados são importantes para nós</h2>
-            <p>Conheça mais sobre como a Uni Hospitalar protege suas informações e cumpre com a LGPD.</p>
+            <h2>{{ t('lgpd.ctaTitle') }}</h2>
+            <p>{{ t('lgpd.ctaText') }}</p>
             <div class="cta-buttons">
-              <router-link to="/PoliticaPrivacidade" class="cta-button primary">Política de Privacidade</router-link>
-              <router-link to="/Contato" class="cta-button secondary">Fale Conosco</router-link>
+              <router-link to="/PoliticaPrivacidade" class="cta-button primary">
+                {{ t('lgpd.ctaButtons.privacy') }}
+              </router-link>
+              <router-link to="/Contato" class="cta-button secondary">
+                {{ t('lgpd.ctaButtons.contact') }}
+              </router-link>
             </div>
           </div>
         </ScrollReveal>
@@ -190,11 +180,20 @@
 <script>
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
+import { useLGPDTranslation } from '@/composables/useLGPDTranslation.js';
 
 export default {
   components: {
     HomeHeader,
     HomeFooter
+  },
+  setup() {
+    const { t, currentLanguage } = useLGPDTranslation()
+    
+    return {
+      t,
+      currentLanguage
+    }
   },
   data() {
     return {

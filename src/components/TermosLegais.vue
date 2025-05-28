@@ -6,8 +6,8 @@
     <section class="hero-section">
       <div class="parallax-container">
         <div class="overlay"></div>
-        <h1 class="hero-title">Termos Legais</h1>
-        <div class="hero-subtitle">Condições de uso do nosso site</div>
+        <h1 class="hero-title">{{ t('terms.heroTitle') }}</h1>
+        <div class="hero-subtitle">{{ t('terms.heroSubtitle') }}</div>
       </div>
     </section>
     
@@ -17,14 +17,11 @@
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-title">
             <span class="accent-line"></span>
-            <h2>Nossos Termos de Uso</h2>
+            <h2>{{ t('terms.introTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
           <p class="intro-text">
-            O nosso site foi desenvolvido para os clientes, colaboradores, parceiros e todos que se relacionam 
-            com a Uni Hospitalar, assim como para visitantes interessados em nossos serviços. Estes Termos de 
-            Uso podem ser alterados a qualquer momento pela Uni Hospitalar, sendo uma nova versão atualizada 
-            publicada em nosso site.
+            {{ t('terms.introText') }}
           </p>
         </ScrollReveal>
       </div>
@@ -40,10 +37,8 @@
                 <i class="fas fa-file-contract"></i>
               </div>
               <div class="terms-content">
-                <h3>Termos de Uso</h3>
-                <p>
-                  O nosso site foi desenvolvido para os clientes, colaboradores, parceiros e todos que se relacionam com a Uni Hospitalar, assim como para visitantes interessados em nossos serviços. Estes Termos de Uso podem ser alterados a qualquer momento pela Uni Hospitalar, sendo uma nova versão atualizada publicada em nosso site.
-                </p>
+                <h3>{{ t('terms.sections.usage.title') }}</h3>
+                <p>{{ t('terms.sections.usage.text') }}</p>
               </div>
             </div>
           </ScrollReveal>
@@ -54,10 +49,8 @@
                 <i class="fas fa-door-open"></i>
               </div>
               <div class="terms-content">
-                <h3>Acesso ao Site</h3>
-                <p>
-                  O site da Uni Hospitalar funciona 24 horas por dia, podendo haver interrupções temporárias para manutenção, o que tornará o site indisponível pelo tempo necessário. O acesso ao site é permitido apenas para maiores de 18 anos ou menores de idade que possuam autorização de seus responsáveis legais. Ao acessar, navegar ou utilizar o site da Uni Hospitalar, todos os visitantes concordam com estes Termos de Uso. Caso discorde de qualquer parte deste documento, recomendamos que interrompa imediatamente a navegação.
-                </p>
+                <h3>{{ t('terms.sections.access.title') }}</h3>
+                <p>{{ t('terms.sections.access.text') }}</p>
               </div>
             </div>
           </ScrollReveal>
@@ -68,13 +61,9 @@
                 <i class="fas fa-copy"></i>
               </div>
               <div class="terms-content">
-                <h3>Uso de Licença e Cópia</h3>
-                <p>
-                  É concedida permissão para acessar todo o conteúdo do site da Uni Hospitalar, incluindo a realização de downloads e cópias dos materiais, mas apenas para uso pessoal e não comercial. Esta permissão não implica em cessão de direitos ou qualquer tipo de licença permanente. Esta licença será automaticamente revogada em caso de violação de suas condições, podendo ser rescindida unilateralmente pela Uni Hospitalar a qualquer momento.
-                </p>
-                <p>
-                  Os visitantes devem utilizar o site e as informações nele contidas de maneira adequada e lícita, em conformidade com a legislação aplicável e as boas práticas de mercado. O uso indevido do site ou de seus conteúdos pode violar os direitos de propriedade intelectual da Uni Hospitalar, sendo punível nos termos da legislação vigente.
-                </p>
+                <h3>{{ t('terms.sections.license.title') }}</h3>
+                <p>{{ t('terms.sections.license.text1') }}</p>
+                <p>{{ t('terms.sections.license.text2') }}</p>
               </div>
             </div>
           </ScrollReveal>
@@ -88,7 +77,7 @@
         <ScrollReveal direction="bottom" :delay="200">
           <div class="section-title light">
             <span class="accent-line"></span>
-            <h2>Responsabilidades</h2>
+            <h2>{{ t('terms.responsibilitiesTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
         </ScrollReveal>
@@ -99,8 +88,8 @@
               <div class="responsibility-icon">
                 <i class="fas fa-user-shield"></i>
               </div>
-              <h4>Responsabilidade do Usuário</h4>
-              <p>O usuário é responsável por todas as ações realizadas em sua navegação no site.</p>
+              <h4>{{ t('terms.responsibilities.user.title') }}</h4>
+              <p>{{ t('terms.responsibilities.user.description') }}</p>
             </div>
           </ScrollReveal>
           
@@ -109,8 +98,8 @@
               <div class="responsibility-icon">
                 <i class="fas fa-shield-alt"></i>
               </div>
-              <h4>Segurança da Informação</h4>
-              <p>Adotamos medidas de segurança para proteger suas informações durante a navegação.</p>
+              <h4>{{ t('terms.responsibilities.security.title') }}</h4>
+              <p>{{ t('terms.responsibilities.security.description') }}</p>
             </div>
           </ScrollReveal>
           
@@ -119,8 +108,8 @@
               <div class="responsibility-icon">
                 <i class="fas fa-balance-scale"></i>
               </div>
-              <h4>Legislação Aplicável</h4>
-              <p>Nossos termos estão em conformidade com a legislação brasileira vigente.</p>
+              <h4>{{ t('terms.responsibilities.legislation.title') }}</h4>
+              <p>{{ t('terms.responsibilities.legislation.description') }}</p>
             </div>
           </ScrollReveal>
           
@@ -129,8 +118,8 @@
               <div class="responsibility-icon">
                 <i class="fas fa-handshake"></i>
               </div>
-              <h4>Compromisso Mútuo</h4>
-              <p>Buscamos uma relação transparente e respeitosa com todos os usuários.</p>
+              <h4>{{ t('terms.responsibilities.commitment.title') }}</h4>
+              <p>{{ t('terms.responsibilities.commitment.description') }}</p>
             </div>
           </ScrollReveal>
         </div>
@@ -149,13 +138,13 @@
           
           <ScrollReveal direction="right" :delay="300">
             <div class="intellectual-text">
-              <h3>Propriedade Intelectual</h3>
-              <p>Todo o conteúdo disponível no site da Uni Hospitalar, incluindo, mas não se limitando a textos, gráficos, logotipos, ícones, imagens, clipes de áudio, downloads digitais e compilações de dados, é de propriedade exclusiva da Uni Hospitalar ou de seus fornecedores de conteúdo e está protegido pelas leis brasileiras e tratados internacionais de direitos autorais.</p>
+              <h3>{{ t('terms.intellectualTitle') }}</h3>
+              <p>{{ t('terms.intellectualText') }}</p>
               <ul class="intellectual-features">
-                <li>Marcas e logotipos são propriedade da Uni Hospitalar</li>
-                <li>Reprodução de conteúdo apenas com autorização prévia</li>
-                <li>Uso indevido sujeito às penalidades legais</li>
-                <li>Respeito aos direitos autorais e propriedade intelectual</li>
+                <li>{{ t('terms.intellectualFeatures.trademarks') }}</li>
+                <li>{{ t('terms.intellectualFeatures.reproduction') }}</li>
+                <li>{{ t('terms.intellectualFeatures.misuse') }}</li>
+                <li>{{ t('terms.intellectualFeatures.respect') }}</li>
               </ul>
             </div>
           </ScrollReveal>
@@ -168,11 +157,11 @@
       <div class="container">
         <ScrollReveal direction="bottom" :delay="200">
           <div class="cta-content">
-            <h2>Dúvidas sobre nossos termos?</h2>
-            <p>Se você tiver qualquer dúvida sobre nossos termos legais ou precisar de esclarecimentos adicionais, entre em contato conosco.</p>
+            <h2>{{ t('terms.ctaTitle') }}</h2>
+            <p>{{ t('terms.ctaText') }}</p>
             <div class="cta-buttons">
-              <router-link to="/PoliticaPrivacidade" class="cta-button primary">Política de Privacidade</router-link>
-              <router-link to="/Contato" class="cta-button secondary">Fale Conosco</router-link>
+              <router-link to="/PoliticaPrivacidade" class="cta-button primary">{{ t('terms.ctaButtons.privacy') }}</router-link>
+              <router-link to="/Contato" class="cta-button secondary">{{ t('terms.ctaButtons.contact') }}</router-link>
             </div>
           </div>
         </ScrollReveal>
@@ -186,11 +175,20 @@
 <script>
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
+import { useTermsTranslation } from '@/composables/useTermsTranslation.js';
 
 export default {
   components: {
     HomeHeader,
     HomeFooter
+  },
+  setup() {
+    const { t, currentLanguage } = useTermsTranslation()
+    
+    return {
+      t,
+      currentLanguage
+    }
   },
   data() {
     return {

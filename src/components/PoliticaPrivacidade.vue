@@ -6,8 +6,8 @@
     <section class="hero-section">
       <div class="parallax-container">
         <div class="overlay"></div>
-        <h1 class="hero-title">Política de Privacidade</h1>
-        <div class="hero-subtitle">Nosso compromisso com a segurança e proteção de dados</div>
+        <h1 class="hero-title">{{ t('privacyPolicy.heroTitle') }}</h1>
+        <div class="hero-subtitle">{{ t('privacyPolicy.heroSubtitle') }}</div>
       </div>
     </section>
     
@@ -17,13 +17,11 @@
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-title">
             <span class="accent-line"></span>
-            <h2>Compromisso com sua Privacidade</h2>
+            <h2>{{ t('privacyPolicy.introTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
           <p class="intro-text">
-            A Uni Hospitalar valoriza a ética e a integridade em todas as suas ações. Esta Política de Privacidade 
-            tem como objetivo informar os titulares de dados pessoais sobre como suas informações são tratadas, 
-            assegurando uma relação transparente e segura.
+            {{ t('privacyPolicy.introText') }}
           </p>
         </ScrollReveal>
       </div>
@@ -50,67 +48,67 @@
     
     <!-- Seção de Direitos do Usuário -->
     <section class="user-rights-section">
-  <div class="container">
-    <ScrollReveal direction="bottom" :delay="200">
-      <div class="section-title light">
-        <span class="accent-line"></span>
-        <h2>Seus Direitos</h2>
-        <span class="accent-line"></span>
+      <div class="container">
+        <ScrollReveal direction="bottom" :delay="200">
+          <div class="section-title light">
+            <span class="accent-line"></span>
+            <h2>{{ t('privacyPolicy.rightsTitle') }}</h2>
+            <span class="accent-line"></span>
+          </div>
+          <p class="rights-intro">{{ t('privacyPolicy.rightsIntro') }}</p>
+        </ScrollReveal>
+        
+        <div class="rights-steps">
+          <ScrollReveal direction="bottom" :delay="300">
+            <div class="rights-step">
+              <div class="step-number">
+                <i class="fas fa-database"></i>
+              </div>
+              <div class="step-content">
+                <h4>{{ t('privacyPolicy.rights.access.title') }}</h4>
+                <p>{{ t('privacyPolicy.rights.access.description') }}</p>
+              </div>
+            </div>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="bottom" :delay="400">
+            <div class="rights-step">
+              <div class="step-number">
+                <i class="fas fa-edit"></i>
+              </div>
+              <div class="step-content">
+                <h4>{{ t('privacyPolicy.rights.correction.title') }}</h4>
+                <p>{{ t('privacyPolicy.rights.correction.description') }}</p>
+              </div>
+            </div>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="bottom" :delay="500">
+            <div class="rights-step">
+              <div class="step-number">
+                <i class="fas fa-trash-alt"></i>
+              </div>
+              <div class="step-content">
+                <h4>{{ t('privacyPolicy.rights.deletion.title') }}</h4>
+                <p>{{ t('privacyPolicy.rights.deletion.description') }}</p>
+              </div>
+            </div>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="bottom" :delay="600">
+            <div class="rights-step">
+              <div class="step-number">
+                <i class="fas fa-ban"></i>
+              </div>
+              <div class="step-content">
+                <h4>{{ t('privacyPolicy.rights.opposition.title') }}</h4>
+                <p>{{ t('privacyPolicy.rights.opposition.description') }}</p>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
       </div>
-      <p class="rights-intro">Conheça os direitos que você possui em relação aos seus dados pessoais</p>
-    </ScrollReveal>
-    
-    <div class="rights-steps">
-      <ScrollReveal direction="bottom" :delay="300">
-        <div class="rights-step">
-          <div class="step-number">
-            <i class="fas fa-database"></i>
-          </div>
-          <div class="step-content">
-            <h4>Acesso aos Dados</h4>
-            <p>Você tem o direito de acessar seus dados pessoais que estão em nossa posse.</p>
-          </div>
-        </div>
-      </ScrollReveal>
-      
-      <ScrollReveal direction="bottom" :delay="400">
-        <div class="rights-step">
-          <div class="step-number">
-            <i class="fas fa-edit"></i>
-          </div>
-          <div class="step-content">
-            <h4>Correção</h4>
-            <p>Você pode solicitar a correção de dados incompletos, inexatos ou desatualizados.</p>
-          </div>
-        </div>
-      </ScrollReveal>
-      
-      <ScrollReveal direction="bottom" :delay="500">
-        <div class="rights-step">
-          <div class="step-number">
-            <i class="fas fa-trash-alt"></i>
-          </div>
-          <div class="step-content">
-            <h4>Exclusão</h4>
-            <p>Você pode solicitar a exclusão de seus dados pessoais armazenados em nossos sistemas.</p>
-          </div>
-        </div>
-      </ScrollReveal>
-      
-      <ScrollReveal direction="bottom" :delay="600">
-        <div class="rights-step">
-          <div class="step-number">
-            <i class="fas fa-ban"></i>
-          </div>
-          <div class="step-content">
-            <h4>Oposição</h4>
-            <p>Você pode se opor ao tratamento de seus dados pessoais em determinadas situações.</p>
-          </div>
-        </div>
-      </ScrollReveal>
-    </div>
-  </div>
-</section>
+    </section>
     
     <!-- Seção de Segurança -->
     <section class="security-section">
@@ -124,14 +122,14 @@
           
           <ScrollReveal direction="right" :delay="300">
             <div class="security-text">
-              <h3>Segurança de Dados</h3>
-              <p>A Uni Hospitalar adota as melhores práticas de segurança para garantir a integridade e confidencialidade dos dados tratados. Utilizamos mecanismos robustos para proteger contra uso indevido, acessos não autorizados, danos, fraudes e outras ameaças.</p>
+              <h3>{{ t('privacyPolicy.securityTitle') }}</h3>
+              <p>{{ t('privacyPolicy.securityText') }}</p>
               <ul class="security-features">
-                <li>Criptografia de dados sensíveis</li>
-                <li>Controle de acesso rigoroso</li>
-                <li>Monitoramento contínuo</li>
-                <li>Atualizações regulares de segurança</li>
-                <li>Treinamento de equipe em proteção de dados</li>
+                <li>{{ t('privacyPolicy.securityFeatures.encryption') }}</li>
+                <li>{{ t('privacyPolicy.securityFeatures.accessControl') }}</li>
+                <li>{{ t('privacyPolicy.securityFeatures.monitoring') }}</li>
+                <li>{{ t('privacyPolicy.securityFeatures.updates') }}</li>
+                <li>{{ t('privacyPolicy.securityFeatures.training') }}</li>
               </ul>
             </div>
           </ScrollReveal>
@@ -144,9 +142,9 @@
       <div class="container">
         <ScrollReveal direction="bottom" :delay="200">
           <div class="cta-content">
-            <h2>Dúvidas sobre nossa política?</h2>
-            <p>Se você tiver qualquer dúvida sobre como tratamos seus dados ou quiser exercer seus direitos, entre em contato conosco.</p>
-            <router-link to="/Contato" class="cta-button">Entre em Contato</router-link>
+            <h2>{{ t('privacyPolicy.ctaTitle') }}</h2>
+            <p>{{ t('privacyPolicy.ctaText') }}</p>
+            <router-link to="/Contato" class="cta-button">{{ t('privacyPolicy.ctaButton') }}</router-link>
           </div>
         </ScrollReveal>
       </div>
@@ -159,50 +157,62 @@
 <script>
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
+import { usePrivacyPolicyTranslation } from '@/composables/usePrivacyPolicyTranslation.js';
 
 export default {
   components: {
     HomeHeader,
     HomeFooter
   },
-  name: 'PoliticaPrivacidade',
+  setup() {
+    const { t, currentLanguage } = usePrivacyPolicyTranslation()
+    
+    return {
+      t,
+      currentLanguage
+    }
+  },
   data() {
     return {
       selectedLanguage: 'pt',
-      sidebarOpen: false,
-      sections: [
+      sidebarOpen: false
+    }
+  },
+  computed: {
+    sections() {
+      return [
         {
           icon: '<i class="fas fa-search"></i>',
-          title: "Sobre a Política de Privacidade",
-          text: "Bem-vindo à Política de Privacidade da Uni Hospitalar. Nós levamos sua privacidade a sério e estamos comprometidos em proteger suas informações pessoais. Coletamos informações pessoais como nome, e-mail, telefone e empresa quando você interage com nossos serviços, sempre com seu consentimento. As informações coletadas são utilizadas para melhorar nossos serviços, personalizar sua experiência e garantir a segurança das transações.",
+          title: this.t('privacyPolicy.sections.about.title'),
+          text: this.t('privacyPolicy.sections.about.text')
         },
         {
           icon: '<i class="fas fa-shield-alt"></i>',
-          title: "Segurança e Direitos dos Usuários",
-          text: "Implementamos medidas de segurança avançadas para proteger suas informações contra acesso não autorizado e outras ameaças. Não compartilhamos suas informações com terceiros, exceto quando exigido por lei ou para proteger nossos direitos legais. Você tem o direito de acessar, corrigir e excluir suas informações pessoais. Entre em contato conosco para exercer esses direitos.",
+          title: this.t('privacyPolicy.sections.security.title'),
+          text: this.t('privacyPolicy.sections.security.text')
         },
         {
           icon: '<i class="fas fa-bullseye"></i>',
-          title: "Objetivo da Política de Privacidade",
-          text: "A Uni Hospitalar valoriza a ética e a integridade em todas as suas ações. Esta Política de Privacidade tem como objetivo informar os titulares de dados pessoais sobre como suas informações são tratadas, assegurando uma relação transparente e segura.",
+          title: this.t('privacyPolicy.sections.objective.title'),
+          text: this.t('privacyPolicy.sections.objective.text')
         },
         {
           icon: '<i class="fas fa-handshake"></i>',
-          title: "Nosso Compromisso",
-          text: "A Uni Hospitalar se compromete a oferecer um atendimento de qualidade a todos que acessam nossas plataformas digitais. Baseados no princípio da segurança, protegemos a privacidade e os dados pessoais, apresentando esta Política com clareza sobre o tratamento dos dados de nossos colaboradores, clientes e visitantes.",
+          title: this.t('privacyPolicy.sections.commitment.title'),
+          text: this.t('privacyPolicy.sections.commitment.text')
         },
         {
           icon: '<i class="fas fa-lock"></i>',
-          title: "Proteção dos Dados Pessoais",
-          text: "A Uni Hospitalar adota as melhores práticas de segurança para garantir a integridade e confidencialidade dos dados tratados. Utilizamos mecanismos robustos para proteger contra uso indevido, acessos não autorizados, danos, fraudes e outras ameaças.",
+          title: this.t('privacyPolicy.sections.protection.title'),
+          text: this.t('privacyPolicy.sections.protection.text')
         },
         {
           icon: '<i class="fas fa-file-alt"></i>',
-          title: "Tratamento de Dados",
-          text: "A Uni Hospitalar trata os dados pessoais de maneira responsável e ética. Coletamos dados para executar atividades relacionadas aos nossos serviços, incluindo identificação, contato, informações financeiras, dados de navegação, saúde, biometria, entre outros. Todos os dados são utilizados para fins legítimos e de acordo com as legislações vigentes.",
-        },
-      ],
-    };
+          title: this.t('privacyPolicy.sections.treatment.title'),
+          text: this.t('privacyPolicy.sections.treatment.text')
+        }
+      ]
+    }
   },
   methods: {
     changeLanguage(event) {

@@ -108,7 +108,7 @@ body, html {
 .transition-logo {
   max-width: 500px;
   height: auto;
-  animation: logoAnimation 1s ease-in-out; /* Animação mais rápida */
+  animation: logoAnimation 1.5s ease-in-out; /* Animação mais rápida */
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
 }
 
@@ -207,4 +207,16 @@ a {
 .router-link-active {
   transition: all 0.3s ease;
 }
+
+@media (max-width: 576px) {
+    .transition-logo {
+      max-width: 350px;
+    }
+  }
+
+@media (max-width: 400px) {
+    .transition-logo {
+      max-width: 270px;
+    }
+  }
 </style>

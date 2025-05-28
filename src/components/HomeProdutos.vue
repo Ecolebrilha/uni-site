@@ -6,8 +6,8 @@
     <section class="hero-section">
       <div class="parallax-container">
         <div class="overlay"></div>
-        <h1 class="hero-title">Nossos Produtos</h1>
-        <div class="hero-subtitle">Soluções completas para o setor de saúde</div>
+        <h1 class="hero-title">{{ t('products.heroTitle') }}</h1>
+        <div class="hero-subtitle">{{ t('products.heroSubtitle') }}</div>
       </div>
     </section>
     
@@ -17,13 +17,11 @@
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-title">
             <span class="accent-line"></span>
-            <h2>Conheça Nossa Linha de Produtos</h2>
+            <h2>{{ t('products.introTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
           <p class="intro-text">
-            A Uni Hospitalar trabalha com uma extensa linha de produtos, procurando sempre ser complementar 
-            e oferecendo soluções eficazes no tratamento das mais diversas patologias. Nossa qualidade e 
-            compromisso são reconhecidos no mercado de saúde.
+            {{ t('products.introText') }}
           </p>
         </ScrollReveal>
       </div>
@@ -39,12 +37,10 @@
             <i class="fas fa-box-open"></i>
           </div>
           <div class="category-content">
-            <h3>LINHA DE PRODUTOS</h3>
-            <p>A Uni Hospitalar trabalha com uma extensa linha de produtos, procurando sempre ser complementar e oferecendo desta forma soluções no tratamento das mais diversas patologias.</p>
+            <h3>{{ t('products.categories.productLine.title') }}</h3>
+            <p>{{ t('products.categories.productLine.description') }}</p>
             <div class="category-features">
-              <span>Qualidade</span>
-              <span>Variedade</span>
-              <span>Eficácia</span>
+              <span v-for="feature in t('products.categories.productLine.features')" :key="feature">{{ feature }}</span>
             </div>
           </div>
         </div>
@@ -53,12 +49,10 @@
       <ScrollReveal direction="right" :delay="300">
   <div class="category-card reverse">
     <div class="category-content">
-      <h3>MEDICAMENTOS DIVERSOS</h3>
-      <p>São medicamentos utilizados para doenças crônico degenerativas que requerem especialidade para seu correto armazenamento.</p>
+      <h3>{{ t('products.categories.diverseMedicines.title') }}</h3>
+      <p>{{ t('products.categories.diverseMedicines.description') }}</p>
       <div class="category-features">
-        <span>Armazenamento Especializado</span>
-        <span>Controle de Temperatura</span>
-        <span>Rastreabilidade</span>
+        <span v-for="feature in t('products.categories.diverseMedicines.features')" :key="feature">{{ feature }}</span>
       </div>
     </div>
     <div class="category-icon">
@@ -73,12 +67,10 @@
             <i class="fas fa-capsules"></i>
           </div>
           <div class="category-content">
-            <h3>MEDICAMENTOS PARA ONCOLOGIA</h3>
-            <p>São medicamentos quimioterápicos utilizados para o tratamento do câncer.</p>
+            <h3>{{ t('products.categories.oncologyMedicines.title') }}</h3>
+            <p>{{ t('products.categories.oncologyMedicines.description') }}</p>
             <div class="category-features">
-              <span>Alta Eficácia</span>
-              <span>Protocolos Específicos</span>
-              <span>Manuseio Seguro</span>
+              <span v-for="feature in t('products.categories.oncologyMedicines.features')" :key="feature">{{ feature }}</span>
             </div>
           </div>
         </div>
@@ -87,12 +79,10 @@
       <ScrollReveal direction="right" :delay="500">
   <div class="category-card reverse">
     <div class="category-content">
-      <h3>MEDICAMENTOS HOSPITALARES</h3>
-      <p>São medicamentos utilizados em ambiente hospitalar necessários aos procedimentos médico-cirúrgicos.</p>
+      <h3>{{ t('products.categories.hospitalMedicines.title') }}</h3>
+      <p>{{ t('products.categories.hospitalMedicines.description') }}</p>
       <div class="category-features">
-        <span>Uso Hospitalar</span>
-        <span>Procedimentos Médicos</span>
-        <span>Pronta Entrega</span>
+        <span v-for="feature in t('products.categories.hospitalMedicines.features')" :key="feature">{{ feature }}</span>
       </div>
     </div>
     <div class="category-icon">
@@ -110,7 +100,7 @@
         <ScrollReveal direction="bottom" :delay="200">
           <div class="section-title light">
             <span class="accent-line"></span>
-            <h2>Nossos Diferenciais</h2>
+            <h2>{{ t('products.differentialsTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
         </ScrollReveal>
@@ -121,8 +111,8 @@
               <div class="feature-icon">
                 <i class="fas fa-truck-loading"></i>
               </div>
-              <h4>Logística Especializada</h4>
-              <p>Entrega rápida e segura, com controle de temperatura e rastreabilidade completa.</p>
+              <h4>{{ t('products.differentials.logistics.title') }}</h4>
+              <p>{{ t('products.differentials.logistics.description') }}</p>
             </div>
           </ScrollReveal>
           
@@ -131,8 +121,8 @@
               <div class="feature-icon">
                 <i class="fas fa-certificate"></i>
               </div>
-              <h4>Produtos Certificados</h4>
-              <p>Todos os nossos produtos possuem certificação e registro nos órgãos competentes.</p>
+              <h4>{{ t('products.differentials.certified.title') }}</h4>
+              <p>{{ t('products.differentials.certified.description') }}</p>
             </div>
           </ScrollReveal>
           
@@ -141,8 +131,8 @@
               <div class="feature-icon">
                 <i class="fas fa-warehouse"></i>
               </div>
-              <h4>Estoque Estratégico</h4>
-              <p>Mantemos estoque adequado para atender às demandas com agilidade.</p>
+              <h4>{{ t('products.differentials.stock.title') }}</h4>
+              <p>{{ t('products.differentials.stock.description') }}</p>
             </div>
           </ScrollReveal>
           
@@ -151,8 +141,8 @@
               <div class="feature-icon">
                 <i class="fas fa-handshake"></i>
               </div>
-              <h4>Parcerias Confiáveis</h4>
-              <p>Trabalhamos com os melhores fornecedores do mercado farmacêutico.</p>
+              <h4>{{ t('products.differentials.partnerships.title') }}</h4>
+              <p>{{ t('products.differentials.partnerships.description') }}</p>
             </div>
           </ScrollReveal>
         </div>
@@ -168,10 +158,10 @@
               <i class="fas fa-file-pdf"></i>
             </div>
             <div class="catalog-text">
-              <h3>Catálogo Completo de Produtos</h3>
-              <p>Acesse nosso catálogo completo com todas as linhas de produtos, especificações técnicas e informações detalhadas.</p>
+              <h3>{{ t('products.catalog.title') }}</h3>
+              <p>{{ t('products.catalog.description') }}</p>
               <a href="/site/uni-hospitalar-produtos.pdf" target="_blank" class="catalog-button">
-                <i class="fas fa-download"></i> BAIXAR CATÁLOGO DE PRODUTOS
+                <i class="fas fa-download"></i> {{ t('products.catalog.downloadButton') }}
               </a>
             </div>
           </div>
@@ -184,12 +174,12 @@
       <div class="container">
         <ScrollReveal direction="bottom" :delay="200">
           <div class="cta-content">
-            <h2>Precisa de mais informações?</h2>
-            <p>Nossa equipe está pronta para ajudar com informações detalhadas sobre nossos produtos e como eles podem atender às suas necessidades.</p>
+            <h2>{{ t('products.cta.title') }}</h2>
+            <p>{{ t('products.cta.description') }}</p>
             <div class="cta-buttons">
-              <router-link to="/Contato" class="cta-button primary">Fale Conosco</router-link>
+              <router-link to="/Contato" class="cta-button primary">{{ t('products.cta.contactButton') }}</router-link>
               <a href="/site/uni-hospitalar-produtos.pdf" target="_blank" class="cta-button secondary">
-                <i class="fas fa-download"></i> Baixar Catálogo
+                <i class="fas fa-download"></i> {{ t('products.cta.catalogButton') }}
               </a>
             </div>
           </div>
@@ -204,11 +194,20 @@
 <script>
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
+import { useProductsTranslation } from '@/composables/useProductsTranslation.js';
 
 export default {
   components: {
     HomeHeader,
     HomeFooter
+  },
+  setup() {
+    const { t, currentLanguage } = useProductsTranslation()
+    
+    return {
+      t,
+      currentLanguage
+    }
   },
   data() {
     return {
