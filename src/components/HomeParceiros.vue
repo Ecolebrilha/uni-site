@@ -1,21 +1,18 @@
 <template>
   <div class="parceiros">
     <HomeHeader />
-
+    
     <!-- Hero Section com Efeito Parallax -->
     <section class="hero-section">
       <div class="parallax-container">
         <div class="overlay"></div>
         <div class="hero-content">
-          <h1 class="hero-title">Nossos Parceiros</h1>
-          <div class="hero-subtitle">Empresas que confiam em nossa excelência</div>
-          <div class="hero-description">
-            Conheça as organizações que escolheram a Uni Hospitalar como parceira estratégica
-          </div>
+          <h1 class="hero-title">{{ t('partners.hero.title') }}</h1>
+          <div class="hero-subtitle">{{ t('partners.hero.subtitle') }}</div>
         </div>
       </div>
     </section>
-
+    
     <!-- Seção de Estatísticas dos Parceiros -->
     <section class="partners-stats-section">
       <div class="container">
@@ -25,37 +22,37 @@
               <i class="fas fa-handshake"></i>
             </div>
             <div class="stat-number">26+</div>
-            <div class="stat-label">Parceiros Estratégicos</div>
+            <div class="stat-label">{{ t('partners.stats.strategicPartners') }}</div>
           </div>
           <div class="stat-card">
             <div class="stat-icon">
               <i class="fas fa-globe-americas"></i>
             </div>
             <div class="stat-number">3</div>
-            <div class="stat-label">Estados Atendidos</div>
+            <div class="stat-label">{{ t('partners.stats.statesServed') }}</div>
           </div>
           <div class="stat-card">
             <div class="stat-icon">
               <i class="fas fa-award"></i>
             </div>
             <div class="stat-number">19</div>
-            <div class="stat-label">Anos de Confiança</div>
+            <div class="stat-label">{{ t('partners.stats.yearsOfTrust') }}</div>
           </div>
         </div>
       </div>
     </section>
-
+    
     <!-- Seção Principal de Parceiros -->
     <section class="partners-showcase-section">
       <div class="container">
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-header">
-            <h2 class="section-title">Parceiros de Confiança</h2>
-            <div class="section-subtitle">Empresas que escolheram a excelência da Uni Hospitalar</div>
+            <h2 class="section-title">{{ t('partners.showcase.title') }}</h2>
+            <div class="section-subtitle">{{ t('partners.showcase.subtitle') }}</div>
             <div class="accent-line"></div>
           </div>
         </ScrollReveal>
-
+        
         <!-- Grid Simples de Parceiros -->
         <ScrollReveal direction="bottom" :delay="200">
           <div class="partners-simple-grid">
@@ -66,74 +63,74 @@
         </ScrollReveal>
       </div>
     </section>
-
+    
     <!-- Seção de Depoimentos de Parceiros -->
     <section class="partners-testimonials">
       <div class="container">
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-header">
-            <h2 class="section-title light">O que nossos parceiros dizem</h2>
+            <h2 class="section-title light">{{ t('partners.testimonials.title') }}</h2>
             <div class="accent-line light"></div>
           </div>
         </ScrollReveal>
-
+        
         <div class="testimonials-grid">
           <ScrollReveal direction="left" :delay="200">
             <div class="testimonial-card">
               <div class="quote-icon">
                 <i class="fas fa-quote-left"></i>
               </div>
-              <p>"A Uni Hospitalar é nossa parceira há mais de 8 anos. Sempre demonstraram profissionalismo e qualidade excepcionais."</p>
+              <p>{{ t('partners.testimonials.testimonial1.text') }}</p>
               <div class="testimonial-author">
-                <strong>Dr. Carlos Silva</strong>
-                <span>Hospital Santa Clara</span>
+                <strong>{{ t('partners.testimonials.testimonial1.author') }}</strong>
+                <span>{{ t('partners.testimonials.testimonial1.company') }}</span>
               </div>
             </div>
           </ScrollReveal>
-
+          
           <ScrollReveal direction="bottom" :delay="300">
             <div class="testimonial-card">
               <div class="quote-icon">
                 <i class="fas fa-quote-left"></i>
               </div>
-              <p>"Confiamos na Uni Hospitalar para nossos medicamentos mais críticos. Nunca nos decepcionaram."</p>
+              <p>{{ t('partners.testimonials.testimonial2.text') }}</p>
               <div class="testimonial-author">
-                <strong>Dra. Ana Martins</strong>
-                <span>Clínica São Lucas</span>
+                <strong>{{ t('partners.testimonials.testimonial2.author') }}</strong>
+                <span>{{ t('partners.testimonials.testimonial2.company') }}</span>
               </div>
             </div>
           </ScrollReveal>
-
+          
           <ScrollReveal direction="right" :delay="400">
             <div class="testimonial-card">
               <div class="quote-icon">
                 <i class="fas fa-quote-left"></i>
               </div>
-              <p>"Parceria sólida e confiável. A Uni Hospitalar entende nossas necessidades e sempre entrega resultados."</p>
+              <p>{{ t('partners.testimonials.testimonial3.text') }}</p>
               <div class="testimonial-author">
-                <strong>Paulo Mendes</strong>
-                <span>Hospital Regional</span>
+                <strong>{{ t('partners.testimonials.testimonial3.author') }}</strong>
+                <span>{{ t('partners.testimonials.testimonial3.company') }}</span>
               </div>
             </div>
           </ScrollReveal>
         </div>
       </div>
     </section>
-
+    
     <!-- Seção de Call to Action -->
     <section class="cta-section">
       <div class="container">
         <div class="cta-content">
-          <h2>Seja nosso próximo parceiro</h2>
-          <p>Junte-se a essas empresas de sucesso e faça parte da nossa rede de parceiros estratégicos</p>
+          <h2>{{ t('partners.cta.title') }}</h2>
+          <p>{{ t('partners.cta.description') }}</p>
           <router-link to="/SejaParceiro" class="cta-button">
             <i class="fas fa-handshake"></i>
-            <span>Quero ser parceiro</span>
+            <span>{{ t('partners.cta.button') }}</span>
           </router-link>
         </div>
       </div>
     </section>
-
+    
     <HomeFooter />
   </div>
 </template>
@@ -141,11 +138,20 @@
 <script>
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
+import { usePartnersTranslation } from '@/composables/usePartnersTranslation.js';
 
 export default {
   components: {
     HomeHeader,
     HomeFooter
+  },
+  setup() {
+    const { t, currentLanguage } = usePartnersTranslation()
+    
+    return {
+      t,
+      currentLanguage
+    }
   },
   data() {
     return {
@@ -244,12 +250,6 @@ section {
   font-weight: 300;
   margin-bottom: 15px;
   animation: fadeInUp 1.5s ease-out 0.3s both;
-}
-
-.hero-description {
-  font-size: 1.2rem;
-  opacity: 0.9;
-  animation: fadeInUp 1.5s ease-out 0.6s both;
 }
 
 @keyframes fadeInUp {
@@ -578,10 +578,6 @@ section {
     font-size: 1.3rem;
   }
   
-  .hero-description {
-    font-size: 1.1rem;
-  }
-  
   .parallax-container {
     background-attachment: scroll;
   }
@@ -616,10 +612,6 @@ section {
   
   .hero-subtitle {
     font-size: 1.1rem;
-  }
-  
-  .hero-description {
-    font-size: 1rem;
   }
   
   .section-title {

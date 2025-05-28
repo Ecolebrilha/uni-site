@@ -6,8 +6,8 @@
     <section class="hero-section">
       <div class="parallax-container">
         <div class="overlay"></div>
-        <h1 class="hero-title">Contato</h1>
-        <div class="hero-subtitle">Estamos à sua disposição</div>
+        <h1 class="hero-title">{{ t('contact.heroTitle') }}</h1>
+        <div class="hero-subtitle">{{ t('contact.heroSubtitle') }}</div>
       </div>
     </section>
     
@@ -17,11 +17,11 @@
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-title">
             <span class="accent-line"></span>
-            <h2>Fale Conosco</h2>
+            <h2>{{ t('contact.introTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
           <p class="intro-text">
-            Estamos prontos para atender suas necessidades. Escolha o departamento desejado e entre em contato conosco.
+            {{ t('contact.introText') }}
           </p>
         </ScrollReveal>
         
@@ -34,7 +34,7 @@
                 :class="{ active: activeSection === 'SAC' }"
                 class="tab-button">
                 <i class="fas fa-headset"></i>
-                <span>Suporte</span>
+                <span>{{ t('contact.departments.support.title') }}</span>
               </button>
               
               <button 
@@ -42,7 +42,7 @@
                 :class="{ active: activeSection === 'Comercial' }"
                 class="tab-button">
                 <i class="fas fa-shopping-cart"></i>
-                <span>Comercial</span>
+                <span>{{ t('contact.departments.commercial.title') }}</span>
               </button>
               
               <button 
@@ -50,7 +50,7 @@
                 :class="{ active: activeSection === 'Licitação' }"
                 class="tab-button">
                 <i class="fas fa-file-contract"></i>
-                <span>Licitação</span>
+                <span>{{ t('contact.departments.bidding.title') }}</span>
               </button>
               
               <button 
@@ -58,7 +58,7 @@
                 :class="{ active: activeSection === 'Financeiro' }"
                 class="tab-button">
                 <i class="fas fa-chart-line"></i>
-                <span>Financeiro</span>
+                <span>{{ t('contact.departments.financial.title') }}</span>
               </button>
             </ScrollReveal>
           </div>
@@ -67,224 +67,224 @@
           <div class="contact-content">
             <ScrollReveal direction="right" :delay="300">
               <!-- Suporte -->
-<div v-if="activeSection === 'SAC'" class="contact-panel">
-  <div class="contact-header">
-    <div class="contact-icon">
-      <i class="fas fa-headset"></i>
-    </div>
-    <h3>Suporte ao Cliente</h3>
-  </div>
-  
-  <div class="contact-info">
-    <div class="info-item">
-      <i class="fas fa-envelope"></i>
-      <p>contato@unihospitalar.com.br</p>
-    </div>
-    <div class="info-item">
-      <i class="fas fa-phone"></i>
-      <p>+55 (81) 3472 7201</p>
-    </div>
-    <div class="info-item">
-      <i class="fas fa-clock"></i>
-      <p>Segunda a Sexta: 8h às 18h</p>
-    </div>
-  </div>
-  
-  <div class="contact-message">
-    <div class="message-header">
-      <i class="fas fa-paper-plane"></i>
-      <h4>Envie sua mensagem</h4>
-    </div>
-    <p>Para enviar sua mensagem, preencha os campos abaixo e em breve retornaremos. Obrigado!</p>
-    <ContatoFormulario :activeSection="activeSection" />
-  </div>
-</div>
+              <div v-if="activeSection === 'SAC'" class="contact-panel">
+                <div class="contact-header">
+                  <div class="contact-icon">
+                    <i class="fas fa-headset"></i>
+                  </div>
+                  <h3>{{ t('contact.departments.support.fullTitle') }}</h3>
+                </div>
+                
+                <div class="contact-info">
+                  <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>{{ t('contact.departments.support.email') }}</p>
+                  </div>
+                  <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <p>{{ t('contact.departments.support.phone') }}</p>
+                  </div>
+                  <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <p>{{ t('contact.departments.support.hours') }}</p>
+                  </div>
+                </div>
+                
+                <div class="contact-message">
+                  <div class="message-header">
+                    <i class="fas fa-paper-plane"></i>
+                    <h4>{{ t('contact.messageSection.title') }}</h4>
+                  </div>
+                  <p>{{ t('contact.messageSection.description') }}</p>
+                  <ContatoFormulario :activeSection="activeSection" />
+                </div>
+              </div>
 
-<!-- Comercial -->
-<div v-if="activeSection === 'Comercial'" class="contact-panel">
-  <div class="contact-header">
-    <div class="contact-icon">
-      <i class="fas fa-shopping-cart"></i>
-    </div>
-    <h3>Departamento Comercial</h3>
-  </div>
-  
-  <div class="contact-info">
-    <div class="info-item">
-      <i class="fas fa-envelope"></i>
-      <p>vendas@unihospitalar.com.br</p>
-    </div>
-    <div class="info-item">
-      <i class="fas fa-phone"></i>
-      <p>+55 (81) 3472 7224</p>
-    </div>
-    <div class="info-item">
-      <i class="fas fa-clock"></i>
-      <p>Segunda a Sexta: 8h às 18h</p>
-    </div>
-  </div>
-  
-  <div class="contact-message">
-    <div class="message-header">
-      <i class="fas fa-paper-plane"></i>
-      <h4>Envie sua mensagem</h4>
-    </div>
-    <p>Para enviar sua mensagem, preencha os campos abaixo e em breve retornaremos. Obrigado!</p>
-    <ContatoFormulario :activeSection="activeSection" />
-  </div>
-</div>
+              <!-- Comercial -->
+              <div v-if="activeSection === 'Comercial'" class="contact-panel">
+                <div class="contact-header">
+                  <div class="contact-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                  </div>
+                  <h3>{{ t('contact.departments.commercial.fullTitle') }}</h3>
+                </div>
+                
+                <div class="contact-info">
+                  <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>{{ t('contact.departments.commercial.email') }}</p>
+                  </div>
+                  <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <p>{{ t('contact.departments.commercial.phone') }}</p>
+                  </div>
+                  <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <p>{{ t('contact.departments.commercial.hours') }}</p>
+                  </div>
+                </div>
+                
+                <div class="contact-message">
+                  <div class="message-header">
+                    <i class="fas fa-paper-plane"></i>
+                    <h4>{{ t('contact.messageSection.title') }}</h4>
+                  </div>
+                  <p>{{ t('contact.messageSection.description') }}</p>
+                  <ContatoFormulario :activeSection="activeSection" />
+                </div>
+              </div>
 
-<!-- Licitação -->
-<div v-if="activeSection === 'Licitação'" class="contact-panel">
-  <div class="contact-header">
-    <div class="contact-icon">
-      <i class="fas fa-file-contract"></i>
-    </div>
-    <h3>Departamento de Licitação</h3>
-  </div>
-  
-  <div class="contact-info">
-    <div class="info-item">
-      <i class="fas fa-envelope"></i>
-      <p>licitacao@unihospitalar.com.br</p>
-    </div>
-    <div class="info-item">
-      <i class="fas fa-phone"></i>
-      <p>+55 (81) 3472 7215</p>
-    </div>
-    <div class="info-item">
-      <i class="fas fa-clock"></i>
-      <p>Segunda a Sexta: 8h às 18h</p>
-    </div>
-  </div>
-  
-  <div class="contact-message">
-    <div class="message-header">
-      <i class="fas fa-paper-plane"></i>
-      <h4>Envie sua mensagem</h4>
-    </div>
-    <p>Para enviar sua mensagem, preencha os campos abaixo e em breve retornaremos. Obrigado!</p>
-    <ContatoFormulario :activeSection="activeSection" />
-  </div>
-</div>
+              <!-- Licitação -->
+              <div v-if="activeSection === 'Licitação'" class="contact-panel">
+                <div class="contact-header">
+                  <div class="contact-icon">
+                    <i class="fas fa-file-contract"></i>
+                  </div>
+                  <h3>{{ t('contact.departments.bidding.fullTitle') }}</h3>
+                </div>
+                
+                <div class="contact-info">
+                  <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>{{ t('contact.departments.bidding.email') }}</p>
+                  </div>
+                  <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <p>{{ t('contact.departments.bidding.phone') }}</p>
+                  </div>
+                  <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <p>{{ t('contact.departments.bidding.hours') }}</p>
+                  </div>
+                </div>
+                
+                <div class="contact-message">
+                  <div class="message-header">
+                    <i class="fas fa-paper-plane"></i>
+                    <h4>{{ t('contact.messageSection.title') }}</h4>
+                  </div>
+                  <p>{{ t('contact.messageSection.description') }}</p>
+                  <ContatoFormulario :activeSection="activeSection" />
+                </div>
+              </div>
 
-<!-- Financeiro -->
-<div v-if="activeSection === 'Financeiro'" class="contact-panel">
-  <div class="contact-header">
-    <div class="contact-icon">
-      <i class="fas fa-chart-line"></i>
-    </div>
-    <h3>Departamento Financeiro</h3>
-  </div>
-  
-  <div class="contact-info">
-    <div class="info-item">
-      <i class="fas fa-envelope"></i>
-      <p>financeiro@unihospitalar.com.br</p>
-    </div>
-    <div class="info-item">
-      <i class="fas fa-phone"></i>
-      <p>+55 (81) 3472 7202</p>
-    </div>
-    <div class="info-item">
-      <i class="fas fa-clock"></i>
-      <p>Segunda a Sexta: 8h às 18h</p>
-    </div>
-  </div>
-  
-  <div class="contact-message">
-    <div class="message-header">
-      <i class="fas fa-paper-plane"></i>
-      <h4>Envie sua mensagem</h4>
-    </div>
-    <p>Para enviar sua mensagem, preencha os campos abaixo e em breve retornaremos. Obrigado!</p>
-    <ContatoFormulario :activeSection="activeSection" />
-  </div>
-</div>
-</ScrollReveal>
-</div>
-</div>
-</div>
-</section>
-    
-    <!-- Seção de Localização -->
-<section class="location-section">
-  <div class="container">
-    <ScrollReveal direction="bottom" :delay="200">
-      <div class="section-title light">
-        <span class="accent-line"></span>
-        <h2>Nossas Localizações</h2>
-        <span class="accent-line"></span>
-      </div>
-    </ScrollReveal>
-    
-    <div class="location-tabs">
-      <ScrollReveal direction="bottom" :delay="250">
-        <div class="location-selector">
-          <div 
-            v-for="(branch, index) in branches" 
-            :key="index"
-            @click="setActiveBranch(index)"
-            :class="['location-tab', { active: activeBranch === index }]"
-          >
-            <div class="tab-icon">
-              <i :class="branch.icon"></i>
-            </div>
-            <div class="tab-info">
-              <h4>{{ branch.name }}</h4>
-              <span>{{ branch.city }}</span>
-            </div>
+              <!-- Financeiro -->
+              <div v-if="activeSection === 'Financeiro'" class="contact-panel">
+                <div class="contact-header">
+                  <div class="contact-icon">
+                    <i class="fas fa-chart-line"></i>
+                  </div>
+                  <h3>{{ t('contact.departments.financial.fullTitle') }}</h3>
+                </div>
+                
+                <div class="contact-info">
+                  <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>{{ t('contact.departments.financial.email') }}</p>
+                  </div>
+                  <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <p>{{ t('contact.departments.financial.phone') }}</p>
+                  </div>
+                  <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <p>{{ t('contact.departments.financial.hours') }}</p>
+                  </div>
+                </div>
+                
+                <div class="contact-message">
+                  <div class="message-header">
+                    <i class="fas fa-paper-plane"></i>
+                    <h4>{{ t('contact.messageSection.title') }}</h4>
+                  </div>
+                  <p>{{ t('contact.messageSection.description') }}</p>
+                  <ContatoFormulario :activeSection="activeSection" />
+                </div>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
-      </ScrollReveal>
-    </div>
+      </div>
+    </section>
     
-    <div class="location-container">
-      <ScrollReveal direction="left" :delay="300">
-        <div class="location-map">
-          <transition name="fade" mode="out-in">
-            <iframe 
-              :key="activeBranch"
-              :src="branches[activeBranch].mapUrl" 
-              width="100%" 
-              height="450" 
-              style="border:0;" 
-              allowfullscreen="" 
-              loading="lazy" 
-              referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-          </transition>
-        </div>
-      </ScrollReveal>
-      
-      <ScrollReveal direction="right" :delay="400">
-        <div class="location-info">
-          <transition name="slide" mode="out-in">
-            <div :key="activeBranch" class="location-card">
-              <div class="location-header">
-                <i :class="branches[activeBranch].icon"></i>
-                <h3>{{ branches[activeBranch].name }}</h3>
-              </div>
-              <div class="location-details">
-                <p><strong>Endereço:</strong> {{ branches[activeBranch].address }}</p>
-                <p><strong>CEP:</strong> {{ branches[activeBranch].cep }}</p>
-                <p><strong>Telefone:</strong> {{ branches[activeBranch].phone }}</p>
-                <p><strong>E-mail:</strong> {{ branches[activeBranch].email }}</p>
-                <p><strong>Horário de Funcionamento:</strong> {{ branches[activeBranch].hours }}</p>
-              </div>
-              <div class="location-actions">
-                <a :href="branches[activeBranch].directionsUrl" target="_blank" class="directions-button">
-                  <i class="fas fa-directions"></i>
-                  <span>Como Chegar</span>
-                </a>
+    <!-- Seção de Localização -->
+    <section class="location-section">
+      <div class="container">
+        <ScrollReveal direction="bottom" :delay="200">
+          <div class="section-title light">
+            <span class="accent-line"></span>
+            <h2>{{ t('contact.locationsTitle') }}</h2>
+            <span class="accent-line"></span>
+          </div>
+        </ScrollReveal>
+        
+        <div class="location-tabs">
+          <ScrollReveal direction="bottom" :delay="250">
+            <div class="location-selector">
+              <div 
+                v-for="(branch, index) in translatedBranches" 
+                :key="index"
+                @click="setActiveBranch(index)"
+                :class="['location-tab', { active: activeBranch === index }]"
+              >
+                <div class="tab-icon">
+                  <i :class="branch.icon"></i>
+                </div>
+                <div class="tab-info">
+                  <h4>{{ branch.name }}</h4>
+                  <span>{{ branch.city }}</span>
+                </div>
               </div>
             </div>
-          </transition>
+          </ScrollReveal>
         </div>
-      </ScrollReveal>
-    </div>
-  </div>
-</section>
+        
+        <div class="location-container">
+          <ScrollReveal direction="left" :delay="300">
+            <div class="location-map">
+              <transition name="fade" mode="out-in">
+                <iframe 
+                  :key="activeBranch"
+                  :src="branches[activeBranch].mapUrl" 
+                  width="100%" 
+                  height="450" 
+                  style="border:0;" 
+                  allowfullscreen="" 
+                  loading="lazy" 
+                  referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+              </transition>
+            </div>
+          </ScrollReveal>
+          
+          <ScrollReveal direction="right" :delay="400">
+            <div class="location-info">
+              <transition name="slide" mode="out-in">
+                <div :key="activeBranch" class="location-card">
+                  <div class="location-header">
+                    <i :class="translatedBranches[activeBranch].icon"></i>
+                    <h3>{{ translatedBranches[activeBranch].name }}</h3>
+                  </div>
+                  <div class="location-details">
+                    <p><strong>{{ t('contact.locationDetails.address') }}</strong> {{ translatedBranches[activeBranch].address }}</p>
+                    <p><strong>{{ t('contact.locationDetails.cep') }}</strong> {{ translatedBranches[activeBranch].cep }}</p>
+                    <p><strong>{{ t('contact.locationDetails.phone') }}</strong> {{ translatedBranches[activeBranch].phone }}</p>
+                    <p><strong>{{ t('contact.locationDetails.email') }}</strong> {{ translatedBranches[activeBranch].email }}</p>
+                    <p><strong>{{ t('contact.locationDetails.hours') }}</strong> {{ translatedBranches[activeBranch].hours }}</p>
+                  </div>
+                  <div class="location-actions">
+                    <a :href="branches[activeBranch].directionsUrl" target="_blank" class="directions-button">
+                      <i class="fas fa-directions"></i>
+                      <span>{{ t('contact.locationDetails.directions') }}</span>
+                    </a>
+                  </div>
+                </div>
+              </transition>
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
+    </section>
     
     <HomeFooter />
   </div>
@@ -294,6 +294,7 @@
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
 import ContatoFormulario from '@/components/ContatoFormulario.vue';
+import { useContactTranslation } from '@/composables/useContactTranslation.js';
 import { mask } from 'v-mask';
 
 export default {
@@ -303,6 +304,14 @@ export default {
     HomeHeader,
     HomeFooter
   },
+  setup() {
+    const { t, currentLanguage } = useContactTranslation()
+    
+    return {
+      t,
+      currentLanguage
+    }
+  },
   data() {
     return {
       activeSection: 'SAC',
@@ -311,52 +320,67 @@ export default {
       activeBranch: 0, // Filial ativa inicialmente (Recife)
       branches: [
         {
-          name: 'Matriz Recife',
-          city: 'Recife - PE',
           icon: 'fas fa-building',
-          address: 'Rua Alagoas, 253 - Ipsep, Recife - PE',
-          cep: '51350-000',
-          phone: '+55 (81) 3472 7200',
-          email: 'contato@unihospitalar.com.br',
-          hours: 'Segunda a Sexta: 8h às 18h',
           mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.5461650060187!2d-34.9142373!3d-8.0992698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab1e5cfb3f2b35%3A0x5c9d6ad871d3c9e0!2sR.%20Alagoas%2C%20253%20-%20Ipsep%2C%20Recife%20-%20PE%2C%2051350-000!5e0!3m2!1spt-BR!2sbr!4v1656520123456!5m2!1spt-BR!2sbr',
           directionsUrl: 'https://www.google.com/maps/dir//R.+Alagoas,+253+-+Ipsep,+Recife+-+PE,+51350-000'
         },
         {
-          name: 'CD Fortaleza',
-          city: 'Fortaleza - CE',
           icon: 'fas fa-warehouse',
-          address: 'R. Francisco Jose Albuquerque Pereira - Cajazeiras, Fortaleza - CE',
-          cep: '60864-520',
-          phone: '+55 (81) 3472 7202',
-          email: 'fortaleza@unihospitalar.com.br',
-          hours: 'Segunda a Sexta: 8h às 18h',
-          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3979.954729928924!2d-38.58232312426936!3d-3.8271872440876074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74c7a7a7a7a7a7%3A0x9e3e5b0d8d3d8d3d!2sR.%20Francisco%20Jose%20Albuquerque%20Pereira%20-%20Cajazeiras%2C%20Fortaleza%20-%20CE%2C%2060864-520!5e0!3m2!1spt-BR!2sbr!4v1625151234567!5m2!1spt-BR!2sbr',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3979.954729928924!2d-38.58232312426936!3d-3.8271872440876074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74c7a7a7a7a7a7%3A0x9e3e5b0d8d3d8d3d!2sR.%20Francisco%20Jose%20Albuquerque%20Pereira%20-%20Cajazeiras%2C%20Fortaleza%20-%20CE%2C%2060864-520!5e0!3m2!1spt-BR!2sbr!4v1656520123457!5m2!1spt-BR!2sbr',
           directionsUrl: 'https://www.google.com/maps/dir//R.+Francisco+Jose+Albuquerque+Pereira+-+Cajazeiras,+Fortaleza+-+CE,+60864-520'
         },
         {
-          name: 'CD São Paulo',
-          city: 'Cotia - SP',
           icon: 'fas fa-warehouse',
-          address: 'R. Pinhal, 165 - Jardim Sabiá, Cotia - SP',
-          cep: '06716-575',
-          phone: '+55 (11) 4777-2159',
-          email: 'sp@unihospitalar.com.br',
-          hours: 'Segunda a Sexta: 8h às 18h',
-          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.3963130076986!2d-46.92011492368744!3d-23.55290096159868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cf03b8b1b8b8b9%3A0x9e3e5b0d8d3d8d3d!2sR.%20Pinhal%2C%20165%20-%20Jardim%20Sabi%C3%A1%2C%20Cotia%20-%20SP%2C%2006716-575!5e0!3m2!1spt-BR!2sbr!4v1625151234567!5m2!1spt-BR!2sbr',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.123456789012!2d-46.91234567890123!3d-23.61234567890123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5a2b2b2b2b2b%3A0x1a2b3c4d5e6f7g8h!2sR.%20Pinhal%2C%20165%20-%20Jardim%20Sabiá%2C%20Cotia%20-%20SP%2C%2006716-575!5e0!3m2!1spt-BR!2sbr!4v1656520123458!5m2!1spt-BR!2sbr',
           directionsUrl: 'https://www.google.com/maps/dir//R.+Pinhal,+165+-+Jardim+Sabiá,+Cotia+-+SP,+06716-575'
         }
       ]
-    };
+    }
+  },
+  computed: {
+    translatedBranches() {
+      return [
+        {
+          icon: 'fas fa-building',
+          name: this.t('contact.branches.recife.name'),
+          city: this.t('contact.branches.recife.city'),
+          address: this.t('contact.branches.recife.address'),
+          cep: this.t('contact.branches.recife.cep'),
+          phone: this.t('contact.branches.recife.phone'),
+          email: this.t('contact.branches.recife.email'),
+          hours: this.t('contact.branches.recife.hours')
+        },
+        {
+          icon: 'fas fa-warehouse',
+          name: this.t('contact.branches.fortaleza.name'),
+          city: this.t('contact.branches.fortaleza.city'),
+          address: this.t('contact.branches.fortaleza.address'),
+          cep: this.t('contact.branches.fortaleza.cep'),
+          phone: this.t('contact.branches.fortaleza.phone'),
+          email: this.t('contact.branches.fortaleza.email'),
+          hours: this.t('contact.branches.fortaleza.hours')
+        },
+        {
+          icon: 'fas fa-warehouse',
+          name: this.t('contact.branches.saopaulo.name'),
+          city: this.t('contact.branches.saopaulo.city'),
+          address: this.t('contact.branches.saopaulo.address'),
+          cep: this.t('contact.branches.saopaulo.cep'),
+          phone: this.t('contact.branches.saopaulo.phone'),
+          email: this.t('contact.branches.saopaulo.email'),
+          hours: this.t('contact.branches.saopaulo.hours')
+        }
+      ]
+    }
   },
   methods: {
+    changeLanguage(event) {
+      const value = typeof event === 'string' ? event : event.target.value;
+      this.selectedLanguage = value;
+      console.log(`Idioma selecionado: ${value}`);
+    },
     toggleSidebar() {
       this.sidebarOpen = !this.sidebarOpen;
-    },
-    changeLanguage(event) {
-      const language = event.target.value;
-      this.$i18n.locale = language;
-      this.selectedLanguage = language;
     },
     setActiveBranch(index) {
       this.activeBranch = index;
@@ -365,7 +389,7 @@ export default {
   directives: {
     mask
   }
-};
+}
 </script>
 
 <style scoped>

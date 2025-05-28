@@ -6,8 +6,8 @@
     <section class="hero-section">
       <div class="parallax-container">
         <div class="overlay"></div>
-        <h1 class="hero-title">Seja Nosso Parceiro</h1>
-        <div class="hero-subtitle">Faça parte da nossa rede de sucesso</div>
+        <h1 class="hero-title">{{ t('partner.heroTitle') }}</h1>
+        <div class="hero-subtitle">{{ t('partner.heroSubtitle') }}</div>
       </div>
     </section>
 
@@ -17,12 +17,11 @@
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-title">
             <span class="accent-line"></span>
-            <h2>Cadastre-se como Parceiro</h2>
+            <h2>{{ t('partner.introTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
           <p class="intro-text">
-            Preencha o formulário abaixo para se tornar um parceiro ou cliente da UniHospitalar.
-            Nossa equipe analisará suas informações e entrará em contato em breve.
+            {{ t('partner.introText') }}
           </p>
         </ScrollReveal>
 
@@ -33,28 +32,28 @@
                 <div class="form-icon">
                   <i class="fas fa-handshake"></i>
                 </div>
-                <h3>Formulário de Parceria</h3>
+                <h3>{{ t('partner.form.title') }}</h3>
               </div>
 
               <form @submit.prevent="submitForm" class="partner-form">
                 <div class="form-grid">
                   <!-- Nome/Razão Social -->
                   <div class="form-group">
-                    <label for="nomeRazaoSocial">Nome / Razão Social</label>
+                    <label for="nomeRazaoSocial">{{ t('partner.form.fields.companyName.label') }}</label>
                     <div class="input-clip">
                       <input type="text" id="nomeRazaoSocial" v-model="formData.nomeRazaoSocial" class="form-control"
-                        placeholder="Digite o nome ou razão social da empresa" required />
+                        :placeholder="t('partner.form.fields.companyName.placeholder')" required />
                     </div>
                   </div>
 
                   <!-- UF -->
                   <div class="form-group">
-                    <label for="uf">UF</label>
+                    <label for="uf">{{ t('partner.form.fields.state.label') }}</label>
                     <div class="input-clip">
                       <select id="uf" v-model="formData.uf" class="form-control" required>
-                        <option value="" disabled selected>Selecione o estado</option>
-                        <option v-for="estado in estados" :key="estado.sigla" :value="estado.sigla">
-                          {{ estado.nome }}
+                        <option value="" disabled selected>{{ t('partner.form.fields.state.placeholder') }}</option>
+                        <option v-for="estado in estados" :key="estado.code" :value="estado.code">
+                          {{ estado.name }}
                         </option>
                       </select>
                     </div>
@@ -62,10 +61,10 @@
 
                   <!-- Ramo de Atuação -->
                   <div class="form-group">
-                    <label for="ramoAtuacao">Ramo de Atuação</label>
+                    <label for="ramoAtuacao">{{ t('partner.form.fields.businessArea.label') }}</label>
                     <div class="input-clip">
                       <select id="ramoAtuacao" v-model="formData.ramoAtuacao" class="form-control" required>
-                        <option value="" disabled selected>Selecione o ramo de atuação</option>
+                        <option value="" disabled selected>{{ t('partner.form.fields.businessArea.placeholder') }}</option>
                         <option v-for="ramo in ramosAtuacao" :key="ramo" :value="ramo">
                           {{ ramo }}
                         </option>
@@ -75,10 +74,10 @@
 
                   <!-- CNPJ -->
                   <div class="form-group">
-                    <label for="cnpj">CNPJ</label>
+                    <label for="cnpj">{{ t('partner.form.fields.cnpj.label') }}</label>
                     <div class="input-clip" :class="{ 'loading': isLoadingCNPJ }">
                       <input type="text" id="cnpj" v-model="formData.cnpj" class="form-control"
-                        placeholder="00.000.000/0000-00" @input="formatCNPJ" @blur="buscarCNPJ" maxlength="18"
+                        :placeholder="t('partner.form.fields.cnpj.placeholder')" @input="formatCNPJ" @blur="buscarCNPJ" maxlength="18"
                         required />
                       <div v-if="isLoadingCNPJ" class="loading-spinner">
                         <i class="fas fa-spinner fa-spin"></i>
@@ -92,43 +91,43 @@
 
                   <!-- Email -->
                   <div class="form-group">
-                    <label for="email">E-mail</label>
+                    <label for="email">{{ t('partner.form.fields.email.label') }}</label>
                     <div class="input-clip">
                       <input type="email" id="email" v-model="formData.email" class="form-control"
-                        placeholder="exemplo@empresa.com.br" required />
+                        :placeholder="t('partner.form.fields.email.placeholder')" required />
                     </div>
                   </div>
 
                   <!-- Celular -->
                   <div class="form-group">
-                    <label for="celular">Celular</label>
+                    <label for="celular">{{ t('partner.form.fields.mobile.label') }}</label>
                     <div class="input-clip">
                       <input type="text" id="celular" v-model="formData.celular" class="form-control"
-                        placeholder="(00) 00000-0000" @input="formatCelular" maxlength="15"
+                        :placeholder="t('partner.form.fields.mobile.placeholder')" @input="formatCelular" maxlength="15"
                         :required="!formData.telefoneFixo" />
                     </div>
                   </div>
 
                   <!-- Telefone Fixo -->
                   <div class="form-group">
-                    <label for="telefoneFixo">Telefone Fixo</label>
+                    <label for="telefoneFixo">{{ t('partner.form.fields.phone.label') }}</label>
                     <div class="input-clip">
                       <input type="text" id="telefoneFixo" v-model="formData.telefoneFixo" class="form-control"
-                        placeholder="(00) 0000-0000" @input="formatTelefoneFixo" maxlength="14"
+                        :placeholder="t('partner.form.fields.phone.placeholder')" @input="formatTelefoneFixo" maxlength="14"
                         :required="!formData.celular" />
                     </div>
                   </div>
 
                   <!-- Endereço -->
                   <div class="form-group">
-                    <label for="endereco">Endereço</label>
+                    <label for="endereco">{{ t('partner.form.fields.address.label') }}</label>
                     <div class="input-clip">
                       <input type="text" id="endereco" v-model="formData.endereco" class="form-control"
-                        placeholder="Endereço será preenchido automaticamente via CNPJ" readonly />
+                        :placeholder="t('partner.form.fields.address.placeholder')" readonly />
                     </div>
                     <small class="field-help">
                       <i class="fas fa-info-circle"></i>
-                      Este campo será preenchido automaticamente ao informar um CNPJ válido.
+                      {{ t('partner.form.fields.address.help') }}
                     </small>
                   </div>
                 </div>
@@ -138,11 +137,10 @@
                   <div class="notice-content">
                     <i class="fas fa-info-circle notice-icon"></i>
                     <p>
-                      Ao preencher e enviar este formulário, você concorda automaticamente com os nossos
-                      <router-link to="/PoliticaPrivacidade" target="_blank" class="terms-link">Termos de
-                        Privacidade</router-link>
+                      {{ t('partner.form.termsNotice.text') }}
+                      <router-link to="/PoliticaPrivacidade" target="_blank" class="terms-link">{{ t('partner.form.termsNotice.privacyPolicy') }}</router-link>
                       e
-                      <router-link to="/TermosLegais" target="_blank" class="terms-link">Termos Legais</router-link>.
+                      <router-link to="/TermosLegais" target="_blank" class="terms-link">{{ t('partner.form.termsNotice.legalTerms') }}</router-link>.
                     </p>
                   </div>
                 </div>
@@ -150,23 +148,21 @@
                 <div class="form-actions">
                   <button type="submit" class="btn-submit" :disabled="isSubmitting">
                     <span v-if="isSubmitting">
-                      <i class="fas fa-spinner fa-spin"></i> Enviando...
+                      <i class="fas fa-spinner fa-spin"></i> {{ t('partner.form.submitButton.loading') }}
                     </span>
                     <span v-else>
-                      <i class="fas fa-paper-plane"></i> Solicitar Análise
+                      <i class="fas fa-paper-plane"></i> {{ t('partner.form.submitButton.default') }}
                     </span>
                   </button>
                 </div>
               </form>
 
               <div v-if="showSuccessMessage" class="alert alert-success">
-                <i class="fas fa-check-circle"></i> Sua solicitação foi enviada com sucesso! Entraremos em contato em
-                breve.
+                <i class="fas fa-check-circle"></i> {{ t('partner.form.messages.success') }}
               </div>
 
               <div v-if="showErrorMessage" class="alert alert-danger">
-                <i class="fas fa-exclamation-circle"></i> Ocorreu um erro ao enviar sua solicitação. Por favor, tente
-                novamente.
+                <i class="fas fa-exclamation-circle"></i> {{ t('partner.form.messages.error') }}
               </div>
             </div>
           </ScrollReveal>
@@ -180,7 +176,7 @@
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-title light">
             <span class="accent-line"></span>
-            <h2>Benefícios de ser nosso parceiro</h2>
+            <h2>{{ t('partner.benefits.title') }}</h2>
             <span class="accent-line"></span>
           </div>
         </ScrollReveal>
@@ -189,60 +185,60 @@
           <ScrollReveal direction="left" :delay="200">
             <div class="benefit-card">
               <div class="benefit-icon">
-                <i class="fas fa-truck-loading"></i>
+                <i :class="t('partner.benefits.logistics.icon')"></i>
               </div>
-              <h3>Logística Eficiente</h3>
-              <p>Entregas rápidas e seguras para todo o Norte e Nordeste brasileiro em até 48 horas úteis.</p>
+              <h3>{{ t('partner.benefits.logistics.title') }}</h3>
+              <p>{{ t('partner.benefits.logistics.description') }}</p>
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="up" :delay="300">
             <div class="benefit-card">
               <div class="benefit-icon">
-                <i class="fas fa-medal"></i>
+                <i :class="t('partner.benefits.quality.icon')"></i>
               </div>
-              <h3>Produtos de Qualidade</h3>
-              <p>Acesso a medicamentos e produtos hospitalares de alta qualidade e confiabilidade.</p>
+              <h3>{{ t('partner.benefits.quality.title') }}</h3>
+              <p>{{ t('partner.benefits.quality.description') }}</p>
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="right" :delay="200">
             <div class="benefit-card">
               <div class="benefit-icon">
-                <i class="fas fa-handshake"></i>
+                <i :class="t('partner.benefits.relationship.icon')"></i>
               </div>
-              <h3>Relacionamento Duradouro</h3>
-              <p>Construímos parcerias sólidas e duradouras baseadas em confiança e compromisso mútuo.</p>
+              <h3>{{ t('partner.benefits.relationship.title') }}</h3>
+              <p>{{ t('partner.benefits.relationship.description') }}</p>
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="left" :delay="400">
             <div class="benefit-card">
               <div class="benefit-icon">
-                <i class="fas fa-chart-line"></i>
+                <i :class="t('partner.benefits.growth.icon')"></i>
               </div>
-              <h3>Crescimento Conjunto</h3>
-              <p>Oportunidades de expansão e desenvolvimento de negócios em conjunto.</p>
+              <h3>{{ t('partner.benefits.growth.title') }}</h3>
+              <p>{{ t('partner.benefits.growth.description') }}</p>
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="up" :delay="500">
             <div class="benefit-card">
               <div class="benefit-icon">
-                <i class="fas fa-headset"></i>
+                <i :class="t('partner.benefits.support.icon')"></i>
               </div>
-              <h3>Suporte Dedicado</h3>
-              <p>Equipe de atendimento especializada para resolver suas necessidades com agilidade.</p>
+              <h3>{{ t('partner.benefits.support.title') }}</h3>
+              <p>{{ t('partner.benefits.support.description') }}</p>
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="right" :delay="400">
             <div class="benefit-card">
               <div class="benefit-icon">
-                <i class="fas fa-certificate"></i>
+                <i :class="t('partner.benefits.certifications.icon')"></i>
               </div>
-              <h3>Certificações</h3>
-              <p>Trabalhamos com os mais altos padrões de qualidade e segurança do mercado.</p>
+              <h3>{{ t('partner.benefits.certifications.title') }}</h3>
+              <p>{{ t('partner.benefits.certifications.description') }}</p>
             </div>
           </ScrollReveal>
         </div>
@@ -256,12 +252,21 @@
 <script>
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
+import { useOurPartnerTranslation } from '@/composables/useOurPartnerTranslation.js';
 
 export default {
   name: 'SejaParceiro',
   components: {
     HomeHeader,
     HomeFooter
+  },
+  setup() {
+    const { t, currentLanguage } = useOurPartnerTranslation()
+    
+    return {
+      t,
+      currentLanguage
+    }
   },
   data() {
     return {
@@ -275,48 +280,6 @@ export default {
         telefoneFixo: '',
         endereco: ''
       },
-      estados: [
-        { sigla: 'AC', nome: 'Acre' },
-        { sigla: 'AL', nome: 'Alagoas' },
-        { sigla: 'AP', nome: 'Amapá' },
-        { sigla: 'AM', nome: 'Amazonas' },
-        { sigla: 'BA', nome: 'Bahia' },
-        { sigla: 'CE', nome: 'Ceará' },
-        { sigla: 'DF', nome: 'Distrito Federal' },
-        { sigla: 'ES', nome: 'Espírito Santo' },
-        { sigla: 'GO', nome: 'Goiás' },
-        { sigla: 'MA', nome: 'Maranhão' },
-        { sigla: 'MT', nome: 'Mato Grosso' },
-        { sigla: 'MS', nome: 'Mato Grosso do Sul' },
-        { sigla: 'MG', nome: 'Minas Gerais' },
-        { sigla: 'PA', nome: 'Pará' },
-        { sigla: 'PB', nome: 'Paraíba' },
-        { sigla: 'PR', nome: 'Paraná' },
-        { sigla: 'PE', nome: 'Pernambuco' },
-        { sigla: 'PI', nome: 'Piauí' },
-        { sigla: 'RJ', nome: 'Rio de Janeiro' },
-        { sigla: 'RN', nome: 'Rio Grande do Norte' },
-        { sigla: 'RS', nome: 'Rio Grande do Sul' },
-        { sigla: 'RO', nome: 'Rondônia' },
-        { sigla: 'RR', nome: 'Roraima' },
-        { sigla: 'SC', nome: 'Santa Catarina' },
-        { sigla: 'SP', nome: 'São Paulo' },
-        { sigla: 'SE', nome: 'Sergipe' },
-        { sigla: 'TO', nome: 'Tocantins' }
-      ],
-      ramosAtuacao: [
-        'Hospital Público',
-        'Hospital Privado',
-        'Clínica Médica',
-        'Laboratório',
-        'Farmácia',
-        'Distribuidora',
-        'Indústria Farmacêutica',
-        'Órgão Público',
-        'Consultório Médico',
-        'Home Care',
-        'Outro'
-      ],
       isSubmitting: false,
       showSuccessMessage: false,
       showErrorMessage: false,
@@ -324,16 +287,24 @@ export default {
       cnpjError: ''
     };
   },
+  computed: {
+    estados() {
+      return this.t('partner.form.states') || []
+    },
+    ramosAtuacao() {
+      return this.t('partner.form.businessAreas') || []
+    }
+  },
   methods: {
     // Formatar CNPJ
     formatCNPJ(event) {
       let value = event.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
-
+      
       // Limita a 14 dígitos
       if (value.length > 14) {
         value = value.substring(0, 14);
       }
-
+      
       // Aplica a formatação
       if (value.length <= 2) {
         // Mantém o valor original
@@ -346,19 +317,19 @@ export default {
       } else {
         value = value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d+)/, '$1.$2.$3/$4-$5');
       }
-
+      
       this.formData.cnpj = value;
     },
 
     // Formatar Celular
     formatCelular(event) {
       let value = event.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
-
+      
       // Limita a 11 dígitos
       if (value.length > 11) {
         value = value.substring(0, 11);
       }
-
+      
       // Aplica a formatação
       if (value.length <= 2) {
         // Mantém o valor original
@@ -367,19 +338,19 @@ export default {
       } else {
         value = value.replace(/(\d{2})(\d{5})(\d+)/, '($1) $2-$3');
       }
-
+      
       this.formData.celular = value;
     },
 
     // Formatar Telefone Fixo
     formatTelefoneFixo(event) {
       let value = event.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
-
+      
       // Limita a 10 dígitos
       if (value.length > 10) {
         value = value.substring(0, 10);
       }
-
+      
       // Aplica a formatação
       if (value.length <= 2) {
         // Mantém o valor original
@@ -388,47 +359,47 @@ export default {
       } else {
         value = value.replace(/(\d{2})(\d{4})(\d+)/, '($1) $2-$3');
       }
-
+      
       this.formData.telefoneFixo = value;
     },
 
     // Valida se o CNPJ tem formato correto
     validarCNPJ(cnpj) {
       cnpj = cnpj.replace(/[^\d]+/g, '');
-
+      
       if (cnpj.length !== 14) return false;
-
+      
       // Elimina CNPJs inválidos conhecidos
       if (/^(\d)\1{13}$/.test(cnpj)) return false;
-
+      
       // Valida DVs
       let tamanho = cnpj.length - 2;
       let numeros = cnpj.substring(0, tamanho);
       let digitos = cnpj.substring(tamanho);
       let soma = 0;
       let pos = tamanho - 7;
-
+      
       for (let i = tamanho; i >= 1; i--) {
         soma += numeros.charAt(tamanho - i) * pos--;
         if (pos < 2) pos = 9;
       }
-
+      
       let resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
       if (resultado != digitos.charAt(0)) return false;
-
+      
       tamanho = tamanho + 1;
       numeros = cnpj.substring(0, tamanho);
       soma = 0;
       pos = tamanho - 7;
-
+      
       for (let i = tamanho; i >= 1; i--) {
         soma += numeros.charAt(tamanho - i) * pos--;
         if (pos < 2) pos = 9;
       }
-
+      
       resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
       if (resultado != digitos.charAt(1)) return false;
-
+      
       return true;
     },
 
@@ -436,46 +407,44 @@ export default {
       if (!this.formData.cnpj || this.formData.cnpj.length !== 18) {
         return;
       }
-
+      
       // Remove formatação para validação e consulta
       const cnpjLimpo = this.formData.cnpj.replace(/[^\d]+/g, '');
-
+      
       // Valida CNPJ
       if (!this.validarCNPJ(cnpjLimpo)) {
-        this.cnpjError = 'CNPJ inválido. Verifique os números digitados.';
+        this.cnpjError = this.t('partner.form.messages.cnpjError');
         this.formData.endereco = '';
         this.formData.nomeRazaoSocial = '';
         return;
       }
-
+      
       this.cnpjError = '';
       this.isLoadingCNPJ = true;
-
+      
       try {
         // Primeira tentativa: API BrasilAPI
         let response = await fetch(`https://brasilapi.com.br/api/cnpj/v1/${cnpjLimpo}`);
-
         if (!response.ok) {
           // Segunda tentativa: API ReceitaWS (backup)
           response = await fetch(`https://www.receitaws.com.br/v1/cnpj/${cnpjLimpo}`);
         }
-
+        
         if (response.ok) {
           const data = await response.json();
-
+          
           // Verifica se a empresa está ativa
           if (data.status && data.status !== 'OK') {
-            this.cnpjError = 'CNPJ consultado com sucesso, mas empresa pode estar inativa.';
+            this.cnpjError = this.t('partner.form.messages.cnpjInactive');
           }
-
+          
           // Preenche os dados automaticamente
           if (data.company_name || data.nome || data.razao_social) {
             this.formData.nomeRazaoSocial = data.company_name || data.nome || data.razao_social;
           }
-
+          
           // Monta o endereço completo
           let endereco = '';
-
           // Para BrasilAPI
           if (data.street || data.logradouro) {
             endereco += (data.street || data.logradouro);
@@ -502,9 +471,9 @@ export default {
               endereco += `, CEP: ${data.zip_code || data.cep}`;
             }
           }
-
+          
           this.formData.endereco = endereco;
-
+          
           // Feedback visual de sucesso
           this.$nextTick(() => {
             const enderecoInput = document.getElementById('endereco');
@@ -517,24 +486,20 @@ export default {
               }, 2000);
             }
           });
-
         } else {
           throw new Error('Erro na consulta');
         }
-
       } catch (error) {
         console.error('Erro ao buscar CNPJ:', error);
-
         // Terceira tentativa: API alternativa
         try {
           const response = await fetch(`https://publica.cnpj.ws/cnpj/${cnpjLimpo}`);
           if (response.ok) {
             const data = await response.json();
-
             if (data.razao_social) {
               this.formData.nomeRazaoSocial = data.razao_social;
             }
-
+            
             let endereco = '';
             if (data.estabelecimento) {
               const est = data.estabelecimento;
@@ -553,14 +518,13 @@ export default {
                 if (est.cep) endereco += `, CEP: ${est.cep}`;
               }
             }
-
             this.formData.endereco = endereco;
           } else {
-            this.cnpjError = 'Não foi possível consultar o CNPJ. Verifique sua conexão ou tente novamente.';
+            this.cnpjError = this.t('partner.form.messages.cnpjNotFound');
           }
         } catch (secondError) {
           console.error('Erro na segunda tentativa:', secondError);
-          this.cnpjError = 'Serviço de consulta CNPJ temporariamente indisponível. Preencha o endereço manualmente.';
+          this.cnpjError = this.t('partner.form.messages.cnpjServiceUnavailable');
         }
       } finally {
         this.isLoadingCNPJ = false;
@@ -568,32 +532,32 @@ export default {
     },
 
     async submitForm() {
-  if (!this.formData.celular && !this.formData.telefoneFixo) {
-    alert('Por favor, preencha pelo menos um telefone de contato (celular ou fixo).');
-    return;
-  }
-
-  this.isSubmitting = true;
-  this.showSuccessMessage = false;
-  this.showErrorMessage = false;
-
-  try {
-    // Usar Formspree
-    const response = await fetch('https://formspree.io/f/xzzrnbbo', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: this.formData.nomeRazaoSocial,
-        email: this.formData.email,
-        telefone: this.formData.celular || this.formData.telefoneFixo,
-        empresa: `${this.formData.ramoAtuacao} - CNPJ: ${this.formData.cnpj}`,
-        uf: this.formData.uf,
-        endereco: this.formData.endereco,
-        ramo_atuacao: this.formData.ramoAtuacao,
-        cnpj: this.formData.cnpj,
-        message: `🤝 SOLICITAÇÃO DE PARCERIA - UniHospitalar
+      if (!this.formData.celular && !this.formData.telefoneFixo) {
+        alert(this.t('partner.form.messages.phoneRequired'));
+        return;
+      }
+      
+      this.isSubmitting = true;
+      this.showSuccessMessage = false;
+      this.showErrorMessage = false;
+      
+      try {
+        // Usar Formspree
+        const response = await fetch('https://formspree.io/f/xzzrnbbo', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: this.formData.nomeRazaoSocial,
+            email: this.formData.email,
+            telefone: this.formData.celular || this.formData.telefoneFixo,
+            empresa: `${this.formData.ramoAtuacao} - CNPJ: ${this.formData.cnpj}`,
+            uf: this.formData.uf,
+            endereco: this.formData.endereco,
+            ramo_atuacao: this.formData.ramoAtuacao,
+            cnpj: this.formData.cnpj,
+            message: `🤝 SOLICITAÇÃO DE PARCERIA - UniHospitalar
 
 📋 DADOS DA EMPRESA:
 • Nome/Razão Social: ${this.formData.nomeRazaoSocial}
@@ -607,25 +571,24 @@ export default {
 
 📅 Data: ${new Date().toLocaleString('pt-BR')}
 🌐 Origem: Formulário "Seja Nosso Parceiro" - Site UniHospitalar
-
 ✅ AÇÃO REQUERIDA: Análise de Parceria (Responder em até 48h)`,
-        _subject: `🤝 Nova Solicitação de Parceria - ${this.formData.nomeRazaoSocial}`
-      }),
-    });
-
-    if (response.ok) {
-      this.showSuccessMessage = true;
-      this.resetForm();
-    } else {
-      this.showErrorMessage = true;
-    }
-  } catch (error) {
-    console.error('Erro ao enviar formulário:', error);
-    this.showErrorMessage = true;
-  } finally {
-    this.isSubmitting = false;
-  }
-},
+            _subject: `🤝 Nova Solicitação de Parceria - ${this.formData.nomeRazaoSocial}`
+          }),
+        });
+        
+        if (response.ok) {
+          this.showSuccessMessage = true;
+          this.resetForm();
+        } else {
+          this.showErrorMessage = true;
+        }
+      } catch (error) {
+        console.error('Erro ao enviar formulário:', error);
+        this.showErrorMessage = true;
+      } finally {
+        this.isSubmitting = false;
+      }
+    },
 
     resetForm() {
       this.formData = {

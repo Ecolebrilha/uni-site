@@ -216,38 +216,50 @@
 </template>
 
 <script>
-import { useTranslation } from '@/composables/useTranslation.js';
-import { useDifferentialsTranslation } from '@/composables/useDifferentialsTranslation.js';
+import { useHomeTranslation } from '@/composables/useHomeTranslation.js';
 import { useAboutTranslation } from '@/composables/useAboutTranslation.js';
+import { useDifferentialsTranslation } from '@/composables/useDifferentialsTranslation.js';
+import { useServicesTranslation } from '@/composables/useServicesTranslation.js';
 import { useProductsTranslation } from '@/composables/useProductsTranslation.js';
 import { useComplianceTranslation } from '@/composables/useComplianceTranslation.js';
 import { useLGPDTranslation } from '@/composables/useLGPDTranslation.js';
 import { usePrivacyPolicyTranslation } from '@/composables/usePrivacyPolicyTranslation.js';
 import { useTermsTranslation } from '@/composables/useTermsTranslation.js';
+import { useContactTranslation } from '@/composables/useContactTranslation.js';
+import { useOurPartnerTranslation } from '@/composables/useOurPartnerTranslation.js';
+import { usePartnersTranslation } from '@/composables/usePartnersTranslation.js';
 
 export default {
   name: 'HomeHeader',
   setup() {
-    const { t, currentLanguage, setLanguage } = useTranslation();
-    const { setLanguage: setDifferentialsLanguage } = useDifferentialsTranslation();
+    const { t, currentLanguage, setLanguage } = useServicesTranslation();
+    const { setLanguage: setHomeLanguage } = useHomeTranslation();
     const { setLanguage: setAboutLanguage } = useAboutTranslation();
+    const { setLanguage: setDifferentialsLanguage } = useDifferentialsTranslation();
     const { setLanguage: setProductsLanguage } = useProductsTranslation();
     const { setLanguage: setComplianceLanguage } = useComplianceTranslation();
     const { setLanguage: setLGPDLanguage } = useLGPDTranslation();
     const { setLanguage: setPrivacyPolicyLanguage } = usePrivacyPolicyTranslation();
     const { setLanguage: setTermsLanguage } = useTermsTranslation();
+    const { setLanguage: setContactLanguage } = useContactTranslation();
+    const { setLanguage: setOurPartnerLanguage } = useOurPartnerTranslation();
+    const { setLanguage: setPartnersLanguage } = usePartnersTranslation();
     
     return {
       t,
       currentLanguage,
-      setLanguage,
-      setDifferentialsLanguage,
+      setHomeLanguage,
       setAboutLanguage,
+      setDifferentialsLanguage,
+      setLanguage,
       setProductsLanguage,
       setComplianceLanguage,
       setLGPDLanguage,
       setPrivacyPolicyLanguage,
-      setTermsLanguage
+      setTermsLanguage,
+      setContactLanguage,
+      setOurPartnerLanguage,
+      setPartnersLanguage,
     };
   },
   data() {
@@ -275,14 +287,18 @@ export default {
       this.openDropdown = this.openDropdown === dropdown ? null : dropdown;
     },
     changeLanguage(lang) {
-      this.setLanguage(lang);
-      this.setDifferentialsLanguage(lang);
+      this.setHomeLanguage(lang);
       this.setAboutLanguage(lang);
+      this.setDifferentialsLanguage(lang);
+      this.setLanguage(lang);
       this.setProductsLanguage(lang);
       this.setComplianceLanguage(lang);
       this.setLGPDLanguage(lang);
       this.setPrivacyPolicyLanguage(lang);
       this.setTermsLanguage(lang);
+      this.setContactLanguage(lang);
+      this.setOurPartnerLanguage(lang);
+      this.setPartnersLanguage(lang);
     },
     handleScroll() {
       this.isScrolled = window.scrollY > 0;
@@ -301,7 +317,6 @@ export default {
   }
 };
 </script>
-
 
 <style>
 header {

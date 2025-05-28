@@ -1,17 +1,16 @@
 <template>
   <div class="home">
     <HomeHeader />
-
     <!-- Hero Section com Efeito Parallax -->
     <section class="hero-section">
       <div class="parallax-container">
         <div class="overlay"></div>
         <div class="hero-content">
           <img src="@/assets/logo-uni.png" alt="Logo Uni Hospitalar" class="logo-image">
-          <h2 class="banner-h2">Respeito às relações humanas</h2>
-          <p class="banner-p">O nosso foco está na distribuição <br> de medicamentos hospitalares, <br> oncológicos e excepcionais.</p>
+          <h2 class="banner-h2">{{ t('home.hero.title') }}</h2>
+          <p class="banner-p" v-html="t('home.hero.subtitle')"></p>
           <div class="scroll-indicator" @click="scrollToContent">
-            <span>Role para baixo</span>
+            <span>{{ t('home.hero.scrollIndicator') }}</span>
             <i class="fas fa-chevron-down"></i>
           </div>
         </div>
@@ -22,7 +21,7 @@
     <section class="stats-section" ref="statsSection">
       <div class="container">
         <div class="section-header">
-          <h2>Nossa Trajetória em Números</h2>
+          <h2>{{ t('home.stats.title') }}</h2>
           <div class="accent-line"></div>
         </div>
         <div class="stats-container">
@@ -31,9 +30,9 @@
               <i class="fas fa-calendar-alt"></i>
             </div>
             <div class="stat-number">
-              <span ref="yearsCounter" data-target="19">0</span>
+              <span ref="yearsCounter" :data-target="yearsOfExperience">0</span>
             </div>
-            <div class="stat-label">Anos de Experiência</div>
+            <div class="stat-label">{{ t('home.stats.years') }}</div>
           </div>
           <div class="stat-item">
             <div class="stat-icon">
@@ -42,7 +41,7 @@
             <div class="stat-number">
               <span ref="unitsCounter" data-target="3">0</span>
             </div>
-            <div class="stat-label">Unidades Estratégicas</div>
+            <div class="stat-label">{{ t('home.stats.units') }}</div>
           </div>
           <div class="stat-item">
             <div class="stat-icon">
@@ -51,7 +50,7 @@
             <div class="stat-number">
               <span ref="clientsCounter" data-target="5000">0</span>+
             </div>
-            <div class="stat-label">Clientes Satisfeitos</div>
+            <div class="stat-label">{{ t('home.stats.clients') }}</div>
           </div>
           <div class="stat-item">
             <div class="stat-icon">
@@ -60,7 +59,7 @@
             <div class="stat-number">
               <span ref="hoursCounter" data-target="48">0</span>h
             </div>
-            <div class="stat-label">Entregas Rápidas</div>
+            <div class="stat-label">{{ t('home.stats.delivery') }}</div>
           </div>
         </div>
       </div>
@@ -71,8 +70,8 @@
       <div class="container">
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-header">
-            <h2 class="section-title">Nossos Serviços</h2>
-            <div class="section-subtitle">Conheça o que oferecemos para você</div>
+            <h2 class="section-title">{{ t('home.services.title') }}</h2>
+            <div class="section-subtitle">{{ t('home.services.subtitle') }}</div>
             <div class="accent-line"></div>
           </div>
         </ScrollReveal>
@@ -89,10 +88,10 @@
                 <div class="service-icon">
                   <i class="fas fa-warehouse"></i>
                 </div>
-                <h3>ESTOQUE</h3>
-                <p>Nossa área de armazenamento segue rigorosamente as normas exigidas pela Anvisa.</p>
+                <h3>{{ t('home.services.storage.title') }}</h3>
+                <p>{{ t('home.services.storage.description') }}</p>
                 <router-link to="/Diferenciais" class="service-link">
-                  <span>Saiba mais</span>
+                  <span>{{ t('home.services.storage.link') }}</span>
                   <i class="fas fa-long-arrow-alt-right"></i>
                 </router-link>
               </div>
@@ -109,10 +108,10 @@
                 <div class="service-icon">
                   <i class="fas fa-award"></i>
                 </div>
-                <h3>DIFERENCIAIS</h3>
-                <p>Profissionais preparados e alinhados com a cultura da empresa, somado à linha de produtos e logística.</p>
+                <h3>{{ t('home.services.differentials.title') }}</h3>
+                <p>{{ t('home.services.differentials.description') }}</p>
                 <router-link to="/Diferenciais" class="service-link">
-                  <span>Saiba mais</span>
+                  <span>{{ t('home.services.differentials.link') }}</span>
                   <i class="fas fa-long-arrow-alt-right"></i>
                 </router-link>
               </div>
@@ -129,10 +128,10 @@
                 <div class="service-icon">
                   <i class="fas fa-truck-loading"></i>
                 </div>
-                <h3>LOGÍSTICA</h3>
-                <p>Entregas para o Norte e Nordeste em até 48 horas com toda segurança e garantia.</p>
+                <h3>{{ t('home.services.logistics.title') }}</h3>
+                <p>{{ t('home.services.logistics.description') }}</p>
                 <router-link to="/Diferenciais" class="service-link">
-                  <span>Saiba mais</span>
+                  <span>{{ t('home.services.logistics.link') }}</span>
                   <i class="fas fa-long-arrow-alt-right"></i>
                 </router-link>
               </div>
@@ -152,10 +151,10 @@
                 <div class="service-icon">
                   <i class="fas fa-building"></i>
                 </div>
-                <h3>UNIDADE DE NEGÓCIOS</h3>
-                <p>Estamos abrindo uma nova unidade em Fortaleza, na busca pelo melhor atendimento e prestação de serviço.</p>
+                <h3>{{ t('home.services.businessUnit.title') }}</h3>
+                <p>{{ t('home.services.businessUnit.description') }}</p>
                 <router-link to="/Diferenciais" class="service-link">
-                  <span>Saiba mais</span>
+                  <span>{{ t('home.services.businessUnit.link') }}</span>
                   <i class="fas fa-long-arrow-alt-right"></i>
                 </router-link>
               </div>
@@ -172,10 +171,10 @@
                 <div class="service-icon">
                   <i class="fas fa-users"></i>
                 </div>
-                <h3>PRINCIPAIS CLIENTES</h3>
-                <p>Buscando melhor atender as demandas do mercado farmacêutico, atendemos a indústrias e hospitais, públicos e privados e clínicas particulares.</p>
+                <h3>{{ t('home.services.mainClients.title') }}</h3>
+                <p>{{ t('home.services.mainClients.description') }}</p>
                 <router-link to="/Parceiros" class="service-link">
-                  <span>Saiba mais</span>
+                  <span>{{ t('home.services.mainClients.link') }}</span>
                   <i class="fas fa-long-arrow-alt-right"></i>
                 </router-link>
               </div>
@@ -192,10 +191,10 @@
                 <div class="service-icon">
                   <i class="fas fa-pills"></i>
                 </div>
-                <h3>PRINCIPAIS PRODUTOS</h3>
-                <p>Foco na distribuição e padronização de medicamentos hospitalares, oncológicos e excepcionais, trabalhando em nichos específicos.</p>
+                <h3>{{ t('home.services.mainProducts.title') }}</h3>
+                <p>{{ t('home.services.mainProducts.description') }}</p>
                 <router-link to="/Produtos" class="service-link">
-                  <span>Saiba mais</span>
+                  <span>{{ t('home.services.mainProducts.link') }}</span>
                   <i class="fas fa-long-arrow-alt-right"></i>
                 </router-link>
               </div>
@@ -210,77 +209,48 @@
       <div class="container">
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-header">
-            <h2 class="section-title">O que dizem sobre nós</h2>
-            <div class="section-subtitle">Depoimentos de nossos parceiros e clientes</div>
+            <h2 class="section-title">{{ t('home.testimonials.title') }}</h2>
+            <div class="section-subtitle">{{ t('home.testimonials.subtitle') }}</div>
             <div class="accent-line"></div>
           </div>
         </ScrollReveal>
-
         <div class="testimonials-slider">
           <div class="testimonials-slides">
-            <div class="testimonial-slide" :class="{ active: currentTestimonial === 0 }">
+            <div 
+              v-for="(testimonial, index) in testimonials" 
+              :key="index"
+              class="testimonial-slide" 
+              :class="{ active: currentTestimonial === index }"
+            >
               <div class="testimonial-content">
                 <div class="quote-icon">
                   <i class="fas fa-quote-left"></i>
                 </div>
-                <p class="testimonial-text">A Uni Hospitalar tem sido uma parceira excepcional e confiável. Sua eficiência logística impecável e compromisso inabalável com a qualidade fazem toda a diferença para nossa operação diária.</p>
+                <p class="testimonial-text">{{ testimonial.text }}</p>
                 <div class="testimonial-author">
                   <div class="author-avatar">
-                    <i class="fas fa-user-md"></i>
+                    <i :class="getAuthorIcon(index)"></i>
                   </div>
                   <div class="author-info">
-                    <div class="author-name">Dr. Carlos Silva</div>
-                    <div class="author-position">Diretor Médico - Hospital Santa Clara</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="testimonial-slide" :class="{ active: currentTestimonial === 1 }">
-              <div class="testimonial-content">
-                <div class="quote-icon">
-                  <i class="fas fa-quote-left"></i>
-                </div>
-                <p class="testimonial-text">Trabalhamos com a Uni Hospitalar há mais de 5 anos e sempre fomos atendidos com excelência. A pontualidade nas entregas e a qualidade dos produtos são impecáveis.</p>
-                <div class="testimonial-author">
-                  <div class="author-avatar">
-                    <i class="fas fa-user-nurse"></i>
-                  </div>
-                  <div class="author-info">
-                    <div class="author-name">Dra. Ana Martins</div>
-                    <div class="author-position">Gerente de Suprimentos - Clínica São Lucas</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="testimonial-slide" :class="{ active: currentTestimonial === 2 }">
-              <div class="testimonial-content">
-                <div class="quote-icon">
-                  <i class="fas fa-quote-left"></i>
-                </div>
-                <p class="testimonial-text">A equipe da Uni Hospitalar demonstra um profundo conhecimento do setor farmacêutico e sempre nos oferece as melhores soluções para nossas necessidades.</p>
-                <div class="testimonial-author">
-                  <div class="author-avatar">
-                    <i class="fas fa-user-tie"></i>
-                  </div>
-                  <div class="author-info">
-                    <div class="author-name">Paulo Mendes</div>
-                    <div class="author-position">Coordenador de Compras - Hospital Regional</div>
+                    <div class="author-name">{{ testimonial.author }}</div>
+                    <div class="author-position">{{ testimonial.position }}</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
           <div class="testimonial-controls">
             <button class="control-prev" @click="prevTestimonial">
               <i class="fas fa-chevron-left"></i>
             </button>
             <div class="control-indicators">
-              <span class="indicator" :class="{ active: currentTestimonial === 0 }" @click="setTestimonial(0)"></span>
-              <span class="indicator" :class="{ active: currentTestimonial === 1 }" @click="setTestimonial(1)"></span>
-              <span class="indicator" :class="{ active: currentTestimonial === 2 }" @click="setTestimonial(2)"></span>
+              <span 
+                v-for="(testimonial, index) in testimonials" 
+                :key="index"
+                class="indicator" 
+                :class="{ active: currentTestimonial === index }" 
+                @click="setTestimonial(index)"
+              ></span>
             </div>
             <button class="control-next" @click="nextTestimonial">
               <i class="fas fa-chevron-right"></i>
@@ -294,11 +264,10 @@
     <section class="partners-section">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">Nossos Parceiros</h2>
-          <div class="section-subtitle">Empresas que confiam em nosso trabalho</div>
+          <h2 class="section-title">{{ t('home.partners.title') }}</h2>
+          <div class="section-subtitle">{{ t('home.partners.subtitle') }}</div>
           <div class="accent-line"></div>
         </div>
-
         <div class="partners-carousel">
           <div class="partners-track">
             <div v-for="n in 10" :key="n" class="partner-slide">
@@ -306,11 +275,10 @@
             </div>
           </div>
         </div>
-
         <div class="partners-action">
           <router-link to="/Parceiros">
             <button class="secondary-button">
-              <span>VER TODOS OS PARCEIROS</span>
+              <span>{{ t('home.partners.button') }}</span>
               <i class="fas fa-arrow-right"></i>
             </button>
           </router-link>
@@ -322,11 +290,11 @@
     <section class="cta-section">
       <div class="container">
         <div class="cta-container">
-          <h2>Seja um parceiro da Uni Hospitalar</h2>
-          <p>Junte-se a nós e faça parte de uma empresa comprometida com a excelência e a qualidade em distribuição de medicamentos.</p>
+          <h2>{{ t('home.cta.title') }}</h2>
+          <p>{{ t('home.cta.description') }}</p>
           <router-link to="/SejaParceiro">
             <button class="cta-button">
-              <span>QUERO SER PARCEIRO</span>
+              <span>{{ t('home.cta.button') }}</span>
               <i class="fas fa-handshake"></i>
             </button>
           </router-link>
@@ -339,18 +307,18 @@
       <div class="container">
         <div class="quick-contact-container">
           <div class="contact-info">
-            <h2>Entre em contato conosco</h2>
-            <p>Estamos prontos para atender suas necessidades e responder a todas as suas dúvidas.</p>
+            <h2>{{ t('home.contact.title') }}</h2>
+            <p>{{ t('home.contact.subtitle') }}</p>
             
             <!-- Botões para selecionar filial -->
             <div class="branch-selector">
-              <button 
-                v-for="(branch, index) in branches" 
-                :key="index" 
-                @click="setActiveBranch(index)" 
+              <button
+                v-for="(branch, index) in branches"
+                :key="index"
+                @click="setActiveBranch(index)"
                 :class="['branch-button', { active: activeBranch === index }]"
               >
-                {{ branch.name }}
+                {{ getBranchName(index) }}
               </button>
             </div>
             
@@ -373,21 +341,21 @@
                 </div>
                 <div class="contact-method">
                   <i class="fas fa-clock"></i>
-                  <span>{{ branches[activeBranch].hours }}</span>
+                  <span>{{ t('home.contact.hours') }}</span>
                 </div>
               </div>
             </div>
           </div>
           
-          <!-- Mapa da filial selecionada -->
-          <div class="branch-map">
-            <iframe 
-              :src="branches[activeBranch].mapUrl" 
-              width="100%" 
-              height="100%" 
-              style="border:0;" 
-              allowfullscreen="" 
-              loading="lazy" 
+                    <!-- Mapa da filial selecionada -->
+                    <div class="branch-map">
+            <iframe
+              :src="branches[activeBranch].mapUrl"
+              width="100%"
+              height="100%"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
               referrerpolicy="no-referrer-when-downgrade">
             </iframe>
           </div>
@@ -404,12 +372,12 @@
           <i class="fas fa-cookie-bite"></i>
         </div>
         <div class="cookie-text">
-          <h3>Utilizamos cookies</h3>
-          <p>Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa <router-link to="/PoliticaPrivacidade">Política de Privacidade</router-link>.</p>
+          <h3>{{ t('home.cookies.banner.title') }}</h3>
+          <p>{{ t('home.cookies.banner.text') }} <router-link to="/PoliticaPrivacidade">{{ t('home.cookies.banner.privacyPolicy') }}</router-link>.</p>
         </div>
         <div class="cookie-buttons">
-          <button class="cookie-accept" @click="acceptCookies">Aceitar</button>
-          <button class="cookie-settings" @click="showCookieSettings = true">Configurações</button>
+          <button class="cookie-accept" @click="acceptCookies">{{ t('home.cookies.banner.accept') }}</button>
+          <button class="cookie-settings" @click="showCookieSettings = true">{{ t('home.cookies.banner.settings') }}</button>
         </div>
       </div>
     </div>
@@ -418,7 +386,7 @@
     <div class="cookie-settings-modal" v-if="showCookieSettings">
       <div class="cookie-settings-content">
         <div class="cookie-settings-header">
-          <h3>Configurações de Cookies</h3>
+          <h3>{{ t('home.cookies.settings.title') }}</h3>
           <button class="close-button" @click="showCookieSettings = false">
             <i class="fas fa-times"></i>
           </button>
@@ -426,30 +394,28 @@
         <div class="cookie-settings-body">
           <div class="cookie-option">
             <div class="cookie-option-info">
-              <h4>Cookies Essenciais</h4>
-              <p>Necessários para o funcionamento básico do site. Não podem ser desativados.</p>
+              <h4>{{ t('home.cookies.settings.essential.title') }}</h4>
+              <p>{{ t('home.cookies.settings.essential.description') }}</p>
             </div>
             <div class="cookie-switch disabled">
               <input type="checkbox" checked disabled>
               <span class="slider"></span>
             </div>
           </div>
-
           <div class="cookie-option">
             <div class="cookie-option-info">
-              <h4>Cookies de Análise</h4>
-              <p>Nos ajudam a entender como os visitantes interagem com o site.</p>
+              <h4>{{ t('home.cookies.settings.analytics.title') }}</h4>
+              <p>{{ t('home.cookies.settings.analytics.description') }}</p>
             </div>
             <div class="cookie-switch">
               <input type="checkbox" v-model="cookiePreferences.analytics" id="analytics-cookie">
               <label for="analytics-cookie" class="slider"></label>
             </div>
           </div>
-
           <div class="cookie-option">
             <div class="cookie-option-info">
-              <h4>Cookies de Marketing</h4>
-              <p>Utilizados para exibir anúncios relevantes com base em seus interesses.</p>
+              <h4>{{ t('home.cookies.settings.marketing.title') }}</h4>
+              <p>{{ t('home.cookies.settings.marketing.description') }}</p>
             </div>
             <div class="cookie-switch">
               <input type="checkbox" v-model="cookiePreferences.marketing" id="marketing-cookie">
@@ -458,7 +424,7 @@
           </div>
         </div>
         <div class="cookie-settings-footer">
-          <button class="cookie-save" @click="saveCookiePreferences">Salvar Preferências</button>
+          <button class="cookie-save" @click="saveCookiePreferences">{{ t('home.cookies.settings.save') }}</button>
         </div>
       </div>
     </div>
@@ -468,6 +434,7 @@
 <script>
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
+import { useHomeTranslation } from '@/composables/useHomeTranslation.js';
 import { mask } from 'v-mask';
 
 export default {
@@ -479,11 +446,21 @@ export default {
   directives: {
     mask
   },
+  setup() {
+    const { t, currentLanguage } = useHomeTranslation()
+    
+    return {
+      t,
+      currentLanguage
+    }
+  },
   data() {
     return {
       currentTestimonial: 0,
       testimonialInterval: null,
       activeBranch: 0,
+      companyFoundingYear: 2005, // Ano de fundação da empresa
+      companyAnniversary: { month: 7, day: 11 }, // 11 de julho
       branches: [
         {
           name: 'Matriz Recife - Uni Hospitalar',
@@ -518,6 +495,43 @@ export default {
         marketing: false
       }
     };
+  },
+  computed: {
+    yearsOfExperience() {
+      const today = new Date();
+      const currentYear = today.getFullYear();
+      const currentMonth = today.getMonth() + 1; // getMonth() retorna 0-11
+      const currentDay = today.getDate();
+      
+      let years = currentYear - this.companyFoundingYear;
+      
+      // Se ainda não passou do aniversário deste ano, subtrai 1
+      if (currentMonth < this.companyAnniversary.month ||
+          (currentMonth === this.companyAnniversary.month && currentDay < this.companyAnniversary.day)) {
+        years--;
+      }
+      
+      return years;
+    },
+    testimonials() {
+      return [
+        {
+          text: this.t('home.testimonials.testimonial1.text'),
+          author: this.t('home.testimonials.testimonial1.author'),
+          position: this.t('home.testimonials.testimonial1.position')
+        },
+        {
+          text: this.t('home.testimonials.testimonial2.text'),
+          author: this.t('home.testimonials.testimonial2.author'),
+          position: this.t('home.testimonials.testimonial2.position')
+        },
+        {
+          text: this.t('home.testimonials.testimonial3.text'),
+          author: this.t('home.testimonials.testimonial3.author'),
+          position: this.t('home.testimonials.testimonial3.position')
+        }
+      ]
+    }
   },
   mounted() {
     this.startTestimonialSlider();
@@ -554,7 +568,7 @@ export default {
       const baseDuration = 6000;
       
       const counters = [
-        { ref: this.$refs.yearsCounter, target: 19 },
+        { ref: this.$refs.yearsCounter, target: this.yearsOfExperience }, // Usando o computed property
         { ref: this.$refs.unitsCounter, target: 3 },
         { ref: this.$refs.clientsCounter, target: 5000 },
         { ref: this.$refs.hoursCounter, target: 48 }
@@ -575,7 +589,7 @@ export default {
         counters.forEach(counter => {
           const easedProgress = 1 - Math.pow(1 - progress, 3);
           const value = Math.min(
-            Math.floor(counter.target * easedProgress), 
+            Math.floor(counter.target * easedProgress),
             counter.target
           );
           
@@ -604,16 +618,24 @@ export default {
     },
     prevTestimonial() {
       clearInterval(this.testimonialInterval);
-      this.currentTestimonial = (this.currentTestimonial - 1 + 3) % 3;
+      this.currentTestimonial = (this.currentTestimonial - 1 + this.testimonials.length) % this.testimonials.length;
       this.startTestimonialSlider();
     },
     nextTestimonial() {
-      this.currentTestimonial = (this.currentTestimonial + 1) % 3;
+      this.currentTestimonial = (this.currentTestimonial + 1) % this.testimonials.length;
     },
     setTestimonial(index) {
       clearInterval(this.testimonialInterval);
       this.currentTestimonial = index;
       this.startTestimonialSlider();
+    },
+    getAuthorIcon(index) {
+      const icons = ['fas fa-user-md', 'fas fa-user-nurse', 'fas fa-user-tie'];
+      return icons[index] || 'fas fa-user';
+    },
+    getBranchName(index) {
+      const branchKeys = ['home.contact.branches.recife', 'home.contact.branches.fortaleza', 'home.contact.branches.saopaulo'];
+      return this.t(branchKeys[index]) || this.branches[index].name;
     },
     handleImageError(e) {
       e.target.src = require('@/assets/logo-uni.png');

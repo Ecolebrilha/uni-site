@@ -213,7 +213,7 @@
 <script>
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
-import { useTranslation } from '@/composables/useTranslation.js';
+import { useServicesTranslation } from '@/composables/useServicesTranslation.js';
 
 export default {
   components: {
@@ -221,7 +221,7 @@ export default {
     HomeFooter
   },
   setup() {
-    const { t, currentLanguage } = useTranslation()
+    const { t, currentLanguage } = useServicesTranslation()
     
     return {
       t,

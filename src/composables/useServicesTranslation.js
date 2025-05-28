@@ -209,7 +209,7 @@ const translations = reactive({
   }
 })
 
-export function useTranslation() {
+export function useServicesTranslation() {
   const setLanguage = (lang) => {
     currentLanguage.value = lang
     localStorage.setItem('language', lang)
