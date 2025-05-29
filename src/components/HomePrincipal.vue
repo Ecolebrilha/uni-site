@@ -214,49 +214,63 @@
             <div class="accent-line"></div>
           </div>
         </ScrollReveal>
-        <div class="testimonials-slider">
-          <div class="testimonials-slides">
-            <div 
-              v-for="(testimonial, index) in testimonials" 
-              :key="index"
-              class="testimonial-slide" 
-              :class="{ active: currentTestimonial === index }"
-            >
-              <div class="testimonial-content">
-                <div class="quote-icon">
-                  <i class="fas fa-quote-left"></i>
-                </div>
-                <p class="testimonial-text">{{ testimonial.text }}</p>
-                <div class="testimonial-author">
-                  <div class="author-avatar">
-                    <i :class="getAuthorIcon(index)"></i>
-                  </div>
-                  <div class="author-info">
-                    <div class="author-name">{{ testimonial.author }}</div>
-                    <div class="author-position">{{ testimonial.position }}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <!-- Nova estrutura dos testimonials com drag -->
+<div class="testimonials-slider">
+  <div 
+    class="testimonials-slides"
+    @touchstart="handleTouchStart"
+    @touchmove="handleTouchMove"
+    @touchend="handleTouchEnd"
+    @mousedown="handleMouseDown"
+    @mousemove="handleMouseMove"
+    @mouseup="handleMouseUp"
+    @mouseleave="handleMouseUp"
+    :style="{ transform: `translateX(${slideOffset}px)` }"
+  >
+    <div 
+      v-for="(testimonial, index) in testimonials" 
+      :key="index"
+      class="testimonial-slide" 
+      :class="{ active: currentTestimonial === index }"
+    >
+      <div class="testimonial-content">
+        <div class="quote-icon">
+          <i class="fas fa-quote-left"></i>
+        </div>
+        <p class="testimonial-text">{{ testimonial.text }}</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">
+            <i :class="getAuthorIcon(index)"></i>
           </div>
-          <div class="testimonial-controls">
-            <button class="control-prev" @click="prevTestimonial">
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <div class="control-indicators">
-              <span 
-                v-for="(testimonial, index) in testimonials" 
-                :key="index"
-                class="indicator" 
-                :class="{ active: currentTestimonial === index }" 
-                @click="setTestimonial(index)"
-              ></span>
-            </div>
-            <button class="control-next" @click="nextTestimonial">
-              <i class="fas fa-chevron-right"></i>
-            </button>
+          <div class="author-info">
+            <div class="author-name">{{ testimonial.author }}</div>
+            <div class="author-position">{{ testimonial.position }}</div>
           </div>
         </div>
+        
+        <!-- Controles movidos para dentro do testimonial-content -->
+        <div class="testimonial-controls">
+          <button class="control-prev" @click="prevTestimonial">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="control-indicators">
+            <span 
+              v-for="(testimonialItem, indicatorIndex) in testimonials" 
+              :key="indicatorIndex"
+              class="indicator" 
+              :class="{ active: currentTestimonial === indicatorIndex }" 
+              @click="setTestimonial(indicatorIndex)"
+            ></span>
+          </div>
+          <button class="control-next" @click="nextTestimonial">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
       </div>
     </section>
 
@@ -461,6 +475,11 @@ export default {
       activeBranch: 0,
       companyFoundingYear: 2005, // Ano de fundação da empresa
       companyAnniversary: { month: 7, day: 11 }, // 11 de julho
+      isDragging: false,
+    startX: 0,
+    currentX: 0,
+    slideOffset: 0,
+    dragThreshold: 50,
       branches: [
         {
           name: 'Matriz Recife - Uni Hospitalar',
@@ -687,7 +706,69 @@ export default {
       } else {
         console.log('Marketing cookies disabled');
       }
+    },
+    handleTouchStart(e) {
+  this.startDrag(e.touches[0].clientX);
+},
+
+handleTouchMove(e) {
+  if (this.isDragging) {
+    e.preventDefault();
+    this.updateDrag(e.touches[0].clientX);
+  }
+},
+
+handleTouchEnd() {
+  this.endDrag();
+},
+
+handleMouseDown(e) {
+  this.startDrag(e.clientX);
+},
+
+handleMouseMove(e) {
+  if (this.isDragging) {
+    e.preventDefault();
+    this.updateDrag(e.clientX);
+  }
+},
+
+handleMouseUp() {
+  this.endDrag();
+},
+
+startDrag(clientX) {
+  this.isDragging = true;
+  this.startX = clientX;
+  this.currentX = clientX;
+  clearInterval(this.testimonialInterval);
+},
+
+updateDrag(clientX) {
+  if (!this.isDragging) return;
+  
+  this.currentX = clientX;
+  const deltaX = this.currentX - this.startX;
+  this.slideOffset = deltaX;
+},
+
+endDrag() {
+  if (!this.isDragging) return;
+  
+  const deltaX = this.currentX - this.startX;
+  
+  if (Math.abs(deltaX) > this.dragThreshold) {
+    if (deltaX > 0) {
+      this.prevTestimonial();
+    } else {
+      this.nextTestimonial();
     }
+  }
+  
+  this.isDragging = false;
+  this.slideOffset = 0;
+  this.startTestimonialSlider();
+}
   }
 };
 </script>
@@ -1208,77 +1289,84 @@ section {
   color: #666;
 }
 
-.testimonial-controls {
+.testimonials-slides {
   position: relative;
+  min-height: 450px;
+  margin-bottom: 30px;
+  cursor: grab;
+  transition: transform 0.3s ease;
+}
+
+.testimonials-slides:active {
+  cursor: grabbing;
+}
+
+.testimonial-controls {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 20px;
-  margin-top: -130px;
   z-index: 10;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 15px 25px;
+  border-radius: 50px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
 }
 
 .control-prev, .control-next {
   background: white;
-  border: none;
-  font-size: 1.2rem;
+  border: 2px solid #AE2C2A;
+  font-size: 1rem;
   color: #AE2C2A;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  width: 40px;
-  height: 40px;
+  transition: all 0.3s ease;
+  width: 35px;
+  height: 35px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  animation: pulse 2s infinite alternate;
-}
-
-.control-prev {
-  left: 20px;
-}
-
-.control-next {
-  right: 20px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .control-prev:hover, .control-next:hover {
   color: white;
   background-color: #AE2C2A;
-  box-shadow: 0 8px 20px rgba(174, 44, 42, 0.3);
-  transform: translateY(-50%) scale(1.15);
-  animation: none;
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(174, 44, 42, 0.3);
 }
 
 .control-indicators {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   justify-content: center;
 }
 
 .indicator {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background-color: #ddd;
   cursor: pointer;
   transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
+  border: 2px solid transparent;
 }
 
 .indicator:hover {
   transform: scale(1.2);
+  background-color: #AE2C2A;
 }
 
 .indicator.active {
   background-color: #AE2C2A;
   transform: scale(1.2);
-  animation: glow 1.5s infinite alternate;
+  border-color: white;
+  box-shadow: 0 0 10px rgba(174, 44, 42, 0.5);
 }
 
 /* Seção de Parceiros */
@@ -2110,19 +2198,19 @@ input:checked + .slider:before {
   }
   
   .testimonial-content {
-    padding: 30px 50px 140px 50px;
+    padding: 30px 30px 80px 30px;
   }
   
   .testimonial-controls {
-    margin-top: -60px;
+    bottom: -15px;
+    padding: 12px 20px;
+    gap: 15px;
   }
   
-  .control-prev {
-    left: 10px;
-  }
-  
-  .control-next {
-    right: 10px;
+  .control-prev, .control-next {
+    width: 30px;
+    height: 30px;
+    font-size: 0.9rem;
   }
   
   .stats-section {
@@ -2181,25 +2269,45 @@ input:checked + .slider:before {
   }
   
   .testimonial-content {
-    padding: 25px 40px 230px 40px;
+    padding: 25px 20px 70px 20px;
   }
   
   .testimonial-controls {
-    margin-top: 40px;
+    bottom: -10px;
+    padding: 10px 15px;
+    gap: 12px;
   }
   
   .control-prev, .control-next {
-    width: 35px;
-    height: 35px;
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+  }
+  
+  .indicator {
+    width: 8px;
+    height: 8px;
+  }
+
+  .author-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .author-avatar i {
+    font-size: 1.2rem;
+  }
+
+  .author-name {
     font-size: 1rem;
   }
-  
-  .control-prev {
-    left: 5px;
+
+  .author-position {
+    font-size: 0.8rem;
   }
-  
-  .control-next {
-    right: 5px;
+
+  .testimonial-text {
+    font-size: 0.9rem;
   }
   
   .branch-selector {
@@ -2244,10 +2352,6 @@ input:checked + .slider:before {
   
   .service-card h3 {
     font-size: 1.3rem;
-  }
-  
-  .testimonial-text {
-    font-size: 1rem;
   }
   
   .cta-container h2 {
@@ -2299,9 +2403,22 @@ input:checked + .slider:before {
   .service-content {
     padding: 25px;
   }
-  
-  .testimonial-content {
-    padding: 20px 30px 200px 30px;
+
+  .author-avatar {
+    width: 25px;
+    height: 25px;
+  }
+
+  .author-avatar i {
+    font-size: 0.7rem;
+  }
+
+  .author-name {
+    font-size: 0.9rem;
+  }
+
+  .author-position {
+    font-size: 0.7rem;
   }
   
   .cookie-content {
