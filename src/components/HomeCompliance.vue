@@ -162,28 +162,49 @@
     </section>
     
     <!-- Seção de Ações Corretivas -->
-    <section class="corrective-section">
-      <div class="container">
-        <div class="corrective-container">
-          <ScrollReveal direction="left" :delay="200">
-            <div class="corrective-content">
-              <h3><i class="fas fa-exclamation-triangle"></i> {{ t('compliance.correctiveTitle') }}</h3>
-              <p>{{ t('compliance.correctiveText1') }}</p>
-              <p>{{ t('compliance.correctiveText2') }}</p>
-              <router-link to="/Contato" class="cta-button">
-                <i class="fas fa-phone"></i> {{ t('compliance.correctiveButton') }}
-              </router-link>
-            </div>
-          </ScrollReveal>
-          
-          <ScrollReveal direction="right" :delay="300">
-            <div class="corrective-image">
-  <img src="@/assets/acoes-corretivas.png" alt="Ações Corretivas" />
-</div>
-          </ScrollReveal>
-        </div>
+<section class="corrective-section">
+  <div class="container">
+    <ScrollReveal direction="bottom" :delay="100">
+      <div class="section-title">
+        <span class="accent-line"></span>
+        <h2>{{ t('compliance.correctiveTitle') }}</h2>
+        <span class="accent-line"></span>
       </div>
-    </section>
+    </ScrollReveal>
+    
+    <div class="corrective-container">
+      <ScrollReveal direction="left" :delay="200">
+        <div class="corrective-content">
+          <h3><i class="fas fa-exclamation-triangle"></i> {{ t('compliance.correctiveSectionTitle') }}</h3>
+          <p>{{ t('compliance.correctiveText') }}</p>
+          
+          <div class="corrective-links">
+            <router-link to="/SegurancaDados" class="corrective-link">
+              <i class="fas fa-lock"></i>
+              <span>{{ t('compliance.correctiveLinks.dataSecurity') }}</span>
+            </router-link>
+            
+            <router-link to="/PraticasAntissuborno" class="corrective-link">
+              <i class="fas fa-ban"></i>
+              <span>{{ t('compliance.correctiveLinks.antiBribery') }}</span>
+            </router-link>
+            
+            <router-link to="/NormasSetoriais" class="corrective-link">
+              <i class="fas fa-gavel"></i>
+              <span>{{ t('compliance.correctiveLinks.sectorCompliance') }}</span>
+            </router-link>
+          </div>
+        </div>
+      </ScrollReveal>
+      
+      <ScrollReveal direction="right" :delay="300">
+        <div class="corrective-image">
+          <img src="@/assets/acoes-corretivas.png" alt="Ações Corretivas" />
+        </div>
+      </ScrollReveal>
+    </div>
+  </div>
+</section>
     
     <!-- Seção de Documentos Legais -->
     <section class="documents-section">
@@ -666,7 +687,7 @@ section {
 
 /* Seção de Ações Corretivas */
 .corrective-section {
-  background-color: #f9f9f9;
+  background-color: #ffffff;
 }
 
 .corrective-container {
@@ -680,7 +701,7 @@ section {
 }
 
 .corrective-content h3 {
-  font-size: 2rem;
+  font-size: 1.6rem;
   color: #AE2C2A;
   margin-bottom: 20px;
   display: flex;
@@ -734,6 +755,40 @@ section {
 
 .corrective-image:hover img {
   transform: scale(1.05);
+}
+
+.corrective-links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.corrective-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  background: #f5f5f5;
+  border-radius: 10px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.corrective-link i {
+  color: #AE2C2A;
+  font-size: 1.2rem;
+}
+
+.corrective-link:hover {
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  color: white;
+  transform: translateX(10px);
+}
+
+.corrective-link:hover i {
+  color: white;
 }
 
 /* Seção de Documentos Legais */
@@ -1009,12 +1064,12 @@ section {
 }
 
 /* Efeito de destaque para links */
-.conduct-link, .policy-link, .document-button, .cta-button {
+.conduct-link, .corrective-link, .policy-link, .document-button, .cta-button {
   position: relative;
   overflow: hidden;
 }
 
-.conduct-link::after, .policy-link::after, .document-button::after, .cta-button::after {
+.conduct-link::after, .corrective-link::after, .policy-link::after, .document-button::after, .cta-button::after {
   content: '';
   position: absolute;
   top: 0;
@@ -1025,7 +1080,7 @@ section {
   transition: left 0.7s;
 }
 
-.conduct-link:hover::after, .policy-link:hover::after, .document-button:hover::after, .cta-button:hover::after {
+.conduct-link:hover::after, .corrective-link:hover::after, .policy-link:hover::after, .document-button:hover::after, .cta-button:hover::after {
   left: 100%;
 }
 

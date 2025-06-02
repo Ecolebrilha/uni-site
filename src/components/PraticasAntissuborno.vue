@@ -1,283 +1,1404 @@
 <template>
-    <div class="termos-legais">
-      <HomeHeader />
-  
-      <div class="banner-container">
-        <div class="banner-overlay">
-          <h1>Práticas Antissuborno</h1>
-        </div>
-        <img src="@/assets/header-praticas-antissuborno.jpg" alt="Imagem do Banner">
+  <div class="praticas-antissuborno-page">
+    <HomeHeader />
+
+    <!-- Hero Section com Efeito Parallax -->
+    <section class="hero-section">
+      <div class="parallax-container">
+        <div class="overlay"></div>
+        <h1 class="hero-title">{{ t('praticasAntissuborno.heroTitle') }}</h1>
+        <div class="hero-subtitle">{{ t('praticasAntissuborno.heroSubtitle') }}</div>
       </div>
-  
-      <main>
-  <section class="termos-content">
-    <div class="termos-section">
-      <h2>Compromisso Contra a Corrupção</h2>
-      <p>A Uni Hospitalar se compromete a manter os mais altos padrões éticos em todas as suas operações e a combater qualquer forma de corrupção. Temos uma política rigorosa contra o suborno e garantimos que todos os colaboradores, fornecedores e parceiros cumpram com as normas estabelecidas.</p>
-      <p>Nossa política de anticorrupção proíbe qualquer forma de pagamento ou presente que possa ser interpretado como um suborno ou incentivo indevido.</p>
-    </div>
+    </section>
 
-    <div class="termos-section">
-      <h2>Procedimentos de Denúncia</h2>
-      <p>Oferecemos canais seguros e confidenciais para a denúncia de práticas corruptas ou antiéticas. Incentivamos nossos colaboradores e parceiros a reportarem qualquer suspeita de suborno ou corrupção sem medo de retaliação.</p>
-      <p>Todos os relatos serão investigados de forma justa e rigorosa, e tomaremos as medidas necessárias para corrigir qualquer violação de nossa política de antissuborno.</p>
-    </div>
+    <!-- Seção de Princípios -->
+    <section class="principles-section">
+      <div class="container">
+        <ScrollReveal direction="bottom" :delay="100">
+          <div class="section-header">
+            <h2>{{ t('praticasAntissuborno.principlesTitle') }}</h2>
+            <p>{{ t('praticasAntissuborno.principlesSubtitle') }}</p>
+          </div>
+        </ScrollReveal>
 
-    <div class="termos-section">
-      <h2>Treinamento e Conscientização</h2>
-      <p>Promovemos treinamentos regulares para todos os colaboradores sobre ética e práticas antissuborno. Nosso objetivo é assegurar que todos entendam a importância de manter a integridade e estejam cientes das políticas e procedimentos para prevenir corrupção.</p>
-      <p>Os treinamentos são atualizados periodicamente para refletir as melhores práticas e mudanças na legislação aplicável.</p>
-    </div>
+        <div class="principles-grid">
+          <ScrollReveal direction="left" :delay="200">
+            <div class="principle-card">
+              <div class="principle-icon">
+                <i class="fas fa-balance-scale"></i>
+              </div>
+              <h3>{{ t('praticasAntissuborno.principles.integrity.title') }}</h3>
+              <p>{{ t('praticasAntissuborno.principles.integrity.description') }}</p>
+            </div>
+          </ScrollReveal>
 
-    <div class="termos-section">
-      <h2>Monitoramento e Cumprimento</h2>
-      <p>Realizamos auditorias e monitoramentos constantes para garantir a conformidade com nossas políticas antissuborno. Qualquer comportamento suspeito é investigado de forma rigorosa, e adotamos medidas corretivas quando necessário.</p>
-      <p>Estamos comprometidos em criar e manter um ambiente de negócios transparente e ético, onde práticas de suborno são inaceitáveis e combatidas com seriedade.</p>
-    </div>
-  </section>
-</main>
-  
-      <HomeFooter />
-    </div>
-  </template>
-  
-  <script>
+          <ScrollReveal direction="bottom" :delay="300">
+            <div class="principle-card">
+              <div class="principle-icon">
+                <i class="fas fa-eye"></i>
+              </div>
+              <h3>{{ t('praticasAntissuborno.principles.transparency.title') }}</h3>
+              <p>{{ t('praticasAntissuborno.principles.transparency.description') }}</p>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="right" :delay="400">
+            <div class="principle-card">
+              <div class="principle-icon">
+                <i class="fas fa-gavel"></i>
+              </div>
+              <h3>{{ t('praticasAntissuborno.principles.compliance.title') }}</h3>
+              <p>{{ t('praticasAntissuborno.principles.compliance.description') }}</p>
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Políticas Zero Tolerância -->
+    <section class="zero-tolerance-section">
+      <div class="container">
+        <div class="tolerance-content">
+          <ScrollReveal direction="left" :delay="200">
+            <div class="tolerance-text">
+              <div class="tolerance-badge">
+                <i class="fas fa-ban"></i>
+                <span>{{ t('praticasAntissuborno.zeroTolerance.badge') }}</span>
+              </div>
+              <h2>{{ t('praticasAntissuborno.zeroTolerance.title') }}</h2>
+              <p>{{ t('praticasAntissuborno.zeroTolerance.description') }}</p>
+              
+              <div class="tolerance-list">
+                <div class="tolerance-item">
+                  <i class="fas fa-times-circle"></i>
+                  <span>{{ t('praticasAntissuborno.zeroTolerance.items.bribery') }}</span>
+                </div>
+                <div class="tolerance-item">
+                  <i class="fas fa-times-circle"></i>
+                  <span>{{ t('praticasAntissuborno.zeroTolerance.items.corruption') }}</span>
+                </div>
+                <div class="tolerance-item">
+                  <i class="fas fa-times-circle"></i>
+                  <span>{{ t('praticasAntissuborno.zeroTolerance.items.kickbacks') }}</span>
+                </div>
+                <div class="tolerance-item">
+                  <i class="fas fa-times-circle"></i>
+                  <span>{{ t('praticasAntissuborno.zeroTolerance.items.facilitation') }}</span>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="right" :delay="300">
+            <div class="tolerance-visual">
+              <div class="visual-circle">
+                <div class="visual-content">
+                  <i class="fas fa-shield-alt"></i>
+                  <span>{{ t('praticasAntissuborno.zeroTolerance.visual') }}</span>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Procedimentos -->
+    <section class="procedures-section">
+      <div class="container">
+        <ScrollReveal direction="bottom" :delay="100">
+          <div class="section-header">
+            <h2>{{ t('praticasAntissuborno.proceduresTitle') }}</h2>
+            <p>{{ t('praticasAntissuborno.proceduresSubtitle') }}</p>
+          </div>
+        </ScrollReveal>
+
+        <div class="procedures-timeline">
+          <ScrollReveal direction="left" :delay="200">
+            <div class="timeline-item">
+              <div class="timeline-marker">
+                <span>01</span>
+              </div>
+              <div class="timeline-content">
+                <h3>{{ t('praticasAntissuborno.procedures.detection.title') }}</h3>
+                <p>{{ t('praticasAntissuborno.procedures.detection.description') }}</p>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="right" :delay="300">
+            <div class="timeline-item">
+              <div class="timeline-marker">
+                <span>02</span>
+              </div>
+              <div class="timeline-content">
+                <h3>{{ t('praticasAntissuborno.procedures.reporting.title') }}</h3>
+                <p>{{ t('praticasAntissuborno.procedures.reporting.description') }}</p>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="left" :delay="400">
+            <div class="timeline-item">
+              <div class="timeline-marker">
+                <span>03</span>
+              </div>
+              <div class="timeline-content">
+                <h3>{{ t('praticasAntissuborno.procedures.investigation.title') }}</h3>
+                <p>{{ t('praticasAntissuborno.procedures.investigation.description') }}</p>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="right" :delay="500">
+            <div class="timeline-item">
+              <div class="timeline-marker">
+                <span>04</span>
+              </div>
+              <div class="timeline-content">
+                <h3>{{ t('praticasAntissuborno.procedures.action.title') }}</h3>
+                <p>{{ t('praticasAntissuborno.procedures.action.description') }}</p>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Treinamento -->
+    <section class="training-section">
+      <div class="container">
+        <div class="training-content">
+          <ScrollReveal direction="left" :delay="200">
+            <div class="training-info">
+              <h2>{{ t('praticasAntissuborno.trainingTitle') }}</h2>
+              <p>{{ t('praticasAntissuborno.trainingDescription') }}</p>
+              
+              <div class="training-features">
+                <div class="feature-item">
+                  <div class="feature-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                  </div>
+                  <div class="feature-text">
+                    <h4>{{ t('praticasAntissuborno.training.regular.title') }}</h4>
+                    <p>{{ t('praticasAntissuborno.training.regular.description') }}</p>
+                  </div>
+                </div>
+
+                <div class="feature-item">
+                  <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                  </div>
+                  <div class="feature-text">
+                    <h4>{{ t('praticasAntissuborno.training.comprehensive.title') }}</h4>
+                    <p>{{ t('praticasAntissuborno.training.comprehensive.description') }}</p>
+                  </div>
+                </div>
+
+                <div class="feature-item">
+                  <div class="feature-icon">
+                    <i class="fas fa-sync-alt"></i>
+                  </div>
+                  <div class="feature-text">
+                    <h4>{{ t('praticasAntissuborno.training.updated.title') }}</h4>
+                    <p>{{ t('praticasAntissuborno.training.updated.description') }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="right" :delay="300">
+            <div class="training-stats">
+              <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">{{ t('praticasAntissuborno.stats.coverage') }}</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number">4x</div>
+                <div class="stat-label">{{ t('praticasAntissuborno.stats.frequency') }}</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number">24h</div>
+                <div class="stat-label">{{ t('praticasAntissuborno.stats.response') }}</div>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Canal de Denúncias -->
+    <section class="reporting-section">
+      <div class="container">
+        <ScrollReveal direction="bottom" :delay="100">
+          <div class="reporting-header">
+            <h2>{{ t('praticasAntissuborno.reportingTitle') }}</h2>
+            <p>{{ t('praticasAntissuborno.reportingSubtitle') }}</p>
+          </div>
+        </ScrollReveal>
+
+        <div class="reporting-channels">
+          <ScrollReveal direction="left" :delay="200">
+            <div class="channel-card">
+              <div class="channel-icon">
+                <i class="fas fa-phone"></i>
+              </div>
+              <h3>{{ t('praticasAntissuborno.channels.phone.title') }}</h3>
+              <p>{{ t('praticasAntissuborno.channels.phone.description') }}</p>
+              <div class="channel-info">
+                <span>{{ t('praticasAntissuborno.channels.phone.number') }}</span>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="bottom" :delay="300">
+            <div class="channel-card">
+              <div class="channel-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <h3>{{ t('praticasAntissuborno.channels.email.title') }}</h3>
+              <p>{{ t('praticasAntissuborno.channels.email.description') }}</p>
+              <div class="channel-info">
+                <span>{{ t('praticasAntissuborno.channels.email.address') }}</span>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="right" :delay="400">
+            <div class="channel-card">
+              <div class="channel-icon">
+                <i class="fas fa-globe"></i>
+              </div>
+              <h3>{{ t('praticasAntissuborno.channels.online.title') }}</h3>
+              <p>{{ t('praticasAntissuborno.channels.online.description') }}</p>
+              <div class="channel-info">
+                <router-link to="/Contato" class="channel-link">
+                  {{ t('praticasAntissuborno.channels.online.link') }}
+                </router-link>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+
+        <ScrollReveal direction="bottom" :delay="500">
+          <div class="reporting-guarantee">
+            <div class="guarantee-content">
+              <i class="fas fa-user-secret"></i>
+              <div class="guarantee-text">
+                <h4>{{ t('praticasAntissuborno.guarantee.title') }}</h4>
+                <p>{{ t('praticasAntissuborno.guarantee.description') }}</p>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+
+    <HomeFooter />
+  </div>
+</template>
+
+<script>
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
+import { useAntiBriberyTranslation } from '@/composables/useAntiBriberyTranslation.js';
 
 export default {
   components: {
     HomeHeader,
     HomeFooter
   },
-  data() {
+  setup() {
+    const { t, currentLanguage } = useAntiBriberyTranslation()
+    
     return {
-      selectedLanguage: 'pt',
-      sidebarOpen: false
-    }
-  },
-  methods: {
-    changeLanguage(event) {
-      const value = typeof event === 'string' ? event : event.target.value;
-      this.selectedLanguage = value;
-
-      console.log(`Idioma selecionado: ${value}`);
-    },
-    toggleSidebar() {
-      this.sidebarOpen = !this.sidebarOpen;
+      t,
+      currentLanguage
     }
   }
 }
-  </script>
-  
-  <style scoped>
-  .banner-container {
+</script>
+
+<style scoped>
+/* Estilos Gerais */
+.praticas-antissuborno-page {
+  font-family: 'Montserrat', sans-serif;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+section {
+  padding: 80px 0;
+}
+
+/* Hero Section com Parallax */
+.hero-section {
   position: relative;
-  bottom: 60px;
+  height: 60vh;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+.parallax-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('@/assets/header-praticas-antissuborno.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(174, 44, 42, 0.7), rgba(0, 0, 0, 0.7));
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 2;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  animation: fadeInUp 1.5s ease-out;
+}
+
+.hero-subtitle {
+  font-size: 1.3rem;
+  font-weight: 300;
+  position: relative;
+  z-index: 2;
+  animation: fadeInUp 1.5s ease-out 0.3s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Seção de Princípios */
+.principles-section {
+  background-color: #f8f9fa;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-header h2 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.section-header p {
+  font-size: 1.2rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.principle-card {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.principle-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+}
+
+.principle-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.principle-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 25px;
+}
+
+.principle-icon i {
+  font-size: 2rem;
+  color: white;
+}
+
+.principle-card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.principle-card p {
+  color: #666;
+  line-height: 1.7;
+}
+
+/* Seção Zero Tolerância */
+.zero-tolerance-section {
+  background: linear-gradient(135deg, #AE2C2A, #8a2220);
+  color: white;
+  padding: 100px 0;
+}
+
+.tolerance-content {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.tolerance-text {
+  flex: 1;
+}
+
+.tolerance-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  border-radius: 50px;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+.tolerance-badge i {
+  font-size: 1.2rem;
+}
+
+.tolerance-text h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.tolerance-text p {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  opacity: 0.9;
+  line-height: 1.8;
+}
+
+.tolerance-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.tolerance-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.tolerance-item i {
+  color: #ff6b6b;
+  font-size: 1.3rem;
+}
+
+.tolerance-visual {
+  flex: 1;
   display: flex;
   justify-content: center;
 }
-  
-  .banner-container img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .banner-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(128, 128, 128, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .banner-overlay h1 {
-    color: #FFFFFF;
-    font-size: 4em;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    animation: slideInRight 1.5s ease-out;
-  }
-  
-  @keyframes slideInRight {
-    from {
-      transform: translateX(50%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-  
-  main {
-    display: flex;
-    justify-content: center;
-    padding-top: 75px;
-    padding-bottom: 80px;
-    background-color: #f4f4f4;
-  }
-  
-  .termos-content {
-    width: 70%;
-    margin: auto;
-    padding: 20px;
-  }
-  
-  .termos-section {
-    background-color: #ffffff;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .termos-section h2 {
-    font-size: 2em;
-    font-weight: bold;
-    color: #AE2C2A;
-    margin-bottom: 15px;
-  }
-  
-  .termos-section p {
-    font-size: 1em;
-    line-height: 1.6em;
-    color: #34495e;
-    margin-bottom: 15px;
-  }
-  
-  @media (max-width: 480px) {
-  @keyframes slideInRight {
+
+.visual-circle {
+  width: 300px;
+  height: 300px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: rotate 20s linear infinite;
+}
+
+.visual-circle::before {
+  content: '';
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+}
+
+.visual-content {
+  text-align: center;
+  z-index: 2;
+}
+
+.visual-content i {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.visual-content span {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@keyframes rotate {
   from {
-    transform: translateX(10%);
-    opacity: 0;
+    transform: rotate(0deg);
   }
   to {
-    transform: translateX(0);
-    opacity: 1;
+    transform: rotate(360deg);
   }
 }
+
+/* Seção de Procedimentos */
+.procedures-section {
+  background: #ffffff;
+  padding: 100px 0;
 }
 
-@media (max-width: 768px) {
-  .banner-container {
-    top: 82px;
-    padding-top: 0px;
-  }
-
-  .termos-content {
-    margin-top: 100px;
-  }
-
-  @keyframes slideInRight {
-  from {
-    transform: translateX(21%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+.procedures-timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
 }
+
+.procedures-timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, #AE2C2A, #ff5555);
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.timeline-item:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.timeline-marker {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  box-shadow: 0 0 0 8px white;
+}
+
+.timeline-marker span {
+  color: white;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.timeline-content {
+  flex: 1;
+  padding: 30px;
+  background: #f8f9fa;
+  border-radius: 15px;
+  margin: 0 50px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+  margin-right: calc(50% + 30px);
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  margin-left: calc(50% + 30px);
+}
+
+.timeline-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.timeline-content h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.timeline-content p {
+  color: #666;
+  line-height: 1.7;
+}
+
+/* Seção de Treinamento */
+.training-section {
+  background: #f8f9fa;
+  padding: 100px 0;
+}
+
+.training-content {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.training-info {
+  flex: 2;
+}
+
+.training-info h2 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+.training-info p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 40px;
+  line-height: 1.8;
+}
+
+.training-features {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateX(10px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.feature-icon i {
+  font-size: 1.3rem;
+  color: white;
+}
+
+.feature-text h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.feature-text p {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.training-stats {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.stat-card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border-top: 4px solid #AE2C2A;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #AE2C2A;
+  margin-bottom: 10px;
+}
+
+.stat-label {
+  font-size: 1rem;
+  color: #666;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Seção de Canal de Denúncias */
+.reporting-section {
+  background: #ffffff;
+  padding: 100px 0;
+}
+
+.reporting-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.reporting-header h2 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.reporting-header p {
+  font-size: 1.2rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.reporting-channels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.channel-card {
+  background: #f8f9fa;
+  padding: 40px 30px;
+  border-radius: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.channel-card:hover {
+  background: white;
+  border-color: #AE2C2A;
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.channel-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 25px;
+}
+
+.channel-icon i {
+  font-size: 2rem;
+  color: white;
+}
+
+.channel-card h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.channel-card p {
+  color: #666;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.channel-info {
+  padding: 15px;
+  background: rgba(174, 44, 42, 0.1);
+  border-radius: 10px;
+  font-weight: 600;
+  color: #AE2C2A;
+}
+
+.channel-link {
+  color: #AE2C2A;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.channel-link:hover {
+  color: #8a2220;
+  text-decoration: underline;
+}
+
+.reporting-guarantee {
+  background: linear-gradient(135deg, #333, #555);
+  padding: 40px;
+  border-radius: 20px;
+  color: white;
+}
+
+.guarantee-content {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.guarantee-content i {
+  font-size: 3rem;
+  opacity: 0.8;
+}
+
+.guarantee-text h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.guarantee-text p {
+  opacity: 0.9;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 30px;
+  }
+  
+  .tolerance-content,
+  .training-content {
+    gap: 40px;
+  }
 }
 
 @media (max-width: 992px) {
-  .banner-overlay h1 {
-    font-size: 3em;
+  .hero-title {
+    font-size: 3rem;
   }
-}
-
-@media (min-width: 769px) {
-  @keyframes slideInRight {
-  from {
-    transform: translateX(30%);
-    opacity: 0;
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
   }
-  to {
-    transform: translateX(0);
-    opacity: 1;
+  
+  section {
+    padding: 60px 0;
   }
-}
-}
-
-@media (min-width: 993px) {
-  @keyframes slideInRight {
-  from {
-    transform: translateX(28%);
-    opacity: 0;
+  
+  .principles-grid,
+  .reporting-channels {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
-  to {
-    transform: translateX(0);
-    opacity: 1;
+  
+  .tolerance-content,
+  .training-content {
+    flex-direction: column;
+    text-align: center;
   }
-}
-}
-
-@media (min-width: 1390px) {
-  @keyframes slideInRight {
-  from {
-    transform: translateX(57%);
-    opacity: 0;
+  
+  .tolerance-text h2 {
+    font-size: 2.5rem;
   }
-  to {
-    transform: translateX(0);
-    opacity: 1;
+  
+  .visual-circle {
+    width: 250px;
+    height: 250px;
   }
-}
-}
-
-@media (min-width: 300px) {
-  @keyframes slideInRight {
-  from {
-    transform: translateX(11%);
-    opacity: 0;
+  
+  .visual-circle::before {
+    width: 200px;
+    height: 200px;
   }
-  to {
-    transform: translateX(0);
-    opacity: 1;
+  
+  .procedures-timeline::before {
+    left: 30px;
   }
-}
-}
-
-@media (min-width: 400px) {
-  @keyframes slideInRight {
-  from {
-    transform: translateX(30%);
-    opacity: 0;
+  
+  .timeline-marker {
+    left: 30px;
+    transform: none;
   }
-  to {
-    transform: translateX(0);
-    opacity: 1;
+  
+  .timeline-item,
+  .timeline-item:nth-child(even) {
+    flex-direction: row;
   }
-}
-}
-
-@media (max-width: 400px) {
-  .banner-overlay h1 {
-    font-size: 1.5em;
+  
+  .timeline-content,
+  .timeline-item:nth-child(odd) .timeline-content,
+  .timeline-item:nth-child(even) .timeline-content {
+    margin: 0 0 0 80px;
   }
-
-  .termos-section h2 {
-    font-size: 1.5em;
+  
+  .training-stats {
+    flex-direction: row;
+    justify-content: center;
   }
 }
 
 @media (max-width: 768px) {
-  .banner-overlay h1 {
-    font-size: 2em;
+  .hero-section {
+    height: 50vh;
+    min-height: 350px;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .parallax-container {
+    background-attachment: scroll;
+  }
+  
+  .section-header h2,
+  .reporting-header h2,
+  .training-info h2 {
+    font-size: 2rem;
+  }
+  
+  .tolerance-text h2 {
+    font-size: 2rem;
+  }
+  
+  .tolerance-list {
+    text-align: left;
+  }
+  
+  .visual-circle {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .visual-circle::before {
+    width: 160px;
+    height: 160px;
+  }
+  
+  .visual-content i {
+    font-size: 3rem;
+  }
+  
+  .training-features {
+    gap: 20px;
+  }
+  
+  .feature-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+  
+  .training-stats {
+    flex-direction: column;
+  }
+  
+  .guarantee-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
   }
 }
 
 @media (max-width: 576px) {
-  .banner-overlay h1 {
-    font-size: 1.5em;
+  .container {
+    padding: 0 20px;
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .section-header h2,
+  .reporting-header h2,
+  .training-info h2 {
+    font-size: 1.8rem;
+  }
+  
+  .tolerance-text h2 {
+    font-size: 1.8rem;
+  }
+  
+  .principle-card,
+  .channel-card {
+    padding: 30px 20px;
+  }
+  
+  .principle-icon,
+  .channel-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .principle-icon i,
+  .channel-icon i {
+    font-size: 1.8rem;
+  }
+  
+  .tolerance-badge {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+  
+  .tolerance-item {
+    font-size: 1rem;
+  }
+  
+  .visual-circle {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .visual-circle::before {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .visual-content i {
+    font-size: 2.5rem;
+  }
+  
+  .visual-content span {
+    font-size: 1rem;
+  }
+  
+  .timeline-marker {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .timeline-marker span {
+    font-size: 1rem;
+  }
+  
+  .timeline-content {
+    padding: 20px;
+    margin-left: 70px;
+  }
+  
+  .timeline-content h3 {
+    font-size: 1.3rem;
+  }
+  
+  .feature-icon {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .feature-icon i {
+    font-size: 1.1rem;
+  }
+  
+  .feature-text h4 {
+    font-size: 1.1rem;
+  }
+  
+  .stat-card {
+    padding: 25px 20px;
+  }
+  
+  .stat-number {
+    font-size: 2.5rem;
+  }
+  
+  .stat-label {
+    font-size: 0.9rem;
+  }
+  
+  .reporting-guarantee {
+    padding: 30px 20px;
+  }
+  
+  .guarantee-text h4 {
+    font-size: 1.3rem;
   }
 }
-  </style>
+
+@media (max-width: 400px) {
+  .hero-title {
+    font-size: 1.8rem;
+  }
+  
+  .section-header h2,
+  .reporting-header h2,
+  .training-info h2 {
+    font-size: 1.5rem;
+  }
+  
+  .tolerance-text h2 {
+    font-size: 1.5rem;
+  }
+  
+  .principle-card,
+  .channel-card,
+  .stat-card {
+    padding: 25px 15px;
+  }
+  
+  .timeline-content {
+    padding: 15px;
+    margin-left: 60px;
+  }
+  
+  .procedures-timeline::before {
+    left: 25px;
+  }
+  
+  .timeline-marker {
+    left: 25px;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .timeline-marker span {
+    font-size: 0.9rem;
+  }
+}
+
+/* Animações adicionais */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.principle-icon i,
+.channel-icon i,
+.feature-icon i {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Efeito de pulsação */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(174, 44, 42, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(174, 44, 42, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(174, 44, 42, 0);
+  }
+}
+
+.principle-icon:hover,
+.channel-icon:hover,
+.feature-icon:hover {
+  animation: pulse 1.5s infinite;
+}
+
+/* Efeito de destaque para links */
+.channel-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.channel-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #AE2C2A;
+  transition: width 0.3s ease;
+}
+
+.channel-link:hover::after {
+  width: 100%;
+}
+
+/* Scroll suave */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Melhorias de acessibilidade */
+.channel-link:focus {
+  outline: 2px solid #AE2C2A;
+  outline-offset: 2px;
+}
+
+/* Efeito de linha animada nos títulos */
+.section-header h2,
+.reporting-header h2,
+.training-info h2 {
+  position: relative;
+  display: inline-block;
+}
+
+.section-header h2::after,
+.reporting-header h2::after,
+.training-info h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background-color: #AE2C2A;
+  transition: width 0.5s ease;
+}
+
+.training-info h2::after {
+  left: 0;
+  transform: none;
+}
+
+.section-header:hover h2::after,
+.reporting-header:hover h2::after,
+.training-info:hover h2::after {
+  width: 80%;
+}
+
+/* Efeito de gradiente nos cards */
+.principle-card:hover,
+.channel-card:hover,
+.stat-card:hover {
+  background: linear-gradient(135deg, #ffffff, #f8f9fa);
+}
+
+/* Animação de entrada para os elementos da timeline */
+.timeline-item {
+  opacity: 0;
+  animation: slideInTimeline 0.6s ease-out forwards;
+}
+
+.timeline-item:nth-child(1) { animation-delay: 0.2s; }
+.timeline-item:nth-child(2) { animation-delay: 0.4s; }
+.timeline-item:nth-child(3) { animation-delay: 0.6s; }
+.timeline-item:nth-child(4) { animation-delay: 0.8s; }
+
+@keyframes slideInTimeline {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Efeito de hover nos números da timeline */
+.timeline-marker:hover {
+  transform: translateX(-50%) scale(1.1);
+  box-shadow: 0 0 0 12px white, 0 5px 15px rgba(174, 44, 42, 0.3);
+}
+
+@media (max-width: 992px) {
+  .timeline-marker:hover {
+    transform: scale(1.1);
+  }
+}
+
+/* Efeito de brilho nos ícones */
+.tolerance-badge i,
+.guarantee-content i {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6);
+  }
+}
+</style>

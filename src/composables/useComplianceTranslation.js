@@ -24,7 +24,7 @@ const translations = reactive({
         }
       },
       conductTitle: 'Nosso Código de Conduta',
-      conductSectionTitle: 'Código de Conduta',
+      conductSectionTitle: 'Diretrizes Éticas e Comportamentais',
       conductText: 'Nosso Código de Conduta é um guia para todos os colaboradores, parceiros e fornecedores, assegurando um comportamento ético em todas as nossas atividades.',
       conductLinks: {
         ethics: 'Conduta Ética e Integridade',
@@ -47,9 +47,14 @@ const translations = reactive({
           description: 'Seguimos rigorosamente todas as normas e regulamentações específicas do setor de saúde.'
         }
       },
-      correctiveTitle: 'Instruções para Ações Corretivas',
-      correctiveText1: 'Identificou alguma irregularidade? Veja como proceder e entre em contato com nosso departamento para uma melhor orientação.',
-      correctiveText2: 'A Uni Hospitalar mantém canais de comunicação abertos para relatos de possíveis violações ao nosso Código de Conduta ou políticas internas. Todos os relatos são tratados com confidencialidade e seriedade.',
+      correctiveTitle: 'Implementação e Monitoramento',
+      correctiveSectionTitle: 'Como Aplicamos Nossas Políticas',
+      correctiveText: 'Conheça como implementamos e monitoramos nossas políticas de compliance na prática, garantindo efetividade e transparência em todos os processos.',
+      correctiveLinks: {
+        dataSecurity: 'Implementação de Segurança de Dados',
+        antiBribery: 'Monitoramento Antissuborno',
+        sectorCompliance: 'Auditoria de Normas Setoriais'
+      },
       correctiveButton: 'Entre em Contato',
       documentsTitle: 'Documentos Legais',
       documentsIntro: 'Acesse documentos completos como políticas de privacidade, termos de uso, entre outros.',
@@ -89,7 +94,7 @@ const translations = reactive({
         }
       },
       conductTitle: 'Our Code of Conduct',
-      conductSectionTitle: 'Code of Conduct',
+      conductSectionTitle: 'Ethical and Behavioral Guidelines',
       conductText: 'Our Code of Conduct is a guide for all employees, partners and suppliers, ensuring ethical behavior in all our activities.',
       conductLinks: {
         ethics: 'Ethical Conduct and Integrity',
@@ -112,9 +117,14 @@ const translations = reactive({
           description: 'We rigorously follow all standards and regulations specific to the healthcare sector.'
         }
       },
-      correctiveTitle: 'Instructions for Corrective Actions',
-      correctiveText1: 'Have you identified any irregularity? See how to proceed and contact our department for better guidance.',
-      correctiveText2: 'Uni Hospitalar maintains open communication channels for reports of possible violations of our Code of Conduct or internal policies. All reports are treated with confidentiality and seriousness.',
+      correctiveTitle: 'Implementation and Monitoring',
+      correctiveSectionTitle: 'How We Apply Our Policies',
+      correctiveText: 'Learn how we implement and monitor our compliance policies in practice, ensuring effectiveness and transparency in all processes.',
+      correctiveLinks: {
+        dataSecurity: 'Data Security Implementation',
+        antiBribery: 'Anti-Bribery Monitoring',
+        sectorCompliance: 'Sector Standards Audit'
+      },
       correctiveButton: 'Contact Us',
       documentsTitle: 'Legal Documents',
       documentsIntro: 'Access complete documents such as privacy policies, terms of use, among others.',
@@ -154,7 +164,7 @@ const translations = reactive({
         }
       },
       conductTitle: 'Nuestro Código de Conducta',
-      conductSectionTitle: 'Código de Conducta',
+      conductSectionTitle: 'Directrices Éticas y Comportamentales',
       conductText: 'Nuestro Código de Conducta es una guía para todos los colaboradores, socios y proveedores, asegurando un comportamiento ético en todas nuestras actividades.',
       conductLinks: {
         ethics: 'Conducta Ética e Integridad',
@@ -177,9 +187,14 @@ const translations = reactive({
           description: 'Seguimos rigurosamente todas las normas y regulaciones específicas del sector de la salud.'
         }
       },
-      correctiveTitle: 'Instrucciones para Acciones Correctivas',
-      correctiveText1: '¿Identificó alguna irregularidad? Vea cómo proceder y póngase en contacto con nuestro departamento para una mejor orientación.',
-      correctiveText2: 'Uni Hospitalar mantiene canales de comunicación abiertos para reportes de posibles violaciones a nuestro Código de Conducta o políticas internas. Todos los reportes son tratados con confidencialidad y seriedad.',
+      correctiveTitle: 'Implementación y Monitoreo',
+      correctiveSectionTitle: 'Cómo Aplicamos Nuestras Políticas',
+      correctiveText: 'Conozca cómo implementamos y monitoreamos nuestras políticas de compliance en la práctica, garantizando efectividad y transparencia en todos los procesos.',
+      correctiveLinks: {
+        dataSecurity: 'Implementación de Seguridad de Datos',
+        antiBribery: 'Monitoreo Antisoborno',
+        sectorCompliance: 'Auditoría de Normas Sectoriales'
+      },
       correctiveButton: 'Contáctanos',
       documentsTitle: 'Documentos Legales',
       documentsIntro: 'Acceda a documentos completos como políticas de privacidad, términos de uso, entre otros.',

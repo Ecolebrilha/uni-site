@@ -228,6 +228,12 @@ import { useTermsTranslation } from '@/composables/useTermsTranslation.js';
 import { useContactTranslation } from '@/composables/useContactTranslation.js';
 import { useOurPartnerTranslation } from '@/composables/useOurPartnerTranslation.js';
 import { usePartnersTranslation } from '@/composables/usePartnersTranslation.js';
+import { useEthicalConductTranslation } from '@/composables/useEthicalConductTranslation';
+import { useSocialResponsibilityTranslation } from '@/composables/useSocialResponsibilityTranslation';
+import { useHumanRightsTranslation } from '@/composables/useHumanRightsTranslation';
+import { useDataSecurityTranslation } from '@/composables/useDataSecurityTranslation';
+import { useAntiBriberyTranslation } from '@/composables/useAntiBriberyTranslation';
+import { useSectorStandardsTranslation } from '@/composables/useSectorStandardsTranslation';
 
 export default {
   name: 'HomeHeader',
@@ -244,6 +250,12 @@ export default {
     const { setLanguage: setContactLanguage } = useContactTranslation();
     const { setLanguage: setOurPartnerLanguage } = useOurPartnerTranslation();
     const { setLanguage: setPartnersLanguage } = usePartnersTranslation();
+    const { setLanguage: setEthicalConductLanguage } = useEthicalConductTranslation();
+    const { setLanguage: setSocialResponsibilityLanguage } = useSocialResponsibilityTranslation();
+    const { setLanguage: setHumanRightsLanguage } = useHumanRightsTranslation();
+    const { setLanguage: setDataSecurityLanguage } = useDataSecurityTranslation();
+    const { setLanguage: setAntiBriberyLanguage } = useAntiBriberyTranslation();
+    const { setLanguage: setSectorStandardsLanguage } = useSectorStandardsTranslation();
     
     return {
       t,
@@ -260,6 +272,12 @@ export default {
       setContactLanguage,
       setOurPartnerLanguage,
       setPartnersLanguage,
+      setEthicalConductLanguage,
+      setSocialResponsibilityLanguage,
+      setHumanRightsLanguage,
+      setDataSecurityLanguage,
+      setAntiBriberyLanguage,
+      setSectorStandardsLanguage,
     };
   },
   data() {
@@ -299,6 +317,12 @@ export default {
       this.setContactLanguage(lang);
       this.setOurPartnerLanguage(lang);
       this.setPartnersLanguage(lang);
+      this.setEthicalConductLanguage(lang);
+      this.setSocialResponsibilityLanguage(lang);
+      this.setHumanRightsLanguage(lang);
+      this.setDataSecurityLanguage(lang);
+      this.setAntiBriberyLanguage(lang);
+      this.setSectorStandardsLanguage(lang);
     },
     handleScroll() {
       this.isScrolled = window.scrollY > 0;

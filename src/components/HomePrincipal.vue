@@ -2117,7 +2117,13 @@ input:checked + .slider:before {
   }
   
   .services-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .service-card {
+    max-width: 700px;
+    margin: 0 auto;
   }
 }
 
@@ -2219,11 +2225,6 @@ input:checked + .slider:before {
   
   .services-section {
     padding: 70px 0;
-  }
-  
-  .services-grid {
-    grid-template-columns: 1fr;
-    gap: 50px;
   }
   
   .service-card {
