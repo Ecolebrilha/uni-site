@@ -75,7 +75,7 @@
             <div class="accent-line"></div>
           </div>
         </ScrollReveal>
-        
+
         <!-- Cards de serviços - Primeira linha -->
         <div class="services-grid">
           <ScrollReveal direction="left" :delay="200">
@@ -97,11 +97,12 @@
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="300">
             <div class="service-card">
               <div class="service-image">
-                <img src="@/assets/diferenciais.jpg" alt="Diferenciais" @error="handleImageError($event, 'diferenciais')">
+                <img src="@/assets/diferenciais.jpg" alt="Diferenciais"
+                  @error="handleImageError($event, 'diferenciais')">
                 <div class="service-overlay"></div>
               </div>
               <div class="service-content">
@@ -117,7 +118,7 @@
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="right" :delay="200">
             <div class="service-card">
               <div class="service-image">
@@ -138,7 +139,7 @@
             </div>
           </ScrollReveal>
         </div>
-        
+
         <!-- Cards de serviços - Segunda linha -->
         <div class="services-grid">
           <ScrollReveal direction="left" :delay="300">
@@ -160,7 +161,7 @@
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="400">
             <div class="service-card">
               <div class="service-image">
@@ -180,7 +181,7 @@
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="right" :delay="300">
             <div class="service-card">
               <div class="service-image">
@@ -214,63 +215,44 @@
             <div class="accent-line"></div>
           </div>
         </ScrollReveal>
-        <!-- Nova estrutura dos testimonials com drag -->
-<div class="testimonials-slider">
-  <div 
-    class="testimonials-slides"
-    @touchstart="handleTouchStart"
-    @touchmove="handleTouchMove"
-    @touchend="handleTouchEnd"
-    @mousedown="handleMouseDown"
-    @mousemove="handleMouseMove"
-    @mouseup="handleMouseUp"
-    @mouseleave="handleMouseUp"
-    :style="{ transform: `translateX(${slideOffset}px)` }"
-  >
-    <div 
-      v-for="(testimonial, index) in testimonials" 
-      :key="index"
-      class="testimonial-slide" 
-      :class="{ active: currentTestimonial === index }"
-    >
-      <div class="testimonial-content">
-        <div class="quote-icon">
-          <i class="fas fa-quote-left"></i>
-        </div>
-        <p class="testimonial-text">{{ testimonial.text }}</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">
-            <i :class="getAuthorIcon(index)"></i>
-          </div>
-          <div class="author-info">
-            <div class="author-name">{{ testimonial.author }}</div>
-            <div class="author-position">{{ testimonial.position }}</div>
-          </div>
-        </div>
-        
-        <!-- Controles movidos para dentro do testimonial-content -->
-        <div class="testimonial-controls">
-          <button class="control-prev" @click="prevTestimonial">
-            <i class="fas fa-chevron-left"></i>
-          </button>
-          <div class="control-indicators">
-            <span 
-              v-for="(testimonialItem, indicatorIndex) in testimonials" 
-              :key="indicatorIndex"
-              class="indicator" 
-              :class="{ active: currentTestimonial === indicatorIndex }" 
-              @click="setTestimonial(indicatorIndex)"
-            ></span>
-          </div>
-          <button class="control-next" @click="nextTestimonial">
-            <i class="fas fa-chevron-right"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+        <div class="testimonials-slider">
+          <div class="testimonials-slides" @touchstart="handleTouchStart" @touchmove="handleTouchMove"
+            @touchend="handleTouchEnd" @mousedown="handleMouseDown" @mousemove="handleMouseMove"
+            @mouseup="handleMouseUp" @mouseleave="handleMouseUp" :style="{ transform: `translateX(${slideOffset}px)` }">
+            <div v-for="(testimonial, index) in testimonials" :key="index" class="testimonial-slide"
+              :class="{ active: currentTestimonial === index }">
+              <div class="testimonial-content">
+                <div class="quote-icon">
+                  <i class="fas fa-quote-left"></i>
+                </div>
+                <p class="testimonial-text">{{ testimonial.text }}</p>
+                <div class="testimonial-author">
+                  <div class="author-avatar">
+                    <i :class="getAuthorIcon(index)"></i>
+                  </div>
+                  <div class="author-info">
+                    <div class="author-name">{{ testimonial.author }}</div>
+                    <div class="author-position">{{ testimonial.position }}</div>
+                  </div>
+                </div>
 
+                <div class="testimonial-controls">
+                  <button class="control-prev" @click="prevTestimonial">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <div class="control-indicators">
+                    <span v-for="(testimonialItem, indicatorIndex) in testimonials" :key="indicatorIndex"
+                      class="indicator" :class="{ active: currentTestimonial === indicatorIndex }"
+                      @click="setTestimonial(indicatorIndex)"></span>
+                  </div>
+                  <button class="control-next" @click="nextTestimonial">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -323,19 +305,15 @@
           <div class="contact-info">
             <h2>{{ t('home.contact.title') }}</h2>
             <p>{{ t('home.contact.subtitle') }}</p>
-            
+
             <!-- Botões para selecionar filial -->
             <div class="branch-selector">
-              <button
-                v-for="(branch, index) in branches"
-                :key="index"
-                @click="setActiveBranch(index)"
-                :class="['branch-button', { active: activeBranch === index }]"
-              >
+              <button v-for="(branch, index) in branches" :key="index" @click="setActiveBranch(index)"
+                :class="['branch-button', { active: activeBranch === index }]">
                 {{ getBranchName(index) }}
               </button>
             </div>
-            
+
             <!-- Informações da filial selecionada -->
             <div class="branch-info">
               <div class="contact-methods">
@@ -360,17 +338,11 @@
               </div>
             </div>
           </div>
-          
-                    <!-- Mapa da filial selecionada -->
-                    <div class="branch-map">
-            <iframe
-              :src="branches[activeBranch].mapUrl"
-              width="100%"
-              height="100%"
-              style="border:0;"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade">
+
+          <!-- Mapa da filial selecionada -->
+          <div class="branch-map">
+            <iframe :src="branches[activeBranch].mapUrl" width="100%" height="100%" style="border:0;" allowfullscreen=""
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade">
             </iframe>
           </div>
         </div>
@@ -378,7 +350,7 @@
     </section>
 
     <HomeFooter />
-    
+
     <!-- Banner de Cookies -->
     <div class="cookie-banner" v-if="showCookieBanner">
       <div class="cookie-content">
@@ -387,11 +359,13 @@
         </div>
         <div class="cookie-text">
           <h3>{{ t('home.cookies.banner.title') }}</h3>
-          <p>{{ t('home.cookies.banner.text') }} <router-link to="/PoliticaPrivacidade">{{ t('home.cookies.banner.privacyPolicy') }}</router-link>.</p>
+          <p>{{ t('home.cookies.banner.text') }} <router-link to="/PoliticaPrivacidade">{{
+            t('home.cookies.banner.privacyPolicy') }}</router-link>.</p>
         </div>
         <div class="cookie-buttons">
           <button class="cookie-accept" @click="acceptCookies">{{ t('home.cookies.banner.accept') }}</button>
-          <button class="cookie-settings" @click="showCookieSettings = true">{{ t('home.cookies.banner.settings') }}</button>
+          <button class="cookie-settings" @click="showCookieSettings = true">{{ t('home.cookies.banner.settings')
+          }}</button>
         </div>
       </div>
     </div>
@@ -449,7 +423,6 @@
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
 import { useHomeTranslation } from '@/composables/useHomeTranslation.js';
-import { mask } from 'v-mask';
 
 export default {
   name: 'HomePrincipal',
@@ -457,12 +430,9 @@ export default {
     HomeHeader,
     HomeFooter
   },
-  directives: {
-    mask
-  },
   setup() {
     const { t, currentLanguage } = useHomeTranslation()
-    
+
     return {
       t,
       currentLanguage
@@ -476,10 +446,10 @@ export default {
       companyFoundingYear: 2005, // Ano de fundação da empresa
       companyAnniversary: { month: 7, day: 11 }, // 11 de julho
       isDragging: false,
-    startX: 0,
-    currentX: 0,
-    slideOffset: 0,
-    dragThreshold: 50,
+      startX: 0,
+      currentX: 0,
+      slideOffset: 0,
+      dragThreshold: 50,
       branches: [
         {
           name: 'Matriz Recife - Uni Hospitalar',
@@ -519,17 +489,17 @@ export default {
     yearsOfExperience() {
       const today = new Date();
       const currentYear = today.getFullYear();
-      const currentMonth = today.getMonth() + 1; // getMonth() retorna 0-11
+      const currentMonth = today.getMonth() + 1;
       const currentDay = today.getDate();
-      
+
       let years = currentYear - this.companyFoundingYear;
-      
+
       // Se ainda não passou do aniversário deste ano, subtrai 1
       if (currentMonth < this.companyAnniversary.month ||
-          (currentMonth === this.companyAnniversary.month && currentDay < this.companyAnniversary.day)) {
+        (currentMonth === this.companyAnniversary.month && currentDay < this.companyAnniversary.day)) {
         years--;
       }
-      
+
       return years;
     },
     testimonials() {
@@ -570,7 +540,7 @@ export default {
         rootMargin: '0px',
         threshold: 0.3
       };
-      
+
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -579,45 +549,45 @@ export default {
           }
         });
       }, options);
-      
+
       observer.observe(this.$refs.statsSection);
     },
-    
+
     animateCounters() {
       const baseDuration = 6000;
-      
+
       const counters = [
-        { ref: this.$refs.yearsCounter, target: this.yearsOfExperience }, // Usando o computed property
+        { ref: this.$refs.yearsCounter, target: this.yearsOfExperience },
         { ref: this.$refs.unitsCounter, target: 3 },
         { ref: this.$refs.clientsCounter, target: 5000 },
         { ref: this.$refs.hoursCounter, target: 48 }
       ];
-      
+
       counters.forEach(counter => {
         counter.ref.innerText = '0';
         counter.current = 0;
       });
-      
+
       const steps = Math.floor(baseDuration / 16);
       let currentStep = 0;
-      
+
       const animate = () => {
         currentStep++;
         const progress = currentStep / steps;
-        
+
         counters.forEach(counter => {
           const easedProgress = 1 - Math.pow(1 - progress, 3);
           const value = Math.min(
             Math.floor(counter.target * easedProgress),
             counter.target
           );
-          
+
           if (value !== counter.current) {
             counter.ref.innerText = value;
             counter.current = value;
           }
         });
-        
+
         if (currentStep < steps) {
           requestAnimationFrame(animate);
         } else {
@@ -626,10 +596,10 @@ export default {
           });
         }
       };
-      
+
       requestAnimationFrame(animate);
     },
-    
+
     startTestimonialSlider() {
       this.testimonialInterval = setInterval(() => {
         this.nextTestimonial();
@@ -674,33 +644,33 @@ export default {
         }
       }
     },
-    
+
     acceptCookies() {
       this.cookiePreferences = {
         essential: true,
         analytics: true,
         marketing: true
       };
-      
+
       localStorage.setItem('cookieConsent', JSON.stringify(this.cookiePreferences));
       this.showCookieBanner = false;
       this.applyUserPreferences();
     },
-    
+
     saveCookiePreferences() {
       localStorage.setItem('cookieConsent', JSON.stringify(this.cookiePreferences));
       this.showCookieBanner = false;
       this.showCookieSettings = false;
       this.applyUserPreferences();
     },
-    
+
     applyUserPreferences() {
       if (this.cookiePreferences.analytics) {
         console.log('Analytics cookies enabled');
       } else {
         console.log('Analytics cookies disabled');
       }
-      
+
       if (this.cookiePreferences.marketing) {
         console.log('Marketing cookies enabled');
       } else {
@@ -708,67 +678,67 @@ export default {
       }
     },
     handleTouchStart(e) {
-  this.startDrag(e.touches[0].clientX);
-},
+      this.startDrag(e.touches[0].clientX);
+    },
 
-handleTouchMove(e) {
-  if (this.isDragging) {
-    e.preventDefault();
-    this.updateDrag(e.touches[0].clientX);
-  }
-},
+    handleTouchMove(e) {
+      if (this.isDragging) {
+        e.preventDefault();
+        this.updateDrag(e.touches[0].clientX);
+      }
+    },
 
-handleTouchEnd() {
-  this.endDrag();
-},
+    handleTouchEnd() {
+      this.endDrag();
+    },
 
-handleMouseDown(e) {
-  this.startDrag(e.clientX);
-},
+    handleMouseDown(e) {
+      this.startDrag(e.clientX);
+    },
 
-handleMouseMove(e) {
-  if (this.isDragging) {
-    e.preventDefault();
-    this.updateDrag(e.clientX);
-  }
-},
+    handleMouseMove(e) {
+      if (this.isDragging) {
+        e.preventDefault();
+        this.updateDrag(e.clientX);
+      }
+    },
 
-handleMouseUp() {
-  this.endDrag();
-},
+    handleMouseUp() {
+      this.endDrag();
+    },
 
-startDrag(clientX) {
-  this.isDragging = true;
-  this.startX = clientX;
-  this.currentX = clientX;
-  clearInterval(this.testimonialInterval);
-},
+    startDrag(clientX) {
+      this.isDragging = true;
+      this.startX = clientX;
+      this.currentX = clientX;
+      clearInterval(this.testimonialInterval);
+    },
 
-updateDrag(clientX) {
-  if (!this.isDragging) return;
-  
-  this.currentX = clientX;
-  const deltaX = this.currentX - this.startX;
-  this.slideOffset = deltaX;
-},
+    updateDrag(clientX) {
+      if (!this.isDragging) return;
 
-endDrag() {
-  if (!this.isDragging) return;
-  
-  const deltaX = this.currentX - this.startX;
-  
-  if (Math.abs(deltaX) > this.dragThreshold) {
-    if (deltaX > 0) {
-      this.prevTestimonial();
-    } else {
-      this.nextTestimonial();
+      this.currentX = clientX;
+      const deltaX = this.currentX - this.startX;
+      this.slideOffset = deltaX;
+    },
+
+    endDrag() {
+      if (!this.isDragging) return;
+
+      const deltaX = this.currentX - this.startX;
+
+      if (Math.abs(deltaX) > this.dragThreshold) {
+        if (deltaX > 0) {
+          this.prevTestimonial();
+        } else {
+          this.nextTestimonial();
+        }
+      }
+
+      this.isDragging = false;
+      this.slideOffset = 0;
+      this.startTestimonialSlider();
     }
-  }
-  
-  this.isDragging = false;
-  this.slideOffset = 0;
-  this.startTestimonialSlider();
-}
   }
 };
 </script>
@@ -864,14 +834,14 @@ section {
   font-size: 1.4em;
   margin-bottom: 1.5em;
   line-height: 1.6;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.7); 
-  font-weight: 600; 
-  letter-spacing: 0.7px; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.7);
+  font-weight: 600;
+  letter-spacing: 0.7px;
   max-width: 90%;
   margin-left: auto;
   margin-right: auto;
   padding: 5px 0;
-  border-left: 4px solid rgba(255, 255, 255, 0.8); 
+  border-left: 4px solid rgba(255, 255, 255, 0.8);
   padding-left: 15px;
   animation: fadeInUp 1.5s ease-out 0.6s both;
 }
@@ -1318,7 +1288,8 @@ section {
   backdrop-filter: blur(10px);
 }
 
-.control-prev, .control-next {
+.control-prev,
+.control-next {
   background: white;
   border: 2px solid #AE2C2A;
   font-size: 1rem;
@@ -1334,7 +1305,8 @@ section {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
-.control-prev:hover, .control-next:hover {
+.control-prev:hover,
+.control-next:hover {
   color: white;
   background-color: #AE2C2A;
   transform: scale(1.1);
@@ -1757,7 +1729,8 @@ section {
   gap: 10px;
 }
 
-.cookie-accept, .cookie-settings {
+.cookie-accept,
+.cookie-settings {
   padding: 10px 20px;
   border-radius: 5px;
   font-weight: bold;
@@ -1903,15 +1876,15 @@ section {
   border-radius: 50%;
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: #AE2C2A;
 }
 
-input:focus + .slider {
+input:focus+.slider {
   box-shadow: 0 0 1px #AE2C2A;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   transform: translateX(26px);
 }
 
@@ -1947,6 +1920,7 @@ input:checked + .slider:before {
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1954,12 +1928,19 @@ input:checked + .slider:before {
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateY(0);
   }
+
   40% {
     transform: translateY(-10px);
   }
+
   60% {
     transform: translateY(-5px);
   }
@@ -1969,6 +1950,7 @@ input:checked + .slider:before {
   from {
     box-shadow: 0 0 10px rgba(174, 44, 42, 0.6);
   }
+
   to {
     box-shadow: 0 0 20px rgba(174, 44, 42, 0.9), 0 0 30px rgba(255, 255, 255, 0.3);
   }
@@ -1979,6 +1961,7 @@ input:checked + .slider:before {
     transform: translateY(100%);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -1989,6 +1972,7 @@ input:checked + .slider:before {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -1998,6 +1982,7 @@ input:checked + .slider:before {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -2007,9 +1992,11 @@ input:checked + .slider:before {
   0% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0.7);
   }
+
   70% {
     box-shadow: 0 0 0 10px rgba(174, 44, 42, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0);
   }
@@ -2019,25 +2006,30 @@ input:checked + .slider:before {
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
+
   100% {
     transform: translateY(0px);
   }
 }
 
-.service-icon i, .stat-icon i {
+.service-icon i,
+.stat-icon i {
   animation: float 3s ease-in-out infinite;
 }
 
 /* Efeito de brilho para botões */
-.secondary-button, .cta-button {
+.secondary-button,
+.cta-button {
   position: relative;
   overflow: hidden;
 }
 
-.secondary-button::after, .cta-button::after {
+.secondary-button::after,
+.cta-button::after {
   content: '';
   position: absolute;
   top: 0;
@@ -2048,7 +2040,8 @@ input:checked + .slider:before {
   transition: left 0.7s;
 }
 
-.secondary-button:hover::after, .cta-button:hover::after {
+.secondary-button:hover::after,
+.cta-button:hover::after {
   left: 100%;
 }
 
@@ -2060,20 +2053,20 @@ input:checked + .slider:before {
     flex: 0 0 calc(50% - 20px);
     max-width: calc(50% - 20px);
   }
-  
+
   .quick-contact-container {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  
+
   .contact-info {
     text-align: center;
   }
-  
+
   .contact-methods {
     align-items: center;
   }
-  
+
   .branch-selector {
     display: flex;
     justify-content: center;
@@ -2085,37 +2078,37 @@ input:checked + .slider:before {
   .stats-container {
     flex-wrap: wrap;
   }
-  
+
   .stat-item {
     flex: 0 0 calc(50% - 30px);
     min-width: calc(50% - 20px);
     padding: 30px 20px;
   }
-  
+
   .logo-image {
     max-width: 70%;
   }
-  
+
   .banner-h2 {
     font-size: 2.2em;
   }
-  
+
   .banner-p {
     font-size: 1.2em;
   }
-  
+
   .branch-selector {
     justify-content: center;
   }
-  
+
   .contact-methods {
     align-items: flex-start;
   }
-  
+
   .branch-map {
     height: 350px;
   }
-  
+
   .services-grid {
     grid-template-columns: 1fr;
     gap: 50px;
@@ -2132,127 +2125,128 @@ input:checked + .slider:before {
   section {
     padding: 60px 0;
   }
-  
+
   .section-title {
     font-size: 2rem;
   }
-  
+
   .section-subtitle {
     font-size: 1.1rem;
   }
-  
+
   .stat-item {
     min-width: 60%;
     max-width: 100%;
   }
-  
+
   .stat-number {
     font-size: 2.5rem;
   }
-  
+
   .stat-icon {
     width: 70px;
     height: 70px;
     font-size: 1.8rem;
   }
-  
+
   .stat-label {
     font-size: 1.1rem;
   }
-  
+
   .hero-section {
     height: 100vh;
   }
-  
+
   .logo-image {
     max-width: 80%;
   }
-  
+
   .banner-h2 {
     font-size: 1.8em;
   }
-  
+
   .banner-p {
     font-size: 1.1em;
     border-left: 3px solid rgba(255, 255, 255, 0.8);
   }
-  
+
   .scroll-indicator {
     padding: 8px 16px;
   }
-  
+
   .scroll-indicator span {
     font-size: 14px;
   }
-  
+
   .cookie-content {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .cookie-icon {
     margin-right: 0;
     margin-bottom: 5px;
   }
-  
+
   .cookie-buttons {
     margin-top: 5px;
   }
-  
+
   .cookie-banner {
     border-radius: 10px;
   }
-  
+
   .testimonial-content {
     padding: 30px 30px 80px 30px;
   }
-  
+
   .testimonial-controls {
     bottom: -15px;
     padding: 12px 20px;
     gap: 15px;
   }
-  
-  .control-prev, .control-next {
+
+  .control-prev,
+  .control-next {
     width: 30px;
     height: 30px;
     font-size: 0.9rem;
   }
-  
+
   .stats-section {
     padding: 80px 0;
   }
-  
+
   .services-section {
     padding: 70px 0;
   }
-  
+
   .service-card {
     max-width: 450px;
     margin: 0 auto;
   }
-  
+
   .branch-button {
     padding: 10px 20px;
     font-size: 0.9rem;
   }
-  
+
   .contact-info h2 {
     font-size: 1.8rem;
   }
-  
+
   .contact-info p {
     font-size: 1rem;
   }
-  
+
   .branch-map {
     height: 300px;
   }
-  
+
   .cta-container h2 {
     font-size: 2rem;
   }
-  
+
   .cta-container p {
     font-size: 1.1rem;
   }
@@ -2263,28 +2257,30 @@ input:checked + .slider:before {
     flex-direction: column;
     width: 55%;
   }
-  
-  .cookie-accept, .cookie-settings {
+
+  .cookie-accept,
+  .cookie-settings {
     width: 100%;
     margin-bottom: 10px;
   }
-  
+
   .testimonial-content {
     padding: 25px 20px 70px 20px;
   }
-  
+
   .testimonial-controls {
     bottom: -10px;
     padding: 10px 15px;
     gap: 12px;
   }
-  
-  .control-prev, .control-next {
+
+  .control-prev,
+  .control-next {
     width: 28px;
     height: 28px;
     font-size: 0.8rem;
   }
-  
+
   .indicator {
     width: 8px;
     height: 8px;
@@ -2310,68 +2306,68 @@ input:checked + .slider:before {
   .testimonial-text {
     font-size: 0.9rem;
   }
-  
+
   .branch-selector {
     flex-direction: column;
     gap: 10px;
     width: 100%;
   }
-  
+
   .branch-button {
     width: 90%;
   }
-  
+
   .branch-info {
     padding: 20px;
   }
-  
+
   .contact-method i {
     width: 35px;
     height: 35px;
     font-size: 1.2rem;
   }
-  
+
   .contact-method span {
     font-size: 0.9rem;
   }
-  
+
   .branch-map {
     height: 250px;
   }
-  
+
   .section-title {
     font-size: 1.8rem;
   }
-  
+
   .section-subtitle {
     font-size: 1rem;
   }
-  
+
   .service-icon {
     font-size: 2.5rem;
   }
-  
+
   .service-card h3 {
     font-size: 1.3rem;
   }
-  
+
   .cta-container h2 {
     font-size: 1.8rem;
   }
-  
+
   .cta-container p {
     font-size: 1rem;
   }
-  
+
   .logo-image {
     max-width: 90%;
   }
-  
+
   .banner-h2 {
     font-size: 1.5em;
     padding: 8px 15px;
   }
-  
+
   .banner-p {
     font-size: 1em;
     border-left: 2px solid rgba(255, 255, 255, 0.8);
@@ -2382,25 +2378,25 @@ input:checked + .slider:before {
   .branch-button {
     font-size: 0.8rem;
   }
-  
+
   .container {
     padding: 0 15px;
   }
-  
+
   .stat-item {
     padding: 25px 20px;
   }
-  
+
   .stat-number {
     font-size: 2rem;
   }
-  
+
   .stat-icon {
     width: 60px;
     height: 60px;
     font-size: 1.5rem;
   }
-  
+
   .service-content {
     padding: 25px;
   }
@@ -2421,15 +2417,15 @@ input:checked + .slider:before {
   .author-position {
     font-size: 0.7rem;
   }
-  
+
   .cookie-content {
     padding: 20px;
   }
-  
+
   .cookie-text h3 {
     font-size: 1.1rem;
   }
-  
+
   .cookie-text p {
     font-size: 0.8rem;
   }
@@ -2442,7 +2438,7 @@ input:checked + .slider:before {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  
+
   .parallax-container {
     background-attachment: scroll;
   }
@@ -2450,29 +2446,30 @@ input:checked + .slider:before {
 
 /* Print styles */
 @media print {
+
   .cookie-banner,
   .cookie-settings-modal,
   .scroll-indicator,
   .testimonial-controls {
     display: none !important;
   }
-  
+
   .hero-section {
     height: auto;
     min-height: auto;
   }
-  
+
   .parallax-container {
     background-attachment: scroll;
     position: relative;
   }
-  
+
   section {
     page-break-inside: avoid;
   }
 }
 
-/* Estilos para componente ScrollReveal (se estiver sendo usado) */
+/* Estilos para o ScrollReveal */
 .scroll-reveal {
   opacity: 0;
   transform: translateY(50px);
@@ -2558,11 +2555,11 @@ button:focus,
   .service-overlay {
     background: rgba(0, 0, 0, 0.8);
   }
-  
+
   .overlay {
     background: rgba(0, 0, 0, 0.8);
   }
-  
+
   .accent-line {
     background: #AE2C2A;
   }

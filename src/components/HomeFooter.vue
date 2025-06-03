@@ -4,18 +4,28 @@
       <a href="/"><img src="@/assets/footerSelo.png" alt="Imagem Selo do footer" class="logo-image"></a>
     </div>
     <div class="footer-mensagem">
-      <p>© 2025 | Uni Hospitalar Ltda. – Todos os direitos reservados</p>
+      <p>{{ t('footer.copyright') }}</p>
     </div>
     <div class="footer-desenvolvedor">
-      <p>Desenvolvido por <a href="/"><span class="company-name">Uni Hospitalar</span> <span class="registered-mark">®</span></a></p>
+      <p>{{ t('footer.developedBy') }} <a href="/"><span class="company-name">Uni Hospitalar</span> <span class="registered-mark">®</span></a></p>
     </div>
   </footer>
 </template>
 
 <script>
+import { useHeaderFooterTranslation } from '@/composables/useHeaderFooterTranslation.js';
+
 export default {
   name: 'HomeFooter',
-};
+  setup() {
+    const { t, currentLanguage } = useHeaderFooterTranslation()
+    
+    return {
+      t,
+      currentLanguage
+    }
+  }
+}
 </script>
 
 <style scoped>

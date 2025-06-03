@@ -295,7 +295,6 @@ import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
 import ContatoFormulario from '@/components/ContatoFormulario.vue';
 import { useContactTranslation } from '@/composables/useContactTranslation.js';
-import { mask } from 'v-mask';
 
 export default {
   name: 'ContatoPage',
@@ -386,9 +385,6 @@ export default {
       this.activeBranch = index;
     }
   },
-  directives: {
-    mask
-  }
 }
 </script>
 

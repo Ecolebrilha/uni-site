@@ -4,7 +4,7 @@
       <span class="menu-icon"></span>
     </button>
 
-    <!-- Menu sidebar melhorado -->
+    <!-- Menu sidebar -->
     <div :class="['menu-sidebar', { 'active': sidebarOpen }]">
       <div class="sidebar-header">
         <img src="@/assets/logo-uni.png" alt="Logo da Uni Hospitalar" class="sidebar-logo">
@@ -16,28 +16,28 @@
       <div class="sidebar-content">
         <ul class="sidebar-menu">
           <li><router-link to="/" exact-active-class="active" @click="closeSidebar">
-            <i class="fas fa-home"></i> Início
+            <i class="fas fa-home"></i> {{ tHeader('header.navigation.home') }}
           </router-link></li>
           <li><router-link to="/Sobre" exact-active-class="active" @click="closeSidebar">
-            <i class="fas fa-building"></i> Sobre
+            <i class="fas fa-building"></i> {{ tHeader('header.navigation.about') }}
           </router-link></li>
           <li><router-link to="/Diferenciais" exact-active-class="active" @click="closeSidebar">
-            <i class="fas fa-award"></i> Diferenciais
+            <i class="fas fa-award"></i> {{ tHeader('header.navigation.differentials') }}
           </router-link></li>
           <li><router-link to="/Servicos" exact-active-class="active" @click="closeSidebar">
-            <i class="fas fa-cogs"></i> Serviços
+            <i class="fas fa-cogs"></i> {{ tHeader('header.navigation.services') }}
           </router-link></li>
           <li><router-link to="/Produtos" exact-active-class="active" @click="closeSidebar">
-            <i class="fas fa-pills"></i> Produtos
+            <i class="fas fa-pills"></i> {{ tHeader('header.navigation.products') }}
           </router-link></li>
           <li><router-link to="/Compliance" exact-active-class="active" @click="closeSidebar">
-            <i class="fas fa-shield-alt"></i> Compliance
+            <i class="fas fa-shield-alt"></i> {{ tHeader('header.navigation.compliance') }}
           </router-link></li>
           <li class="sidebar-dropdown">
             <div class="sidebar-dropdown-toggle">
               <router-link to="/LGPD" class="sidebar-dropdown-main" @click="closeSidebar">
                 <i class="fas fa-lock"></i>
-                <span>LGPD</span>
+                <span>{{ tHeader('header.navigation.lgpd') }}</span>
               </router-link>
               <div class="sidebar-dropdown-arrow-container" @click.stop="toggleDropdown('lgpd')">
                 <i class="fas fa-chevron-down sidebar-dropdown-arrow" 
@@ -47,11 +47,11 @@
             <div class="sidebar-dropdown-menu" :class="{ 'show': openDropdown === 'lgpd' }">
               <router-link to="/PoliticaPrivacidade" class="sidebar-dropdown-item" @click="closeSidebar">
                 <i class="fas fa-file-shield"></i>
-                <span class="politica-span">Política de Privacidade</span>
+                <span class="politica-span">{{ tHeader('header.dropdown.lgpd.privacyPolicy') }}</span>
               </router-link>
               <router-link to="/TermosLegais" class="sidebar-dropdown-item" @click="closeSidebar">
                 <i class="fas fa-gavel"></i>
-                <span>Termos Legais</span>
+                <span>{{ tHeader('header.dropdown.lgpd.legalTerms') }}</span>
               </router-link>
             </div>
           </li>
@@ -60,7 +60,7 @@
             <div class="sidebar-dropdown-toggle">
               <router-link to="/Contato" class="sidebar-dropdown-main" @click="closeSidebar">
                 <i class="fas fa-envelope"></i>
-                <span>Contato</span>
+                <span>{{ tHeader('header.navigation.contact') }}</span>
               </router-link>
               <div class="sidebar-dropdown-arrow-container" @click.stop="toggleDropdown('contato')">
                 <i class="fas fa-chevron-down sidebar-dropdown-arrow" 
@@ -70,12 +70,8 @@
             <div class="sidebar-dropdown-menu" :class="{ 'show': openDropdown === 'contato' }">
               <router-link to="/SejaParceiro" class="sidebar-dropdown-item" @click="closeSidebar">
                 <i class="fas fa-handshake"></i>
-                <span class="seja-parceiro-span">Seja Nosso Parceiro</span>
+                <span class="seja-parceiro-span">{{ tHeader('header.dropdown.contact.bePartner') }}</span>
               </router-link>
-              <!-- <router-link to="/TrabalheConosco" class="sidebar-dropdown-item" @click="closeSidebar">
-                <i class="fas fa-briefcase"></i>
-                <span>Trabalhe Conosco</span>
-              </router-link> -->
             </div>
           </li>
         </ul>
@@ -84,7 +80,7 @@
       <!-- Redes sociais e idiomas no menu mobile -->
       <div class="sidebar-footer">
         <div class="social-media-mobile">
-          <h3>Siga-nos</h3>
+          <h3>{{ tHeader('header.social.follow') }}</h3>
           <div class="social-icons">
             <a href="https://www.instagram.com/unihospitalar" target="_blank" class="social-icon">
               <i class="fab fa-instagram"></i>
@@ -96,7 +92,7 @@
         </div>
         
         <div class="language-selector-mobile">
-          <h3>Idioma</h3>
+          <h3>{{ tHeader('header.social.language') }}</h3>
           <div class="icon-selector">
             <span @click="changeLanguage('pt')" :class="['fi fi-br', {'active': selectedLanguage === 'pt'}]" title="Português"></span>
             <span @click="changeLanguage('en')" :class="['fi fi-us', {'active': selectedLanguage === 'en'}]" title="English"></span>
@@ -105,8 +101,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Resto do header permanece o mesmo -->
     <router-link to="/" custom v-slot="{ navigate }">
       <div class="logo-container" :class="{'scrolled': isScrolled}" @click="navigate" role="link">
         <img src="@/assets/logo-uni.png" alt="Logo da Uni Hospitalar" class="logo">
@@ -154,15 +148,15 @@
 
     <nav>
       <ul>
-        <li><router-link to="/" exact-active-class="active">Início</router-link></li>
-        <li><router-link to="/Sobre" exact-active-class="active">Sobre</router-link></li>
-        <li><router-link to="/Diferenciais" exact-active-class="active">Diferenciais</router-link></li>
-        <li><router-link to="/Servicos" exact-active-class="active">Serviços</router-link></li>
-        <li><router-link to="/Produtos" exact-active-class="active">Produtos</router-link></li>
-        <li><router-link to="/Compliance" exact-active-class="active">Compliance</router-link></li>
+        <li><router-link to="/" exact-active-class="active">{{ tHeader('header.navigation.home') }}</router-link></li>
+        <li><router-link to="/Sobre" exact-active-class="active">{{ tHeader('header.navigation.about') }}</router-link></li>
+        <li><router-link to="/Diferenciais" exact-active-class="active">{{ tHeader('header.navigation.differentials') }}</router-link></li>
+        <li><router-link to="/Servicos" exact-active-class="active">{{ tHeader('header.navigation.services') }}</router-link></li>
+        <li><router-link to="/Produtos" exact-active-class="active">{{ tHeader('header.navigation.products') }}</router-link></li>
+        <li><router-link to="/Compliance" exact-active-class="active">{{ tHeader('header.navigation.compliance') }}</router-link></li>
         <li class="dropdown">
           <router-link to="/LGPD" exact-active-class="active" class="dropdown-trigger">
-            LGPD <i class="fas fa-chevron-down dropdown-arrow"></i>
+            {{ tHeader('header.navigation.lgpd') }} <i class="fas fa-chevron-down dropdown-arrow"></i>
           </router-link>
           <div class="dropdown-content">
             <div class="dropdown-items">
@@ -171,7 +165,7 @@
                   <i class="fas fa-file-alt"></i>
                 </div>
                 <div class="item-content">
-                  <span class="item-title">Política de Privacidade</span>
+                  <span class="item-title">{{ tHeader('header.dropdown.lgpd.privacyPolicy') }}</span>
                 </div>
               </router-link>
               <router-link to="/TermosLegais" exact-active-class="active" class="dropdown-item">
@@ -179,7 +173,7 @@
                   <i class="fas fa-gavel"></i>
                 </div>
                 <div class="item-content">
-                  <span class="item-title">Termos Legais</span>
+                  <span class="item-title">{{ tHeader('header.dropdown.lgpd.legalTerms') }}</span>
                 </div>
               </router-link>
             </div>
@@ -187,7 +181,7 @@
         </li>
         <li class="dropdown">
           <router-link to="/Contato" exact-active-class="active" class="dropdown-trigger">
-            Contato <i class="fas fa-chevron-down dropdown-arrow"></i>
+            {{ tHeader('header.navigation.contact') }} <i class="fas fa-chevron-down dropdown-arrow"></i>
           </router-link>
           <div class="dropdown-content">
             <div class="dropdown-items">
@@ -196,17 +190,9 @@
                   <i class="fas fa-handshake"></i>
                 </div>
                 <div class="item-content">
-                  <span class="item-title">Seja Nosso Parceiro</span>
+                  <span class="item-title">{{ tHeader('header.dropdown.contact.bePartner') }}</span>
                 </div>
               </router-link>
-              <!-- <router-link to="/TrabalheConosco" exact-active-class="active" class="dropdown-item">
-                <div class="item-icon">
-                  <i class="fas fa-briefcase"></i>
-                </div>
-                <div class="item-content">
-                  <span class="item-title">Trabalhe Conosco</span>
-                </div>
-              </router-link> -->
             </div>
           </div>
         </li>
@@ -234,6 +220,7 @@ import { useHumanRightsTranslation } from '@/composables/useHumanRightsTranslati
 import { useDataSecurityTranslation } from '@/composables/useDataSecurityTranslation';
 import { useAntiBriberyTranslation } from '@/composables/useAntiBriberyTranslation';
 import { useSectorStandardsTranslation } from '@/composables/useSectorStandardsTranslation';
+import { useHeaderFooterTranslation } from '@/composables/useHeaderFooterTranslation';
 
 export default {
   name: 'HomeHeader',
@@ -256,9 +243,11 @@ export default {
     const { setLanguage: setDataSecurityLanguage } = useDataSecurityTranslation();
     const { setLanguage: setAntiBriberyLanguage } = useAntiBriberyTranslation();
     const { setLanguage: setSectorStandardsLanguage } = useSectorStandardsTranslation();
-    
+    const { t: tHeader, setLanguage: setHeaderFooterLanguage } = useHeaderFooterTranslation();
+      
     return {
       t,
+      tHeader,
       currentLanguage,
       setHomeLanguage,
       setAboutLanguage,
@@ -278,6 +267,7 @@ export default {
       setDataSecurityLanguage,
       setAntiBriberyLanguage,
       setSectorStandardsLanguage,
+      setHeaderFooterLanguage,
     };
   },
   data() {
@@ -323,6 +313,7 @@ export default {
       this.setDataSecurityLanguage(lang);
       this.setAntiBriberyLanguage(lang);
       this.setSectorStandardsLanguage(lang);
+      this.setHeaderFooterLanguage(lang);
     },
     handleScroll() {
       this.isScrolled = window.scrollY > 0;
@@ -384,7 +375,7 @@ header * {
   gap: 20px;
 }
 
-/* Novo elemento para controles centralizados em mobile */
+/* Controles centralizados em mobile */
 .mobile-center-controls {
   display: none;
   position: absolute;
@@ -602,7 +593,7 @@ nav ul li a:hover {
   color: rgba(255, 255, 255, 0.8);
 }
 
-/* Estilos melhorados para dropdown no desktop */
+/* Estilos para dropdown no desktop */
 nav ul li.dropdown {
   position: relative;
 }
@@ -766,7 +757,7 @@ nav ul li.dropdown:hover .dropdown-content {
   color: #FFFFFF;
 }
 
-/* Estilo para o botão de menu (hamburger) */
+/* Estilos para o botão de menu */
 .menu-toggle {
   display: none;
   position: fixed;
@@ -794,7 +785,7 @@ nav ul li.dropdown:hover .dropdown-content {
   background-color: #ffffff;
 }
 
-/* Ícone de hamburger animado */
+/* Ícone do menu animado */
 .menu-icon {
   position: relative;
   display: inline-block;
@@ -840,7 +831,7 @@ nav ul li.dropdown:hover .dropdown-content {
   background-color: #AE2C2A;
 }
 
-/* Estilo para o menu sidebar */
+/* Estilos para o menu sidebar */
 .menu-sidebar {
   display: none;
   position: fixed;
@@ -1042,7 +1033,6 @@ nav ul li.dropdown:hover .dropdown-content {
   transform: rotate(180deg) !important;
 }
 
-/* Estado ativo do router-link */
 .sidebar-dropdown-main.router-link-active {
   background: linear-gradient(135deg, rgba(174, 44, 42, 0.15), rgba(174, 44, 42, 0.08));
   color: #AE2C2A;
@@ -1053,7 +1043,6 @@ nav ul li.dropdown:hover .dropdown-content {
   color: #AE2C2A;
 }
 
-/* Remover os efeitos de hover do toggle principal */
 .sidebar-dropdown-toggle::before {
   display: none;
 }
@@ -1168,7 +1157,6 @@ nav ul li.dropdown:hover .dropdown-content {
   font-size: 1.1rem;
 }
 
-/* Animação suave para o texto */
 .sidebar-dropdown-item span {
   transition: all 0.3s ease;
 }
@@ -1210,7 +1198,6 @@ nav ul li.dropdown:hover .dropdown-content {
   transform: rotate(180deg) scale(1.2);
 }
 
-/* Efeito de pulso na seta quando ativa */
 .sidebar-dropdown-arrow-container:active::before {
   animation: pulse-arrow 0.3s ease;
 }
@@ -1274,6 +1261,24 @@ nav ul li.dropdown:hover .dropdown-content {
   transform: scale(1.2);
 }
 
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
 /* Ajustes para o header em telas menores */
 @media (max-width: 1600px) {
   nav ul li a {
@@ -1285,9 +1290,36 @@ nav ul li.dropdown:hover .dropdown-content {
     height: 32px;
     font-size: 0.9rem;
   }
+  
+  nav ul li a {
+    font-size: 0.9em;
+  }
+  
+  nav ul li {
+    display: flex;
+    align-items: center;
+  }
+  
+  nav ul li a,
+  nav ul li .dropdown-trigger {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    padding: 8px 0;
+  }
+  
+  .dropdown-trigger {
+    gap: 5px;
+  }
+  
+  .dropdown-arrow {
+    font-size: 0.8em;
+    margin-top: 0;
+    vertical-align: middle;
+  }
 }
 
-@media (max-width: 1390px) {
+@media (max-width: 1500px) {
   .logo-container {
     width: 15%;
   }
@@ -1295,7 +1327,9 @@ nav ul li.dropdown:hover .dropdown-content {
   .logo {
     max-height: 50px;
   }
+}
 
+@media (max-width: 1390px) {
   .header-right {
     right: 30px;
   }
@@ -1311,13 +1345,36 @@ nav ul li.dropdown:hover .dropdown-content {
   nav ul li a {
     font-size: 0.8em;
   }
-  
+
+  nav ul li a,
+  nav ul li .dropdown-trigger {
+    padding: 6px 0;
+  }
+
   .social-icon {
     width: 30px;
     height: 30px;
     font-size: 0.85rem;
   }
 }
+
+@media (max-width: 1215px) {
+  nav ul li {
+    margin: 0 8px;
+  }
+
+  nav ul li a {
+    font-size: 0.7em;
+  }
+}
+
+@media (max-width: 1040px) {
+  nav ul li a {
+    font-size: 0.6em;
+  }
+}
+
+/* Responsividade geral */
 
 @media (max-width: 1100px) {
   .logo-container {
@@ -1328,12 +1385,9 @@ nav ul li.dropdown:hover .dropdown-content {
     max-height: 40px;
   }
 
-  nav ul li {
-    margin: 0 8px;
-  }
-
-  nav ul li a {
-    font-size: 0.7em;
+  nav ul li a,
+  nav ul li .dropdown-trigger {
+    padding: 4px 0;
   }
 
   .header-right {
@@ -1378,12 +1432,10 @@ nav ul li.dropdown:hover .dropdown-content {
     max-width: 100%;
   }
   
-  /* Esconder os controles originais em telas menores */
   .header-right {
     display: none;
   }
   
-  /* Mostrar os controles centralizados em telas menores */
   .mobile-center-controls {
     display: flex;
   }
@@ -1433,7 +1485,6 @@ nav ul li.dropdown:hover .dropdown-content {
     font-size: 0.85rem;
   }
   
-  /* Continuação do CSS */
   .mobile-center-controls .icon-selector span {
     font-size: 0.7em;
   }
@@ -1485,94 +1536,6 @@ nav ul li.dropdown:hover .dropdown-content {
   }
 }
 
-@media (max-width: 440px) {
-  .logo-container {
-    width: 90px;
-  }
-
-  .logo {
-    max-height: 25px;
-  }
-  
-  .mobile-center-controls {
-    transform: translate(-50%, -50%) scale(0.9);
-  }
-  
-  .menu-sidebar {
-    width: 260px;
-  }
-
-  .seja-parceiro-span {
-    font-size: 1rem;
-  }
-}
-
-/* Estilo para o overlay que escurece o fundo quando o menu está aberto */
-.menu-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.menu-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Animações adicionais */
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-.service-icon i, .benefit-icon i {
-  animation: float 3s ease-in-out infinite;
-}
-
-/* Animação para os cards de serviços quando em hover */
-.service-card:hover .service-icon {
-  transform: scale(1.05);
-  transition: transform 0.3s ease;
-}
-
-/* Animação para os números de etapas */
-.process-step:hover .step-number {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.1);
-  transition: all 0.3s ease;
-}
-
-/* Animação para o botão CTA */
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(174, 44, 42, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(174, 44, 42, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(174, 44, 42, 0);
-  }
-}
-
-.cta-button:hover {
-  animation: pulse 1.5s infinite;
-}
-
 /* Ajustes para dispositivos móveis */
 @media (max-width: 480px) {
   .hero-title {
@@ -1605,5 +1568,73 @@ nav ul li.dropdown:hover .dropdown-content {
   .process-steps::before {
     display: none;
   }
+}
+
+@media (max-width: 440px) {
+  .logo-container {
+    width: 90px;
+  }
+
+  .logo {
+    max-height: 25px;
+  }
+  
+  .mobile-center-controls {
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  
+  .menu-sidebar {
+    width: 260px;
+  }
+
+  .seja-parceiro-span {
+    font-size: 1rem;
+  }
+}
+
+
+/* Animações adicionais */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.service-icon i, .benefit-icon i {
+  animation: float 3s ease-in-out infinite;
+}
+
+.service-card:hover .service-icon {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.process-step:hover .step-number {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
+
+/* Animação para o botão CTA */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(174, 44, 42, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(174, 44, 42, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(174, 44, 42, 0);
+  }
+}
+
+.cta-button:hover {
+  animation: pulse 1.5s infinite;
 }
 </style>
