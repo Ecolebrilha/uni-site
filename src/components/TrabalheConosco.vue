@@ -1,347 +1,311 @@
 <template>
-    <div class="trabalhe-page">
-      <HomeHeader />
-      
-      <!-- Hero Section com Efeito Parallax -->
-      <section class="hero-section">
-        <div class="parallax-container">
-          <div class="overlay"></div>
-          <h1 class="hero-title">Trabalhe Conosco</h1>
-          <div class="hero-subtitle">Faça parte do nosso time</div>
-        </div>
-      </section>
-      
-      <!-- Seção de Introdução -->
-      <section class="intro-section">
-        <div class="container">
-          <ScrollReveal direction="bottom" :delay="100">
-            <div class="section-title">
-              <span class="accent-line"></span>
-              <h2>Junte-se à Nossa Equipe</h2>
-              <span class="accent-line"></span>
-            </div>
-            <p class="intro-text">
-              Na Uni Hospitalar, acreditamos que nossos colaboradores são o nosso maior ativo. 
-              Estamos sempre em busca de talentos que compartilhem nossos valores e queiram 
-              fazer a diferença no setor de saúde. Conheça nossas oportunidades e faça parte 
-              do nosso time.
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
-      
-      <!-- Seção de Valores da Empresa -->
-      <section class="values-section">
-        <div class="container">
-          <ScrollReveal direction="bottom" :delay="200">
-            <div class="section-title">
-              <span class="accent-line"></span>
-              <h2>Nossos Valores</h2>
-              <span class="accent-line"></span>
-            </div>
-          </ScrollReveal>
-          
-          <div class="values-grid">
-            <ScrollReveal direction="bottom" :delay="300">
-              <div class="value-card">
-                <div class="value-icon">
-                  <i class="fas fa-handshake"></i>
-                </div>
-                <h3>Integridade</h3>
-                <p>Agimos com ética, transparência e responsabilidade em todas as nossas relações.</p>
-              </div>
-            </ScrollReveal>
-            
-            <ScrollReveal direction="bottom" :delay="400">
-              <div class="value-card">
-                <div class="value-icon">
-                  <i class="fas fa-users"></i>
-                </div>
-                <h3>Colaboração</h3>
-                <p>Trabalhamos juntos, valorizando sempre a diversidade, a inclusão e o respeito mútuo.</p>
-              </div>
-            </ScrollReveal>
-            
-            <ScrollReveal direction="bottom" :delay="500">
-              <div class="value-card">
-                <div class="value-icon">
-                  <i class="fas fa-lightbulb"></i>
-                </div>
-                <h3>Inovação</h3>
-                <p>Buscamos constantemente novas soluções e melhores práticas para o setor de saúde.</p>
-              </div>
-            </ScrollReveal>
-            
-            <ScrollReveal direction="bottom" :delay="600">
-              <div class="value-card">
-                <div class="value-icon">
-                  <i class="fas fa-chart-line"></i>
-                </div>
-                <h3>Excelência</h3>
-                <p>Comprometemo-nos com a qualidade e a melhoria contínua em tudo o que fazemos.</p>
-              </div>
-            </ScrollReveal>
+  <div class="trabalhe-page">
+    <HomeHeader />
+
+    <!-- Hero Section com Efeito Parallax -->
+    <section class="hero-section">
+      <div class="parallax-container">
+        <div class="overlay"></div>
+        <h1 class="hero-title">Trabalhe Conosco</h1>
+        <div class="hero-subtitle">Faça parte do nosso time</div>
+      </div>
+    </section>
+
+    <!-- Seção de Introdução -->
+    <section class="intro-section">
+      <div class="container">
+        <ScrollReveal direction="bottom" :delay="100">
+          <div class="section-title">
+            <span class="accent-line"></span>
+            <h2>Junte-se à Nossa Equipe</h2>
+            <span class="accent-line"></span>
           </div>
-        </div>
-      </section>
-      
-      <!-- Seção de Benefícios -->
-      <section class="benefits-section">
-        <div class="container">
-          <ScrollReveal direction="bottom" :delay="200">
-            <div class="section-title light">
-              <span class="accent-line"></span>
-              <h2>Benefícios de Trabalhar Conosco</h2>
-              <span class="accent-line"></span>
-            </div>
-          </ScrollReveal>
-          
-          <div class="benefits-container">
-            <ScrollReveal direction="left" :delay="300">
-              <div class="benefits-image">
-                <img src="@/assets/trabalhe-conosco.png" alt="Equipe Uni Hospitalar" />
-              </div>
-            </ScrollReveal>
-            
-            <ScrollReveal direction="right" :delay="400">
-              <div class="benefits-list">
-                <div class="benefit-item">
-                  <div class="benefit-icon">
-                    <i class="fas fa-medal"></i>
-                  </div>
-                  <div class="benefit-content">
-                    <h4>Plano de Carreira</h4>
-                    <p>Oportunidades de crescimento e desenvolvimento profissional.</p>
-                  </div>
-                </div>
-                
-                <div class="benefit-item">
-                  <div class="benefit-icon">
-                    <i class="fas fa-heartbeat"></i>
-                  </div>
-                  <div class="benefit-content">
-                    <h4>Plano de Saúde</h4>
-                    <p>Assistência médica e odontológica para você e seus dependentes.</p>
-                  </div>
-                </div>
-                
-                <div class="benefit-item">
-                  <div class="benefit-icon">
-                    <i class="fas fa-graduation-cap"></i>
-                  </div>
-                  <div class="benefit-content">
-                    <h4>Capacitação Contínua</h4>
-                    <p>Programas de treinamento e desenvolvimento de habilidades.</p>
-                  </div>
-                </div>
-                
-                <div class="benefit-item">
-                  <div class="benefit-icon">
-                    <i class="fas fa-gift"></i>
-                  </div>
-                  <div class="benefit-content">
-                    <h4>Pacote de Benefícios</h4>
-                    <p>Vale-alimentação, vale-transporte e outros benefícios competitivos.</p>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
+          <p class="intro-text">
+            Na Uni Hospitalar, acreditamos que nossos colaboradores são o nosso maior ativo.
+            Estamos sempre em busca de talentos que compartilhem nossos valores e queiram
+            fazer a diferença no setor de saúde. Conheça nossas oportunidades e faça parte
+            do nosso time.
+          </p>
+        </ScrollReveal>
+      </div>
+    </section>
+
+    <!-- Seção de Valores da Empresa -->
+    <section class="values-section">
+      <div class="container">
+        <ScrollReveal direction="bottom" :delay="200">
+          <div class="section-title">
+            <span class="accent-line"></span>
+            <h2>Nossos Valores</h2>
+            <span class="accent-line"></span>
           </div>
-        </div>
-      </section>
-      
-      <!-- Seção de Formulário -->
-      <section class="form-section">
-        <div class="container">
-          <ScrollReveal direction="bottom" :delay="200">
-            <div class="section-title">
-              <span class="accent-line"></span>
-              <h2>Candidate-se</h2>
-              <span class="accent-line"></span>
-            </div>
-            <p class="form-intro">
-              Preencha o formulário abaixo para se candidatar a uma vaga na Uni Hospitalar. 
-              Anexe seu currículo e nos conte um pouco sobre você e suas expectativas.
-            </p>
-          </ScrollReveal>
-          
+        </ScrollReveal>
+
+        <div class="values-grid">
           <ScrollReveal direction="bottom" :delay="300">
-            <div class="form-container">
-              <form @submit.prevent="submitForm" class="career-form">
-                <div class="form-grid">
-                  <div class="form-group">
-                    <label for="name">Nome Completo*</label>
-                    <input 
-                      type="text" 
-                      id="name" 
-                      v-model="formData.name" 
-                      required 
-                      placeholder="Seu nome completo"
-                    >
-                    <span class="error-message" v-if="errors.name">{{ errors.name }}</span>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="email">E-mail*</label>
-                    <input 
-                      type="email" 
-                      id="email" 
-                      v-model="formData.email" 
-                      required 
-                      placeholder="seu.email@exemplo.com"
-                    >
-                    <span class="error-message" v-if="errors.email">{{ errors.email }}</span>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="phone">Telefone*</label>
-                    <input 
-                      type="tel" 
-                      id="phone" 
-                      v-model="formData.phone" 
-                      required 
-                      placeholder="(00) 00000-0000"
-                      v-mask="'(##) #####-####'"
-                    >
-                    <span class="error-message" v-if="errors.phone">{{ errors.phone }}</span>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="position">Área de Interesse*</label>
-                    <select 
-                      id="position" 
-                      v-model="formData.position" 
-                      required
-                    >
-                      <option value="" disabled selected>Selecione uma área</option>
-                      <option value="Administrativo">Administrativo</option>
-                      <option value="Comercial">Comercial</option>
-                      <option value="Logística">Logística</option>
-                      <option value="Marketing">Marketing</option>
-                      <option value="Recursos Humanos">Recursos Humanos</option>
-                      <option value="Tecnologia">Tecnologia</option>
-                      <option value="Outro">Outro</option>
-                    </select>
-                    <span class="error-message" v-if="errors.position">{{ errors.position }}</span>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="education">Formação Acadêmica*</label>
-                    <select 
-                      id="education" 
-                      v-model="formData.education" 
-                      required
-                    >
-                      <option value="" disabled selected>Selecione sua formação</option>
-                      <option value="Ensino Médio">Ensino Médio</option>
-                      <option value="Ensino Técnico">Ensino Técnico</option>
-                      <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
-                      <option value="Ensino Superior Completo">Ensino Superior Completo</option>
-                      <option value="Pós-graduação">Pós-graduação</option>
-                      <option value="Mestrado">Mestrado</option>
-                      <option value="Doutorado">Doutorado</option>
-                    </select>
-                    <span class="error-message" v-if="errors.education">{{ errors.education }}</span>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="experience">Experiência Profissional*</label>
-                    <select 
-                      id="experience" 
-                      v-model="formData.experience" 
-                      required
-                    >
-                      <option value="" disabled selected>Selecione sua experiência</option>
-                      <option value="Sem experiência">Sem experiência</option>
-                      <option value="Menos de 1 ano">Menos de 1 ano</option>
-                      <option value="1-3 anos">1-3 anos</option>
-                      <option value="3-5 anos">3-5 anos</option>
-                      <option value="5-10 anos">5-10 anos</option>
-                      <option value="Mais de 10 anos">Mais de 10 anos</option>
-                    </select>
-                    <span class="error-message" v-if="errors.experience">{{ errors.experience }}</span>
-                  </div>
+            <div class="value-card">
+              <div class="value-icon">
+                <i class="fas fa-handshake"></i>
+              </div>
+              <h3>Integridade</h3>
+              <p>Agimos com ética, transparência e responsabilidade em todas as nossas relações.</p>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="bottom" :delay="400">
+            <div class="value-card">
+              <div class="value-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <h3>Colaboração</h3>
+              <p>Trabalhamos juntos, valorizando sempre a diversidade, a inclusão e o respeito mútuo.</p>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="bottom" :delay="500">
+            <div class="value-card">
+              <div class="value-icon">
+                <i class="fas fa-lightbulb"></i>
+              </div>
+              <h3>Inovação</h3>
+              <p>Buscamos constantemente novas soluções e melhores práticas para o setor de saúde.</p>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="bottom" :delay="600">
+            <div class="value-card">
+              <div class="value-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <h3>Excelência</h3>
+              <p>Comprometemo-nos com a qualidade e a melhoria contínua em tudo o que fazemos.</p>
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Benefícios -->
+    <section class="benefits-section">
+      <div class="container">
+        <ScrollReveal direction="bottom" :delay="200">
+          <div class="section-title light">
+            <span class="accent-line"></span>
+            <h2>Benefícios de Trabalhar Conosco</h2>
+            <span class="accent-line"></span>
+          </div>
+        </ScrollReveal>
+
+        <div class="benefits-container">
+          <ScrollReveal direction="left" :delay="300">
+            <div class="benefits-image">
+              <img src="@/assets/trabalhe-conosco.png" alt="Equipe Uni Hospitalar" />
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="right" :delay="400">
+            <div class="benefits-list">
+              <div class="benefit-item">
+                <div class="benefit-icon">
+                  <i class="fas fa-medal"></i>
                 </div>
-                
-                <div class="form-group full-width">
-                  <label for="message">Mensagem / Carta de Apresentação</label>
-                  <textarea 
-                    id="message" 
-                    v-model="formData.message" 
-                    rows="5" 
-                    placeholder="Conte-nos um pouco sobre você, suas experiências e expectativas..."
-                  ></textarea>
-                  <span class="error-message" v-if="errors.message">{{ errors.message }}</span>
+                <div class="benefit-content">
+                  <h4>Plano de Carreira</h4>
+                  <p>Oportunidades de crescimento e desenvolvimento profissional.</p>
                 </div>
-                
-                <div class="form-group full-width">
-                  <label for="resume">Currículo (PDF, DOC ou DOCX)*</label>
-                  <div class="file-upload">
-                    <input 
-                      type="file" 
-                      id="resume" 
-                      @change="handleFileUpload" 
-                      accept=".pdf,.doc,.docx"
-                      required
-                    >
-                    <div class="file-upload-info">
-                      <i class="fas fa-cloud-upload-alt"></i>
-                      <span v-if="!formData.resume">Arraste seu arquivo ou clique para selecionar</span>
-                      <span v-else>{{ formData.resumeName }}</span>
-                    </div>
-                  </div>
-                  <span class="error-message" v-if="errors.resume">{{ errors.resume }}</span>
+              </div>
+
+              <div class="benefit-item">
+                <div class="benefit-icon">
+                  <i class="fas fa-heartbeat"></i>
+                </div>
+                <div class="benefit-content">
+                  <h4>Plano de Saúde</h4>
+                  <p>Assistência médica e odontológica para você e seus dependentes.</p>
+                </div>
+              </div>
+
+              <div class="benefit-item">
+                <div class="benefit-icon">
+                  <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="benefit-content">
+                  <h4>Capacitação Contínua</h4>
+                  <p>Programas de treinamento e desenvolvimento de habilidades.</p>
+                </div>
+              </div>
+
+              <div class="benefit-item">
+                <div class="benefit-icon">
+                  <i class="fas fa-gift"></i>
+                </div>
+                <div class="benefit-content">
+                  <h4>Pacote de Benefícios</h4>
+                  <p>Vale-alimentação, vale-transporte e outros benefícios competitivos.</p>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Formulário -->
+    <section class="form-section">
+      <div class="container">
+        <ScrollReveal direction="bottom" :delay="200">
+          <div class="section-title">
+            <span class="accent-line"></span>
+            <h2>Candidate-se</h2>
+            <span class="accent-line"></span>
+          </div>
+          <p class="form-intro">
+            Preencha o formulário abaixo para se candidatar a uma vaga na Uni Hospitalar.
+            Anexe seu currículo e nos conte um pouco sobre você e suas expectativas.
+          </p>
+        </ScrollReveal>
+
+        <ScrollReveal direction="bottom" :delay="300">
+          <div class="form-container">
+            <form @submit.prevent="submitForm" class="career-form">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="name">Nome Completo*</label>
+                  <input type="text" id="name" v-model="formData.name" required placeholder="Seu nome completo">
+                  <span class="error-message" v-if="errors.name">{{ errors.name }}</span>
                 </div>
 
-                <!-- Aviso de Termos -->
-                <div class="terms-notice">
-                  <div class="notice-content">
-                    <i class="fas fa-info-circle notice-icon"></i>
-                    <p>
-                      Ao preencher e enviar este formulário, você concorda automaticamente com os nossos 
-                      <router-link to="/PoliticaPrivacidade" target="_blank" class="terms-link">Termos de Privacidade</router-link> 
-                      e 
-                      <router-link to="/TermosLegais" target="_blank" class="terms-link">Termos Legais</router-link>.
-                    </p>
+                <div class="form-group">
+                  <label for="email">E-mail*</label>
+                  <input type="email" id="email" v-model="formData.email" required placeholder="seu.email@exemplo.com">
+                  <span class="error-message" v-if="errors.email">{{ errors.email }}</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="phone">Telefone*</label>
+                  <input type="tel" id="phone" v-model="formData.phone" required placeholder="(00) 00000-0000"
+                    @input="formatPhone" maxlength="15">
+                  <span class="error-message" v-if="errors.phone">{{ errors.phone }}</span>
+                </div>
+
+
+                <div class="form-group">
+                  <label for="position">Área de Interesse*</label>
+                  <select id="position" v-model="formData.position" required>
+                    <option value="" disabled selected>Selecione uma área</option>
+                    <option value="Administrativo">Administrativo</option>
+                    <option value="Comercial">Comercial</option>
+                    <option value="Logística">Logística</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Recursos Humanos">Recursos Humanos</option>
+                    <option value="Tecnologia">Tecnologia</option>
+                    <option value="Outro">Outro</option>
+                  </select>
+                  <span class="error-message" v-if="errors.position">{{ errors.position }}</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="education">Formação Acadêmica*</label>
+                  <select id="education" v-model="formData.education" required>
+                    <option value="" disabled selected>Selecione sua formação</option>
+                    <option value="Ensino Médio">Ensino Médio</option>
+                    <option value="Ensino Técnico">Ensino Técnico</option>
+                    <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
+                    <option value="Ensino Superior Completo">Ensino Superior Completo</option>
+                    <option value="Pós-graduação">Pós-graduação</option>
+                    <option value="Mestrado">Mestrado</option>
+                    <option value="Doutorado">Doutorado</option>
+                  </select>
+                  <span class="error-message" v-if="errors.education">{{ errors.education }}</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="experience">Experiência Profissional*</label>
+                  <select id="experience" v-model="formData.experience" required>
+                    <option value="" disabled selected>Selecione sua experiência</option>
+                    <option value="Sem experiência">Sem experiência</option>
+                    <option value="Menos de 1 ano">Menos de 1 ano</option>
+                    <option value="1-3 anos">1-3 anos</option>
+                    <option value="3-5 anos">3-5 anos</option>
+                    <option value="5-10 anos">5-10 anos</option>
+                    <option value="Mais de 10 anos">Mais de 10 anos</option>
+                  </select>
+                  <span class="error-message" v-if="errors.experience">{{ errors.experience }}</span>
+                </div>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="message">Mensagem / Carta de Apresentação</label>
+                <textarea id="message" v-model="formData.message" rows="5"
+                  placeholder="Conte-nos um pouco sobre você, suas experiências e expectativas..."></textarea>
+                <span class="error-message" v-if="errors.message">{{ errors.message }}</span>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="resume">Currículo (PDF, DOC ou DOCX)*</label>
+                <div class="file-upload">
+                  <input type="file" id="resume" @change="handleFileUpload" accept=".pdf,.doc,.docx" required>
+                  <div class="file-upload-info">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span v-if="!formData.resume">Arraste seu arquivo ou clique para selecionar</span>
+                    <span v-else>{{ formData.resumeName }}</span>
                   </div>
                 </div>
-                
-                <div class="form-group full-width">
-                  <button type="submit" class="submit-button" :disabled="isSubmitting">
-                    <span v-if="!isSubmitting">Enviar Candidatura</span>
-                    <span v-else><i class="fas fa-spinner fa-spin"></i> Enviando...</span>
-                  </button>
+                <span class="error-message" v-if="errors.resume">{{ errors.resume }}</span>
+              </div>
+
+              <!-- Aviso de Termos -->
+              <div class="terms-notice">
+                <div class="notice-content">
+                  <i class="fas fa-info-circle notice-icon"></i>
+                  <p>
+                    Ao preencher e enviar este formulário, você concorda automaticamente com os nossos
+                    <router-link to="/PoliticaPrivacidade" target="_blank" class="terms-link">Termos de
+                      Privacidade</router-link>
+                    e
+                    <router-link to="/TermosLegais" target="_blank" class="terms-link">Termos Legais</router-link>.
+                  </p>
                 </div>
-              </form>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-      
-      <!-- Seção de Perguntas Frequentes -->
-      <section class="faq-section">
-        <div class="container">
-          <ScrollReveal direction="bottom" :delay="200">
-            <div class="section-title">
-              <span class="accent-line"></span>
-              <h2>Perguntas Frequentes</h2>
-              <span class="accent-line"></span>
-            </div>
-          </ScrollReveal>
-          
-          <div class="faq-container">
-            <ScrollReveal direction="bottom" :delay="300">
-              <div class="faq-item" :class="{ active: activeQuestion === 1 }" @click="toggleQuestion(1)">
-                <div class="faq-question">
-                  <h4>Como funciona o processo seletivo?</h4>
-                  <i class="fas" :class="activeQuestion === 1 ? 'fa-minus' : 'fa-plus'"></i>
+              </div>
+
+              <div class="form-group full-width">
+                <button type="submit" class="submit-button" :disabled="isSubmitting">
+                  <span v-if="!isSubmitting">Enviar Candidatura</span>
+                  <span v-else><i class="fas fa-spinner fa-spin"></i> Enviando...</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+
+    <!-- Seção de Perguntas Frequentes -->
+    <section class="faq-section">
+      <div class="container">
+        <ScrollReveal direction="bottom" :delay="200">
+          <div class="section-title">
+            <span class="accent-line"></span>
+            <h2>Perguntas Frequentes</h2>
+            <span class="accent-line"></span>
+          </div>
+        </ScrollReveal>
+
+        <div class="faq-container">
+          <ScrollReveal direction="bottom" :delay="300">
+            <div class="faq-item" :class="{ active: activeQuestion === 1 }" @click="toggleQuestion(1)">
+              <div class="faq-question">
+                <h4>Como funciona o processo seletivo?</h4>
+                <i class="fas" :class="activeQuestion === 1 ? 'fa-minus' : 'fa-plus'"></i>
               </div>
               <div class="faq-answer">
-                <p>Nosso processo seletivo geralmente inclui as seguintes etapas: análise curricular, entrevista com RH, entrevista técnica e, em alguns casos, testes práticos. O tempo de duração varia de acordo com a vaga e a urgência da contratação.</p>
+                <p>Nosso processo seletivo geralmente inclui as seguintes etapas: análise curricular, entrevista com RH,
+                  entrevista técnica e, em alguns casos, testes práticos. O tempo de duração varia de acordo com a vaga
+                  e a urgência da contratação.</p>
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="350">
             <div class="faq-item" :class="{ active: activeQuestion === 2 }" @click="toggleQuestion(2)">
               <div class="faq-question">
@@ -349,11 +313,12 @@
                 <i class="fas" :class="activeQuestion === 2 ? 'fa-minus' : 'fa-plus'"></i>
               </div>
               <div class="faq-answer">
-                <p>Procuramos dar um retorno em até 15 dias úteis após o recebimento da candidatura. Caso você seja selecionado para a próxima fase, entraremos em contato por e-mail ou telefone.</p>
+                <p>Procuramos dar um retorno em até 15 dias úteis após o recebimento da candidatura. Caso você seja
+                  selecionado para a próxima fase, entraremos em contato por e-mail ou telefone.</p>
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="400">
             <div class="faq-item" :class="{ active: activeQuestion === 3 }" @click="toggleQuestion(3)">
               <div class="faq-question">
@@ -361,11 +326,12 @@
                 <i class="fas" :class="activeQuestion === 3 ? 'fa-minus' : 'fa-plus'"></i>
               </div>
               <div class="faq-answer">
-                <p>Sim! Mantemos um banco de talentos e, quando surgir uma oportunidade compatível com seu perfil, entraremos em contato. Recomendamos atualizar seu currículo periodicamente.</p>
+                <p>Sim! Mantemos um banco de talentos e, quando surgir uma oportunidade compatível com seu perfil,
+                  entraremos em contato. Recomendamos atualizar seu currículo periodicamente.</p>
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="450">
             <div class="faq-item" :class="{ active: activeQuestion === 4 }" @click="toggleQuestion(4)">
               <div class="faq-question">
@@ -373,11 +339,13 @@
                 <i class="fas" :class="activeQuestion === 4 ? 'fa-minus' : 'fa-plus'"></i>
               </div>
               <div class="faq-answer">
-                <p>Sim, a Uni Hospitalar valoriza a diversidade e inclusão. Temos um programa específico para contratação de pessoas com deficiência e adaptamos nosso ambiente de trabalho para garantir acessibilidade.</p>
+                <p>Sim, a Uni Hospitalar valoriza a diversidade e inclusão. Temos um programa específico para
+                  contratação de pessoas com deficiência e adaptamos nosso ambiente de trabalho para garantir
+                  acessibilidade.</p>
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="500">
             <div class="faq-item" :class="{ active: activeQuestion === 5 }" @click="toggleQuestion(5)">
               <div class="faq-question">
@@ -385,16 +353,17 @@
                 <i class="fas" :class="activeQuestion === 5 ? 'fa-minus' : 'fa-plus'"></i>
               </div>
               <div class="faq-answer">
-                <p>Sim, oferecemos programas de estágio e trainee periodicamente. Fique atento às nossas redes sociais e site para informações sobre as próximas turmas e processos seletivos.</p>
+                <p>Sim, oferecemos programas de estágio e trainee periodicamente. Fique atento às nossas redes sociais e
+                  site para informações sobre as próximas turmas e processos seletivos.</p>
               </div>
             </div>
           </ScrollReveal>
         </div>
       </div>
     </section>
-    
+
     <HomeFooter />
-    
+
     <!-- Modal de Sucesso -->
     <div class="modal" v-if="showSuccessModal">
       <div class="modal-content">
@@ -404,7 +373,8 @@
         </div>
         <div class="modal-body">
           <p>Sua candidatura foi enviada com sucesso. Agradecemos seu interesse em fazer parte da nossa equipe!</p>
-          <p>Analisaremos seu currículo e, caso seu perfil esteja alinhado com nossas oportunidades, entraremos em contato.</p>
+          <p>Analisaremos seu currículo e, caso seu perfil esteja alinhado com nossas oportunidades, entraremos em
+            contato.</p>
         </div>
         <div class="modal-footer">
           <button @click="closeModal" class="modal-button">Fechar</button>
@@ -417,7 +387,7 @@
 <script>
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
-import { mask } from 'v-mask';
+import { VueMaskDirective } from 'v-mask';
 
 export default {
   name: 'TrabalheConosco',
@@ -426,7 +396,7 @@ export default {
     HomeFooter
   },
   directives: {
-    mask
+    mask: VueMaskDirective
   },
   data() {
     return {
@@ -449,6 +419,30 @@ export default {
     }
   },
   methods: {
+    formatPhone(event) {
+    // Remove todos os caracteres que não são números
+    let value = event.target.value.replace(/\D/g, '');
+    
+    // Limita a 11 dígitos (DDD + número)
+    if (value.length > 11) {
+      value = value.slice(0, 11);
+    }
+    
+    // Aplica a formatação
+    if (value.length >= 11) {
+      value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+    } else if (value.length >= 7) {
+      value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+    } else if (value.length >= 3) {
+      value = value.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+    } else if (value.length >= 1) {
+      value = value.replace(/(\d{0,2})/, '($1');
+    }
+    
+    // Atualiza o valor
+    this.formData.phone = value;
+    event.target.value = value;
+  },
     handleFileUpload(event) {
       const file = event.target.files[0];
       if (file) {
@@ -460,7 +454,7 @@ export default {
           this.formData.resumeName = '';
           return;
         }
-        
+
         // Verificar tamanho do arquivo (máximo 5MB)
         if (file.size > 5 * 1024 * 1024) {
           this.errors.resume = 'O arquivo deve ter no máximo 5MB.';
@@ -468,7 +462,7 @@ export default {
           this.formData.resumeName = '';
           return;
         }
-        
+
         this.formData.resume = file;
         this.formData.resumeName = file.name;
         this.errors.resume = '';
@@ -477,69 +471,69 @@ export default {
     validateForm() {
       let isValid = true;
       this.errors = {};
-      
+
       // Validar nome
       if (!this.formData.name.trim()) {
         this.errors.name = 'Por favor, informe seu nome completo.';
         isValid = false;
       }
-      
+
       // Validar e-mail
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!this.formData.email.trim() || !emailRegex.test(this.formData.email)) {
         this.errors.email = 'Por favor, informe um e-mail válido.';
         isValid = false;
       }
-      
+
       // Validar telefone
       if (!this.formData.phone.trim() || this.formData.phone.replace(/[^0-9]/g, '').length < 10) {
         this.errors.phone = 'Por favor, informe um telefone válido.';
         isValid = false;
       }
-      
+
       // Validar área de interesse
       if (!this.formData.position) {
         this.errors.position = 'Por favor, selecione uma área de interesse.';
         isValid = false;
       }
-      
+
       // Validar formação
       if (!this.formData.education) {
         this.errors.education = 'Por favor, selecione sua formação acadêmica.';
         isValid = false;
       }
-      
+
       // Validar experiência
       if (!this.formData.experience) {
         this.errors.experience = 'Por favor, selecione sua experiência profissional.';
         isValid = false;
       }
-      
+
       // Validar currículo
       if (!this.formData.resume) {
         this.errors.resume = 'Por favor, anexe seu currículo.';
         isValid = false;
       }
-      
+
       // Validar termos
       if (!this.formData.termsAccepted) {
         this.errors.termsAccepted = 'Você precisa aceitar os termos para continuar.';
         isValid = false;
       }
-      
+
       return isValid;
     },
     submitForm() {
       if (this.validateForm()) {
         this.isSubmitting = true;
-        
+
         // Simulação de envio para o servidor
         setTimeout(() => {
           this.isSubmitting = false;
           this.showSuccessModal = true;
           this.resetForm();
         }, 2000);
-        
+
         // Aqui você implementaria a lógica real de envio para o servidor
         // const formData = new FormData();
         // Object.keys(this.formData).forEach(key => {
@@ -572,7 +566,7 @@ export default {
         resumeName: '',
         termsAccepted: false
       };
-      
+
       // Resetar o input de arquivo
       const fileInput = document.getElementById('resume');
       if (fileInput) fileInput.value = '';
@@ -669,6 +663,7 @@ section {
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1209,8 +1204,13 @@ section {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .modal-content {
@@ -1223,8 +1223,15 @@ section {
 }
 
 @keyframes scaleIn {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .modal-header {
@@ -1312,24 +1319,24 @@ section {
   .parallax-container {
     background-position: center 220px;
   }
-  
+
   .hero-subtitle {
     font-size: 1.3rem;
   }
-  
+
   section {
     padding: 60px 0;
   }
-  
+
   .benefits-container {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  
+
   .benefits-image {
     order: 2;
   }
-  
+
   .benefits-list {
     order: 1;
   }
@@ -1344,37 +1351,37 @@ section {
     height: 60vh;
     min-height: 400px;
   }
-  
+
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .section-title h2 {
     font-size: 2rem;
   }
-  
+
   .intro-text {
     font-size: 1.1rem;
   }
-  
+
   .form-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .form-group.full-width {
     grid-column: span 1;
   }
-  
+
   .form-container {
     padding: 30px 20px;
   }
-  
+
   .benefit-item {
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
-  
+
   .benefit-icon {
     margin-bottom: 15px;
   }
@@ -1392,37 +1399,37 @@ section {
   .container {
     padding: 0 20px;
   }
-  
+
   .hero-title {
     font-size: 2rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.1rem;
   }
-  
+
   .section-title h2 {
     font-size: 1.8rem;
   }
-  
+
   .accent-line {
     width: 40px;
   }
-  
+
   .value-icon {
     width: 60px;
     height: 60px;
     font-size: 1.5rem;
   }
-  
+
   .value-card h3 {
     font-size: 1.3rem;
   }
-  
+
   .submit-button {
     width: 100%;
   }
-  
+
   .faq-question h4 {
     font-size: 1rem;
   }
@@ -1433,15 +1440,18 @@ section {
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
+
   100% {
     transform: translateY(0px);
   }
 }
 
-.value-icon i, .benefit-icon i {
+.value-icon i,
+.benefit-icon i {
   animation: float 3s ease-in-out infinite;
 }
 
@@ -1450,9 +1460,11 @@ section {
   0% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0.7);
   }
+
   70% {
     box-shadow: 0 0 0 10px rgba(174, 44, 42, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0);
   }
@@ -1490,56 +1502,57 @@ section {
   .parallax-container {
     background-position: center 320px;
   }
-  
+
   .hero-title {
     font-size: 1.8rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1rem;
   }
-  
-  .value-card, .benefit-item {
+
+  .value-card,
+  .benefit-item {
     padding: 20px;
   }
-  
+
   .value-icon {
     width: 50px;
     height: 50px;
     font-size: 1.3rem;
   }
-  
+
   .value-card h3 {
     font-size: 1.2rem;
   }
-  
+
   .benefit-icon {
     width: 40px;
     height: 40px;
     font-size: 1.2rem;
   }
-  
+
   .benefit-content h4 {
     font-size: 1.1rem;
   }
-  
+
   .form-container {
     padding: 20px 15px;
   }
-  
+
   .submit-button {
     padding: 12px 20px;
     font-size: 1rem;
   }
-  
+
   .modal-content {
     width: 95%;
   }
-  
+
   .modal-header i {
     font-size: 2.5rem;
   }
-  
+
   .modal-header h3 {
     font-size: 1.3rem;
   }

@@ -1001,6 +1001,7 @@ section {
   margin-bottom: 15px;
   line-height: 1;
   background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
