@@ -1,7 +1,7 @@
 <template>
   <div class="servicos-page">
     <HomeHeader />
-    
+
     <!-- Hero Section com Efeito Parallax -->
     <section class="hero-section">
       <div class="parallax-container">
@@ -10,7 +10,7 @@
         <div class="hero-subtitle">{{ t('services.heroSubtitle') }}</div>
       </div>
     </section>
-    
+
     <!-- Seção de Introdução -->
     <section class="intro-section">
       <div class="container">
@@ -26,7 +26,7 @@
         </ScrollReveal>
       </div>
     </section>
-    
+
     <!-- Seção Principal de Serviços -->
     <section class="services-main">
       <div class="container">
@@ -41,7 +41,7 @@
             </div>
           </div>
         </ScrollReveal>
-        
+
         <div class="services-grid">
           <ScrollReveal direction="left" :delay="300">
             <div class="service-card">
@@ -60,7 +60,7 @@
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="right" :delay="400">
             <div class="service-card">
               <div class="service-icon public">
@@ -81,7 +81,7 @@
         </div>
       </div>
     </section>
-    
+
     <!-- Seção de Processo de Trabalho -->
     <section class="process-section">
       <div class="container">
@@ -93,7 +93,7 @@
           </div>
           <p class="process-intro">{{ t('services.processIntro') }}</p>
         </ScrollReveal>
-        
+
         <div class="process-steps">
           <ScrollReveal direction="bottom" :delay="300">
             <div class="process-step">
@@ -104,7 +104,7 @@
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="400">
             <div class="process-step">
               <div class="step-number">02</div>
@@ -114,7 +114,7 @@
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="500">
             <div class="process-step">
               <div class="step-number">03</div>
@@ -124,7 +124,7 @@
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="600">
             <div class="process-step">
               <div class="step-number">04</div>
@@ -137,7 +137,7 @@
         </div>
       </div>
     </section>
-    
+
     <!-- Seção de Benefícios -->
     <section class="benefits-section">
       <div class="container">
@@ -148,7 +148,7 @@
             <span class="accent-line"></span>
           </div>
         </ScrollReveal>
-        
+
         <div class="benefits-grid">
           <ScrollReveal direction="bottom" :delay="300">
             <div class="benefit-card">
@@ -159,7 +159,7 @@
               <p>{{ t('services.benefits.efficiency.description') }}</p>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="400">
             <div class="benefit-card">
               <div class="benefit-icon">
@@ -169,7 +169,7 @@
               <p>{{ t('services.benefits.security.description') }}</p>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="500">
             <div class="benefit-card">
               <div class="benefit-icon">
@@ -179,7 +179,7 @@
               <p>{{ t('services.benefits.partnerships.description') }}</p>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="600">
             <div class="benefit-card">
               <div class="benefit-icon">
@@ -192,7 +192,7 @@
         </div>
       </div>
     </section>
-    
+
     <!-- Seção CTA -->
     <section class="cta-section">
       <div class="container">
@@ -205,7 +205,7 @@
         </ScrollReveal>
       </div>
     </section>
-    
+
     <HomeFooter />
   </div>
 </template>
@@ -222,7 +222,7 @@ export default {
   },
   setup() {
     const { t, currentLanguage } = useServicesTranslation()
-    
+
     return {
       t,
       currentLanguage
@@ -242,7 +242,7 @@ export default {
 </script>
 
 <style scoped>
-/* Todo o CSS permanece igual ao original */
+/* Estilos Gerais */
 .servicos-page {
   font-family: 'Montserrat', sans-serif;
   color: #333;
@@ -319,6 +319,7 @@ section {
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -416,11 +417,11 @@ section {
 }
 
 .service-icon.private {
-  background: linear-gradient(135deg, #2C5EAE, #5596ff);
+  background: linear-gradient(135deg, #AE2C2A, #D2342C);
 }
 
 .service-icon.public {
-  background: linear-gradient(135deg, #2CAE6F, #55ff9d);
+  background: linear-gradient(135deg, #8B2220, #AE2C2A);
 }
 
 .service-content {
@@ -448,19 +449,19 @@ section {
 }
 
 .service-card:nth-child(2) .service-content h3 {
-  color: #2C5EAE;
+  color: #AE2C2A;
 }
 
 .service-card:nth-child(2) .service-content h3::after {
-  background-color: #2C5EAE;
+  background-color: #AE2C2A;
 }
 
 .service-card:nth-child(3) .service-content h3 {
-  color: #2CAE6F;
+  color: #8B2220;
 }
 
 .service-card:nth-child(3) .service-content h3::after {
-  background-color: #2CAE6F;
+  background-color: #8B2220;
 }
 
 .service-content p {
@@ -491,11 +492,11 @@ section {
 }
 
 .service-card:nth-child(2) .service-features li::before {
-  color: #2C5EAE;
+  color: #AE2C2A;
 }
 
 .service-card:nth-child(3) .service-features li::before {
-  color: #2CAE6F;
+  color: #8B2220;
 }
 
 .services-grid {
@@ -592,7 +593,10 @@ section {
 
 /* Seção de Benefícios */
 .benefits-section {
-  margin-bottom: 50px;
+  background: linear-gradient(135deg, #f8f9fa, #ffffff);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .benefits-section::before {
@@ -602,58 +606,115 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ae2c2a' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7z' fill='%23ae2c2a' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+  z-index: 0;
+}
+
+.benefits-section .container {
+  position: relative;
+  z-index: 1;
 }
 
 .benefit-card {
   background: white;
-  border-radius: 15px;
-  padding: 30px;
+  border-radius: 20px;
+  padding: 40px 30px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 100%;
+  box-shadow: 0 15px 40px rgba(174, 44, 42, 0.08);
+  transition: all 0.4s ease;
+  height: 320px;
   display: flex;
-  flex-direction: column;   
-  justify-content: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(174, 44, 42, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.benefit-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(135deg, #AE2C2A, #D2342C);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.benefit-card:hover::before {
+  transform: scaleX(1);
+}
+
+.benefit-card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 25px 60px rgba(174, 44, 42, 0.15);
+  border-color: rgba(174, 44, 42, 0.2);
 }
 
 .benefit-icon {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  background: linear-gradient(135deg, #AE2C2A, #D2342C);
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto 20px;
+  margin: 0 auto 25px;
   color: white;
-  font-size: 2rem;
+  font-size: 2.2rem;
   flex-shrink: 0;
+  box-shadow: 0 10px 30px rgba(174, 44, 42, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.benefit-card:hover .benefit-icon {
+  transform: scale(1.1);
 }
 
 .benefit-card h4 {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   color: #333;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   flex-shrink: 0;
+  font-weight: 700;
+  position: relative;
 }
 
 .benefit-card p {
   color: #666;
   margin: 0;
-  flex-grow: 1; 
+  flex-grow: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  line-height: 1.7;
+  font-size: 1rem;
 }
 
 .benefits-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
   align-items: stretch;
+  margin-top: 60px;
+}
+
+.benefit-card:nth-child(1) .benefit-icon {
+  background: linear-gradient(135deg, #AE2C2A, #D2342C);
+}
+
+.benefit-card:nth-child(2) .benefit-icon {
+  background: linear-gradient(135deg, #8B2220, #AE2C2A);
+}
+
+.benefit-card:nth-child(3) .benefit-icon {
+  background: linear-gradient(135deg, #D2342C, #FF4444);
+}
+
+.benefit-card:nth-child(4) .benefit-icon {
+  background: linear-gradient(135deg, #AE2C2A, #8B2220);
 }
 
 /* Seção CTA */
@@ -707,7 +768,7 @@ section {
 
   .benefits-grid {
     grid-template-columns: 1fr 1fr;
-    row-gap: 100px;
+    row-gap: 40px;
   }
 
   .benefits-section {
@@ -719,32 +780,47 @@ section {
   .hero-title {
     font-size: 3rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.3rem;
   }
-  
+
   section {
     padding: 60px 0;
   }
-  
+
   .service-card {
     flex-direction: column;
   }
-  
+
   .service-icon {
     min-width: 100%;
     padding: 30px 0;
   }
-  
+
   .process-steps::before {
     left: 25px;
   }
-  
+
   .step-number {
     width: 50px;
     height: 50px;
     font-size: 1.3rem;
+  }
+
+  .benefits-section {
+    padding: 80px 0;
+  }
+
+  .benefit-card {
+    height: 300px;
+    padding: 35px 25px;
+  }
+
+  .benefit-icon {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
   }
 }
 
@@ -753,29 +829,60 @@ section {
     height: 60vh;
     min-height: 400px;
   }
-  
+
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .section-title h2 {
     font-size: 2rem;
   }
-  
+
   .intro-text {
     font-size: 1.1rem;
   }
-  
+
   .cta-content h2 {
     font-size: 2rem;
   }
-  
+
   .step-number {
     margin: 0 auto;
   }
-  
+
   .step-content {
     text-align: center;
+  }
+
+  .benefits-section {
+    padding: 70px 0;
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-top: 40px;
+  }
+
+  .benefit-card {
+    height: 280px;
+    padding: 30px 20px;
+  }
+
+  .benefit-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+  .benefit-card h4 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+
+  .benefit-card p {
+    font-size: 0.95rem;
   }
 }
 
@@ -783,36 +890,52 @@ section {
   .container {
     padding: 0 20px;
   }
-  
+
   .hero-title {
     font-size: 2rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.1rem;
   }
-  
+
   .section-title h2 {
     font-size: 1.8rem;
   }
-  
+
   .accent-line {
     width: 40px;
   }
-  
-   .cta-button {
+
+  .cta-button {
     padding: 12px 30px;
     font-size: 1rem;
   }
-  
+
+  .benefits-section {
+    padding: 60px 0;
+  }
+
+  .benefit-card {
+    height: 260px;
+    padding: 25px 15px;
+  }
+
   .benefit-icon {
     width: 60px;
     height: 60px;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    margin-bottom: 15px;
   }
 
-  .benefits-grid {
-    grid-template-columns: 1fr;
+  .benefit-card h4 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+
+  .benefit-card p {
+    font-size: 0.9rem;
+    line-height: 1.6;
   }
 }
 
@@ -821,7 +944,7 @@ section {
     flex-direction: column;
     gap: 15px;
   }
-  
+
   .process-steps::before {
     display: none;
   }
@@ -832,25 +955,79 @@ section {
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
+
   100% {
     transform: translateY(0px);
   }
 }
 
-.service-icon i, .benefit-icon i {
+.service-icon i,
+.benefit-icon i {
   animation: float 3s ease-in-out infinite;
 }
 
-/* Animação para os cards de serviços quando em hover */
+/* Animações adicionais para benefícios */
+@keyframes benefitFloat {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.benefit-icon {
+  animation: benefitFloat 3s ease-in-out infinite;
+}
+
+.benefit-card:nth-child(2) .benefit-icon {
+  animation-delay: 0.5s;
+}
+
+.benefit-card:nth-child(3) .benefit-icon {
+  animation-delay: 1s;
+}
+
+.benefit-card:nth-child(4) .benefit-icon {
+  animation-delay: 1.5s;
+}
+
+/* Efeito de hover mais suave para touch devices */
+@media (hover: none) {
+  .benefit-card:hover {
+    transform: none;
+  }
+
+  .benefit-card:hover .benefit-icon {
+    transform: none;
+  }
+}
+
+/* Melhorias de acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  .benefit-icon {
+    animation: none;
+  }
+
+  .benefit-card {
+    transition: none;
+  }
+}
+
 .service-card:hover .service-icon {
   transform: scale(1.05);
   transition: transform 0.3s ease;
 }
 
-/* Animação para os números de etapas */
 .process-step:hover .step-number {
   background: rgba(255, 255, 255, 0.2);
   transform: scale(1.1);
@@ -862,9 +1039,11 @@ section {
   0% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0.7);
   }
+
   70% {
     box-shadow: 0 0 0 10px rgba(174, 44, 42, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0);
   }
@@ -879,19 +1058,19 @@ section {
   .hero-title {
     font-size: 1.8rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1rem;
   }
-  
+
   .service-content h3 {
     font-size: 1.5rem;
   }
-  
+
   .step-content h4 {
     font-size: 1.2rem;
   }
-  
+
   .benefit-card {
     padding: 20px;
   }

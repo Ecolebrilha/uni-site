@@ -46,6 +46,55 @@ const translations = reactive({
           label: 'Estados Atendidos'
         }
       },
+      differentials: {
+        title: 'Nossos Diferenciais',
+        items: [
+          {
+            title: 'Qualidade Premium',
+            description: 'Produtos com certificação internacional e rigoroso controle de qualidade'
+          },
+          {
+            title: 'Entrega Rápida',
+            description: 'Logística otimizada para atender suas necessidades com agilidade'
+          },
+          {
+            title: 'Suporte Especializado',
+            description: 'Equipe técnica qualificada para orientação e suporte completo'
+          },
+          {
+            title: 'Confiabilidade',
+            description: 'Parceria sólida construída com base na confiança e transparência'
+          },
+          {
+            title: 'Soluções Personalizadas',
+            description: 'Adaptamos nossos serviços às necessidades específicas de cada cliente'
+          },
+          {
+            title: 'Inovação Constante',
+            description: 'Sempre em busca das melhores tecnologias e práticas do mercado'
+          }
+        ]
+      },
+      keyPoints: {
+        tradition: {
+          title: 'Tradição e Confiança',
+          description: 'Anos de experiência no mercado hospitalar'
+        },
+        team: {
+          title: 'Equipe Especializada',
+          description: 'Profissionais qualificados e dedicados'
+        },
+        reach: {
+          title: 'Alcance Nacional',
+          description: 'Atendimento em todo território brasileiro'
+        }
+      },
+      badges: {
+        excellence: 'Excelência em Saúde'
+      },
+      buttons: {
+        knowMore: 'Conheça Mais'
+      },
       ctaTitle: 'Faça parte da nossa história',
       ctaText: 'Entre em contato conosco e descubra como podemos trabalhar juntos.',
       ctaButton: 'Fale Conosco'
@@ -94,6 +143,55 @@ const translations = reactive({
           label: 'States Served'
         }
       },
+      differentials: {
+        title: 'Our Differentials',
+        items: [
+          {
+            title: 'Premium Quality',
+            description: 'Products with international certification and rigorous quality control'
+          },
+          {
+            title: 'Fast Delivery',
+            description: 'Optimized logistics to meet your needs with agility'
+          },
+          {
+            title: 'Specialized Support',
+            description: 'Qualified technical team for guidance and complete support'
+          },
+          {
+            title: 'Reliability',
+            description: 'Solid partnership built on trust and transparency'
+          },
+          {
+            title: 'Customized Solutions',
+            description: 'We adapt our services to the specific needs of each client'
+          },
+          {
+            title: 'Constant Innovation',
+            description: 'Always seeking the best technologies and market practices'
+          }
+        ]
+      },
+      keyPoints: {
+        tradition: {
+          title: 'Tradition and Trust',
+          description: 'Years of experience in the hospital market'
+        },
+        team: {
+          title: 'Specialized Team',
+          description: 'Qualified and dedicated professionals'
+        },
+        reach: {
+          title: 'National Reach',
+          description: 'Service throughout Brazilian territory'
+        }
+      },
+      badges: {
+        excellence: 'Excellence in Health'
+      },
+      buttons: {
+        knowMore: 'Learn More'
+      },
       ctaTitle: 'Be part of our story',
       ctaText: 'Contact us and discover how we can work together.',
       ctaButton: 'Contact Us'
@@ -141,6 +239,55 @@ const translations = reactive({
           number: '27',
           label: 'Estados Atendidos'
         }
+      },
+      differentials: {
+        title: 'Nuestros Diferenciales',
+        items: [
+          {
+            title: 'Calidad Premium',
+            description: 'Productos con certificación internacional y riguroso control de calidad'
+          },
+          {
+            title: 'Entrega Rápida',
+            description: 'Logística optimizada para atender sus necesidades con agilidad'
+          },
+          {
+            title: 'Soporte Especializado',
+            description: 'Equipo técnico calificado para orientación y soporte completo'
+          },
+          {
+            title: 'Confiabilidad',
+            description: 'Asociación sólida construida sobre la base de confianza y transparencia'
+          },
+          {
+            title: 'Soluciones Personalizadas',
+            description: 'Adaptamos nuestros servicios a las necesidades específicas de cada cliente'
+          },
+          {
+            title: 'Innovación Constante',
+            description: 'Siempre en busca de las mejores tecnologías y prácticas del mercado'
+          }
+        ]
+      },
+      keyPoints: {
+        tradition: {
+          title: 'Tradición y Confianza',
+          description: 'Años de experiencia en el mercado hospitalario'
+        },
+        team: {
+          title: 'Equipo Especializado',
+          description: 'Profesionales calificados y dedicados'
+        },
+        reach: {
+          title: 'Alcance Nacional',
+          description: 'Atención en todo el territorio brasileño'
+        }
+      },
+      badges: {
+        excellence: 'Excelencia en Salud'
+      },
+      buttons: {
+        knowMore: 'Conoce Más'
       },
       ctaTitle: 'Forma parte de nuestra historia',
       ctaText: 'Contáctanos y descubre cómo podemos trabajar juntos.',

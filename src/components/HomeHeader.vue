@@ -7,7 +7,7 @@
     <!-- Menu sidebar -->
     <div :class="['menu-sidebar', { 'active': sidebarOpen }]">
       <div class="sidebar-header">
-        <img src="@/assets/logo-uni.png" alt="Logo da Uni Hospitalar" class="sidebar-logo">
+        <img src="@/assets/logo-uni2.png" alt="Logo da Uni Hospitalar" class="sidebar-logo">
         <button class="menu-close" @click="toggleSidebar">
           <i class="fas fa-times"></i>
         </button>
@@ -103,7 +103,7 @@
     </div>
     <router-link to="/" custom v-slot="{ navigate }">
       <div class="logo-container" :class="{'scrolled': isScrolled}" @click="navigate" role="link">
-        <img src="@/assets/logo-uni.png" alt="Logo da Uni Hospitalar" class="logo">
+        <img src="@/assets/logo-uni2.png" alt="Logo da Uni Hospitalar" class="logo">
       </div>
     </router-link>
 
@@ -422,7 +422,7 @@ header * {
 }
 
 .logo {
-  max-height: 100%;
+  max-height: 75px;
   width: auto;
   display: block;
   transition: transform 0.3s ease;
@@ -863,7 +863,7 @@ nav ul li.dropdown:hover .dropdown-content {
 }
 
 .sidebar-logo {
-  height: 40px;
+  height: 55px;
   width: auto;
 }
 
@@ -1325,7 +1325,7 @@ nav ul li.dropdown:hover .dropdown-content {
   }
 
   .logo {
-    max-height: 50px;
+    max-height: 60px;
   }
 }
 
@@ -1382,7 +1382,7 @@ nav ul li.dropdown:hover .dropdown-content {
   }
 
   .logo {
-    max-height: 40px;
+    max-height: 55px;
   }
 
   nav ul li a,
@@ -1428,7 +1428,7 @@ nav ul li.dropdown:hover .dropdown-content {
   }
 
   .logo {
-    max-height: 45px;
+    max-height: 80px;
     max-width: 100%;
   }
   
@@ -1476,7 +1476,7 @@ nav ul li.dropdown:hover .dropdown-content {
   }
 
   .logo {
-    max-height: 40px;
+    max-height: 70px;
   }
   
   .mobile-center-controls .social-icon {
@@ -1501,7 +1501,7 @@ nav ul li.dropdown:hover .dropdown-content {
   }
 
   .logo {
-    max-height: 35px;
+    max-height: 50px;
   }
   
   .mobile-center-controls .social-icon {
@@ -1576,7 +1576,7 @@ nav ul li.dropdown:hover .dropdown-content {
   }
 
   .logo {
-    max-height: 25px;
+    max-height: 35px;
   }
   
   .mobile-center-controls {

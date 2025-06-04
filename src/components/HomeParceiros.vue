@@ -169,7 +169,7 @@ export default {
       this.sidebarOpen = !this.sidebarOpen;
     },
     handleImageError(e) {
-      e.target.src = require('@/assets/logo-uni.png');
+      e.target.src = require('@/assets/logo-uni2.png');
     }
   }
 }

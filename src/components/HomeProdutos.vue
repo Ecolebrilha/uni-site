@@ -1,7 +1,7 @@
 <template>
   <div class="produtos-page">
     <HomeHeader />
-    
+
     <!-- Hero Section com Efeito Parallax -->
     <section class="hero-section">
       <div class="parallax-container">
@@ -10,7 +10,7 @@
         <div class="hero-subtitle">{{ t('products.heroSubtitle') }}</div>
       </div>
     </section>
-    
+
     <!-- Seção de Introdução -->
     <section class="intro-section">
       <div class="container">
@@ -26,74 +26,78 @@
         </ScrollReveal>
       </div>
     </section>
-    
+
     <!-- Seção de Categorias de Produtos -->
-<section class="products-categories">
-  <div class="container">
-    <div class="categories-grid">
-      <ScrollReveal direction="left" :delay="200">
-        <div class="category-card">
-          <div class="category-icon">
-            <i class="fas fa-box-open"></i>
-          </div>
-          <div class="category-content">
-            <h3>{{ t('products.categories.productLine.title') }}</h3>
-            <p>{{ t('products.categories.productLine.description') }}</p>
-            <div class="category-features">
-              <span v-for="feature in t('products.categories.productLine.features')" :key="feature">{{ feature }}</span>
+    <section class="products-categories">
+      <div class="container">
+        <div class="categories-grid">
+          <ScrollReveal direction="left" :delay="200">
+            <div class="category-card">
+              <div class="category-icon">
+                <i class="fas fa-box-open"></i>
+              </div>
+              <div class="category-content">
+                <h3>{{ t('products.categories.productLine.title') }}</h3>
+                <p>{{ t('products.categories.productLine.description') }}</p>
+                <div class="category-features">
+                  <span v-for="feature in t('products.categories.productLine.features')" :key="feature">{{ feature
+                    }}</span>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </ScrollReveal>
-      
-      <ScrollReveal direction="right" :delay="300">
-  <div class="category-card reverse">
-    <div class="category-content">
-      <h3>{{ t('products.categories.diverseMedicines.title') }}</h3>
-      <p>{{ t('products.categories.diverseMedicines.description') }}</p>
-      <div class="category-features">
-        <span v-for="feature in t('products.categories.diverseMedicines.features')" :key="feature">{{ feature }}</span>
-      </div>
-    </div>
-    <div class="category-icon">
-      <i class="fas fa-pills"></i>
-    </div>
-  </div>
-</ScrollReveal>
-      
-      <ScrollReveal direction="left" :delay="400">
-        <div class="category-card">
-          <div class="category-icon">
-            <i class="fas fa-capsules"></i>
-          </div>
-          <div class="category-content">
-            <h3>{{ t('products.categories.oncologyMedicines.title') }}</h3>
-            <p>{{ t('products.categories.oncologyMedicines.description') }}</p>
-            <div class="category-features">
-              <span v-for="feature in t('products.categories.oncologyMedicines.features')" :key="feature">{{ feature }}</span>
+          </ScrollReveal>
+
+          <ScrollReveal direction="right" :delay="300">
+            <div class="category-card reverse">
+              <div class="category-content">
+                <h3>{{ t('products.categories.diverseMedicines.title') }}</h3>
+                <p>{{ t('products.categories.diverseMedicines.description') }}</p>
+                <div class="category-features">
+                  <span v-for="feature in t('products.categories.diverseMedicines.features')" :key="feature">{{ feature
+                    }}</span>
+                </div>
+              </div>
+              <div class="category-icon">
+                <i class="fas fa-pills"></i>
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="left" :delay="400">
+            <div class="category-card">
+              <div class="category-icon">
+                <i class="fas fa-capsules"></i>
+              </div>
+              <div class="category-content">
+                <h3>{{ t('products.categories.oncologyMedicines.title') }}</h3>
+                <p>{{ t('products.categories.oncologyMedicines.description') }}</p>
+                <div class="category-features">
+                  <span v-for="feature in t('products.categories.oncologyMedicines.features')" :key="feature">{{ feature
+                    }}</span>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="right" :delay="500">
+            <div class="category-card reverse">
+              <div class="category-content">
+                <h3>{{ t('products.categories.hospitalMedicines.title') }}</h3>
+                <p>{{ t('products.categories.hospitalMedicines.description') }}</p>
+                <div class="category-features">
+                  <span v-for="feature in t('products.categories.hospitalMedicines.features')" :key="feature">{{ feature
+                    }}</span>
+                </div>
+              </div>
+              <div class="category-icon">
+                <i class="fas fa-hospital-alt"></i>
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
-      </ScrollReveal>
-      
-      <ScrollReveal direction="right" :delay="500">
-  <div class="category-card reverse">
-    <div class="category-content">
-      <h3>{{ t('products.categories.hospitalMedicines.title') }}</h3>
-      <p>{{ t('products.categories.hospitalMedicines.description') }}</p>
-      <div class="category-features">
-        <span v-for="feature in t('products.categories.hospitalMedicines.features')" :key="feature">{{ feature }}</span>
       </div>
-    </div>
-    <div class="category-icon">
-      <i class="fas fa-hospital-alt"></i>
-    </div>
-  </div>
-</ScrollReveal>
-    </div>
-  </div>
-</section>
-    
+    </section>
+
     <!-- Seção de Destaques -->
     <section class="featured-section">
       <div class="container">
@@ -104,7 +108,7 @@
             <span class="accent-line"></span>
           </div>
         </ScrollReveal>
-        
+
         <div class="features-grid">
           <ScrollReveal direction="bottom" :delay="300">
             <div class="feature-item">
@@ -115,7 +119,7 @@
               <p>{{ t('products.differentials.logistics.description') }}</p>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="400">
             <div class="feature-item">
               <div class="feature-icon">
@@ -125,7 +129,7 @@
               <p>{{ t('products.differentials.certified.description') }}</p>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="500">
             <div class="feature-item">
               <div class="feature-icon">
@@ -135,7 +139,7 @@
               <p>{{ t('products.differentials.stock.description') }}</p>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="600">
             <div class="feature-item">
               <div class="feature-icon">
@@ -148,7 +152,7 @@
         </div>
       </div>
     </section>
-    
+
     <!-- Seção de Catálogo -->
     <section class="catalog-section">
       <div class="container">
@@ -168,7 +172,7 @@
         </ScrollReveal>
       </div>
     </section>
-    
+
     <!-- Seção CTA -->
     <section class="cta-section">
       <div class="container">
@@ -177,7 +181,8 @@
             <h2>{{ t('products.cta.title') }}</h2>
             <p>{{ t('products.cta.description') }}</p>
             <div class="cta-buttons">
-              <router-link to="/Contato" class="cta-button primary">{{ t('products.cta.contactButton') }}</router-link>
+              <router-link to="/Contato" class="cta-button primary">
+                <i class="fas fa-envelope"></i> {{ t('products.cta.contactButton') }}</router-link>
               <a href="/site/uni-hospitalar-produtos.pdf" target="_blank" class="cta-button secondary">
                 <i class="fas fa-download"></i> {{ t('products.cta.catalogButton') }}
               </a>
@@ -186,7 +191,7 @@
         </ScrollReveal>
       </div>
     </section>
-    
+
     <HomeFooter />
   </div>
 </template>
@@ -203,7 +208,7 @@ export default {
   },
   setup() {
     const { t, currentLanguage } = useProductsTranslation()
-    
+
     return {
       t,
       currentLanguage
@@ -306,6 +311,7 @@ section {
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -380,40 +386,40 @@ section {
   gap: 30px;
 }
 
-.categories-grid > div {
+.categories-grid>div {
   opacity: 0;
   transition: all 0.8s ease-out;
 }
 
-.categories-grid > div:nth-child(odd) {
+.categories-grid>div:nth-child(odd) {
   transform: translateX(-50px);
   align-self: flex-start;
   margin-right: auto;
 }
 
-.categories-grid > div:nth-child(even) {
+.categories-grid>div:nth-child(even) {
   transform: translateX(50px);
   align-self: flex-end;
   margin-left: auto;
 }
 
-.categories-grid > div.is-revealed {
+.categories-grid>div.is-revealed {
   opacity: 1;
   transform: translateX(0);
 }
 
-.categories-grid > div:nth-child(1) .category-card,
-.categories-grid > div:nth-child(3) .category-card {
+.categories-grid>div:nth-child(1) .category-card,
+.categories-grid>div:nth-child(3) .category-card {
   width: 100%;
 }
 
-.categories-grid > div:nth-child(2) .category-card,
-.categories-grid > div:nth-child(4) .category-card {
+.categories-grid>div:nth-child(2) .category-card,
+.categories-grid>div:nth-child(4) .category-card {
   width: 100%;
 }
 
-.categories-grid > div:nth-child(2) .category-content h3::after,
-.categories-grid > div:nth-child(4) .category-content h3::after {
+.categories-grid>div:nth-child(2) .category-content h3::after,
+.categories-grid>div:nth-child(4) .category-content h3::after {
   left: auto;
   right: 0;
 }
@@ -473,28 +479,6 @@ section {
   margin-bottom: 15px;
   line-height: 1.6;
   font-size: 0.95rem;
-}
-
-@media (max-width: 768px) {
-  .categories-grid > div {
-    align-self: center !important;
-  }
-  
-  .categories-grid > div:nth-child(1) .category-card,
-  .categories-grid > div:nth-child(3) .category-card,
-  .categories-grid > div:nth-child(2) .category-card,
-  .categories-grid > div:nth-child(4) .category-card {
-    width: 100%;
-  }
-  
-  .category-card {
-    flex-direction: column;
-  }
-  
-  .category-icon {
-    min-width: 100%;
-    padding: 15px 0;
-  }
 }
 
 .category-features {
@@ -733,6 +717,32 @@ section {
   margin-right: 10px;
 }
 
+.feature-item:hover .feature-icon {
+  transform: scale(1.2);
+  transition: transform 0.3s ease;
+}
+
+.cta-button.secondary:hover {
+  color: #ff5555;
+  border-color: #ff5555;
+}
+
+.feature-item:nth-child(1) {
+  border-bottom: 3px solid rgba(255, 85, 85, 0.5);
+}
+
+.feature-item:nth-child(2) {
+  border-bottom: 3px solid rgba(85, 150, 255, 0.5);
+}
+
+.feature-item:nth-child(3) {
+  border-bottom: 3px solid rgba(85, 255, 157, 0.5);
+}
+
+.feature-item:nth-child(4) {
+  border-bottom: 3px solid rgba(255, 204, 85, 0.5);
+}
+
 /* Responsividade */
 @media (max-width: 1200px) {
   .container {
@@ -755,15 +765,15 @@ section {
   .hero-title {
     font-size: 3rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.3rem;
   }
-  
+
   section {
     padding: 60px 0;
   }
-  
+
   .category-card {
     flex-direction: column;
     width: 100%;
@@ -779,22 +789,22 @@ section {
   .category-card.reverse .category-icon {
     order: -1;
   }
-  
+
   .category-icon {
     min-width: 100%;
     padding: 30px 0;
   }
 
-  .categories-grid > div {
+  .categories-grid>div {
     width: 100% !important;
     max-width: 100% !important;
     align-self: center !important;
   }
-  
+
   .catalog-content {
     flex-direction: column;
   }
-  
+
   .catalog-image {
     min-width: 100%;
     height: 150px;
@@ -810,53 +820,78 @@ section {
     height: 60vh;
     min-height: 400px;
   }
-  
+
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .section-title h2 {
     font-size: 2rem;
   }
-  
+
   .intro-text {
     font-size: 1.1rem;
   }
-  
+
   .cta-content h2 {
     font-size: 2rem;
   }
-  
+
   .catalog-text h3 {
     font-size: 1.8rem;
   }
 
   .features-grid {
     grid-template-columns: 1fr;
-  }	
+  }
+
+  .categories-grid>div {
+    align-self: center !important;
+  }
+
+  .categories-grid>div:nth-child(1) .category-card,
+  .categories-grid>div:nth-child(3) .category-card,
+  .categories-grid>div:nth-child(2) .category-card,
+  .categories-grid>div:nth-child(4) .category-card {
+    width: 100%;
+  }
+
+  .category-card {
+    flex-direction: column;
+  }
+
+  .category-icon {
+    min-width: 100%;
+    padding: 15px 0;
+  }
+
+  .cta-button.primary,
+  .cta-button.secondary {
+    width: 50%;
+  }
 }
 
 @media (max-width: 576px) {
   .container {
     padding: 0 20px;
   }
-  
+
   .hero-title {
     font-size: 2rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.1rem;
   }
-  
+
   .section-title h2 {
     font-size: 1.8rem;
   }
-  
+
   .accent-line {
     width: 40px;
   }
-  
+
   .cta-button {
     padding: 12px 30px;
     font-size: 1rem;
@@ -864,12 +899,12 @@ section {
     margin: 0 auto;
     display: block;
   }
-  
+
   .cta-buttons {
     flex-direction: column;
     gap: 15px;
   }
-  
+
   .category-features {
     justify-content: center;
   }
@@ -880,19 +915,22 @@ section {
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
+
   100% {
     transform: translateY(0px);
   }
 }
 
-.category-icon i, .feature-icon i, .catalog-image i {
+.category-icon i,
+.feature-icon i,
+.catalog-image i {
   animation: float 3s ease-in-out infinite;
 }
 
-/* Animação para os cards de categorias quando em hover */
 .category-card:hover .category-icon {
   transform: scale(1.05);
   transition: transform 0.3s ease;
@@ -903,15 +941,18 @@ section {
   0% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0.7);
   }
+
   70% {
     box-shadow: 0 0 0 10px rgba(174, 44, 42, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0);
   }
 }
 
-.catalog-button:hover, .cta-button.primary:hover {
+.catalog-button:hover,
+.cta-button.primary:hover {
   animation: pulse 1.5s infinite;
 }
 
@@ -920,66 +961,48 @@ section {
   .hero-title {
     font-size: 1.8rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1rem;
   }
-  
+
   .category-content h3 {
     font-size: 1.4rem;
   }
-  
-    .feature-item {
+
+  .feature-item {
     padding: 20px;
   }
-  
+
   .feature-icon {
     font-size: 2rem;
   }
-  
+
   .feature-item h4 {
     font-size: 1.2rem;
   }
-  
+
   .catalog-text {
     padding: 20px;
   }
-  
+
   .catalog-text h3 {
     font-size: 1.5rem;
   }
-  
+
   .catalog-text p {
     font-size: 1rem;
   }
+
+  .catalog-button {
+    padding: 10px;
+    font-size: 0.7rem;
+  }
+
+  .cta-button.primary,
+  .cta-button.secondary {
+    width: 80%;
+  }
 }
 
-/* Efeito de hover para os itens de recursos */
-.feature-item:hover .feature-icon {
-  transform: scale(1.2);
-  transition: transform 0.3s ease;
-}
-
-/* Efeito de hover para os botões */
-.cta-button.secondary:hover {
-  color: #ff5555;
-  border-color: #ff5555;
-}
-
-/* Efeito de destaque para os recursos */
-.feature-item:nth-child(1) {
-  border-bottom: 3px solid rgba(255, 85, 85, 0.5);
-}
-
-.feature-item:nth-child(2) {
-  border-bottom: 3px solid rgba(85, 150, 255, 0.5);
-}
-
-.feature-item:nth-child(3) {
-  border-bottom: 3px solid rgba(85, 255, 157, 0.5);
-}
-
-.feature-item:nth-child(4) {
-  border-bottom: 3px solid rgba(255, 204, 85, 0.5);
-}
 </style>

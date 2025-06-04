@@ -2,7 +2,7 @@
   <div id="app">
     <div class="page-transition-overlay" :class="{ active: isTransitioning }">
       <div class="transition-logo-container" v-if="isTransitioning">
-        <img src="@/assets/logo-uni.png" alt="Uni Hospitalar" class="transition-logo">
+        <img src="@/assets/logo-uni2.png" alt="Uni Hospitalar" class="transition-logo">
       </div>
     </div>
     <transition 

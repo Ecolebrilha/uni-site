@@ -1,7 +1,7 @@
 <template>
   <div class="diferenciais-page">
     <HomeHeader />
-    
+
     <!-- Hero Section com Efeito Parallax -->
     <section class="hero-section">
       <div class="parallax-container">
@@ -10,7 +10,7 @@
         <div class="hero-subtitle">{{ t('differentials.heroSubtitle') }}</div>
       </div>
     </section>
-    
+
     <!-- Seção de Introdução -->
     <section class="intro-section">
       <div class="container">
@@ -26,8 +26,8 @@
         </ScrollReveal>
       </div>
     </section>
-    
-    <!-- Seção de Diferenciais com Cards Modernos -->
+
+    <!-- Seção de Diferenciais -->
     <section class="features-section">
       <div class="container">
         <div class="features-grid">
@@ -40,13 +40,15 @@
                 <h3>{{ t('differentials.features.inventory.title') }}</h3>
                 <p>{{ t('differentials.features.inventory.description') }}</p>
                 <ul class="feature-list">
-                  <li><span class="highlight">{{ t('differentials.features.inventory.feature1') }}</span> {{ t('differentials.features.inventory.feature1Description') }}</li>
-                  <li><span class="highlight">{{ t('differentials.features.inventory.feature2') }}</span> {{ t('differentials.features.inventory.feature2Description') }}</li>
+                  <li><span class="highlight">{{ t('differentials.features.inventory.feature1') }}</span> {{
+                    t('differentials.features.inventory.feature1Description') }}</li>
+                  <li><span class="highlight">{{ t('differentials.features.inventory.feature2') }}</span> {{
+                    t('differentials.features.inventory.feature2Description') }}</li>
                 </ul>
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="right" :delay="300">
             <div class="feature-card">
               <div class="feature-icon-wrapper">
@@ -56,13 +58,15 @@
                 <h3>{{ t('differentials.features.logistics.title') }}</h3>
                 <p>{{ t('differentials.features.logistics.description') }}</p>
                 <ul class="feature-list">
-                  <li><span class="highlight">{{ t('differentials.features.logistics.feature1') }}</span> {{ t('differentials.features.logistics.feature1Description') }}</li>
-                  <li><span class="highlight">{{ t('differentials.features.logistics.feature2') }}</span> {{ t('differentials.features.logistics.feature2Description') }}</li>
+                  <li><span class="highlight">{{ t('differentials.features.logistics.feature1') }}</span> {{
+                    t('differentials.features.logistics.feature1Description') }}</li>
+                  <li><span class="highlight">{{ t('differentials.features.logistics.feature2') }}</span> {{
+                    t('differentials.features.logistics.feature2Description') }}</li>
                 </ul>
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="left" :delay="400">
             <div class="feature-card">
               <div class="feature-icon-wrapper">
@@ -72,13 +76,15 @@
                 <h3>{{ t('differentials.features.expansion.title') }}</h3>
                 <p>{{ t('differentials.features.expansion.description') }}</p>
                 <ul class="feature-list">
-                  <li><span class="highlight">{{ t('differentials.features.expansion.feature1') }}</span> {{ t('differentials.features.expansion.feature1Description') }}</li>
-                  <li><span class="highlight">{{ t('differentials.features.expansion.feature2') }}</span> {{ t('differentials.features.expansion.feature2Description') }}</li>
+                  <li><span class="highlight">{{ t('differentials.features.expansion.feature1') }}</span> {{
+                    t('differentials.features.expansion.feature1Description') }}</li>
+                  <li><span class="highlight">{{ t('differentials.features.expansion.feature2') }}</span> {{
+                    t('differentials.features.expansion.feature2Description') }}</li>
                 </ul>
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="right" :delay="500">
             <div class="feature-card">
               <div class="feature-icon-wrapper">
@@ -88,8 +94,10 @@
                 <h3>{{ t('differentials.features.quality.title') }}</h3>
                 <p>{{ t('differentials.features.quality.description') }}</p>
                 <ul class="feature-list">
-                  <li><span class="highlight">{{ t('differentials.features.quality.feature1') }}</span> {{ t('differentials.features.quality.feature1Description') }}</li>
-                  <li><span class="highlight">{{ t('differentials.features.quality.feature2') }}</span> {{ t('differentials.features.quality.feature2Description') }}</li>
+                  <li><span class="highlight">{{ t('differentials.features.quality.feature1') }}</span> {{
+                    t('differentials.features.quality.feature1Description') }}</li>
+                  <li><span class="highlight">{{ t('differentials.features.quality.feature2') }}</span> {{
+                    t('differentials.features.quality.feature2Description') }}</li>
                 </ul>
               </div>
             </div>
@@ -97,7 +105,7 @@
         </div>
       </div>
     </section>
-    
+
     <!-- Seção de Métricas/Indicadores -->
     <section class="metrics-section">
       <div class="container">
@@ -108,7 +116,7 @@
             <span class="accent-line"></span>
           </div>
         </ScrollReveal>
-        
+
         <div class="metrics-grid">
           <ScrollReveal direction="bottom" :delay="300">
             <div class="metric-card">
@@ -119,7 +127,7 @@
               <div class="metric-label">{{ t('differentials.metrics.delivery.label') }}</div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="400">
             <div class="metric-card">
               <div class="metric-icon">
@@ -129,7 +137,7 @@
               <div class="metric-label">{{ t('differentials.metrics.accuracy.label') }}</div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="500">
             <div class="metric-card">
               <div class="metric-icon">
@@ -139,7 +147,7 @@
               <div class="metric-label">{{ t('differentials.metrics.satisfaction.label') }}</div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="600">
             <div class="metric-card">
               <div class="metric-icon">
@@ -152,8 +160,8 @@
         </div>
       </div>
     </section>
-    
-    <!-- Seção de Depoimentos com Design Moderno -->
+
+    <!-- Seção de Depoimentos -->
     <section class="testimonials-section">
       <div class="container">
         <ScrollReveal direction="bottom" :delay="200">
@@ -163,7 +171,7 @@
             <span class="accent-line"></span>
           </div>
         </ScrollReveal>
-        
+
         <div class="testimonials-grid">
           <ScrollReveal direction="left" :delay="300">
             <div class="testimonial-card">
@@ -182,7 +190,7 @@
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="right" :delay="400">
             <div class="testimonial-card">
               <div class="testimonial-content">
@@ -203,7 +211,7 @@
         </div>
       </div>
     </section>
-    
+
     <!-- Seção CTA -->
     <section class="cta-section">
       <div class="container">
@@ -216,7 +224,7 @@
         </ScrollReveal>
       </div>
     </section>
-    
+
     <HomeFooter />
   </div>
 </template>
@@ -233,7 +241,7 @@ export default {
   },
   setup() {
     const { t, currentLanguage } = useDifferentialsTranslation()
-    
+
     return {
       t,
       currentLanguage
@@ -330,6 +338,7 @@ section {
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -710,19 +719,19 @@ section {
   .hero-title {
     font-size: 3rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.3rem;
   }
-  
+
   section {
     padding: 60px 0;
   }
-  
+
   .feature-card {
     flex-direction: column;
   }
-  
+
   .feature-icon-wrapper {
     min-width: 100%;
     padding: 30px 0;
@@ -734,23 +743,23 @@ section {
     height: 60vh;
     min-height: 400px;
   }
-  
+
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .section-title h2 {
     font-size: 2rem;
   }
-  
+
   .intro-text {
     font-size: 1.1rem;
   }
-  
+
   .metrics-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .cta-content h2 {
     font-size: 2rem;
   }
@@ -760,27 +769,27 @@ section {
   .container {
     padding: 0 20px;
   }
-  
+
   .hero-title {
     font-size: 2rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.1rem;
   }
-  
+
   .section-title h2 {
     font-size: 1.8rem;
   }
-  
+
   .accent-line {
     width: 40px;
   }
-  
+
   .metrics-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .cta-button {
     padding: 12px 30px;
     font-size: 1rem;
@@ -792,36 +801,35 @@ section {
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
+
   100% {
     transform: translateY(0px);
   }
 }
 
-.feature-icon-wrapper i, .metric-icon i {
+.feature-icon-wrapper i,
+.metric-icon i {
   animation: float 3s ease-in-out infinite;
 }
 
-/* Animação para os cards de recursos quando em hover */
 .feature-card:hover .feature-icon-wrapper {
   background: linear-gradient(135deg, #ff5555, #AE2C2A);
 }
 
-/* Animação para os ícones de métricas */
 .metric-card:hover .metric-icon {
   transform: scale(1.1);
   transition: transform 0.3s ease;
 }
 
-/* Animação para os depoimentos */
 .testimonial-card:hover .quote-icon {
   opacity: 0.4;
   transition: opacity 0.3s ease;
 }
 
-/* Efeito de destaque para os itens da lista */
 .feature-list li:hover::before {
   transform: scale(1.2);
   transition: transform 0.3s ease;
@@ -837,9 +845,11 @@ section {
   0% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0.7);
   }
+
   70% {
     box-shadow: 0 0 0 10px rgba(174, 44, 42, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0);
   }
@@ -854,29 +864,29 @@ section {
   .hero-title {
     font-size: 1.8rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1rem;
   }
-  
+
   .feature-content h3 {
     font-size: 1.4rem;
   }
-  
+
   .metric-number {
     font-size: 2.5rem;
   }
-  
+
   .testimonial-content {
     padding: 20px;
   }
-  
+
   .author-avatar {
     width: 40px;
     height: 40px;
     font-size: 0.8rem;
   }
-  
+
   .author-info h4 {
     font-size: 1rem;
   }

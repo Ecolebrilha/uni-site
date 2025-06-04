@@ -328,9 +328,9 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('@/assets/logo-uni.jpeg');
+  background-image: url('@/assets/fundo-logo-uni.png');
   background-size: 70%;
-  background-position: center 40%;
+  background-position: center 20%;
   background-repeat: no-repeat;
   background-attachment: fixed;
   display: flex;
@@ -950,7 +950,7 @@ section {
 
   .parallax-container {
     background-attachment: scroll;
-    background-position: center 35% !important;
+    background-position: center 28% !important;
   }
   
   .section-title h2 {
@@ -982,6 +982,10 @@ section {
 @media (max-width: 576px) {
   .container {
     padding: 0 20px;
+  }
+
+  .parallax-container {
+    background-position: center 35% !important;
   }
   
   .hero-title {
@@ -1106,6 +1110,10 @@ section {
       transform: translateX(0);
       opacity: 1;
     }
+  }
+
+  .parallax-container {
+    background-position: center 38% !important;
   }
 }
 

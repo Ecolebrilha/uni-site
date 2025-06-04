@@ -1,7 +1,7 @@
 <template>
   <footer>
     <div class="footer-logo">
-      <a href="/"><img src="@/assets/footerSelo.png" alt="Imagem Selo do footer" class="logo-image"></a>
+      <a href="/"><img src="@/assets/selo-15anos-uni.png" alt="Imagem Selo do footer" class="logo-image"></a>
     </div>
     <div class="footer-mensagem">
       <p>{{ t('footer.copyright') }}</p>
@@ -48,8 +48,9 @@ footer {
 .logo-image {
   background-color: rgba(255, 255, 255, 0.9);
   padding: 5px;
-  border-radius: 40%;
+  border-radius: 20%;
   cursor: pointer;
+  max-height: 74px;
 }
 
 .logo-image:hover {

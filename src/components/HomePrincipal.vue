@@ -6,7 +6,7 @@
       <div class="parallax-container">
         <div class="overlay"></div>
         <div class="hero-content">
-          <img src="@/assets/logo-uni.png" alt="Logo Uni Hospitalar" class="logo-image">
+          <img src="@/assets/logo-uni2.png" alt="Logo Uni Hospitalar" class="logo-image">
           <h2 class="banner-h2">{{ t('home.hero.title') }}</h2>
           <p class="banner-p" v-html="t('home.hero.subtitle')"></p>
           <div class="scroll-indicator" @click="scrollToContent">
@@ -365,7 +365,7 @@
         <div class="cookie-buttons">
           <button class="cookie-accept" @click="acceptCookies">{{ t('home.cookies.banner.accept') }}</button>
           <button class="cookie-settings" @click="showCookieSettings = true">{{ t('home.cookies.banner.settings')
-          }}</button>
+            }}</button>
         </div>
       </div>
     </div>
@@ -627,7 +627,7 @@ export default {
       return this.t(branchKeys[index]) || this.branches[index].name;
     },
     handleImageError(e) {
-      e.target.src = require('@/assets/logo-uni.png');
+      e.target.src = require('@/assets/logo-uni2.png');
     },
     setActiveBranch(index) {
       this.activeBranch = index;
@@ -810,15 +810,15 @@ section {
 }
 
 .logo-image {
-  max-width: 50%;
+  max-width: 64.5%;
   max-height: 80%;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   animation: fadeInUp 1.5s ease-out;
 }
 
 .banner-h2 {
   font-size: 2.5em;
-  margin-bottom: 0.5em;
+  margin: 0px 0px 0.5em 0px;
   font-weight: bold;
   color: #ffffff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);

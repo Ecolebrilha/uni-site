@@ -1,7 +1,7 @@
 <template>
   <div class="about-page">
     <HomeHeader />
-    
+
     <!-- Hero Section com Parallax -->
     <section class="hero-section">
       <div class="parallax-container">
@@ -10,7 +10,7 @@
         <div class="hero-subtitle">{{ t('about.heroSubtitle') }}</div>
       </div>
     </section>
-    
+
     <!-- Seção de Introdução -->
     <section class="intro-section">
       <div class="container">
@@ -26,8 +26,8 @@
         </ScrollReveal>
       </div>
     </section>
-    
-    <!-- Seção Quem Somos com Cards -->
+
+    <!-- Seção Quem Somos -->
     <section class="who-we-are">
       <div class="container">
         <ScrollReveal direction="bottom" :delay="200">
@@ -45,8 +45,8 @@
         </ScrollReveal>
       </div>
     </section>
-    
-    <!-- Seção Missão, Visão e Valores com Design Moderno -->
+
+    <!-- Seção Missão, Visão e Valores -->
     <section class="mvv-section">
       <div class="container">
         <div class="mvv-grid">
@@ -61,7 +61,7 @@
               </p>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="400">
             <div class="mvv-card vision">
               <div class="mvv-icon">
@@ -73,7 +73,7 @@
               </p>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="right" :delay="500">
             <div class="mvv-card values">
               <div class="mvv-icon">
@@ -82,8 +82,8 @@
               <h3>{{ t('about.valuesTitle') }}</h3>
               <p>{{ t('about.valuesText') }}</p>
               <div class="values-container">
-                <ScrollReveal v-for="(valor, index) in t('about.values')" :key="index" 
-                              direction="fade" :delay="600 + (index * 100)" customClass="value-tag">
+                <ScrollReveal v-for="(valor, index) in t('about.values')" :key="index" direction="fade"
+                  :delay="600 + (index * 100)" customClass="value-tag">
                   <span class="value-pill">
                     <i :class="valorIcons[index]"></i>
                     {{ valor }}
@@ -95,34 +95,46 @@
         </div>
       </div>
     </section>
-    
+
     <!-- Seção de Estatísticas -->
     <section class="stats-section">
       <div class="container">
         <div class="stats-grid">
           <ScrollReveal direction="bottom" :delay="200">
             <div class="stat-item">
+              <div class="stat-icon">
+                <i class="fas fa-calendar-alt"></i>
+              </div>
               <div class="stat-number">{{ t('about.stats.experience.number') }}</div>
               <div class="stat-label">{{ t('about.stats.experience.label') }}</div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="300">
             <div class="stat-item">
+              <div class="stat-icon">
+                <i class="fas fa-handshake"></i>
+              </div>
               <div class="stat-number">{{ t('about.stats.clients.number') }}</div>
               <div class="stat-label">{{ t('about.stats.clients.label') }}</div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="400">
             <div class="stat-item">
+              <div class="stat-icon">
+                <i class="fas fa-boxes"></i>
+              </div>
               <div class="stat-number">{{ t('about.stats.products.number') }}</div>
               <div class="stat-label">{{ t('about.stats.products.label') }}</div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="500">
             <div class="stat-item">
+              <div class="stat-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
               <div class="stat-number">{{ t('about.stats.states.number') }}</div>
               <div class="stat-label">{{ t('about.stats.states.label') }}</div>
             </div>
@@ -130,20 +142,52 @@
         </div>
       </div>
     </section>
-    
+
+    <!-- Seção de Diferenciais -->
+    <section class="differentials-section">
+      <div class="container">
+        <ScrollReveal direction="bottom" :delay="100">
+          <div class="section-title">
+            <span class="accent-line"></span>
+            <h2>{{ t('about.differentials.title') }}</h2>
+            <span class="accent-line"></span>
+          </div>
+        </ScrollReveal>
+
+        <div class="differentials-grid">
+          <ScrollReveal v-for="(differential, index) in t('about.differentials.items')" :key="index"
+            :direction="getDifferentialDirection(index)" :delay="200 + (index * 100)">
+            <div class="differential-item">
+              <div class="differential-icon">
+                <i :class="differentialIcons[index]"></i>
+              </div>
+              <h4>{{ differential.title }}</h4>
+              <p>{{ differential.description }}</p>
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
+    </section>
+
     <!-- Seção CTA -->
     <section class="cta-section">
       <div class="container">
         <ScrollReveal direction="bottom" :delay="200">
           <div class="cta-content">
+            <div class="cta-icon">
+              <i class="fas fa-comments"></i>
+            </div>
             <h2>{{ t('about.ctaTitle') }}</h2>
             <p>{{ t('about.ctaText') }}</p>
-            <router-link to="/Contato" class="cta-button">{{ t('about.ctaButton') }}</router-link>
+            <router-link to="/Contato" class="cta-button">
+              {{ t('about.ctaButton') }}
+              <i class="fas fa-arrow-right"></i>
+            </router-link>
           </div>
         </ScrollReveal>
       </div>
     </section>
-    
+
     <HomeFooter />
   </div>
 </template>
@@ -160,7 +204,7 @@ export default {
   },
   setup() {
     const { t, currentLanguage } = useAboutTranslation()
-    
+
     return {
       t,
       currentLanguage
@@ -179,12 +223,24 @@ export default {
         'fas fa-bolt',            // Agilidade
         'fas fa-crosshairs',      // Objetividade
         'fas fa-award'            // Integridade
+      ],
+      differentialIcons: [
+        'fas fa-award',           // Qualidade Premium
+        'fas fa-shipping-fast',   // Entrega Rápida
+        'fas fa-user-md',         // Suporte Especializado
+        'fas fa-shield-alt',      // Confiabilidade
+        'fas fa-cogs',            // Soluções Personalizadas
+        'fas fa-chart-line'       // Inovação Constante
       ]
     }
   },
   methods: {
     toggleSidebar() {
       this.sidebarOpen = !this.sidebarOpen;
+    },
+    getDifferentialDirection(index) {
+      const directions = ['left', 'bottom', 'right', 'left', 'bottom', 'right'];
+      return directions[index] || 'bottom';
     }
   }
 }
@@ -213,7 +269,7 @@ section {
 .hero-section {
   position: relative;
   height: 70vh;
-  min-height: 500px;
+  min-height: 600px;
   overflow: hidden;
 }
 
@@ -241,26 +297,29 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(rgba(174, 44, 42, 0.7), rgba(0, 0, 0, 0.7));
+  background: linear-gradient(135deg, rgba(174, 44, 42, 0.8), rgba(139, 34, 32, 0.9));
 }
 
 .hero-title {
-  font-size: 4rem;
+  font-size: 4.5rem;
   font-weight: 800;
   margin-bottom: 20px;
   position: relative;
   z-index: 2;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   animation: fadeInUp 1.5s ease-out;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero-subtitle {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 300;
   position: relative;
   z-index: 2;
   animation: fadeInUp 1.5s ease-out 0.3s both;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
 }
 
 @keyframes fadeInUp {
@@ -268,6 +327,7 @@ section {
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -276,8 +336,19 @@ section {
 
 /* Seção de Introdução */
 .intro-section {
-  background-color: #f9f9f9;
+  background: linear-gradient(135deg, #f8f9fa, #ffffff);
   text-align: center;
+  position: relative;
+}
+
+.intro-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ae2c2a' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
 .section-title {
@@ -285,27 +356,34 @@ section {
   align-items: center;
   justify-content: center;
   margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
 }
 
 .section-title h2 {
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   font-weight: 700;
   color: #AE2C2A;
   margin: 0 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .accent-line {
-  height: 3px;
-  width: 70px;
-  background-color: #AE2C2A;
+  height: 4px;
+  width: 80px;
+  background: linear-gradient(135deg, #AE2C2A, #D2342C);
+  border-radius: 2px;
 }
 
 .intro-text {
-  font-size: 1.3rem;
-  max-width: 800px;
+  font-size: 1.4rem;
+  max-width: 900px;
   margin: 0 auto;
   color: #555;
-  line-height: 1.8;
+  line-height: 1.9;
+  position: relative;
+  z-index: 1;
+  font-weight: 400;
 }
 
 /* Seção Quem Somos */
@@ -321,7 +399,7 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ae2c2a' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='%23ae2c2a' fill-opacity='0.04' fill-rule='evenodd'/%3E%3C/svg%3E");
   opacity: 0.5;
 }
 
@@ -334,42 +412,44 @@ section {
 
 .info-card {
   background: white;
-  border-radius: 15px;
-  padding: 40px;
+  border-radius: 20px;
+  padding: 50px;
   text-align: center;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 20px 60px rgba(174, 44, 42, 0.1);
+  max-width: 900px;
+  transition: all 0.4s ease;
+  border: 1px solid rgba(174, 44, 42, 0.1);
 }
 
 .info-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+  transform: translateY(-15px);
+  box-shadow: 0 30px 80px rgba(174, 44, 42, 0.15);
 }
 
 .card-icon {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  background: linear-gradient(135deg, #AE2C2A, #D2342C);
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto 25px;
+  margin: 0 auto 30px;
   color: white;
-  font-size: 2rem;
+  font-size: 2.2rem;
+  box-shadow: 0 10px 30px rgba(174, 44, 42, 0.3);
 }
 
 .info-card h3 {
-  font-size: 2rem;
+  font-size: 2.2rem;
   color: #AE2C2A;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   font-weight: 700;
 }
 
 .info-card p {
   color: #666;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.8;
   margin: 0;
 }
@@ -387,26 +467,27 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ae2c2a' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7z' fill='%23ae2c2a' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
 
 .mvv-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 40px;
+  gap: 50px;
   position: relative;
   z-index: 1;
 }
 
 .mvv-card {
   background: white;
-  border-radius: 15px;
-  padding: 40px;
+  border-radius: 20px;
+  padding: 50px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
   position: relative;
   overflow: hidden;
+  border: 1px solid rgba(174, 44, 42, 0.1);
 }
 
 .mvv-card::before {
@@ -415,51 +496,44 @@ section {
   top: 0;
   left: 0;
   width: 100%;
-  height: 4px;
-  background: linear-gradient(135deg, #AE2C2A, #ff5555);
-}
-
-.mvv-card.mission::before {
-  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  height: 5px;
+  background: linear-gradient(135deg, #AE2C2A, #D2342C);
 }
 
 .mvv-card.vision::before {
-  background: linear-gradient(135deg, #2C5EAE, #5596ff);
+  background: linear-gradient(135deg, #8B2220, #AE2C2A);
 }
 
 .mvv-card.values::before {
-  background: linear-gradient(135deg, #2CAE6F, #55ff9d);
+  background: linear-gradient(135deg, #D2342C, #FF4444);
 }
 
 .mvv-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  transform: translateY(-15px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
 }
 
 .mvv-icon {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  background: linear-gradient(135deg, #AE2C2A, #D2342C);
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto 25px;
+  margin: 0 auto 30px;
   color: white;
-  font-size: 2rem;
+  font-size: 2.2rem;
   transition: transform 0.3s ease;
-}
-
-.mvv-card.mission .mvv-icon {
-  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  box-shadow: 0 10px 30px rgba(174, 44, 42, 0.3);
 }
 
 .mvv-card.vision .mvv-icon {
-  background: linear-gradient(135deg, #2C5EAE, #5596ff);
+  background: linear-gradient(135deg, #8B2220, #AE2C2A);
 }
 
 .mvv-card.values .mvv-icon {
-  background: linear-gradient(135deg, #2CAE6F, #55ff9d);
+  background: linear-gradient(135deg, #D2342C, #FF4444);
 }
 
 .mvv-card:hover .mvv-icon {
@@ -467,68 +541,56 @@ section {
 }
 
 .mvv-card h3 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   font-weight: 700;
 }
 
 .mvv-card p {
   color: #666;
-  font-size: 1rem;
-  line-height: 1.7;
-  margin-bottom: 20px;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 25px;
 }
 
 /* Valores específicos */
 .values-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
   justify-content: center;
-  margin-top: 25px;
+  margin-top: 30px;
 }
 
 .value-pill {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, rgba(174, 44, 42, 0.1), rgba(255, 85, 85, 0.1));
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(174, 44, 42, 0.1), rgba(210, 52, 44, 0.1));
   color: #AE2C2A;
-  padding: 8px 16px;
-  border-radius: 25px;
-  font-size: 0.9rem;
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-size: 0.95rem;
   font-weight: 600;
   border: 1px solid rgba(174, 44, 42, 0.2);
   transition: all 0.3s ease;
 }
 
 .value-pill:hover {
-  background: linear-gradient(135deg, rgba(174, 44, 42, 0.2), rgba(255, 85, 85, 0.2));
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(174, 44, 42, 0.3);
-}
-
-.value-pill:nth-child(3n+1) {
-  background: linear-gradient(135deg, rgba(174, 44, 42, 0.1), rgba(174, 44, 42, 0.2));
-  color: #AE2C2A;
-  border: 1px solid rgba(174, 44, 42, 0.3);
-  box-shadow: 0 3px 10px rgba(174, 44, 42, 0.1);
-}
-
-.value-pill:nth-child(3n+1):hover {
-  background: linear-gradient(135deg, #AE2C2A, #8a2220);
+  background: linear-gradient(135deg, #AE2C2A, #D2342C);
   color: white;
-  box-shadow: 0 8px 20px rgba(174, 44, 42, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(174, 44, 42, 0.3);
 }
 
 .value-pill i {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 /* Seção de Estatísticas */
 .stats-section {
-  background: linear-gradient(135deg, #AE2C2A, #8a2220);
+  background: linear-gradient(135deg, #AE2C2A, #8B2220);
   color: white;
   position: relative;
   overflow: hidden;
@@ -541,12 +603,12 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 40px;
   position: relative;
   z-index: 1;
@@ -555,21 +617,41 @@ section {
 .stat-item {
   text-align: center;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  padding: 30px 20px;
-  backdrop-filter: blur(5px);
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  border-radius: 20px;
+  padding: 40px 25px;
+  backdrop-filter: blur(10px);
+  transition: all 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .stat-item:hover {
-  transform: translateY(-10px);
+  transform: translateY(-15px);
   background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.stat-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 20px;
+  font-size: 1.8rem;
+  color: white;
+  transition: transform 0.3s ease;
+}
+
+.stat-item:hover .stat-icon {
+  transform: scale(1.1);
 }
 
 .stat-number {
-  font-size: 3.5rem;
+  font-size: 3.8rem;
   font-weight: 800;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   background: linear-gradient(135deg, #ffffff, #f0f0f0);
   background-clip: text;
   -webkit-background-clip: text;
@@ -577,52 +659,178 @@ section {
 }
 
 .stat-label {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.9);
+}
+
+/* Seção de Diferenciais */
+.differentials-section {
+  background: #ffffff;
+  padding: 100px 0;
+}
+
+.differentials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+  margin-top: 60px;
+}
+
+.differential-item {
+  background: white;
+  border-radius: 15px;
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(174, 44, 42, 0.08);
+  transition: all 0.4s ease;
+  border: 1px solid rgba(174, 44, 42, 0.1);
+  position: relative;
+  overflow: hidden;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.differential-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(135deg, #AE2C2A, #D2342C);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.differential-item:hover::before {
+  transform: scaleX(1);
+}
+
+.differential-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(174, 44, 42, 0.15);
+}
+
+.differential-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(174, 44, 42, 0.1), rgba(210, 52, 44, 0.1));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 25px;
+  color: #AE2C2A;
+  font-size: 2rem;
+  transition: all 0.3s ease;
+}
+
+.differential-item:hover .differential-icon {
+  background: linear-gradient(135deg, #AE2C2A, #D2342C);
+  color: white;
+  transform: scale(1.1);
+}
+
+.differential-item h4 {
+  font-size: 1.4rem;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.differential-item p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0;
 }
 
 /* Seção CTA */
 .cta-section {
   background: linear-gradient(135deg, #f8f9fa, #e9ecef);
   text-align: center;
-  padding: 100px 0;
+  padding: 120px 0;
+  position: relative;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ae2c2a' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
 .cta-content {
-  max-width: 700px;
+  max-width: 800px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #AE2C2A, #D2342C);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 30px;
+  color: white;
+  font-size: 2.5rem;
+  box-shadow: 0 15px 40px rgba(174, 44, 42, 0.3);
+  animation: float 3s ease-in-out infinite;
 }
 
 .cta-content h2 {
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   font-weight: 700;
 }
 
 .cta-content p {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: #666;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+  line-height: 1.8;
 }
 
 .cta-button {
-  display: inline-block;
-  padding: 15px 40px;
-  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px 45px;
+  background: linear-gradient(135deg, #AE2C2A, #D2342C);
   color: white;
   text-decoration: none;
   border-radius: 50px;
   font-weight: 600;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 20px rgba(174, 44, 42, 0.3);
+  font-size: 1.2rem;
+  transition: all 0.4s ease;
+  box-shadow: 0 15px 35px rgba(174, 44, 42, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .cta-button:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(174, 44, 42, 0.4);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(174, 44, 42, 0.4);
+  background: linear-gradient(135deg, #D2342C, #FF4444);
+}
+
+.cta-button i {
+  transition: transform 0.3s ease;
+}
+
+.cta-button:hover i {
+  transform: translateX(5px);
 }
 
 /* Responsividade */
@@ -630,58 +838,97 @@ section {
   .container {
     padding: 0 40px;
   }
-}
 
-@media (max-width: 992px) {
-  .hero-title {
-    font-size: 3rem;
+  .differentials-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
-  
-  .hero-subtitle {
-    font-size: 1.3rem;
-  }
-  
-  section {
-    padding: 60px 0;
-  }
-  
-  .mvv-grid {
-    grid-template-columns: 1fr;
-  }
-  
+
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
+@media (max-width: 992px) {
+  .hero-title {
+    font-size: 3.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.4rem;
+  }
+
+  section {
+    padding: 60px 0;
+  }
+
+  .differentials-section {
+    padding: 80px 0;
+  }
+
+  .cta-section {
+    padding: 100px 0;
+  }
+
+  .mvv-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .differentials-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+  }
+}
+
 @media (max-width: 768px) {
   .hero-section {
-    height: 60vh;
-    min-height: 400px;
+    height: 65vh;
+    min-height: 500px;
   }
-  
+
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
+    letter-spacing: 2px;
   }
-  
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+
   .section-title h2 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
-  
+
   .intro-text {
+    font-size: 1.2rem;
+  }
+
+  .info-card {
+    padding: 40px 30px;
+  }
+
+  .mvv-card {
+    padding: 40px 30px;
+  }
+
+  .differential-item {
+    padding: 35px 25px;
+  }
+
+  .cta-content h2 {
+    font-size: 2.2rem;
+  }
+
+  .cta-content p {
     font-size: 1.1rem;
   }
-  
-  .info-card {
-    padding: 30px;
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
   }
-  
-  .mvv-card {
-    padding: 30px;
-  }
-  
-  .cta-content h2 {
-    font-size: 2rem;
+
+  .differentials-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -689,43 +936,72 @@ section {
   .container {
     padding: 0 20px;
   }
-  
+
   .hero-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
   }
-  
+
   .hero-subtitle {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
-  
+
   .section-title h2 {
     font-size: 1.8rem;
+    margin: 0 15px;
   }
-  
+
   .accent-line {
-    width: 40px;
+    width: 50px;
   }
-  
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-  
+
   .stat-number {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
-  
+
   .values-container {
     gap: 8px;
   }
-  
+
   .value-pill {
-    font-size: 0.8rem;
-    padding: 6px 12px;
+    font-size: 0.85rem;
+    padding: 8px 14px;
   }
-  
+
   .cta-button {
-    padding: 12px 30px;
+    padding: 15px 35px;
     font-size: 1rem;
+  }
+
+  .info-card {
+    padding: 30px 20px;
+  }
+
+  .mvv-card {
+    padding: 30px 20px;
+  }
+
+  .differential-item {
+    padding: 30px 20px;
+  }
+
+  .card-icon,
+  .mvv-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
+  }
+
+  .differential-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
+  }
+
+  .cta-icon {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
   }
 }
 
@@ -734,25 +1010,30 @@ section {
   0% {
     transform: translateY(0px);
   }
+
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-15px);
   }
+
   100% {
     transform: translateY(0px);
   }
 }
 
-.card-icon i, .mvv-icon i {
+.card-icon i,
+.mvv-icon i {
+  animation: float 4s ease-in-out infinite;
+}
+
+.differential-icon i {
   animation: float 3s ease-in-out infinite;
 }
 
-/* Animação para os cards quando em hover */
 .info-card:hover .card-icon {
-  transform: scale(1.1);
-  transition: transform 0.3s ease;
+  transform: scale(1.15);
+  transition: transform 0.4s ease;
 }
 
-/* Animação para as estatísticas */
 .stat-item:hover .stat-number {
   transform: scale(1.1);
   transition: transform 0.3s ease;
@@ -763,40 +1044,102 @@ section {
   0% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0.7);
   }
+
   70% {
-    box-shadow: 0 0 0 10px rgba(174, 44, 42, 0);
+    box-shadow: 0 0 0 15px rgba(174, 44, 42, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0);
   }
 }
 
 .cta-button:hover {
-  animation: pulse 1.5s infinite;
+  animation: pulse 2s infinite;
 }
 
-/* Ajustes para dispositivos móveis */
+/* Efeito de gradiente animado */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.hero-section .overlay {
+  background: linear-gradient(135deg, rgba(174, 44, 42, 0.8), rgba(139, 34, 32, 0.9), rgba(210, 52, 44, 0.8));
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+}
+
+/* Ajustes para dispositivos móveis muito pequenos */
 @media (max-width: 480px) {
   .hero-title {
     font-size: 1.8rem;
   }
-  
+
   .hero-subtitle {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
-  
+
   .info-card h3 {
+    font-size: 1.8rem;
+  }
+
+  .mvv-card h3 {
     font-size: 1.6rem;
   }
-  
-  .mvv-card h3 {
-    font-size: 1.5rem;
+
+  .differential-item h4 {
+    font-size: 1.2rem;
   }
-  
-  .card-icon, .mvv-icon {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
+
+  .cta-content h2 {
+    font-size: 1.8rem;
+  }
+
+  section {
+    padding: 50px 0;
+  }
+
+  .differentials-section {
+    padding: 70px 0;
+  }
+
+  .cta-section {
+    padding: 80px 0;
+  }
+}
+
+/* Melhorias de acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Efeitos de hover mais suaves para touch devices */
+@media (hover: none) {
+
+  .info-card:hover,
+  .mvv-card:hover,
+  .differential-item:hover,
+  .stat-item:hover {
+    transform: none;
+  }
+
+  .cta-button:hover {
+    transform: none;
+    animation: none;
   }
 }
 </style>
