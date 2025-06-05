@@ -219,7 +219,7 @@
           <div class="cta-content">
             <h2>{{ t('differentials.ctaTitle') }}</h2>
             <p>{{ t('differentials.ctaText') }}</p>
-            <router-link to="/Contato" class="cta-button">{{ t('differentials.ctaButton') }}</router-link>
+            <router-link to="/Contato" class="cta-button"><i class="fas fa-envelope"></i> {{ t('differentials.ctaButton') }}</router-link>
           </div>
         </ScrollReveal>
       </div>
@@ -293,7 +293,7 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('@/assets/header-diferenciais.jpg');
+  background-image: url('@/assets/header-diferenciais2.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -655,20 +655,13 @@ section {
   padding: 100px 0;
 }
 
-.cta-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ae2c2a' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  opacity: 0.5;
-}
-
 .cta-content {
   max-width: 700px;
   margin: 0 auto;
+}
+
+.cta-content i {
+  margin-right: 8px;
 }
 
 .cta-content h2 {

@@ -1,7 +1,7 @@
 <template>
   <div class="lgpd-page">
     <HomeHeader />
-    
+
     <!-- Hero Section com Efeito Parallax -->
     <section class="hero-section">
       <div class="parallax-container">
@@ -10,7 +10,7 @@
         <div class="hero-subtitle">{{ t('lgpd.heroSubtitle') }}</div>
       </div>
     </section>
-    
+
     <!-- Seção de Introdução -->
     <section class="intro-section">
       <div class="container">
@@ -27,7 +27,7 @@
         </ScrollReveal>
       </div>
     </section>
-    
+
     <!-- Seção Principal de LGPD -->
     <section class="lgpd-main">
       <div class="container">
@@ -44,7 +44,7 @@
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="right" :delay="300">
             <div class="lgpd-card">
               <div class="lgpd-icon">
@@ -57,7 +57,7 @@
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="left" :delay="400">
             <div class="lgpd-card">
               <div class="lgpd-icon">
@@ -78,7 +78,7 @@
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="right" :delay="500">
             <div class="lgpd-card">
               <div class="lgpd-icon">
@@ -97,7 +97,7 @@
         </div>
       </div>
     </section>
-    
+
     <!-- Seção de Princípios LGPD -->
     <section class="principles-section">
       <div class="container">
@@ -108,7 +108,7 @@
             <span class="accent-line"></span>
           </div>
         </ScrollReveal>
-        
+
         <div class="principles-grid">
           <ScrollReveal direction="bottom" :delay="300">
             <div class="principle-item">
@@ -119,7 +119,7 @@
               <p>{{ t('lgpd.principles.finality.description') }}</p>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="400">
             <div class="principle-item">
               <div class="principle-icon">
@@ -129,17 +129,17 @@
               <p>{{ t('lgpd.principles.adequacy.description') }}</p>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="500">
             <div class="principle-item">
-<div class="principle-icon">
+              <div class="principle-icon">
                 <i class="fas fa-hand-paper"></i>
               </div>
               <h4>{{ t('lgpd.principles.necessity.title') }}</h4>
               <p>{{ t('lgpd.principles.necessity.description') }}</p>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="600">
             <div class="principle-item">
               <div class="principle-icon">
@@ -152,7 +152,7 @@
         </div>
       </div>
     </section>
-    
+
     <!-- Seção CTA -->
     <section class="cta-section">
       <div class="container">
@@ -162,17 +162,17 @@
             <p>{{ t('lgpd.ctaText') }}</p>
             <div class="cta-buttons">
               <router-link to="/PoliticaPrivacidade" class="cta-button primary">
-                {{ t('lgpd.ctaButtons.privacy') }}
+                <i class="fas fa-user-shield"></i> {{ t('lgpd.ctaButtons.privacy') }}
               </router-link>
               <router-link to="/Contato" class="cta-button secondary">
-                {{ t('lgpd.ctaButtons.contact') }}
+                <i class="fas fa-envelope"></i> {{ t('lgpd.ctaButtons.contact') }}
               </router-link>
             </div>
           </div>
         </ScrollReveal>
       </div>
     </section>
-    
+
     <HomeFooter />
   </div>
 </template>
@@ -189,7 +189,7 @@ export default {
   },
   setup() {
     const { t, currentLanguage } = useLGPDTranslation()
-    
+
     return {
       t,
       currentLanguage
@@ -292,6 +292,7 @@ section {
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -302,6 +303,17 @@ section {
 .intro-section {
   background-color: #f9f9f9;
   text-align: center;
+}
+
+.intro-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7z' fill='%23ae2c2a' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+  z-index: 0;
 }
 
 .section-title {
@@ -421,7 +433,9 @@ section {
   margin-top: auto;
 }
 
-.policy-button, .terms-button, .contact-button {
+.policy-button,
+.terms-button,
+.contact-button {
   padding: 12px 25px;
   font-size: 1rem;
   font-weight: 600;
@@ -435,7 +449,9 @@ section {
   overflow: hidden;
 }
 
-.policy-button::after, .terms-button::after, .contact-button::after {
+.policy-button::after,
+.terms-button::after,
+.contact-button::after {
   content: '';
   position: absolute;
   top: 0;
@@ -446,7 +462,9 @@ section {
   transition: left 0.7s;
 }
 
-.policy-button:hover::after, .terms-button:hover::after, .contact-button:hover::after {
+.policy-button:hover::after,
+.terms-button:hover::after,
+.contact-button:hover::after {
   left: 100%;
 }
 
@@ -467,7 +485,9 @@ section {
   letter-spacing: 1px;
 }
 
-.policy-button:hover, .terms-button:hover, .contact-button:hover {
+.policy-button:hover,
+.terms-button:hover,
+.contact-button:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
@@ -561,6 +581,10 @@ section {
   flex-wrap: wrap;
 }
 
+.cta-buttons i {
+  margin-right: 10px;
+}
+
 .cta-button {
   display: inline-block;
   padding: 15px 40px;
@@ -596,11 +620,17 @@ section {
 }
 
 /* Responsividade */
+@media (min-width: 1201px) {
+  .principle-item {
+    min-height: 230px;
+  }
+}
+
 @media (max-width: 1200px) {
   .container {
     padding: 0 40px;
   }
-  
+
   .lgpd-grid {
     grid-template-columns: 1fr;
   }
@@ -611,6 +641,10 @@ section {
 
   .principles-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .principle-item {
+    min-height: 190px;
   }
 
   .lgpd-buttons {
@@ -626,19 +660,23 @@ section {
   .hero-title {
     font-size: 3rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.3rem;
   }
-  
+
   section {
     padding: 60px 0;
   }
-  
+
+  .principle-item {
+    min-height: 220px;
+  }
+
   .lgpd-card {
     flex-direction: column;
   }
-  
+
   .lgpd-icon {
     min-width: 100%;
     padding: 30px 0;
@@ -663,35 +701,35 @@ section {
     min-width: 100%;
     padding: 25px 0;
   }
-  
+
   .lgpd-content {
     padding: 25px;
   }
-  
+
   .lgpd-buttons {
     justify-content: center;
   }
-  
+
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .section-title h2 {
     font-size: 2rem;
   }
-  
+
   .subtitle {
     font-size: 1.3rem;
   }
-  
+
   .intro-text {
     font-size: 1.1rem;
   }
-  
+
   .cta-content h2 {
     font-size: 2rem;
   }
-  
+
   .lgpd-buttons {
     justify-content: center;
   }
@@ -705,23 +743,23 @@ section {
   .container {
     padding: 0 20px;
   }
-  
+
   .hero-title {
     font-size: 2rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.1rem;
   }
-  
+
   .section-title h2 {
     font-size: 1.8rem;
   }
-  
+
   .accent-line {
     width: 40px;
   }
-  
+
   .cta-button {
     padding: 12px 30px;
     font-size: 1rem;
@@ -729,13 +767,15 @@ section {
     margin: 0 auto;
     display: block;
   }
-  
+
   .cta-buttons {
     flex-direction: column;
     gap: 15px;
   }
-  
-  .policy-button, .terms-button, .contact-button {
+
+  .policy-button,
+  .terms-button,
+  .contact-button {
     width: 100%;
   }
 }
@@ -745,9 +785,11 @@ section {
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
+
   100% {
     transform: translateY(0px);
   }
@@ -757,7 +799,8 @@ section {
   transition: transform 0.5s ease;
 }
 
-.lgpd-icon i, .principle-icon i {
+.lgpd-icon i,
+.principle-icon i {
   animation: float 3s ease-in-out infinite;
 }
 
@@ -793,15 +836,18 @@ section {
   0% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0.7);
   }
+
   70% {
     box-shadow: 0 0 0 10px rgba(174, 44, 42, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0);
   }
 }
 
-.cta-button.primary:hover, .contact-button:hover {
+.cta-button.primary:hover,
+.contact-button:hover {
   animation: pulse 1.5s infinite;
 }
 

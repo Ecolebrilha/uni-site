@@ -160,8 +160,8 @@
             <h2>{{ t('terms.ctaTitle') }}</h2>
             <p>{{ t('terms.ctaText') }}</p>
             <div class="cta-buttons">
-              <router-link to="/PoliticaPrivacidade" class="cta-button primary">{{ t('terms.ctaButtons.privacy') }}</router-link>
-              <router-link to="/Contato" class="cta-button secondary">{{ t('terms.ctaButtons.contact') }}</router-link>
+              <router-link to="/PoliticaPrivacidade" class="cta-button primary"><i class="fas fa-user-shield"></i> {{ t('terms.ctaButtons.privacy') }}</router-link>
+              <router-link to="/Contato" class="cta-button secondary"><i class="fas fa-envelope"></i> {{ t('terms.ctaButtons.contact') }}</router-link>
             </div>
           </div>
         </ScrollReveal>
@@ -242,7 +242,7 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('@/assets/header-termos-legais.jpg');
+  background-image: url('@/assets/header-termos-legais2.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -297,6 +297,17 @@ section {
 .intro-section {
   background-color: #f9f9f9;
   text-align: center;
+}
+
+.intro-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7z' fill='%23ae2c2a' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+  z-index: 0;
 }
 
 .section-title {
@@ -610,6 +621,10 @@ section {
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
+}
+
+.cta-buttons i {
+  margin-right: 10px;
 }
 
 .cta-button {

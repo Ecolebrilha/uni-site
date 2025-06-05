@@ -1,7 +1,7 @@
 <template>
   <div class="privacidade-page">
     <HomeHeader />
-    
+
     <!-- Hero Section com Efeito Parallax -->
     <section class="hero-section">
       <div class="parallax-container">
@@ -10,7 +10,7 @@
         <div class="hero-subtitle">{{ t('privacyPolicy.heroSubtitle') }}</div>
       </div>
     </section>
-    
+
     <!-- Seção de Introdução -->
     <section class="intro-section">
       <div class="container">
@@ -26,14 +26,13 @@
         </ScrollReveal>
       </div>
     </section>
-    
+
     <!-- Seção Principal de Política de Privacidade -->
     <section class="privacy-main">
       <div class="container">
         <div class="privacy-grid">
-          <ScrollReveal v-for="(section, index) in sections" :key="index" 
-                        :direction="index % 2 === 0 ? 'left' : 'right'" 
-                        :delay="200 + (index * 100)">
+          <ScrollReveal v-for="(section, index) in sections" :key="index"
+            :direction="index % 2 === 0 ? 'left' : 'right'" :delay="200 + (index * 100)">
             <div class="privacy-card">
               <div class="privacy-icon" v-html="section.icon"></div>
               <div class="privacy-content">
@@ -45,7 +44,7 @@
         </div>
       </div>
     </section>
-    
+
     <!-- Seção de Direitos do Usuário -->
     <section class="user-rights-section">
       <div class="container">
@@ -57,7 +56,7 @@
           </div>
           <p class="rights-intro">{{ t('privacyPolicy.rightsIntro') }}</p>
         </ScrollReveal>
-        
+
         <div class="rights-steps">
           <ScrollReveal direction="bottom" :delay="300">
             <div class="rights-step">
@@ -70,7 +69,7 @@
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="400">
             <div class="rights-step">
               <div class="step-number">
@@ -82,7 +81,7 @@
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="500">
             <div class="rights-step">
               <div class="step-number">
@@ -94,7 +93,7 @@
               </div>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="bottom" :delay="600">
             <div class="rights-step">
               <div class="step-number">
@@ -109,7 +108,7 @@
         </div>
       </div>
     </section>
-    
+
     <!-- Seção de Segurança -->
     <section class="security-section">
       <div class="container">
@@ -119,7 +118,7 @@
               <i class="fas fa-shield-alt"></i>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="right" :delay="300">
             <div class="security-text">
               <h3>{{ t('privacyPolicy.securityTitle') }}</h3>
@@ -136,7 +135,7 @@
         </div>
       </div>
     </section>
-    
+
     <!-- Seção CTA -->
     <section class="cta-section">
       <div class="container">
@@ -144,12 +143,12 @@
           <div class="cta-content">
             <h2>{{ t('privacyPolicy.ctaTitle') }}</h2>
             <p>{{ t('privacyPolicy.ctaText') }}</p>
-            <router-link to="/Contato" class="cta-button">{{ t('privacyPolicy.ctaButton') }}</router-link>
+            <router-link to="/Contato" class="cta-button">{{ t('privacyPolicy.ctaButton') }} <i class="fas fa-arrow-right"></i></router-link>
           </div>
         </ScrollReveal>
       </div>
     </section>
-    
+
     <HomeFooter />
   </div>
 </template>
@@ -166,7 +165,7 @@ export default {
   },
   setup() {
     const { t, currentLanguage } = usePrivacyPolicyTranslation()
-    
+
     return {
       t,
       currentLanguage
@@ -305,6 +304,7 @@ section {
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -315,6 +315,17 @@ section {
 .intro-section {
   background-color: #f9f9f9;
   text-align: center;
+}
+
+.intro-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7z' fill='%23ae2c2a' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+  z-index: 0;
 }
 
 .section-title {
@@ -367,7 +378,7 @@ section {
   width: 100%;
   height: 100%;
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ae2c2a' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    opacity: 0.5;
+  opacity: 0.5;
 }
 
 .privacy-grid {
@@ -559,9 +570,11 @@ section {
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-5px);
   }
+
   100% {
     transform: translateY(0px);
   }
@@ -599,9 +612,11 @@ section {
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.2);
   }
+
   100% {
     transform: scale(1);
   }
@@ -629,6 +644,17 @@ section {
   position: relative;
 }
 
+.security-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ae2c2a' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+
 .security-content {
   display: flex;
   align-items: center;
@@ -649,12 +675,15 @@ section {
   0% {
     transform: translateY(0px);
   }
+
   25% {
     transform: translateY(-4px);
   }
+
   75% {
     transform: translateY(4px);
   }
+
   100% {
     transform: translateY(0px);
   }
@@ -749,6 +778,10 @@ section {
   box-shadow: 0 10px 20px rgba(174, 44, 42, 0.3);
 }
 
+.cta-button i {
+  margin-left: 7px;
+}
+
 .cta-button:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 30px rgba(174, 44, 42, 0.4);
@@ -759,7 +792,7 @@ section {
   .container {
     padding: 0 40px;
   }
-  
+
   .privacy-grid {
     grid-template-columns: 1fr;
   }
@@ -773,19 +806,19 @@ section {
   .hero-title {
     font-size: 3rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.3rem;
   }
-  
+
   section {
     padding: 60px 0;
   }
-  
+
   .privacy-card {
     flex-direction: column;
   }
-  
+
   .privacy-icon {
     min-width: 100%;
     padding: 30px 0;
@@ -794,17 +827,17 @@ section {
   .privacy-content {
     padding: 25px;
   }
-  
+
   .security-content {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .security-text h3::after {
     left: 50%;
     transform: translateX(-50%);
   }
-  
+
   .security-features li {
     text-align: left;
   }
@@ -815,11 +848,11 @@ section {
     height: 60vh;
     min-height: 400px;
   }
-  
+
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .section-title h2 {
     font-size: 2rem;
   }
@@ -827,27 +860,27 @@ section {
   .privacy-content h3 {
     font-size: 1.4rem;
   }
-  
+
   .privacy-content p {
     font-size: 0.9rem;
   }
-  
+
   .intro-text {
     font-size: 1.1rem;
   }
-  
+
   .cta-content h2 {
     font-size: 2rem;
   }
-  
+
   .rights-steps::before {
     display: none;
   }
-  
+
   .step-number {
     margin: 0 auto;
   }
-  
+
   .step-content {
     text-align: center;
   }
@@ -857,23 +890,23 @@ section {
   .container {
     padding: 0 20px;
   }
-  
+
   .hero-title {
     font-size: 2rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.1rem;
   }
-  
+
   .section-title h2 {
     font-size: 1.8rem;
   }
-  
+
   .accent-line {
     width: 40px;
   }
-  
+
   .privacy-content h3 {
     font-size: 1.4rem;
   }
@@ -885,7 +918,8 @@ section {
 }
 
 /* Animações adicionais */
-.privacy-icon i, .right-icon i {
+.privacy-icon i,
+.right-icon i {
   animation: float 3s ease-in-out infinite;
 }
 
@@ -900,9 +934,11 @@ section {
   0% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0.7);
   }
+
   70% {
     box-shadow: 0 0 0 10px rgba(174, 44, 42, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0);
   }
