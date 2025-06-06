@@ -1,5 +1,5 @@
 <template>
-  <header :class="{'scrolled': isScrolled}">
+  <header :class="{ 'scrolled': isScrolled }">
     <button @click="toggleSidebar" :class="['menu-toggle', { 'scrolled': isScrolled, 'active': sidebarOpen }]">
       <span class="menu-icon"></span>
     </button>
@@ -12,27 +12,27 @@
           <i class="fas fa-times"></i>
         </button>
       </div>
-      
+
       <div class="sidebar-content">
         <ul class="sidebar-menu">
           <li><router-link to="/" exact-active-class="active" @click="closeSidebar">
-            <i class="fas fa-home"></i> {{ tHeader('header.navigation.home') }}
-          </router-link></li>
+              <i class="fas fa-home"></i> {{ tHeader('header.navigation.home') }}
+            </router-link></li>
           <li><router-link to="/Sobre" exact-active-class="active" @click="closeSidebar">
-            <i class="fas fa-building"></i> {{ tHeader('header.navigation.about') }}
-          </router-link></li>
+              <i class="fas fa-building"></i> {{ tHeader('header.navigation.about') }}
+            </router-link></li>
           <li><router-link to="/Diferenciais" exact-active-class="active" @click="closeSidebar">
-            <i class="fas fa-award"></i> {{ tHeader('header.navigation.differentials') }}
-          </router-link></li>
+              <i class="fas fa-award"></i> {{ tHeader('header.navigation.differentials') }}
+            </router-link></li>
           <li><router-link to="/Servicos" exact-active-class="active" @click="closeSidebar">
-            <i class="fas fa-cogs"></i> {{ tHeader('header.navigation.services') }}
-          </router-link></li>
+              <i class="fas fa-cogs"></i> {{ tHeader('header.navigation.services') }}
+            </router-link></li>
           <li><router-link to="/Produtos" exact-active-class="active" @click="closeSidebar">
-            <i class="fas fa-pills"></i> {{ tHeader('header.navigation.products') }}
-          </router-link></li>
+              <i class="fas fa-pills"></i> {{ tHeader('header.navigation.products') }}
+            </router-link></li>
           <li><router-link to="/Compliance" exact-active-class="active" @click="closeSidebar">
-            <i class="fas fa-shield-alt"></i> {{ tHeader('header.navigation.compliance') }}
-          </router-link></li>
+              <i class="fas fa-shield-alt"></i> {{ tHeader('header.navigation.compliance') }}
+            </router-link></li>
           <li class="sidebar-dropdown">
             <div class="sidebar-dropdown-toggle">
               <router-link to="/LGPD" class="sidebar-dropdown-main" @click="closeSidebar">
@@ -40,8 +40,8 @@
                 <span>{{ tHeader('header.navigation.lgpd') }}</span>
               </router-link>
               <div class="sidebar-dropdown-arrow-container" @click.stop="toggleDropdown('lgpd')">
-                <i class="fas fa-chevron-down sidebar-dropdown-arrow" 
-                   :class="{ 'rotated': openDropdown === 'lgpd' }"></i>
+                <i class="fas fa-chevron-down sidebar-dropdown-arrow"
+                  :class="{ 'rotated': openDropdown === 'lgpd' }"></i>
               </div>
             </div>
             <div class="sidebar-dropdown-menu" :class="{ 'show': openDropdown === 'lgpd' }">
@@ -58,25 +58,34 @@
 
           <li class="sidebar-dropdown">
             <div class="sidebar-dropdown-toggle">
-              <router-link to="/Contato" class="sidebar-dropdown-main" @click="closeSidebar">
+              <a href="#" class="sidebar-dropdown-main" @click.prevent>
                 <i class="fas fa-envelope"></i>
                 <span>{{ tHeader('header.navigation.contact') }}</span>
-              </router-link>
+              </a>
               <div class="sidebar-dropdown-arrow-container" @click.stop="toggleDropdown('contato')">
-                <i class="fas fa-chevron-down sidebar-dropdown-arrow" 
-                   :class="{ 'rotated': openDropdown === 'contato' }"></i>
+                <i class="fas fa-chevron-down sidebar-dropdown-arrow"
+                  :class="{ 'rotated': openDropdown === 'contato' }"></i>
               </div>
             </div>
             <div class="sidebar-dropdown-menu" :class="{ 'show': openDropdown === 'contato' }">
+              <router-link to="/Contato" class="sidebar-dropdown-item" @click="closeSidebar">
+                <i class="fas fa-comments"></i>
+                <span class="fale-conosco-span">{{ tHeader('header.dropdown.contact.talkToUs') }}</span>
+              </router-link>
+              <router-link to="/TrabalheConosco" class="sidebar-dropdown-item" @click="closeSidebar">
+                <i class="fas fa-briefcase"></i>
+                <span class="trabalhe-conosco-span">{{ tHeader('header.dropdown.contact.workWithUs') }}</span>
+              </router-link>
               <router-link to="/SejaParceiro" class="sidebar-dropdown-item" @click="closeSidebar">
                 <i class="fas fa-handshake"></i>
                 <span class="seja-parceiro-span">{{ tHeader('header.dropdown.contact.bePartner') }}</span>
               </router-link>
             </div>
+
           </li>
         </ul>
       </div>
-      
+
       <!-- Redes sociais e idiomas no menu mobile -->
       <div class="sidebar-footer">
         <div class="social-media-mobile">
@@ -85,24 +94,27 @@
             <a href="https://www.instagram.com/unihospitalar" target="_blank" class="social-icon">
               <i class="fab fa-instagram"></i>
             </a>
-            <a href="https://www.linkedin.com/company/uni-hospitalar/about" target="_blank" class="social-icon">
+            <a href="https://www.linkedin.com/company/uni-hospitalar" target="_blank" class="social-icon">
               <i class="fab fa-linkedin-in"></i>
             </a>
           </div>
         </div>
-        
+
         <div class="language-selector-mobile">
           <h3>{{ tHeader('header.social.language') }}</h3>
           <div class="icon-selector">
-            <span @click="changeLanguage('pt')" :class="['fi fi-br', {'active': selectedLanguage === 'pt'}]" title="Português"></span>
-            <span @click="changeLanguage('en')" :class="['fi fi-us', {'active': selectedLanguage === 'en'}]" title="English"></span>
-            <span @click="changeLanguage('es')" :class="['fi fi-es', {'active': selectedLanguage === 'es'}]" title="Español"></span>
+            <span @click="changeLanguage('pt')" :class="['fi fi-br', { 'active': selectedLanguage === 'pt' }]"
+              title="Português"></span>
+            <span @click="changeLanguage('en')" :class="['fi fi-us', { 'active': selectedLanguage === 'en' }]"
+              title="English"></span>
+            <span @click="changeLanguage('es')" :class="['fi fi-es', { 'active': selectedLanguage === 'es' }]"
+              title="Español"></span>
           </div>
         </div>
       </div>
     </div>
     <router-link to="/" custom v-slot="{ navigate }">
-      <div class="logo-container" :class="{'scrolled': isScrolled}" @click="navigate" role="link">
+      <div class="logo-container" :class="{ 'scrolled': isScrolled }" @click="navigate" role="link">
         <img src="@/assets/logo-uni2.png" alt="Logo da Uni Hospitalar" class="logo">
       </div>
     </router-link>
@@ -118,9 +130,12 @@
         </a>
       </div>
       <div class="icon-selector">
-        <span @click="changeLanguage('pt')" :class="['fi fi-br', {'active': selectedLanguage === 'pt'}]" title="Português"></span>
-        <span @click="changeLanguage('en')" :class="['fi fi-us', {'active': selectedLanguage === 'en'}]" title="English"></span>
-        <span @click="changeLanguage('es')" :class="['fi fi-es', {'active': selectedLanguage === 'es'}]" title="Español"></span>
+        <span @click="changeLanguage('pt')" :class="['fi fi-br', { 'active': selectedLanguage === 'pt' }]"
+          title="Português"></span>
+        <span @click="changeLanguage('en')" :class="['fi fi-us', { 'active': selectedLanguage === 'en' }]"
+          title="English"></span>
+        <span @click="changeLanguage('es')" :class="['fi fi-es', { 'active': selectedLanguage === 'es' }]"
+          title="Español"></span>
       </div>
     </div>
 
@@ -139,9 +154,12 @@
 
       <div class="language-selector">
         <div class="icon-selector">
-          <span @click="changeLanguage('pt')" :class="['fi fi-br', {'active': selectedLanguage === 'pt'}]" title="Português"></span>
-          <span @click="changeLanguage('en')" :class="['fi fi-us', {'active': selectedLanguage === 'en'}]" title="English"></span>
-          <span @click="changeLanguage('es')" :class="['fi fi-es', {'active': selectedLanguage === 'es'}]" title="Español"></span>
+          <span @click="changeLanguage('pt')" :class="['fi fi-br', { 'active': selectedLanguage === 'pt' }]"
+            title="Português"></span>
+          <span @click="changeLanguage('en')" :class="['fi fi-us', { 'active': selectedLanguage === 'en' }]"
+            title="English"></span>
+          <span @click="changeLanguage('es')" :class="['fi fi-es', { 'active': selectedLanguage === 'es' }]"
+            title="Español"></span>
         </div>
       </div>
     </div>
@@ -149,11 +167,16 @@
     <nav>
       <ul>
         <li><router-link to="/" exact-active-class="active">{{ tHeader('header.navigation.home') }}</router-link></li>
-        <li><router-link to="/Sobre" exact-active-class="active">{{ tHeader('header.navigation.about') }}</router-link></li>
-        <li><router-link to="/Diferenciais" exact-active-class="active">{{ tHeader('header.navigation.differentials') }}</router-link></li>
-        <li><router-link to="/Servicos" exact-active-class="active">{{ tHeader('header.navigation.services') }}</router-link></li>
-        <li><router-link to="/Produtos" exact-active-class="active">{{ tHeader('header.navigation.products') }}</router-link></li>
-        <li><router-link to="/Compliance" exact-active-class="active">{{ tHeader('header.navigation.compliance') }}</router-link></li>
+        <li><router-link to="/Sobre" exact-active-class="active">{{ tHeader('header.navigation.about') }}</router-link>
+        </li>
+        <li><router-link to="/Diferenciais" exact-active-class="active">{{ tHeader('header.navigation.differentials')
+            }}</router-link></li>
+        <li><router-link to="/Servicos" exact-active-class="active">{{ tHeader('header.navigation.services')
+            }}</router-link></li>
+        <li><router-link to="/Produtos" exact-active-class="active">{{ tHeader('header.navigation.products')
+            }}</router-link></li>
+        <li><router-link to="/Compliance" exact-active-class="active">{{ tHeader('header.navigation.compliance')
+            }}</router-link></li>
         <li class="dropdown">
           <router-link to="/LGPD" exact-active-class="active" class="dropdown-trigger">
             {{ tHeader('header.navigation.lgpd') }} <i class="fas fa-chevron-down dropdown-arrow"></i>
@@ -180,11 +203,27 @@
           </div>
         </li>
         <li class="dropdown">
-          <router-link to="/Contato" exact-active-class="active" class="dropdown-trigger">
+          <a href="#" class="dropdown-trigger" @click.prevent>
             {{ tHeader('header.navigation.contact') }} <i class="fas fa-chevron-down dropdown-arrow"></i>
-          </router-link>
+          </a>
           <div class="dropdown-content">
             <div class="dropdown-items">
+              <router-link to="/Contato" exact-active-class="active" class="dropdown-item">
+                <div class="item-icon">
+                  <i class="fas fa-comments"></i>
+                </div>
+                <div class="item-content">
+                  <span class="item-title">{{ tHeader('header.dropdown.contact.talkToUs') }}</span>
+                </div>
+              </router-link>
+              <router-link to="/TrabalheConosco" exact-active-class="active" class="dropdown-item">
+                <div class="item-icon">
+                  <i class="fas fa-briefcase"></i>
+                </div>
+                <div class="item-content">
+                  <span class="item-title">{{ tHeader('header.dropdown.contact.workWithUs') }}</span>
+                </div>
+              </router-link>
               <router-link to="/SejaParceiro" exact-active-class="active" class="dropdown-item">
                 <div class="item-icon">
                   <i class="fas fa-handshake"></i>
@@ -244,7 +283,7 @@ export default {
     const { setLanguage: setAntiBriberyLanguage } = useAntiBriberyTranslation();
     const { setLanguage: setSectorStandardsLanguage } = useSectorStandardsTranslation();
     const { t: tHeader, setLanguage: setHeaderFooterLanguage } = useHeaderFooterTranslation();
-      
+
     return {
       t,
       tHeader,
@@ -598,6 +637,25 @@ nav ul li.dropdown {
   position: relative;
 }
 
+nav ul li.dropdown::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 15px;
+  background: transparent;
+  z-index: 999;
+}
+
+nav ul li.dropdown:hover .dropdown-content,
+nav ul li.dropdown::after:hover+.dropdown-content {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
 .dropdown-trigger {
   display: flex;
   align-items: center;
@@ -616,7 +674,7 @@ nav ul li.dropdown:hover .dropdown-arrow {
 .dropdown-content {
   display: none;
   position: absolute;
-  top: calc(45% + 15px);
+  top: calc(45% + 25px);
   left: 50%;
   transform: translateX(-50%);
   min-width: 320px;
@@ -927,7 +985,7 @@ nav ul li.dropdown:hover .dropdown-content {
   color: #AE2C2A;
 }
 
-.sidebar-menu li a:hover, 
+.sidebar-menu li a:hover,
 .sidebar-menu li a.active {
   background-color: rgba(174, 44, 42, 0.1);
   color: #AE2C2A;
@@ -1203,9 +1261,17 @@ nav ul li.dropdown:hover .dropdown-content {
 }
 
 @keyframes pulse-arrow {
-  0% { transform: translate(-50%, -50%) scale(1); }
-  50% { transform: translate(-50%, -50%) scale(1.3); }
-  100% { transform: translate(-50%, -50%) scale(1); }
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 .sidebar-dropdown-arrow-container:active {
@@ -1284,22 +1350,22 @@ nav ul li.dropdown:hover .dropdown-content {
   nav ul li a {
     font-size: 0.9em;
   }
-  
+
   .social-icon {
     width: 32px;
     height: 32px;
     font-size: 0.9rem;
   }
-  
+
   nav ul li a {
     font-size: 0.9em;
   }
-  
+
   nav ul li {
     display: flex;
     align-items: center;
   }
-  
+
   nav ul li a,
   nav ul li .dropdown-trigger {
     display: flex;
@@ -1307,11 +1373,11 @@ nav ul li.dropdown:hover .dropdown-content {
     line-height: 1;
     padding: 8px 0;
   }
-  
+
   .dropdown-trigger {
     gap: 5px;
   }
-  
+
   .dropdown-arrow {
     font-size: 0.8em;
     margin-top: 0;
@@ -1401,7 +1467,7 @@ nav ul li.dropdown:hover .dropdown-content {
   .icon-selector span {
     font-size: 0.8em;
   }
-  
+
   .social-icon {
     width: 28px;
     height: 28px;
@@ -1411,8 +1477,8 @@ nav ul li.dropdown:hover .dropdown-content {
 
 @media (max-width: 992px) {
   header {
-    padding: 18px 0; 
-    min-height: 80px; 
+    padding: 18px 0;
+    min-height: 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1431,35 +1497,39 @@ nav ul li.dropdown:hover .dropdown-content {
     max-height: 80px;
     max-width: 100%;
   }
-  
+
   .header-right {
     display: none;
   }
-  
+
   .mobile-center-controls {
     display: flex;
   }
-  
+
   .mobile-center-controls .social-icon {
     width: 32px;
     height: 32px;
     font-size: 0.9rem;
   }
-  
+
   .mobile-center-controls .icon-selector span {
     font-size: 0.8em;
   }
-  
+
   .menu-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
+  .menu-toggle.active {
+    top: 25px;
+  }
+
   nav ul {
     display: none;
   }
-  
+
   .menu-sidebar {
     display: flex;
   }
@@ -1478,13 +1548,13 @@ nav ul li.dropdown:hover .dropdown-content {
   .logo {
     max-height: 70px;
   }
-  
+
   .mobile-center-controls .social-icon {
     width: 30px;
     height: 30px;
     font-size: 0.85rem;
   }
-  
+
   .mobile-center-controls .icon-selector span {
     font-size: 0.7em;
   }
@@ -1495,7 +1565,7 @@ nav ul li.dropdown:hover .dropdown-content {
     padding: 12px 0;
     min-height: 65px;
   }
-  
+
   .logo-container {
     width: 130px;
   }
@@ -1503,25 +1573,25 @@ nav ul li.dropdown:hover .dropdown-content {
   .logo {
     max-height: 50px;
   }
-  
+
   .mobile-center-controls .social-icon {
     width: 28px;
     height: 28px;
     font-size: 0.8rem;
   }
-  
+
   .mobile-center-controls .icon-selector {
     gap: 5px;
   }
-  
+
   .mobile-center-controls .icon-selector span {
     font-size: 0.6em;
   }
-  
+
   .menu-sidebar {
     width: 280px;
   }
-  
+
   .sidebar-menu li a {
     font-size: 0.95em;
     padding: 12px 20px;
@@ -1541,19 +1611,19 @@ nav ul li.dropdown:hover .dropdown-content {
   .hero-title {
     font-size: 1.8rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1rem;
   }
-  
+
   .service-content h3 {
     font-size: 1.5rem;
   }
-  
+
   .step-content h4 {
     font-size: 1.2rem;
   }
-  
+
   .benefit-card {
     padding: 20px;
   }
@@ -1564,7 +1634,7 @@ nav ul li.dropdown:hover .dropdown-content {
     flex-direction: column;
     gap: 15px;
   }
-  
+
   .process-steps::before {
     display: none;
   }
@@ -1578,11 +1648,11 @@ nav ul li.dropdown:hover .dropdown-content {
   .logo {
     max-height: 35px;
   }
-  
+
   .mobile-center-controls {
     transform: translate(-50%, -50%) scale(0.9);
   }
-  
+
   .menu-sidebar {
     width: 260px;
   }
@@ -1598,15 +1668,18 @@ nav ul li.dropdown:hover .dropdown-content {
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
+
   100% {
     transform: translateY(0px);
   }
 }
 
-.service-icon i, .benefit-icon i {
+.service-icon i,
+.benefit-icon i {
   animation: float 3s ease-in-out infinite;
 }
 
@@ -1626,9 +1699,11 @@ nav ul li.dropdown:hover .dropdown-content {
   0% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0.7);
   }
+
   70% {
     box-shadow: 0 0 0 10px rgba(174, 44, 42, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0);
   }

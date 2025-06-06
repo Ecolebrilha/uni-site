@@ -21,7 +21,9 @@ const translations = reactive({
           legalTerms: 'Termos Legais'
         },
         contact: {
-          bePartner: 'Seja Nosso Parceiro'
+          bePartner: 'Seja Nosso Parceiro',
+          workWithUs: 'Trabalhe Conosco',
+          talkToUs: 'Entre em Contato'
         }
       },
       social: {
@@ -52,7 +54,9 @@ const translations = reactive({
           legalTerms: 'Legal Terms'
         },
         contact: {
-          bePartner: 'Be Our Partner'
+          bePartner: 'Be Our Partner',
+          workWithUs: 'Work With Us',
+          talkToUs: 'Contact Us'
         }
       },
       social: {
@@ -83,7 +87,9 @@ const translations = reactive({
           legalTerms: 'Términos Legales'
         },
         contact: {
-          bePartner: 'Sea Nuestro Socio'
+          bePartner: 'Sea Nuestro Socio',
+          workWithUs: 'Trabaja con Nosotros',
+          talkToUs: 'Contáctanos'
         }
       },
       social: {
@@ -107,11 +113,11 @@ export function useHeaderFooterTranslation() {
   const t = (key) => {
     const keys = key.split('.')
     let value = translations[currentLanguage.value]
-    
+
     for (const k of keys) {
       value = value?.[k]
     }
-    
+
     return value || key
   }
 

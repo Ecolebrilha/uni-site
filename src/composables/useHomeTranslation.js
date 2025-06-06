@@ -84,9 +84,9 @@ const translations = reactive({
         title: 'Entre em contato conosco',
         subtitle: 'Estamos prontos para atender suas necessidades e responder a todas as suas dúvidas.',
         branches: {
-          recife: 'Matriz Recife - Uni Hospitalar',
-          fortaleza: 'CD Fortaleza - Uni Ceará',
-          saopaulo: 'CD São Paulo - SP Hospitalar LTDA'
+          recife: 'Uni Hospitalar LTDA',
+          fortaleza: 'Uni Hospitalar Ceará LTDA',
+          saopaulo: 'SP Hospitalar LTDA'
         },
         hours: 'Segunda a Sexta: 8h às 18h'
       },
@@ -198,9 +198,9 @@ const translations = reactive({
         title: 'Contact us',
         subtitle: 'We are ready to meet your needs and answer all your questions.',
         branches: {
-          recife: 'Headquarters Recife - Uni Hospitalar',
-          fortaleza: 'DC Fortaleza - Uni Ceará',
-          saopaulo: 'DC São Paulo - SP Hospitalar LTDA'
+          recife: 'Uni Hospitalar LTDA',
+          fortaleza: 'Uni Hospitalar Ceará LTDA',
+          saopaulo: 'SP Hospitalar LTDA'
         },
         hours: 'Monday to Friday: 8am to 6pm'
       },
@@ -312,9 +312,9 @@ const translations = reactive({
         title: 'Contáctanos',
         subtitle: 'Estamos listos para atender tus necesidades y responder todas tus preguntas.',
         branches: {
-          recife: 'Sede Recife - Uni Hospitalar',
-          fortaleza: 'CD Fortaleza - Uni Ceará',
-          saopaulo: 'CD São Paulo - SP Hospitalar LTDA'
+          recife: 'Uni Hospitalar LTDA',
+          fortaleza: 'Uni Hospitalar Ceará LTDA',
+          saopaulo: 'SP Hospitalar LTDA'
         },
         hours: 'Lunes a Viernes: 8h a 18h'
       },

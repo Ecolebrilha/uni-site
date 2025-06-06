@@ -365,7 +365,7 @@
         <div class="cookie-buttons">
           <button class="cookie-accept" @click="acceptCookies">{{ t('home.cookies.banner.accept') }}</button>
           <button class="cookie-settings" @click="showCookieSettings = true">{{ t('home.cookies.banner.settings')
-            }}</button>
+          }}</button>
         </div>
       </div>
     </div>
@@ -452,28 +452,28 @@ export default {
       dragThreshold: 50,
       branches: [
         {
-          name: 'Matriz Recife - Uni Hospitalar',
+          name: 'Uni Hospitalar LTDA',
           phone: '+55 (81) 3472-7201',
           email: 'contato@unihospitalar.com.br',
           address: 'R. Alagoas, 253 - Ipsep, Recife - PE, 51350-560',
           hours: 'Segunda a Sexta: 8h às 18h',
-          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.5988857640384!2d-34.8951233!3d-8.0623376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab1be2a5d9b3d7%3A0x9e3e5b0d8d3d8d3d!2sUni%20Hospitalar!5e0!3m2!1spt-BR!2sbr!4v1625151234567!5m2!1spt-BR!2sbr'
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d246.91!2d-34.8951233!3d-8.0623376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab1be2a5d9b3d7%3A0x123456789!2sR.%20Alagoas%2C%20253%20-%20Ipsep%2C%20Recife%20-%20PE%2C%2051350-560%2C%20Brasil!5e0!3m2!1spt-BR!2sbr!4v1699999999999!5m2!1spt-BR!2sbr'
         },
         {
-          name: 'CD Fortaleza - Uni Ceará',
-          phone: '+55 (81) 3472-7202',
-          email: 'fortaleza@unihospitalar.com.br',
+          name: 'Uni Hospitalar Ceará LTDA',
+          phone: '+55 (85) 3289-3722',
+          email: 'contato@uniceara.com.br',
           address: 'R. Francisco Jose Albuquerque Pereira - Cajazeiras, Fortaleza - CE, 60864-520',
           hours: 'Segunda a Sexta: 8h às 18h',
-          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3979.954729928924!2d-38.58232312426936!3d-3.8271872440876074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74c7a7a7a7a7a7%3A0x9e3e5b0d8d3d8d3d!2sR.%20Francisco%20Jose%20Albuquerque%20Pereira%20-%20Cajazeiras%2C%20Fortaleza%20-%20CE%2C%2060864-520!5e0!3m2!1spt-BR!2sbr!4v1625151234567!5m2!1spt-BR!2sbr'
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124.37358531027889!2d-38.58232312426936!3d-3.8271872440876074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74c7a7a7a7a7a7%3A0x9e3e5b0d8d3d8d3d!2sR.%20Francisco%20Jose%20Albuquerque%20Pereira%20-%20Cajazeiras%2C%20Fortaleza%20-%20CE%2C%2060864-520!5e0!3m2!1spt-BR!2sbr!4v1625151234567!5m2!1spt-BR!2sbr'
         },
         {
-          name: 'CD São Paulo - SP Hospitalar LTDA',
+          name: 'SP Hospitalar LTDA',
           phone: '+55 (11) 4777-2159',
-          email: 'sp@unihospitalar.com.br',
+          email: 'contato@sphospitalar.com.br',
           address: 'R. Pinhal, 165 - Jardim Sabiá, Cotia - SP, 06716-575',
           hours: 'Segunda a Sexta: 8h às 18h',
-          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.3963130076986!2d-46.92011492368744!3d-23.55290096159868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cf03b8b1b8b8b9%3A0x9e3e5b0d8d3d8d3d!2sR.%20Pinhal%2C%20165%20-%20Jardim%20Sabi%C3%A1%2C%20Cotia%20-%20SP%2C%2006716-575!5e0!3m2!1spt-BR!2sbr!4v1625151234567!5m2!1spt-BR!2sbr'
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d228.58726956298115!2d-46.92011492368744!3d-23.55290096159868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cf03b8b1b8b8b9%3A0x9e3e5b0d8d3d8d3d!2sR.%20Pinhal%2C%20165%20-%20Jardim%20Sabi%C3%A1%2C%20Cotia%20-%20SP%2C%2006716-575!5e0!3m2!1spt-BR!2sbr!4v1625151234567!5m2!1spt-BR!2sbr'
         }
       ],
       showCookieBanner: false,
@@ -1381,7 +1381,6 @@ section {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  filter: grayscale(100%);
   transition: filter 0.3s ease;
 }
 
@@ -1559,6 +1558,9 @@ section {
   color: #666;
   cursor: pointer;
   transition: all 0.3s ease;
+  flex: 1;
+  min-width: 300px;
+  text-align: center;
 }
 
 .branch-button:hover {
@@ -1610,11 +1612,15 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .contact-method span {
   font-size: 1.1rem;
   color: #333;
+  line-height: 1.4;
+  flex: 1;
 }
 
 .contact-method a {
@@ -1622,6 +1628,7 @@ section {
   color: #333;
   text-decoration: none;
   transition: color 0.3s ease;
+  line-height: 1.4;
 }
 
 .contact-method a:hover {
@@ -1636,17 +1643,18 @@ section {
   transition: all 0.3s ease;
   position: relative;
   border-radius: 5px;
-  padding: 2px 6px;
+  line-height: 1.4;
 }
 
 .email-link:hover {
   color: #AE2C2A;
   background-color: rgba(174, 44, 42, 0.1);
   transform: scale(1.05);
+  padding: 2px 6px;
 }
 
 .branch-map {
-  height: 450px;
+  height: 640px;
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -2064,14 +2072,67 @@ input:checked+.slider:before {
     text-align: center;
   }
 
+  .branch-info {
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    padding: 25px;
+    margin: 0 auto 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    max-width: 450px;
+  }
+
   .contact-methods {
     align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .contact-method {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .contact-method i {
+    font-size: 1.5rem;
+    color: #AE2C2A;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(174, 44, 42, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .contact-method span,
+  .contact-method a {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.4;
+    flex: 1;
+    text-align: left;
   }
 
   .branch-selector {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+
+  .branch-button {
+    min-width: 500px;
   }
 }
 
@@ -2102,8 +2163,54 @@ input:checked+.slider:before {
     justify-content: center;
   }
 
+  .branch-info {
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    padding: 25px;
+    margin: 0 auto 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    max-width: 450px;
+  }
+
   .contact-methods {
-    align-items: flex-start;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .contact-method {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .contact-method i {
+    font-size: 1.5rem;
+    color: #AE2C2A;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(174, 44, 42, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .contact-method span,
+  .contact-method a {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.4;
+    flex: 1;
+    text-align: left;
   }
 
   .branch-map {
@@ -2315,7 +2422,14 @@ input:checked+.slider:before {
   }
 
   .branch-button {
-    width: 90%;
+    min-width: unset;
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    word-wrap: break-word;
+    white-space: normal;
+    line-height: 1.3;
   }
 
   .branch-info {
