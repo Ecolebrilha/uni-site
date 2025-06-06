@@ -150,47 +150,169 @@
       </div>
     </section>
 
-    <!-- Seção de Formulário -->
-    <section class="form-section">
+    <!-- Seção de Vagas Disponíveis -->
+    <section class="jobs-section">
       <div class="container">
         <ScrollReveal direction="bottom" :delay="200">
           <div class="section-title">
             <span class="accent-line"></span>
-            <h2>Candidate-se</h2>
+            <h2>Vagas Disponíveis</h2>
             <span class="accent-line"></span>
           </div>
-          <p class="form-intro">
-            Preencha o formulário abaixo para se candidatar a uma vaga na Uni Hospitalar.
+          <p class="jobs-intro">
+            Confira nossas oportunidades atuais e candidate-se à vaga que mais combina com seu perfil.
+          </p>
+        </ScrollReveal>
+
+        <!-- Loading das vagas -->
+        <div v-if="loadingJobs" class="loading-container">
+          <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+          </div>
+          <p>Carregando vagas disponíveis...</p>
+        </div>
+
+        <!-- Lista de vagas -->
+        <div v-else-if="availableJobs.length > 0" class="jobs-grid">
+          <ScrollReveal direction="bottom" :delay="300 + (index * 100)" v-for="(job, index) in availableJobs" :key="job.id">
+            <div class="job-card" @click="selectJob(job)">
+              <div class="job-header">
+                <div class="job-icon">
+                  <i :class="getJobIcon(job.department)"></i>
+                </div>
+                <div class="job-badge" :class="getJobBadgeClass(job.type)">
+                  {{ job.type }}
+                </div>
+              </div>
+              <div class="job-content">
+                <h3 class="job-title">{{ job.title }}</h3>
+                <div class="job-info">
+                  <div class="job-detail">
+                    <i class="fas fa-building"></i>
+                    <span>{{ job.department }}</span>
+                  </div>
+                  <div class="job-detail">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>{{ job.location }}</span>
+                  </div>
+                  <div class="job-detail">
+                    <i class="fas fa-clock"></i>
+                    <span>{{ job.workload }}</span>
+                  </div>
+                </div>
+                <p class="job-description">{{ job.shortDescription }}</p>
+                <div class="job-requirements">
+                  <h4>Principais requisitos:</h4>
+                  <ul>
+                    <li v-for="requirement in job.mainRequirements" :key="requirement">
+                      {{ requirement }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="job-footer">
+                <div class="job-salary" v-if="job.salary">
+                  <i class="fas fa-dollar-sign"></i>
+                  <span>{{ job.salary }}</span>
+                </div>
+                <button class="apply-button">
+                  <i class="fas fa-paper-plane"></i>
+                  Candidatar-se
+                </button>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+
+        <!-- Mensagem quando não há vagas -->
+        <div v-else class="no-jobs-container">
+          <ScrollReveal direction="bottom" :delay="300">
+            <div class="no-jobs-content">
+              <div class="no-jobs-icon">
+                <i class="fas fa-search"></i>
+              </div>
+              <h3>Nenhuma vaga disponível no momento</h3>
+              <p>
+                Não temos vagas abertas atualmente, mas você pode enviar seu currículo para nosso banco de talentos.
+                Entraremos em contato quando surgir uma oportunidade compatível com seu perfil.
+              </p>
+              <button @click="showTalentBankForm" class="talent-bank-button">
+                <i class="fas fa-database"></i>
+                Cadastrar no Banco de Talentos
+              </button>
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Formulário (oculta inicialmente) -->
+    <section class="form-section" v-if="showForm">
+      <div class="container">
+        <ScrollReveal direction="bottom" :delay="200">
+          <div class="section-title">
+            <span class="accent-line"></span>
+            <h2 v-if="selectedJob">Candidatar-se para: {{ selectedJob.title }}</h2>
+            <h2 v-else>Banco de Talentos</h2>
+            <span class="accent-line"></span>
+          </div>
+          <div class="selected-job-info" v-if="selectedJob">
+            <div class="job-summary">
+              <div class="job-summary-header">
+                <h3>{{ selectedJob.title }}</h3>
+                <button @click="backToJobs" class="back-button">
+                  <i class="fas fa-arrow-left"></i>
+                  Voltar às vagas
+                </button>
+              </div>
+              <div class="job-summary-details">
+                <span><i class="fas fa-building"></i> {{ selectedJob.department }}</span>
+                <span><i class="fas fa-map-marker-alt"></i> {{ selectedJob.location }}</span>
+                <span><i class="fas fa-clock"></i> {{ selectedJob.workload }}</span>
+              </div>
+            </div>
+          </div>
+          <p class="form-intro" v-if="selectedJob">
+            Preencha o formulário abaixo para se candidatar a esta vaga.
             Anexe seu currículo e nos conte um pouco sobre você e suas expectativas.
+          </p>
+          <p class="form-intro" v-else>
+            Preencha o formulário abaixo para fazer parte do nosso banco de talentos.
+            Entraremos em contato quando surgir uma oportunidade compatível com seu perfil.
           </p>
         </ScrollReveal>
 
         <ScrollReveal direction="bottom" :delay="300">
           <div class="form-container">
+            <div class="form-header">
+                <div class="form-icon">
+                  <i class="fas fa-handshake"></i>
+                </div>
+                <h3>Teste</h3>
+              </div>
             <form @submit.prevent="submitForm" class="career-form">
               <div class="form-grid">
                 <div class="form-group">
-                  <label for="name">Nome Completo*</label>
+                  <label for="name">Nome Completo</label>
                   <input type="text" id="name" v-model="formData.name" required placeholder="Seu nome completo">
                   <span class="error-message" v-if="errors.name">{{ errors.name }}</span>
                 </div>
 
                 <div class="form-group">
-                  <label for="email">E-mail*</label>
+                  <label for="email">E-mail</label>
                   <input type="email" id="email" v-model="formData.email" required placeholder="seu.email@exemplo.com">
                   <span class="error-message" v-if="errors.email">{{ errors.email }}</span>
                 </div>
 
                 <div class="form-group">
-                  <label for="phone">Telefone*</label>
+                  <label for="phone">Telefone</label>
                   <input type="tel" id="phone" v-model="formData.phone" required placeholder="(00) 00000-0000"
                     @input="formatPhone" maxlength="15">
                   <span class="error-message" v-if="errors.phone">{{ errors.phone }}</span>
                 </div>
 
-
-                <div class="form-group">
-                  <label for="position">Área de Interesse*</label>
+                <div class="form-group" v-if="!selectedJob">
+                  <label for="position">Área de Interesse</label>
                   <select id="position" v-model="formData.position" required>
                     <option value="" disabled selected>Selecione uma área</option>
                     <option value="Administrativo">Administrativo</option>
@@ -205,7 +327,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="education">Formação Acadêmica*</label>
+                  <label for="education">Formação Acadêmica</label>
                   <select id="education" v-model="formData.education" required>
                     <option value="" disabled selected>Selecione sua formação</option>
                     <option value="Ensino Médio">Ensino Médio</option>
@@ -220,14 +342,14 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="experience">Experiência Profissional*</label>
+                  <label for="experience">Experiência Profissional</label>
                   <select id="experience" v-model="formData.experience" required>
                     <option value="" disabled selected>Selecione sua experiência</option>
                     <option value="Sem experiência">Sem experiência</option>
-                    <option value="Menos de 1 ano">Menos de 1 ano</option>
-                    <option value="1-3 anos">1-3 anos</option>
-                    <option value="3-5 anos">3-5 anos</option>
-                    <option value="5-10 anos">5-10 anos</option>
+                    <option value="Até 1 ano">Até 1 ano</option>
+                    <option value="1 a 3 anos">1 a 3 anos</option>
+                    <option value="3 a 5 anos">3 a 5 anos</option>
+                    <option value="5 a 10 anos">5 a 10 anos</option>
                     <option value="Mais de 10 anos">Mais de 10 anos</option>
                   </select>
                   <span class="error-message" v-if="errors.experience">{{ errors.experience }}</span>
@@ -235,43 +357,53 @@
               </div>
 
               <div class="form-group full-width">
-                <label for="message">Mensagem / Carta de Apresentação</label>
-                <textarea id="message" v-model="formData.message" rows="5"
-                  placeholder="Conte-nos um pouco sobre você, suas experiências e expectativas..."></textarea>
-                <span class="error-message" v-if="errors.message">{{ errors.message }}</span>
-              </div>
-
-              <div class="form-group full-width">
-                <label for="resume">Currículo (PDF, DOC ou DOCX)*</label>
-                <div class="file-upload">
-                  <input type="file" id="resume" @change="handleFileUpload" accept=".pdf,.doc,.docx" required>
-                  <div class="file-upload-info">
+                <label for="resume">Currículo (PDF)</label>
+                <div class="file-upload-container">
+                  <input type="file" id="resume" ref="resumeFile" @change="handleFileUpload" accept=".pdf"
+                    required class="file-input">
+                  <label for="resume" class="file-upload-label">
                     <i class="fas fa-cloud-upload-alt"></i>
-                    <span v-if="!formData.resume">Arraste seu arquivo ou clique para selecionar</span>
-                    <span v-else>{{ formData.resumeName }}</span>
-                  </div>
+                    <span v-if="!formData.resume">Clique para anexar seu currículo (PDF)</span>
+                    <span v-else>{{ formData.resume.name }}</span>
+                  </label>
                 </div>
                 <span class="error-message" v-if="errors.resume">{{ errors.resume }}</span>
               </div>
 
-              <!-- Aviso de Termos -->
-              <div class="terms-notice">
-                <div class="notice-content">
-                  <i class="fas fa-info-circle notice-icon"></i>
-                  <p>
-                    Ao preencher e enviar este formulário, você concorda automaticamente com os nossos
-                    <router-link to="/PoliticaPrivacidade" target="_blank" class="terms-link">Termos de
-                      Privacidade</router-link>
-                    e
-                    <router-link to="/TermosLegais" target="_blank" class="terms-link">Termos Legais</router-link>.
-                  </p>
-                </div>
+              <div class="form-group full-width">
+                <label for="message">Apresentação Pessoal</label>
+                <textarea id="message" v-model="formData.message" required rows="6"
+                  placeholder="Conte-nos um pouco sobre você, suas experiências, motivações e por que gostaria de trabalhar na Uni Hospitalar..."></textarea>
+                <span class="error-message" v-if="errors.message">{{ errors.message }}</span>
               </div>
 
               <div class="form-group full-width">
+                <label for="expectations">Expectativas Salariais</label>
+                <input type="text" id="expectations" v-model="formData.expectations"
+                  placeholder="Ex: R$ 3.000,00 - R$ 4.000,00 (opcional)">
+              </div>
+
+              <div class="form-group full-width">
+                <div class="checkbox-group">
+                  <input type="checkbox" id="privacy" v-model="formData.privacy" required>
+                  <label for="privacy">
+                    Concordo com o tratamento dos meus dados pessoais conforme a
+                    <router-link to="/PoliticaPrivacidade" target="_blank">Política de Privacidade</router-link>
+                    da Uni Hospitalar.
+                  </label>
+                </div>
+                <span class="error-message" v-if="errors.privacy">{{ errors.privacy }}</span>
+              </div>
+
+              <div class="form-actions">
+                <button type="button" @click="backToJobs" class="cancel-button">
+                  <i class="fas fa-times"></i>
+                  Cancelar
+                </button>
                 <button type="submit" class="submit-button" :disabled="isSubmitting">
-                  <span v-if="!isSubmitting">Enviar Candidatura</span>
-                  <span v-else><i class="fas fa-spinner fa-spin"></i> Enviando...</span>
+                  <i class="fas fa-paper-plane" v-if="!isSubmitting"></i>
+                  <i class="fas fa-spinner fa-spin" v-else></i>
+                  {{ isSubmitting ? 'Enviando...' : 'Enviar Candidatura' }}
                 </button>
               </div>
             </form>
@@ -280,126 +412,29 @@
       </div>
     </section>
 
-    <!-- Seção de Perguntas Frequentes -->
-    <section class="faq-section">
-      <div class="container">
-        <ScrollReveal direction="bottom" :delay="200">
-          <div class="section-title">
-            <span class="accent-line"></span>
-            <h2>Perguntas Frequentes</h2>
-            <span class="accent-line"></span>
-          </div>
-        </ScrollReveal>
-
-        <div class="faq-container">
-          <ScrollReveal direction="bottom" :delay="300">
-            <div class="faq-item" :class="{ active: activeQuestion === 1 }" @click="toggleQuestion(1)">
-              <div class="faq-question">
-                <h4>Como funciona o processo seletivo?</h4>
-                <i class="fas" :class="activeQuestion === 1 ? 'fa-minus' : 'fa-plus'"></i>
-              </div>
-              <div class="faq-answer">
-                <p>Nosso processo seletivo geralmente inclui as seguintes etapas: análise curricular, entrevista com RH,
-                  entrevista técnica e, em alguns casos, testes práticos. O tempo de duração varia de acordo com a vaga
-                  e a urgência da contratação.</p>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="bottom" :delay="350">
-            <div class="faq-item" :class="{ active: activeQuestion === 2 }" @click="toggleQuestion(2)">
-              <div class="faq-question">
-                <h4>Quanto tempo leva para receber um retorno após a candidatura?</h4>
-                <i class="fas" :class="activeQuestion === 2 ? 'fa-minus' : 'fa-plus'"></i>
-              </div>
-              <div class="faq-answer">
-                <p>Procuramos dar um retorno em até 15 dias úteis após o recebimento da candidatura. Caso você seja
-                  selecionado para a próxima fase, entraremos em contato por e-mail ou telefone.</p>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="bottom" :delay="400">
-            <div class="faq-item" :class="{ active: activeQuestion === 3 }" @click="toggleQuestion(3)">
-              <div class="faq-question">
-                <h4>Posso me candidatar mesmo sem vagas abertas para minha área?</h4>
-                <i class="fas" :class="activeQuestion === 3 ? 'fa-minus' : 'fa-plus'"></i>
-              </div>
-              <div class="faq-answer">
-                <p>Sim! Mantemos um banco de talentos e, quando surgir uma oportunidade compatível com seu perfil,
-                  entraremos em contato. Recomendamos atualizar seu currículo periodicamente.</p>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="bottom" :delay="450">
-            <div class="faq-item" :class="{ active: activeQuestion === 4 }" @click="toggleQuestion(4)">
-              <div class="faq-question">
-                <h4>A Uni Hospitalar oferece oportunidades para pessoas com deficiência?</h4>
-                <i class="fas" :class="activeQuestion === 4 ? 'fa-minus' : 'fa-plus'"></i>
-              </div>
-              <div class="faq-answer">
-                <p>Sim, a Uni Hospitalar valoriza a diversidade e inclusão. Temos um programa específico para
-                  contratação de pessoas com deficiência e adaptamos nosso ambiente de trabalho para garantir
-                  acessibilidade.</p>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="bottom" :delay="500">
-            <div class="faq-item" :class="{ active: activeQuestion === 5 }" @click="toggleQuestion(5)">
-              <div class="faq-question">
-                <h4>Existe programa de estágio ou trainee?</h4>
-                <i class="fas" :class="activeQuestion === 5 ? 'fa-minus' : 'fa-plus'"></i>
-              </div>
-              <div class="faq-answer">
-                <p>Sim, oferecemos programas de estágio e trainee periodicamente. Fique atento às nossas redes sociais e
-                  site para informações sobre as próximas turmas e processos seletivos.</p>
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </div>
-    </section>
-
     <HomeFooter />
-
-    <!-- Modal de Sucesso -->
-    <div class="modal" v-if="showSuccessModal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <i class="fas fa-check-circle"></i>
-          <h3>Candidatura Enviada!</h3>
-        </div>
-        <div class="modal-body">
-          <p>Sua candidatura foi enviada com sucesso. Agradecemos seu interesse em fazer parte da nossa equipe!</p>
-          <p>Analisaremos seu currículo e, caso seu perfil esteja alinhado com nossas oportunidades, entraremos em
-            contato.</p>
-        </div>
-        <div class="modal-footer">
-          <button @click="closeModal" class="modal-button">Fechar</button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
-import { VueMaskDirective } from 'v-mask';
+import ScrollReveal from '@/components/ScrollReveal.vue';
 
 export default {
   name: 'TrabalheConosco',
   components: {
     HomeHeader,
-    HomeFooter
-  },
-  directives: {
-    mask: VueMaskDirective
+    HomeFooter,
+    ScrollReveal
   },
   data() {
     return {
+      showForm: false,
+      selectedJob: null,
+      loadingJobs: true,
+      availableJobs: [],
+      isSubmitting: false,
       formData: {
         name: '',
         email: '',
@@ -407,152 +442,274 @@ export default {
         position: '',
         education: '',
         experience: '',
-        message: '',
         resume: null,
-        resumeName: '',
-        termsAccepted: false
+        message: '',
+        expectations: '',
+        privacy: false
       },
-      errors: {},
-      isSubmitting: false,
-      showSuccessModal: false,
-      activeQuestion: null
-    }
+      errors: {}
+    };
+  },
+  async mounted() {
+    await this.loadJobs();
   },
   methods: {
+    // Carregar vagas do backend
+    async loadJobs() {
+      this.loadingJobs = true;
+      try {
+        // Simular chamada para API - substitua pela sua URL real
+        // const response = await fetch('/api/jobs/available');
+        // const jobs = await response.json();
+        
+        // Dados simulados - remova quando integrar com backend real
+        await new Promise(resolve => setTimeout(resolve, 1500)); // Simular loading
+        
+        this.availableJobs = [
+          {
+            id: 1,
+            title: 'Analista de Marketing Digital',
+            department: 'Marketing',
+            location: 'São Paulo - SP',
+            workload: '40h semanais',
+            type: 'CLT',
+            salary: 'R$ 4.000 - R$ 6.000',
+            shortDescription: 'Responsável por desenvolver e executar estratégias de marketing digital para aumentar a visibilidade da marca.',
+            mainRequirements: [
+              'Superior completo em Marketing, Publicidade ou áreas afins',
+              'Experiência com Google Ads e Facebook Ads',
+              'Conhecimento em SEO e Analytics'
+            ]
+          },
+          {
+            id: 2,
+            title: 'Desenvolvedor Full Stack',
+            department: 'Tecnologia',
+            location: 'Remoto',
+            workload: '40h semanais',
+            type: 'CLT',
+            salary: 'R$ 6.000 - R$ 10.000',
+            shortDescription: 'Desenvolvimento de aplicações web e mobile para soluções hospitalares.',
+            mainRequirements: [
+              'Superior em Ciência da Computação ou áreas afins',
+              'Experiência com Vue.js, Node.js e bancos de dados',
+              'Conhecimento em metodologias ágeis'
+            ]
+          },
+          {
+            id: 3,
+            title: 'Coordenador de Logística',
+            department: 'Logística',
+            location: 'São Paulo - SP',
+            workload: '44h semanais',
+            type: 'CLT',
+            salary: 'R$ 5.000 - R$ 7.500',
+            shortDescription: 'Coordenar operações logísticas e gestão de estoque de produtos hospitalares.',
+            mainRequirements: [
+              'Superior em Logística, Administração ou áreas afins',
+              'Experiência em gestão de equipes',
+              'Conhecimento em sistemas WMS/ERP'
+            ]
+          }
+        ];
+      } catch (error) {
+        console.error('Erro ao carregar vagas:', error);
+        this.availableJobs = [];
+      } finally {
+        this.loadingJobs = false;
+      }
+    },
+
+    // Selecionar vaga e mostrar formulário
+    selectJob(job) {
+      this.selectedJob = job;
+      this.showForm = true;
+      this.formData.position = job.title; // Preencher automaticamente
+      this.$nextTick(() => {
+        document.querySelector('.form-section').scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      });
+    },
+
+    // Mostrar formulário para banco de talentos
+    showTalentBankForm() {
+      this.selectedJob = null;
+      this.showForm = true;
+      this.$nextTick(() => {
+        document.querySelector('.form-section').scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      });
+    },
+
+    // Voltar para lista de vagas
+    backToJobs() {
+      this.showForm = false;
+      this.selectedJob = null;
+      this.resetForm();
+      this.$nextTick(() => {
+        document.querySelector('.jobs-section').scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      });
+    },
+
+    // Obter ícone baseado no departamento
+    getJobIcon(department) {
+      const icons = {
+        'Marketing': 'fas fa-bullhorn',
+        'Tecnologia': 'fas fa-code',
+        'Logística': 'fas fa-truck',
+        'Comercial': 'fas fa-handshake',
+        'Administrativo': 'fas fa-building',
+        'Recursos Humanos': 'fas fa-users'
+      };
+      return icons[department] || 'fas fa-briefcase';
+    },
+
+    // Obter classe do badge baseado no tipo
+    getJobBadgeClass(type) {
+      const classes = {
+        'CLT': 'badge-clt',
+        'PJ': 'badge-pj',
+        'Estágio': 'badge-internship',
+        'Freelancer': 'badge-freelancer'
+      };
+      return classes[type] || 'badge-default';
+    },
+
+    // Formatar telefone
     formatPhone(event) {
-    // Remove todos os caracteres que não são números
-    let value = event.target.value.replace(/\D/g, '');
-    
-    // Limita a 11 dígitos (DDD + número)
-    if (value.length > 11) {
-      value = value.slice(0, 11);
-    }
-    
-    // Aplica a formatação
-    if (value.length >= 11) {
-      value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-    } else if (value.length >= 7) {
-      value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
-    } else if (value.length >= 3) {
-      value = value.replace(/(\d{2})(\d{0,5})/, '($1) $2');
-    } else if (value.length >= 1) {
-      value = value.replace(/(\d{0,2})/, '($1');
-    }
-    
-    // Atualiza o valor
-    this.formData.phone = value;
-    event.target.value = value;
-  },
+      let value = event.target.value.replace(/\D/g, '');
+      if (value.length <= 11) {
+        value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+        if (value.length < 14) {
+          value = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+        }
+      }
+      this.formData.phone = value;
+    },
+
+    // Manipular upload de arquivo
     handleFileUpload(event) {
       const file = event.target.files[0];
       if (file) {
-        // Verificar tipo de arquivo
-        const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-        if (!allowedTypes.includes(file.type)) {
-          this.errors.resume = 'Por favor, envie um arquivo PDF, DOC ou DOCX.';
-          this.formData.resume = null;
-          this.formData.resumeName = '';
+        if (file.type !== 'application/pdf') {
+          this.errors.resume = 'Por favor, selecione apenas arquivos PDF.';
           return;
         }
-
-        // Verificar tamanho do arquivo (máximo 5MB)
-        if (file.size > 5 * 1024 * 1024) {
+        if (file.size > 5 * 1024 * 1024) { // 5MB
           this.errors.resume = 'O arquivo deve ter no máximo 5MB.';
-          this.formData.resume = null;
-          this.formData.resumeName = '';
           return;
         }
-
         this.formData.resume = file;
-        this.formData.resumeName = file.name;
         this.errors.resume = '';
       }
     },
+
+    // Validar formulário
     validateForm() {
-      let isValid = true;
       this.errors = {};
-
-      // Validar nome
+      
       if (!this.formData.name.trim()) {
-        this.errors.name = 'Por favor, informe seu nome completo.';
-        isValid = false;
+        this.errors.name = 'Nome é obrigatório.';
       }
-
-      // Validar e-mail
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!this.formData.email.trim() || !emailRegex.test(this.formData.email)) {
-        this.errors.email = 'Por favor, informe um e-mail válido.';
-        isValid = false;
+      
+      if (!this.formData.email.trim()) {
+        this.errors.email = 'E-mail é obrigatório.';
+      } else if (!/\S+@\S+\.\S+/.test(this.formData.email)) {
+        this.errors.email = 'E-mail inválido.';
       }
-
-      // Validar telefone
-      if (!this.formData.phone.trim() || this.formData.phone.replace(/[^0-9]/g, '').length < 10) {
-        this.errors.phone = 'Por favor, informe um telefone válido.';
-        isValid = false;
+      
+      if (!this.formData.phone.trim()) {
+        this.errors.phone = 'Telefone é obrigatório.';
       }
-
-      // Validar área de interesse
-      if (!this.formData.position) {
-        this.errors.position = 'Por favor, selecione uma área de interesse.';
-        isValid = false;
+      
+      if (!this.selectedJob && !this.formData.position) {
+        this.errors.position = 'Área de interesse é obrigatória.';
       }
-
-      // Validar formação
+      
       if (!this.formData.education) {
-        this.errors.education = 'Por favor, selecione sua formação acadêmica.';
-        isValid = false;
+        this.errors.education = 'Formação acadêmica é obrigatória.';
       }
-
-      // Validar experiência
+      
       if (!this.formData.experience) {
-        this.errors.experience = 'Por favor, selecione sua experiência profissional.';
-        isValid = false;
+        this.errors.experience = 'Experiência profissional é obrigatória.';
       }
-
-      // Validar currículo
+      
       if (!this.formData.resume) {
-        this.errors.resume = 'Por favor, anexe seu currículo.';
-        isValid = false;
+        this.errors.resume = 'Currículo é obrigatório.';
       }
-
-      // Validar termos
-      if (!this.formData.termsAccepted) {
-        this.errors.termsAccepted = 'Você precisa aceitar os termos para continuar.';
-        isValid = false;
+      
+      if (!this.formData.message.trim()) {
+        this.errors.message = 'Apresentação pessoal é obrigatória.';
       }
-
-      return isValid;
+      
+      if (!this.formData.privacy) {
+        this.errors.privacy = 'Você deve concordar com a política de privacidade.';
+      }
+      
+      return Object.keys(this.errors).length === 0;
     },
-    submitForm() {
-      if (this.validateForm()) {
-        this.isSubmitting = true;
 
-        // Simulação de envio para o servidor
-        setTimeout(() => {
-          this.isSubmitting = false;
-          this.showSuccessModal = true;
-          this.resetForm();
-        }, 2000);
-
-        // Aqui você implementaria a lógica real de envio para o servidor
-        // const formData = new FormData();
-        // Object.keys(this.formData).forEach(key => {
-        //   formData.append(key, this.formData[key]);
+    // Enviar formulário
+    async submitForm() {
+      if (!this.validateForm()) {
+        return;
+      }
+      
+      this.isSubmitting = true;
+      
+      try {
+        const formData = new FormData();
+        
+        // Adicionar dados do formulário
+        Object.keys(this.formData).forEach(key => {
+          if (key !== 'resume') {
+            formData.append(key, this.formData[key]);
+          }
+        });
+        
+        // Adicionar arquivo
+        if (this.formData.resume) {
+          formData.append('resume', this.formData.resume);
+        }
+        
+        // Adicionar informações da vaga se selecionada
+        if (this.selectedJob) {
+          formData.append('jobId', this.selectedJob.id);
+          formData.append('jobTitle', this.selectedJob.title);
+        }
+        
+        // Enviar para o backend - substitua pela sua URL real
+        // const response = await fetch('/api/job-applications', {
+        //   method: 'POST',
+        //   body: formData
         // });
-        // 
-        // axios.post('/api/careers/apply', formData)
-        //   .then(response => {
-        //     this.isSubmitting = false;
-        //     this.showSuccessModal = true;
-        //     this.resetForm();
-        //   })
-        //   .catch(error => {
-        //     this.isSubmitting = false;
-        //     console.error('Erro ao enviar formulário:', error);
-        //     // Tratar erro
-        //   });
+        
+        // Simular envio
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        // Mostrar mensagem de sucesso
+        alert('Candidatura enviada com sucesso! Entraremos em contato em breve.');
+        
+        // Resetar formulário
+        this.resetForm();
+        this.backToJobs();
+        
+      } catch (error) {
+        console.error('Erro ao enviar candidatura:', error);
+        alert('Erro ao enviar candidatura. Tente novamente.');
+      } finally {
+        this.isSubmitting = false;
       }
     },
+
+    // Resetar formulário
     resetForm() {
       this.formData = {
         name: '',
@@ -561,28 +718,18 @@ export default {
         position: '',
         education: '',
         experience: '',
-        message: '',
         resume: null,
-        resumeName: '',
-        termsAccepted: false
+        message: '',
+        expectations: '',
+        privacy: false
       };
-
-      // Resetar o input de arquivo
-      const fileInput = document.getElementById('resume');
-      if (fileInput) fileInput.value = '';
-    },
-    closeModal() {
-      this.showSuccessModal = false;
-    },
-    toggleQuestion(index) {
-      if (this.activeQuestion === index) {
-        this.activeQuestion = null;
-      } else {
-        this.activeQuestion = index;
+      this.errors = {};
+      if (this.$refs.resumeFile) {
+        this.$refs.resumeFile.value = '';
       }
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -865,38 +1012,407 @@ section {
   margin: 0;
 }
 
-/* Seção de Formulário */
+/* Novos estilos para seção de vagas */
+.jobs-section {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.jobs-intro {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 50px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.loading-container {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.loading-spinner {
+  font-size: 3rem;
+  color: #AE2C2A;
+  margin-bottom: 20px;
+}
+
+.jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.job-card {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.job-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(174, 44, 42, 0.05), transparent);
+  transition: left 0.5s ease;
+}
+
+.job-card:hover::before {
+  left: 100%;
+}
+
+.job-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  border-color: #AE2C2A;
+}
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.job-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.job-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-clt {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+}
+
+.badge-pj {
+  background: linear-gradient(135deg, #007bff, #6610f2);
+  color: white;
+}
+
+.badge-internship {
+  background: linear-gradient(135deg, #ffc107, #fd7e14);
+  color: white;
+}
+
+.badge-freelancer {
+  background: linear-gradient(135deg, #6f42c1, #e83e8c);
+  color: white;
+}
+
+.badge-default {
+  background: linear-gradient(135deg, #6c757d, #495057);
+  color: white;
+}
+
+.job-content {
+  position: relative;
+  z-index: 1;
+}
+
+.job-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+  line-height: 1.3;
+}
+
+.job-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.job-detail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.job-detail i {
+  color: #AE2C2A;
+  width: 16px;
+}
+
+.job-description {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.job-requirements {
+  margin-bottom: 20px;
+}
+
+.job-requirements h4 {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.job-requirements ul {
+  list-style: none;
+  padding: 0;
+}
+
+.job-requirements li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+.job-requirements li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #AE2C2A;
+  font-weight: bold;
+}
+
+.job-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  position: relative;
+  z-index: 1;
+}
+
+.job-salary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #28a745;
+  font-size: 1rem;
+}
+
+.job-salary i {
+  color: #28a745;
+}
+
+.apply-button {
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.apply-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(174, 44, 42, 0.4);
+}
+
+.no-jobs-container {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.no-jobs-content {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.no-jobs-icon {
+  font-size: 4rem;
+  color: #AE2C2A;
+  margin-bottom: 30px;
+}
+
+.no-jobs-content h3 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.no-jobs-content p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.talent-bank-button {
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.talent-bank-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(174, 44, 42, 0.4);
+}
+
+/* Estilos para formulário */
 .form-section {
-  background-color: #f9f9f9;
+  padding: 80px 0;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.selected-job-info {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 40px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid #AE2C2A;
+}
+
+.job-summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.job-summary-header h3 {
+  color: #AE2C2A;
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.back-button {
+  background: transparent;
+  border: 2px solid #AE2C2A;
+  color: #AE2C2A;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.back-button:hover {
+  background: #AE2C2A;
+  color: white;
+}
+
+.job-summary-details {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.job-summary-details span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.job-summary-details i {
+  color: #AE2C2A;
 }
 
 .form-intro {
   text-align: center;
-  font-size: 1.2rem;
-  color: #555;
-  max-width: 800px;
-  margin: 0 auto 40px;
+  color: #666;
+  margin-bottom: 40px;
+  font-size: 1.1rem;
+  line-height: 1.6;
 }
 
 .form-container {
-  max-width: 900px;
+  max-width: 800px;
   margin: 0 auto;
   background: white;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.form-header {
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  color: white;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.form-icon {
+  font-size: 2.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.form-header h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
 }
 
 .career-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  width: 100%;
 }
 
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-bottom: 25px;
 }
 
 .form-group {
@@ -905,82 +1421,173 @@ section {
 }
 
 .form-group.full-width {
-  grid-column: span 2;
+  grid-column: 1 / -1;
+  margin-top: 20px
 }
 
 .form-group label {
-  font-size: 1rem;
+  font-weight: 600;
   color: #333;
   margin-bottom: 8px;
-  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.form-group label::after {
+  content: ' *';
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.file-upload-container label::after {
+  content: none;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
   padding: 12px 15px;
-  border: 1px solid #ddd;
+  border: 2px solid #e0e0e0;
   border-radius: 8px;
   font-size: 1rem;
-  color: #333;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
+  background: white;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
+  outline: none;
   border-color: #AE2C2A;
   box-shadow: 0 0 0 3px rgba(174, 44, 42, 0.1);
-  outline: none;
 }
 
 .form-group textarea {
   resize: vertical;
   min-height: 120px;
+  font-family: inherit;
 }
 
-.file-upload {
+.file-upload-container {
   position: relative;
-  border: 2px dashed #ddd;
-  border-radius: 8px;
-  padding: 30px 20px;
-  text-align: center;
-  transition: all 0.3s ease;
-  cursor: pointer;
 }
 
-.file-upload:hover {
-  border-color: #AE2C2A;
-  background-color: rgba(174, 44, 42, 0.05);
-}
-
-.file-upload input[type="file"] {
+.file-input {
   position: absolute;
-  top: 0;
-  left: 0;
+  opacity: 0;
   width: 100%;
   height: 100%;
-  opacity: 0;
   cursor: pointer;
 }
 
-.file-upload-info {
+.file-upload-label {
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 10px;
-  color: #666;
+  padding: 12px 15px;
+  border: 2px dashed #AE2C2A;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(174, 44, 42, 0.05);
+  color: #AE2C2A;
+  font-weight: 500;
 }
 
-.file-upload-info i {
-  font-size: 2.5rem;
+.file-upload-label:hover {
+  background: rgba(174, 44, 42, 0.1);
+  border-style: solid;
+}
+
+.file-upload-label i {
+  font-size: 1.2rem;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin-top: 4px;
+  transform: scale(1.2);
+  accent-color: #AE2C2A;
+}
+
+.checkbox-group label {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #555;
+  margin-bottom: 0;
+}
+
+.checkbox-group a {
   color: #AE2C2A;
+  text-decoration: none;
+}
+
+.checkbox-group a:hover {
+  text-decoration: underline;
 }
 
 .error-message {
-  color: #e74c3c;
+  color: #dc3545;
   font-size: 0.85rem;
   margin-top: 5px;
+  font-weight: 500;
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid #eee;
+}
+
+.cancel-button {
+  background: transparent;
+  border: 2px solid #6c757d;
+  color: #6c757d;
+  padding: 12px 24px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.cancel-button:hover {
+  background: #6c757d;
+  color: white;
+}
+
+.submit-button {
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(174, 44, 42, 0.4);
+}
+
+.submit-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 /* Estilos para o checkbox de termos */
@@ -1364,16 +1971,51 @@ section {
     font-size: 1.1rem;
   }
 
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
-
   .form-group.full-width {
     grid-column: span 1;
   }
 
+  .jobs-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .job-card {
+    padding: 20px;
+  }
+  
+  .apply-button {
+    justify-content: center;
+  }
+  
   .form-container {
-    padding: 30px 20px;
+    padding: 25px 20px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .job-summary-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: stretch;
+  }
+  
+  .job-summary-details {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .cancel-button,
+  .submit-button {
+    justify-content: center;
   }
 
   .benefit-item {
@@ -1536,8 +2178,28 @@ section {
     font-size: 1.1rem;
   }
 
+  .job-card {
+    padding: 15px;
+  }
+  
+  .job-title {
+    font-size: 1.2rem;
+  }
+  
   .form-container {
     padding: 20px 15px;
+  }
+  
+  .no-jobs-container {
+    padding: 60px 15px;
+  }
+  
+  .no-jobs-icon {
+    font-size: 3rem;
+  }
+  
+  .no-jobs-content h3 {
+    font-size: 1.5rem;
   }
 
   .submit-button {
@@ -1555,6 +2217,12 @@ section {
 
   .modal-header h3 {
     font-size: 1.3rem;
+  }
+
+  .job-footer {
+    flex-direction: column;
+    gap: 15px;
+    align-items: stretch;
   }
 }
 </style>

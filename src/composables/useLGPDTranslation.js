@@ -10,6 +10,9 @@ const translations = reactive({
       introTitle: 'Protegendo seus dados com responsabilidade',
       introSubtitle: 'Nosso compromisso com a segurança e a LGPD',
       introText: 'Na Uni Hospitalar, valorizamos a segurança e a privacidade dos nossos clientes, parceiros e colaboradores. Estamos comprometidos com a proteção dos seus dados pessoais e com o cumprimento da Lei Geral de Proteção de Dados.',
+      gpoTitle: 'Encarregado de Proteção de Dados (GPO)',
+      gpoName: 'Responsável',
+      gpoEmail: 'E-mail de Contato',
       cards: {
         card1: {
           text: 'Somos a Uni Hospitalar, uma empresa dedicada à excelência em serviços de saúde e comprometida com a proteção dos seus dados pessoais. Valorizamos a segurança e a privacidade dos nossos clientes, parceiros e colaboradores.'
@@ -61,6 +64,9 @@ const translations = reactive({
       introTitle: 'Protecting your data responsibly',
       introSubtitle: 'Our commitment to security and LGPD',
       introText: 'At Uni Hospitalar, we value the security and privacy of our clients, partners and employees. We are committed to protecting your personal data and complying with the General Data Protection Law.',
+      gpoTitle: 'Data Protection Officer (DPO)',
+      gpoName: 'Responsible',
+      gpoEmail: 'Contact Email',
       cards: {
         card1: {
           text: 'We are Uni Hospitalar, a company dedicated to excellence in healthcare services and committed to protecting your personal data. We value the security and privacy of our clients, partners and employees.'
@@ -112,6 +118,9 @@ const translations = reactive({
       introTitle: 'Protegiendo sus datos con responsabilidad',
       introSubtitle: 'Nuestro compromiso con la seguridad y la LGPD',
       introText: 'En Uni Hospitalar, valoramos la seguridad y privacidad de nuestros clientes, socios y colaboradores. Estamos comprometidos con la protección de sus datos personales y con el cumplimiento de la Ley General de Protección de Datos.',
+      gpoTitle: 'Oficial de Protección de Datos (GPO)',
+      gpoName: 'Responsable',
+      gpoEmail: 'Correo de Contacto',
       cards: {
         card1: {
           text: 'Somos Uni Hospitalar, una empresa dedicada a la excelencia en servicios de salud y comprometida con la protección de sus datos personales. Valoramos la seguridad y privacidad de nuestros clientes, socios y colaboradores.'

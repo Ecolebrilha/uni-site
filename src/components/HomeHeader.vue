@@ -58,7 +58,7 @@
 
           <li class="sidebar-dropdown">
             <div class="sidebar-dropdown-toggle">
-              <a href="#" class="sidebar-dropdown-main" @click.prevent>
+              <a href="#" class="sidebar-dropdown-main" @click.prevent="toggleDropdown('contato')">
                 <i class="fas fa-envelope"></i>
                 <span>{{ tHeader('header.navigation.contact') }}</span>
               </a>
@@ -81,7 +81,6 @@
                 <span class="seja-parceiro-span">{{ tHeader('header.dropdown.contact.bePartner') }}</span>
               </router-link>
             </div>
-
           </li>
         </ul>
       </div>
@@ -170,13 +169,13 @@
         <li><router-link to="/Sobre" exact-active-class="active">{{ tHeader('header.navigation.about') }}</router-link>
         </li>
         <li><router-link to="/Diferenciais" exact-active-class="active">{{ tHeader('header.navigation.differentials')
-            }}</router-link></li>
+        }}</router-link></li>
         <li><router-link to="/Servicos" exact-active-class="active">{{ tHeader('header.navigation.services')
-            }}</router-link></li>
+        }}</router-link></li>
         <li><router-link to="/Produtos" exact-active-class="active">{{ tHeader('header.navigation.products')
-            }}</router-link></li>
+        }}</router-link></li>
         <li><router-link to="/Compliance" exact-active-class="active">{{ tHeader('header.navigation.compliance')
-            }}</router-link></li>
+        }}</router-link></li>
         <li class="dropdown">
           <router-link to="/LGPD" exact-active-class="active" class="dropdown-trigger">
             {{ tHeader('header.navigation.lgpd') }} <i class="fas fa-chevron-down dropdown-arrow"></i>

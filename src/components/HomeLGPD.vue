@@ -24,6 +24,27 @@
           <p class="intro-text">
             {{ t('lgpd.introText') }}
           </p>
+
+          <!-- Contato do GPO -->
+          <div class="gpo-contact">
+            <div class="gpo-info">
+              <h4 class="gpo-title">{{ t('lgpd.gpoTitle') }}</h4>
+              <div class="gpo-details">
+                <div class="gpo-item">
+                  <i class="fas fa-user-shield"></i>
+                  <span class="gpo-label">{{ t('lgpd.gpoName') }}:</span>
+                  <span class="gpo-value">Ítalo Morais - GPO TI Uni Hospitalar</span>
+                </div>
+                <div class="gpo-item">
+                  <i class="fas fa-envelope"></i>
+                  <span class="gpo-label">{{ t('lgpd.gpoEmail') }}:</span>
+                  <a href="mailto:gpo@unihospitalar.com.br" class="gpo-email">
+                    gpo@unihospitalar.com.br
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </ScrollReveal>
       </div>
     </section>
@@ -357,6 +378,99 @@ section {
   margin: 0 auto;
   color: #555;
   line-height: 1.8;
+}
+
+/* Estilos para o contato do GPO */
+.gpo-contact {
+  margin-top: 40px;
+  padding: 30px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 249, 250, 0.98));
+  border-radius: 15px;
+  border-left: 4px solid #AE2C2A;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.gpo-contact:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.gpo-info {
+  text-align: center;
+}
+
+.gpo-title {
+  font-size: 1.4rem;
+  color: #AE2C2A;
+  margin: 0px 0px 20px 0px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.gpo-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.gpo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.gpo-item i {
+  color: #AE2C2A;
+  font-size: 1.2rem;
+  width: 20px;
+  text-align: center;
+}
+
+.gpo-label {
+  font-weight: 600;
+  color: #333;
+}
+
+.gpo-value {
+  color: #666;
+  font-weight: 500;
+}
+
+.gpo-email {
+  color: #AE2C2A;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.gpo-email::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: #AE2C2A;
+  transition: width 0.3s ease;
+}
+
+.gpo-email:hover {
+  color: #ff5555;
+  transform: translateY(-2px);
+}
+
+.gpo-email:hover::after {
+  width: 100%;
 }
 
 /* Seção Principal de LGPD */
@@ -737,6 +851,26 @@ section {
   .principles-grid {
     grid-template-columns: 1fr;
   }
+
+  .gpo-contact {
+    margin-top: 30px;
+    padding: 25px 20px;
+  }
+  
+  .gpo-title {
+    font-size: 1.2rem;
+  }
+  
+  .gpo-details {
+    gap: 12px;
+  }
+  
+  .gpo-item {
+    font-size: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
 }
 
 @media (max-width: 576px) {
@@ -777,6 +911,15 @@ section {
   .terms-button,
   .contact-button {
     width: 100%;
+  }
+
+  .gpo-item {
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .gpo-email {
+    word-break: break-all;
   }
 }
 

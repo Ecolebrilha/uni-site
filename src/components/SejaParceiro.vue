@@ -37,6 +37,24 @@
 
               <form @submit.prevent="submitForm" class="partner-form">
                 <div class="form-grid">
+                  
+                  <!-- CNPJ -->
+                  <div class="form-group">
+                    <label for="cnpj">{{ t('partner.form.fields.cnpj.label') }}</label>
+                    <div class="input-clip" :class="{ 'loading': isLoadingCNPJ }">
+                      <input type="text" id="cnpj" v-model="formData.cnpj" class="form-control"
+                        :placeholder="t('partner.form.fields.cnpj.placeholder')" @input="formatCNPJ" @blur="buscarCNPJ"
+                        maxlength="18" required />
+                      <div v-if="isLoadingCNPJ" class="loading-spinner">
+                        <i class="fas fa-spinner fa-spin"></i>
+                      </div>
+                    </div>
+                    <div v-if="cnpjError" class="field-error">
+                      <i class="fas fa-exclamation-triangle"></i>
+                      {{ cnpjError }}
+                    </div>
+                  </div>
+
                   <!-- Nome/Razão Social -->
                   <div class="form-group">
                     <label for="nomeRazaoSocial">{{ t('partner.form.fields.companyName.label') }}</label>
@@ -64,7 +82,8 @@
                     <label for="ramoAtuacao">{{ t('partner.form.fields.businessArea.label') }}</label>
                     <div class="input-clip">
                       <select id="ramoAtuacao" v-model="formData.ramoAtuacao" class="form-control" required>
-                        <option value="" disabled selected>{{ t('partner.form.fields.businessArea.placeholder') }}</option>
+                        <option value="" disabled selected>{{ t('partner.form.fields.businessArea.placeholder') }}
+                        </option>
                         <option v-for="ramo in ramosAtuacao" :key="ramo" :value="ramo">
                           {{ ramo }}
                         </option>
@@ -72,22 +91,6 @@
                     </div>
                   </div>
 
-                  <!-- CNPJ -->
-                  <div class="form-group">
-                    <label for="cnpj">{{ t('partner.form.fields.cnpj.label') }}</label>
-                    <div class="input-clip" :class="{ 'loading': isLoadingCNPJ }">
-                      <input type="text" id="cnpj" v-model="formData.cnpj" class="form-control"
-                        :placeholder="t('partner.form.fields.cnpj.placeholder')" @input="formatCNPJ" @blur="buscarCNPJ" maxlength="18"
-                        required />
-                      <div v-if="isLoadingCNPJ" class="loading-spinner">
-                        <i class="fas fa-spinner fa-spin"></i>
-                      </div>
-                    </div>
-                    <div v-if="cnpjError" class="field-error">
-                      <i class="fas fa-exclamation-triangle"></i>
-                      {{ cnpjError }}
-                    </div>
-                  </div>
 
                   <!-- Email -->
                   <div class="form-group">
@@ -113,8 +116,8 @@
                     <label for="telefoneFixo">{{ t('partner.form.fields.phone.label') }}</label>
                     <div class="input-clip">
                       <input type="text" id="telefoneFixo" v-model="formData.telefoneFixo" class="form-control"
-                        :placeholder="t('partner.form.fields.phone.placeholder')" @input="formatTelefoneFixo" maxlength="14"
-                        :required="!formData.celular" />
+                        :placeholder="t('partner.form.fields.phone.placeholder')" @input="formatTelefoneFixo"
+                        maxlength="14" :required="!formData.celular" />
                     </div>
                   </div>
 
@@ -138,9 +141,11 @@
                     <i class="fas fa-info-circle notice-icon"></i>
                     <p>
                       {{ t('partner.form.termsNotice.text') }}
-                      <router-link to="/PoliticaPrivacidade" target="_blank" class="terms-link">{{ t('partner.form.termsNotice.privacyPolicy') }}</router-link>
+                      <router-link to="/PoliticaPrivacidade" target="_blank" class="terms-link">{{
+                        t('partner.form.termsNotice.privacyPolicy') }}</router-link>
                       e
-                      <router-link to="/TermosLegais" target="_blank" class="terms-link">{{ t('partner.form.termsNotice.legalTerms') }}</router-link>.
+                      <router-link to="/TermosLegais" target="_blank" class="terms-link">{{
+                        t('partner.form.termsNotice.legalTerms') }}</router-link>.
                     </p>
                   </div>
                 </div>
@@ -262,7 +267,7 @@ export default {
   },
   setup() {
     const { t, currentLanguage } = useOurPartnerTranslation()
-    
+
     return {
       t,
       currentLanguage
@@ -299,12 +304,12 @@ export default {
     // Formatar CNPJ
     formatCNPJ(event) {
       let value = event.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
-      
+
       // Limita a 14 dígitos
       if (value.length > 14) {
         value = value.substring(0, 14);
       }
-      
+
       // Aplica a formatação
       if (value.length <= 2) {
         // Mantém o valor original
@@ -317,19 +322,19 @@ export default {
       } else {
         value = value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d+)/, '$1.$2.$3/$4-$5');
       }
-      
+
       this.formData.cnpj = value;
     },
 
     // Formatar Celular
     formatCelular(event) {
       let value = event.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
-      
+
       // Limita a 11 dígitos
       if (value.length > 11) {
         value = value.substring(0, 11);
       }
-      
+
       // Aplica a formatação
       if (value.length <= 2) {
         // Mantém o valor original
@@ -338,19 +343,19 @@ export default {
       } else {
         value = value.replace(/(\d{2})(\d{5})(\d+)/, '($1) $2-$3');
       }
-      
+
       this.formData.celular = value;
     },
 
     // Formatar Telefone Fixo
     formatTelefoneFixo(event) {
       let value = event.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
-      
+
       // Limita a 10 dígitos
       if (value.length > 10) {
         value = value.substring(0, 10);
       }
-      
+
       // Aplica a formatação
       if (value.length <= 2) {
         // Mantém o valor original
@@ -359,47 +364,47 @@ export default {
       } else {
         value = value.replace(/(\d{2})(\d{4})(\d+)/, '($1) $2-$3');
       }
-      
+
       this.formData.telefoneFixo = value;
     },
 
     // Valida se o CNPJ tem formato correto
     validarCNPJ(cnpj) {
       cnpj = cnpj.replace(/[^\d]+/g, '');
-      
+
       if (cnpj.length !== 14) return false;
-      
+
       // Elimina CNPJs inválidos conhecidos
       if (/^(\d)\1{13}$/.test(cnpj)) return false;
-      
+
       // Valida DVs
       let tamanho = cnpj.length - 2;
       let numeros = cnpj.substring(0, tamanho);
       let digitos = cnpj.substring(tamanho);
       let soma = 0;
       let pos = tamanho - 7;
-      
+
       for (let i = tamanho; i >= 1; i--) {
         soma += numeros.charAt(tamanho - i) * pos--;
         if (pos < 2) pos = 9;
       }
-      
+
       let resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
       if (resultado != digitos.charAt(0)) return false;
-      
+
       tamanho = tamanho + 1;
       numeros = cnpj.substring(0, tamanho);
       soma = 0;
       pos = tamanho - 7;
-      
+
       for (let i = tamanho; i >= 1; i--) {
         soma += numeros.charAt(tamanho - i) * pos--;
         if (pos < 2) pos = 9;
       }
-      
+
       resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
       if (resultado != digitos.charAt(1)) return false;
-      
+
       return true;
     },
 
@@ -407,10 +412,10 @@ export default {
       if (!this.formData.cnpj || this.formData.cnpj.length !== 18) {
         return;
       }
-      
+
       // Remove formatação para validação e consulta
       const cnpjLimpo = this.formData.cnpj.replace(/[^\d]+/g, '');
-      
+
       // Valida CNPJ
       if (!this.validarCNPJ(cnpjLimpo)) {
         this.cnpjError = this.t('partner.form.messages.cnpjError');
@@ -418,10 +423,10 @@ export default {
         this.formData.nomeRazaoSocial = '';
         return;
       }
-      
+
       this.cnpjError = '';
       this.isLoadingCNPJ = true;
-      
+
       try {
         // Primeira tentativa: API BrasilAPI
         let response = await fetch(`https://brasilapi.com.br/api/cnpj/v1/${cnpjLimpo}`);
@@ -429,20 +434,20 @@ export default {
           // Segunda tentativa: API ReceitaWS (backup)
           response = await fetch(`https://www.receitaws.com.br/v1/cnpj/${cnpjLimpo}`);
         }
-        
+
         if (response.ok) {
           const data = await response.json();
-          
+
           // Verifica se a empresa está ativa
           if (data.status && data.status !== 'OK') {
             this.cnpjError = this.t('partner.form.messages.cnpjInactive');
           }
-          
+
           // Preenche os dados automaticamente
           if (data.company_name || data.nome || data.razao_social) {
             this.formData.nomeRazaoSocial = data.company_name || data.nome || data.razao_social;
           }
-          
+
           // Monta o endereço completo
           let endereco = '';
           // Para BrasilAPI
@@ -471,9 +476,9 @@ export default {
               endereco += `, CEP: ${data.zip_code || data.cep}`;
             }
           }
-          
+
           this.formData.endereco = endereco;
-          
+
           // Feedback visual de sucesso
           this.$nextTick(() => {
             const enderecoInput = document.getElementById('endereco');
@@ -499,7 +504,7 @@ export default {
             if (data.razao_social) {
               this.formData.nomeRazaoSocial = data.razao_social;
             }
-            
+
             let endereco = '';
             if (data.estabelecimento) {
               const est = data.estabelecimento;
@@ -536,11 +541,11 @@ export default {
         alert(this.t('partner.form.messages.phoneRequired'));
         return;
       }
-      
+
       this.isSubmitting = true;
       this.showSuccessMessage = false;
       this.showErrorMessage = false;
-      
+
       try {
         // Usar Formspree
         const response = await fetch('https://formspree.io/f/xzzrnbbo', {
@@ -575,7 +580,7 @@ export default {
             _subject: `🤝 Nova Solicitação de Parceria - ${this.formData.nomeRazaoSocial}`
           }),
         });
-        
+
         if (response.ok) {
           this.showSuccessMessage = true;
           this.resetForm();
