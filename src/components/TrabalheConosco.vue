@@ -284,12 +284,13 @@
 
         <ScrollReveal direction="bottom" :delay="300">
           <div class="form-container">
-            <div class="form-header">
-                <div class="form-icon">
-                  <i class="fas fa-handshake"></i>
-                </div>
-                <h3>Teste</h3>
-              </div>
+    <div class="form-header">
+      <div class="form-icon">
+        <i class="fas fa-briefcase"></i>
+      </div>
+      <h3 v-if="selectedJob">Candidatar-se para: {{ selectedJob.title }}</h3>
+      <h3 v-else>Banco de Talentos</h3>
+    </div>
             <form @submit.prevent="submitForm" class="career-form">
               <div class="form-grid">
                 <div class="form-group">
@@ -1373,9 +1374,9 @@ section {
   max-width: 800px;
   margin: 0 auto;
   background: white;
-  padding: 40px;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 .form-header {
@@ -1385,6 +1386,8 @@ section {
   display: flex;
   align-items: center;
   gap: 20px;
+  margin: 0;
+  border-radius: 0;
 }
 
 .form-icon {
@@ -1392,10 +1395,13 @@ section {
   background: rgba(255, 255, 255, 0.2);
   width: 70px;
   height: 70px;
+  min-width: 70px;
+  min-height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .form-header h3 {
@@ -1405,7 +1411,8 @@ section {
 }
 
 .career-form {
-  width: 100%;
+  padding: 40px;
+  background: white;
 }
 
 .form-grid {
@@ -1506,24 +1513,37 @@ section {
   display: flex;
   align-items: flex-start;
   gap: 10px;
+  width: 100%;
 }
 
 .checkbox-group input[type="checkbox"] {
   margin-top: 4px;
   transform: scale(1.2);
   accent-color: #AE2C2A;
+  flex-shrink: 0;
+  min-width: 16px;
+  width: 16px;
+  height: 16px;
+  align-self: flex-start;
 }
 
 .checkbox-group label {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   line-height: 1.5;
   color: #555;
   margin-bottom: 0;
+  flex: 1;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  text-align: left;
+  margin-top: 0;
+  padding-top: 2px;
 }
 
 .checkbox-group a {
   color: #AE2C2A;
   text-decoration: none;
+  word-wrap: break-word;
 }
 
 .checkbox-group a:hover {
@@ -1897,6 +1917,10 @@ section {
   box-shadow: 0 10px 20px rgba(174, 44, 42, 0.3);
 }
 
+:deep(.footer-class) {
+  z-index: 999 !important;
+}
+
 /* Responsividade */
 @media (max-width: 1600px) {
   .parallax-container {
@@ -1947,6 +1971,16 @@ section {
   .benefits-list {
     order: 1;
   }
+
+  .form-icon {
+    font-size: 2.2rem;
+    width: 65px;
+  height: 65px;
+  }
+
+  .form-header h3 {
+    font-size: 1.6rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1987,14 +2021,20 @@ section {
   .apply-button {
     justify-content: center;
   }
-  
-  .form-container {
-    padding: 25px 20px;
-  }
 
   .form-grid {
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+
+  .form-icon {
+    font-size: 2rem;
+    width: 60px;
+    height: 60px;
+  }
+  
+  .form-header h3 {
+    font-size: 1.4rem;
   }
   
   .job-summary-header {
@@ -2030,6 +2070,15 @@ section {
 
   .values-grid {
     grid-template-columns: 1fr;
+  }
+
+  .checkbox-group {
+    gap: 8px;
+  }
+  
+  .checkbox-group label {
+    font-size: 0.85rem;
+    line-height: 1.4;
   }
 }
 
@@ -2074,6 +2123,17 @@ section {
 
   .faq-question h4 {
     font-size: 1rem;
+  }
+
+  .form-icon {
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  min-height: 60px;
+  }
+
+  .form-header h3 {
+    font-size: 1.2rem;
   }
 }
 
@@ -2186,10 +2246,6 @@ section {
     font-size: 1.2rem;
   }
   
-  .form-container {
-    padding: 20px 15px;
-  }
-  
   .no-jobs-container {
     padding: 60px 15px;
   }
@@ -2224,5 +2280,128 @@ section {
     gap: 15px;
     align-items: stretch;
   }
+
+  .checkbox-group {
+    gap: 6px;
+  }
+  
+  .checkbox-group label {
+    font-size: 0.8rem;
+    line-height: 1.3;
+  }
+  
+  .checkbox-group input[type="checkbox"] {
+    transform: scale(1.1);
+    margin-top: 2px;
+  }
+}
+
+/* Correção para dispositivos pequenos */
+@media (max-width: 400px) {
+  .form-container {
+    margin: 0 10px;
+    max-width: calc(100vw - 20px);
+  }
+  
+  .career-form {
+    padding: 20px 25px;
+  }
+  
+  .form-header {
+    padding: 20px 15px;
+    gap: 10px;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr !important;
+    gap: 15px;
+  }
+  
+  .form-group {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .checkbox-group {
+    gap: 8px;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+  }
+  
+  .checkbox-group input[type="checkbox"] {
+    transform: scale(1.0);
+    margin-top: 2px;
+    min-width: 14px;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+  
+  .checkbox-group label {
+    font-size: 0.8rem;
+    line-height: 1.3;
+    max-width: calc(100% - 22px);
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+  
+  .file-upload-label {
+    font-size: 0.85rem;
+    padding: 10px 12px;
+    word-wrap: break-word;
+  }
+}
+
+@media (max-width: 360px) {
+  .form-container {
+    margin: 0 5px;
+    max-width: calc(100vw - 10px);
+  }
+  
+  .form-header {
+    padding: 15px 10px;
+  }
+  
+  .form-header h3 {
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+
+  .checkbox-group {
+    gap: 5px;
+  }
+  
+  .checkbox-group label {
+    font-size: 0.75rem;
+    line-height: 1.2;
+  }
+  
+  .checkbox-group input[type="checkbox"] {
+    transform: scale(1.0);
+    margin-top: 1px;
+  }
+}
+
+</style>
+
+<style>
+/* CSS global para corrigir o footer */
+footer {
+  position: relative !important;
+  z-index: 999 !important;
+  pointer-events: auto !important;
+}
+
+footer * {
+  pointer-events: auto !important;
 }
 </style>

@@ -284,7 +284,7 @@
         <ScrollReveal direction="bottom" :delay="500">
           <div class="reporting-guarantee">
             <div class="guarantee-content">
-              <i class="fas fa-user-secret"></i>
+              <i class="fas fa-user-lock"></i>
               <div class="guarantee-text">
                 <h4>{{ t('praticasAntissuborno.guarantee.title') }}</h4>
                 <p>{{ t('praticasAntissuborno.guarantee.description') }}</p>

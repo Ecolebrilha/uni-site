@@ -14,75 +14,101 @@
       </div>
 
       <div class="sidebar-content">
-        <ul class="sidebar-menu">
-          <li><router-link to="/" exact-active-class="active" @click="closeSidebar">
-              <i class="fas fa-home"></i> {{ tHeader('header.navigation.home') }}
-            </router-link></li>
-          <li><router-link to="/Sobre" exact-active-class="active" @click="closeSidebar">
-              <i class="fas fa-building"></i> {{ tHeader('header.navigation.about') }}
-            </router-link></li>
-          <li><router-link to="/Diferenciais" exact-active-class="active" @click="closeSidebar">
-              <i class="fas fa-award"></i> {{ tHeader('header.navigation.differentials') }}
-            </router-link></li>
-          <li><router-link to="/Servicos" exact-active-class="active" @click="closeSidebar">
-              <i class="fas fa-cogs"></i> {{ tHeader('header.navigation.services') }}
-            </router-link></li>
-          <li><router-link to="/Produtos" exact-active-class="active" @click="closeSidebar">
-              <i class="fas fa-pills"></i> {{ tHeader('header.navigation.products') }}
-            </router-link></li>
-          <li><router-link to="/Compliance" exact-active-class="active" @click="closeSidebar">
-              <i class="fas fa-shield-alt"></i> {{ tHeader('header.navigation.compliance') }}
-            </router-link></li>
-          <li class="sidebar-dropdown">
-            <div class="sidebar-dropdown-toggle">
-              <router-link to="/LGPD" class="sidebar-dropdown-main" @click="closeSidebar">
-                <i class="fas fa-lock"></i>
-                <span>{{ tHeader('header.navigation.lgpd') }}</span>
-              </router-link>
-              <div class="sidebar-dropdown-arrow-container" @click.stop="toggleDropdown('lgpd')">
-                <i class="fas fa-chevron-down sidebar-dropdown-arrow"
-                  :class="{ 'rotated': openDropdown === 'lgpd' }"></i>
-              </div>
-            </div>
-            <div class="sidebar-dropdown-menu" :class="{ 'show': openDropdown === 'lgpd' }">
-              <router-link to="/PoliticaPrivacidade" class="sidebar-dropdown-item" @click="closeSidebar">
-                <i class="fas fa-file-shield"></i>
-                <span class="politica-span">{{ tHeader('header.dropdown.lgpd.privacyPolicy') }}</span>
-              </router-link>
-              <router-link to="/TermosLegais" class="sidebar-dropdown-item" @click="closeSidebar">
-                <i class="fas fa-gavel"></i>
-                <span>{{ tHeader('header.dropdown.lgpd.legalTerms') }}</span>
-              </router-link>
-            </div>
-          </li>
+        <!-- Substitua a seção do sidebar-menu por esta versão corrigida: -->
 
-          <li class="sidebar-dropdown">
-            <div class="sidebar-dropdown-toggle">
-              <a href="#" class="sidebar-dropdown-main" @click.prevent="toggleDropdown('contato')">
-                <i class="fas fa-envelope"></i>
-                <span>{{ tHeader('header.navigation.contact') }}</span>
-              </a>
-              <div class="sidebar-dropdown-arrow-container" @click.stop="toggleDropdown('contato')">
-                <i class="fas fa-chevron-down sidebar-dropdown-arrow"
-                  :class="{ 'rotated': openDropdown === 'contato' }"></i>
-              </div>
-            </div>
-            <div class="sidebar-dropdown-menu" :class="{ 'show': openDropdown === 'contato' }">
-              <router-link to="/Contato" class="sidebar-dropdown-item" @click="closeSidebar">
-                <i class="fas fa-comments"></i>
-                <span class="fale-conosco-span">{{ tHeader('header.dropdown.contact.talkToUs') }}</span>
-              </router-link>
-              <router-link to="/TrabalheConosco" class="sidebar-dropdown-item" @click="closeSidebar">
-                <i class="fas fa-briefcase"></i>
-                <span class="trabalhe-conosco-span">{{ tHeader('header.dropdown.contact.workWithUs') }}</span>
-              </router-link>
-              <router-link to="/SejaParceiro" class="sidebar-dropdown-item" @click="closeSidebar">
-                <i class="fas fa-handshake"></i>
-                <span class="seja-parceiro-span">{{ tHeader('header.dropdown.contact.bePartner') }}</span>
-              </router-link>
-            </div>
-          </li>
-        </ul>
+<ul class="sidebar-menu">
+  <li><router-link to="/" exact-active-class="active" @click="closeSidebar">
+      <i class="fas fa-home"></i> {{ tHeader('header.navigation.home') }}
+    </router-link></li>
+  <li><router-link to="/Sobre" exact-active-class="active" @click="closeSidebar">
+      <i class="fas fa-building"></i> {{ tHeader('header.navigation.about') }}
+    </router-link></li>
+  <li><router-link to="/Diferenciais" exact-active-class="active" @click="closeSidebar">
+      <i class="fas fa-award"></i> {{ tHeader('header.navigation.differentials') }}
+    </router-link></li>
+  <li><router-link to="/Servicos" exact-active-class="active" @click="closeSidebar">
+      <i class="fas fa-cogs"></i> {{ tHeader('header.navigation.services') }}
+    </router-link></li>
+  <li><router-link to="/Produtos" exact-active-class="active" @click="closeSidebar">
+      <i class="fas fa-pills"></i> {{ tHeader('header.navigation.products') }}
+    </router-link></li>
+  
+  <!-- Compliance Dropdown -->
+  <li class="sidebar-dropdown">
+    <div class="sidebar-dropdown-toggle">
+      <router-link to="/Compliance" class="sidebar-dropdown-main" @click="closeSidebar">
+        <i class="fas fa-shield-alt"></i>
+        <span>{{ tHeader('header.navigation.compliance') }}</span>
+      </router-link>
+      <div class="sidebar-dropdown-arrow-container" @click.stop="toggleDropdown('compliance')">
+        <i class="fas fa-chevron-down sidebar-dropdown-arrow"
+          :class="{ 'rotated': openDropdown === 'compliance' }"></i>
+      </div>
+    </div>
+    <div class="sidebar-dropdown-menu" :class="{ 'show': openDropdown === 'compliance' }">
+      <router-link to="/CanalConfidencial" class="sidebar-dropdown-item" @click="closeSidebar">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span>{{ tHeader('header.dropdown.compliance.confidentialChannel') }}</span>
+      </router-link>
+      <router-link to="/FazerRelato" class="sidebar-dropdown-item" @click="closeSidebar">
+        <i class="fas fa-edit"></i>
+        <span>{{ tHeader('header.dropdown.compliance.makeReport') }}</span>
+      </router-link>
+    </div>
+  </li>
+
+  <!-- LGPD Dropdown -->
+  <li class="sidebar-dropdown">
+    <div class="sidebar-dropdown-toggle">
+      <router-link to="/LGPD" class="sidebar-dropdown-main" @click="closeSidebar">
+        <i class="fas fa-lock"></i>
+        <span>{{ tHeader('header.navigation.lgpd') }}</span>
+      </router-link>
+      <div class="sidebar-dropdown-arrow-container" @click.stop="toggleDropdown('lgpd')">
+        <i class="fas fa-chevron-down sidebar-dropdown-arrow"
+          :class="{ 'rotated': openDropdown === 'lgpd' }"></i>
+      </div>
+    </div>
+    <div class="sidebar-dropdown-menu" :class="{ 'show': openDropdown === 'lgpd' }">
+      <router-link to="/PoliticaPrivacidade" class="sidebar-dropdown-item" @click="closeSidebar">
+        <i class="fas fa-file-shield"></i>
+        <span class="politica-span">{{ tHeader('header.dropdown.lgpd.privacyPolicy') }}</span>
+      </router-link>
+      <router-link to="/TermosLegais" class="sidebar-dropdown-item" @click="closeSidebar">
+        <i class="fas fa-gavel"></i>
+        <span>{{ tHeader('header.dropdown.lgpd.legalTerms') }}</span>
+      </router-link>
+    </div>
+  </li>
+
+  <!-- Contato Dropdown -->
+  <li class="sidebar-dropdown">
+    <div class="sidebar-dropdown-toggle">
+      <a href="#" class="sidebar-dropdown-main" @click.prevent="toggleDropdown('contato')">
+        <i class="fas fa-envelope"></i>
+        <span>{{ tHeader('header.navigation.contact') }}</span>
+      </a>
+      <div class="sidebar-dropdown-arrow-container" @click.stop="toggleDropdown('contato')">
+        <i class="fas fa-chevron-down sidebar-dropdown-arrow"
+          :class="{ 'rotated': openDropdown === 'contato' }"></i>
+      </div>
+    </div>
+    <div class="sidebar-dropdown-menu" :class="{ 'show': openDropdown === 'contato' }">
+      <router-link to="/Contato" class="sidebar-dropdown-item" @click="closeSidebar">
+        <i class="fas fa-comments"></i>
+        <span class="fale-conosco-span">{{ tHeader('header.dropdown.contact.talkToUs') }}</span>
+      </router-link>
+      <router-link to="/TrabalheConosco" class="sidebar-dropdown-item" @click="closeSidebar">
+        <i class="fas fa-briefcase"></i>
+        <span class="trabalhe-conosco-span">{{ tHeader('header.dropdown.contact.workWithUs') }}</span>
+      </router-link>
+      <router-link to="/SejaParceiro" class="sidebar-dropdown-item" @click="closeSidebar">
+        <i class="fas fa-handshake"></i>
+        <span class="seja-parceiro-span">{{ tHeader('header.dropdown.contact.bePartner') }}</span>
+      </router-link>
+    </div>
+  </li>
+</ul>
       </div>
 
       <!-- Redes sociais e idiomas no menu mobile -->
@@ -164,78 +190,103 @@
     </div>
 
     <nav>
-      <ul>
-        <li><router-link to="/" exact-active-class="active">{{ tHeader('header.navigation.home') }}</router-link></li>
-        <li><router-link to="/Sobre" exact-active-class="active">{{ tHeader('header.navigation.about') }}</router-link>
-        </li>
-        <li><router-link to="/Diferenciais" exact-active-class="active">{{ tHeader('header.navigation.differentials')
-        }}</router-link></li>
-        <li><router-link to="/Servicos" exact-active-class="active">{{ tHeader('header.navigation.services')
-        }}</router-link></li>
-        <li><router-link to="/Produtos" exact-active-class="active">{{ tHeader('header.navigation.products')
-        }}</router-link></li>
-        <li><router-link to="/Compliance" exact-active-class="active">{{ tHeader('header.navigation.compliance')
-        }}</router-link></li>
-        <li class="dropdown">
-          <router-link to="/LGPD" exact-active-class="active" class="dropdown-trigger">
-            {{ tHeader('header.navigation.lgpd') }} <i class="fas fa-chevron-down dropdown-arrow"></i>
+  <ul>
+    <li><router-link to="/" exact-active-class="active">{{ tHeader('header.navigation.home') }}</router-link></li>
+    <li><router-link to="/Sobre" exact-active-class="active">{{ tHeader('header.navigation.about') }}</router-link></li>
+    <li><router-link to="/Diferenciais" exact-active-class="active">{{ tHeader('header.navigation.differentials') }}</router-link></li>
+    <li><router-link to="/Servicos" exact-active-class="active">{{ tHeader('header.navigation.services') }}</router-link></li>
+    <li><router-link to="/Produtos" exact-active-class="active">{{ tHeader('header.navigation.products') }}</router-link></li>
+    
+    <!-- Compliance Dropdown -->
+    <li class="dropdown">
+      <router-link to="/Compliance" exact-active-class="active" class="dropdown-trigger">
+        {{ tHeader('header.navigation.compliance') }} <i class="fas fa-chevron-down dropdown-arrow"></i>
+      </router-link>
+      <div class="dropdown-content">
+        <div class="dropdown-items">
+          <router-link to="/CanalConfidencial" exact-active-class="active" class="dropdown-item">
+            <div class="item-icon">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="item-content">
+              <span class="item-title">{{ tHeader('header.dropdown.compliance.confidentialChannel') }}</span>
+            </div>
           </router-link>
-          <div class="dropdown-content">
-            <div class="dropdown-items">
-              <router-link to="/PoliticaPrivacidade" exact-active-class="active" class="dropdown-item">
-                <div class="item-icon">
-                  <i class="fas fa-file-alt"></i>
-                </div>
-                <div class="item-content">
-                  <span class="item-title">{{ tHeader('header.dropdown.lgpd.privacyPolicy') }}</span>
-                </div>
-              </router-link>
-              <router-link to="/TermosLegais" exact-active-class="active" class="dropdown-item">
-                <div class="item-icon">
-                  <i class="fas fa-gavel"></i>
-                </div>
-                <div class="item-content">
-                  <span class="item-title">{{ tHeader('header.dropdown.lgpd.legalTerms') }}</span>
-                </div>
-              </router-link>
+          <router-link to="/FazerRelato" exact-active-class="active" class="dropdown-item">
+            <div class="item-icon">
+              <i class="fas fa-edit"></i>
             </div>
-          </div>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-trigger" @click.prevent>
-            {{ tHeader('header.navigation.contact') }} <i class="fas fa-chevron-down dropdown-arrow"></i>
-          </a>
-          <div class="dropdown-content">
-            <div class="dropdown-items">
-              <router-link to="/Contato" exact-active-class="active" class="dropdown-item">
-                <div class="item-icon">
-                  <i class="fas fa-comments"></i>
-                </div>
-                <div class="item-content">
-                  <span class="item-title">{{ tHeader('header.dropdown.contact.talkToUs') }}</span>
-                </div>
-              </router-link>
-              <router-link to="/TrabalheConosco" exact-active-class="active" class="dropdown-item">
-                <div class="item-icon">
-                  <i class="fas fa-briefcase"></i>
-                </div>
-                <div class="item-content">
-                  <span class="item-title">{{ tHeader('header.dropdown.contact.workWithUs') }}</span>
-                </div>
-              </router-link>
-              <router-link to="/SejaParceiro" exact-active-class="active" class="dropdown-item">
-                <div class="item-icon">
-                  <i class="fas fa-handshake"></i>
-                </div>
-                <div class="item-content">
-                  <span class="item-title">{{ tHeader('header.dropdown.contact.bePartner') }}</span>
-                </div>
-              </router-link>
+            <div class="item-content">
+              <span class="item-title">{{ tHeader('header.dropdown.compliance.makeReport') }}</span>
             </div>
-          </div>
-        </li>
-      </ul>
-    </nav>
+          </router-link>
+        </div>
+      </div>
+    </li>
+    
+    <!-- LGPD Dropdown -->
+    <li class="dropdown">
+      <router-link to="/LGPD" exact-active-class="active" class="dropdown-trigger">
+        {{ tHeader('header.navigation.lgpd') }} <i class="fas fa-chevron-down dropdown-arrow"></i>
+      </router-link>
+      <div class="dropdown-content">
+        <div class="dropdown-items">
+          <router-link to="/PoliticaPrivacidade" exact-active-class="active" class="dropdown-item">
+            <div class="item-icon">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="item-content">
+              <span class="item-title">{{ tHeader('header.dropdown.lgpd.privacyPolicy') }}</span>
+            </div>
+          </router-link>
+          <router-link to="/TermosLegais" exact-active-class="active" class="dropdown-item">
+            <div class="item-icon">
+              <i class="fas fa-gavel"></i>
+            </div>
+            <div class="item-content">
+              <span class="item-title">{{ tHeader('header.dropdown.lgpd.legalTerms') }}</span>
+            </div>
+          </router-link>
+        </div>
+      </div>
+    </li>
+    
+    <!-- Contato Dropdown -->
+    <li class="dropdown">
+      <a href="#" class="dropdown-trigger" @click.prevent>
+        {{ tHeader('header.navigation.contact') }} <i class="fas fa-chevron-down dropdown-arrow"></i>
+      </a>
+      <div class="dropdown-content">
+        <div class="dropdown-items">
+          <router-link to="/Contato" exact-active-class="active" class="dropdown-item">
+            <div class="item-icon">
+              <i class="fas fa-comments"></i>
+            </div>
+            <div class="item-content">
+              <span class="item-title">{{ tHeader('header.dropdown.contact.talkToUs') }}</span>
+            </div>
+          </router-link>
+          <router-link to="/TrabalheConosco" exact-active-class="active" class="dropdown-item">
+            <div class="item-icon">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="item-content">
+              <span class="item-title">{{ tHeader('header.dropdown.contact.workWithUs') }}</span>
+            </div>
+          </router-link>
+          <router-link to="/SejaParceiro" exact-active-class="active" class="dropdown-item">
+            <div class="item-icon">
+              <i class="fas fa-handshake"></i>
+            </div>
+            <div class="item-content">
+              <span class="item-title">{{ tHeader('header.dropdown.contact.bePartner') }}</span>
+            </div>
+          </router-link>
+        </div>
+      </div>
+    </li>
+  </ul>
+</nav>
   </header>
 </template>
 
@@ -252,13 +303,15 @@ import { useTermsTranslation } from '@/composables/useTermsTranslation.js';
 import { useContactTranslation } from '@/composables/useContactTranslation.js';
 import { useOurPartnerTranslation } from '@/composables/useOurPartnerTranslation.js';
 import { usePartnersTranslation } from '@/composables/usePartnersTranslation.js';
-import { useEthicalConductTranslation } from '@/composables/useEthicalConductTranslation';
-import { useSocialResponsibilityTranslation } from '@/composables/useSocialResponsibilityTranslation';
-import { useHumanRightsTranslation } from '@/composables/useHumanRightsTranslation';
-import { useDataSecurityTranslation } from '@/composables/useDataSecurityTranslation';
-import { useAntiBriberyTranslation } from '@/composables/useAntiBriberyTranslation';
-import { useSectorStandardsTranslation } from '@/composables/useSectorStandardsTranslation';
-import { useHeaderFooterTranslation } from '@/composables/useHeaderFooterTranslation';
+import { useEthicalConductTranslation } from '@/composables/useEthicalConductTranslation.js';
+import { useSocialResponsibilityTranslation } from '@/composables/useSocialResponsibilityTranslation.js';
+import { useHumanRightsTranslation } from '@/composables/useHumanRightsTranslation.js';
+import { useDataSecurityTranslation } from '@/composables/useDataSecurityTranslation.js';
+import { useAntiBriberyTranslation } from '@/composables/useAntiBriberyTranslation.js';
+import { useSectorStandardsTranslation } from '@/composables/useSectorStandardsTranslation.js';
+import { useHeaderFooterTranslation } from '@/composables/useHeaderFooterTranslation.js';
+import { useConfidentialChannelTranslation } from '@/composables/useConfidentialChannelTranslation.js';
+import { useReportTranslation } from '@/composables/useReportTranslation';
 
 export default {
   name: 'HomeHeader',
@@ -281,6 +334,8 @@ export default {
     const { setLanguage: setDataSecurityLanguage } = useDataSecurityTranslation();
     const { setLanguage: setAntiBriberyLanguage } = useAntiBriberyTranslation();
     const { setLanguage: setSectorStandardsLanguage } = useSectorStandardsTranslation();
+    const { setLanguage: setConfidentialChannelLanguage } = useConfidentialChannelTranslation();
+    const { setLanguage: setReportLanguage } = useReportTranslation();
     const { t: tHeader, setLanguage: setHeaderFooterLanguage } = useHeaderFooterTranslation();
 
     return {
@@ -305,6 +360,8 @@ export default {
       setDataSecurityLanguage,
       setAntiBriberyLanguage,
       setSectorStandardsLanguage,
+      setConfidentialChannelLanguage,
+      setReportLanguage,
       setHeaderFooterLanguage,
     };
   },
@@ -351,6 +408,8 @@ export default {
       this.setDataSecurityLanguage(lang);
       this.setAntiBriberyLanguage(lang);
       this.setSectorStandardsLanguage(lang);
+      this.setConfidentialChannelLanguage(lang);
+      this.setReportLanguage(lang);
       this.setHeaderFooterLanguage(lang);
     },
     handleScroll() {

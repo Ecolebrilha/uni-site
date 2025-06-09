@@ -16,14 +16,18 @@ const translations = reactive({
         contact: 'Contato'
       },
       dropdown: {
+        compliance: {
+          confidentialChannel: 'Canal Confidencial',
+          makeReport: 'Faça um Relato'
+        },
         lgpd: {
           privacyPolicy: 'Política de Privacidade',
           legalTerms: 'Termos Legais'
         },
         contact: {
-          bePartner: 'Seja Nosso Parceiro',
+          talkToUs: 'Entre em Contato',
           workWithUs: 'Trabalhe Conosco',
-          talkToUs: 'Entre em Contato'
+          bePartner: 'Seja Nosso Parceiro'
         }
       },
       social: {
@@ -49,14 +53,18 @@ const translations = reactive({
         contact: 'Contact'
       },
       dropdown: {
+        compliance: {
+          confidentialChannel: 'Confidential Channel',
+          makeReport: 'Make a Report'
+        },
         lgpd: {
           privacyPolicy: 'Privacy Policy',
           legalTerms: 'Legal Terms'
         },
         contact: {
-          bePartner: 'Be Our Partner',
+          talkToUs: 'Contact Us',
           workWithUs: 'Work With Us',
-          talkToUs: 'Contact Us'
+          bePartner: 'Be Our Partner'
         }
       },
       social: {
@@ -82,14 +90,18 @@ const translations = reactive({
         contact: 'Contacto'
       },
       dropdown: {
+        compliance: {
+          confidentialChannel: 'Canal Confidencial',
+          makeReport: 'Hacer un Reporte'
+        },
         lgpd: {
           privacyPolicy: 'Política de Privacidad',
           legalTerms: 'Términos Legales'
         },
         contact: {
-          bePartner: 'Sea Nuestro Socio',
+          talkToUs: 'Contáctanos',
           workWithUs: 'Trabaja con Nosotros',
-          talkToUs: 'Contáctanos'
+          bePartner: 'Sea Nuestro Socio'
         }
       },
       social: {

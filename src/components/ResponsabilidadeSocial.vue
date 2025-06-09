@@ -221,8 +221,8 @@ section {
 /* Hero Section com Parallax */
 .hero-section {
   position: relative;
-  height: 60vh;
-  min-height: 400px;
+  height: 70vh;
+  min-height: 500px;
   overflow: hidden;
 }
 
@@ -232,7 +232,7 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('@/assets/header-responsabilidade-social.jpg');
+  background-image: url('@/assets/header-responsabilidade-social2.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

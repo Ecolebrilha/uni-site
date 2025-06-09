@@ -11,6 +11,71 @@
       </div>
     </section>
 
+    <!-- Seção de Canal Confidencial -->
+<section class="confidential-channel-section">
+  <div class="container">
+    <ScrollReveal direction="bottom" :delay="100">
+      <div class="channel-header">
+        <div class="alert-icon">
+          <i class="fas fa-envelope-open-text"></i>
+        </div>
+        <h2>{{ t('compliance.confidentialChannel.title') }}</h2>
+        <p class="channel-subtitle">{{ t('compliance.confidentialChannel.subtitle') }}</p>
+      </div>
+    </ScrollReveal>
+
+    <ScrollReveal direction="bottom" :delay="200">
+      <div class="channel-actions">
+        <div class="action-card primary">
+          <div class="action-icon">
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+          <h3>{{ t('compliance.confidentialChannel.makeReport.title') }}</h3>
+          <p>{{ t('compliance.confidentialChannel.makeReport.description') }}</p>
+          <router-link to="/FazerRelato" class="action-button primary">
+            <i class="fas fa-edit"></i>
+            {{ t('compliance.confidentialChannel.makeReport.button') }}
+          </router-link>
+        </div>
+
+        <div class="action-card secondary">
+          <div class="action-icon">
+            <i class="fas fa-info-circle"></i>
+          </div>
+          <h3>{{ t('compliance.confidentialChannel.learnMore.title') }}</h3>
+          <p>{{ t('compliance.confidentialChannel.learnMore.description') }}</p>
+          <router-link to="/CanalConfidencial" class="action-button secondary">
+            <i class="fas fa-arrow-right"></i>
+            {{ t('compliance.confidentialChannel.learnMore.button') }}
+          </router-link>
+        </div>
+      </div>
+    </ScrollReveal>
+
+    <ScrollReveal direction="bottom" :delay="300">
+      <div class="channel-footer">
+        <div class="security-info">
+          <div class="security-features">
+            <div class="feature-item">
+              <i class="fas fa-shield-alt"></i>
+              <span>{{ t('compliance.confidentialChannel.features.secure') }}</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-user-secret"></i>
+              <span>{{ t('compliance.confidentialChannel.features.anonymous') }}</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-lock"></i>
+              <span>{{ t('compliance.confidentialChannel.features.confidential') }}</span>
+            </div>
+          </div>
+          <p class="security-guarantee">{{ t('compliance.confidentialChannel.guarantee') }}</p>
+        </div>
+      </div>
+    </ScrollReveal>
+  </div>
+</section>
+
     <!-- Seção de Visão Geral -->
     <section class="overview-section">
       <div class="container">
@@ -388,6 +453,314 @@ section {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Seção de Canal Confidencial */
+.confidential-channel-section {
+  background: linear-gradient(135deg, #fff5f5, #ffffff);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+  border-top: 4px solid #AE2C2A;
+  border-bottom: 4px solid #AE2C2A;
+}
+
+.confidential-channel-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ae2c2a' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  z-index: 0;
+}
+
+.confidential-channel-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+.channel-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.alert-icon {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, #ff4444, #AE2C2A);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 30px;
+  box-shadow: 0 15px 40px rgba(174, 44, 42, 0.3);
+  animation: pulse-alert 2s infinite;
+}
+
+.alert-icon i {
+  font-size: 3rem;
+  color: white;
+  animation: bounce-alert 2s infinite;
+}
+
+@keyframes pulse-alert {
+  0% {
+    box-shadow: 0 15px 40px rgba(174, 44, 42, 0.3);
+  }
+  50% {
+    box-shadow: 0 15px 40px rgba(174, 44, 42, 0.6);
+  }
+  100% {
+    box-shadow: 0 15px 40px rgba(174, 44, 42, 0.3);
+  }
+}
+
+@keyframes bounce-alert {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.channel-header h2 {
+  font-size: 3rem;
+  color: #AE2C2A;
+  margin-bottom: 20px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.channel-subtitle {
+  font-size: 1.4rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.channel-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  max-width: 870px;
+  margin: 0 auto 60px;
+}
+
+.action-card {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.action-card.primary {
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  color: white;
+}
+
+.action-card.primary::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: rotate(45deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  50% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+}
+
+.action-card.secondary {
+  border: 2px solid #AE2C2A;
+}
+
+.action-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 25px 60px rgba(174, 44, 42, 0.2);
+}
+
+.action-card.primary:hover {
+  transform: translateY(-10px) scale(1.08);
+}
+
+.action-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 25px;
+  position: relative;
+  z-index: 1;
+}
+
+.action-card.primary .action-icon {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.action-card.secondary .action-icon {
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+}
+
+.action-icon i {
+  font-size: 2.2rem;
+}
+
+.action-card.primary .action-icon i {
+  color: white;
+}
+
+.action-card.secondary .action-icon i {
+  color: white;
+}
+
+.action-card h3 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+}
+
+.action-card.primary h3 {
+  color: white;
+}
+
+.action-card.secondary h3 {
+  color: #AE2C2A;
+}
+
+.action-card p {
+  margin-bottom: 30px;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+
+.action-card.primary p {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.action-card.secondary p {
+  color: #666;
+}
+
+.action-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 35px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.action-button.primary {
+  background: white;
+  color: #AE2C2A;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.action-button.primary:hover {
+  background: #f8f9fa;
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.action-button.secondary {
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  color: white;
+  box-shadow: 0 8px 25px rgba(174, 44, 42, 0.3);
+}
+
+.action-button.secondary:hover {
+  background: linear-gradient(135deg, #ff5555, #ff6666);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(174, 44, 42, 0.4);
+}
+
+.channel-footer {
+  text-align: center;
+}
+
+.security-info {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(174, 44, 42, 0.1);
+}
+
+.security-features {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  min-width: 120px;
+}
+
+.feature-item i {
+  font-size: 2rem;
+  color: #AE2C2A;
+  margin-bottom: 5px;
+}
+
+.feature-item span {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.security-guarantee {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(174, 44, 42, 0.1);
+  font-style: italic;
+  line-height: 1.6;
 }
 
 /* Seção de Visão Geral */
@@ -1207,6 +1580,37 @@ section {
   .document-icon i {
     font-size: 2.2rem;
   }
+
+  .confidential-channel-section {
+    padding: 80px 0;
+  }
+  
+  .channel-actions {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    max-width: 500px;
+  }
+  
+  .action-card.primary {
+    transform: none;
+  }
+  
+  .channel-header h2 {
+    font-size: 2.2rem;
+  }
+  
+  .channel-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .alert-icon {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .alert-icon i {
+    font-size: 2.5rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1301,6 +1705,34 @@ section {
   .banner-container {
     top: 82px;
     padding-top: 0px;
+  }
+
+  .confidential-channel-section {
+    padding: 60px 0;
+  }
+  
+  .channel-header {
+    margin-bottom: 40px;
+  }
+  
+  .channel-header h2 {
+    font-size: 1.8rem;
+  }
+  
+  .channel-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .action-card {
+    padding: 30px 25px;
+  }
+  
+  .security-features {
+    gap: 25px;
+  }
+  
+  .security-info {
+    padding: 30px 25px;
   }
 }
 
@@ -1421,6 +1853,64 @@ section {
   .banner-overlay h1 {
     font-size: 1.5em;
   }
+
+  .channel-header h2 {
+    font-size: 1.6rem;
+  }
+  
+  .channel-subtitle {
+    font-size: 1rem;
+  }
+  
+  .alert-icon {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 20px;
+  }
+  
+  .alert-icon i {
+    font-size: 2rem;
+  }
+  
+  .action-card {
+    padding: 25px 20px;
+  }
+
+  .action-card h3 {
+    font-size: 1.4rem;
+  }
+  
+  .action-button {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+  
+  .security-features {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .feature-item {
+    flex-direction: row;
+    gap: 15px;
+    min-width: auto;
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .feature-item i {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+  }
+  
+  .security-info {
+    padding: 25px 20px;
+  }
+  
+  .security-guarantee {
+    font-size: 1rem;
+  }
 }
 
 /* Animações adicionais */
@@ -1526,6 +2016,11 @@ section {
 
   .parallax-container {
     background-position: center 38% !important;
+  }
+
+  .action-button {
+    padding: 12px 20px;
+    font-size: 0.9rem;
   }
 }
 

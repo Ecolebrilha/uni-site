@@ -19,6 +19,8 @@ import PraticasAntissuborno from '@/components/PraticasAntissuborno.vue';
 import NormasSetoriais from '@/components/NormasSetoriais.vue';
 import ParceirosCadastro from '@/components/SejaParceiro.vue';
 import TrabalheConosco from '@/components/TrabalheConosco.vue';
+import CanalConfidencial from '@/components/CanalConfidencial.vue';
+import FazerRelato from '@/components/FazerRelato.vue';
 
 const routes = [
   {
@@ -139,6 +141,18 @@ const routes = [
     path: '/TrabalheConosco',
     name: 'TrabalheConosco',
     component: TrabalheConosco,
+    meta: { transition: 'slide-left' }
+  },
+  {
+    path: '/CanalConfidencial',
+    name: 'CanalConfidencial',
+    component: CanalConfidencial,
+    meta: { transition: 'slide-left' }
+  },
+  {
+    path: '/FazerRelato',
+    name: 'FazerRelato',
+    component: FazerRelato,
     meta: { transition: 'slide-left' }
   },
 ];

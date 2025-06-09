@@ -7,6 +7,26 @@ const translations = reactive({
     compliance: {
       heroTitle: 'Compliance',
       heroSubtitle: 'Integridade e Transparência',
+      confidentialChannel: {
+        title: 'Canal Confidencial',
+        subtitle: 'Relatos seguros e sigilosos para questões de compliance e ética',
+        makeReport: {
+          title: 'Fazer um Relato',
+          description: 'Reporte violações, irregularidades ou questões éticas de forma segura e confidencial.',
+          button: 'Fazer Relato Agora'
+        },
+        learnMore: {
+          title: 'Saiba Mais',
+          description: 'Conheça como funciona nosso canal confidencial e suas garantias de proteção.',
+          button: 'Conhecer o Canal'
+        },
+        features: {
+          secure: 'Totalmente Seguro',
+          anonymous: 'Relatos Anônimos',
+          confidential: 'Confidencial'
+        },
+        guarantee: 'Todas as informações são tratadas com máxima confidencialidade e garantimos proteção contra qualquer forma de retaliação.'
+      },    
       overviewTitle: 'Compliance e Código de Conduta',
       overviewText: 'O nosso compromisso é com a integridade, transparência e conformidade. Explore o Código de Conduta que guia as práticas éticas da Uni Hospitalar e garante o respeito às normas e regulamentos aplicáveis.',
       values: {
@@ -77,6 +97,26 @@ const translations = reactive({
     compliance: {
       heroTitle: 'Compliance',
       heroSubtitle: 'Integrity and Transparency',
+      confidentialChannel: {
+        title: 'Confidential Channel',
+        subtitle: 'Safe and confidential reports for compliance and ethics issues',
+        makeReport: {
+          title: 'Make a Report',
+          description: 'Report violations, irregularities or ethical issues safely and confidentially.',
+          button: 'Make Report Now'
+        },
+        learnMore: {
+          title: 'Learn More',
+          description: 'Learn how our confidential channel works and its protection guarantees.',
+          button: 'Know the Channel'
+        },
+        features: {
+          secure: 'Completely Secure',
+          anonymous: 'Anonymous Reports',
+          confidential: 'Confidential'
+        },
+        guarantee: 'All information is treated with maximum confidentiality and we guarantee protection against any form of retaliation.'
+      },
       overviewTitle: 'Compliance and Code of Conduct',
       overviewText: 'Our commitment is to integrity, transparency and compliance. Explore the Code of Conduct that guides Uni Hospitalar\'s ethical practices and ensures respect for applicable laws and regulations.',
       values: {
@@ -147,6 +187,26 @@ const translations = reactive({
     compliance: {
       heroTitle: 'Compliance',
       heroSubtitle: 'Integridad y Transparencia',
+      confidentialChannel: {
+        title: 'Canal Confidencial',
+        subtitle: 'Reportes seguros y confidenciales para cuestiones de compliance y ética',
+        makeReport: {
+          title: 'Hacer un Reporte',
+          description: 'Reporte violaciones, irregularidades o cuestiones éticas de forma segura y confidencial.',
+          button: 'Hacer Reporte Ahora'
+        },
+        learnMore: {
+          title: 'Saber Más',
+          description: 'Conozca cómo funciona nuestro canal confidencial y sus garantías de protección.',
+          button: 'Conocer el Canal'
+        },
+        features: {
+          secure: 'Totalmente Seguro',
+          anonymous: 'Reportes Anónimos',
+          confidential: 'Confidencial'
+        },
+        guarantee: 'Todas las informaciones son tratadas con máxima confidencialidad y garantizamos protección contra cualquier forma de represalia.'
+      },
       overviewTitle: 'Compliance y Código de Conducta',
       overviewText: 'Nuestro compromiso es con la integridad, transparencia y conformidad. Explore el Código de Conducta que guía las prácticas éticas de Uni Hospitalar y garantiza el respeto a las normas y regulaciones aplicables.',
       values: {

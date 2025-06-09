@@ -164,7 +164,7 @@
             <div class="catalog-text">
               <h3>{{ t('products.catalog.title') }}</h3>
               <p>{{ t('products.catalog.description') }}</p>
-              <a href="/site/uni-hospitalar-produtos.pdf" target="_blank" class="catalog-button">
+              <a href="/uni-hospitalar-produtos.pdf" target="_blank" class="catalog-button">
                 <i class="fas fa-download"></i> {{ t('products.catalog.downloadButton') }}
               </a>
             </div>
@@ -183,7 +183,7 @@
             <div class="cta-buttons">
               <router-link to="/Contato" class="cta-button primary">
                 <i class="fas fa-envelope"></i> {{ t('products.cta.contactButton') }}</router-link>
-              <a href="/site/uni-hospitalar-produtos.pdf" target="_blank" class="cta-button secondary">
+              <a href="/uni-hospitalar-produtos.pdf" target="_blank" class="cta-button secondary">
                 <i class="fas fa-download"></i> {{ t('products.cta.catalogButton') }}
               </a>
             </div>
