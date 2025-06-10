@@ -9,9 +9,9 @@ const translations = reactive({
       heroSubtitle: 'Nosso compromisso com a segurança e proteção de dados',
       introTitle: 'Compromisso com sua Privacidade',
       introText: 'A Uni Hospitalar valoriza a ética e a integridade em todas as suas ações. Esta Política de Privacidade tem como objetivo informar os titulares de dados pessoais sobre como suas informações são tratadas, assegurando uma relação transparente e segura.',
-      gpoTitle: 'Encarregado de Proteção de Dados (GPO)',
-      gpoName: 'Responsável',
-      gpoEmail: 'E-mail de Contato',
+      dpoTitle: 'Encarregado de Proteção de Dados (dpo)',
+      dpoName: 'Responsável',
+      dpoEmail: 'E-mail de Contato',
       sections: {
         about: {
           title: 'Sobre a Política de Privacidade',
@@ -78,9 +78,9 @@ const translations = reactive({
       heroSubtitle: 'Our commitment to data security and protection',
       introTitle: 'Commitment to Your Privacy',
       introText: 'Uni Hospitalar values ethics and integrity in all its actions. This Privacy Policy aims to inform personal data holders about how their information is treated, ensuring a transparent and secure relationship.',
-      gpoTitle: 'Data Protection Officer (DPO)',
-      gpoName: 'Responsible',
-      gpoEmail: 'Contact Email',
+      dpoTitle: 'Data Protection Officer (DPO)',
+      dpoName: 'Responsible',
+      dpoEmail: 'Contact Email',
       sections: {
         about: {
           title: 'About the Privacy Policy',
@@ -147,9 +147,9 @@ const translations = reactive({
       heroSubtitle: 'Nuestro compromiso con la seguridad y protección de datos',
       introTitle: 'Compromiso con su Privacidad',
       introText: 'Uni Hospitalar valora la ética y la integridad en todas sus acciones. Esta Política de Privacidad tiene como objetivo informar a los titulares de datos personales sobre cómo se tratan sus informaciones, asegurando una relación transparente y segura.',
-      gpoTitle: 'Oficial de Protección de Datos (GPO)',
-      gpoName: 'Responsable',
-      gpoEmail: 'Correo de Contacto',
+      dpoTitle: 'Oficial de Protección de Datos (dpo)',
+      dpoName: 'Responsable',
+      dpoEmail: 'Correo de Contacto',
       sections: {
         about: {
           title: 'Sobre la Política de Privacidad',

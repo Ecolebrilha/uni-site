@@ -24,21 +24,21 @@
             {{ t('privacyPolicy.introText') }}
           </p>
 
-          <!-- Contato do GPO -->
-          <div class="gpo-contact">
-            <div class="gpo-info">
-              <h4 class="gpo-title">{{ t('privacyPolicy.gpoTitle') }}</h4>
-              <div class="gpo-details">
-                <div class="gpo-item">
+          <!-- Contato do DPO -->
+          <div class="dpo-contact">
+            <div class="dpo-info">
+              <h4 class="dpo-title">{{ t('privacyPolicy.dpoTitle') }}</h4>
+              <div class="dpo-details">
+                <div class="dpo-item">
                   <i class="fas fa-user-shield"></i>
-                  <span class="gpo-label">{{ t('privacyPolicy.gpoName') }}:</span>
-                  <span class="gpo-value">Ítalo Morais - GPO TI Uni Hospitalar</span>
+                  <span class="dpo-label">{{ t('privacyPolicy.dpoName') }}:</span>
+                  <span class="dpo-value">Ítalo Morais - DPO Uni Hospitalar</span>
                 </div>
-                <div class="gpo-item">
+                <div class="dpo-item">
                   <i class="fas fa-envelope"></i>
-                  <span class="gpo-label">{{ t('privacyPolicy.gpoEmail') }}:</span>
-                  <a href="mailto:gpo@unihospitalar.com.br" class="gpo-email">
-                    gpo@unihospitalar.com.br
+                  <span class="dpo-label">{{ t('privacyPolicy.dpoEmail') }}:</span>
+                  <a href="mailto:dpo@unihospitalar.com.br" class="dpo-email">
+                    dpo@unihospitalar.com.br
                   </a>
                 </div>
               </div>
@@ -385,8 +385,8 @@ section {
   line-height: 1.8;
 }
 
-/* Estilos para o contato do GPO */
-.gpo-contact {
+/* Estilos para o contato do dpo */
+.dpo-contact {
   margin-top: 40px;
   padding: 30px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 249, 250, 0.98));
@@ -400,16 +400,16 @@ section {
   -webkit-backdrop-filter: blur(10px);
 }
 
-.gpo-contact:hover {
+.dpo-contact:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
-.gpo-info {
+.dpo-info {
   text-align: center;
 }
 
-.gpo-title {
+.dpo-title {
   font-size: 1.4rem;
   color: #AE2C2A;
   margin: 0px 0px 20px 0px;
@@ -418,14 +418,14 @@ section {
   letter-spacing: 1px;
 }
 
-.gpo-details {
+.dpo-details {
   display: flex;
   flex-direction: column;
   gap: 15px;
   align-items: center;
 }
 
-.gpo-item {
+.dpo-item {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -433,24 +433,24 @@ section {
   color: #555;
 }
 
-.gpo-item i {
+.dpo-item i {
   color: #AE2C2A;
   font-size: 1.2rem;
   width: 20px;
   text-align: center;
 }
 
-.gpo-label {
+.dpo-label {
   font-weight: 600;
   color: #333;
 }
 
-.gpo-value {
+.dpo-value {
   color: #666;
   font-weight: 500;
 }
 
-.gpo-email {
+.dpo-email {
   color: #AE2C2A;
   text-decoration: none;
   font-weight: 600;
@@ -458,7 +458,7 @@ section {
   position: relative;
 }
 
-.gpo-email::after {
+.dpo-email::after {
   content: '';
   position: absolute;
   width: 0;
@@ -469,12 +469,12 @@ section {
   transition: width 0.3s ease;
 }
 
-.gpo-email:hover {
+.dpo-email:hover {
   color: #ff5555;
   transform: translateY(-2px);
 }
 
-.gpo-email:hover::after {
+.dpo-email:hover::after {
   width: 100%;
 }
 
@@ -999,20 +999,20 @@ section {
     text-align: center;
   }
 
-  .gpo-contact {
+  .dpo-contact {
     margin-top: 30px;
     padding: 25px 20px;
   }
   
-  .gpo-title {
+  .dpo-title {
     font-size: 1.2rem;
   }
   
-  .gpo-details {
+  .dpo-details {
     gap: 12px;
   }
   
-  .gpo-item {
+  .dpo-item {
     font-size: 1rem;
     flex-wrap: wrap;
     justify-content: center;
@@ -1050,12 +1050,12 @@ section {
     gap: 15px;
   }
 
-  .gpo-item {
+  .dpo-item {
     flex-direction: column;
     gap: 5px;
   }
   
-  .gpo-email {
+  .dpo-email {
     word-break: break-all;
   }
 }
