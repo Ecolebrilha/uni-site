@@ -99,7 +99,7 @@
         <div class="benefits-container">
           <ScrollReveal direction="left" :delay="300">
             <div class="benefits-image">
-              <img src="@/assets/trabalhe-conosco.png" alt="Equipe Uni Hospitalar" />
+              <img src="@/assets/trabalhe-conosco.jpg" alt="Equipe Uni Hospitalar" />
             </div>
           </ScrollReveal>
 
