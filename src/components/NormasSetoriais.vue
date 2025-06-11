@@ -1054,7 +1054,7 @@ section {
 
 .audit-flow {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
   gap: 20px;
   position: relative;
@@ -1072,7 +1072,10 @@ section {
   border: 2px solid transparent;
   position: relative;
   overflow: hidden;
-  animation: slideInUp 0.6s ease-out;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .audit-step::before {
@@ -1112,6 +1115,10 @@ section {
 
 .step-content {
   margin-top: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .step-icon {
@@ -1135,7 +1142,6 @@ section {
   font-size: 2rem;
   color: #AE2C2A;
   transition: color 0.4s ease;
-  animation: float 3s ease-in-out infinite;
 }
 
 .audit-step:hover .step-icon i {
@@ -1149,12 +1155,14 @@ section {
   margin-bottom: 15px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  line-height: 1.3;
 }
 
 .step-content p {
   color: #666;
   line-height: 1.7;
   font-size: 0.95rem;
+  margin: 0;
 }
 
 .flow-arrow {
@@ -1162,6 +1170,13 @@ section {
   font-size: 2rem;
   opacity: 0.6;
   animation: pulse 2s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flow-arrow i {
+  transition: transform 0.3s ease;
 }
 
 @keyframes pulse {
@@ -1928,6 +1943,31 @@ section {
   .dashboard-content {
     gap: 30px;
   }
+
+  .standards-grid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+  }
+
+  .audit-flow {
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .flow-arrow i {
+    transform: rotate(90deg);
+  }
+
+  .audit-process-section {
+    padding: 80px 0;
+  }
+  
+  .audit-step {
+    max-width: 400px;
+    width: 100%;
+    min-height: 320px;
+  }
 }
 
 @media (max-width: 992px) {
@@ -1948,25 +1988,10 @@ section {
     gap: 30px;
   }
   
-  .standards-grid {
-    grid-template-columns: repeat(1, 1fr);
-    gap: 30px;
-  }
-  
   .compliance-content,
   .monitoring-content {
     flex-direction: column;
     text-align: center;
-  }
-  
-  .audit-flow {
-    flex-direction: column;
-    gap: 40px;
-  }
-  
-  .flow-arrow {
-    transform: rotate(90deg);
-    margin: 0;
   }
   
   .certifications-showcase {
@@ -2035,6 +2060,48 @@ section {
   .stat-number {
     font-size: 2rem;
   }
+
+  .audit-process-section {
+    padding: 60px 0;
+  }
+  
+  .audit-flow {
+    gap: 30px;
+  }
+  
+  .audit-step {
+    padding: 30px 25px;
+    max-width: 350px;
+    min-height: 300px;
+  }
+  
+  .step-number {
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+    top: -12px;
+  }
+  
+  .step-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .step-icon i {
+    font-size: 1.8rem;
+  }
+  
+  .step-content h4 {
+    font-size: 1.2rem;
+  }
+  
+  .step-content p {
+    font-size: 0.9rem;
+  }
+  
+  .flow-arrow {
+    font-size: 1.8rem;
+  }
   
   .compliance-text,
   .monitoring-info {
@@ -2042,8 +2109,8 @@ section {
   }
   
   .circular-progress {
-    width: 250px;
-    height: 250px;
+    width: 280px;
+    height: 280px;
   }
   
   .progress-number {
@@ -2167,17 +2234,53 @@ section {
     padding: 40px 20px 25px;
   }
   
+  .audit-process-section {
+    padding: 50px 0;
+  }
+  
+  .audit-flow {
+    gap: 25px;
+  }
+  
+  .audit-step {
+    padding: 25px 20px;
+    max-width: 300px;
+    min-height: 280px;
+  }
+  
+  .step-number {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+    top: -10px;
+  }
+  
+  .step-icon {
+    width: 55px;
+    height: 55px;
+    margin-bottom: 20px;
+  }
+  
+  .step-icon i {
+    font-size: 1.5rem;
+  }
+  
   .step-content h4 {
     font-size: 1.1rem;
+    margin-bottom: 12px;
   }
   
   .step-content p {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+  }
+  
+  .flow-arrow {
+    font-size: 1.5rem;
   }
   
   .circular-progress {
-    width: 200px;
-    height: 200px;
+    width: 280px;
+    height: 280px;
   }
   
   .progress-number {
@@ -2285,8 +2388,8 @@ section {
   }
   
   .circular-progress {
-    width: 180px;
-    height: 180px;
+    width: 270px;
+    height: 270px;
   }
   
   .progress-number {

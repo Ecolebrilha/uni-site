@@ -28,132 +28,164 @@
     </section>
 
     <!-- Seção de Princípios -->
-    <section class="principles-section">
-      <div class="container">
-        <ScrollReveal direction="bottom" :delay="100">
-          <div class="section-title">
-            <h2>{{ t('direitosHumanos.principlesTitle') }}</h2>
-            <div class="title-underline"></div>
-          </div>
-        </ScrollReveal>
-
-        <div class="principles-grid">
-          <ScrollReveal direction="left" :delay="200">
-            <div class="principle-card">
-              <div class="principle-icon">
-                <i class="fas fa-balance-scale"></i>
-              </div>
-              <div class="principle-content">
-                <h3>{{ t('direitosHumanos.principles.equality.title') }}</h3>
-                <p>{{ t('direitosHumanos.principles.equality.description') }}</p>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="bottom" :delay="300">
-            <div class="principle-card">
-              <div class="principle-icon">
-                <i class="fas fa-shield-alt"></i>
-              </div>
-              <div class="principle-content">
-                <h3>{{ t('direitosHumanos.principles.dignity.title') }}</h3>
-                <p>{{ t('direitosHumanos.principles.dignity.description') }}</p>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="right" :delay="400">
-            <div class="principle-card">
-              <div class="principle-icon">
-                <i class="fas fa-users"></i>
-              </div>
-              <div class="principle-content">
-                <h3>{{ t('direitosHumanos.principles.inclusion.title') }}</h3>
-                <p>{{ t('direitosHumanos.principles.inclusion.description') }}</p>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="left" :delay="500">
-            <div class="principle-card">
-              <div class="principle-icon">
-                <i class="fas fa-heart"></i>
-              </div>
-              <div class="principle-content">
-                <h3>{{ t('direitosHumanos.principles.respect.title') }}</h3>
-                <p>{{ t('direitosHumanos.principles.respect.description') }}</p>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="right" :delay="600">
-            <div class="principle-card">
-              <div class="principle-icon">
-                <i class="fas fa-gavel"></i>
-              </div>
-              <div class="principle-content">
-                <h3>{{ t('direitosHumanos.principles.justice.title') }}</h3>
-                <p>{{ t('direitosHumanos.principles.justice.description') }}</p>
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
+<section class="principles-section">
+  <div class="container">
+    <ScrollReveal direction="bottom" :delay="100">
+      <div class="section-title">
+        <h2>{{ t('direitosHumanos.principlesTitle') }}</h2>
+        <div class="title-underline"></div>
       </div>
-    </section>
+    </ScrollReveal>
 
-    <!-- Seção de Compromissos -->
-    <section class="commitments-section">
-      <div class="container">
-        <ScrollReveal direction="bottom" :delay="100">
-          <div class="section-title light">
-            <h2>{{ t('direitosHumanos.commitmentsTitle') }}</h2>
-            <div class="title-underline light"></div>
+    <div class="principles-grid">
+      <ScrollReveal direction="left" :delay="200">
+        <div class="principle-card">
+          <div class="principle-icon">
+            <i class="fas fa-balance-scale"></i>
           </div>
-        </ScrollReveal>
-
-        <div class="commitments-grid">
-          <ScrollReveal direction="bottom" :delay="200">
-            <div class="commitment-item">
-              <div class="commitment-circle">
-                <i class="fas fa-briefcase"></i>
-              </div>
-              <h4>{{ t('direitosHumanos.commitments.workplace.title') }}</h4>
-              <p>{{ t('direitosHumanos.commitments.workplace.description') }}</p>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="bottom" :delay="300">
-            <div class="commitment-item">
-              <div class="commitment-circle">
-                <i class="fas fa-user-md"></i>
-              </div>
-              <h4>{{ t('direitosHumanos.commitments.patients.title') }}</h4>
-              <p>{{ t('direitosHumanos.commitments.patients.description') }}</p>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="bottom" :delay="400">
-            <div class="commitment-item">
-              <div class="commitment-circle">
-                <i class="fas fa-handshake"></i>
-              </div>
-              <h4>{{ t('direitosHumanos.commitments.suppliers.title') }}</h4>
-              <p>{{ t('direitosHumanos.commitments.suppliers.description') }}</p>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="bottom" :delay="500">
-            <div class="commitment-item">
-              <div class="commitment-circle">
-                <i class="fas fa-globe"></i>
-              </div>
-              <h4>{{ t('direitosHumanos.commitments.community.title') }}</h4>
-              <p>{{ t('direitosHumanos.commitments.community.description') }}</p>
-            </div>
-          </ScrollReveal>
+          <div class="principle-content">
+            <h3>{{ t('direitosHumanos.principles.equality.title') }}</h3>
+            <p>{{ t('direitosHumanos.principles.equality.description') }}</p>
+          </div>
         </div>
+      </ScrollReveal>
+
+      <ScrollReveal direction="bottom" :delay="300">
+        <div class="principle-card">
+          <div class="principle-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div class="principle-content">
+            <h3>{{ t('direitosHumanos.principles.dignity.title') }}</h3>
+            <p>{{ t('direitosHumanos.principles.dignity.description') }}</p>
+          </div>
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal direction="right" :delay="400">
+        <div class="principle-card">
+          <div class="principle-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="principle-content">
+            <h3>{{ t('direitosHumanos.principles.inclusion.title') }}</h3>
+            <p>{{ t('direitosHumanos.principles.inclusion.description') }}</p>
+          </div>
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal direction="left" :delay="500">
+        <div class="principle-card">
+          <div class="principle-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <div class="principle-content">
+            <h3>{{ t('direitosHumanos.principles.respect.title') }}</h3>
+            <p>{{ t('direitosHumanos.principles.respect.description') }}</p>
+          </div>
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal direction="right" :delay="600">
+        <div class="principle-card">
+          <div class="principle-icon">
+            <i class="fas fa-gavel"></i>
+          </div>
+          <div class="principle-content">
+            <h3>{{ t('direitosHumanos.principles.justice.title') }}</h3>
+            <p>{{ t('direitosHumanos.principles.justice.description') }}</p>
+          </div>
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal direction="bottom" :delay="700">
+        <div class="principle-card">
+          <div class="principle-icon">
+            <i class="fas fa-hands-helping"></i>
+          </div>
+          <div class="principle-content">
+            <h3>{{ t('direitosHumanos.principles.solidarity.title') }}</h3>
+            <p>{{ t('direitosHumanos.principles.solidarity.description') }}</p>
+          </div>
+        </div>
+      </ScrollReveal>
+    </div>
+  </div>
+</section>
+
+<!-- Seção de Compromissos -->
+<section class="commitments-section">
+  <div class="container">
+    <ScrollReveal direction="bottom" :delay="100">
+      <div class="section-title light">
+        <h2>{{ t('direitosHumanos.commitmentsTitle') }}</h2>
+        <div class="title-underline light"></div>
       </div>
-    </section>
+    </ScrollReveal>
+
+    <div class="commitments-grid">
+      <ScrollReveal direction="bottom" :delay="200">
+        <div class="commitment-item">
+          <div class="commitment-circle">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <h4>{{ t('direitosHumanos.commitments.workplace.title') }}</h4>
+          <p>{{ t('direitosHumanos.commitments.workplace.description') }}</p>
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal direction="bottom" :delay="300">
+        <div class="commitment-item">
+          <div class="commitment-circle">
+            <i class="fas fa-user-md"></i>
+          </div>
+          <h4>{{ t('direitosHumanos.commitments.patients.title') }}</h4>
+          <p>{{ t('direitosHumanos.commitments.patients.description') }}</p>
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal direction="bottom" :delay="400">
+        <div class="commitment-item">
+          <div class="commitment-circle">
+            <i class="fas fa-handshake"></i>
+          </div>
+          <h4>{{ t('direitosHumanos.commitments.suppliers.title') }}</h4>
+          <p>{{ t('direitosHumanos.commitments.suppliers.description') }}</p>
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal direction="bottom" :delay="500">
+        <div class="commitment-item">
+          <div class="commitment-circle">
+            <i class="fas fa-globe"></i>
+          </div>
+          <h4>{{ t('direitosHumanos.commitments.community.title') }}</h4>
+          <p>{{ t('direitosHumanos.commitments.community.description') }}</p>
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal direction="bottom" :delay="600">
+        <div class="commitment-item">
+          <div class="commitment-circle">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <h4>{{ t('direitosHumanos.commitments.education.title') }}</h4>
+          <p>{{ t('direitosHumanos.commitments.education.description') }}</p>
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal direction="bottom" :delay="700">
+        <div class="commitment-item">
+          <div class="commitment-circle">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <h4>{{ t('direitosHumanos.commitments.environment.title') }}</h4>
+          <p>{{ t('direitosHumanos.commitments.environment.description') }}</p>
+        </div>
+      </ScrollReveal>
+    </div>
+  </div>
+</section>
 
     <!-- Seção de Ações e Políticas -->
     <section class="actions-section">
@@ -317,7 +349,7 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('@/assets/logo-uni.jpeg');
+  background-image: url('@/assets/logo-uni2.png');
   background-size: 70%;
   background-position: center 40%;
   background-repeat: no-repeat;

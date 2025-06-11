@@ -142,7 +142,7 @@ const translations = reactive({
       modal: {
         title: 'Acompanhar Relato',
         description: 'Digite o número do relato e o código de acesso para consultar o status da sua denúncia.',
-        reportNumber: 'Número do Relato',
+        reportNumber: 'Número do Protocolo',
         reportNumberPlaceholder: 'Ex: REL-2024-001',
         accessCode: 'Código de Acesso',
         accessCodePlaceholder: 'Digite seu código de acesso',
@@ -153,6 +153,7 @@ const translations = reactive({
         result: {
           title: 'Status do Relato',
           protocol: 'Protocolo',
+          code: 'Código',
           date: 'Data do Relato',
           status: 'Status',
           statusTypes: {
@@ -312,7 +313,7 @@ const translations = reactive({
       modal: {
         title: 'Track Report',
         description: 'Enter the report number and access code to check the status of your complaint.',
-        reportNumber: 'Report Number',
+        reportNumber: 'Protocol Number',
         reportNumberPlaceholder: 'Ex: REL-2024-001',
         accessCode: 'Access Code',
         accessCodePlaceholder: 'Enter your access code',
@@ -323,6 +324,7 @@ const translations = reactive({
         result: {
           title: 'Report Status',
           protocol: 'Protocol',
+          code: 'Code',
           date: 'Report Date',
           status: 'Status',
           statusTypes: {
@@ -482,7 +484,7 @@ const translations = reactive({
       modal: {
         title: 'Acompañar Reporte',
         description: 'Digite el número del reporte y el código de acceso para consultar el estado de su denuncia.',
-        reportNumber: 'Número del Reporte',
+        reportNumber: 'Número del Protocolo',
         reportNumberPlaceholder: 'Ej: REL-2024-001',
         accessCode: 'Código de Acceso',
         accessCodePlaceholder: 'Digite su código de acceso',
@@ -493,6 +495,7 @@ const translations = reactive({
         result: {
           title: 'Estado del Reporte',
           protocol: 'Protocolo',
+          code: 'Código',
           date: 'Fecha del Reporte',
           status: 'Estado',
           statusTypes: {

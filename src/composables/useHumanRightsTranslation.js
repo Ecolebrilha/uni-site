@@ -31,6 +31,10 @@ const translations = reactive({
         justice: {
           title: 'Justiça e Equidade',
           description: 'Promovemos práticas justas e equitativas em todas as nossas operações, garantindo que todos tenham acesso igual a oportunidades e recursos.'
+        },
+        solidarity: {
+          title: 'Solidariedade e Cooperação',
+          description: 'Fomentamos a solidariedade e cooperação entre todos os colaboradores, parceiros e comunidades, construindo relações baseadas na confiança mútua e apoio.'
         }
       },
       commitmentsTitle: 'Nossos Compromissos em Ação',
@@ -50,6 +54,14 @@ const translations = reactive({
         community: {
           title: 'Impacto Comunitário',
           description: 'Contribuímos positivamente para as comunidades onde operamos, respeitando os direitos locais e promovendo o desenvolvimento sustentável.'
+        },
+        education: {
+          title: 'Educação e Capacitação',
+          description: 'Investimos na educação e capacitação contínua de nossos colaboradores sobre direitos humanos, promovendo uma cultura de respeito e consciência social.'
+        },
+        environment: {
+          title: 'Responsabilidade Ambiental',
+          description: 'Reconhecemos o direito a um meio ambiente saudável, implementando práticas sustentáveis que protegem o planeta para as futuras gerações.'
         }
       },
       actionsTitle: 'Políticas e Ações Concretas',
@@ -116,6 +128,10 @@ const translations = reactive({
         justice: {
           title: 'Justice and Equity',
           description: 'We promote fair and equitable practices in all our operations, ensuring that everyone has equal access to opportunities and resources.'
+        },
+        solidarity: {
+          title: 'Solidarity and Cooperation',
+          description: 'We foster solidarity and cooperation among all employees, partners and communities, building relationships based on mutual trust and support.'
         }
       },
       commitmentsTitle: 'Our Commitments in Action',
@@ -135,6 +151,14 @@ const translations = reactive({
         community: {
           title: 'Community Impact',
           description: 'We contribute positively to the communities where we operate, respecting local rights and promoting sustainable development.'
+        },
+        education: {
+          title: 'Education and Training',
+          description: 'We invest in continuous education and training of our employees on human rights, promoting a culture of respect and social awareness.'
+        },
+        environment: {
+          title: 'Environmental Responsibility',
+          description: 'We recognize the right to a healthy environment, implementing sustainable practices that protect the planet for future generations.'
         }
       },
       actionsTitle: 'Concrete Policies and Actions',
@@ -201,6 +225,10 @@ const translations = reactive({
         justice: {
           title: 'Justicia y Equidad',
           description: 'Promovemos prácticas justas y equitativas en todas nuestras operaciones, garantizando que todos tengan acceso igual a oportunidades y recursos.'
+        },
+        solidarity: {
+          title: 'Solidaridad y Cooperación',
+          description: 'Fomentamos la solidaridad y cooperación entre todos los empleados, socios y comunidades, construyendo relaciones basadas en la confianza mutua y el apoyo.'
         }
       },
       commitmentsTitle: 'Nuestros Compromisos en Acción',
@@ -220,6 +248,14 @@ const translations = reactive({
         community: {
           title: 'Impacto Comunitario',
           description: 'Contribuimos positivamente a las comunidades donde operamos, respetando los derechos locales y promoviendo el desarrollo sostenible.'
+        },
+        education: {
+          title: 'Educación y Capacitación',
+          description: 'Invertimos en la educación y capacitación continua de nuestros empleados sobre derechos humanos, promoviendo una cultura de respeto y conciencia social.'
+        },
+        environment: {
+          title: 'Responsabilidad Ambiental',
+          description: 'Reconocemos el derecho a un medio ambiente saludable, implementando prácticas sostenibles que protegen el planeta para las futuras generaciones.'
         }
       },
       actionsTitle: 'Políticas y Acciones Concretas',

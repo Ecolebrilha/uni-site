@@ -347,8 +347,8 @@
                                 <span class="value">{{ trackingResult.protocol }}</span>
                             </div>
                             <div class="info-row">
-                                <span class="label">{{ t('confidential.modal.result.protocol') }}:</span>
-                                <span class="value">{{ trackingResult.protocol }}</span>
+                                <span class="label">{{ t('confidential.modal.result.code') }}:</span>
+                                <span class="value">{{ trackingResult.code }}</span>
                             </div>
                             <div class="info-row">
                                 <span class="label">{{ t('confidential.modal.result.date') }}:</span>
@@ -434,6 +434,7 @@ export default {
                     if (this.tracking.reportNumber.length >= 8 && this.tracking.accessCode.length >= 6) {
                         this.trackingResult = {
                             protocol: this.tracking.reportNumber,
+                            code: this.tracking.accessCode,
                             date: new Date().toLocaleDateString(),
                             status: 'in-progress',
                             statusClass: 'in-progress'
