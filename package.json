@@ -3,12 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "deploy": "npm run build && gh-pages -d dist",
-    "lint": "vue-cli-service lint",
-    "netlify:dev": "netlify dev",
-    "netlify:build": "npm run build"
+    "build": "vite build",
+    "vercel-build": "npm run build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",

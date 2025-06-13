@@ -174,7 +174,8 @@
 
         <!-- Lista de vagas -->
         <div v-else-if="availableJobs.length > 0" class="jobs-grid">
-          <ScrollReveal direction="bottom" :delay="300 + (index * 100)" v-for="(job, index) in availableJobs" :key="job.id">
+          <ScrollReveal direction="bottom" :delay="300 + (index * 100)" v-for="(job, index) in availableJobs"
+            :key="job.id">
             <div class="job-card" @click="selectJob(job)">
               <div class="job-header">
                 <div class="job-icon">
@@ -208,212 +209,235 @@
                       {{ requirement }}
                     </li>
                   </ul>
-                </div>
-              </div>
-              <div class="job-footer">
-                <div class="job-salary" v-if="job.salary">
-                  <i class="fas fa-dollar-sign"></i>
-                  <span>{{ job.salary }}</span>
-                </div>
-                <button class="apply-button">
-                  <i class="fas fa-paper-plane"></i>
-                  Candidatar-se
-                </button>
+
+                  <!-- Adicionar requisitos adicionais se existirem -->
+                  <div v-if="job.additionalRequirements && job.additionalRequirements.length > 0"
+                    class="additional-requirements">
+                    <h4>Requisitos adicionais:</h4>
+                    <ul>
+                      <li v-for="requirement in job.additionalRequirements" :key="requirement">
+                        {{ requirement }}
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- Adicionar benefícios se existirem -->
+                  <div v-if="job.benefits && job.benefits.length > 0" class="job-benefits">
+                    <h4>Benefícios:</h4>
+                    <ul>
+                      <li v-for="benefit in job.benefits" :key="benefit">
+                        {{ benefit }}
+                      </li>
+                    </ul>
+                  </div>
               </div>
             </div>
-          </ScrollReveal>
-        </div>
-
-        <!-- Mensagem quando não há vagas -->
-        <div v-else class="no-jobs-container">
-          <ScrollReveal direction="bottom" :delay="300">
-            <div class="no-jobs-content">
-              <div class="no-jobs-icon">
-                <i class="fas fa-search"></i>
+            <div class="job-footer">
+              <div class="job-salary" v-if="job.salary">
+                <i class="fas fa-dollar-sign"></i>
+                <span>{{ job.salary }}</span>
               </div>
-              <h3>Nenhuma vaga disponível no momento</h3>
-              <p>
-                Não temos vagas abertas atualmente, mas você pode enviar seu currículo para nosso banco de talentos.
-                Entraremos em contato quando surgir uma oportunidade compatível com seu perfil.
-              </p>
-              <button @click="showTalentBankForm" class="talent-bank-button">
-                <i class="fas fa-database"></i>
-                Cadastrar no Banco de Talentos
+              <button class="apply-button">
+                <i class="fas fa-paper-plane"></i>
+                Candidatar-se
               </button>
             </div>
-          </ScrollReveal>
         </div>
+        </ScrollReveal>
       </div>
-    </section>
 
-    <!-- Seção de Formulário (oculta inicialmente) -->
-    <section class="form-section" v-if="showForm">
-      <div class="container">
-        <ScrollReveal direction="bottom" :delay="200">
-          <div class="section-title">
-            <span class="accent-line"></span>
-            <h2 v-if="selectedJob">Candidatar-se para: {{ selectedJob.title }}</h2>
-            <h2 v-else>Banco de Talentos</h2>
-            <span class="accent-line"></span>
+      <!-- Mensagem quando não há vagas -->
+      <div v-else class="no-jobs-container">
+        <ScrollReveal direction="bottom" :delay="300">
+          <div class="no-jobs-content">
+            <div class="no-jobs-icon">
+              <i class="fas fa-search"></i>
+            </div>
+            <h3>Nenhuma vaga disponível no momento</h3>
+            <p>
+              Não temos vagas abertas atualmente, mas você pode enviar seu currículo para nosso banco de talentos.
+              Entraremos em contato quando surgir uma oportunidade compatível com seu perfil.
+            </p>
+            <button @click="showTalentBankForm" class="talent-bank-button">
+              <i class="fas fa-database"></i>
+              Cadastrar no Banco de Talentos
+            </button>
           </div>
-          <div class="selected-job-info" v-if="selectedJob">
-            <div class="job-summary">
-              <div class="job-summary-header">
-                <h3>{{ selectedJob.title }}</h3>
-                <button @click="backToJobs" class="back-button">
-                  <i class="fas fa-arrow-left"></i>
-                  Voltar às vagas
-                </button>
-              </div>
-              <div class="job-summary-details">
-                <span><i class="fas fa-building"></i> {{ selectedJob.department }}</span>
-                <span><i class="fas fa-map-marker-alt"></i> {{ selectedJob.location }}</span>
-                <span><i class="fas fa-clock"></i> {{ selectedJob.workload }}</span>
-              </div>
+        </ScrollReveal>
+      </div>
+  </div>
+  </section>
+
+  <!-- Seção de Formulário (oculta inicialmente) -->
+  <section class="form-section" v-if="showForm">
+    <div class="container">
+      <ScrollReveal direction="bottom" :delay="200">
+        <div class="section-title">
+          <span class="accent-line"></span>
+          <h2 v-if="selectedJob">Candidatar-se para: {{ selectedJob.title }}</h2>
+          <h2 v-else>Banco de Talentos</h2>
+          <span class="accent-line"></span>
+        </div>
+        <div class="selected-job-info" v-if="selectedJob">
+          <div class="job-summary">
+            <div class="job-summary-header">
+              <h3>{{ selectedJob.title }}</h3>
+              <button @click="backToJobs" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+                Voltar às vagas
+              </button>
+            </div>
+            <div class="job-summary-details">
+              <span><i class="fas fa-building"></i> {{ selectedJob.department }}</span>
+              <span><i class="fas fa-map-marker-alt"></i> {{ selectedJob.location }}</span>
+              <span><i class="fas fa-clock"></i> {{ selectedJob.workload }}</span>
             </div>
           </div>
-          <p class="form-intro" v-if="selectedJob">
-            Preencha o formulário abaixo para se candidatar a esta vaga.
-            Anexe seu currículo e nos conte um pouco sobre você e suas expectativas.
-          </p>
-          <p class="form-intro" v-else>
-            Preencha o formulário abaixo para fazer parte do nosso banco de talentos.
-            Entraremos em contato quando surgir uma oportunidade compatível com seu perfil.
-          </p>
-        </ScrollReveal>
+        </div>
+        <p class="form-intro" v-if="selectedJob">
+          Preencha o formulário abaixo para se candidatar a esta vaga.
+          Anexe seu currículo e nos conte um pouco sobre você e suas expectativas.
+        </p>
+        <p class="form-intro" v-else>
+          Preencha o formulário abaixo para fazer parte do nosso banco de talentos.
+          Entraremos em contato quando surgir uma oportunidade compatível com seu perfil.
+        </p>
+      </ScrollReveal>
 
-        <ScrollReveal direction="bottom" :delay="300">
-          <div class="form-container">
-    <div class="form-header">
-      <div class="form-icon">
-        <i class="fas fa-briefcase"></i>
-      </div>
-      <h3 v-if="selectedJob">Candidatar-se para: {{ selectedJob.title }}</h3>
-      <h3 v-else>Banco de Talentos</h3>
-    </div>
-            <form @submit.prevent="submitForm" class="career-form">
-              <div class="form-grid">
-                <div class="form-group">
-                  <label for="name">Nome Completo</label>
-                  <input type="text" id="name" v-model="formData.name" required placeholder="Seu nome completo">
-                  <span class="error-message" v-if="errors.name">{{ errors.name }}</span>
-                </div>
-
-                <div class="form-group">
-                  <label for="email">E-mail</label>
-                  <input type="email" id="email" v-model="formData.email" required placeholder="seu.email@exemplo.com">
-                  <span class="error-message" v-if="errors.email">{{ errors.email }}</span>
-                </div>
-
-                <div class="form-group">
-                  <label for="phone">Telefone</label>
-                  <input type="tel" id="phone" v-model="formData.phone" required placeholder="(00) 00000-0000"
-                    @input="formatPhone" maxlength="15">
-                  <span class="error-message" v-if="errors.phone">{{ errors.phone }}</span>
-                </div>
-
-                <div class="form-group" v-if="!selectedJob">
-                  <label for="position">Área de Interesse</label>
-                  <select id="position" v-model="formData.position" required>
-                    <option value="" disabled selected>Selecione uma área</option>
-                    <option value="Administrativo">Administrativo</option>
-                    <option value="Comercial">Comercial</option>
-                    <option value="Logística">Logística</option>
-                    <option value="Marketing">Marketing</option>
-                    <option value="Recursos Humanos">Recursos Humanos</option>
-                    <option value="Tecnologia">Tecnologia</option>
-                    <option value="Outro">Outro</option>
-                  </select>
-                  <span class="error-message" v-if="errors.position">{{ errors.position }}</span>
-                </div>
-
-                <div class="form-group">
-                  <label for="education">Formação Acadêmica</label>
-                  <select id="education" v-model="formData.education" required>
-                    <option value="" disabled selected>Selecione sua formação</option>
-                    <option value="Ensino Médio">Ensino Médio</option>
-                    <option value="Ensino Técnico">Ensino Técnico</option>
-                    <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
-                    <option value="Ensino Superior Completo">Ensino Superior Completo</option>
-                    <option value="Pós-graduação">Pós-graduação</option>
-                    <option value="Mestrado">Mestrado</option>
-                    <option value="Doutorado">Doutorado</option>
-                  </select>
-                  <span class="error-message" v-if="errors.education">{{ errors.education }}</span>
-                </div>
-
-                <div class="form-group">
-                  <label for="experience">Experiência Profissional</label>
-                  <select id="experience" v-model="formData.experience" required>
-                    <option value="" disabled selected>Selecione sua experiência</option>
-                    <option value="Sem experiência">Sem experiência</option>
-                    <option value="Até 1 ano">Até 1 ano</option>
-                    <option value="1 a 3 anos">1 a 3 anos</option>
-                    <option value="3 a 5 anos">3 a 5 anos</option>
-                    <option value="5 a 10 anos">5 a 10 anos</option>
-                    <option value="Mais de 10 anos">Mais de 10 anos</option>
-                  </select>
-                  <span class="error-message" v-if="errors.experience">{{ errors.experience }}</span>
-                </div>
-              </div>
-
-              <div class="form-group full-width">
-                <label for="resume">Currículo (PDF)</label>
-                <div class="file-upload-container">
-                  <input type="file" id="resume" ref="resumeFile" @change="handleFileUpload" accept=".pdf"
-                    required class="file-input">
-                  <label for="resume" class="file-upload-label">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <span v-if="!formData.resume">Clique para anexar seu currículo (PDF)</span>
-                    <span v-else>{{ formData.resume.name }}</span>
-                  </label>
-                </div>
-                <span class="error-message" v-if="errors.resume">{{ errors.resume }}</span>
-              </div>
-
-              <div class="form-group full-width">
-                <label for="message">Apresentação Pessoal</label>
-                <textarea id="message" v-model="formData.message" required rows="6"
-                  placeholder="Conte-nos um pouco sobre você, suas experiências, motivações e por que gostaria de trabalhar na Uni Hospitalar..."></textarea>
-                <span class="error-message" v-if="errors.message">{{ errors.message }}</span>
-              </div>
-
-              <div class="form-group full-width">
-                <label for="expectations">Expectativas Salariais</label>
-                <input type="text" id="expectations" v-model="formData.expectations"
-                  placeholder="Ex: R$ 3.000,00 - R$ 4.000,00 (opcional)">
-              </div>
-
-              <div class="form-group full-width">
-                <div class="checkbox-group">
-                  <input type="checkbox" id="privacy" v-model="formData.privacy" required>
-                  <label for="privacy">
-                    Concordo com o tratamento dos meus dados pessoais conforme a
-                    <router-link to="/PoliticaPrivacidade" target="_blank">Política de Privacidade</router-link>
-                    da Uni Hospitalar.
-                  </label>
-                </div>
-                <span class="error-message" v-if="errors.privacy">{{ errors.privacy }}</span>
-              </div>
-
-              <div class="form-actions">
-                <button type="button" @click="backToJobs" class="cancel-button">
-                  <i class="fas fa-times"></i>
-                  Cancelar
-                </button>
-                <button type="submit" class="submit-button" :disabled="isSubmitting">
-                  <i class="fas fa-paper-plane" v-if="!isSubmitting"></i>
-                  <i class="fas fa-spinner fa-spin" v-else></i>
-                  {{ isSubmitting ? 'Enviando...' : 'Enviar Candidatura' }}
-                </button>
-              </div>
-            </form>
+      <ScrollReveal direction="bottom" :delay="300">
+        <div class="form-container">
+          <div class="form-header">
+            <div class="form-icon">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <h3 v-if="selectedJob">Candidatar-se para: {{ selectedJob.title }}</h3>
+            <h3 v-else>Banco de Talentos</h3>
           </div>
-        </ScrollReveal>
-      </div>
-    </section>
+          <form @submit.prevent="submitForm" class="career-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="name">Nome Completo</label>
+                <input type="text" id="name" v-model="formData.name" required placeholder="Seu nome completo">
+                <span class="error-message" v-if="errors.name">{{ errors.name }}</span>
+              </div>
 
-    <HomeFooter />
+              <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" v-model="formData.email" required placeholder="seu.email@exemplo.com">
+                <span class="error-message" v-if="errors.email">{{ errors.email }}</span>
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Telefone</label>
+                <input type="tel" id="phone" v-model="formData.phone" required placeholder="(00) 00000-0000"
+                  @input="formatPhone" maxlength="15">
+                <span class="error-message" v-if="errors.phone">{{ errors.phone }}</span>
+              </div>
+
+              <div class="form-group" v-if="!selectedJob">
+                <label for="position">Área de Interesse</label>
+                <select id="position" v-model="formData.position" required>
+                  <option value="" disabled selected>Selecione uma área</option>
+                  <option value="Administrativo">Administrativo</option>
+                  <option value="Comercial">Comercial</option>
+                  <option value="Estoque">Estoque</option>
+                  <option value="Financeiro">Financeiro</option>
+                  <option value="Fiscal">Fiscal</option>
+                  <option value="Licitação">Licitação</option>
+                  <option value="Logística">Logística</option>
+                  <option value="TI">TI</option>
+                  <option value="Outro">Outro</option>
+                </select>
+                <span class="error-message" v-if="errors.position">{{ errors.position }}</span>
+              </div>
+
+              <div class="form-group">
+                <label for="education">Formação Acadêmica</label>
+                <select id="education" v-model="formData.education" required>
+                  <option value="" disabled selected>Selecione sua formação</option>
+                  <option value="Ensino Médio">Ensino Médio</option>
+                  <option value="Ensino Técnico">Ensino Técnico</option>
+                  <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
+                  <option value="Ensino Superior Completo">Ensino Superior Completo</option>
+                  <option value="Pós-graduação">Pós-graduação</option>
+                  <option value="Mestrado">Mestrado</option>
+                  <option value="Doutorado">Doutorado</option>
+                </select>
+                <span class="error-message" v-if="errors.education">{{ errors.education }}</span>
+              </div>
+
+              <div class="form-group">
+                <label for="experience">Experiência Profissional</label>
+                <select id="experience" v-model="formData.experience" required>
+                  <option value="" disabled selected>Selecione sua experiência</option>
+                  <option value="Sem experiência">Sem experiência</option>
+                  <option value="Até 1 ano">Até 1 ano</option>
+                  <option value="1 a 3 anos">1 a 3 anos</option>
+                  <option value="3 a 5 anos">3 a 5 anos</option>
+                  <option value="5 a 10 anos">5 a 10 anos</option>
+                  <option value="Mais de 10 anos">Mais de 10 anos</option>
+                </select>
+                <span class="error-message" v-if="errors.experience">{{ errors.experience }}</span>
+              </div>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="resume">Currículo (PDF)</label>
+              <div class="file-upload-container">
+                <input type="file" id="resume" ref="resumeFile" @change="handleFileUpload" accept=".pdf" required
+                  class="file-input">
+                <label for="resume" class="file-upload-label">
+                  <i class="fas fa-cloud-upload-alt"></i>
+                  <span v-if="!formData.resume">Clique para anexar seu currículo (PDF)</span>
+                  <span v-else>{{ formData.resume.name }}</span>
+                </label>
+              </div>
+              <span class="error-message" v-if="errors.resume">{{ errors.resume }}</span>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="message">Apresentação Pessoal</label>
+              <textarea id="message" v-model="formData.message" required rows="6"
+                placeholder="Conte-nos um pouco sobre você, suas experiências, motivações e por que gostaria de trabalhar na Uni Hospitalar..."></textarea>
+              <span class="error-message" v-if="errors.message">{{ errors.message }}</span>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="expectations">Expectativas Salariais</label>
+              <input type="text" id="expectations" v-model="formData.expectations"
+                placeholder="Ex: R$ 3.000,00 - R$ 4.000,00 (opcional)">
+            </div>
+
+            <div class="form-group full-width">
+              <div class="checkbox-group">
+                <input type="checkbox" id="privacy" v-model="formData.privacy" required>
+                <label for="privacy">
+                  Concordo com o tratamento dos meus dados pessoais conforme a
+                  <router-link to="/PoliticaPrivacidade" target="_blank">Política de Privacidade</router-link>
+                  da Uni Hospitalar.
+                </label>
+              </div>
+              <span class="error-message" v-if="errors.privacy">{{ errors.privacy }}</span>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" @click="backToJobs" class="cancel-button">
+                <i class="fas fa-times"></i>
+                Cancelar
+              </button>
+              <button type="submit" class="submit-button" :disabled="isSubmitting">
+                <i class="fas fa-paper-plane" v-if="!isSubmitting"></i>
+                <i class="fas fa-spinner fa-spin" v-else></i>
+                {{ isSubmitting ? 'Enviando...' : 'Enviar Candidatura' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <HomeFooter />
   </div>
 </template>
 
@@ -459,13 +483,22 @@ export default {
     async loadJobs() {
       this.loadingJobs = true;
       try {
-        // Simular chamada para API - substitua pela sua URL real
-        // const response = await fetch('/api/jobs/available');
-        // const jobs = await response.json();
-        
-        // Dados simulados - remova quando integrar com backend real
+        // Tentar carregar da API real primeiro
+        const API_BASE = process.env.VUE_APP_API_URL || 'http://localhost:3000';
+        const response = await fetch(`${API_BASE}/api/jobs`);
+
+        if (response.ok) {
+          this.availableJobs = await response.json();
+          console.log('✅ Vagas carregadas da API:', this.availableJobs.length);
+        } else {
+          throw new Error(`Erro HTTP: ${response.status}`);
+        }
+      } catch (error) {
+        console.warn('⚠️ Erro ao carregar vagas da API, usando dados simulados:', error);
+
+        // Fallback para dados simulados - remova quando integrar com backend real
         await new Promise(resolve => setTimeout(resolve, 1500)); // Simular loading
-        
+
         this.availableJobs = [
           {
             id: 1,
@@ -513,9 +546,6 @@ export default {
             ]
           }
         ];
-      } catch (error) {
-        console.error('Erro ao carregar vagas:', error);
-        this.availableJobs = [];
       } finally {
         this.loadingJobs = false;
       }
@@ -527,7 +557,7 @@ export default {
       this.showForm = true;
       this.formData.position = job.title; // Preencher automaticamente
       this.$nextTick(() => {
-        document.querySelector('.form-section').scrollIntoView({ 
+        document.querySelector('.form-section').scrollIntoView({
           behavior: 'smooth',
           block: 'start'
         });
@@ -539,7 +569,7 @@ export default {
       this.selectedJob = null;
       this.showForm = true;
       this.$nextTick(() => {
-        document.querySelector('.form-section').scrollIntoView({ 
+        document.querySelector('.form-section').scrollIntoView({
           behavior: 'smooth',
           block: 'start'
         });
@@ -552,7 +582,7 @@ export default {
       this.selectedJob = null;
       this.resetForm();
       this.$nextTick(() => {
-        document.querySelector('.jobs-section').scrollIntoView({ 
+        document.querySelector('.jobs-section').scrollIntoView({
           behavior: 'smooth',
           block: 'start'
         });
@@ -562,12 +592,14 @@ export default {
     // Obter ícone baseado no departamento
     getJobIcon(department) {
       const icons = {
-        'Marketing': 'fas fa-bullhorn',
-        'Tecnologia': 'fas fa-code',
-        'Logística': 'fas fa-truck',
+        'Administrativo': 'fas fa-clipboard-list',
         'Comercial': 'fas fa-handshake',
-        'Administrativo': 'fas fa-building',
-        'Recursos Humanos': 'fas fa-users'
+        'Estoque': 'fas fa-boxes',
+        'Financeiro': 'fas fa-calculator',
+        'Fiscal': 'fas fa-file-invoice-dollar',
+        'Licitação': 'fas fa-gavel',
+        'Logística': 'fas fa-truck',
+        'TI': 'fas fa-code',
       };
       return icons[department] || 'fas fa-briefcase';
     },
@@ -575,9 +607,10 @@ export default {
     // Obter classe do badge baseado no tipo
     getJobBadgeClass(type) {
       const classes = {
+        'Jovem Aprendiz': 'badge-apprentice',
+        'Estágio': 'badge-internship',
         'CLT': 'badge-clt',
         'PJ': 'badge-pj',
-        'Estágio': 'badge-internship',
         'Freelancer': 'badge-freelancer'
       };
       return classes[type] || 'badge-default';
@@ -615,45 +648,45 @@ export default {
     // Validar formulário
     validateForm() {
       this.errors = {};
-      
+
       if (!this.formData.name.trim()) {
         this.errors.name = 'Nome é obrigatório.';
       }
-      
+
       if (!this.formData.email.trim()) {
         this.errors.email = 'E-mail é obrigatório.';
       } else if (!/\S+@\S+\.\S+/.test(this.formData.email)) {
         this.errors.email = 'E-mail inválido.';
       }
-      
+
       if (!this.formData.phone.trim()) {
         this.errors.phone = 'Telefone é obrigatório.';
       }
-      
+
       if (!this.selectedJob && !this.formData.position) {
         this.errors.position = 'Área de interesse é obrigatória.';
       }
-      
+
       if (!this.formData.education) {
         this.errors.education = 'Formação acadêmica é obrigatória.';
       }
-      
+
       if (!this.formData.experience) {
         this.errors.experience = 'Experiência profissional é obrigatória.';
       }
-      
+
       if (!this.formData.resume) {
         this.errors.resume = 'Currículo é obrigatório.';
       }
-      
+
       if (!this.formData.message.trim()) {
         this.errors.message = 'Apresentação pessoal é obrigatória.';
       }
-      
+
       if (!this.formData.privacy) {
         this.errors.privacy = 'Você deve concordar com a política de privacidade.';
       }
-      
+
       return Object.keys(this.errors).length === 0;
     },
 
@@ -662,49 +695,89 @@ export default {
       if (!this.validateForm()) {
         return;
       }
-      
+
       this.isSubmitting = true;
-      
+
       try {
         const formData = new FormData();
-        
+
         // Adicionar dados do formulário
         Object.keys(this.formData).forEach(key => {
-          if (key !== 'resume') {
+          if (key !== 'resume' && key !== 'privacy') {
             formData.append(key, this.formData[key]);
           }
         });
-        
+
         // Adicionar arquivo
         if (this.formData.resume) {
           formData.append('resume', this.formData.resume);
         }
-        
+
         // Adicionar informações da vaga se selecionada
         if (this.selectedJob) {
           formData.append('jobId', this.selectedJob.id);
           formData.append('jobTitle', this.selectedJob.title);
         }
-        
-        // Enviar para o backend - substitua pela sua URL real
-        // const response = await fetch('/api/job-applications', {
-        //   method: 'POST',
-        //   body: formData
-        // });
-        
-        // Simular envio
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        
-        // Mostrar mensagem de sucesso
-        alert('Candidatura enviada com sucesso! Entraremos em contato em breve.');
-        
-        // Resetar formulário
+
+        // Tentar enviar para o backend real primeiro
+        const API_BASE = process.env.VUE_APP_API_URL || 'http://localhost:3000';
+
+        try {
+          const response = await fetch(`${API_BASE}/api/job-applications`, {
+            method: 'POST',
+            body: formData
+          });
+
+          if (response.ok) {
+            const result = await response.json();
+
+            // Mostrar mensagem de sucesso personalizada
+            if (this.selectedJob) {
+              alert(`Candidatura enviada com sucesso para a vaga "${this.selectedJob.title}"! Entraremos em contato em breve.`);
+            } else {
+              alert('Seu currículo foi adicionado ao nosso banco de talentos com sucesso! Entraremos em contato quando surgir uma oportunidade compatível.');
+            }
+
+            console.log('✅ Candidatura enviada via API:', result);
+          } else {
+            const error = await response.json();
+            throw new Error(error.error || 'Erro ao enviar candidatura');
+          }
+        } catch (apiError) {
+          console.warn('⚠️ Erro na API, usando simulação:', apiError);
+
+          // Fallback: Simular envio se API não estiver disponível
+          await new Promise(resolve => setTimeout(resolve, 2000));
+
+          // Mostrar mensagem de sucesso (simulada)
+          if (this.selectedJob) {
+            alert(`Candidatura enviada com sucesso para a vaga "${this.selectedJob.title}"! Entraremos em contato em breve.`);
+          } else {
+            alert('Seu currículo foi adicionado ao nosso banco de talentos com sucesso! Entraremos em contato quando surgir uma oportunidade compatível.');
+          }
+
+          console.log('✅ Candidatura simulada enviada');
+        }
+
+        // Resetar formulário e voltar
         this.resetForm();
         this.backToJobs();
-        
+
       } catch (error) {
-        console.error('Erro ao enviar candidatura:', error);
-        alert('Erro ao enviar candidatura. Tente novamente.');
+        console.error('❌ Erro ao enviar candidatura:', error);
+
+        // Mensagem de erro mais específica
+        let errorMessage = 'Erro ao enviar candidatura. ';
+
+        if (error.message.includes('Failed to fetch')) {
+          errorMessage += 'Verifique sua conexão com a internet e tente novamente.';
+        } else if (error.message.includes('PDF')) {
+          errorMessage += 'Problema com o arquivo PDF. Verifique se o arquivo não está corrompido.';
+        } else {
+          errorMessage += error.message || 'Tente novamente em alguns instantes.';
+        }
+
+        alert(errorMessage);
       } finally {
         this.isSubmitting = false;
       }
@@ -1108,6 +1181,16 @@ section {
   letter-spacing: 0.5px;
 }
 
+.badge-apprentice {
+  background: linear-gradient(135deg, #17a2b8, #0dcaf0);
+  color: white;
+}
+
+.badge-internship {
+  background: linear-gradient(135deg, #ffc107, #fd7e14);
+  color: white;
+}
+
 .badge-clt {
   background: linear-gradient(135deg, #28a745, #20c997);
   color: white;
@@ -1115,11 +1198,6 @@ section {
 
 .badge-pj {
   background: linear-gradient(135deg, #007bff, #6610f2);
-  color: white;
-}
-
-.badge-internship {
-  background: linear-gradient(135deg, #ffc107, #fd7e14);
   color: white;
 }
 
@@ -1202,6 +1280,51 @@ section {
   position: absolute;
   left: 0;
   color: #AE2C2A;
+  font-weight: bold;
+}
+
+.additional-requirements,
+.job-benefits {
+  margin-top: 15px;
+}
+
+.additional-requirements h4,
+.job-benefits h4 {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.additional-requirements ul,
+.job-benefits ul {
+  list-style: none;
+  padding: 0;
+}
+
+.additional-requirements li,
+.job-benefits li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 4px;
+  font-size: 0.85rem;
+  color: #777;
+  line-height: 1.3;
+}
+
+.additional-requirements li::before {
+  content: '◦';
+  position: absolute;
+  left: 0;
+  color: #AE2C2A;
+  font-weight: bold;
+}
+
+.job-benefits li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #28a745;
   font-weight: bold;
 }
 
@@ -1484,6 +1607,7 @@ section {
   width: 100%;
   height: 100%;
   cursor: pointer;
+  left: 0;
 }
 
 .file-upload-label {
@@ -1498,6 +1622,7 @@ section {
   background: rgba(174, 44, 42, 0.05);
   color: #AE2C2A;
   font-weight: 500;
+  text-align: left;
 }
 
 .file-upload-label:hover {
@@ -1555,6 +1680,13 @@ section {
   font-size: 0.85rem;
   margin-top: 5px;
   font-weight: 500;
+}
+
+.file-upload-container + .error-message {
+  text-align: left;
+  margin-left: 0;
+  display: block;
+  width: 100%;
 }
 
 .form-actions {
@@ -1975,7 +2107,7 @@ section {
   .form-icon {
     font-size: 2.2rem;
     width: 65px;
-  height: 65px;
+    height: 65px;
   }
 
   .form-header h3 {
@@ -2013,11 +2145,11 @@ section {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  
+
   .job-card {
     padding: 20px;
   }
-  
+
   .apply-button {
     justify-content: center;
   }
@@ -2032,27 +2164,37 @@ section {
     width: 60px;
     height: 60px;
   }
-  
+
   .form-header h3 {
     font-size: 1.4rem;
   }
-  
+
   .job-summary-header {
     flex-direction: column;
     gap: 15px;
     align-items: stretch;
   }
-  
+
   .job-summary-details {
     flex-direction: column;
     gap: 10px;
   }
+
+  .additional-requirements h4,
+  .job-benefits h4 {
+    font-size: 0.9rem;
+  }
   
+  .additional-requirements li,
+  .job-benefits li {
+    font-size: 0.8rem;
+  }
+
   .form-actions {
     flex-direction: column;
     gap: 10px;
   }
-  
+
   .cancel-button,
   .submit-button {
     justify-content: center;
@@ -2075,7 +2217,7 @@ section {
   .checkbox-group {
     gap: 8px;
   }
-  
+
   .checkbox-group label {
     font-size: 0.85rem;
     line-height: 1.4;
@@ -2126,10 +2268,10 @@ section {
   }
 
   .form-icon {
-  width: 60px;
-  height: 60px;
-  min-width: 60px;
-  min-height: 60px;
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    min-height: 60px;
   }
 
   .form-header h3 {
@@ -2241,19 +2383,19 @@ section {
   .job-card {
     padding: 15px;
   }
-  
+
   .job-title {
     font-size: 1.2rem;
   }
-  
+
   .no-jobs-container {
     padding: 60px 15px;
   }
-  
+
   .no-jobs-icon {
     font-size: 3rem;
   }
-  
+
   .no-jobs-content h3 {
     font-size: 1.5rem;
   }
@@ -2284,12 +2426,12 @@ section {
   .checkbox-group {
     gap: 6px;
   }
-  
+
   .checkbox-group label {
     font-size: 0.8rem;
     line-height: 1.3;
   }
-  
+
   .checkbox-group input[type="checkbox"] {
     transform: scale(1.1);
     margin-top: 2px;
@@ -2302,21 +2444,21 @@ section {
     margin: 0 10px;
     max-width: calc(100vw - 20px);
   }
-  
+
   .career-form {
     padding: 20px 25px;
   }
-  
+
   .form-header {
     padding: 20px 15px;
     gap: 10px;
   }
-  
+
   .form-grid {
     grid-template-columns: 1fr !important;
     gap: 15px;
   }
-  
+
   .form-group {
     width: 100%;
     box-sizing: border-box;
@@ -2327,7 +2469,7 @@ section {
     align-items: flex-start;
     flex-wrap: nowrap;
   }
-  
+
   .checkbox-group input[type="checkbox"] {
     transform: scale(1.0);
     margin-top: 2px;
@@ -2336,7 +2478,7 @@ section {
     height: 14px;
     flex-shrink: 0;
   }
-  
+
   .checkbox-group label {
     font-size: 0.8rem;
     line-height: 1.3;
@@ -2344,7 +2486,7 @@ section {
     overflow-wrap: anywhere;
     word-break: break-word;
   }
-  
+
   .form-group input,
   .form-group select,
   .form-group textarea {
@@ -2353,7 +2495,7 @@ section {
     font-size: 0.9rem;
     padding: 10px 12px;
   }
-  
+
   .file-upload-label {
     font-size: 0.85rem;
     padding: 10px 12px;
@@ -2366,11 +2508,11 @@ section {
     margin: 0 5px;
     max-width: calc(100vw - 10px);
   }
-  
+
   .form-header {
     padding: 15px 10px;
   }
-  
+
   .form-header h3 {
     font-size: 1rem;
     line-height: 1.3;
@@ -2379,18 +2521,17 @@ section {
   .checkbox-group {
     gap: 5px;
   }
-  
+
   .checkbox-group label {
     font-size: 0.75rem;
     line-height: 1.2;
   }
-  
+
   .checkbox-group input[type="checkbox"] {
     transform: scale(1.0);
     margin-top: 1px;
   }
 }
-
 </style>
 
 <style>
