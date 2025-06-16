@@ -301,6 +301,17 @@ export default {
     }
   },
   methods: {
+    getBrazilianTimeNative() {
+      return new Date().toLocaleString('pt-BR', {
+        timeZone: 'America/Sao_Paulo',
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+    },
     // Formatar CNPJ
     formatCNPJ(event) {
       let value = event.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
@@ -574,7 +585,7 @@ export default {
 • Telefone Fixo: ${this.formData.telefoneFixo || 'Não informado'}
 • Endereço: ${this.formData.endereco || 'Não informado'}
 
-📅 Data: ${getBrazilianTimeNative()}
+📅 Data: ${this.getBrazilianTimeNative()}
 🌐 Origem: Formulário "Seja Nosso Parceiro" - Site UniHospitalar
 ✅ AÇÃO REQUERIDA: Análise de Parceria (Responder em até 48h)`,
             _subject: `🤝 Nova Solicitação de Parceria - ${this.formData.nomeRazaoSocial}`
