@@ -144,7 +144,7 @@ export default {
 💬 MENSAGEM:
 ${this.formData.message}
 
-📅 Data: ${new Date().toLocaleString('pt-BR')}
+📅 Data: ${getBrazilianTimeNative()}
 🌐 Origem: Formulário de Contato - Site UniHospitalar
 
 📞 AÇÃO REQUERIDA: Responder Contato (Responder em até 24h)`,

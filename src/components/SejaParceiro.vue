@@ -574,7 +574,7 @@ export default {
 • Telefone Fixo: ${this.formData.telefoneFixo || 'Não informado'}
 • Endereço: ${this.formData.endereco || 'Não informado'}
 
-📅 Data: ${new Date().toLocaleString('pt-BR')}
+📅 Data: ${getBrazilianTimeNative()}
 🌐 Origem: Formulário "Seja Nosso Parceiro" - Site UniHospitalar
 ✅ AÇÃO REQUERIDA: Análise de Parceria (Responder em até 48h)`,
             _subject: `🤝 Nova Solicitação de Parceria - ${this.formData.nomeRazaoSocial}`
