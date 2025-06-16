@@ -73,6 +73,8 @@
 </template>
 
 <script>
+import API_CONFIG from '@/config/api.js';
+
 export default {
   name: 'ContatoFormulario',
   data() {
@@ -121,7 +123,7 @@ export default {
 
       try {
         // Usar Formspree
-        const response = await fetch('https://formspree.io/f/xpwdvzzv', {
+        const response = await fetch(`${API_CONFIG.BASE_URL}/send-email`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -146,6 +148,7 @@ ${this.formData.message}
 🌐 Origem: Formulário de Contato - Site UniHospitalar
 
 📞 AÇÃO REQUERIDA: Responder Contato (Responder em até 24h)`,
+            section: 'Contato - Geral', // ← ADICIONAR SEÇÃO
             _subject: `📧 Novo Contato - ${this.formData.name}`
           }),
         });

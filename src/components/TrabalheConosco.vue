@@ -445,6 +445,7 @@
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
 import ScrollReveal from '@/components/ScrollReveal.vue';
+import API_CONFIG from '@/config/api.js'; 
 
 export default {
   name: 'TrabalheConosco',
@@ -481,75 +482,51 @@ export default {
   methods: {
     // Carregar vagas do backend
     async loadJobs() {
-      this.loadingJobs = true;
-      try {
-        // Tentar carregar da API real primeiro
-        const API_BASE = process.env.VUE_APP_API_URL || 'http://localhost:3000';
-        const response = await fetch(`${API_BASE}/api/jobs`);
-
-        if (response.ok) {
-          this.availableJobs = await response.json();
-          console.log('✅ Vagas carregadas da API:', this.availableJobs.length);
-        } else {
-          throw new Error(`Erro HTTP: ${response.status}`);
-        }
-      } catch (error) {
-        console.warn('⚠️ Erro ao carregar vagas da API, usando dados simulados:', error);
-
-        // Fallback para dados simulados - remova quando integrar com backend real
-        await new Promise(resolve => setTimeout(resolve, 1500)); // Simular loading
-
-        this.availableJobs = [
-          {
-            id: 1,
-            title: 'Analista de Marketing Digital',
-            department: 'Marketing',
-            location: 'São Paulo - SP',
-            workload: '40h semanais',
-            type: 'CLT',
-            salary: 'R$ 4.000 - R$ 6.000',
-            shortDescription: 'Responsável por desenvolver e executar estratégias de marketing digital para aumentar a visibilidade da marca.',
-            mainRequirements: [
-              'Superior completo em Marketing, Publicidade ou áreas afins',
-              'Experiência com Google Ads e Facebook Ads',
-              'Conhecimento em SEO e Analytics'
-            ]
-          },
-          {
-            id: 2,
-            title: 'Desenvolvedor Full Stack',
-            department: 'Tecnologia',
-            location: 'Remoto',
-            workload: '40h semanais',
-            type: 'CLT',
-            salary: 'R$ 6.000 - R$ 10.000',
-            shortDescription: 'Desenvolvimento de aplicações web e mobile para soluções hospitalares.',
-            mainRequirements: [
-              'Superior em Ciência da Computação ou áreas afins',
-              'Experiência com Vue.js, Node.js e bancos de dados',
-              'Conhecimento em metodologias ágeis'
-            ]
-          },
-          {
-            id: 3,
-            title: 'Coordenador de Logística',
-            department: 'Logística',
-            location: 'São Paulo - SP',
-            workload: '44h semanais',
-            type: 'CLT',
-            salary: 'R$ 5.000 - R$ 7.500',
-            shortDescription: 'Coordenar operações logísticas e gestão de estoque de produtos hospitalares.',
-            mainRequirements: [
-              'Superior em Logística, Administração ou áreas afins',
-              'Experiência em gestão de equipes',
-              'Conhecimento em sistemas WMS/ERP'
-            ]
-          }
-        ];
-      } finally {
-        this.loadingJobs = false;
+  this.loadingJobs = true;
+  try {
+    console.log('🔍 Carregando vagas de:', `${API_CONFIG.BASE_URL}/api/jobs`);
+    
+    const response = await fetch(`${API_CONFIG.BASE_URL}/api/jobs`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       }
-    },
+    });
+    
+    console.log('📡 Status da resposta:', response.status);
+    
+    if (response.ok) {
+      const jobs = await response.json();
+      console.log('✅ Vagas recebidas:', jobs);
+      
+      this.availableJobs = jobs;
+      
+      if (jobs.length === 0) {
+        console.log('📋 Nenhuma vaga cadastrada no sistema');
+      }
+    } else {
+      const errorText = await response.text();
+      console.error('❌ Erro HTTP:', response.status, errorText);
+      throw new Error(`HTTP ${response.status}: ${errorText}`);
+    }
+  } catch (error) {
+    console.error('❌ Erro ao carregar vagas:', error);
+    
+    // Mostrar erro específico
+    if (error.message.includes('Failed to fetch')) {
+      console.error('🌐 Possível problema de CORS ou rede');
+      alert('Erro de conexão com o servidor. Verifique sua conexão com a internet.');
+    } else {
+      alert(`Erro ao carregar vagas: ${error.message}`);
+    }
+    
+    // Não usar dados simulados - mostrar que não há vagas
+    this.availableJobs = [];
+  } finally {
+    this.loadingJobs = false;
+  }
+},
 
     // Selecionar vaga e mostrar formulário
     selectJob(job) {
@@ -720,43 +697,25 @@ export default {
         }
 
         // Tentar enviar para o backend real primeiro
-        const API_BASE = process.env.VUE_APP_API_URL || 'http://localhost:3000';
+        const response = await fetch(`${API_CONFIG.BASE_URL}/api/job-applications`, {
+          method: 'POST',
+          body: formData
+        });
 
-        try {
-          const response = await fetch(`${API_BASE}/api/job-applications`, {
-            method: 'POST',
-            body: formData
-          });
+        if (response.ok) {
+          const result = await response.json();
 
-          if (response.ok) {
-            const result = await response.json();
-
-            // Mostrar mensagem de sucesso personalizada
-            if (this.selectedJob) {
-              alert(`Candidatura enviada com sucesso para a vaga "${this.selectedJob.title}"! Entraremos em contato em breve.`);
-            } else {
-              alert('Seu currículo foi adicionado ao nosso banco de talentos com sucesso! Entraremos em contato quando surgir uma oportunidade compatível.');
-            }
-
-            console.log('✅ Candidatura enviada via API:', result);
-          } else {
-            const error = await response.json();
-            throw new Error(error.error || 'Erro ao enviar candidatura');
-          }
-        } catch (apiError) {
-          console.warn('⚠️ Erro na API, usando simulação:', apiError);
-
-          // Fallback: Simular envio se API não estiver disponível
-          await new Promise(resolve => setTimeout(resolve, 2000));
-
-          // Mostrar mensagem de sucesso (simulada)
+          // Mostrar mensagem de sucesso personalizada
           if (this.selectedJob) {
             alert(`Candidatura enviada com sucesso para a vaga "${this.selectedJob.title}"! Entraremos em contato em breve.`);
           } else {
             alert('Seu currículo foi adicionado ao nosso banco de talentos com sucesso! Entraremos em contato quando surgir uma oportunidade compatível.');
           }
 
-          console.log('✅ Candidatura simulada enviada');
+          console.log('✅ Candidatura enviada via API:', result);
+        } else {
+          const error = await response.json();
+          throw new Error(error.error || 'Erro ao enviar candidatura');
         }
 
         // Resetar formulário e voltar
