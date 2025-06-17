@@ -185,8 +185,10 @@
                   {{ job.type }}
                 </div>
               </div>
+
               <div class="job-content">
                 <h3 class="job-title">{{ job.title }}</h3>
+
                 <div class="job-info">
                   <div class="job-detail">
                     <i class="fas fa-building"></i>
@@ -200,244 +202,305 @@
                     <i class="fas fa-clock"></i>
                     <span>{{ job.workload }}</span>
                   </div>
+                  <div class="job-detail" v-if="job.salary">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>{{ job.salary }}</span>
+                  </div>
                 </div>
-                <p class="job-description">{{ job.shortDescription }}</p>
-                <div class="job-requirements">
-                  <h4>Principais requisitos:</h4>
-                  <ul>
-                    <li v-for="requirement in job.mainRequirements" :key="requirement">
-                      {{ requirement }}
-                    </li>
-                  </ul>
 
-                  <!-- Adicionar requisitos adicionais se existirem -->
-                  <div v-if="job.additionalRequirements && job.additionalRequirements.length > 0"
-                    class="additional-requirements">
-                    <h4>Requisitos adicionais:</h4>
-                    <ul>
-                      <li v-for="requirement in job.additionalRequirements" :key="requirement">
+                <!-- Seção de Descrição (Resumida + Completa) -->
+                <div class="job-description-section" v-if="job.shortDescription || job.description">
+                  <h4>Descrição da Vaga:</h4>
+
+                  <!-- Sempre mostra a descrição resumida se existir -->
+                  <div v-if="job.shortDescription" class="short-description">
+                    <p class="job-description">{{ job.shortDescription }}</p>
+                  </div>
+
+                  <!-- Se não tiver descrição resumida, mostra a completa como padrão -->
+                  <div v-else-if="job.description && !expandedSections[`desc-${job.id}`]" class="short-description">
+                    <p class="job-description">{{ job.description }}</p>
+                  </div>
+
+                  <!-- Descrição completa - só aparece quando expandida E quando existe shortDescription -->
+                  <div v-if="job.description && job.shortDescription && expandedSections[`desc-${job.id}`]"
+                    class="complete-description">
+                    <h5 class="complete-description-title">Descrição Detalhada:</h5>
+                    <p class="job-description-complete">{{ job.description }}</p>
+                  </div>
+
+                  <!-- Botão para expandir - só aparece se tiver AMBAS as descrições -->
+                  <button v-if="job.description && job.shortDescription" @click.stop="toggleSection(`desc-${job.id}`)"
+                    class="expand-button">
+                    {{ expandedSections[`desc-${job.id}`] ? 'Ver menos detalhes' : 'Ver descrição completa' }}
+                    <i :class="expandedSections[`desc-${job.id}`] ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
+                  </button>
+                </div>
+
+                <!-- Requisitos Principais -->
+                <div class="job-requirements" v-if="job.mainRequirements && job.mainRequirements.length > 0">
+                  <h4>Requisitos Principais:</h4>
+                  <div class="expandable-content" :class="{ 'expanded': expandedSections[`main-req-${job.id}`] }">
+                    <ul class="requirements-list">
+                      <li v-for="(requirement, idx) in job.mainRequirements" :key="idx"
+                        v-show="expandedSections[`main-req-${job.id}`] || idx < 3">
                         {{ requirement }}
                       </li>
                     </ul>
+                    <button v-if="job.mainRequirements.length > 3" @click.stop="toggleSection(`main-req-${job.id}`)"
+                      class="expand-button">
+                      {{ expandedSections[`main-req-${job.id}`] ? 'Ver menos' : `Ver mais ${job.mainRequirements.length
+                      - 3} requisitos` }}
+                      <i
+                        :class="expandedSections[`main-req-${job.id}`] ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
+                    </button>
                   </div>
+                </div>
 
-                  <!-- Adicionar benefícios se existirem -->
-                  <div v-if="job.benefits && job.benefits.length > 0" class="job-benefits">
-                    <h4>Benefícios:</h4>
-                    <ul>
-                      <li v-for="benefit in job.benefits" :key="benefit">
+                <!-- Requisitos Adicionais -->
+                <div class="job-additional-requirements"
+                  v-if="job.additionalRequirements && job.additionalRequirements.length > 0">
+                  <h4>Requisitos Adicionais:</h4>
+                  <div class="expandable-content" :class="{ 'expanded': expandedSections[`add-req-${job.id}`] }">
+                    <ul class="additional-requirements-list">
+                      <li v-for="(requirement, idx) in job.additionalRequirements" :key="idx"
+                        v-show="expandedSections[`add-req-${job.id}`] || idx < 2">
+                        {{ requirement }}
+                      </li>
+                    </ul>
+                    <button v-if="job.additionalRequirements.length > 2"
+                      @click.stop="toggleSection(`add-req-${job.id}`)" class="expand-button">
+                      {{ expandedSections[`add-req-${job.id}`] ? 'Ver menos' : `Ver mais
+                      ${job.additionalRequirements.length - 2} requisitos` }}
+                      <i
+                        :class="expandedSections[`add-req-${job.id}`] ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Benefícios -->
+                <div class="job-benefits-preview" v-if="job.benefits && job.benefits.length > 0">
+                  <h4>Benefícios:</h4>
+                  <div class="expandable-content" :class="{ 'expanded': expandedSections[`benefits-${job.id}`] }">
+                    <ul class="benefits-list">
+                      <li v-for="(benefit, idx) in job.benefits" :key="idx"
+                        v-show="expandedSections[`benefits-${job.id}`] || idx < 3">
                         {{ benefit }}
                       </li>
                     </ul>
+                    <button v-if="job.benefits.length > 3" @click.stop="toggleSection(`benefits-${job.id}`)"
+                      class="expand-button">
+                      {{ expandedSections[`benefits-${job.id}`] ? 'Ver menos' : `Ver mais ${job.benefits.length - 3}
+                      benefícios` }}
+                      <i
+                        :class="expandedSections[`benefits-${job.id}`] ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
+                    </button>
                   </div>
+                </div>
+              </div>
+
+              <div class="job-footer">
+                <button class="apply-button">
+                  <i class="fas fa-paper-plane"></i>
+                  Candidatar-se
+                </button>
               </div>
             </div>
-            <div class="job-footer">
-              <div class="job-salary" v-if="job.salary">
-                <i class="fas fa-dollar-sign"></i>
-                <span>{{ job.salary }}</span>
+          </ScrollReveal>
+        </div>
+
+        <!-- Mensagem quando não há vagas -->
+        <div v-else class="no-jobs-container">
+          <ScrollReveal direction="bottom" :delay="300">
+            <div class="no-jobs-content">
+              <div class="no-jobs-icon">
+                <i class="fas fa-search"></i>
               </div>
-              <button class="apply-button">
-                <i class="fas fa-paper-plane"></i>
-                Candidatar-se
+              <h3>Nenhuma vaga disponível no momento</h3>
+              <p>
+                Não temos vagas abertas atualmente, mas você pode enviar seu currículo para nosso banco de talentos.
+                Entraremos em contato quando surgir uma oportunidade compatível com seu perfil.
+              </p>
+              <button @click="showTalentBankForm" class="talent-bank-button">
+                <i class="fas fa-database"></i>
+                Cadastrar no Banco de Talentos
               </button>
             </div>
+          </ScrollReveal>
         </div>
-        </ScrollReveal>
       </div>
+    </section>
 
-      <!-- Mensagem quando não há vagas -->
-      <div v-else class="no-jobs-container">
+    <!-- Seção de Formulário (oculta inicialmente) -->
+    <section class="form-section" v-if="showForm">
+      <div class="container">
+        <ScrollReveal direction="bottom" :delay="200">
+          <div class="section-title">
+            <span class="accent-line"></span>
+            <h2 v-if="selectedJob">Candidatar-se para: {{ selectedJob.title }}</h2>
+            <h2 v-else>Banco de Talentos</h2>
+            <span class="accent-line"></span>
+          </div>
+          <div class="selected-job-info" v-if="selectedJob">
+            <div class="job-summary">
+              <div class="job-summary-header">
+                <h3>{{ selectedJob.title }}</h3>
+                <button @click="backToJobs" class="back-button">
+                  <i class="fas fa-arrow-left"></i>
+                  Voltar às vagas
+                </button>
+              </div>
+              <div class="job-summary-details">
+                <span><i class="fas fa-building"></i> {{ selectedJob.department }}</span>
+                <span><i class="fas fa-map-marker-alt"></i> {{ selectedJob.location }}</span>
+                <span><i class="fas fa-clock"></i> {{ selectedJob.workload }}</span>
+              </div>
+            </div>
+          </div>
+          <p class="form-intro" v-if="selectedJob">
+            Preencha o formulário abaixo para se candidatar a esta vaga.
+            Anexe seu currículo e nos conte um pouco sobre você e suas expectativas.
+          </p>
+          <p class="form-intro" v-else>
+            Preencha o formulário abaixo para fazer parte do nosso banco de talentos.
+            Entraremos em contato quando surgir uma oportunidade compatível com seu perfil.
+          </p>
+        </ScrollReveal>
+
         <ScrollReveal direction="bottom" :delay="300">
-          <div class="no-jobs-content">
-            <div class="no-jobs-icon">
-              <i class="fas fa-search"></i>
+          <div class="form-container">
+            <div class="form-header">
+              <div class="form-icon">
+                <i class="fas fa-briefcase"></i>
+              </div>
+              <h3 v-if="selectedJob">Candidatar-se para: {{ selectedJob.title }}</h3>
+              <h3 v-else>Banco de Talentos</h3>
             </div>
-            <h3>Nenhuma vaga disponível no momento</h3>
-            <p>
-              Não temos vagas abertas atualmente, mas você pode enviar seu currículo para nosso banco de talentos.
-              Entraremos em contato quando surgir uma oportunidade compatível com seu perfil.
-            </p>
-            <button @click="showTalentBankForm" class="talent-bank-button">
-              <i class="fas fa-database"></i>
-              Cadastrar no Banco de Talentos
-            </button>
+            <form @submit.prevent="submitForm" class="career-form">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="name">Nome Completo</label>
+                  <input type="text" id="name" v-model="formData.name" required placeholder="Seu nome completo">
+                  <span class="error-message" v-if="errors.name">{{ errors.name }}</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="email">E-mail</label>
+                  <input type="email" id="email" v-model="formData.email" required placeholder="seu.email@exemplo.com">
+                  <span class="error-message" v-if="errors.email">{{ errors.email }}</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="phone">Telefone</label>
+                  <input type="tel" id="phone" v-model="formData.phone" required placeholder="(00) 00000-0000"
+                    @input="formatPhone" maxlength="15">
+                  <span class="error-message" v-if="errors.phone">{{ errors.phone }}</span>
+                </div>
+
+                <div class="form-group" v-if="!selectedJob">
+                  <label for="position">Área de Interesse</label>
+                  <select id="position" v-model="formData.position" required>
+                    <option value="" disabled selected>Selecione uma área</option>
+                    <option value="Administrativo">Administrativo</option>
+                    <option value="Comercial">Comercial</option>
+                    <option value="Estoque">Estoque</option>
+                    <option value="Financeiro">Financeiro</option>
+                    <option value="Fiscal">Fiscal</option>
+                    <option value="Licitação">Licitação</option>
+                    <option value="Logística">Logística</option>
+                    <option value="TI">TI</option>
+                    <option value="Outro">Outro</option>
+                  </select>
+                  <span class="error-message" v-if="errors.position">{{ errors.position }}</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="education">Formação Acadêmica</label>
+                  <select id="education" v-model="formData.education" required>
+                    <option value="" disabled selected>Selecione sua formação</option>
+                    <option value="Ensino Médio">Ensino Médio</option>
+                    <option value="Ensino Técnico">Ensino Técnico</option>
+                    <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
+                    <option value="Ensino Superior Completo">Ensino Superior Completo</option>
+                    <option value="Pós-graduação">Pós-graduação</option>
+                    <option value="Mestrado">Mestrado</option>
+                    <option value="Doutorado">Doutorado</option>
+                  </select>
+                  <span class="error-message" v-if="errors.education">{{ errors.education }}</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="experience">Experiência Profissional</label>
+                  <select id="experience" v-model="formData.experience" required>
+                    <option value="" disabled selected>Selecione sua experiência</option>
+                    <option value="Sem experiência">Sem experiência</option>
+                    <option value="Até 1 ano">Até 1 ano</option>
+                    <option value="1 a 3 anos">1 a 3 anos</option>
+                    <option value="3 a 5 anos">3 a 5 anos</option>
+                    <option value="5 a 10 anos">5 a 10 anos</option>
+                    <option value="Mais de 10 anos">Mais de 10 anos</option>
+                  </select>
+                  <span class="error-message" v-if="errors.experience">{{ errors.experience }}</span>
+                </div>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="resume">Currículo (PDF)</label>
+                <div class="file-upload-container">
+                  <input type="file" id="resume" ref="resumeFile" @change="handleFileUpload" accept=".pdf" required
+                    class="file-input">
+                  <label for="resume" class="file-upload-label">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span v-if="!formData.resume">Clique para anexar seu currículo (PDF)</span>
+                    <span v-else>{{ formData.resume.name }}</span>
+                  </label>
+                </div>
+                <span class="error-message" v-if="errors.resume">{{ errors.resume }}</span>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="message">Apresentação Pessoal</label>
+                <textarea id="message" v-model="formData.message" required rows="6"
+                  placeholder="Conte-nos um pouco sobre você, suas experiências, motivações e por que gostaria de trabalhar na Uni Hospitalar..."></textarea>
+                <span class="error-message" v-if="errors.message">{{ errors.message }}</span>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="expectations">Expectativas Salariais</label>
+                <input type="text" id="expectations" v-model="formData.expectations"
+                  placeholder="Ex: R$ 3.000,00 - R$ 4.000,00 (opcional)">
+              </div>
+
+              <div class="form-group full-width">
+                <div class="checkbox-group">
+                  <input type="checkbox" id="privacy" v-model="formData.privacy" required>
+                  <label for="privacy">
+                    Concordo com o tratamento dos meus dados pessoais conforme a
+                    <router-link to="/PoliticaPrivacidade" target="_blank">Política de Privacidade</router-link>
+                    da Uni Hospitalar.
+                  </label>
+                </div>
+                <span class="error-message" v-if="errors.privacy">{{ errors.privacy }}</span>
+              </div>
+
+              <div class="form-actions">
+                <button type="button" @click="backToJobs" class="cancel-button">
+                  <i class="fas fa-times"></i>
+                  Cancelar
+                </button>
+                <button type="submit" class="submit-button" :disabled="isSubmitting">
+                  <i class="fas fa-paper-plane" v-if="!isSubmitting"></i>
+                  <i class="fas fa-spinner fa-spin" v-else></i>
+                  {{ isSubmitting ? 'Enviando...' : 'Enviar Candidatura' }}
+                </button>
+              </div>
+            </form>
           </div>
         </ScrollReveal>
       </div>
-  </div>
-  </section>
+    </section>
 
-  <!-- Seção de Formulário (oculta inicialmente) -->
-  <section class="form-section" v-if="showForm">
-    <div class="container">
-      <ScrollReveal direction="bottom" :delay="200">
-        <div class="section-title">
-          <span class="accent-line"></span>
-          <h2 v-if="selectedJob">Candidatar-se para: {{ selectedJob.title }}</h2>
-          <h2 v-else>Banco de Talentos</h2>
-          <span class="accent-line"></span>
-        </div>
-        <div class="selected-job-info" v-if="selectedJob">
-          <div class="job-summary">
-            <div class="job-summary-header">
-              <h3>{{ selectedJob.title }}</h3>
-              <button @click="backToJobs" class="back-button">
-                <i class="fas fa-arrow-left"></i>
-                Voltar às vagas
-              </button>
-            </div>
-            <div class="job-summary-details">
-              <span><i class="fas fa-building"></i> {{ selectedJob.department }}</span>
-              <span><i class="fas fa-map-marker-alt"></i> {{ selectedJob.location }}</span>
-              <span><i class="fas fa-clock"></i> {{ selectedJob.workload }}</span>
-            </div>
-          </div>
-        </div>
-        <p class="form-intro" v-if="selectedJob">
-          Preencha o formulário abaixo para se candidatar a esta vaga.
-          Anexe seu currículo e nos conte um pouco sobre você e suas expectativas.
-        </p>
-        <p class="form-intro" v-else>
-          Preencha o formulário abaixo para fazer parte do nosso banco de talentos.
-          Entraremos em contato quando surgir uma oportunidade compatível com seu perfil.
-        </p>
-      </ScrollReveal>
-
-      <ScrollReveal direction="bottom" :delay="300">
-        <div class="form-container">
-          <div class="form-header">
-            <div class="form-icon">
-              <i class="fas fa-briefcase"></i>
-            </div>
-            <h3 v-if="selectedJob">Candidatar-se para: {{ selectedJob.title }}</h3>
-            <h3 v-else>Banco de Talentos</h3>
-          </div>
-          <form @submit.prevent="submitForm" class="career-form">
-            <div class="form-grid">
-              <div class="form-group">
-                <label for="name">Nome Completo</label>
-                <input type="text" id="name" v-model="formData.name" required placeholder="Seu nome completo">
-                <span class="error-message" v-if="errors.name">{{ errors.name }}</span>
-              </div>
-
-              <div class="form-group">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" v-model="formData.email" required placeholder="seu.email@exemplo.com">
-                <span class="error-message" v-if="errors.email">{{ errors.email }}</span>
-              </div>
-
-              <div class="form-group">
-                <label for="phone">Telefone</label>
-                <input type="tel" id="phone" v-model="formData.phone" required placeholder="(00) 00000-0000"
-                  @input="formatPhone" maxlength="15">
-                <span class="error-message" v-if="errors.phone">{{ errors.phone }}</span>
-              </div>
-
-              <div class="form-group" v-if="!selectedJob">
-                <label for="position">Área de Interesse</label>
-                <select id="position" v-model="formData.position" required>
-                  <option value="" disabled selected>Selecione uma área</option>
-                  <option value="Administrativo">Administrativo</option>
-                  <option value="Comercial">Comercial</option>
-                  <option value="Estoque">Estoque</option>
-                  <option value="Financeiro">Financeiro</option>
-                  <option value="Fiscal">Fiscal</option>
-                  <option value="Licitação">Licitação</option>
-                  <option value="Logística">Logística</option>
-                  <option value="TI">TI</option>
-                  <option value="Outro">Outro</option>
-                </select>
-                <span class="error-message" v-if="errors.position">{{ errors.position }}</span>
-              </div>
-
-              <div class="form-group">
-                <label for="education">Formação Acadêmica</label>
-                <select id="education" v-model="formData.education" required>
-                  <option value="" disabled selected>Selecione sua formação</option>
-                  <option value="Ensino Médio">Ensino Médio</option>
-                  <option value="Ensino Técnico">Ensino Técnico</option>
-                  <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
-                  <option value="Ensino Superior Completo">Ensino Superior Completo</option>
-                  <option value="Pós-graduação">Pós-graduação</option>
-                  <option value="Mestrado">Mestrado</option>
-                  <option value="Doutorado">Doutorado</option>
-                </select>
-                <span class="error-message" v-if="errors.education">{{ errors.education }}</span>
-              </div>
-
-              <div class="form-group">
-                <label for="experience">Experiência Profissional</label>
-                <select id="experience" v-model="formData.experience" required>
-                  <option value="" disabled selected>Selecione sua experiência</option>
-                  <option value="Sem experiência">Sem experiência</option>
-                  <option value="Até 1 ano">Até 1 ano</option>
-                  <option value="1 a 3 anos">1 a 3 anos</option>
-                  <option value="3 a 5 anos">3 a 5 anos</option>
-                  <option value="5 a 10 anos">5 a 10 anos</option>
-                  <option value="Mais de 10 anos">Mais de 10 anos</option>
-                </select>
-                <span class="error-message" v-if="errors.experience">{{ errors.experience }}</span>
-              </div>
-            </div>
-
-            <div class="form-group full-width">
-              <label for="resume">Currículo (PDF)</label>
-              <div class="file-upload-container">
-                <input type="file" id="resume" ref="resumeFile" @change="handleFileUpload" accept=".pdf" required
-                  class="file-input">
-                <label for="resume" class="file-upload-label">
-                  <i class="fas fa-cloud-upload-alt"></i>
-                  <span v-if="!formData.resume">Clique para anexar seu currículo (PDF)</span>
-                  <span v-else>{{ formData.resume.name }}</span>
-                </label>
-              </div>
-              <span class="error-message" v-if="errors.resume">{{ errors.resume }}</span>
-            </div>
-
-            <div class="form-group full-width">
-              <label for="message">Apresentação Pessoal</label>
-              <textarea id="message" v-model="formData.message" required rows="6"
-                placeholder="Conte-nos um pouco sobre você, suas experiências, motivações e por que gostaria de trabalhar na Uni Hospitalar..."></textarea>
-              <span class="error-message" v-if="errors.message">{{ errors.message }}</span>
-            </div>
-
-            <div class="form-group full-width">
-              <label for="expectations">Expectativas Salariais</label>
-              <input type="text" id="expectations" v-model="formData.expectations"
-                placeholder="Ex: R$ 3.000,00 - R$ 4.000,00 (opcional)">
-            </div>
-
-            <div class="form-group full-width">
-              <div class="checkbox-group">
-                <input type="checkbox" id="privacy" v-model="formData.privacy" required>
-                <label for="privacy">
-                  Concordo com o tratamento dos meus dados pessoais conforme a
-                  <router-link to="/PoliticaPrivacidade" target="_blank">Política de Privacidade</router-link>
-                  da Uni Hospitalar.
-                </label>
-              </div>
-              <span class="error-message" v-if="errors.privacy">{{ errors.privacy }}</span>
-            </div>
-
-            <div class="form-actions">
-              <button type="button" @click="backToJobs" class="cancel-button">
-                <i class="fas fa-times"></i>
-                Cancelar
-              </button>
-              <button type="submit" class="submit-button" :disabled="isSubmitting">
-                <i class="fas fa-paper-plane" v-if="!isSubmitting"></i>
-                <i class="fas fa-spinner fa-spin" v-else></i>
-                {{ isSubmitting ? 'Enviando...' : 'Enviar Candidatura' }}
-              </button>
-            </div>
-          </form>
-        </div>
-      </ScrollReveal>
-    </div>
-  </section>
-
-  <HomeFooter />
+    <HomeFooter />
   </div>
 </template>
 
@@ -445,7 +508,7 @@
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
 import ScrollReveal from '@/components/ScrollReveal.vue';
-import API_CONFIG from '@/config/api.js'; 
+import API_CONFIG from '@/config/api.js';
 
 export default {
   name: 'TrabalheConosco',
@@ -461,6 +524,7 @@ export default {
       loadingJobs: true,
       availableJobs: [],
       isSubmitting: false,
+      expandedSections: {},
       formData: {
         name: '',
         email: '',
@@ -480,53 +544,61 @@ export default {
     await this.loadJobs();
   },
   methods: {
+    // Método para alternar seções expandidas
+    toggleSection(sectionId) {
+      const currentState = this.expandedSections[sectionId] || false;
+      this.expandedSections = {
+        ...this.expandedSections,
+        [sectionId]: !currentState
+      };
+    },
     // Carregar vagas do backend
     async loadJobs() {
-  this.loadingJobs = true;
-  try {
-    console.log('🔍 Carregando vagas de:', `${API_CONFIG.BASE_URL}/api/jobs`);
-    
-    const response = await fetch(`${API_CONFIG.BASE_URL}/api/jobs`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+      this.loadingJobs = true;
+      try {
+        console.log('🔍 Carregando vagas de:', `${API_CONFIG.BASE_URL}/api/jobs`);
+
+        const response = await fetch(`${API_CONFIG.BASE_URL}/api/jobs`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        });
+
+        console.log('📡 Status da resposta:', response.status);
+
+        if (response.ok) {
+          const jobs = await response.json();
+          console.log('✅ Vagas recebidas:', jobs);
+
+          this.availableJobs = jobs;
+
+          if (jobs.length === 0) {
+            console.log('📋 Nenhuma vaga cadastrada no sistema');
+          }
+        } else {
+          const errorText = await response.text();
+          console.error('❌ Erro HTTP:', response.status, errorText);
+          throw new Error(`HTTP ${response.status}: ${errorText}`);
+        }
+      } catch (error) {
+        console.error('❌ Erro ao carregar vagas:', error);
+
+        // Mostrar erro específico
+        if (error.message.includes('Failed to fetch')) {
+          console.error('🌐 Possível problema de CORS ou rede');
+          alert('Erro de conexão com o servidor. Verifique sua conexão com a internet.');
+        } else {
+          alert(`Erro ao carregar vagas: ${error.message}`);
+        }
+
+        // Não usar dados simulados - mostrar que não há vagas
+        this.availableJobs = [];
+      } finally {
+        this.loadingJobs = false;
       }
-    });
-    
-    console.log('📡 Status da resposta:', response.status);
-    
-    if (response.ok) {
-      const jobs = await response.json();
-      console.log('✅ Vagas recebidas:', jobs);
-      
-      this.availableJobs = jobs;
-      
-      if (jobs.length === 0) {
-        console.log('📋 Nenhuma vaga cadastrada no sistema');
-      }
-    } else {
-      const errorText = await response.text();
-      console.error('❌ Erro HTTP:', response.status, errorText);
-      throw new Error(`HTTP ${response.status}: ${errorText}`);
-    }
-  } catch (error) {
-    console.error('❌ Erro ao carregar vagas:', error);
-    
-    // Mostrar erro específico
-    if (error.message.includes('Failed to fetch')) {
-      console.error('🌐 Possível problema de CORS ou rede');
-      alert('Erro de conexão com o servidor. Verifique sua conexão com a internet.');
-    } else {
-      alert(`Erro ao carregar vagas: ${error.message}`);
-    }
-    
-    // Não usar dados simulados - mostrar que não há vagas
-    this.availableJobs = [];
-  } finally {
-    this.loadingJobs = false;
-  }
-},
+    },
 
     // Selecionar vaga e mostrar formulário
     selectJob(job) {
@@ -1075,20 +1147,26 @@ section {
 .jobs-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 30px;
+  gap: 60px;
   margin-top: 40px;
 }
 
 .job-card {
   background: white;
   border-radius: 15px;
-  padding: 30px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
   cursor: pointer;
   border: 2px solid transparent;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 650px;
+  max-width: 700px;
+  text-align: left;
+  margin: 0 auto;
 }
 
 .job-card::before {
@@ -1116,7 +1194,437 @@ section {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 25px 25px 0;
   margin-bottom: 20px;
+}
+
+.job-content {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  padding: 0 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.job-content>* {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.job-content>*:not(:last-child) {
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(174, 44, 42, 0.1);
+}
+
+.job-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+  line-height: 1.3;
+  min-height: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.job-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border-left: 3px solid #AE2C2A;
+  align-items: start;
+  text-align: left;
+  box-shadow: 0 2px 10px rgba(174, 44, 42, 0.08);
+  border-bottom: 2px solid rgba(174, 44, 42, 0.15);
+}
+
+.job-detail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.job-detail i {
+  color: #AE2C2A;
+  width: 16px;
+  flex-shrink: 0;
+}
+
+.job-description-section {
+  flex: 1;
+  text-align: center;
+  background: rgba(174, 44, 42, 0.02);
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 3px solid rgba(174, 44, 42, 0.3);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.job-description-section:nth-of-type(2) h4::before {
+  content: '📄';
+  font-size: 0.9rem;
+}
+
+.job-description-section:first-of-type {
+  background: rgba(174, 44, 42, 0.02);
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 3px solid rgba(174, 44, 42, 0.3);
+}
+
+.job-description-section:first-of-type h4 {
+  color: #AE2C2A;
+}
+
+.job-description-section:first-of-type h4::before {
+  content: '📋';
+  font-size: 0.9rem;
+}
+
+.job-description-section:nth-of-type(2) {
+  background: rgba(0, 123, 255, 0.02);
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 3px solid rgba(0, 123, 255, 0.3);
+}
+
+.job-description-section:nth-of-type(2) h4 {
+  color: #007bff;
+}
+
+.job-description-section h4 {
+  font-size: 1rem;
+  color: #AE2C2A;
+  margin: 0 0 15px 0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.job-description-section h4::before {
+  content: '📋';
+  font-size: 0.9rem;
+}
+
+.job-description {
+  color: #555;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 0.95rem;
+  text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  white-space: pre-wrap;
+  max-width: 100%;
+}
+
+.short-description {
+  width: 100%;
+  overflow: hidden;
+}
+
+.complete-description {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(174, 44, 42, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
+  width: 100%;
+}
+
+.complete-description-title {
+  font-size: 0.9rem;
+  color: #007bff;
+  margin: 0 0 10px 0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.complete-description-title::before {
+  content: '📄';
+  font-size: 0.8rem;
+}
+
+.job-description-complete {
+  color: #555;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 0.9rem;
+  text-align: center;
+  background: rgba(0, 123, 255, 0.05);
+  padding: 12px;
+  border-radius: 6px;
+  border-left: 2px solid #007bff;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  white-space: pre-wrap;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Animação para expansão */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.job-description-section .expand-button {
+  background: transparent;
+  border: 1px solid #AE2C2A;
+  color: #AE2C2A;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 15px auto 0;
+  font-weight: 500;
+  max-width: fit-content;
+}
+
+.job-description-section .expand-button:hover {
+  background: #AE2C2A;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(174, 44, 42, 0.3);
+}
+
+/* Estilos para conteúdo expandível */
+.expandable-content {
+  position: relative;
+}
+
+.job-description.expanded {
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  overflow: visible;
+  display: block;
+}
+
+.expand-button {
+  background: transparent;
+  border: 1px solid #AE2C2A;
+  color: #AE2C2A;
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin: 10px auto 0;
+  font-weight: 500;
+}
+
+.expand-button:hover {
+  background: #AE2C2A;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.expand-button i {
+  font-size: 0.7rem;
+  transition: transform 0.3s ease;
+}
+
+.job-requirements h4 {
+  font-size: 1rem;
+  color: #333;
+  margin: 0 0 10px 0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.job-requirements h4::before {
+  content: '✅';
+  font-size: 0.9rem;
+}
+
+/* Listas de requisitos e benefícios */
+.requirements-list,
+.additional-requirements-list,
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.requirements-list li,
+.additional-requirements-list li,
+.benefits-list li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+.requirements-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #AE2C2A;
+  font-weight: bold;
+}
+
+.additional-requirements-list li::before {
+  content: '◦';
+  position: absolute;
+  left: 0;
+  color: #AE2C2A;
+  font-weight: bold;
+}
+
+.benefits-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #28a745;
+  font-weight: bold;
+}
+
+/* Seções de requisitos adicionais */
+.job-additional-requirements h4 {
+  font-size: 1rem;
+  color: #333;
+  margin: 0 0 10px 0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.job-additional-requirements h4::before {
+  content: '📝';
+  font-size: 0.9rem;
+}
+
+.requirements-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #AE2C2A;
+  font-weight: bold;
+}
+
+.benefits-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #28a745;
+  font-weight: bold;
+}
+
+.more-requirements,
+.more-benefits {
+  font-style: italic;
+  color: #888 !important;
+  font-size: 0.85rem !important;
+}
+
+.more-requirements::before,
+.more-benefits::before {
+  content: '⋯';
+  color: #AE2C2A !important;
+}
+
+.job-benefits-preview .benefits-list {
+  align-items: center;
+}
+
+.job-benefits-preview .benefits-list li {
+  text-align: center;
+}
+
+.job-benefits-preview h4 {
+  font-size: 1rem;
+  color: #333;
+  margin: 0 0 10px 0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.job-benefits-preview h4::before {
+  content: '🎁';
+  font-size: 0.9rem;
+}
+
+.job-footer {
+  padding: 20px 25px 25px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid #f0f0f0;
+}
+
+.apply-button {
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.apply-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(174, 44, 42, 0.4);
 }
 
 .job-icon {
@@ -1170,54 +1678,27 @@ section {
   color: white;
 }
 
-.job-content {
-  position: relative;
-  z-index: 1;
-}
-
-.job-title {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 15px;
-  line-height: 1.3;
-}
-
-.job-info {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 15px;
-}
-
-.job-detail {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
-  color: #666;
-}
-
-.job-detail i {
-  color: #AE2C2A;
-  width: 16px;
-}
-
-.job-description {
-  color: #555;
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
 .job-requirements {
   margin-bottom: 20px;
+  text-align: center;
 }
 
-.job-requirements h4 {
-  font-size: 1rem;
-  color: #333;
-  margin-bottom: 10px;
-  font-weight: 600;
+
+.job-requirements .requirements-list {
+  align-items: center;
+}
+
+.job-requirements .requirements-list li {
+  text-align: center;
+}
+
+
+.job-additional-requirements .additional-requirements-list {
+  align-items: center;
+}
+
+.job-additional-requirements .additional-requirements-list li {
+  text-align: center;
 }
 
 .job-requirements ul {
@@ -1287,17 +1768,6 @@ section {
   font-weight: bold;
 }
 
-.job-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 25px;
-  padding-top: 20px;
-  border-top: 1px solid #eee;
-  position: relative;
-  z-index: 1;
-}
-
 .job-salary {
   display: flex;
   align-items: center;
@@ -1309,26 +1779,6 @@ section {
 
 .job-salary i {
   color: #28a745;
-}
-
-.apply-button {
-  background: linear-gradient(135deg, #AE2C2A, #ff5555);
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 25px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
-}
-
-.apply-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(174, 44, 42, 0.4);
 }
 
 .no-jobs-container {
@@ -1641,7 +2091,7 @@ section {
   font-weight: 500;
 }
 
-.file-upload-container + .error-message {
+.file-upload-container+.error-message {
   text-align: left;
   margin-left: 0;
   display: block;
@@ -2102,11 +2552,48 @@ section {
 
   .jobs-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
   }
 
   .job-card {
-    padding: 20px;
+    min-height: 600px;
+    padding: 0;
+  }
+
+  .job-description-section:first-of-type,
+  .job-description-section:nth-of-type(2) {
+    padding: 12px;
+    margin: 10px 0;
+  }
+
+  .job-description-section {
+    padding: 12px;
+  }
+
+  .complete-description-title {
+    font-size: 0.85rem;
+  }
+
+  .job-description,
+  .job-description-complete {
+    font-size: 0.85rem;
+  }
+
+  .job-header {
+    padding: 20px 20px 0;
+  }
+
+  .job-content {
+    padding: 0 20px;
+  }
+
+  .job-info {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .job-footer {
+    padding: 15px 20px 20px;
   }
 
   .apply-button {
@@ -2143,7 +2630,7 @@ section {
   .job-benefits h4 {
     font-size: 0.9rem;
   }
-  
+
   .additional-requirements li,
   .job-benefits li {
     font-size: 0.8rem;
@@ -2235,6 +2722,43 @@ section {
 
   .form-header h3 {
     font-size: 1.2rem;
+  }
+
+  .job-card {
+    min-height: 550px;
+  }
+
+  .job-description-section:first-of-type,
+  .job-description-section:nth-of-type(2) {
+    padding: 10px;
+    margin: 8px 0;
+  }
+
+  .job-title {
+    font-size: 1.2rem;
+    min-height: 2.4rem;
+  }
+
+  .job-description-section {
+    padding: 10px;
+  }
+
+  .job-description-section .expand-button {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .job-description,
+  .job-description-complete {
+    font-size: 0.85rem;
+  }
+
+  .job-info {
+    padding: 10px;
+  }
+
+  .job-detail {
+    font-size: 0.85rem;
   }
 }
 
@@ -2337,10 +2861,6 @@ section {
 
   .benefit-content h4 {
     font-size: 1.1rem;
-  }
-
-  .job-card {
-    padding: 15px;
   }
 
   .job-title {
