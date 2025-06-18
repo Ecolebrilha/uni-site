@@ -16,6 +16,9 @@ const translations = reactive({
         contact: 'Contato'
       },
       dropdown: {
+        products: {
+          makeComplaint: 'Faça uma Reclamação'
+        },
         compliance: {
           confidentialChannel: 'Canal Confidencial',
           makeReport: 'Faça um Relato'
@@ -53,6 +56,9 @@ const translations = reactive({
         contact: 'Contact'
       },
       dropdown: {
+        products: {
+          makeComplaint: 'Make a Complaint'
+        },
         compliance: {
           confidentialChannel: 'Confidential Channel',
           makeReport: 'Make a Report'
@@ -90,6 +96,9 @@ const translations = reactive({
         contact: 'Contacto'
       },
       dropdown: {
+        products: {
+          makeComplaint: 'Hacer una Queja'
+        },
         compliance: {
           confidentialChannel: 'Canal Confidencial',
           makeReport: 'Hacer un Reporte'

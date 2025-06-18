@@ -21,6 +21,7 @@ import ParceirosCadastro from '@/components/SejaParceiro.vue';
 import TrabalheConosco from '@/components/TrabalheConosco.vue';
 import CanalConfidencial from '@/components/CanalConfidencial.vue';
 import FazerRelato from '@/components/FazerRelato.vue';
+import FazerReclamacao from '@/components/FazerReclamacao.vue';
 
 const routes = [
   {
@@ -153,6 +154,12 @@ const routes = [
     path: '/FazerRelato',
     name: 'FazerRelato',
     component: FazerRelato,
+    meta: { transition: 'slide-left' }
+  },
+  {
+    path: '/FazerReclamacao',
+    name: 'FazerReclamacao',
+    component: FazerReclamacao,
     meta: { transition: 'slide-left' }
   },
 ];

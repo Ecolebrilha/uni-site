@@ -250,7 +250,7 @@
                     <button v-if="job.mainRequirements.length > 3" @click.stop="toggleSection(`main-req-${job.id}`)"
                       class="expand-button">
                       {{ expandedSections[`main-req-${job.id}`] ? 'Ver menos' : `Ver mais ${job.mainRequirements.length
-                      - 3} requisitos` }}
+                        - 3} requisitos` }}
                       <i
                         :class="expandedSections[`main-req-${job.id}`] ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
                     </button>
@@ -354,6 +354,7 @@
                 <span><i class="fas fa-building"></i> {{ selectedJob.department }}</span>
                 <span><i class="fas fa-map-marker-alt"></i> {{ selectedJob.location }}</span>
                 <span><i class="fas fa-clock"></i> {{ selectedJob.workload }}</span>
+                <span><i class="fas fa-money-bill-wave"></i> {{ selectedJob.salary }}</span>
               </div>
             </div>
           </div>
@@ -1146,7 +1147,7 @@ section {
 
 .jobs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
   gap: 60px;
   margin-top: 40px;
 }
@@ -1265,7 +1266,6 @@ section {
 }
 
 .job-description-section {
-  flex: 1;
   text-align: center;
   background: rgba(174, 44, 42, 0.02);
   padding: 15px;
@@ -1273,6 +1273,8 @@ section {
   border-left: 3px solid rgba(174, 44, 42, 0.3);
   width: 100%;
   box-sizing: border-box;
+  min-height: auto;
+  height: auto;
 }
 
 .job-description-section:nth-of-type(2) h4::before {
@@ -1297,14 +1299,14 @@ section {
 }
 
 .job-description-section:nth-of-type(2) {
-  background: rgba(0, 123, 255, 0.02);
+  background: rgba(174, 44, 42, 0.05);
   padding: 15px;
   border-radius: 8px;
-  border-left: 3px solid rgba(0, 123, 255, 0.3);
+  border-left: 3px solid rgba(174, 44, 42, 0.4);
 }
 
 .job-description-section:nth-of-type(2) h4 {
-  color: #007bff;
+  color: #AE2C2A;
 }
 
 .job-description-section h4 {
@@ -1348,11 +1350,13 @@ section {
   border-top: 1px solid rgba(174, 44, 42, 0.2);
   animation: fadeIn 0.3s ease-in-out;
   width: 100%;
+  min-height: auto;
+  height: auto;
 }
 
 .complete-description-title {
   font-size: 0.9rem;
-  color: #007bff;
+  color: #AE2C2A;
   margin: 0 0 10px 0;
   font-weight: 600;
   display: flex;
@@ -1372,16 +1376,18 @@ section {
   margin: 0;
   font-size: 0.9rem;
   text-align: center;
-  background: rgba(0, 123, 255, 0.05);
+  background: rgba(174, 44, 42, 0.08);
   padding: 12px;
   border-radius: 6px;
-  border-left: 2px solid #007bff;
+  border-left: 2px solid #AE2C2A;
   word-wrap: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
   white-space: pre-wrap;
   max-width: 100%;
   box-sizing: border-box;
+  min-height: auto;
+  height: auto;
 }
 
 /* Animação para expansão */
@@ -2590,6 +2596,19 @@ section {
     grid-template-columns: 1fr;
     gap: 8px;
     padding: 12px;
+    align-items: start;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .job-detail {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    padding-left: 40px;
   }
 
   .job-footer {
@@ -2865,6 +2884,14 @@ section {
 
   .job-title {
     font-size: 1.2rem;
+  }
+
+  .job-card {
+    max-width: calc(100vw - 40px);
+    width: calc(100vw - 40px);
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow: hidden;
   }
 
   .no-jobs-container {
