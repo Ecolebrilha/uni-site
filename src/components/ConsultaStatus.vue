@@ -799,7 +799,7 @@ async loadStatusHistory() {
   try {
     const date = new Date(dateString);
     // Subtrai 3 horas para ajustar o fuso horário
-    date.setHours(date.getHours() - 3);
+    date.setHours(date.getHours());
     
     return date.toLocaleString('pt-BR', {
       day: '2-digit',
