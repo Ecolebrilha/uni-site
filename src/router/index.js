@@ -22,6 +22,8 @@ import TrabalheConosco from '@/components/TrabalheConosco.vue';
 import CanalConfidencial from '@/components/CanalConfidencial.vue';
 import FazerRelato from '@/components/FazerRelato.vue';
 import FazerReclamacao from '@/components/FazerReclamacao.vue';
+import ConsultaStatus from '@/components/ConsultaStatus.vue';
+import AvisoPrivacidade from '@/components/AvisoPrivacidade.vue';
 
 const routes = [
   {
@@ -162,6 +164,19 @@ const routes = [
     component: FazerReclamacao,
     meta: { transition: 'slide-left' }
   },
+  {
+    path: '/ConsultaStatus',
+    name: 'ConsultaStatus',
+    component: ConsultaStatus,
+    meta: { transition: 'slide-left' }
+  },
+  {
+    path: '/AvisoPrivacidade',
+    name: 'AvisoPrivacidade',
+    component: AvisoPrivacidade,
+    meta: { transition: 'slide-left' }
+  },
+  
 ];
 
 const router = createRouter({

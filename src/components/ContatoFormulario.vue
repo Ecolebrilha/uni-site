@@ -36,16 +36,16 @@
     
     <!-- Aviso de Termos -->
     <div class="terms-notice">
-      <div class="notice-content">
-        <i class="fas fa-info-circle notice-icon"></i>
-        <p>
-          Ao preencher e enviar este formulário, você concorda automaticamente com os nossos 
-          <router-link to="/PoliticaPrivacidade" target="_blank" class="terms-link">Termos de Privacidade</router-link> 
-          e 
-          <router-link to="/TermosLegais" target="_blank" class="terms-link">Termos Legais</router-link>.
-        </p>
-      </div>
-    </div>
+  <div class="notice-content">
+    <i class="fas fa-info-circle notice-icon"></i>
+    <p>
+      {{ t('contact.form.termsNotice.text') }}
+      <router-link to="/PoliticaPrivacidade" target="_blank" class="terms-link">{{
+        t('contact.form.termsNotice.privacyPolicy') }}</router-link>
+      {{ t('contact.form.termsNotice.continuation') }}
+    </p>
+  </div>
+</div>
     
     <!-- Botão com loading -->
     <button 
@@ -73,6 +73,7 @@
 </template>
 
 <script>
+import { useContactTranslation } from '@/composables/useContactTranslation.js';
 import API_CONFIG from '@/config/api.js';
 
 export default {
@@ -90,6 +91,14 @@ export default {
       showSuccessMessage: false,
       showErrorMessage: false
     };
+  },
+  setup() {
+    const { t, currentLanguage } = useContactTranslation()
+    
+    return {
+      t,
+      currentLanguage
+    }
   },
   methods: {
     getBrazilianTimeNative() {
@@ -144,7 +153,7 @@ export default {
             email: this.formData.email,
             telefone: this.formData.telefone,
             empresa: this.formData.empresa,
-            message: `📧 CONTATO - UniHospitalar
+            message: `📧 CONTATO - Uni Hospitalar
 
 👤 DADOS DO CONTATO:
 • Nome: ${this.formData.name}
@@ -156,7 +165,7 @@ export default {
 ${this.formData.message}
 
 📅 Data: ${this.getBrazilianTimeNative()}
-🌐 Origem: Formulário de Contato - Site UniHospitalar
+🌐 Origem: Formulário de Contato - Site Uni Hospitalar
 
 📞 AÇÃO REQUERIDA: Responder Contato (Responder em até 24h)`,
             section: 'Contato - Geral', // ← ADICIONAR SEÇÃO
@@ -236,42 +245,40 @@ ${this.formData.message}
 
 /* Aviso de Termos */
 .terms-notice {
-  margin: 30px 0 20px 0;
-  background: linear-gradient(135deg, rgba(174, 44, 42, 0.05), rgba(174, 44, 42, 0.02));
-  border: 1px solid rgba(174, 44, 42, 0.2);
-  border-radius: 10px;
-  padding: 20px;
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #AE2C2A;
 }
 
 .notice-content {
   display: flex;
   align-items: flex-start;
-  gap: 15px;
+  gap: 10px;
 }
 
 .notice-icon {
   color: #AE2C2A;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-top: 2px;
   flex-shrink: 0;
 }
 
 .notice-content p {
   margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #666;
 }
 
 .terms-link {
   color: #AE2C2A;
-  font-weight: 600;
   text-decoration: none;
-  transition: color 0.3s ease;
+  font-weight: 600;
 }
 
 .terms-link:hover {
-  color: #ff5555;
   text-decoration: underline;
 }
 

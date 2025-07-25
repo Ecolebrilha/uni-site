@@ -288,93 +288,14 @@
                         </div>
                         <h3>{{ t('confidential.actions.trackReport.title') }}</h3>
                         <p>{{ t('confidential.actions.trackReport.text') }}</p>
-                        <button @click="showTrackingModal = true" class="action-button secondary">
+                        <router-link to="/ConsultaStatus" class="action-button secondary">
                             <i class="fas fa-clipboard-list"></i>
                             {{ t('confidential.actions.trackReport.button') }}
-                        </button>
+                        </router-link>
                     </div>
                 </div>
             </div>
         </section>
-
-        <!-- Modal de Acompanhamento -->
-        <div v-if="showTrackingModal" class="modal-overlay" @click="closeModal">
-            <div class="modal-content" @click.stop>
-                <div class="modal-header">
-                    <h3>{{ t('confidential.modal.title') }}</h3>
-                    <button @click="closeModal" class="close-btn">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-                    <p>{{ t('confidential.modal.description') }}</p>
-
-                    <form @submit.prevent="trackReport" class="tracking-form">
-                        <div class="form-group">
-                            <label for="reportNumber">{{ t('confidential.modal.reportNumber') }}</label>
-                            <input type="text" id="reportNumber" v-model="tracking.reportNumber"
-                                :placeholder="t('confidential.modal.reportNumberPlaceholder')" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="accessCode">{{ t('confidential.modal.accessCode') }}</label>
-                            <input type="text" id="accessCode" v-model="tracking.accessCode"
-                                :placeholder="t('confidential.modal.accessCodePlaceholder')" required>
-                        </div>
-
-                        <div class="form-actions">
-                            <button type="button" @click="closeModal" class="btn-cancel">
-                                {{ t('confidential.modal.cancel') }}
-                            </button>
-                            <button type="submit" class="btn-track" :disabled="trackingLoading">
-                                {{ trackingLoading ? t('confidential.modal.searching') : t('confidential.modal.search')
-                                }}
-                            </button>
-                        </div>
-                    </form>
-
-                    <!-- Resultado da consulta -->
-                    <div v-if="trackingResult" class="tracking-result">
-                        <div class="result-header">
-                            <i class="fas fa-check-circle"></i>
-                            <h4>{{ t('confidential.modal.result.title') }}</h4>
-                        </div>
-
-                        <div class="result-info">
-                            <div class="info-row">
-                                <span class="label">{{ t('confidential.modal.result.protocol') }}:</span>
-                                <span class="value">{{ trackingResult.protocol }}</span>
-                            </div>
-                            <div class="info-row">
-                                <span class="label">{{ t('confidential.modal.result.code') }}:</span>
-                                <span class="value">{{ trackingResult.code }}</span>
-                            </div>
-                            <div class="info-row">
-                                <span class="label">{{ t('confidential.modal.result.date') }}:</span>
-                                <span class="value">{{ trackingResult.date }}</span>
-                            </div>
-                            <div class="info-row">
-                                <span class="label">{{ t('confidential.modal.result.status') }}:</span>
-                                <span class="value status" :class="trackingResult.statusClass">
-                                    {{ t(`confidential.modal.result.statusTypes.${trackingResult.status}`) }}
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="status-description">
-                            <p>{{ t(`confidential.modal.result.descriptions.${trackingResult.status}`) }}</p>
-                        </div>
-                    </div>
-
-                    <!-- Erro na consulta -->
-                    <div v-if="trackingError" class="tracking-error">
-                        <i class="fas fa-exclamation-circle error-icon"></i>
-                        <p>{{ trackingError }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <HomeFooter />
     </div>

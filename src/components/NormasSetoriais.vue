@@ -277,24 +277,24 @@
     </section>
 
     <!-- Seção de Monitoramento Contínuo -->
-<section class="monitoring-section">
+    <section class="monitoring-section">
   <div class="container">
     <ScrollReveal direction="bottom" :delay="100">
       <div class="section-header">
         <div class="section-badge">
           <i class="fas fa-chart-line"></i>
-          <span>{{ t('normasSetoriais.monitoring.badge') }}</span>
+          <span>{{ t('normasSetoriais.stats.monitoring.badge') }}</span>
         </div>
-        <h2>{{ t('normasSetoriais.monitoring.title') }}</h2>
-        <p>{{ t('normasSetoriais.monitoring.description') }}</p>
+        <h2>{{ t('normasSetoriais.stats.monitoring.title') }}</h2>
+        <p>{{ t('normasSetoriais.stats.monitoring.description') }}</p>
       </div>
     </ScrollReveal>
-
+    
     <ScrollReveal direction="bottom" :delay="200">
       <div class="monitoring-info">
         <div class="info-overview">
-          <h3>{{ t('normasSetoriais.monitoring.overview.title') }}</h3>
-          <p>{{ t('normasSetoriais.monitoring.overview.description') }}</p>
+          <h3>{{ t('normasSetoriais.stats.monitoring.overview.title') }}</h3>
+          <p>{{ t('normasSetoriais.stats.monitoring.overview.description') }}</p>
         </div>
         
         <div class="monitoring-features">
@@ -340,177 +340,8 @@
         </div>
       </div>
     </ScrollReveal>
-
-    <ScrollReveal direction="bottom" :delay="300">
-      <div class="monitoring-dashboard">
-        <div class="dashboard-header">
-          <div class="dashboard-title">
-            <i class="fas fa-tachometer-alt"></i>
-            <h3>{{ t('normasSetoriais.monitoring.dashboard.title') }}</h3>
-          </div>
-          <div class="status-indicator">
-            <span class="status-dot active"></span>
-            <span class="status-text">{{ t('normasSetoriais.monitoring.dashboard.status') }}</span>
-          </div>
-        </div>
-        
-        <div class="dashboard-content">
-          <div class="dashboard-metrics">
-            <div class="metric-item primary">
-              <div class="metric-header">
-                <div class="metric-icon">
-                  <i class="fas fa-shield-check"></i>
-                </div>
-                <div class="metric-trend up">
-                  <i class="fas fa-arrow-up"></i>
-                  <span>+2.3%</span>
-                </div>
-              </div>
-              <div class="metric-value">98.7%</div>
-              <div class="metric-label">{{ t('normasSetoriais.monitoring.dashboard.metrics.compliance') }}</div>
-            </div>
-            
-            <div class="metric-item secondary">
-              <div class="metric-header">
-                <div class="metric-icon">
-                  <i class="fas fa-clock"></i>
-                </div>
-                <div class="metric-trend stable">
-                  <i class="fas fa-minus"></i>
-                  <span>{{ t('normasSetoriais.monitoring.dashboard.metrics.stable') }}</span>
-                </div>
-              </div>
-              <div class="metric-value">24/7</div>
-              <div class="metric-label">{{ t('normasSetoriais.monitoring.dashboard.metrics.monitoring') }}</div>
-            </div>
-            
-            <div class="metric-item tertiary">
-              <div class="metric-header">
-                <div class="metric-icon">
-                  <i class="fas fa-stopwatch"></i>
-                </div>
-                <div class="metric-trend up">
-                  <i class="fas fa-arrow-down"></i>
-                  <span>-15%</span>
-                </div>
-              </div>
-              <div class="metric-value">2h</div>
-              <div class="metric-label">{{ t('normasSetoriais.monitoring.dashboard.metrics.response') }}</div>
-            </div>
-          </div>
-          
-          <div class="dashboard-chart">
-            <div class="chart-header">
-              <h4>{{ t('normasSetoriais.monitoring.dashboard.chart.title') }}</h4>
-            </div>
-            <div class="chart-placeholder">
-              <div class="chart-visual">
-                <i class="fas fa-chart-area"></i>
-                <span>{{ t('normasSetoriais.monitoring.dashboard.chart.description') }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </ScrollReveal>
   </div>
 </section>
-
-    <!-- Seção de Certificações -->
-    <section class="certifications-section">
-      <div class="container">
-        <ScrollReveal direction="bottom" :delay="100">
-          <div class="section-header">
-            <h2>{{ t('normasSetoriais.certifications.title') }}</h2>
-            <p>{{ t('normasSetoriais.certifications.subtitle') }}</p>
-          </div>
-        </ScrollReveal>
-
-        <div class="certifications-showcase">
-          <ScrollReveal direction="left" :delay="200">
-            <div class="certification-card featured">
-              <div class="cert-badge">
-                <i class="fas fa-star"></i>
-                <span>{{ t('normasSetoriais.certifications.featured') }}</span>
-              </div>
-              <div class="cert-logo">
-                <i class="fas fa-certificate"></i>
-              </div>
-              <h3>{{ t('normasSetoriais.certifications.main.title') }}</h3>
-              <p>{{ t('normasSetoriais.certifications.main.description') }}</p>
-              <div class="cert-details">
-                <div class="cert-detail">
-                  <span class="detail-label">{{ t('normasSetoriais.certifications.main.issued') }}</span>
-                  <span class="detail-value">{{ t('normasSetoriais.certifications.main.issuedDate') }}</span>
-                </div>
-                <div class="cert-detail">
-                  <span class="detail-label">{{ t('normasSetoriais.certifications.main.valid') }}</span>
-                  <span class="detail-value">{{ t('normasSetoriais.certifications.main.validUntil') }}</span>
-                </div>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          <div class="certifications-grid">
-            <ScrollReveal direction="bottom" :delay="300">
-              <div class="certification-item">
-                <div class="cert-icon">
-                  <i class="fas fa-shield-alt"></i>
-                </div>
-                <h4>{{ t('normasSetoriais.certifications.items.gmp.title') }}</h4>
-                <p>{{ t('normasSetoriais.certifications.items.gmp.description') }}</p>
-                <div class="cert-status valid">
-                  <i class="fas fa-check-circle"></i>
-                  <span>{{ t('normasSetoriais.certifications.status.valid') }}</span>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal direction="bottom" :delay="400">
-              <div class="certification-item">
-                <div class="cert-icon">
-                  <i class="fas fa-leaf"></i>
-                </div>
-                <h4>{{ t('normasSetoriais.certifications.items.environmental.title') }}</h4>
-                <p>{{ t('normasSetoriais.certifications.items.environmental.description') }}</p>
-                <div class="cert-status valid">
-                  <i class="fas fa-check-circle"></i>
-                  <span>{{ t('normasSetoriais.certifications.status.valid') }}</span>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal direction="bottom" :delay="500">
-              <div class="certification-item">
-                <div class="cert-icon">
-                  <i class="fas fa-users"></i>
-                </div>
-                <h4>{{ t('normasSetoriais.certifications.items.safety.title') }}</h4>
-                <p>{{ t('normasSetoriais.certifications.items.safety.description') }}</p>
-                <div class="cert-status valid">
-                  <i class="fas fa-check-circle"></i>
-                  <span>{{ t('normasSetoriais.certifications.status.valid') }}</span>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal direction="bottom" :delay="600">
-              <div class="certification-item">
-                <div class="cert-icon">
-                  <i class="fas fa-lock"></i>
-                </div>
-                <h4>{{ t('normasSetoriais.certifications.items.security.title') }}</h4>
-                <p>{{ t('normasSetoriais.certifications.items.security.description') }}</p>
-                <div class="cert-status valid">
-                  <i class="fas fa-check-circle"></i>
-                  <span>{{ t('normasSetoriais.certifications.status.valid') }}</span>
-                </div>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- Seção de Contato -->
     <section class="contact-section">
@@ -717,7 +548,6 @@ section {
 }
 
 /* Seção de Visão Geral da Conformidade */
-/* Seção de Conformidade */
 .compliance-overview-section {
   background: white;
   padding: 120px 0;
@@ -748,8 +578,9 @@ section {
 }
 
 .section-badge {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   background: linear-gradient(135deg, rgba(174, 44, 42, 0.1), rgba(255, 85, 85, 0.1));
   padding: 12px 25px;
@@ -760,6 +591,9 @@ section {
   border: 2px solid rgba(174, 44, 42, 0.2);
   position: relative;
   overflow: hidden;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .section-badge i {
@@ -894,13 +728,17 @@ section {
 
 .section-header {
   text-align: center;
-  margin-bottom: 80px;
+  margin-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .section-header h2 {
   font-size: 3rem;
   font-weight: 800;
   color: #AE2C2A;
+  margin-top: 0;
   margin-bottom: 20px;
   position: relative;
   text-transform: uppercase;

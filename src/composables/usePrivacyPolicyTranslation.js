@@ -58,15 +58,6 @@ const translations = reactive({
           description: 'Você pode se opor ao tratamento de seus dados pessoais em determinadas situações.'
         }
       },
-      securityTitle: 'Segurança de Dados',
-      securityText: 'A Uni Hospitalar adota as melhores práticas de segurança para garantir a integridade e confidencialidade dos dados tratados. Utilizamos mecanismos robustos para proteger contra uso indevido, acessos não autorizados, danos, fraudes e outras ameaças.',
-      securityFeatures: {
-        encryption: 'Criptografia de dados sensíveis',
-        accessControl: 'Controle de acesso rigoroso',
-        monitoring: 'Monitoramento contínuo',
-        updates: 'Atualizações regulares de segurança',
-        training: 'Treinamento de equipe em proteção de dados'
-      },
       ctaTitle: 'Dúvidas sobre nossa política?',
       ctaText: 'Se você tiver qualquer dúvida sobre como tratamos seus dados ou quiser exercer seus direitos, entre em contato conosco.',
       ctaButton: 'Entre em Contato'
@@ -127,15 +118,6 @@ const translations = reactive({
           description: 'You can oppose the processing of your personal data in certain situations.'
         }
       },
-      securityTitle: 'Data Security',
-      securityText: 'Uni Hospitalar adopts the best security practices to ensure the integrity and confidentiality of the data processed. We use robust mechanisms to protect against misuse, unauthorized access, damage, fraud and other threats.',
-      securityFeatures: {
-        encryption: 'Sensitive data encryption',
-        accessControl: 'Strict access control',
-        monitoring: 'Continuous monitoring',
-        updates: 'Regular security updates',
-        training: 'Team training in data protection'
-      },
       ctaTitle: 'Questions about our policy?',
       ctaText: 'If you have any questions about how we handle your data or want to exercise your rights, contact us.',
       ctaButton: 'Contact Us'
@@ -195,15 +177,6 @@ const translations = reactive({
           title: 'Oposición',
           description: 'Usted puede oponerse al tratamiento de sus datos personales en determinadas situaciones.'
         }
-      },
-      securityTitle: 'Seguridad de Datos',
-      securityText: 'Uni Hospitalar adopta las mejores prácticas de seguridad para garantizar la integridad y confidencialidad de los datos tratados. Utilizamos mecanismos robustos para proteger contra uso indebido, accesos no autorizados, daños, fraudes y otras amenazas.',
-      securityFeatures: {
-        encryption: 'Encriptación de datos sensibles',
-        accessControl: 'Control de acceso riguroso',
-        monitoring: 'Monitoreo continuo',
-        updates: 'Actualizaciones regulares de seguridad',
-        training: 'Entrenamiento de equipo en protección de datos'
       },
       ctaTitle: '¿Dudas sobre nuestra política?',
       ctaText: 'Si usted tiene alguna duda sobre cómo tratamos sus datos o quiere ejercer sus derechos, contáctenos.',

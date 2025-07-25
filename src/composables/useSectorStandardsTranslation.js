@@ -19,7 +19,15 @@ const translations = reactive({
         },
         monitoring: {
           number: '24/7',
-          label: 'Monitoramento Contínuo'
+          label: 'Monitoramento Contínuo',
+          badge: 'Monitoramento Ativo',
+      title: 'Monitoramento Contínuo',
+      description: 'Implementamos sistemas avançados de monitoramento que garantem o acompanhamento em tempo real de todos os indicadores de conformidade e qualidade.',
+      
+      overview: {
+        title: 'Visão Geral do Sistema',
+        description: 'Nossa plataforma de monitoramento oferece uma visão completa e em tempo real de todos os processos críticos, garantindo máxima eficiência e conformidade.'
+      },
         },
         training: {
           number: '500+',
@@ -221,7 +229,15 @@ const translations = reactive({
         },
         monitoring: {
           number: '24/7',
-          label: 'Continuous Monitoring'
+          label: 'Continuous Monitoring',
+          badge: 'Active Monitoring',
+      title: 'Continuous Monitoring',
+      description: 'We implement advanced monitoring systems that ensure real-time tracking of all compliance and quality indicators.',
+      
+      overview: {
+        title: 'System Overview',
+        description: 'Our monitoring platform provides a complete and real-time view of all critical processes, ensuring maximum efficiency and compliance.'
+      },
         },
         training: {
           number: '500+',
@@ -423,7 +439,15 @@ const translations = reactive({
         },
         monitoring: {
           number: '24/7',
-          label: 'Monitoreo Continuo'
+          label: 'Monitoreo Continuo',
+          badge: 'Monitoreo Activo',
+      title: 'Monitoreo Continuo',
+      description: 'Implementamos sistemas avanzados de monitoreo que garantizan el seguimiento en tiempo real de todos los indicadores de cumplimiento y calidad.',
+      
+      overview: {
+        title: 'Visión General del Sistema',
+        description: 'Nuestra plataforma de monitoreo ofrece una visión completa y en tiempo real de todos los procesos críticos, garantizando máxima eficiencia y cumplimiento.'
+      },
         },
         training: {
           number: '500+',

@@ -21,21 +21,28 @@ const translations = reactive({
           title: 'Comercial',
           fullTitle: 'Departamento Comercial',
           email: 'vendas@unihospitalar.com.br',
-          phone: '+55 (81) 3472 7224',
+          phone: '+55 (81) 3472 7223',
           hours: 'Segunda a Sexta: 8h às 18h'
         },
         bidding: {
           title: 'Licitação',
           fullTitle: 'Departamento de Licitação',
           email: 'licitacao@unihospitalar.com.br',
-          phone: '+55 (81) 3472 7215',
+          phone: '+55 (81) 3472 7214',
           hours: 'Segunda a Sexta: 8h às 18h'
         },
         financial: {
           title: 'Financeiro',
           fullTitle: 'Departamento Financeiro',
           email: 'financeiro@unihospitalar.com.br',
-          phone: '+55 (81) 3472 7202',
+          phone: '+55 (81) 3472 7207',
+          hours: 'Segunda a Sexta: 8h às 18h'
+        },
+        lgpd: {
+          title: 'LGPD',
+          fullTitle: 'Lei Geral de Proteção de Dados',
+          email: 'dpo@unihospitalar.com.br',
+          phone: '+55 (81) 3472 7231',
           hours: 'Segunda a Sexta: 8h às 18h'
         }
       },
@@ -46,7 +53,7 @@ const translations = reactive({
       locationsTitle: 'Nossas Localizações',
       branches: {
         recife: {
-          name: 'Matriz Recife',
+          name: 'Uni Hospitalar LTDA',
           city: 'Recife - PE',
           address: 'Rua Alagoas, 253 - Ipsep, Recife - PE',
           cep: '51350-000',
@@ -55,16 +62,16 @@ const translations = reactive({
           hours: 'Segunda a Sexta: 8h às 18h'
         },
         fortaleza: {
-          name: 'CD Fortaleza',
+          name: 'Uni Hospitalar Ceará LTDA',
           city: 'Fortaleza - CE',
-          address: 'R. Francisco Jose Albuquerque Pereira - Cajazeiras, Fortaleza - CE',
+          address: 'Rua Flôres, 38 - Cajazeiras, Fortaleza - CE',
           cep: '60864-520',
           phone: '+55 (81) 3472 7202',
           email: 'fortaleza@unihospitalar.com.br',
           hours: 'Segunda a Sexta: 8h às 18h'
         },
         saopaulo: {
-          name: 'CD São Paulo',
+          name: 'SP Hospitalar LTDA',
           city: 'Cotia - SP',
           address: 'R. Pinhal, 165 - Jardim Sabiá, Cotia - SP',
           cep: '06716-575',
@@ -80,6 +87,13 @@ const translations = reactive({
         email: 'E-mail:',
         hours: 'Horário de Funcionamento:',
         directions: 'Como Chegar'
+      },
+      form: {
+        termsNotice: {
+          text: 'Ao enviar este formulário, você reconhece nossa',
+          privacyPolicy: 'Política de Privacidade',
+          continuation: 'e está ciente de que seus dados serão utilizados conforme a natureza de sua solicitação, para atendimento adequado e comunicações necessárias ao acompanhamento da demanda junto à Uni Hospitalar.'
+        }
       }
     }
   },
@@ -101,21 +115,28 @@ const translations = reactive({
           title: 'Commercial',
           fullTitle: 'Commercial Department',
           email: 'vendas@unihospitalar.com.br',
-          phone: '+55 (81) 3472 7224',
+          phone: '+55 (81) 3472 7223',
           hours: 'Monday to Friday: 8am to 6pm'
         },
         bidding: {
           title: 'Bidding',
           fullTitle: 'Bidding Department',
           email: 'licitacao@unihospitalar.com.br',
-          phone: '+55 (81) 3472 7215',
+          phone: '+55 (81) 3472 7214',
           hours: 'Monday to Friday: 8am to 6pm'
         },
         financial: {
           title: 'Financial',
           fullTitle: 'Financial Department',
           email: 'financeiro@unihospitalar.com.br',
-          phone: '+55 (81) 3472 7202',
+          phone: '+55 (81) 3472 7207',
+          hours: 'Monday to Friday: 8am to 6pm'
+        },
+        lgpd: {
+          title: 'LGPD',
+          fullTitle: 'General Data Protection Law',
+          email: 'dpo@unihospitalar.com.br',
+          phone: '+55 (81) 3472 7231',
           hours: 'Monday to Friday: 8am to 6pm'
         }
       },
@@ -126,7 +147,7 @@ const translations = reactive({
       locationsTitle: 'Our Locations',
       branches: {
         recife: {
-          name: 'Headquarters Recife',
+          name: 'Uni Hospitalar LTDA',
           city: 'Recife - PE',
           address: 'Rua Alagoas, 253 - Ipsep, Recife - PE',
           cep: '51350-000',
@@ -135,16 +156,16 @@ const translations = reactive({
           hours: 'Monday to Friday: 8am to 6pm'
         },
         fortaleza: {
-          name: 'DC Fortaleza',
+          name: 'Uni Hospitalar Ceará LTDA',
           city: 'Fortaleza - CE',
-          address: 'R. Francisco Jose Albuquerque Pereira - Cajazeiras, Fortaleza - CE',
+          address: 'Rua Flôres, 38 - Cajazeiras, Fortaleza - CE',
           cep: '60864-520',
           phone: '+55 (81) 3472 7202',
           email: 'fortaleza@unihospitalar.com.br',
           hours: 'Monday to Friday: 8am to 6pm'
         },
         saopaulo: {
-          name: 'DC São Paulo',
+          name: 'SP Hospitalar LTDA',
           city: 'Cotia - SP',
           address: 'R. Pinhal, 165 - Jardim Sabiá, Cotia - SP',
           cep: '06716-575',
@@ -160,6 +181,13 @@ const translations = reactive({
         email: 'Email:',
         hours: 'Business Hours:',
         directions: 'Get Directions'
+      },
+      form: {
+        termsNotice: {
+          text: 'By submitting this form, you acknowledge our',
+          privacyPolicy: 'Privacy Policy',
+          continuation: 'and are aware that your data will be used according to the nature of your request, for adequate service and necessary communications to follow up on the demand with Uni Hospitalar.'
+        }
       }
     }
   },
@@ -181,21 +209,28 @@ const translations = reactive({
           title: 'Comercial',
           fullTitle: 'Departamento Comercial',
           email: 'vendas@unihospitalar.com.br',
-          phone: '+55 (81) 3472 7224',
+          phone: '+55 (81) 3472 7223',
           hours: 'Lunes a Viernes: 8h a 18h'
         },
         bidding: {
           title: 'Licitación',
           fullTitle: 'Departamento de Licitación',
           email: 'licitacao@unihospitalar.com.br',
-          phone: '+55 (81) 3472 7215',
+          phone: '+55 (81) 3472 7214',
           hours: 'Lunes a Viernes: 8h a 18h'
         },
         financial: {
           title: 'Financiero',
           fullTitle: 'Departamento Financiero',
           email: 'financeiro@unihospitalar.com.br',
-          phone: '+55 (81) 3472 7202',
+          phone: '+55 (81) 3472 7207',
+          hours: 'Lunes a Viernes: 8h a 18h'
+        },
+        lgpd: {
+          title: 'LGPD',
+          fullTitle: 'Ley General de Protección de Datos',
+          email: 'dpo@unihospitalar.com.br',
+          phone: '+55 (81) 3472 7231',
           hours: 'Lunes a Viernes: 8h a 18h'
         }
       },
@@ -206,7 +241,7 @@ const translations = reactive({
       locationsTitle: 'Nuestras Ubicaciones',
       branches: {
         recife: {
-          name: 'Sede Recife',
+          name: 'Uni Hospitalar LTDA',
           city: 'Recife - PE',
           address: 'Rua Alagoas, 253 - Ipsep, Recife - PE',
           cep: '51350-000',
@@ -215,16 +250,16 @@ const translations = reactive({
           hours: 'Lunes a Viernes: 8h a 18h'
         },
         fortaleza: {
-          name: 'CD Fortaleza',
+          name: 'Uni Hospitalar Ceará LTDA',
           city: 'Fortaleza - CE',
-          address: 'R. Francisco Jose Albuquerque Pereira - Cajazeiras, Fortaleza - CE',
+          address: 'Rua Flôres, 38 - Cajazeiras, Fortaleza - CE',
           cep: '60864-520',
           phone: '+55 (81) 3472 7202',
           email: 'fortaleza@unihospitalar.com.br',
           hours: 'Lunes a Viernes: 8h a 18h'
         },
         saopaulo: {
-          name: 'CD São Paulo',
+          name: 'SP Hospitalar LTDA',
           city: 'Cotia - SP',
           address: 'R. Pinhal, 165 - Jardim Sabiá, Cotia - SP',
           cep: '06716-575',
@@ -240,6 +275,13 @@ const translations = reactive({
         email: 'Correo:',
         hours: 'Horario de Funcionamiento:',
         directions: 'Cómo Llegar'
+      },
+      form: {
+        termsNotice: {
+          text: 'Al enviar este formulario, reconoces nuestra',
+          privacyPolicy: 'Política de Privacidad',
+          continuation: 'y estás consciente de que tus datos serán utilizados conforme a la naturaleza de tu solicitud, para atención adecuada y comunicaciones necesarias para el seguimiento de la demanda con Uni Hospitalar.'
+        }
       }
     }
   }

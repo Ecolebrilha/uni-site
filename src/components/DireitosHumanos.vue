@@ -197,14 +197,13 @@
           </div>
         </ScrollReveal>
 
-        <div class="actions-grid">
-          <ScrollReveal direction="left" :delay="200">
-            <div class="action-card featured">
-              <div class="action-header">
-                <div class="action-icon">
-                  <i class="fas fa-clipboard-check"></i>
-                </div>
-                <h3>{{ t('direitosHumanos.actions.policies.title') }}</h3>
+        <ScrollReveal direction="left" :delay="200">
+          <div class="action-card featured">
+            <div class="action-header">
+              <div class="action-icon">
+                <i class="fas fa-clipboard-check"></i>
+              </div>
+              <h3>{{ t('direitosHumanos.actions.policies.title') }}</h3>
               </div>
               <p>{{ t('direitosHumanos.actions.policies.description') }}</p>
               <div class="action-list">
@@ -223,7 +222,8 @@
               </div>
             </div>
           </ScrollReveal>
-
+          
+          <div class="actions-grid">
           <ScrollReveal direction="right" :delay="300">
             <div class="action-card">
               <div class="action-icon">
@@ -641,8 +641,14 @@ section {
 }
 
 .commitment-item {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 30px;
   text-align: center;
-  padding: 30px 20px;
+  color: white;
+  transition: all 0.3s ease;
+  position: relative;
+  height: 340px;
 }
 
 .commitment-circle {
@@ -766,11 +772,11 @@ section {
 }
 
 .action-card.featured {
-  grid-column: 1;
-  grid-row: 1 / 3;
+  grid-template-columns: 1fr;
   background: linear-gradient(135deg, #AE2C2A, #8a2220);
   color: white;
   border-top: none;
+  margin-bottom: 30px;
 }
 
 .action-card.featured:hover {
@@ -779,11 +785,16 @@ section {
 
 .action-header {
   display: flex;
-  align-items: center;
+  align-self: center;
   gap: 20px;
   margin-bottom: 20px;
   position: relative;
   z-index: 2;
+}
+
+.action-header h3 {
+  position: relative;
+  top: 14px;
 }
 
 .action-icon {
@@ -858,6 +869,7 @@ section {
   margin-top: auto;
   position: relative;
   z-index: 2;
+  align-items: center;
 }
 
 .action-item {
@@ -1014,6 +1026,10 @@ section {
   .commitments-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .commitment-item {
+    height: 320px;
+  }
   
   .actions-grid {
     grid-template-columns: 1fr;
@@ -1022,6 +1038,10 @@ section {
   .action-card.featured {
     grid-column: 1;
     grid-row: 1;
+  }
+
+  .action-icon {
+    margin: 0 auto;
   }
 }
 
@@ -1072,10 +1092,15 @@ section {
     grid-template-columns: 1fr;
     gap: 30px;
   }
+
+  .commitment-item {
+    height: 280px;
+  }
   
   .action-header {
     flex-direction: column;
     text-align: center;
+    align-items: center;
     gap: 15px;
   }
   

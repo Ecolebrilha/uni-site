@@ -27,26 +27,9 @@
           <li><router-link to="/Servicos" exact-active-class="active" @click="closeSidebar">
               <i class="fas fa-cogs"></i> {{ tHeader('header.navigation.services') }}
             </router-link></li>
-
-          <!-- Produtos Dropdown -->
-          <li class="sidebar-dropdown">
-            <div class="sidebar-dropdown-toggle">
-              <router-link to="/Produtos" class="sidebar-dropdown-main" @click="closeSidebar">
-                <i class="fas fa-pills"></i>
-                <span>{{ tHeader('header.navigation.products') }}</span>
-              </router-link>
-              <div class="sidebar-dropdown-arrow-container" @click.stop="toggleDropdown('produtos')">
-                <i class="fas fa-chevron-down sidebar-dropdown-arrow"
-                  :class="{ 'rotated': openDropdown === 'produtos' }"></i>
-              </div>
-            </div>
-            <div class="sidebar-dropdown-menu" :class="{ 'show': openDropdown === 'produtos' }">
-              <router-link to="/FazerReclamacao" class="sidebar-dropdown-item" @click="closeSidebar">
-                <i class="fas fa-edit"></i>
-                <span>{{ tHeader('header.dropdown.products.makeComplaint') }}</span>
-              </router-link>
-            </div>
-          </li>
+          <li><router-link to="/Produtos" exact-active-class="active" @click="closeSidebar">
+              <i class="fas fa-pills"></i>{{ tHeader('header.navigation.products') }}
+            </router-link></li>
 
           <!-- Compliance Dropdown -->
           <li class="sidebar-dropdown">
@@ -69,6 +52,10 @@
                 <i class="fas fa-edit"></i>
                 <span>{{ tHeader('header.dropdown.compliance.makeReport') }}</span>
               </router-link>
+              <router-link to="/ConsultaStatus" class="sidebar-dropdown-item" @click="closeSidebar">
+                <i class="fas fa-search"></i>
+                <span>{{ tHeader('header.dropdown.compliance.checkStatus') }}</span>
+              </router-link>
             </div>
           </li>
 
@@ -89,9 +76,9 @@
                 <i class="fas fa-file-shield"></i>
                 <span class="politica-span">{{ tHeader('header.dropdown.lgpd.privacyPolicy') }}</span>
               </router-link>
-              <router-link to="/TermosLegais" class="sidebar-dropdown-item" @click="closeSidebar">
-                <i class="fas fa-gavel"></i>
-                <span>{{ tHeader('header.dropdown.lgpd.legalTerms') }}</span>
+              <router-link to="/AvisoPrivacidade" class="sidebar-dropdown-item" @click="closeSidebar">
+                <i class="fas fa-info-circle"></i>
+                <span class="politica-span">{{ tHeader('header.dropdown.lgpd.privacyNotice') }}</span>
               </router-link>
             </div>
           </li>
@@ -120,6 +107,14 @@
               <router-link to="/SejaParceiro" class="sidebar-dropdown-item" @click="closeSidebar">
                 <i class="fas fa-handshake"></i>
                 <span class="seja-parceiro-span">{{ tHeader('header.dropdown.contact.bePartner') }}</span>
+              </router-link>
+              <router-link to="/FazerReclamacao" class="sidebar-dropdown-item" @click="closeSidebar">
+                <i class="fas fa-edit"></i>
+                <span>{{ tHeader('header.dropdown.products.makeComplaint') }}</span>
+              </router-link>
+              <router-link to="/ConsultaStatus" class="sidebar-dropdown-item" @click="closeSidebar">
+                <i class="fas fa-search"></i>
+                <span>{{ tHeader('header.dropdown.products.checkStatus') }}</span>
               </router-link>
             </div>
           </li>
@@ -213,25 +208,8 @@
         }}</router-link></li>
         <li><router-link to="/Servicos" exact-active-class="active">{{ tHeader('header.navigation.services')
         }}</router-link></li>
-
-        <!-- Produtos Dropdown -->
-        <li class="dropdown">
-          <router-link to="/Produtos" exact-active-class="active" class="dropdown-trigger">
-            {{ tHeader('header.navigation.products') }} <i class="fas fa-chevron-down dropdown-arrow"></i>
-          </router-link>
-          <div class="dropdown-content">
-            <div class="dropdown-items">
-              <router-link to="/FazerReclamacao" exact-active-class="active" class="dropdown-item">
-                <div class="item-icon">
-                  <i class="fas fa-edit"></i>
-                </div>
-                <div class="item-content">
-                  <span class="item-title">{{ tHeader('header.dropdown.products.makeComplaint') }}</span>
-                </div>
-              </router-link>
-            </div>
-          </div>
-        </li>
+        <li><router-link to="/Produtos" exact-active-class="active">{{ tHeader('header.navigation.products') }}
+          </router-link></li>
 
         <!-- Compliance Dropdown -->
         <li class="dropdown">
@@ -256,6 +234,14 @@
                   <span class="item-title">{{ tHeader('header.dropdown.compliance.makeReport') }}</span>
                 </div>
               </router-link>
+              <router-link to="/ConsultaStatus" exact-active-class="active" class="dropdown-item">
+                <div class="item-icon">
+                  <i class="fas fa-search"></i>
+                </div>
+                <div class="item-content">
+                  <span class="item-title">{{ tHeader('header.dropdown.compliance.checkStatus') }}</span>
+                </div>
+              </router-link>
             </div>
           </div>
         </li>
@@ -275,12 +261,12 @@
                   <span class="item-title">{{ tHeader('header.dropdown.lgpd.privacyPolicy') }}</span>
                 </div>
               </router-link>
-              <router-link to="/TermosLegais" exact-active-class="active" class="dropdown-item">
+              <router-link to="/AvisoPrivacidade" exact-active-class="active" class="dropdown-item">
                 <div class="item-icon">
-                  <i class="fas fa-gavel"></i>
+                  <i class="fas fa-info-circle"></i>
                 </div>
                 <div class="item-content">
-                  <span class="item-title">{{ tHeader('header.dropdown.lgpd.legalTerms') }}</span>
+                  <span class="item-title">{{ tHeader('header.dropdown.lgpd.privacyNotice') }}</span>
                 </div>
               </router-link>
             </div>
@@ -318,6 +304,22 @@
                   <span class="item-title">{{ tHeader('header.dropdown.contact.bePartner') }}</span>
                 </div>
               </router-link>
+              <router-link to="/FazerReclamacao" exact-active-class="active" class="dropdown-item">
+                <div class="item-icon">
+                  <i class="fas fa-edit"></i>
+                </div>
+                <div class="item-content">
+                  <span class="item-title">{{ tHeader('header.dropdown.products.makeComplaint') }}</span>
+                </div>
+              </router-link>
+              <router-link to="/ConsultaStatus" exact-active-class="active" class="dropdown-item">
+                <div class="item-icon">
+                  <i class="fas fa-search"></i>
+                </div>
+                <div class="item-content">
+                  <span class="item-title">{{ tHeader('header.dropdown.products.checkStatus') }}</span>
+                </div>
+              </router-link>
             </div>
           </div>
         </li>
@@ -349,6 +351,7 @@ import { useHeaderFooterTranslation } from '@/composables/useHeaderFooterTransla
 import { useConfidentialChannelTranslation } from '@/composables/useConfidentialChannelTranslation.js';
 import { useReportTranslation } from '@/composables/useReportTranslation';
 import { useComplaintTranslation } from '@/composables/useComplaintTranslation';
+import { usePrivacyNoticeTranslation } from '@/composables/usePrivacyNoticeTranslation';
 
 export default {
   name: 'HomeHeader',
@@ -374,6 +377,7 @@ export default {
     const { setLanguage: setConfidentialChannelLanguage } = useConfidentialChannelTranslation();
     const { setLanguage: setReportLanguage } = useReportTranslation();
     const { setLanguage: setComplaintLanguage } = useComplaintTranslation();
+    const { setLanguage: setPrivacyNoticeLanguage } = usePrivacyNoticeTranslation();
     const { t: tHeader, setLanguage: setHeaderFooterLanguage } = useHeaderFooterTranslation();
 
     return {
@@ -401,6 +405,7 @@ export default {
       setConfidentialChannelLanguage,
       setReportLanguage,
       setComplaintLanguage,
+      setPrivacyNoticeLanguage,
       setHeaderFooterLanguage,
     };
   },
@@ -450,6 +455,7 @@ export default {
       this.setConfidentialChannelLanguage(lang);
       this.setReportLanguage(lang);
       this.setComplaintLanguage(lang);
+      this.setPrivacyNoticeLanguage(lang);
       this.setHeaderFooterLanguage(lang);
     },
     handleScroll() {
@@ -1242,7 +1248,7 @@ nav ul li.dropdown:hover .dropdown-content {
 }
 
 .sidebar-dropdown-menu.show {
-  max-height: 200px;
+  max-height: 300px;
   padding: 8px 0;
 }
 

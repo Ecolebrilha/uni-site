@@ -71,7 +71,7 @@ export default {
               this.isRevealed = true;
             }
             
-            // Desconectar o observer após revelar (opcional)
+            // Desconectar o observer após revelar
             // this.observer.disconnect();
           }
         });

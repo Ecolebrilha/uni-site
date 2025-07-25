@@ -275,7 +275,7 @@
               <h3>{{ t('praticasAntissuborno.channels.online.title') }}</h3>
               <p>{{ t('praticasAntissuborno.channels.online.description') }}</p>
               <div class="channel-info">
-                <router-link to="/Contato" class="channel-link">
+                <router-link to="/FazerRelato" class="channel-link">
                   {{ t('praticasAntissuborno.channels.online.link') }}
                 </router-link>
               </div>

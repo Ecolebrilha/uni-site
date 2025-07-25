@@ -12,69 +12,69 @@
     </section>
 
     <!-- Seção de Canal Confidencial -->
-<section class="confidential-channel-section">
-  <div class="container">
-    <ScrollReveal direction="bottom" :delay="100">
-      <div class="channel-header">
-        <div class="alert-icon">
-          <i class="fas fa-envelope-open-text"></i>
-        </div>
-        <h2>{{ t('compliance.confidentialChannel.title') }}</h2>
-        <p class="channel-subtitle">{{ t('compliance.confidentialChannel.subtitle') }}</p>
-      </div>
-    </ScrollReveal>
-
-    <ScrollReveal direction="bottom" :delay="200">
-      <div class="channel-actions">
-        <div class="action-card primary">
-          <div class="action-icon">
-            <i class="fas fa-exclamation-triangle"></i>
-          </div>
-          <h3>{{ t('compliance.confidentialChannel.makeReport.title') }}</h3>
-          <p>{{ t('compliance.confidentialChannel.makeReport.description') }}</p>
-          <router-link to="/FazerRelato" class="action-button primary">
-            <i class="fas fa-edit"></i>
-            {{ t('compliance.confidentialChannel.makeReport.button') }}
-          </router-link>
-        </div>
-
-        <div class="action-card secondary">
-          <div class="action-icon">
-            <i class="fas fa-info-circle"></i>
-          </div>
-          <h3>{{ t('compliance.confidentialChannel.learnMore.title') }}</h3>
-          <p>{{ t('compliance.confidentialChannel.learnMore.description') }}</p>
-          <router-link to="/CanalConfidencial" class="action-button secondary">
-            <i class="fas fa-arrow-right"></i>
-            {{ t('compliance.confidentialChannel.learnMore.button') }}
-          </router-link>
-        </div>
-      </div>
-    </ScrollReveal>
-
-    <ScrollReveal direction="bottom" :delay="300">
-      <div class="channel-footer">
-        <div class="security-info">
-          <div class="security-features">
-            <div class="feature-item">
-              <i class="fas fa-shield-alt"></i>
-              <span>{{ t('compliance.confidentialChannel.features.secure') }}</span>
+    <section class="confidential-channel-section">
+      <div class="container">
+        <ScrollReveal direction="bottom" :delay="100">
+          <div class="channel-header">
+            <div class="alert-icon">
+              <i class="fas fa-envelope-open-text"></i>
             </div>
-            <div class="feature-item">
-              <i class="fas fa-user-secret"></i>
-              <span>{{ t('compliance.confidentialChannel.features.anonymous') }}</span>
+            <h2>{{ t('compliance.confidentialChannel.title') }}</h2>
+            <p class="channel-subtitle">{{ t('compliance.confidentialChannel.subtitle') }}</p>
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal direction="bottom" :delay="200">
+          <div class="channel-actions">
+            <div class="action-card primary">
+              <div class="action-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+              </div>
+              <h3>{{ t('compliance.confidentialChannel.makeReport.title') }}</h3>
+              <p>{{ t('compliance.confidentialChannel.makeReport.description') }}</p>
+              <router-link to="/FazerRelato" class="action-button primary">
+                <i class="fas fa-edit"></i>
+                {{ t('compliance.confidentialChannel.makeReport.button') }}
+              </router-link>
             </div>
-            <div class="feature-item">
-              <i class="fas fa-lock"></i>
-              <span>{{ t('compliance.confidentialChannel.features.confidential') }}</span>
+
+            <div class="action-card secondary">
+              <div class="action-icon">
+                <i class="fas fa-info-circle"></i>
+              </div>
+              <h3>{{ t('compliance.confidentialChannel.learnMore.title') }}</h3>
+              <p>{{ t('compliance.confidentialChannel.learnMore.description') }}</p>
+              <router-link to="/CanalConfidencial" class="action-button secondary">
+                <i class="fas fa-arrow-right"></i>
+                {{ t('compliance.confidentialChannel.learnMore.button') }}
+              </router-link>
             </div>
           </div>
-          <p class="security-guarantee">{{ t('compliance.confidentialChannel.guarantee') }}</p>
-        </div>
+        </ScrollReveal>
+
+        <ScrollReveal direction="bottom" :delay="300">
+          <div class="channel-footer">
+            <div class="security-info">
+              <div class="security-features">
+                <div class="feature-item">
+                  <i class="fas fa-shield-alt"></i>
+                  <span>{{ t('compliance.confidentialChannel.features.secure') }}</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fas fa-user-secret"></i>
+                  <span>{{ t('compliance.confidentialChannel.features.anonymous') }}</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fas fa-lock"></i>
+                  <span>{{ t('compliance.confidentialChannel.features.confidential') }}</span>
+                </div>
+              </div>
+              <p class="security-guarantee">{{ t('compliance.confidentialChannel.guarantee') }}</p>
+            </div>
+          </div>
+        </ScrollReveal>
       </div>
-    </ScrollReveal>
-  </div>
-</section>
+    </section>
 
     <!-- Seção de Visão Geral -->
     <section class="overview-section">
@@ -187,12 +187,12 @@
           <ScrollReveal direction="left" :delay="200">
             <div class="policy-card">
               <div class="policy-icon">
-                <i class="fas fa-lock"></i>
+                <i class="fas fa-chalkboard-teacher"></i>
               </div>
               <div class="policy-content">
-                <h3>{{ t('compliance.policies.dataSecurity.title') }}</h3>
-                <p>{{ t('compliance.policies.dataSecurity.description') }}</p>
-                <router-link to="/SegurancaDados" class="policy-link">{{ t('compliance.learnMore') }} <i
+                <h3>{{ t('compliance.policies.regularTraining.title') }}</h3>
+                <p>{{ t('compliance.policies.regularTraining.description') }}</p>
+                <router-link to="/Compliance" class="policy-link">{{ t('compliance.learnMore') }} <i
                     class="fas fa-arrow-right"></i></router-link>
               </div>
             </div>
@@ -247,9 +247,9 @@
               <p>{{ t('compliance.correctiveText') }}</p>
 
               <div class="corrective-links">
-                <router-link to="/SegurancaDados" class="corrective-link">
-                  <i class="fas fa-lock"></i>
-                  <span>{{ t('compliance.correctiveLinks.dataSecurity') }}</span>
+                <router-link to="/Compliance" class="corrective-link">
+                  <i class="fas fa-chalkboard-teacher"></i>
+                  <span>{{ t('compliance.correctiveLinks.regularTraining') }}</span>
                 </router-link>
 
                 <router-link to="/PraticasAntissuborno" class="corrective-link">
@@ -268,60 +268,6 @@
           <ScrollReveal direction="right" :delay="300">
             <div class="corrective-image">
               <img src="@/assets/acoes-corretivas.png" alt="Ações Corretivas" />
-            </div>
-          </ScrollReveal>
-        </div>
-      </div>
-    </section>
-
-    <!-- Seção de Documentos Legais -->
-    <section class="documents-section">
-      <div class="container">
-        <ScrollReveal direction="bottom" :delay="100">
-          <div class="section-title">
-            <span class="accent-line"></span>
-            <h2>{{ t('compliance.documentsTitle') }}</h2>
-            <span class="accent-line"></span>
-          </div>
-          <p class="intro-text">
-            {{ t('compliance.documentsIntro') }}
-          </p>
-        </ScrollReveal>
-
-        <div class="documents-container">
-          <ScrollReveal direction="left" :delay="200">
-            <div class="document-card">
-              <div class="document-icon">
-                <i class="fas fa-user-shield"></i>
-              </div>
-              <div class="document-content">
-                <h3>{{ t('compliance.documents.privacy.title') }}</h3>
-                <p>{{ t('compliance.documents.privacy.description') }}</p>
-              </div>
-              <div class="document-button-container">
-                <router-link to="/PoliticaPrivacidade" class="document-button">
-                  <i class="fas fa-file-alt"></i> {{ t('compliance.documents.privacy.button') }}
-                </router-link>
-              </div>
-
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="right" :delay="300">
-            <div class="document-card">
-              <div class="document-icon">
-                <i class="fas fa-file-contract"></i>
-              </div>
-              <div class="document-content">
-                <h3>{{ t('compliance.documents.terms.title') }}</h3>
-                <p>{{ t('compliance.documents.terms.description') }}</p>
-              </div>
-              <div class="document-button-container">
-                <router-link to="/TermosLegais" class="document-button">
-                  <i class="fas fa-file-alt"></i> {{ t('compliance.documents.terms.button') }}
-                </router-link>
-              </div>
-
             </div>
           </ScrollReveal>
         </div>
@@ -509,21 +455,30 @@ section {
   0% {
     box-shadow: 0 15px 40px rgba(174, 44, 42, 0.3);
   }
+
   50% {
     box-shadow: 0 15px 40px rgba(174, 44, 42, 0.6);
   }
+
   100% {
     box-shadow: 0 15px 40px rgba(174, 44, 42, 0.3);
   }
 }
 
 @keyframes bounce-alert {
-  0%, 20%, 50%, 80%, 100% {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateY(0);
   }
+
   40% {
     transform: translateY(-10px);
   }
+
   60% {
     transform: translateY(-5px);
   }
@@ -586,9 +541,11 @@ section {
   0% {
     transform: translateX(-100%) translateY(-100%) rotate(45deg);
   }
+
   50% {
     transform: translateX(100%) translateY(100%) rotate(45deg);
   }
+
   100% {
     transform: translateX(-100%) translateY(-100%) rotate(45deg);
   }
@@ -776,7 +733,7 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ae2c2a' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7z' fill='%23ae2c2a' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
 
 .section-title {
@@ -1264,226 +1221,10 @@ section {
   color: white;
 }
 
-/* Seção de Documentos Legais */
-.documents-section {
-  background: linear-gradient(135deg, #f8f9fa, #ffffff);
-  padding: 100px 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.documents-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7z' fill='%23ae2c2a' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
-  z-index: 0;
-}
-
-.documents-section .container {
-  position: relative;
-  z-index: 1;
-}
-
-.documents-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 40px;
-  margin-top: 60px;
-  align-items: stretch;
-}
-
-.document-card {
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(174, 44, 42, 0.08);
-  padding: 40px 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  transition: all 0.4s ease;
-  border: 1px solid rgba(174, 44, 42, 0.1);
-  position: relative;
-  overflow: hidden;
-  height: 380px;
-  justify-content: space-between;
-}
-
-.document-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-  z-index: 1;
-}
-
-.document-card:hover::before {
-  transform: scaleX(1);
-}
-
-.document-card:hover {
-  transform: translateY(-15px);
-  box-shadow: 0 25px 60px rgba(174, 44, 42, 0.15);
-  border-color: rgba(174, 44, 42, 0.2);
-}
-
-.document-icon {
-  width: 100px;
-  height: 100px;
-  background: linear-gradient(135deg, #AE2C2A, #D2342C);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 25px;
-  box-shadow: 0 15px 40px rgba(174, 44, 42, 0.3);
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
-}
-
-.document-card:hover .document-icon {
-  transform: scale(1.1);
-}
-
-.document-icon i {
-  font-size: 2.5rem;
-  color: white;
-  animation: documentFloat 3s ease-in-out infinite;
-}
-
-.document-content {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-bottom: 30px;
-}
-
-.document-content h3 {
-  font-size: 1.6rem;
-  color: #333;
-  margin-bottom: 20px;
-  font-weight: 700;
-  position: relative;
-}
-
-.document-content h3::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 2px;
-  background: linear-gradient(135deg, #AE2C2A, #D2342C);
-  transition: width 0.3s ease;
-}
-
-.document-card:hover .document-content h3::after {
-  width: 80%;
-}
-
-.document-content p {
-  color: #666;
-  margin-bottom: 25px;
-  font-size: 1.1rem;
-  line-height: 1.7;
-}
-
-.document-button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin-top: auto;
-  min-height: 50px;
-}
-
-.document-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 12px 30px;
-  background: linear-gradient(135deg, #AE2C2A, #D2342C);
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  border-radius: 50px;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 20px rgba(174, 44, 42, 0.3);
-  font-size: 0.95rem;
-  letter-spacing: 0.3px;
-  white-space: nowrap;
-  position: relative;
-  z-index: 2;
-  min-width: 160px;
-}
-
-.document-button:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(174, 44, 42, 0.4);
-  background: linear-gradient(135deg, #D2342C, #FF4444);
-}
-
-.document-button i {
-  transition: transform 0.3s ease;
-}
-
-.document-button:hover i {
-  transform: translateX(3px);
-}
-
-.document-card:nth-child(1) .document-icon {
-  background: linear-gradient(135deg, #AE2C2A, #D2342C);
-}
-
-.document-card:nth-child(2) .document-icon {
-  background: linear-gradient(135deg, #8B2220, #AE2C2A);
-}
-
-/* Animação flutuante para os ícones */
-@keyframes documentFloat {
-  0% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
-
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-.document-card:nth-child(2) .document-icon i {
-  animation-delay: 0.5s;
-}
-
 /* Responsividade */
 @media (max-width: 1200px) {
   .container {
     padding: 0 40px;
-  }
-
-  .documents-container {
-    grid-template-columns: 1fr;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .document-card {
-    height: 420px;
   }
 }
 
@@ -1545,69 +1286,33 @@ section {
     flex-direction: column;
   }
 
-  .documents-section {
-    padding: 80px 0;
-  }
-
-  .documents-container {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    margin-top: 50px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .document-card {
-    height: 400px;
-    padding: 35px 25px 25px 25px;
-  }
-  
-  .document-button-container {
-    margin-bottom: 10px;
-    padding: 0 10px;
-  }
-  
-  .document-button {
-    margin: 0 auto;
-  }
-
-  .document-icon {
-    width: 90px;
-    height: 90px;
-  }
-
-  .document-icon i {
-    font-size: 2.2rem;
-  }
-
   .confidential-channel-section {
     padding: 80px 0;
   }
-  
+
   .channel-actions {
     grid-template-columns: 1fr;
     gap: 30px;
     max-width: 500px;
   }
-  
+
   .action-card.primary {
     transform: none;
   }
-  
+
   .channel-header h2 {
     font-size: 2.2rem;
   }
-  
+
   .channel-subtitle {
     font-size: 1.2rem;
   }
-  
+
   .alert-icon {
     width: 80px;
     height: 80px;
   }
-  
+
   .alert-icon i {
     font-size: 2.5rem;
   }
@@ -1660,44 +1365,6 @@ section {
     font-size: 0.95rem;
   }
 
-  .documents-section {
-    padding: 70px 0;
-  }
-
-  .document-card {
-    height: 380px;
-    padding: 30px 20px 20px 20px;
-  }
-
-  .document-button-container {
-    margin-bottom: 8px;
-    padding: 0 8px;
-  }
-
-  .document-icon {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 20px;
-  }
-
-  .document-icon i {
-    font-size: 2rem;
-  }
-
-  .document-content h3 {
-    font-size: 1.4rem;
-    margin-bottom: 15px;
-  }
-
-  .document-content p {
-    font-size: 1rem;
-  }
-
-  .document-button {
-    padding: 12px 25px;
-    font-size: 0.95rem;
-  }
-
   .corrective-content h3 {
     font-size: 1.8rem;
   }
@@ -1710,27 +1377,27 @@ section {
   .confidential-channel-section {
     padding: 60px 0;
   }
-  
+
   .channel-header {
     margin-bottom: 40px;
   }
-  
+
   .channel-header h2 {
     font-size: 1.8rem;
   }
-  
+
   .channel-subtitle {
     font-size: 1.1rem;
   }
-  
+
   .action-card {
     padding: 30px 25px;
   }
-  
+
   .security-features {
     gap: 25px;
   }
-  
+
   .security-info {
     padding: 30px 25px;
   }
@@ -1771,47 +1438,6 @@ section {
   .conduct-link {
     padding: 12px 15px;
     font-size: 0.9rem;
-  }
-
-  .documents-container {
-    gap: 25px;
-    margin-top: 40px;
-  }
-
-  .document-card {
-    height: 350px;
-    padding: 25px 15px 15px 15px;
-  }
-  
-  .document-button-container {
-    margin-bottom: 5px;
-    padding: 0 5px;
-  }
-
-  .document-icon {
-    width: 70px;
-    height: 70px;
-    margin-bottom: 15px;
-  }
-
-  .document-icon i {
-    font-size: 1.8rem;
-  }
-
-  .document-content h3 {
-    font-size: 1.2rem;
-    margin-bottom: 12px;
-  }
-
-  .document-content p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-  }
-
-  .document-button {
-    padding: 10px 20px;
-    font-size: 0.9rem;
-    gap: 8px;
   }
 
   .values-container {
@@ -1857,21 +1483,21 @@ section {
   .channel-header h2 {
     font-size: 1.6rem;
   }
-  
+
   .channel-subtitle {
     font-size: 1rem;
   }
-  
+
   .alert-icon {
     width: 70px;
     height: 70px;
     margin-bottom: 20px;
   }
-  
+
   .alert-icon i {
     font-size: 2rem;
   }
-  
+
   .action-card {
     padding: 25px 20px;
   }
@@ -1879,18 +1505,18 @@ section {
   .action-card h3 {
     font-size: 1.4rem;
   }
-  
+
   .action-button {
     padding: 12px 25px;
     font-size: 1rem;
   }
-  
+
   .security-features {
     flex-direction: column;
     gap: 20px;
     align-items: center;
   }
-  
+
   .feature-item {
     flex-direction: row;
     gap: 15px;
@@ -1898,16 +1524,16 @@ section {
     width: 100%;
     max-width: 200px;
   }
-  
+
   .feature-item i {
     font-size: 1.5rem;
     margin-bottom: 0;
   }
-  
+
   .security-info {
     padding: 25px 20px;
   }
-  
+
   .security-guarantee {
     font-size: 1rem;
   }
@@ -1929,8 +1555,7 @@ section {
 }
 
 .value-icon i,
-.policy-icon i,
-.document-icon i {
+.policy-icon i {
   animation: float 3s ease-in-out infinite;
 }
 
@@ -1950,8 +1575,7 @@ section {
 }
 
 .value-icon:hover,
-.policy-icon:hover,
-.document-icon:hover {
+.policy-icon:hover {
   animation: pulse 1.5s infinite;
 }
 
@@ -1959,7 +1583,6 @@ section {
 .conduct-link,
 .corrective-link,
 .policy-link,
-.document-button,
 .cta-button {
   position: relative;
   overflow: hidden;
@@ -1968,7 +1591,6 @@ section {
 .conduct-link::after,
 .corrective-link::after,
 .policy-link::after,
-.document-button::after,
 .cta-button::after {
   content: '';
   position: absolute;
@@ -1983,7 +1605,6 @@ section {
 .conduct-link:hover::after,
 .corrective-link:hover::after,
 .policy-link:hover::after,
-.document-button:hover::after,
 .cta-button:hover::after {
   left: 100%;
 }
@@ -2110,14 +1731,12 @@ section {
 
 /* Efeito de sombra para os cards */
 .value-card,
-.policy-card,
-.document-card {
+.policy-card {
   position: relative;
 }
 
 .value-card::before,
-.policy-card::before,
-.document-card::before {
+.policy-card::before {
   content: '';
   position: absolute;
   top: 0;
@@ -2132,35 +1751,30 @@ section {
 }
 
 .value-card:hover::before,
-.policy-card:hover::before,
-.document-card:hover::before {
+.policy-card:hover::before {
   opacity: 1;
 }
 
 @media (max-width: 350px) {
 
   .value-card,
-  .policy-card,
-  .document-card {
+  .policy-card {
     padding: 20px;
   }
 
   .value-icon,
-  .policy-icon,
-  .document-icon {
+  .policy-icon {
     width: 50px;
     height: 50px;
   }
 
   .value-icon i,
-  .policy-icon i,
-  .document-icon i {
+  .policy-icon i {
     font-size: 1.5rem;
   }
 
   .value-card h3,
-  .policy-content h3,
-  .document-content h3 {
+  .policy-content h3 {
     font-size: 1.2rem;
   }
 
@@ -2174,8 +1788,7 @@ section {
     font-size: 0.8rem;
   }
 
-  .cta-button,
-  .document-button {
+  .cta-button {
     padding: 10px 15px;
     font-size: 0.8rem;
   }
@@ -2226,18 +1839,6 @@ section {
   .value-card {
     transition: none;
   }
-
-  .document-icon i {
-    animation: none;
-  }
-
-  .document-card {
-    transition: none;
-  }
-
-  .document-button {
-    transition: none;
-  }
 }
 
 /* Efeitos de hover para touch devices */
@@ -2247,18 +1848,6 @@ section {
   }
 
   .value-card:hover .value-icon {
-    transform: none;
-  }
-
-  .document-card:hover {
-    transform: none;
-  }
-
-  .document-card:hover .document-icon {
-    transform: none;
-  }
-
-  .document-button:hover {
     transform: none;
   }
 }

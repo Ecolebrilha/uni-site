@@ -37,7 +37,7 @@
 
               <form @submit.prevent="submitForm" class="partner-form">
                 <div class="form-grid">
-                  
+
                   <!-- CNPJ -->
                   <div class="form-group">
                     <label for="cnpj">{{ t('partner.form.fields.cnpj.label') }}</label>
@@ -143,9 +143,7 @@
                       {{ t('partner.form.termsNotice.text') }}
                       <router-link to="/PoliticaPrivacidade" target="_blank" class="terms-link">{{
                         t('partner.form.termsNotice.privacyPolicy') }}</router-link>
-                      e
-                      <router-link to="/TermosLegais" target="_blank" class="terms-link">{{
-                        t('partner.form.termsNotice.legalTerms') }}</router-link>.
+                      {{ t('partner.form.termsNotice.continuation') }}
                     </p>
                   </div>
                 </div>
@@ -573,7 +571,7 @@ export default {
             endereco: this.formData.endereco,
             ramo_atuacao: this.formData.ramoAtuacao,
             cnpj: this.formData.cnpj,
-            message: `🤝 SOLICITAÇÃO DE PARCERIA - UniHospitalar
+            message: `🤝 SOLICITAÇÃO DE PARCERIA - Uni Hospitalar
 
 📋 DADOS DA EMPRESA:
 • Nome/Razão Social: ${this.formData.nomeRazaoSocial}
@@ -586,7 +584,7 @@ export default {
 • Endereço: ${this.formData.endereco || 'Não informado'}
 
 📅 Data: ${this.getBrazilianTimeNative()}
-🌐 Origem: Formulário "Seja Nosso Parceiro" - Site UniHospitalar
+🌐 Origem: Formulário "Seja Nosso Parceiro" - Site Uni Hospitalar
 ✅ AÇÃO REQUERIDA: Análise de Parceria (Responder em até 48h)`,
             _subject: `🤝 Nova Solicitação de Parceria - ${this.formData.nomeRazaoSocial}`
           }),

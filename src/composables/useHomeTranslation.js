@@ -93,13 +93,16 @@ const translations = reactive({
       cookies: {
         banner: {
           title: 'Utilizamos cookies',
-          text: 'Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa',
-          privacyPolicy: 'Política de Privacidade',
+          text: 'Usamos cookies em nosso site: alguns são essenciais para o funcionamento, outros medem o desempenho ou personalizam anúncios. Aceite todos os cookies ou clique em "Configurações" para escolher suas preferências. Saiba mais em nossa',
+          privacyPolicy: 'Declaração de Cookies',
           accept: 'Aceitar',
+          reject: 'Rejeitar',
           settings: 'Configurações'
         },
         settings: {
           title: 'Configurações de Cookies',
+          intro: 'Abaixo listamos todos os cookies que podem ser utilizados pela Uni Hospitalar. É importante lembrar que você também pode gerenciar a permissão concedida para cada cookie em seu navegador. Saiba mais em nossa',
+    cookieStatement: 'Declaração de Cookies',
           essential: {
             title: 'Cookies Essenciais',
             description: 'Necessários para o funcionamento básico do site. Não podem ser desativados.'
@@ -207,13 +210,16 @@ const translations = reactive({
       cookies: {
         banner: {
           title: 'We use cookies',
-          text: 'This site uses cookies to improve your experience. By continuing to browse, you agree to our',
-          privacyPolicy: 'Privacy Policy',
+          text: 'We use cookies on our website: some are essential for functionality, others measure performance or personalize ads. Accept all cookies or click "Settings" to choose your preferences. Learn more in our',
+          privacyPolicy: 'Cookie Statement',
           accept: 'Accept',
+          reject: 'Reject',
           settings: 'Settings'
         },
         settings: {
           title: 'Cookie Settings',
+          intro: 'Below we list all cookies that may be used by Uni Hospitalar. It is important to remember that you can also manage the permission granted for each cookie in your browser. Learn more in our',
+    cookieStatement: 'Cookie Statement',
           essential: {
             title: 'Essential Cookies',
             description: 'Necessary for basic site functionality. Cannot be disabled.'
@@ -321,13 +327,16 @@ const translations = reactive({
       cookies: {
         banner: {
           title: 'Utilizamos cookies',
-          text: 'Este sitio utiliza cookies para mejorar tu experiencia. Al continuar navegando, aceptas nuestra',
-          privacyPolicy: 'Política de Privacidad',
+          text: 'Usamos cookies en nuestro sitio web: algunos son esenciales para el funcionamiento, otros miden el rendimiento o personalizan anuncios. Acepta todas las cookies o haz clic en "Configuraciones" para elegir tus preferencias. Obtén más información en nuestra',
+          privacyPolicy: 'Declaración de Cookies',
           accept: 'Aceptar',
+          reject: 'Rechazar',
           settings: 'Configuraciones'
         },
         settings: {
           title: 'Configuraciones de Cookies',
+          intro: 'A continuación listamos todas las cookies que pueden ser utilizadas por Uni Hospitalar. Es importante recordar que también puedes gestionar el permiso concedido para cada cookie en tu navegador. Obtén más información en nuestra',
+    cookieStatement: 'Declaración de Cookies',
           essential: {
             title: 'Cookies Esenciales',
             description: 'Necesarios para el funcionamiento básico del sitio. No se pueden desactivar.'

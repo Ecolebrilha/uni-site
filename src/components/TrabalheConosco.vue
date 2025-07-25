@@ -473,16 +473,40 @@
               </div>
 
               <div class="form-group full-width">
-                <div class="checkbox-group">
-                  <input type="checkbox" id="privacy" v-model="formData.privacy" required>
-                  <label for="privacy">
-                    Concordo com o tratamento dos meus dados pessoais conforme a
-                    <router-link to="/PoliticaPrivacidade" target="_blank">Política de Privacidade</router-link>
-                    da Uni Hospitalar.
-                  </label>
-                </div>
-                <span class="error-message" v-if="errors.privacy">{{ errors.privacy }}</span>
-              </div>
+  <div class="checkbox-group">
+    <input type="checkbox" id="privacy" v-model="formData.privacy" required>
+    <label for="privacy">
+      Autorizo a Uni Hospitalar a manter em seu banco de talentos
+      meus dados pessoais fornecidos durante a candidatura e
+      processo seletivo, permitindo que eu seja considerado para
+      futuras oportunidades compatíveis com meu perfil
+      profissional.
+    </label>
+  </div>
+  <div class="privacy-disclaimer">
+  <div class="notice-content">
+    <i class="fas fa-info-circle notice-icon"></i>
+    <p>
+      Se você optar por não autorizar, utilizaremos seus dados apenas
+      para esta candidatura específica. Após a conclusão do processo
+      seletivo, seus dados serão eliminados, preservando somente as
+      informações necessárias para registro histórico e cumprimento de
+      obrigações legais. Você pode revogar esta autorização a qualquer
+      momento através de contato com o nosso DPO.
+    </p>
+  </div>
+  
+  <div class="notice-content">
+    <i class="fas fa-external-link-alt notice-icon"></i>
+    <p>
+      Para mais informações sobre como tratamos seus dados pessoais,
+      acesse nosso 
+      <router-link to="/AvisoPrivacidade" target="_blank">Aviso de Privacidade</router-link>.
+    </p>
+  </div>
+</div>
+  <span class="error-message" v-if="errors.privacy">{{ errors.privacy }}</span>
+</div>
 
               <div class="form-actions">
                 <button type="button" @click="backToJobs" class="cancel-button">
@@ -501,6 +525,68 @@
       </div>
     </section>
 
+    <!-- Modal de Sucesso -->
+    <div v-if="showSuccessModal" class="success-modal-overlay" @click="closeSuccessModal">
+      <div class="success-modal-content" @click.stop>
+        <div class="success-animation">
+          <div class="checkmark-container">
+            <div class="checkmark-circle">
+              <i class="fas fa-check checkmark-icon"></i>
+            </div>
+            <div class="celebration-particles">
+              <div class="particle" v-for="n in 12" :key="n"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="success-content">
+          <h2 class="success-title">{{ successTitle }}</h2>
+          <p class="success-message">{{ successMessage }}</p>
+          
+          <div class="success-details" v-if="selectedJob">
+            <div class="job-applied">
+              <i class="fas fa-briefcase"></i>
+              <span>{{ selectedJob.title }}</span>
+            </div>
+            <div class="next-steps">
+              <h4>Próximos passos:</h4>
+              <ul>
+                <li><i class="fas fa-envelope"></i> Você receberá um e-mail de confirmação</li>
+                <li><i class="fas fa-search"></i> Nossa equipe analisará seu perfil</li>
+                <li><i class="fas fa-phone"></i> Entraremos em contato em breve</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="success-details" v-else>
+            <div class="talent-bank">
+              <i class="fas fa-database"></i>
+              <span>Banco de Talentos</span>
+            </div>
+            <div class="next-steps">
+              <h4>O que acontece agora:</h4>
+              <ul>
+                <li><i class="fas fa-save"></i> Seu perfil foi salvo em nosso sistema</li>
+                <li><i class="fas fa-bell"></i> Você será notificado sobre novas oportunidades</li>
+                <li><i class="fas fa-heart"></i> Manteremos contato para futuras vagas</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="success-actions">
+          <button @click="closeSuccessModal" class="success-button">
+            <i class="fas fa-home"></i>
+            Voltar ao Início
+          </button>
+          <button @click="viewMoreJobs" class="secondary-button" v-if="selectedJob">
+            <i class="fas fa-search"></i>
+            Ver Mais Vagas
+          </button>
+        </div>
+      </div>
+    </div>
+
     <HomeFooter />
   </div>
 </template>
@@ -509,6 +595,7 @@
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
 import ScrollReveal from '@/components/ScrollReveal.vue';
+import { useJobsStore } from '@/composables/useJobsStore.js'
 import API_CONFIG from '@/config/api.js';
 
 export default {
@@ -518,6 +605,10 @@ export default {
     HomeFooter,
     ScrollReveal
   },
+  setup() {
+    const { jobsStore, loadJobs } = useJobsStore()
+    return { jobsStore, loadJobsFromStore: loadJobs }
+  },
   data() {
     return {
       showForm: false,
@@ -526,6 +617,9 @@ export default {
       availableJobs: [],
       isSubmitting: false,
       expandedSections: {},
+      showSuccessModal: false,
+      successTitle: '',
+      successMessage: '',
       formData: {
         name: '',
         email: '',
@@ -542,7 +636,12 @@ export default {
     };
   },
   async mounted() {
-    await this.loadJobs();
+    this.loadingJobs = true
+    
+    // Usar vagas do store global
+    const jobs = await this.loadJobsFromStore()
+    this.availableJobs = jobs
+    this.loadingJobs = false
   },
   methods: {
     // Método para alternar seções expandidas
@@ -697,6 +796,7 @@ export default {
 
     // Validar formulário
     validateForm() {
+      console.log('🔍 Validando formulário...');
       this.errors = {};
 
       if (!this.formData.name.trim()) {
@@ -742,9 +842,15 @@ export default {
 
     // Enviar formulário
     async submitForm() {
+      console.log('🔄 submitForm chamado');
+      console.log('📋 Dados do formulário:', this.formData);
+      
       if (!this.validateForm()) {
+        console.log('❌ Validação falhou:', this.errors);
         return;
       }
+      
+      console.log('✅ Validação passou, enviando formulário...');
 
       this.isSubmitting = true;
 
@@ -778,13 +884,16 @@ export default {
         if (response.ok) {
           const result = await response.json();
 
-          // Mostrar mensagem de sucesso personalizada
+          // Mostrar modal de sucesso personalizado
           if (this.selectedJob) {
-            alert(`Candidatura enviada com sucesso para a vaga "${this.selectedJob.title}"! Entraremos em contato em breve.`);
+            this.successTitle = 'Candidatura Enviada com Sucesso!';
+            this.successMessage = `Sua candidatura para a vaga "${this.selectedJob.title}" foi enviada com sucesso. Nossa equipe de RH analisará seu perfil e entraremos em contato em breve.`;
           } else {
-            alert('Seu currículo foi adicionado ao nosso banco de talentos com sucesso! Entraremos em contato quando surgir uma oportunidade compatível.');
+            this.successTitle = 'Perfil Adicionado com Sucesso!';
+            this.successMessage = 'Seu currículo foi adicionado ao nosso banco de talentos com sucesso! Entraremos em contato quando surgir uma oportunidade compatível com seu perfil.';
           }
-
+          
+          this.showSuccessModal = true;
           console.log('✅ Candidatura enviada via API:', result);
         } else {
           const error = await response.json();
@@ -813,6 +922,20 @@ export default {
       } finally {
         this.isSubmitting = false;
       }
+    },
+
+    // Fechar modal de sucesso
+    closeSuccessModal() {
+      this.showSuccessModal = false;
+      this.resetForm();
+      this.backToJobs();
+    },
+
+    // Ver mais vagas
+    viewMoreJobs() {
+      this.showSuccessModal = false;
+      this.resetForm();
+      this.backToJobs();
     },
 
     // Resetar formulário
@@ -871,9 +994,9 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('@/assets/header-trabalhe-conosco.png');
+  background-image: url('@/assets/header_trabalhe_conosco.png');
   background-size: contain;
-  background-position: center -140px;
+  background-position: center 40px;
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
@@ -897,6 +1020,7 @@ section {
   font-weight: 800;
   margin-bottom: 20px;
   position: relative;
+  top: 200px;
   z-index: 2;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -907,6 +1031,7 @@ section {
   font-size: 1.5rem;
   font-weight: 300;
   position: relative;
+  top: 200px;
   z-index: 2;
   animation: fadeInUp 1.5s ease-out 0.3s both;
 }
@@ -2235,26 +2360,6 @@ section {
   padding: 20px;
 }
 
-.notice-content {
-  display: flex;
-  align-items: flex-start;
-  gap: 15px;
-}
-
-.notice-icon {
-  color: #AE2C2A;
-  font-size: 1.2rem;
-  margin-top: 2px;
-  flex-shrink: 0;
-}
-
-.notice-content p {
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: #555;
-}
-
 .terms-link {
   color: #AE2C2A;
   font-weight: 600;
@@ -2468,10 +2573,59 @@ section {
   z-index: 999 !important;
 }
 
+.privacy-disclaimer {
+  margin-top: 10px;
+  padding: 12px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border-left: 3px solid #AE2C2A;
+}
+
+.notice-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.notice-icon {
+  color: #AE2C2A;
+  font-size: 1.1rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.notice-content p {
+  margin: 0;
+  flex: 1;
+}
+
+.privacy-disclaimer p {
+  font-size: 0.75rem;
+  color: #6c757d;
+  line-height: 1.4;
+  margin: 0 0 8px 0;
+  text-align: left;
+}
+
+.privacy-disclaimer p:last-child {
+  margin-bottom: 0;
+}
+
+.privacy-disclaimer a {
+  color: #AE2C2A;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.privacy-disclaimer a:hover {
+  text-decoration: underline;
+}
+
 /* Responsividade */
 @media (max-width: 1600px) {
   .parallax-container {
-    background-position: center 0;
+    background-position: center 140px;
   }
 }
 
@@ -2481,7 +2635,7 @@ section {
   }
 
   .parallax-container {
-    background-position: center 140px;
+    background-position: center 230px;
   }
 
   .values-grid {
@@ -2495,7 +2649,7 @@ section {
   }
 
   .parallax-container {
-    background-position: center 220px;
+    background-position: center 240px;
   }
 
   .hero-subtitle {
@@ -2532,7 +2686,7 @@ section {
 
 @media (max-width: 768px) {
   .parallax-container {
-    background-position: center 220px;
+    background-position: center 280px;
   }
 
   .hero-section {
@@ -3041,6 +3195,370 @@ section {
 </style>
 
 <style>
+/* Modal de Sucesso */
+.success-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeInOverlay 0.3s ease-out;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.success-modal-content {
+  background: white;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideInModal 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+}
+
+@keyframes slideInModal {
+  from {
+    transform: scale(0.7) translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.success-animation {
+  padding: 40px 30px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.checkmark-container {
+  position: relative;
+  display: inline-block;
+}
+
+.checkmark-circle {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #28a745, #20c997);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both;
+  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+  position: relative;
+}
+
+@keyframes bounceIn {
+  from {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.checkmark-icon {
+  color: white;
+  font-size: 2.5rem;
+  animation: checkmarkDraw 0.3s ease-out 0.5s both;
+}
+
+@keyframes checkmarkDraw {
+  from {
+    transform: scale(0) rotate(-45deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.celebration-particles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  border-radius: 50%;
+  animation: particleFloat 2s ease-out infinite;
+}
+
+.particle:nth-child(1) { animation-delay: 0.1s; transform: rotate(0deg) translateX(60px); }
+.particle:nth-child(2) { animation-delay: 0.2s; transform: rotate(30deg) translateX(60px); }
+.particle:nth-child(3) { animation-delay: 0.3s; transform: rotate(60deg) translateX(60px); }
+.particle:nth-child(4) { animation-delay: 0.4s; transform: rotate(90deg) translateX(60px); }
+.particle:nth-child(5) { animation-delay: 0.5s; transform: rotate(120deg) translateX(60px); }
+.particle:nth-child(6) { animation-delay: 0.6s; transform: rotate(150deg) translateX(60px); }
+.particle:nth-child(7) { animation-delay: 0.7s; transform: rotate(180deg) translateX(60px); }
+.particle:nth-child(8) { animation-delay: 0.8s; transform: rotate(210deg) translateX(60px); }
+.particle:nth-child(9) { animation-delay: 0.9s; transform: rotate(240deg) translateX(60px); }
+.particle:nth-child(10) { animation-delay: 1.0s; transform: rotate(270deg) translateX(60px); }
+.particle:nth-child(11) { animation-delay: 1.1s; transform: rotate(300deg) translateX(60px); }
+.particle:nth-child(12) { animation-delay: 1.2s; transform: rotate(330deg) translateX(60px); }
+
+@keyframes particleFloat {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--rotation, 0deg)) translateX(0px) scale(0);
+  }
+  20% {
+    opacity: 1;
+    transform: rotate(var(--rotation, 0deg)) translateX(40px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--rotation, 0deg)) translateX(80px) scale(0);
+  }
+}
+
+.success-content {
+  padding: 0 30px 20px;
+  text-align: center;
+}
+
+.success-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #28a745;
+  margin-bottom: 15px;
+  animation: fadeInUp 0.5s ease-out 0.3s both;
+}
+
+.success-message {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  animation: fadeInUp 0.5s ease-out 0.4s both;
+}
+
+.success-details {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+  animation: fadeInUp 0.5s ease-out 0.5s both;
+}
+
+.job-applied,
+.talent-bank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 12px;
+  background: white;
+  border-radius: 8px;
+  border-left: 4px solid #AE2C2A;
+  font-weight: 600;
+  color: #333;
+}
+
+.job-applied i,
+.talent-bank i {
+  color: #AE2C2A;
+  font-size: 1.2rem;
+}
+
+.next-steps h4 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.next-steps ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.next-steps li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.next-steps li i {
+  color: #28a745;
+  font-size: 1rem;
+  width: 16px;
+  flex-shrink: 0;
+}
+
+.success-actions {
+  padding: 20px 30px 30px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  animation: fadeInUp 0.5s ease-out 0.6s both;
+}
+
+.success-button {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.success-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+}
+
+.secondary-button {
+  background: transparent;
+  color: #AE2C2A;
+  border: 2px solid #AE2C2A;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+}
+
+.secondary-button:hover {
+  background: #AE2C2A;
+  color: white;
+  transform: translateY(-2px);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade do Modal */
+@media (max-width: 768px) {
+  .success-modal-content {
+    width: 95%;
+    margin: 20px;
+  }
+  
+  .success-animation {
+    padding: 30px 20px 15px;
+  }
+  
+  .checkmark-circle {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .checkmark-icon {
+    font-size: 2rem;
+  }
+  
+  .success-content {
+    padding: 0 20px 15px;
+  }
+  
+  .success-title {
+    font-size: 1.5rem;
+  }
+  
+  .success-message {
+    font-size: 1rem;
+  }
+  
+  .success-actions {
+    flex-direction: column;
+    padding: 15px 20px 25px;
+  }
+  
+  .success-button,
+  .secondary-button {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .particle {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .checkmark-circle {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .checkmark-icon {
+    font-size: 1.8rem;
+  }
+  
+  .success-title {
+    font-size: 1.3rem;
+  }
+  
+  .success-message {
+    font-size: 0.95rem;
+  }
+  
+  .success-details {
+    padding: 15px;
+    margin: 15px 0;
+  }
+  
+  .next-steps li {
+    font-size: 0.9rem;
+  }
+}
+
 /* CSS global para corrigir o footer */
 footer {
   position: relative !important;

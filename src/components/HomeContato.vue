@@ -1,7 +1,7 @@
 <template>
   <div class="contato-page">
     <HomeHeader />
-    
+
     <!-- Hero Section com Efeito Parallax -->
     <section class="hero-section">
       <div class="parallax-container">
@@ -10,7 +10,7 @@
         <div class="hero-subtitle">{{ t('contact.heroSubtitle') }}</div>
       </div>
     </section>
-    
+
     <!-- Seção Principal de Contato -->
     <section class="contact-main">
       <div class="container">
@@ -24,45 +24,41 @@
             {{ t('contact.introText') }}
           </p>
         </ScrollReveal>
-        
+
         <div class="contact-container">
           <!-- Tabs de Navegação -->
           <div class="contact-tabs">
             <ScrollReveal direction="left" :delay="200">
-              <button 
-                @click="activeSection = 'SAC'" 
-                :class="{ active: activeSection === 'SAC' }"
-                class="tab-button">
+              <button @click="activeSection = 'SAC'" :class="{ active: activeSection === 'SAC' }" class="tab-button">
                 <i class="fas fa-headset"></i>
                 <span>{{ t('contact.departments.support.title') }}</span>
               </button>
-              
-              <button 
-                @click="activeSection = 'Comercial'" 
-                :class="{ active: activeSection === 'Comercial' }"
+
+              <button @click="activeSection = 'Comercial'" :class="{ active: activeSection === 'Comercial' }"
                 class="tab-button">
                 <i class="fas fa-shopping-cart"></i>
                 <span>{{ t('contact.departments.commercial.title') }}</span>
               </button>
-              
-              <button 
-                @click="activeSection = 'Licitação'" 
-                :class="{ active: activeSection === 'Licitação' }"
+
+              <button @click="activeSection = 'Licitação'" :class="{ active: activeSection === 'Licitação' }"
                 class="tab-button">
                 <i class="fas fa-file-contract"></i>
                 <span>{{ t('contact.departments.bidding.title') }}</span>
               </button>
-              
-              <button 
-                @click="activeSection = 'Financeiro'" 
-                :class="{ active: activeSection === 'Financeiro' }"
+
+              <button @click="activeSection = 'Financeiro'" :class="{ active: activeSection === 'Financeiro' }"
                 class="tab-button">
                 <i class="fas fa-chart-line"></i>
                 <span>{{ t('contact.departments.financial.title') }}</span>
               </button>
+
+              <button @click="activeSection = 'LGPD'" :class="{ active: activeSection === 'LGPD' }" class="tab-button">
+                <i class="fas fa-lock"></i>
+                <span>{{ t('contact.departments.lgpd.title') }}</span>
+              </button>
             </ScrollReveal>
           </div>
-          
+
           <!-- Conteúdo dos Tabs -->
           <div class="contact-content">
             <ScrollReveal direction="right" :delay="300">
@@ -74,9 +70,9 @@
                   </div>
                   <h3>{{ t('contact.departments.support.fullTitle') }}</h3>
                 </div>
-                
+
                 <div class="contact-info">
-                  <div class="info-item">
+                  <div class="info-item email" @click="openEmail('contato@unihospitalar.com.br')">
                     <i class="fas fa-envelope"></i>
                     <p>{{ t('contact.departments.support.email') }}</p>
                   </div>
@@ -89,7 +85,7 @@
                     <p>{{ t('contact.departments.support.hours') }}</p>
                   </div>
                 </div>
-                
+
                 <div class="contact-message">
                   <div class="message-header">
                     <i class="fas fa-paper-plane"></i>
@@ -108,9 +104,9 @@
                   </div>
                   <h3>{{ t('contact.departments.commercial.fullTitle') }}</h3>
                 </div>
-                
+
                 <div class="contact-info">
-                  <div class="info-item">
+                  <div class="info-item email" @click="openEmail('vendas@unihospitalar.com.br')">
                     <i class="fas fa-envelope"></i>
                     <p>{{ t('contact.departments.commercial.email') }}</p>
                   </div>
@@ -123,7 +119,7 @@
                     <p>{{ t('contact.departments.commercial.hours') }}</p>
                   </div>
                 </div>
-                
+
                 <div class="contact-message">
                   <div class="message-header">
                     <i class="fas fa-paper-plane"></i>
@@ -142,9 +138,9 @@
                   </div>
                   <h3>{{ t('contact.departments.bidding.fullTitle') }}</h3>
                 </div>
-                
+
                 <div class="contact-info">
-                  <div class="info-item">
+                  <div class="info-item email" @click="openEmail('licitacao@unihospitalar.com.br')">
                     <i class="fas fa-envelope"></i>
                     <p>{{ t('contact.departments.bidding.email') }}</p>
                   </div>
@@ -157,7 +153,7 @@
                     <p>{{ t('contact.departments.bidding.hours') }}</p>
                   </div>
                 </div>
-                
+
                 <div class="contact-message">
                   <div class="message-header">
                     <i class="fas fa-paper-plane"></i>
@@ -176,9 +172,9 @@
                   </div>
                   <h3>{{ t('contact.departments.financial.fullTitle') }}</h3>
                 </div>
-                
+
                 <div class="contact-info">
-                  <div class="info-item">
+                  <div class="info-item email" @click="openEmail('financeiro@unihospitalar.com.br')">
                     <i class="fas fa-envelope"></i>
                     <p>{{ t('contact.departments.financial.email') }}</p>
                   </div>
@@ -191,7 +187,41 @@
                     <p>{{ t('contact.departments.financial.hours') }}</p>
                   </div>
                 </div>
-                
+
+                <div class="contact-message">
+                  <div class="message-header">
+                    <i class="fas fa-paper-plane"></i>
+                    <h4>{{ t('contact.messageSection.title') }}</h4>
+                  </div>
+                  <p>{{ t('contact.messageSection.description') }}</p>
+                  <ContatoFormulario :activeSection="activeSection" />
+                </div>
+              </div>
+
+              <!-- LGPD -->
+              <div v-if="activeSection === 'LGPD'" class="contact-panel">
+                <div class="contact-header">
+                  <div class="contact-icon">
+                    <i class="fas fa-lock"></i>
+                  </div>
+                  <h3>{{ t('contact.departments.lgpd.fullTitle') }}</h3>
+                </div>
+
+                <div class="contact-info">
+                  <div class="info-item email" @click="openEmail('dpo@unihospitalar.com.br')">
+                    <i class="fas fa-envelope"></i>
+                    <p>{{ t('contact.departments.lgpd.email') }}</p>
+                  </div>
+                  <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <p>{{ t('contact.departments.lgpd.phone') }}</p>
+                  </div>
+                  <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <p>{{ t('contact.departments.lgpd.hours') }}</p>
+                  </div>
+                </div>
+
                 <div class="contact-message">
                   <div class="message-header">
                     <i class="fas fa-paper-plane"></i>
@@ -206,7 +236,7 @@
         </div>
       </div>
     </section>
-    
+
     <!-- Seção de Localização -->
     <section class="location-section">
       <div class="container">
@@ -217,16 +247,12 @@
             <span class="accent-line"></span>
           </div>
         </ScrollReveal>
-        
+
         <div class="location-tabs">
           <ScrollReveal direction="bottom" :delay="250">
             <div class="location-selector">
-              <div 
-                v-for="(branch, index) in translatedBranches" 
-                :key="index"
-                @click="setActiveBranch(index)"
-                :class="['location-tab', { active: activeBranch === index }]"
-              >
+              <div v-for="(branch, index) in translatedBranches" :key="index" @click="setActiveBranch(index)"
+                :class="['location-tab', { active: activeBranch === index }]">
                 <div class="tab-icon">
                   <i :class="branch.icon"></i>
                 </div>
@@ -238,25 +264,18 @@
             </div>
           </ScrollReveal>
         </div>
-        
+
         <div class="location-container">
           <ScrollReveal direction="left" :delay="300">
             <div class="location-map">
               <transition name="fade" mode="out-in">
-                <iframe 
-                  :key="activeBranch"
-                  :src="branches[activeBranch].mapUrl" 
-                  width="100%" 
-                  height="450" 
-                  style="border:0;" 
-                  allowfullscreen="" 
-                  loading="lazy" 
-                  referrerpolicy="no-referrer-when-downgrade">
+                <iframe :key="activeBranch" :src="branches[activeBranch].mapUrl" width="100%" height="450"
+                  style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
               </transition>
             </div>
           </ScrollReveal>
-          
+
           <ScrollReveal direction="right" :delay="400">
             <div class="location-info">
               <transition name="slide" mode="out-in">
@@ -266,11 +285,16 @@
                     <h3>{{ translatedBranches[activeBranch].name }}</h3>
                   </div>
                   <div class="location-details">
-                    <p><strong>{{ t('contact.locationDetails.address') }}</strong> {{ translatedBranches[activeBranch].address }}</p>
-                    <p><strong>{{ t('contact.locationDetails.cep') }}</strong> {{ translatedBranches[activeBranch].cep }}</p>
-                    <p><strong>{{ t('contact.locationDetails.phone') }}</strong> {{ translatedBranches[activeBranch].phone }}</p>
-                    <p><strong>{{ t('contact.locationDetails.email') }}</strong> {{ translatedBranches[activeBranch].email }}</p>
-                    <p><strong>{{ t('contact.locationDetails.hours') }}</strong> {{ translatedBranches[activeBranch].hours }}</p>
+                    <p><strong>{{ t('contact.locationDetails.address') }}</strong> {{
+                      translatedBranches[activeBranch].address }}</p>
+                    <p><strong>{{ t('contact.locationDetails.cep') }}</strong> {{ translatedBranches[activeBranch].cep
+                      }}</p>
+                    <p><strong>{{ t('contact.locationDetails.phone') }}</strong> {{
+                      translatedBranches[activeBranch].phone }}</p>
+                    <p><strong>{{ t('contact.locationDetails.email') }}</strong> {{
+                      translatedBranches[activeBranch].email }}</p>
+                    <p><strong>{{ t('contact.locationDetails.hours') }}</strong> {{
+                      translatedBranches[activeBranch].hours }}</p>
                   </div>
                   <div class="location-actions">
                     <a :href="branches[activeBranch].directionsUrl" target="_blank" class="directions-button">
@@ -285,7 +309,7 @@
         </div>
       </div>
     </section>
-    
+
     <HomeFooter />
   </div>
 </template>
@@ -305,7 +329,7 @@ export default {
   },
   setup() {
     const { t, currentLanguage } = useContactTranslation()
-    
+
     return {
       t,
       currentLanguage
@@ -319,18 +343,18 @@ export default {
       activeBranch: 0, // Filial ativa inicialmente (Recife)
       branches: [
         {
-          icon: 'fas fa-building',
-          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.5461650060187!2d-34.9142373!3d-8.0992698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab1e5cfb3f2b35%3A0x5c9d6ad871d3c9e0!2sR.%20Alagoas%2C%20253%20-%20Ipsep%2C%20Recife%20-%20PE%2C%2051350-000!5e0!3m2!1spt-BR!2sbr!4v1656520123456!5m2!1spt-BR!2sbr',
+          icon: 'fas fa-map-marker-alt',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d246.91!2d-34.8951233!3d-8.0623376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab1be2a5d9b3d7%3A0x123456789!2sR.%20Alagoas%2C%20253%20-%20Ipsep%2C%20Recife%20-%20PE%2C%2051350-560%2C%20Brasil!5e0!3m2!1spt-BR!2sbr!4v1699999999999!5m2!1spt-BR!2sbr',
           directionsUrl: 'https://www.google.com/maps/dir//R.+Alagoas,+253+-+Ipsep,+Recife+-+PE,+51350-000'
         },
         {
-          icon: 'fas fa-warehouse',
-          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3979.954729928924!2d-38.58232312426936!3d-3.8271872440876074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74c7a7a7a7a7a7%3A0x9e3e5b0d8d3d8d3d!2sR.%20Francisco%20Jose%20Albuquerque%20Pereira%20-%20Cajazeiras%2C%20Fortaleza%20-%20CE%2C%2060864-520!5e0!3m2!1spt-BR!2sbr!4v1656520123457!5m2!1spt-BR!2sbr',
-          directionsUrl: 'https://www.google.com/maps/dir//R.+Francisco+Jose+Albuquerque+Pereira+-+Cajazeiras,+Fortaleza+-+CE,+60864-520'
+          icon: 'fas fa-map-marker-alt',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124.37358531027889!2d-38.58232312426936!3d-3.8271872440876074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74c7a7a7a7a7a7%3A0x9e3e5b0d8d3d8d3d!2sR.%20Fl%C3%B4res%2C%2038%20-%20Cajazeiras%2C%20Fortaleza%20-%20CE%2C%2060864-510!5e0!3m2!1spt-BR!2sbr!4v1625151234567!5m2!1spt-BR!2sbr',
+          directionsUrl: 'https://www.google.com/maps/dir//R.+Fl%C3%B4res,+38+-+Cajazeiras,+Fortaleza+-+CE,+60864-510'
         },
         {
-          icon: 'fas fa-warehouse',
-          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.123456789012!2d-46.91234567890123!3d-23.61234567890123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5a2b2b2b2b2b%3A0x1a2b3c4d5e6f7g8h!2sR.%20Pinhal%2C%20165%20-%20Jardim%20Sabiá%2C%20Cotia%20-%20SP%2C%2006716-575!5e0!3m2!1spt-BR!2sbr!4v1656520123458!5m2!1spt-BR!2sbr',
+          icon: 'fas fa-map-marker-alt',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115.29363478149057!2d-46.92011492368744!3d-23.55290096159868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cf03b8b1b8b8b9%3A0x9e3e5b0d8d3d8d3d!2sR.%20Pinhal%2C%20165%20-%20Jardim%20Sabi%C3%A1%2C%20Cotia%20-%20SP%2C%2006716-575!5e0!3m2!1spt-BR!2sbr!4v1625151234567!5m2!1spt-BR!2sbr',
           directionsUrl: 'https://www.google.com/maps/dir//R.+Pinhal,+165+-+Jardim+Sabiá,+Cotia+-+SP,+06716-575'
         }
       ]
@@ -340,7 +364,7 @@ export default {
     translatedBranches() {
       return [
         {
-          icon: 'fas fa-building',
+          icon: 'fas fa-map-marker-alt',
           name: this.t('contact.branches.recife.name'),
           city: this.t('contact.branches.recife.city'),
           address: this.t('contact.branches.recife.address'),
@@ -350,7 +374,7 @@ export default {
           hours: this.t('contact.branches.recife.hours')
         },
         {
-          icon: 'fas fa-warehouse',
+          icon: 'fas fa-map-marker-alt',
           name: this.t('contact.branches.fortaleza.name'),
           city: this.t('contact.branches.fortaleza.city'),
           address: this.t('contact.branches.fortaleza.address'),
@@ -360,7 +384,7 @@ export default {
           hours: this.t('contact.branches.fortaleza.hours')
         },
         {
-          icon: 'fas fa-warehouse',
+          icon: 'fas fa-map-marker-alt',
           name: this.t('contact.branches.saopaulo.name'),
           city: this.t('contact.branches.saopaulo.city'),
           address: this.t('contact.branches.saopaulo.address'),
@@ -383,7 +407,10 @@ export default {
     },
     setActiveBranch(index) {
       this.activeBranch = index;
-    }
+    },
+    openEmail(email) {
+    window.location.href = `mailto:${email}`;
+  }
   },
 }
 </script>
@@ -466,6 +493,7 @@ section {
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -541,7 +569,7 @@ section {
   margin-bottom: 30px;
 }
 
-.contact-tabs > div {
+.contact-tabs>div {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -650,14 +678,40 @@ section {
   flex-wrap: wrap;
   gap: 20px;
   border-bottom: 1px solid #eee;
+  justify-content: center;
 }
 
 .info-item {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 15px;
   flex: 1;
   min-width: 250px;
+  text-align: center;
+}
+
+.info-item.email {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.info-item.email:hover {
+  background-color: rgba(174, 44, 42, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.info-item.email p {
+  color: #AE2C2A;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.info-item.email:hover p {
+  color: #8a2220;
 }
 
 .info-item i {
@@ -809,6 +863,10 @@ section {
   transition: all 0.3s ease;
   border: 2px solid rgba(255, 255, 255, 0.2);
   min-width: 250px;
+}
+
+.location-tab h4 {
+  letter-spacing: 0.15cap;
 }
 
 .location-tab:hover {
@@ -969,15 +1027,18 @@ section {
 }
 
 /* Animações para transições */
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.5s ease;
 }
 
-.fade-enter-from, .fade-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 
-.slide-enter-active, .slide-leave-active {
+.slide-enter-active,
+.slide-leave-active {
   transition: all 0.5s ease;
 }
 
@@ -998,27 +1059,29 @@ section {
     flex-direction: column;
     margin: 0 auto;
   }
-  
+
   .location-map {
     flex: 2;
-    min-height: 500px; /* Altura mínima para o mapa */
+    min-height: 500px;
+    /* Altura mínima para o mapa */
   }
-  
+
   .location-map iframe {
-    height: 500px; /* Altura fixa para o iframe em telas grandes */
+    height: 500px;
+    /* Altura fixa para o iframe em telas grandes */
   }
-  
+
   .location-info {
     flex: 1;
     display: flex;
     align-items: center;
   }
-  
+
   .location-card {
     width: 100%;
     padding: 40px;
   }
-  
+
   .location-details p {
     font-size: 1.2rem;
     margin: 15px 0;
@@ -1035,11 +1098,11 @@ section {
     grid-template-columns: 1fr;
     gap: 30px;
   }
-  
+
   .location-map {
     order: 2;
   }
-  
+
   .location-info {
     order: 1;
   }
@@ -1049,29 +1112,29 @@ section {
   .hero-title {
     font-size: 3rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.3rem;
   }
-  
+
   section {
     padding: 60px 0;
   }
-  
+
   .contact-container {
     flex-direction: column;
   }
-  
+
   .tab-button {
     flex: 1;
     min-width: 150px;
     justify-content: center;
   }
-  
+
   .tab-button i {
     margin-right: 10px;
   }
-  
+
   .location-container {
     flex-direction: column;
   }
@@ -1082,46 +1145,46 @@ section {
     height: 60vh;
     min-height: 400px;
   }
-  
+
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .section-title h2 {
     font-size: 2rem;
   }
-  
+
   .intro-text {
     font-size: 1.1rem;
   }
-  
+
   .tab-button {
     padding: 15px;
     font-size: 0.9rem;
   }
-  
+
   .tab-button i {
     font-size: 1.2rem;
   }
-  
+
   .contact-header {
     padding: 20px;
   }
-  
+
   .contact-icon {
     width: 50px;
     height: 50px;
     font-size: 1.8rem;
   }
-  
+
   .contact-header h3 {
     font-size: 1.5rem;
   }
-  
+
   .info-item {
     min-width: 100%;
   }
-  
+
   .banner-container {
     top: 82px;
     padding-top: 0px;
@@ -1131,33 +1194,33 @@ section {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .location-tab {
     width: 100%;
     max-width: 400px;
   }
-  
+
   .location-header {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .location-details p {
     font-size: 1rem;
   }
-  
+
   .location-actions {
     justify-content: center;
   }
 }
 
-@media (max-width: 725px) {
-  .contact-tabs > div {
+@media (max-width: 890px) {
+  .contact-tabs>div {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 15px;
   }
-  
+
   .tab-button {
     width: 100%;
     min-width: auto;
@@ -1168,42 +1231,42 @@ section {
   .container {
     padding: 0 20px;
   }
-  
+
   .hero-title {
     font-size: 2rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.1rem;
   }
-  
+
   .section-title h2 {
     font-size: 1.8rem;
   }
-  
+
   .accent-line {
     width: 40px;
   }
-  
+
   .tab-button {
     min-width: 100%;
     margin-bottom: 10px;
   }
 
-  .contact-tabs > div {
+  .contact-tabs>div {
     display: grid;
     grid-template-columns: 1fr;
     gap: 15px;
   }
-  
+
   .contact-info {
     padding: 20px;
   }
-  
+
   .contact-message {
     padding: 20px;
   }
-  
+
   .banner-overlay h1 {
     font-size: 1.5em;
   }
@@ -1211,27 +1274,27 @@ section {
   .location-tab {
     padding: 12px 15px;
   }
-  
+
   .tab-icon {
     width: 40px;
     height: 40px;
     font-size: 1.2rem;
   }
-  
+
   .tab-info h4 {
     font-size: 1rem;
   }
-  
+
   .location-header i {
     width: 50px;
     height: 50px;
     font-size: 1.5rem;
   }
-  
+
   .location-header h3 {
     font-size: 1.5rem;
   }
-  
+
   .location-map {
     height: 350px;
   }
@@ -1242,15 +1305,18 @@ section {
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
+
   100% {
     transform: translateY(0px);
   }
 }
 
-.contact-icon i, .location-header i {
+.contact-icon i,
+.location-header i {
   animation: float 3s ease-in-out infinite;
 }
 
@@ -1326,6 +1392,7 @@ section {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1388,6 +1455,7 @@ section {
     transform: translateX(85%);
     opacity: 0;
   }
+
   to {
     transform: translateX(0);
     opacity: 1;
@@ -1400,6 +1468,7 @@ section {
       transform: translateX(10%);
       opacity: 0;
     }
+
     to {
       transform: translateX(0);
       opacity: 1;
@@ -1417,6 +1486,7 @@ section {
       transform: translateX(21%);
       opacity: 0;
     }
+
     to {
       transform: translateX(0);
       opacity: 1;
@@ -1430,6 +1500,7 @@ section {
       transform: translateX(30%);
       opacity: 0;
     }
+
     to {
       transform: translateX(0);
       opacity: 1;
@@ -1443,6 +1514,7 @@ section {
       transform: translateX(28%);
       opacity: 0;
     }
+
     to {
       transform: translateX(0);
       opacity: 1;
@@ -1456,6 +1528,7 @@ section {
       transform: translateX(57%);
       opacity: 0;
     }
+
     to {
       transform: translateX(0);
       opacity: 1;
@@ -1469,6 +1542,7 @@ section {
       transform: translateX(11%);
       opacity: 0;
     }
+
     to {
       transform: translateX(0);
       opacity: 1;
@@ -1482,6 +1556,7 @@ section {
       transform: translateX(30%);
       opacity: 0;
     }
+
     to {
       transform: translateX(0);
       opacity: 1;
@@ -1494,9 +1569,11 @@ section {
   0% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0.7);
   }
+
   70% {
     box-shadow: 0 0 0 10px rgba(174, 44, 42, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0);
   }
@@ -1545,24 +1622,24 @@ section {
     padding: 10px;
     font-size: 0.8rem;
   }
-  
+
   .tab-button i {
     font-size: 1rem;
     margin-right: 5px;
   }
-  
+
   .contact-header h3 {
     font-size: 1.2rem;
   }
-  
+
   .info-item p {
     font-size: 0.9rem;
   }
-  
+
   .location-header h3 {
     font-size: 1.4rem;
   }
-  
+
   .location-details p {
     font-size: 0.9rem;
   }

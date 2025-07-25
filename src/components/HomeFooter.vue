@@ -6,8 +6,16 @@
     <div class="footer-mensagem">
       <p>{{ t('footer.copyright') }}</p>
     </div>
-    <div class="footer-desenvolvedor">
-      <p>{{ t('footer.developedBy') }} <a href="/"><span class="company-name">Uni Hospitalar</span> <span class="registered-mark">®</span></a></p>
+    <div class="footer-right">
+      <div class="footer-content">
+        <div class="footer-links">
+          <router-link to="/TermosLegais" class="legal-terms-link">Legal terms</router-link>
+          <span class="footer-separator">|</span>
+        </div>
+        <div class="footer-desenvolvedor">
+          <p>{{ t('footer.developedBy') }} <a href="/"><span class="company-name">Uni Hospitalar</span> <span class="registered-mark">®</span></a></p>
+        </div>
+      </div>
     </div>
   </footer>
 </template>
@@ -62,14 +70,39 @@ footer {
   text-align: center;
   color: rgba(255, 255, 255, 0.8);
   font-weight: 700;
+  max-width: 510px;
+}
+
+.footer-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+}
+
+.footer-separator {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 400;
+  margin: 0 15px;
+  font-size: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
 }
 
 .footer-desenvolvedor {
-  flex: 1;
   color: rgba(255, 255, 255, 0.8);
   font-weight: 700;
   font-size: 0.9em;
-  text-align: right;
 }
 
 .footer-desenvolvedor a {
@@ -100,7 +133,29 @@ footer {
   color: #ffffff;
 }
 
-@media (max-width: 1055px) {
+.legal-terms-link {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  padding: 5px 10px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: inline-block;
+  cursor: pointer;
+}
+
+.legal-terms-link:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  text-decoration: underline;
+}
+
+@media (max-width: 1360px) {
   footer {
     flex-direction: column;
     text-align: center;
@@ -116,8 +171,27 @@ footer {
     margin-bottom: 15px;
   }
 
+  .footer-right {
+    justify-content: center;
+  }
+
   .footer-desenvolvedor {
     text-align: center;
+  }
+  
+  .legal-terms-link {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .footer-content {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .footer-separator {
+    display: none;
   }
 }
 </style>

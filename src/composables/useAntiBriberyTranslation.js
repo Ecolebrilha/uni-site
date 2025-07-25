@@ -91,8 +91,8 @@ const translations = reactive({
       channels: {
         phone: {
           title: 'Linha Direta',
-          description: 'Canal telefônico disponível 24 horas por dia, 7 dias por semana.',
-          number: '0800-123-4567'
+          description: 'Canal telefônico disponível de segunda a sexta em horário comercial.',
+          number: '+55 (81) 3472 7201'
         },
         email: {
           title: 'E-mail Seguro',
@@ -200,8 +200,8 @@ const translations = reactive({
       channels: {
         phone: {
           title: 'Direct Line',
-          description: 'Telephone channel available 24 hours a day, 7 days a week.',
-          number: '0800-123-4567'
+          description: 'Telephone channel available Monday to Friday during business hours.',
+          number: '+55 (81) 3472 7201'
         },
         email: {
           title: 'Secure Email',
@@ -309,8 +309,8 @@ const translations = reactive({
       channels: {
         phone: {
           title: 'Línea Directa',
-          description: 'Canal telefónico disponible 24 horas al día, 7 días a la semana.',
-          number: '0800-123-4567'
+          description: 'Canal telefónico disponible de lunes a viernes en horario comercial.',
+          number: '+55 (81) 3472 7201'
         },
         email: {
           title: 'Email Seguro',

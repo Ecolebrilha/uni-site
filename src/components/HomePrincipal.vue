@@ -364,58 +364,63 @@
         </div>
         <div class="cookie-buttons">
           <button class="cookie-accept" @click="acceptCookies">{{ t('home.cookies.banner.accept') }}</button>
+          <button class="cookie-reject" @click="rejectCookies">{{ t('home.cookies.banner.reject') }}</button>
           <button class="cookie-settings" @click="showCookieSettings = true">{{ t('home.cookies.banner.settings')
-          }}</button>
+            }}</button>
         </div>
       </div>
     </div>
 
     <!-- Modal de Configurações de Cookies -->
-    <div class="cookie-settings-modal" v-if="showCookieSettings">
-      <div class="cookie-settings-content">
-        <div class="cookie-settings-header">
-          <h3>{{ t('home.cookies.settings.title') }}</h3>
-          <button class="close-button" @click="showCookieSettings = false">
-            <i class="fas fa-times"></i>
-          </button>
+<div class="cookie-settings-modal" v-if="showCookieSettings">
+  <div class="cookie-settings-content">
+    <div class="cookie-settings-header">
+      <h3>{{ t('home.cookies.settings.title') }}</h3>
+      <button class="close-button" @click="showCookieSettings = false">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="cookie-settings-body">
+      <div class="cookie-settings-intro">
+        <p><i class="fas fa-cookie-bite cookie-intro-icon"></i>
+          {{ t('home.cookies.settings.intro') }} <router-link to="/PoliticaPrivacidade">{{ t('home.cookies.settings.cookieStatement') }}</router-link>.</p>
+      </div>
+      <div class="cookie-option">
+        <div class="cookie-option-info">
+          <h4>{{ t('home.cookies.settings.essential.title') }}</h4>
+          <p>{{ t('home.cookies.settings.essential.description') }}</p>
         </div>
-        <div class="cookie-settings-body">
-          <div class="cookie-option">
-            <div class="cookie-option-info">
-              <h4>{{ t('home.cookies.settings.essential.title') }}</h4>
-              <p>{{ t('home.cookies.settings.essential.description') }}</p>
-            </div>
-            <div class="cookie-switch disabled">
-              <input type="checkbox" checked disabled>
-              <span class="slider"></span>
-            </div>
-          </div>
-          <div class="cookie-option">
-            <div class="cookie-option-info">
-              <h4>{{ t('home.cookies.settings.analytics.title') }}</h4>
-              <p>{{ t('home.cookies.settings.analytics.description') }}</p>
-            </div>
-            <div class="cookie-switch">
-              <input type="checkbox" v-model="cookiePreferences.analytics" id="analytics-cookie">
-              <label for="analytics-cookie" class="slider"></label>
-            </div>
-          </div>
-          <div class="cookie-option">
-            <div class="cookie-option-info">
-              <h4>{{ t('home.cookies.settings.marketing.title') }}</h4>
-              <p>{{ t('home.cookies.settings.marketing.description') }}</p>
-            </div>
-            <div class="cookie-switch">
-              <input type="checkbox" v-model="cookiePreferences.marketing" id="marketing-cookie">
-              <label for="marketing-cookie" class="slider"></label>
-            </div>
-          </div>
+        <div class="cookie-switch disabled">
+          <input type="checkbox" checked disabled>
+          <span class="slider"></span>
         </div>
-        <div class="cookie-settings-footer">
-          <button class="cookie-save" @click="saveCookiePreferences">{{ t('home.cookies.settings.save') }}</button>
+      </div>
+      <div class="cookie-option">
+        <div class="cookie-option-info">
+          <h4>{{ t('home.cookies.settings.analytics.title') }}</h4>
+          <p>{{ t('home.cookies.settings.analytics.description') }}</p>
+        </div>
+        <div class="cookie-switch">
+          <input type="checkbox" v-model="cookiePreferences.analytics" id="analytics-cookie">
+          <label for="analytics-cookie" class="slider"></label>
+        </div>
+      </div>
+      <div class="cookie-option">
+        <div class="cookie-option-info">
+          <h4>{{ t('home.cookies.settings.marketing.title') }}</h4>
+          <p>{{ t('home.cookies.settings.marketing.description') }}</p>
+        </div>
+        <div class="cookie-switch">
+          <input type="checkbox" v-model="cookiePreferences.marketing" id="marketing-cookie">
+          <label for="marketing-cookie" class="slider"></label>
         </div>
       </div>
     </div>
+    <div class="cookie-settings-footer">
+      <button class="cookie-save" @click="saveCookiePreferences">{{ t('home.cookies.settings.save') }}</button>
+    </div>
+  </div>
+</div>
   </div>
 </template>
 
@@ -423,6 +428,7 @@
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
 import { useHomeTranslation } from '@/composables/useHomeTranslation.js';
+import { useJobsStore } from '@/composables/useJobsStore.js'
 
 export default {
   name: 'HomePrincipal',
@@ -432,10 +438,12 @@ export default {
   },
   setup() {
     const { t, currentLanguage } = useHomeTranslation()
+    const { preloadJobs } = useJobsStore()
 
     return {
       t,
-      currentLanguage
+      currentLanguage,
+      preloadJobs
     }
   },
   data() {
@@ -463,9 +471,9 @@ export default {
           name: 'Uni Hospitalar Ceará LTDA',
           phone: '+55 (85) 3289-3722',
           email: 'contato@uniceara.com.br',
-          address: 'R. Francisco Jose Albuquerque Pereira - Cajazeiras, Fortaleza - CE, 60864-520',
+          address: 'Rua Flôres, 38 - Cajazeiras, Fortaleza - CE, 60864-520',
           hours: 'Segunda a Sexta: 8h às 18h',
-          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124.37358531027889!2d-38.58232312426936!3d-3.8271872440876074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74c7a7a7a7a7a7%3A0x9e3e5b0d8d3d8d3d!2sR.%20Francisco%20Jose%20Albuquerque%20Pereira%20-%20Cajazeiras%2C%20Fortaleza%20-%20CE%2C%2060864-520!5e0!3m2!1spt-BR!2sbr!4v1625151234567!5m2!1spt-BR!2sbr'
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124.37358531027889!2d-38.58232312426936!3d-3.8271872440876074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74c7a7a7a7a7a7%3A0x9e3e5b0d8d3d8d3d!2sR.%20Fl%C3%B4res%2C%2038%20-%20Cajazeiras%2C%20Fortaleza%20-%20CE%2C%2060864-510!5e0!3m2!1spt-BR!2sbr!4v1625151234567!5m2!1spt-BR!2sbr'
         },
         {
           name: 'SP Hospitalar LTDA',
@@ -480,7 +488,7 @@ export default {
       showCookieSettings: false,
       cookiePreferences: {
         essential: true,
-        analytics: true,
+        analytics: false,
         marketing: false
       }
     };
@@ -526,6 +534,7 @@ export default {
     this.startTestimonialSlider();
     this.setupIntersectionObserver();
     this.checkCookieConsent();
+    this.preloadJobs();
   },
   beforeUnmount() {
     clearInterval(this.testimonialInterval);
@@ -650,6 +659,18 @@ export default {
         essential: true,
         analytics: true,
         marketing: true
+      };
+
+      localStorage.setItem('cookieConsent', JSON.stringify(this.cookiePreferences));
+      this.showCookieBanner = false;
+      this.applyUserPreferences();
+    },
+
+    rejectCookies() {
+      this.cookiePreferences = {
+        essential: true,
+        analytics: false,
+        marketing: false
       };
 
       localStorage.setItem('cookieConsent', JSON.stringify(this.cookiePreferences));
@@ -1739,6 +1760,7 @@ section {
 }
 
 .cookie-accept,
+.cookie-reject,
 .cookie-settings {
   padding: 10px 20px;
   border-radius: 5px;
@@ -1755,6 +1777,15 @@ section {
 
 .cookie-accept:hover {
   background-color: #D84A48;
+}
+
+.cookie-reject {
+  background-color: #6c757d;
+  color: white;
+}
+
+.cookie-reject:hover {
+  background-color: #5a6268;
 }
 
 .cookie-settings {
@@ -1797,6 +1828,42 @@ section {
   align-items: center;
   padding: 20px;
   border-bottom: 1px solid #eee;
+}
+
+.cookie-settings-intro {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #AE2C2A;
+}
+
+.cookie-settings-intro p {
+  margin: 0;
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  text-align: justify;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.cookie-intro-icon {
+  color: #AE2C2A;
+  font-size: 1.2rem;
+  margin-top: 2px;
+  margin-left: -25px;
+  flex-shrink: 0;
+}
+
+.cookie-settings-intro a {
+  color: #AE2C2A;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.cookie-settings-intro a:hover {
+  text-decoration: underline;
 }
 
 .cookie-settings-header h3 {
@@ -2367,6 +2434,7 @@ input:checked+.slider:before {
   }
 
   .cookie-accept,
+  .cookie-reject,
   .cookie-settings {
     width: 100%;
     margin-bottom: 10px;

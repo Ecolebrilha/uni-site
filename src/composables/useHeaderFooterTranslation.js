@@ -17,15 +17,17 @@ const translations = reactive({
       },
       dropdown: {
         products: {
-          makeComplaint: 'Faça uma Reclamação'
+          makeComplaint: 'Faça uma Reclamação',
+          checkStatus: 'Consultar Status'
         },
         compliance: {
           confidentialChannel: 'Canal Confidencial',
-          makeReport: 'Faça um Relato'
+          makeReport: 'Faça um Relato',
+          checkStatus: 'Consultar Status'
         },
         lgpd: {
           privacyPolicy: 'Política de Privacidade',
-          legalTerms: 'Termos Legais'
+          privacyNotice: 'Aviso de Privacidade'
         },
         contact: {
           talkToUs: 'Entre em Contato',
@@ -40,7 +42,8 @@ const translations = reactive({
     },
     footer: {
       copyright: '© 2025 | Uni Hospitalar Ltda. – Todos os direitos reservados',
-      developedBy: 'Desenvolvido por'
+      developedBy: 'Desenvolvido por',
+      legalTerms: 'Termos Legais'
     }
   },
   en: {
@@ -57,15 +60,17 @@ const translations = reactive({
       },
       dropdown: {
         products: {
-          makeComplaint: 'Make a Complaint'
+          makeComplaint: 'Make a Complaint',
+          checkStatus: 'Check Status'
         },
         compliance: {
           confidentialChannel: 'Confidential Channel',
-          makeReport: 'Make a Report'
+          makeReport: 'Make a Report',
+          checkStatus: 'Check Status'
         },
         lgpd: {
           privacyPolicy: 'Privacy Policy',
-          legalTerms: 'Legal Terms'
+          privacyNotice: 'Privacy Notice'
         },
         contact: {
           talkToUs: 'Contact Us',
@@ -80,7 +85,8 @@ const translations = reactive({
     },
     footer: {
       copyright: '© 2025 | Uni Hospitalar Ltd. – All rights reserved',
-      developedBy: 'Developed by'
+      developedBy: 'Developed by',
+      legalTerms: 'Legal Terms'
     }
   },
   es: {
@@ -97,15 +103,17 @@ const translations = reactive({
       },
       dropdown: {
         products: {
-          makeComplaint: 'Hacer una Queja'
+          makeComplaint: 'Hacer una Queja',
+          checkStatus: 'Consultar Estado'
         },
         compliance: {
           confidentialChannel: 'Canal Confidencial',
-          makeReport: 'Hacer un Reporte'
+          makeReport: 'Hacer un Reporte',
+          checkStatus: 'Consultar Estado'
         },
         lgpd: {
           privacyPolicy: 'Política de Privacidad',
-          legalTerms: 'Términos Legales'
+          privacyNotice: 'Aviso de Privacidad'
         },
         contact: {
           talkToUs: 'Contáctanos',
@@ -120,7 +128,8 @@ const translations = reactive({
     },
     footer: {
       copyright: '© 2025 | Uni Hospitalar Ltda. – Todos los derechos reservados',
-      developedBy: 'Desarrollado por'
+      developedBy: 'Desarrollado por',
+      legalTerms: 'Términos Legales'
     }
   }
 })

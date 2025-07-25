@@ -8,7 +8,7 @@ const translations = reactive({
       heroTitle: 'Seja Nosso Parceiro',
       heroSubtitle: 'Faça parte da nossa rede de sucesso',
       introTitle: 'Cadastre-se como Parceiro',
-      introText: 'Preencha o formulário abaixo para se tornar um parceiro ou cliente da UniHospitalar. Nossa equipe analisará suas informações e entrará em contato em breve.',
+      introText: 'Preencha o formulário abaixo para se tornar um parceiro ou cliente da Uni Hospitalar. Nossa equipe analisará suas informações e entrará em contato em breve.',
       form: {
         title: 'Formulário de Parceria',
         fields: {
@@ -89,9 +89,9 @@ const translations = reactive({
           { code: 'TO', name: 'Tocantins' }
         ],
         termsNotice: {
-          text: 'Ao preencher e enviar este formulário, você concorda automaticamente com os nossos',
-          privacyPolicy: 'Termos de Privacidade',
-          legalTerms: 'Termos Legais'
+          text: 'Ao enviar este formulário, você reconhece nossa',
+  privacyPolicy: 'Política de Privacidade',
+  continuation: 'e está ciente de que seus dados serão utilizados para análise de parceria comercial e comunicações relacionadas ao processo de credenciamento junto à Uni Hospitalar.'
         },
         submitButton: {
           default: 'Solicitar Análise',
@@ -146,7 +146,7 @@ const translations = reactive({
       heroTitle: 'Become Our Partner',
       heroSubtitle: 'Join our success network',
       introTitle: 'Register as a Partner',
-      introText: 'Fill out the form below to become a partner or client of UniHospitalar. Our team will analyze your information and contact you soon.',
+      introText: 'Fill out the form below to become a partner or client of Uni Hospitalar. Our team will analyze your information and contact you soon.',
       form: {
         title: 'Partnership Form',
         fields: {
@@ -227,9 +227,9 @@ const translations = reactive({
           { code: 'TO', name: 'Tocantins' }
         ],
         termsNotice: {
-          text: 'By filling out and submitting this form, you automatically agree to our',
-          privacyPolicy: 'Privacy Policy',
-          legalTerms: 'Legal Terms'
+          text: 'By submitting this form, you acknowledge our',
+  privacyPolicy: 'Privacy Policy',
+  continuation: 'and are aware that your data will be used for commercial partnership analysis and communications related to the accreditation process with Uni Hospitalar.'
         },
         submitButton: {
           default: 'Request Analysis',
@@ -284,7 +284,7 @@ const translations = reactive({
       heroTitle: 'Conviértete en Nuestro Socio',
       heroSubtitle: 'Únete a nuestra red de éxito',
       introTitle: 'Regístrate como Socio',
-      introText: 'Complete el formulario a continuación para convertirse en socio o cliente de UniHospitalar. Nuestro equipo analizará su información y se pondrá en contacto pronto.',
+      introText: 'Complete el formulario a continuación para convertirse en socio o cliente de Uni Hospitalar. Nuestro equipo analizará su información y se pondrá en contacto pronto.',
       form: {
         title: 'Formulario de Asociación',
         fields: {
@@ -365,9 +365,9 @@ const translations = reactive({
           { code: 'TO', name: 'Tocantins' }
         ],
         termsNotice: {
-          text: 'Al completar y enviar este formulario, usted acepta automáticamente nuestros',
-          privacyPolicy: 'Política de Privacidad',
-          legalTerms: 'Términos Legales'
+          text: 'Al enviar este formulario, reconoces nuestra',
+  privacyPolicy: 'Política de Privacidad',
+  continuation: 'y estás consciente de que tus datos serán utilizados para análisis de asociación comercial y comunicaciones relacionadas con el proceso de acreditación con Uni Hospitalar.'
         },
         submitButton: {
           default: 'Solicitar Análisis',

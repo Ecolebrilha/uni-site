@@ -54,9 +54,9 @@ const translations = reactive({
       policiesTitle: 'Políticas e Regulamentos',
       policiesIntro: 'Acesse nossas políticas que reforçam o compromisso com a conformidade e a ética.',
       policies: {
-        dataSecurity: {
-          title: 'Política de Segurança de Dados',
-          description: 'Protegemos todas as informações sensíveis e dados pessoais conforme as legislações vigentes.'
+        regularTraining: {
+          title: 'Treinamentos Regulares',
+          description: 'Promovemos capacitação contínua de nossos colaboradores em práticas éticas e conformidade regulatória.'
         },
         antiBribery: {
           title: 'Práticas Antissuborno',
@@ -71,25 +71,11 @@ const translations = reactive({
       correctiveSectionTitle: 'Como Aplicamos Nossas Políticas',
       correctiveText: 'Conheça como implementamos e monitoramos nossas políticas de compliance na prática, garantindo efetividade e transparência em todos os processos.',
       correctiveLinks: {
-        dataSecurity: 'Implementação de Segurança de Dados',
+        regularTraining: 'Treinamentos Regulares',
         antiBribery: 'Monitoramento Antissuborno',
         sectorCompliance: 'Auditoria de Normas Setoriais'
       },
       correctiveButton: 'Entre em Contato',
-      documentsTitle: 'Documentos Legais',
-      documentsIntro: 'Acesse documentos completos como políticas de privacidade, termos de uso, entre outros.',
-      documents: {
-        privacy: {
-          title: 'Política de Privacidade',
-          description: 'Nossa política de privacidade detalha como coletamos, usamos e protegemos seus dados pessoais.',
-          button: 'Acessar Documento'
-        },
-        terms: {
-          title: 'Termos Legais de Uso',
-          description: 'Nossos termos de uso estabelecem as regras e condições para utilização de nossos serviços e plataformas.',
-          button: 'Acessar Documento'
-        }
-      },
       learnMore: 'Saiba mais'
     }
   },
@@ -144,9 +130,9 @@ const translations = reactive({
       policiesTitle: 'Policies and Regulations',
       policiesIntro: 'Access our policies that reinforce our commitment to compliance and ethics.',
       policies: {
-        dataSecurity: {
-          title: 'Data Security Policy',
-          description: 'We protect all sensitive information and personal data in accordance with current legislation.'
+        regularTraining: {
+          title: 'Regular Training',
+          description: 'We promote continuous training of our employees in ethical practices and regulatory compliance.'
         },
         antiBribery: {
           title: 'Anti-Bribery Practices',
@@ -161,25 +147,11 @@ const translations = reactive({
       correctiveSectionTitle: 'How We Apply Our Policies',
       correctiveText: 'Learn how we implement and monitor our compliance policies in practice, ensuring effectiveness and transparency in all processes.',
       correctiveLinks: {
-        dataSecurity: 'Data Security Implementation',
+        regularTraining: 'Regular Training',
         antiBribery: 'Anti-Bribery Monitoring',
         sectorCompliance: 'Sector Standards Audit'
       },
       correctiveButton: 'Contact Us',
-      documentsTitle: 'Legal Documents',
-      documentsIntro: 'Access complete documents such as privacy policies, terms of use, among others.',
-      documents: {
-        privacy: {
-          title: 'Privacy Policy',
-          description: 'Our privacy policy details how we collect, use and protect your personal data.',
-          button: 'Access Document'
-        },
-        terms: {
-          title: 'Legal Terms of Use',
-          description: 'Our terms of use establish the rules and conditions for using our services and platforms.',
-          button: 'Access Document'
-        }
-      },
       learnMore: 'Learn more'
     }
   },
@@ -234,9 +206,9 @@ const translations = reactive({
       policiesTitle: 'Políticas y Regulaciones',
       policiesIntro: 'Acceda a nuestras políticas que refuerzan el compromiso con la conformidad y la ética.',
       policies: {
-        dataSecurity: {
-          title: 'Política de Seguridad de Datos',
-          description: 'Protegemos toda la información sensible y datos personales conforme a las legislaciones vigentes.'
+        regularTraining: {
+          title: 'Entrenamientos Regulares',
+          description: 'Promovemos la capacitación continua de nuestros colaboradores en prácticas éticas y conformidad regulatoria.'
         },
         antiBribery: {
           title: 'Prácticas Antisoborno',
@@ -251,25 +223,11 @@ const translations = reactive({
       correctiveSectionTitle: 'Cómo Aplicamos Nuestras Políticas',
       correctiveText: 'Conozca cómo implementamos y monitoreamos nuestras políticas de compliance en la práctica, garantizando efectividad y transparencia en todos los procesos.',
       correctiveLinks: {
-        dataSecurity: 'Implementación de Seguridad de Datos',
+        regularTraining: 'Entrenamientos regulares',
         antiBribery: 'Monitoreo Antisoborno',
         sectorCompliance: 'Auditoría de Normas Sectoriales'
       },
       correctiveButton: 'Contáctanos',
-      documentsTitle: 'Documentos Legales',
-      documentsIntro: 'Acceda a documentos completos como políticas de privacidad, términos de uso, entre otros.',
-      documents: {
-        privacy: {
-          title: 'Política de Privacidad',
-          description: 'Nuestra política de privacidad detalla cómo recolectamos, usamos y protegemos sus datos personales.',
-          button: 'Acceder al Documento'
-        },
-        terms: {
-          title: 'Términos Legales de Uso',
-          description: 'Nuestros términos de uso establecen las reglas y condiciones para la utilización de nuestros servicios y plataformas.',
-          button: 'Acceder al Documento'
-        }
-      },
       learnMore: 'Saber más'
     }
   }

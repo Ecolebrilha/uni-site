@@ -25,7 +25,15 @@
                         </div>
 
                         <div class="terms-content">
+                            <div class="terms-intro">
+                                <p>{{ t('report.terms.intro') }}</p>
+                            </div>
+
                             <div class="terms-info">
+                                <div class="info-block">
+                                    <h3>{{ t('report.terms.confidentiality.title') }}</h3>
+                                    <p>{{ t('report.terms.confidentiality.text') }}</p>
+                                </div>
 
                                 <div class="info-block">
                                     <h3>{{ t('report.terms.responsibility.title') }}</h3>
@@ -36,6 +44,20 @@
                                     <h3>{{ t('report.terms.process.title') }}</h3>
                                     <p>{{ t('report.terms.process.text') }}</p>
                                 </div>
+
+                                <div class="info-block">
+                                    <h3>{{ t('report.terms.tracking.title') }}</h3>
+                                    <p>{{ t('report.terms.tracking.text') }}</p>
+                                </div>
+
+                                <div class="info-block">
+                                    <h3>{{ t('report.terms.dataProtection.title') }}</h3>
+                                    <p>{{ t('report.terms.dataProtection.text') }}</p>
+                                </div>
+                            </div>
+
+                            <div class="terms-acceptance">
+                                <p><strong>{{ t('report.terms.acceptance') }}</strong></p>
                             </div>
 
                             <div class="terms-actions">
@@ -47,6 +69,10 @@
                                     <i class="fas fa-times"></i>
                                     {{ t('report.terms.reject') }}
                                 </button>
+                            </div>
+
+                            <div class="terms-disclaimer">
+                                <p><em>{{ t('report.terms.disclaimer') }}</em></p>
                             </div>
                         </div>
                     </div>
@@ -138,6 +164,67 @@
                                             <div v-if="errors.violationType" class="error-message">{{
                                                 errors.violationType }}</div>
                                         </div>
+
+                                        <!-- Novo campo: Tipo de Cliente -->
+                                        <div class="form-group">
+                                            <label for="clientType">{{ t('report.form.step1.clientType.label') }}
+                                                <span class="required">*</span></label>
+                                            <select id="clientType" v-model="form.clientType" required
+                                                :class="{ 'error': errors.clientType }">
+                                                <option value="" disabled>{{
+                                                    t('report.form.step1.clientType.placeholder') }}</option>
+                                                <option value="hospital">{{
+                                                    t('report.form.step1.clientType.options.hospital') }}</option>
+                                                <option value="clinic">{{
+                                                    t('report.form.step1.clientType.options.clinic') }}</option>
+                                                <option value="pharmacy">{{
+                                                    t('report.form.step1.clientType.options.pharmacy') }}</option>
+                                                <option value="laboratory">{{
+                                                    t('report.form.step1.clientType.options.laboratory') }}</option>
+                                                <option value="healthCenter">{{
+                                                    t('report.form.step1.clientType.options.healthCenter') }}</option>
+                                                <option value="individual">{{
+                                                    t('report.form.step1.clientType.options.individual') }}</option>
+                                                <option value="other">{{
+                                                    t('report.form.step1.clientType.options.other') }}</option>
+                                            </select>
+                                            <div v-if="errors.clientType" class="error-message">{{ errors.clientType }}
+                                            </div>
+                                        </div>
+
+                                        <!-- Novo campo: Já Contatou a Empresa -->
+                                        <div class="form-group">
+                                            <label for="previousContact">{{ t('report.form.step1.previousContact.label')
+                                            }}
+                                                <span class="required">*</span></label>
+                                            <select id="previousContact" v-model="form.previousContact" required
+                                                :class="{ 'error': errors.previousContact }">
+                                                <option value="" disabled>{{
+                                                    t('report.form.step1.previousContact.placeholder') }}</option>
+                                                <option value="no">{{
+                                                    t('report.form.step1.previousContact.options.no') }}</option>
+                                                <option value="phone">{{
+                                                    t('report.form.step1.previousContact.options.phone') }}</option>
+                                                <option value="email">{{
+                                                    t('report.form.step1.previousContact.options.email') }}</option>
+                                                <option value="whatsapp">{{
+                                                    t('report.form.step1.previousContact.options.whatsapp') }}</option>
+                                                <option value="representative">{{
+                                                    t('report.form.step1.previousContact.options.representative') }}
+                                                </option>
+                                                <option value="multiple">{{
+                                                    t('report.form.step1.previousContact.options.multiple') }}</option>
+                                            </select>
+                                            <div v-if="errors.previousContact" class="error-message">{{
+                                                errors.previousContact }}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="confidentiality-notice">
+                                        <div class="notice-content">
+                                            <i class="fas fa-shield-alt notice-icon"></i>
+                                            <p>{{ t('report.form.step1.confidentialityNotice') }}</p>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -150,6 +237,7 @@
                                             <label for="incidentDate">{{ t('report.form.step2.date') }} <span
                                                     class="required">*</span></label>
                                             <input type="date" id="incidentDate" v-model="form.incidentDate" required
+                                                min="1900-01-01" :max="getCurrentDate()" @input="validateDateInput"
                                                 :class="{ 'error': errors.incidentDate }">
                                             <div v-if="errors.incidentDate" class="error-message">{{ errors.incidentDate
                                             }}</div>
@@ -159,6 +247,8 @@
                                             <label for="invoiceNumber">{{ t('report.form.step2.invoiceNumber') }} <span
                                                     class="required">*</span></label>
                                             <input type="text" id="invoiceNumber" v-model="form.invoiceNumber" required
+                                                maxlength="9" pattern="[0-9]*" inputmode="numeric"
+                                                @input="formatInvoiceNumber"
                                                 :placeholder="t('report.form.step2.invoiceNumberPlaceholder')"
                                                 :class="{ 'error': errors.invoiceNumber }">
                                             <div v-if="errors.invoiceNumber" class="error-message">{{
@@ -175,6 +265,88 @@
                                             <div v-if="errors.productName" class="error-message">{{ errors.productName
                                                 }}
                                             </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="quantity">{{ t('report.form.step2.quantity') }} <span
+                                                    class="required">*</span></label>
+                                            <input type="text" id="quantity" v-model="form.quantity" required
+                                                :placeholder="t('report.form.step2.quantityPlaceholder')"
+                                                :class="{ 'error': errors.quantity }">
+                                            <div v-if="errors.quantity" class="error-message">{{ errors.quantity }}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="supplier">{{ t('report.form.step2.supplier') }} <span
+                                                    class="required">*</span></label>
+                                            <input type="text" id="supplier" v-model="form.supplier" required
+                                                :placeholder="t('report.form.step2.supplierPlaceholder')"
+                                                :class="{ 'error': errors.supplier }">
+                                            <div class="field-help">{{ t('report.form.step2.supplierHelp') }}</div>
+                                            <div v-if="errors.supplier" class="error-message">{{ errors.supplier }}
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="incidentLocation">{{ t('report.form.step2.incidentLocation') }}
+                                                <span class="required">*</span></label>
+                                            <select id="incidentLocation" v-model="form.incidentLocation" required
+                                                :class="{ 'error': errors.incidentLocation }">
+                                                <option value="" disabled>{{
+                                                    t('report.form.step2.incidentLocationPlaceholder') }}</option>
+                                                <option value="delivery">{{
+                                                    t('report.form.step2.incidentLocationOptions.delivery') }}</option>
+                                                <option value="storage">{{
+                                                    t('report.form.step2.incidentLocationOptions.storage') }}</option>
+                                                <option value="usage">{{
+                                                    t('report.form.step2.incidentLocationOptions.usage') }}</option>
+                                                <option value="opening">{{
+                                                    t('report.form.step2.incidentLocationOptions.opening') }}</option>
+                                                <option value="transport">{{
+                                                    t('report.form.step2.incidentLocationOptions.transport') }}</option>
+                                                <option value="other">{{
+                                                    t('report.form.step2.incidentLocationOptions.other') }}</option>
+                                            </select>
+                                            <div v-if="errors.incidentLocation" class="error-message">{{
+                                                errors.incidentLocation }}</div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="actionsTaken">{{ t('report.form.step2.actionsTaken') }} <span
+                                                    class="required">*</span></label>
+                                            <select id="actionsTaken" v-model="form.actionsTaken" required
+                                                :class="{ 'error': errors.actionsTaken }">
+                                                <option value="" disabled>{{
+                                                    t('report.form.step2.actionsTakenPlaceholder') }}</option>
+                                                <option value="none">{{ t('report.form.step2.actionsTakenOptions.none')
+                                                }}</option>
+                                                <option value="isolated">{{
+                                                    t('report.form.step2.actionsTakenOptions.isolated') }}</option>
+                                                <option value="stopped">{{
+                                                    t('report.form.step2.actionsTakenOptions.stopped') }}</option>
+                                                <option value="reported">{{
+                                                    t('report.form.step2.actionsTakenOptions.reported') }}</option>
+                                                <option value="documented">{{
+                                                    t('report.form.step2.actionsTakenOptions.documented') }}</option>
+                                                <option value="replaced">{{
+                                                    t('report.form.step2.actionsTakenOptions.replaced') }}</option>
+                                                <option value="multiple">{{
+                                                    t('report.form.step2.actionsTakenOptions.multiple') }}</option>
+                                            </select>
+                                            <div v-if="errors.actionsTaken" class="error-message">{{ errors.actionsTaken
+                                            }}</div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="responsiblePerson">{{ t('report.form.step2.responsiblePerson')
+                                            }} <span class="required">*</span></label>
+                                            <input type="text" id="responsiblePerson" v-model="form.responsiblePerson"
+                                                required
+                                                :placeholder="t('report.form.step2.responsiblePersonPlaceholder')"
+                                                :class="{ 'error': errors.responsiblePerson }">
+                                            <div v-if="errors.responsiblePerson" class="error-message">{{
+                                                errors.responsiblePerson }}</div>
                                         </div>
                                     </div>
 
@@ -213,7 +385,7 @@
                                         <label for="evidence">{{ t('report.form.step3.evidence') }}</label>
                                         <div class="file-upload-area" @drop="handleFileDrop" @dragover.prevent
                                             @dragenter.prevent>
-                                            <input type="file" id="evidence" @change="handleFileUpload" multiple
+                                            <input type="file" ref="fileInput" @change="handleFileUpload" multiple
                                                 accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display: none;">
                                             <div class="upload-content" @click="$refs.fileInput.click()">
                                                 <i class="fas fa-cloud-upload-alt"></i>
@@ -288,9 +460,11 @@
                                                 <label for="phone">{{ t('report.form.step3.phone') }} <span
                                                         class="required">*</span></label>
                                                 <input type="tel" id="phone" v-model="form.phone"
-                                                    :required="!form.anonymous"
+                                                    :required="!form.anonymous" maxlength="15" inputmode="numeric"
+                                                    @input="formatPhoneNumber" @keypress="onlyNumbers"
                                                     :placeholder="t('report.form.step3.phonePlaceholder')"
                                                     :class="{ 'error': errors.phone }">
+                                                <div class="field-help">{{ t('report.form.step3.phoneHelp') }}</div>
                                                 <div v-if="errors.phone" class="error-message">{{ errors.phone }}</div>
                                             </div>
                                         </div>
@@ -366,9 +540,9 @@
                             </div>
 
                             <div class="success-actions">
-                                <router-link to="/CanalConfidencial" class="btn-secondary">
-                                    <i class="fas fa-arrow-left"></i>
-                                    {{ t('report.success.backToChannel') }}
+                                <router-link to="/ConsultaStatus" class="btn-secondary">
+                                    <i class="fas fa-search"></i>
+                                    {{ t('report.success.checkStatus') }}
                                 </router-link>
                                 <router-link to="/" class="btn-primary">
                                     <i class="fas fa-home"></i>
@@ -411,15 +585,26 @@ export default {
             currentStep: 1,
             reportSubmitted: false,
             submitting: false,
+            submitError: '',
             trackingCode: '',
             accessCode: '',
+            isDragOver: false,
+            maxFiles: 5,
+            maxFileSize: 10 * 1024 * 1024, // 10MB
             errors: {}, // Objeto para armazenar erros de validação
             form: {
                 relationship: '',
                 violationType: '',
+                clientType: '',
+                previousContact: '',
                 incidentDate: '',
                 invoiceNumber: '',
                 productName: '',
+                quantity: '',
+                supplier: '',
+                incidentLocation: '',
+                actionsTaken: '',
+                responsiblePerson: '',
                 description: '',
                 relatedReport: '',
                 evidence: [],
@@ -432,6 +617,105 @@ export default {
         }
     },
     methods: {
+        // Função para validar arquivo
+        validateFile(file) {
+            const validTypes = [
+                'application/pdf',
+                'application/msword',
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'image/jpeg',
+                'image/jpg',
+                'image/png'
+            ];
+
+            const maxSize = 10 * 1024 * 1024; // 10MB
+
+            // Verificar tipo de arquivo
+            if (!validTypes.includes(file.type)) {
+                alert(`Arquivo ${file.name} não é um tipo válido. Use PDF, DOC, DOCX, JPG, JPEG ou PNG.`);
+                return false;
+            }
+
+            // Verificar tamanho do arquivo
+            if (file.size > maxSize) {
+                alert(`Arquivo ${file.name} é muito grande. Máximo 10MB.`);
+                return false;
+            }
+
+            return true;
+        },
+
+        // Feedback visual para upload
+        showUploadSuccess(files) {
+            const count = files.length
+            let message
+
+            if (count === 1) {
+                message = `Arquivo "${files[0].name}" adicionado com sucesso!`
+            } else {
+                const fileNames = files.map(file => file.name).join(', ')
+                message = `${count} arquivos adicionados: ${fileNames}`
+            }
+
+            // Criar notificação temporária
+            const notification = document.createElement('div')
+            notification.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 10000;
+            font-weight: 600;
+            animation: slideInRight 0.3s ease-out;
+            max-width: 400px;
+            word-wrap: break-word;
+        ">
+            <i class="fas fa-check-circle"></i> ${message}
+        </div>
+    `
+
+            document.body.appendChild(notification)
+
+            setTimeout(() => {
+                notification.remove()
+            }, 3000)
+        },
+
+        // Função para obter ícone do arquivo
+        getFileIcon(filename) {
+            if (!filename) return 'fas fa-file';
+
+            const extension = filename.split('.').pop().toLowerCase();
+
+            switch (extension) {
+                case 'pdf':
+                    return 'fas fa-file-pdf';
+                case 'doc':
+                case 'docx':
+                    return 'fas fa-file-word';
+                case 'jpg':
+                case 'jpeg':
+                case 'png':
+                    return 'fas fa-file-image';
+                default:
+                    return 'fas fa-file';
+            }
+        },
+
+        // Função para formatar tamanho do arquivo
+        formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        },
+
         acceptTerms() {
             this.termsAccepted = true
         },
@@ -469,6 +753,12 @@ export default {
                 if (!this.form.violationType) {
                     this.errors.violationType = this.t('report.validation.required')
                 }
+                if (!this.form.clientType) {
+                    this.errors.clientType = this.t('report.validation.required')
+                }
+                if (!this.form.previousContact) {
+                    this.errors.previousContact = this.t('report.validation.required')
+                }
                 return Object.keys(this.errors).length === 0
             }
 
@@ -476,22 +766,53 @@ export default {
                 if (!this.form.incidentDate) {
                     this.errors.incidentDate = this.t('report.validation.required')
                 } else {
-                    // Validar se a data não é futura
                     const today = new Date()
                     const incidentDate = new Date(this.form.incidentDate)
+                    const minDate = new Date('1900-01-01')
+
                     if (incidentDate > today) {
                         this.errors.incidentDate = this.t('report.validation.futureDate')
+                    } else if (incidentDate < minDate) {
+                        this.errors.incidentDate = this.t('report.validation.invalidDate')
                     }
                 }
 
-                if (!this.form.invoiceNumber || this.form.invoiceNumber.trim().length < 3) {
-                    this.errors.invoiceNumber = this.form.invoiceNumber ?
-                        this.t('report.validation.minLength').replace('{min}', '3') :
-                        this.t('report.validation.required')
+                if (!this.form.invoiceNumber) {
+                    this.errors.invoiceNumber = this.t('report.validation.required')
+                } else if (!/^[0-9]+$/.test(this.form.invoiceNumber)) {
+                    this.errors.invoiceNumber = this.t('report.validation.numbersOnly')
+                } else if (this.form.invoiceNumber.length < 3) {
+                    this.errors.invoiceNumber = this.t('report.validation.minLength').replace('{min}', '3')
+                } else if (this.form.invoiceNumber.length > 9) {
+                    this.errors.invoiceNumber = this.t('report.validation.maxLength').replace('{max}', '9')
                 }
 
                 if (!this.form.productName || this.form.productName.trim().length < 2) {
                     this.errors.productName = this.form.productName ?
+                        this.t('report.validation.minLength').replace('{min}', '2') :
+                        this.t('report.validation.required')
+                }
+
+                if (!this.form.quantity || this.form.quantity.trim().length < 1) {
+                    this.errors.quantity = this.t('report.validation.required')
+                }
+
+                if (!this.form.supplier || this.form.supplier.trim().length < 2) {
+                    this.errors.supplier = this.form.supplier ?
+                        this.t('report.validation.minLength').replace('{min}', '2') :
+                        this.t('report.validation.required')
+                }
+
+                if (!this.form.incidentLocation) {
+                    this.errors.incidentLocation = this.t('report.validation.required')
+                }
+
+                if (!this.form.actionsTaken) {
+                    this.errors.actionsTaken = this.t('report.validation.required')
+                }
+
+                if (!this.form.responsiblePerson || this.form.responsiblePerson.trim().length < 2) {
+                    this.errors.responsiblePerson = this.form.responsiblePerson ?
                         this.t('report.validation.minLength').replace('{min}', '2') :
                         this.t('report.validation.required')
                 }
@@ -528,7 +849,14 @@ export default {
                     if (!this.form.phone) {
                         this.errors.phone = this.t('report.validation.required')
                     } else if (!this.isValidPhone(this.form.phone)) {
-                        this.errors.phone = this.t('report.validation.invalidPhone')
+                        const numbersOnly = this.form.phone.replace(/\D/g, '')
+                        if (numbersOnly.length < 10) {
+                            this.errors.phone = this.t('report.validation.phoneMinDigits')
+                        } else if (numbersOnly.length > 11) {
+                            this.errors.phone = this.t('report.validation.phoneMaxDigits')
+                        } else {
+                            this.errors.phone = this.t('report.validation.invalidPhone')
+                        }
                     }
                 }
 
@@ -544,37 +872,99 @@ export default {
             return emailRegex.test(email)
         },
 
-        // Método para validar telefone
-        isValidPhone(phone) {
-            const phoneRegex = /^[\d\s\-()+ ]{10,}$/
-            return phoneRegex.test(phone)
-        },
-
         handleFileUpload(event) {
             const files = Array.from(event.target.files)
-            this.form.evidence = [...this.form.evidence, ...files]
+
+            // Verificar limite de arquivos
+            if (this.form.evidence.length + files.length > this.maxFiles) {
+                alert(`Máximo de ${this.maxFiles} arquivos permitidos. Você já tem ${this.form.evidence.length} arquivo(s).`)
+                return
+            }
+
+            // Validar cada arquivo
+            const validFiles = files.filter(file => this.validateFile(file))
+
+            if (validFiles.length > 0) {
+                this.form.evidence = [...this.form.evidence, ...validFiles]
+                this.showUploadSuccess(validFiles)
+            }
+
+            // Limpar o input
+            event.target.value = ''
         },
 
         handleFileDrop(event) {
             event.preventDefault()
             const files = Array.from(event.dataTransfer.files)
-            this.form.evidence = [...this.form.evidence, ...files]
+
+            // Usar a mesma validação do handleFileUpload
+            const validFiles = files.filter(file => {
+                const validTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/jpeg', 'image/jpg', 'image/png']
+                const maxSize = 10 * 1024 * 1024 // 10MB
+
+                if (!validTypes.includes(file.type)) {
+                    alert(`Arquivo ${file.name} não é um tipo válido. Use PDF, DOC, DOCX, JPG, JPEG ou PNG.`)
+                    return false
+                }
+
+                if (file.size > maxSize) {
+                    alert(`Arquivo ${file.name} é muito grande. Máximo 10MB.`)
+                    return false
+                }
+
+                return true
+            })
+
+            this.form.evidence = [...this.form.evidence, ...validFiles]
         },
 
         removeFile(index) {
+            const fileName = this.form.evidence[index].name
             this.form.evidence.splice(index, 1)
+            this.showRemoveSuccess(fileName)
+        },
+
+        // Feedback visual para remoção
+        showRemoveSuccess(fileName) {
+            const message = `Arquivo "${fileName}" removido com sucesso!`
+
+            // Criar notificação temporária
+            const notification = document.createElement('div')
+            notification.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 10000;
+            font-weight: 600;
+            animation: slideInRight 0.3s ease-out;
+        ">
+            <i class="fas fa-trash-alt"></i> ${message}
+        </div>
+    `
+
+            document.body.appendChild(notification)
+
+            setTimeout(() => {
+                notification.remove()
+            }, 3000)
         },
 
         generateTrackingCode() {
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 
-            // Gerar número do protocolo
-            let protocolNumber = 'UNI-'
+            // Gerar número do protocolo para RECLAMAÇÃO (UNI-REC + 8 caracteres)
+            let protocolNumber = 'UNI-REC'
             for (let i = 0; i < 8; i++) {
                 protocolNumber += chars.charAt(Math.floor(Math.random() * chars.length))
             }
 
-            // Gerar código de acesso (6 dígitos)
+            // Gerar código de acesso (6 caracteres)
             let accessCode = ''
             for (let i = 0; i < 6; i++) {
                 accessCode += chars.charAt(Math.floor(Math.random() * chars.length))
@@ -588,7 +978,6 @@ export default {
 
         async submitReport() {
             if (!this.validateCurrentStep()) {
-                // Scroll para o primeiro erro se houver
                 this.$nextTick(() => {
                     const firstError = document.querySelector('.error')
                     if (firstError) {
@@ -600,17 +989,76 @@ export default {
 
             this.submitting = true
 
-            // Simular envio
-            await new Promise(resolve => setTimeout(resolve, 3000))
+            try {
+                // Criar FormData para enviar arquivos
+                const formData = new FormData()
 
-            const codes = this.generateTrackingCode()
-            this.trackingCode = codes.protocol
-            this.accessCode = codes.access
-            this.reportSubmitted = true
-            this.submitting = false
+                // Adicionar dados do formulário
+                const complaintData = {
+                    relationship: this.form.relationship,
+                    violationType: this.form.violationType,
+                    clientType: this.form.clientType,
+                    previousContact: this.form.previousContact,
+                    incidentDate: this.form.incidentDate,
+                    invoiceNumber: this.form.invoiceNumber,
+                    productName: this.form.productName,
+                    quantity: this.form.quantity,
+                    supplier: this.form.supplier,
+                    incidentLocation: this.form.incidentLocation,
+                    actionsTaken: this.form.actionsTaken,
+                    responsiblePerson: this.form.responsiblePerson,
+                    description: this.form.description,
+                    relatedReport: this.form.relatedReport,
+                    confidenceLevel: this.form.confidenceLevel,
+                    anonymous: this.form.anonymous || false,
+                    name: this.form.anonymous ? null : this.form.name,
+                    institution: this.form.anonymous ? null : this.form.institution,
+                    email: this.form.anonymous ? null : this.form.email,
+                    phone: this.form.anonymous ? null : this.form.phone
+                }
 
-            // Scroll para o topo
-            window.scrollTo({ top: 0, behavior: 'smooth' })
+                // Adicionar dados como JSON
+                formData.append('complaintData', JSON.stringify(complaintData))
+
+                // Adicionar arquivos de evidência
+                this.form.evidence.forEach((file) => {
+                    formData.append('evidence', file)
+                })
+
+                console.log('📤 Enviando reclamação com arquivos para API...')
+                console.log('📎 Total de arquivos:', this.form.evidence.length)
+
+                // Fazer requisição para a API
+                const response = await fetch('http://localhost:3000/api/complaints', {
+                    method: 'POST',
+                    body: formData
+                })
+
+                const result = await response.json()
+
+                if (!response.ok) {
+                    throw new Error(result.error || 'Erro ao enviar reclamação')
+                }
+
+                // Sucesso
+                this.trackingCode = result.trackingCode
+                this.accessCode = result.accessCode
+                this.reportSubmitted = true
+                this.submitting = false
+
+                console.log('✅ Reclamação enviada com sucesso!')
+                console.log('📋 Protocolo:', this.trackingCode)
+                console.log('🔑 Código de Acesso:', this.accessCode)
+                console.log('📎 Arquivos enviados:', result.evidenceCount || 0)
+
+                // Scroll para o topo
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+
+            } catch (error) {
+                console.error('❌ Erro ao enviar reclamação:', error)
+                this.submitting = false
+                this.submitError = `Erro ao enviar reclamação: ${error.message}`
+            }
         },
 
         copyCode(event) {
@@ -633,6 +1081,171 @@ export default {
             if (this.errors[fieldName]) {
                 delete this.errors[fieldName]
             }
+        },
+        // Formatar campo da NF para aceitar apenas números
+        formatInvoiceNumber(event) {
+            // Remove todos os caracteres que não são números
+            let value = event.target.value.replace(/[^0-9]/g, '')
+
+            // Limita a 9 dígitos
+            if (value.length > 9) {
+                value = value.substring(0, 9)
+            }
+
+            // Atualiza o valor do campo
+            this.form.invoiceNumber = value
+            event.target.value = value
+        },
+
+        // Validar entrada da data
+        validateDateInput(event) {
+            const dateValue = event.target.value
+
+            if (dateValue) {
+                const selectedDate = new Date(dateValue)
+                const currentDate = new Date()
+                const minDate = new Date('1900-01-01')
+
+                // Verificar se a data não é futura
+                if (selectedDate > currentDate) {
+                    this.errors.incidentDate = this.t('report.validation.futureDate')
+                    return
+                }
+
+                // Verificar se a data não é muito antiga
+                if (selectedDate < minDate) {
+                    this.errors.incidentDate = this.t('report.validation.invalidDate')
+                    return
+                }
+
+                // Limpar erro se a data for válida
+                this.clearFieldError('incidentDate')
+            }
+        },
+
+        // Obter data atual no formato YYYY-MM-DD
+        getCurrentDate() {
+            const today = new Date()
+            const year = today.getFullYear()
+            const month = String(today.getMonth() + 1).padStart(2, '0')
+            const day = String(today.getDate()).padStart(2, '0')
+            return `${year}-${month}-${day}`
+        },
+
+        // Permitir apenas números na digitação
+        onlyNumbers(event) {
+            const char = String.fromCharCode(event.which)
+            if (!/[0-9]/.test(char)) {
+                event.preventDefault()
+            }
+        },
+
+        // Formatar número de telefone
+        formatPhoneNumber(event) {
+            let value = event.target.value
+
+            // Remove tudo que não é número
+            value = value.replace(/\D/g, '')
+
+            // Limita a 11 dígitos
+            if (value.length > 11) {
+                value = value.substring(0, 11)
+            }
+
+            // Aplica formatação baseada no tamanho
+            if (value.length >= 10) {
+                if (value.length === 10) {
+                    // Telefone fixo: (11) 4888-9999
+                    value = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3')
+                } else if (value.length === 11) {
+                    // Celular: (11) 99999-8888
+                    value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3')
+                }
+            } else if (value.length >= 6) {
+                // Formatação parcial durante a digitação
+                if (value.length <= 6) {
+                    value = value.replace(/(\d{2})(\d+)/, '($1) $2')
+                } else {
+                    value = value.replace(/(\d{2})(\d{4})(\d+)/, '($1) $2-$3')
+                }
+            } else if (value.length >= 2) {
+                // Apenas DDD
+                value = value.replace(/(\d{2})/, '($1) ')
+            }
+
+            // Atualiza o valor
+            this.form.phone = value
+            event.target.value = value
+
+            // Limpa erro se houver
+            this.clearFieldError('phone')
+        },
+
+        // Validar telefone
+        isValidPhone(phone) {
+            // Remove formatação para validar apenas números
+            const numbersOnly = phone.replace(/\D/g, '')
+
+            // Deve ter pelo menos 10 dígitos (DDD + número)
+            if (numbersOnly.length < 10) {
+                return false
+            }
+
+            // Deve ter no máximo 11 dígitos
+            if (numbersOnly.length > 11) {
+                return false
+            }
+
+            // Validar DDD (códigos válidos do Brasil)
+            const ddd = numbersOnly.substring(0, 2)
+            const validDDDs = [
+                '11', '12', '13', '14', '15', '16', '17', '18', '19', // SP
+                '21', '22', '24', // RJ
+                '27', '28', // ES
+                '31', '32', '33', '34', '35', '37', '38', // MG
+                '41', '42', '43', '44', '45', '46', // PR
+                '47', '48', '49', // SC
+                '51', '53', '54', '55', // RS
+                '61', // DF
+                '62', '64', // GO
+                '63', // TO
+                '65', '66', // MT
+                '67', // MS
+                '68', // AC
+                '69', // RO
+                '71', '73', '74', '75', '77', // BA
+                '79', // SE
+                '81', '87', // PE
+                '82', // AL
+                '83', // PB
+                '84', // RN
+                '85', '88', // CE
+                '86', '89', // PI
+                '91', '93', '94', // PA
+                '92', '97', // AM
+                '95', // RR
+                '96', // AP
+                '98', '99' // MA
+            ]
+
+            if (!validDDDs.includes(ddd)) {
+                return false
+            }
+
+            // Se tem 11 dígitos, deve ser celular (9 na terceira posição)
+            if (numbersOnly.length === 11) {
+                const thirdDigit = numbersOnly.charAt(2)
+                if (thirdDigit !== '9') {
+                    return false
+                }
+            }
+
+            return true
+        },
+
+        // Método para abrir o seletor de arquivos
+        triggerFileInput() {
+            this.$refs.fileInput.click()
         }
     },
 
@@ -644,6 +1257,12 @@ export default {
         'form.violationType'() {
             this.clearFieldError('violationType')
         },
+        'form.clientType'() {
+            this.clearFieldError('clientType')
+        },
+        'form.previousContact'() {
+            this.clearFieldError('previousContact')
+        },
         'form.incidentDate'() {
             this.clearFieldError('incidentDate')
         },
@@ -652,6 +1271,21 @@ export default {
         },
         'form.productName'() {
             this.clearFieldError('productName')
+        },
+        'form.quantity'() {
+            this.clearFieldError('quantity')
+        },
+        'form.supplier'() {
+            this.clearFieldError('supplier')
+        },
+        'form.incidentLocation'() {
+            this.clearFieldError('incidentLocation')
+        },
+        'form.actionsTaken'() {
+            this.clearFieldError('actionsTaken')
+        },
+        'form.responsiblePerson'() {
+            this.clearFieldError('responsiblePerson')
         },
         'form.description'() {
             this.clearFieldError('description')
@@ -684,38 +1318,37 @@ export default {
 
 /* Hero Section com Parallax */
 .hero-section {
-    position: relative;
-    height: 85.3vh;
-    min-height: 500px;
-    overflow: hidden;
+  position: relative;
+  height: 85.3vh;
+  min-height: 500px;
+  overflow: hidden;
 }
 
 .parallax-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('@/assets/fundo-logo-uni.png');
-    background-size: 70%;
-    background-position: center 20%;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #FFFFFF;
+  background-image: url('@/assets/fundo-logo-uni.png');
+  background-size: contain;
+  background-position: center calc(50% - 80px);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(174, 44, 42, 0.8), rgba(0, 0, 0, 0.6));
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(174, 44, 42, 0.8), rgba(0, 0, 0, 0.6));
 }
 
 .hero-title {
@@ -727,6 +1360,7 @@ export default {
     text-transform: uppercase;
     letter-spacing: 2px;
     animation: fadeInUp 1.5s ease-out;
+    color: white;
 }
 
 .hero-subtitle {
@@ -735,6 +1369,7 @@ export default {
     position: relative;
     z-index: 2;
     animation: fadeInUp 1.5s ease-out 0.3s both;
+    color: white;
 }
 
 @keyframes fadeInUp {
@@ -761,7 +1396,6 @@ export default {
     padding: 60px 0;
 }
 
-/* Terms Section */
 .terms-section {
     margin-bottom: 40px;
 }
@@ -805,6 +1439,122 @@ export default {
 
 .terms-info {
     margin-bottom: 40px;
+}
+
+.terms-intro {
+    margin-bottom: 30px;
+    padding: 25px;
+    background: linear-gradient(135deg, #fff5f5, #ffebee);
+    border-radius: 12px;
+    border: 2px solid #AE2C2A;
+    box-shadow: 0 8px 25px rgba(174, 44, 42, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.terms-intro::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #AE2C2A, #D2342C);
+}
+
+.terms-intro::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: rgba(174, 44, 42, 0.1);
+    border-radius: 50%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23AE2C2A' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E");
+    background-size: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(174, 44, 42, 0.2);
+}
+
+.terms-intro p {
+    margin: 30px 0 0 0;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #AE2C2A;
+    font-weight: 600;
+    text-align: justify;
+    position: relative;
+    z-index: 1;
+}
+
+.terms-acceptance {
+    margin: 30px 0;
+    padding: 18px 22px;
+    background: linear-gradient(135deg, #fafafa, #f8f8f8);
+    border-radius: 8px;
+    border: 1px solid rgba(174, 44, 42, 0.2);
+    box-shadow: 0 3px 10px rgba(174, 44, 42, 0.05);
+    text-align: center;
+    position: relative;
+}
+
+.terms-acceptance::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #AE2C2A, transparent);
+}
+
+.terms-acceptance p {
+    margin: 0;
+    color: #AE2C2A;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.terms-acceptance:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(174, 44, 42, 0.1);
+    transition: all 0.3s ease;
+}
+
+.terms-disclaimer {
+    margin-top: 25px;
+    padding: 18px 22px;
+    background: linear-gradient(135deg, #fafafa, #f5f5f5);
+    border-radius: 8px;
+    border-left: 4px solid #AE2C2A;
+    border-right: 4px solid #AE2C2A;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(174, 44, 42, 0.08);
+    position: relative;
+}
+
+.terms-disclaimer::before {
+    content: '⚠️';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 0 10px;
+    font-size: 1.2rem;
+}
+
+.terms-disclaimer p {
+    margin: 0;
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    font-weight: 500;
+    font-style: italic;
 }
 
 .info-block {
@@ -869,6 +1619,23 @@ export default {
 .btn-reject:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 25px rgba(220, 53, 69, 0.3);
+}
+
+/* Efeitos hover para melhor interatividade */
+.terms-intro:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(174, 44, 42, 0.2);
+    transition: all 0.3s ease;
+}
+
+.terms-acceptance:hover {
+    transform: scale(1.02);
+    transition: all 0.3s ease;
+}
+
+.terms-disclaimer:hover {
+    background: linear-gradient(135deg, #f8f8f8, #f0f0f0);
+    transition: all 0.3s ease;
 }
 
 /* Progress Bar */
@@ -1052,6 +1819,42 @@ export default {
     font-family: inherit;
 }
 
+.confidentiality-notice {
+    margin-top: 25px;
+    padding: 20px;
+    background: linear-gradient(135deg, #fff5f5, #ffebee);
+    border-radius: 10px;
+    border: 1px solid rgba(174, 44, 42, 0.2);
+    box-shadow: 0 3px 10px rgba(174, 44, 42, 0.05);
+}
+
+.notice-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.notice-icon {
+    color: #AE2C2A;
+    font-size: 1.3rem;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.notice-content p {
+    margin: 0;
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.confidentiality-notice:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(174, 44, 42, 0.1);
+    transition: all 0.3s ease;
+}
+
 /* Mensagens de erro */
 .error-message {
     color: #dc3545;
@@ -1183,18 +1986,39 @@ export default {
     font-size: 0.95rem;
 }
 
+/* Forçar cor branca no ícone X */
+.file-item .remove-file,
+.file-item .remove-file i,
+.file-item .remove-file::before,
+.file-item .remove-file * {
+    color: white !important;
+    fill: white !important;
+}
+
 .remove-file {
-    background: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
+    background: #dc3545 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 50% !important;
+    width: 24px !important;
+    height: 24px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 0.8rem !important;
+}
+
+.remove-file:hover {
+    background: #c82333 !important;
+}
+
+.remove-file:hover,
+.remove-file:hover i,
+.remove-file:hover::before,
+.remove-file:hover * {
+    color: white !important;
+    fill: white !important;
 }
 
 /* Confidence Scale */
@@ -1738,6 +2562,48 @@ export default {
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
     animation: loading 1.5s infinite;
+}
+
+/* Estilo para campos numéricos */
+input[inputmode="numeric"] {
+    text-align: left;
+}
+
+/* Remover setas do input number em alguns navegadores */
+input[type="text"][inputmode="numeric"]::-webkit-outer-spin-button,
+input[type="text"][inputmode="numeric"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Estilo para campo de data */
+input[type="date"] {
+    position: relative;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}
+
+.field-help {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-top: 5px;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+.form-group .field-help {
+    margin-bottom: 5px;
+}
+
+/* Ajustar margem quando há erro */
+.form-group .field-help+.error-message {
+    margin-top: 5px;
+}
+
+input[type="tel"]:focus {
+    font-family: inherit;
 }
 
 @keyframes loading {
