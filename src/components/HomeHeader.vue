@@ -76,10 +76,10 @@
                 <i class="fas fa-file-shield"></i>
                 <span class="politica-span">{{ tHeader('header.dropdown.lgpd.privacyPolicy') }}</span>
               </router-link>
-              <router-link to="/AvisoPrivacidade" class="sidebar-dropdown-item" @click="closeSidebar">
+              <!-- <router-link to="/AvisoPrivacidade" class="sidebar-dropdown-item" @click="closeSidebar">
                 <i class="fas fa-info-circle"></i>
                 <span class="politica-span">{{ tHeader('header.dropdown.lgpd.privacyNotice') }}</span>
-              </router-link>
+              </router-link> -->
             </div>
           </li>
 
@@ -261,14 +261,14 @@
                   <span class="item-title">{{ tHeader('header.dropdown.lgpd.privacyPolicy') }}</span>
                 </div>
               </router-link>
-              <router-link to="/AvisoPrivacidade" exact-active-class="active" class="dropdown-item">
+              <!-- <router-link to="/AvisoPrivacidade" exact-active-class="active" class="dropdown-item">
                 <div class="item-icon">
                   <i class="fas fa-info-circle"></i>
                 </div>
                 <div class="item-content">
                   <span class="item-title">{{ tHeader('header.dropdown.lgpd.privacyNotice') }}</span>
                 </div>
-              </router-link>
+              </router-link> -->
             </div>
           </div>
         </li>

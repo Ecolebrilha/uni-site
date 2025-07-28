@@ -14,28 +14,34 @@
     </section>
     
     <!-- Seção de Estatísticas dos Parceiros -->
-    <section class="partners-stats-section">
+    <section ref="statsSection" class="partners-stats-section">
       <div class="container">
         <div class="stats-grid">
           <div class="stat-card">
             <div class="stat-icon">
               <i class="fas fa-handshake"></i>
             </div>
-            <div class="stat-number">26+</div>
+            <div class="stat-number">
+              <span ref="partnersCounter">0</span>+
+            </div>
             <div class="stat-label">{{ t('partners.stats.strategicPartners') }}</div>
           </div>
           <div class="stat-card">
             <div class="stat-icon">
               <i class="fas fa-globe-americas"></i>
             </div>
-            <div class="stat-number">3</div>
+            <div class="stat-number">
+              <span ref="statesCounter">0</span>
+            </div>
             <div class="stat-label">{{ t('partners.stats.statesServed') }}</div>
           </div>
           <div class="stat-card">
             <div class="stat-icon">
               <i class="fas fa-award"></i>
             </div>
-            <div class="stat-number">19</div>
+            <div class="stat-number">
+              <span ref="yearsCounter">0</span>
+            </div>
             <div class="stat-label">{{ t('partners.stats.yearsOfTrust') }}</div>
           </div>
         </div>
@@ -69,7 +75,7 @@
       <div class="container">
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-header">
-            <h2 class="section-title light">{{ t('partners.testimonials.title') }}</h2>
+            <h2 class="section-title-light">{{ t('partners.testimonials.title') }}</h2>
             <div class="accent-line light"></div>
           </div>
         </ScrollReveal>
@@ -156,8 +162,31 @@ export default {
   data() {
     return {
       selectedLanguage: 'pt',
-      sidebarOpen: false
+      sidebarOpen: false,
+      companyFoundingYear: 2005, // Ano de fundação da empresa
+      companyAnniversary: { month: 7, day: 11 } // 11 de julho
     }
+  },
+  computed: {
+    yearsOfExperience() {
+      const today = new Date();
+      const currentYear = today.getFullYear();
+      const currentMonth = today.getMonth() + 1;
+      const currentDay = today.getDate();
+
+      let years = currentYear - this.companyFoundingYear;
+
+      // Se ainda não passou do aniversário deste ano, subtrai 1
+      if (currentMonth < this.companyAnniversary.month ||
+        (currentMonth === this.companyAnniversary.month && currentDay < this.companyAnniversary.day)) {
+        years--;
+      }
+
+      return years;
+    }
+  },
+  mounted() {
+    this.setupIntersectionObserver();
   },
   methods: {
     changeLanguage(event) {
@@ -170,6 +199,79 @@ export default {
     },
     handleImageError(e) {
       e.target.src = require('@/assets/logo-uni2.png');
+    },
+    
+    setupIntersectionObserver() {
+      const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.3
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.animateCounters();
+            observer.unobserve(entry.target);
+          }
+        });
+      }, options);
+
+      // Observar seção de estatísticas se existir
+      if (this.$refs.statsSection) {
+        observer.observe(this.$refs.statsSection);
+      }
+    },
+
+    animateCounters() {
+      const baseDuration = 4000;
+
+      const counters = [
+        { ref: this.$refs.partnersCounter, target: 26 },
+        { ref: this.$refs.statesCounter, target: 3 },
+        { ref: this.$refs.yearsCounter, target: this.yearsOfExperience }
+      ];
+
+      // Verificar se os refs existem antes de animar
+      const validCounters = counters.filter(counter => counter.ref);
+      
+      if (validCounters.length === 0) return;
+
+      validCounters.forEach(counter => {
+        counter.ref.innerText = '0';
+        counter.current = 0;
+      });
+
+      const steps = Math.floor(baseDuration / 16);
+      let currentStep = 0;
+
+      const animate = () => {
+        currentStep++;
+        const progress = currentStep / steps;
+
+        validCounters.forEach(counter => {
+          const easedProgress = 1 - Math.pow(1 - progress, 3);
+          const value = Math.min(
+            Math.floor(counter.target * easedProgress),
+            counter.target
+          );
+
+          if (value !== counter.current) {
+            counter.ref.innerText = value;
+            counter.current = value;
+          }
+        });
+
+        if (currentStep < steps) {
+          requestAnimationFrame(animate);
+        } else {
+          validCounters.forEach(counter => {
+            counter.ref.innerText = counter.target;
+          });
+        }
+      };
+
+      requestAnimationFrame(animate);
     }
   }
 }
@@ -358,12 +460,18 @@ section {
 .section-title {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #333;
+  background: linear-gradient(135deg, #2c3e50, #AE2C2A);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 15px;
 }
 
-.section-title.light {
+.section-title-light {
+  font-size: 2.5rem;
+  font-weight: 700;
   color: white;
+  margin-bottom: 15px;
 }
 
 .section-subtitle {
@@ -386,40 +494,79 @@ section {
 .partners-simple-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
+  gap: 45px;
   justify-items: center;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 60px;
+  padding: 20px 0;
 }
 
 .partner-logo {
-  background: white;
-  border-radius: 15px;
-  padding: 25px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+  background: linear-gradient(145deg, #ffffff, #fafbfc);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.06),
+    0 8px 20px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(174, 44, 42, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   width: 100%;
-  height: 120px;
+  height: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  border: 2px solid rgba(174, 44, 42, 0.08);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.partner-logo::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.7s ease;
+  z-index: 1;
+}
+
+.partner-logo:hover::before {
+  left: 100%;
 }
 
 .partner-logo:hover {
-  transform: translateY(-10px) scale(1.05);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-12px) scale(1.03);
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.12),
+    0 15px 30px rgba(174, 44, 42, 0.1),
+    0 0 0 1px rgba(174, 44, 42, 0.15),
+    inset 0 2px 0 rgba(255, 255, 255, 1);
+  border-color: rgba(174, 44, 42, 0.2);
+  background: linear-gradient(145deg, #ffffff, #f8fafc);
 }
 
 .partner-logo img {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 85%;
+  max-height: 85%;
   object-fit: contain;
-  filter: grayscale(100%);
-  transition: filter 0.3s ease;
+  filter: grayscale(60%) brightness(0.95) contrast(1.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 2;
 }
 
 .partner-logo:hover img {
-  filter: grayscale(0%);
+  filter: grayscale(0%) brightness(1) contrast(1.2) saturate(1.1);
+  transform: scale(1.05);
 }
 
 /* Seção de Depoimentos */
@@ -507,7 +654,10 @@ section {
 .cta-content h2 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #333;
+  background: linear-gradient(135deg, #2c3e50, #AE2C2A);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 20px;
 }
 

@@ -266,7 +266,12 @@
         </div>
         <div class="partners-carousel">
           <div class="partners-track">
-            <div v-for="n in 10" :key="n" class="partner-slide">
+            <!-- Primeira passagem de todos os parceiros -->
+            <div v-for="n in totalPartners" :key="`first-${n}`" class="partner-slide">
+              <img :src="require(`@/assets/parceiro${n}.jpg`)" :alt="`Parceiro ${n}`" @error="handleImageError">
+            </div>
+            <!-- Segunda passagem para criar o loop infinito -->
+            <div v-for="n in totalPartners" :key="`second-${n}`" class="partner-slide">
               <img :src="require(`@/assets/parceiro${n}.jpg`)" :alt="`Parceiro ${n}`" @error="handleImageError">
             </div>
           </div>
@@ -372,7 +377,7 @@
     </div>
 
     <!-- Modal de Configurações de Cookies -->
-<div class="cookie-settings-modal" v-if="showCookieSettings">
+<div id="bannerCookiesModal" class="cookie-settings-modal" v-if="showCookieSettings" @click.self="showCookieSettings = false">
   <div class="cookie-settings-content">
     <div class="cookie-settings-header">
       <h3>{{ t('home.cookies.settings.title') }}</h3>
@@ -448,6 +453,7 @@ export default {
   },
   data() {
     return {
+      totalPartners: 26, // Total de imagens de parceiros (parceiro1.jpg até parceiro26.jpg)
       currentTestimonial: 0,
       testimonialInterval: null,
       activeBranch: 0,
@@ -535,9 +541,11 @@ export default {
     this.setupIntersectionObserver();
     this.checkCookieConsent();
     this.preloadJobs();
+    document.addEventListener('keydown', this.handleEscapeKey);
   },
   beforeUnmount() {
     clearInterval(this.testimonialInterval);
+    document.removeEventListener('keydown', this.handleEscapeKey);
   },
   methods: {
     scrollToContent() {
@@ -759,7 +767,13 @@ export default {
       this.isDragging = false;
       this.slideOffset = 0;
       this.startTestimonialSlider();
+    },
+
+    handleEscapeKey(event) {
+    if (event.key === 'Escape' && this.showCookieSettings) {
+      this.showCookieSettings = false;
     }
+  }
   }
 };
 </script>
@@ -821,6 +835,7 @@ section {
 
 .hero-content {
   position: relative;
+  top: -60px;
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -929,7 +944,10 @@ section {
 .section-header h2 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #333;
+  background: linear-gradient(135deg, #2c3e50, #AE2C2A);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 15px;
   position: relative;
   display: inline-block;
@@ -1124,7 +1142,10 @@ section {
 .service-card h3 {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #333;
+  background: linear-gradient(135deg, #2c3e50, #AE2C2A);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 15px;
   text-align: center;
 }
@@ -1376,7 +1397,10 @@ section {
 .partners-track {
   display: flex;
   gap: 30px;
-  animation: scroll 20s linear infinite;
+  animation: scroll 60s linear infinite;
+  width: calc((180px + 30px) * 52); /* 52 slides total: 26 originais + 26 duplicados */
+  height: 220px;
+  align-items: center;
 }
 
 .partner-slide {
@@ -1386,27 +1410,60 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  padding: 15px;
-  transition: all 0.3s ease;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.06),
+    0 4px 16px rgba(0, 0, 0, 0.03),
+    0 0 0 1px rgba(174, 44, 42, 0.08);
+  padding: 20px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  border: 2px solid rgba(174, 44, 42, 0.1);
+  overflow: hidden;
+}
+
+.partner-slide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.partner-slide:hover::before {
+  left: 100%;
 }
 
 .partner-slide:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.12),
+    0 8px 24px rgba(174, 44, 42, 0.15),
+    0 0 0 1px rgba(174, 44, 42, 0.2);
+  border-color: rgba(174, 44, 42, 0.3);
 }
 
 .partner-slide img {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 85%;
+  max-height: 85%;
   object-fit: contain;
-  transition: filter 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 2;
 }
 
 .partner-slide:hover img {
-  filter: grayscale(0%);
+  filter: grayscale(0%) brightness(1) saturate(1.1);
+  transform: scale(1.05);
 }
 
 .partners-action {
@@ -1444,6 +1501,16 @@ section {
 
 .secondary-button:hover i {
   transform: translateX(5px);
+}
+
+/* Animação do carrossel de parceiros */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-1 * (180px + 30px) * 26));
+  }
 }
 
 /* Seção de Chamada para Ação */
@@ -1551,7 +1618,10 @@ section {
 .contact-info h2 {
   font-size: 2.2rem;
   font-weight: 700;
-  color: #333;
+  background: linear-gradient(135deg, #2c3e50, #AE2C2A);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 20px;
 }
 
@@ -2054,16 +2124,6 @@ input:checked+.slider:before {
   }
 }
 
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
 @keyframes pulse {
   0% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0.7);
@@ -2437,7 +2497,7 @@ input:checked+.slider:before {
   .cookie-reject,
   .cookie-settings {
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 2px;
   }
 
   .testimonial-content {
@@ -2629,7 +2689,6 @@ input:checked+.slider:before {
 
 /* Print styles */
 @media print {
-
   .cookie-banner,
   .cookie-settings-modal,
   .scroll-indicator,

@@ -473,40 +473,40 @@
               </div>
 
               <div class="form-group full-width">
-  <div class="checkbox-group">
-    <input type="checkbox" id="privacy" v-model="formData.privacy" required>
-    <label for="privacy">
-      Autorizo a Uni Hospitalar a manter em seu banco de talentos
-      meus dados pessoais fornecidos durante a candidatura e
-      processo seletivo, permitindo que eu seja considerado para
-      futuras oportunidades compatíveis com meu perfil
-      profissional.
-    </label>
-  </div>
-  <div class="privacy-disclaimer">
-  <div class="notice-content">
-    <i class="fas fa-info-circle notice-icon"></i>
-    <p>
-      Se você optar por não autorizar, utilizaremos seus dados apenas
-      para esta candidatura específica. Após a conclusão do processo
-      seletivo, seus dados serão eliminados, preservando somente as
-      informações necessárias para registro histórico e cumprimento de
-      obrigações legais. Você pode revogar esta autorização a qualquer
-      momento através de contato com o nosso DPO.
-    </p>
-  </div>
-  
-  <div class="notice-content">
-    <i class="fas fa-external-link-alt notice-icon"></i>
-    <p>
-      Para mais informações sobre como tratamos seus dados pessoais,
-      acesse nosso 
-      <router-link to="/AvisoPrivacidade" target="_blank">Aviso de Privacidade</router-link>.
-    </p>
-  </div>
-</div>
-  <span class="error-message" v-if="errors.privacy">{{ errors.privacy }}</span>
-</div>
+                <div class="checkbox-group">
+                  <input type="checkbox" id="privacy" v-model="formData.privacy" required>
+                  <label for="privacy">
+                    Autorizo a Uni Hospitalar a manter em seu banco de talentos
+                    meus dados pessoais fornecidos durante a candidatura e
+                    processo seletivo, permitindo que eu seja considerado para
+                    futuras oportunidades compatíveis com meu perfil
+                    profissional.
+                  </label>
+                </div>
+                <div class="privacy-disclaimer">
+                  <div class="notice-content">
+                    <i class="fas fa-info-circle notice-icon"></i>
+                    <p>
+                      Se você optar por não autorizar, utilizaremos seus dados apenas
+                      para esta candidatura específica. Após a conclusão do processo
+                      seletivo, seus dados serão eliminados, preservando somente as
+                      informações necessárias para registro histórico e cumprimento de
+                      obrigações legais. Você pode revogar esta autorização a qualquer
+                      momento através de contato com o nosso DPO.
+                    </p>
+                  </div>
+
+                  <div class="notice-content">
+                    <i class="fas fa-external-link-alt notice-icon"></i>
+                    <p>
+                      Para mais informações sobre como tratamos seus dados pessoais,
+                      acesse nosso
+                      <a href="/aviso-privacidade-candidatos.pdf" target="_blank">Aviso de Privacidade</a>.
+                    </p>
+                  </div>
+                </div>
+                <span class="error-message" v-if="errors.privacy">{{ errors.privacy }}</span>
+              </div>
 
               <div class="form-actions">
                 <button type="button" @click="backToJobs" class="cancel-button">
@@ -538,11 +538,11 @@
             </div>
           </div>
         </div>
-        
+
         <div class="success-content">
           <h2 class="success-title">{{ successTitle }}</h2>
           <p class="success-message">{{ successMessage }}</p>
-          
+
           <div class="success-details" v-if="selectedJob">
             <div class="job-applied">
               <i class="fas fa-briefcase"></i>
@@ -557,7 +557,7 @@
               </ul>
             </div>
           </div>
-          
+
           <div class="success-details" v-else>
             <div class="talent-bank">
               <i class="fas fa-database"></i>
@@ -573,7 +573,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="success-actions">
           <button @click="closeSuccessModal" class="success-button">
             <i class="fas fa-home"></i>
@@ -637,7 +637,7 @@ export default {
   },
   async mounted() {
     this.loadingJobs = true
-    
+
     // Usar vagas do store global
     const jobs = await this.loadJobsFromStore()
     this.availableJobs = jobs
@@ -844,12 +844,12 @@ export default {
     async submitForm() {
       console.log('🔄 submitForm chamado');
       console.log('📋 Dados do formulário:', this.formData);
-      
+
       if (!this.validateForm()) {
         console.log('❌ Validação falhou:', this.errors);
         return;
       }
-      
+
       console.log('✅ Validação passou, enviando formulário...');
 
       this.isSubmitting = true;
@@ -892,7 +892,7 @@ export default {
             this.successTitle = 'Perfil Adicionado com Sucesso!';
             this.successMessage = 'Seu currículo foi adicionado ao nosso banco de talentos com sucesso! Entraremos em contato quando surgir uma oportunidade compatível com seu perfil.';
           }
-          
+
           this.showSuccessModal = true;
           console.log('✅ Candidatura enviada via API:', result);
         } else {
@@ -3215,6 +3215,7 @@ section {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -3237,6 +3238,7 @@ section {
     transform: scale(0.7) translateY(-50px);
     opacity: 0;
   }
+
   to {
     transform: scale(1) translateY(0);
     opacity: 1;
@@ -3272,9 +3274,11 @@ section {
   from {
     transform: scale(0);
   }
+
   50% {
     transform: scale(1.1);
   }
+
   to {
     transform: scale(1);
   }
@@ -3291,6 +3295,7 @@ section {
     transform: scale(0) rotate(-45deg);
     opacity: 0;
   }
+
   to {
     transform: scale(1) rotate(0deg);
     opacity: 1;
@@ -3314,28 +3319,77 @@ section {
   animation: particleFloat 2s ease-out infinite;
 }
 
-.particle:nth-child(1) { animation-delay: 0.1s; transform: rotate(0deg) translateX(60px); }
-.particle:nth-child(2) { animation-delay: 0.2s; transform: rotate(30deg) translateX(60px); }
-.particle:nth-child(3) { animation-delay: 0.3s; transform: rotate(60deg) translateX(60px); }
-.particle:nth-child(4) { animation-delay: 0.4s; transform: rotate(90deg) translateX(60px); }
-.particle:nth-child(5) { animation-delay: 0.5s; transform: rotate(120deg) translateX(60px); }
-.particle:nth-child(6) { animation-delay: 0.6s; transform: rotate(150deg) translateX(60px); }
-.particle:nth-child(7) { animation-delay: 0.7s; transform: rotate(180deg) translateX(60px); }
-.particle:nth-child(8) { animation-delay: 0.8s; transform: rotate(210deg) translateX(60px); }
-.particle:nth-child(9) { animation-delay: 0.9s; transform: rotate(240deg) translateX(60px); }
-.particle:nth-child(10) { animation-delay: 1.0s; transform: rotate(270deg) translateX(60px); }
-.particle:nth-child(11) { animation-delay: 1.1s; transform: rotate(300deg) translateX(60px); }
-.particle:nth-child(12) { animation-delay: 1.2s; transform: rotate(330deg) translateX(60px); }
+.particle:nth-child(1) {
+  animation-delay: 0.1s;
+  transform: rotate(0deg) translateX(60px);
+}
+
+.particle:nth-child(2) {
+  animation-delay: 0.2s;
+  transform: rotate(30deg) translateX(60px);
+}
+
+.particle:nth-child(3) {
+  animation-delay: 0.3s;
+  transform: rotate(60deg) translateX(60px);
+}
+
+.particle:nth-child(4) {
+  animation-delay: 0.4s;
+  transform: rotate(90deg) translateX(60px);
+}
+
+.particle:nth-child(5) {
+  animation-delay: 0.5s;
+  transform: rotate(120deg) translateX(60px);
+}
+
+.particle:nth-child(6) {
+  animation-delay: 0.6s;
+  transform: rotate(150deg) translateX(60px);
+}
+
+.particle:nth-child(7) {
+  animation-delay: 0.7s;
+  transform: rotate(180deg) translateX(60px);
+}
+
+.particle:nth-child(8) {
+  animation-delay: 0.8s;
+  transform: rotate(210deg) translateX(60px);
+}
+
+.particle:nth-child(9) {
+  animation-delay: 0.9s;
+  transform: rotate(240deg) translateX(60px);
+}
+
+.particle:nth-child(10) {
+  animation-delay: 1.0s;
+  transform: rotate(270deg) translateX(60px);
+}
+
+.particle:nth-child(11) {
+  animation-delay: 1.1s;
+  transform: rotate(300deg) translateX(60px);
+}
+
+.particle:nth-child(12) {
+  animation-delay: 1.2s;
+  transform: rotate(330deg) translateX(60px);
+}
 
 @keyframes particleFloat {
   0% {
     opacity: 0;
     transform: rotate(var(--rotation, 0deg)) translateX(0px) scale(0);
   }
+
   20% {
     opacity: 1;
     transform: rotate(var(--rotation, 0deg)) translateX(40px) scale(1);
   }
+
   100% {
     opacity: 0;
     transform: rotate(var(--rotation, 0deg)) translateX(80px) scale(0);
@@ -3477,6 +3531,7 @@ section {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -3489,37 +3544,37 @@ section {
     width: 95%;
     margin: 20px;
   }
-  
+
   .success-animation {
     padding: 30px 20px 15px;
   }
-  
+
   .checkmark-circle {
     width: 70px;
     height: 70px;
   }
-  
+
   .checkmark-icon {
     font-size: 2rem;
   }
-  
+
   .success-content {
     padding: 0 20px 15px;
   }
-  
+
   .success-title {
     font-size: 1.5rem;
   }
-  
+
   .success-message {
     font-size: 1rem;
   }
-  
+
   .success-actions {
     flex-direction: column;
     padding: 15px 20px 25px;
   }
-  
+
   .success-button,
   .secondary-button {
     justify-content: center;
@@ -3531,29 +3586,29 @@ section {
     width: 6px;
     height: 6px;
   }
-  
+
   .checkmark-circle {
     width: 60px;
     height: 60px;
   }
-  
+
   .checkmark-icon {
     font-size: 1.8rem;
   }
-  
+
   .success-title {
     font-size: 1.3rem;
   }
-  
+
   .success-message {
     font-size: 0.95rem;
   }
-  
+
   .success-details {
     padding: 15px;
     margin: 15px 0;
   }
-  
+
   .next-steps li {
     font-size: 0.9rem;
   }
