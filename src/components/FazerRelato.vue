@@ -483,7 +483,7 @@
 
                     <!-- Success Message -->
                     <div class="success-section" v-else>
-                        <div class="success-card">
+                        <div class="success-card" ref="successCard">
                             <div class="success-animation">
                                 <div class="success-icon">
                                     <i class="fas fa-check-circle"></i>
@@ -600,6 +600,24 @@ export default {
         }
     },
     methods: {
+        // Função para scroll suave até o success-card
+        scrollToSuccess() {
+            this.$nextTick(() => {
+                if (this.$refs.successCard) {
+                    this.$refs.successCard.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                }
+            });
+        },
+        
+        // Função para mostrar sucesso e fazer scroll
+        showSuccessAndScroll() {
+            this.showSuccess = true;
+            this.scrollToSuccess();
+        },
+        
         acceptTerms() {
             this.termsAccepted = true
         },
@@ -1806,6 +1824,7 @@ export default {
     height: 20px;
     margin: 0;
     accent-color: #AE2C2A;
+    cursor: pointer;
 }
 
 .checkbox-group label {

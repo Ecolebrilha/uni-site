@@ -2753,7 +2753,6 @@ formatDateTwo(dateString) {
   outline-offset: 2px;
 }
 
-.form-group input:focus,
 .consultar-btn:focus,
 .nova-consulta-btn:focus,
 .compartilhar-btn:focus,

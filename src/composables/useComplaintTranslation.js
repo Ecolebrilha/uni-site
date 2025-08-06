@@ -166,7 +166,7 @@ const translations = reactive({
                 navigation: {
                     previous: 'Anterior',
                     next: 'Próximo',
-                    submit: 'Enviar Relato',
+                    submit: 'Enviar Reclamação',
                     submitting: 'Enviando...'
                 }
             },
@@ -359,7 +359,7 @@ const translations = reactive({
                 navigation: {
                     previous: 'Previous',
                     next: 'Next',
-                    submit: 'Submit Report',
+                    submit: 'Submit Complaint',
                     submitting: 'Submitting...'
                 }
             },
@@ -552,7 +552,7 @@ const translations = reactive({
                 navigation: {
                     previous: 'Anterior',
                     next: 'Siguiente',
-                    submit: 'Enviar Reporte',
+                    submit: 'Enviar Queja',
                     submitting: 'Enviando...'
                 }
             },
