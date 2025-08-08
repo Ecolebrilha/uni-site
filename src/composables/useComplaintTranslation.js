@@ -59,12 +59,13 @@ const translations = reactive({
                         options: {
                             productDefect: 'Defeito no produto',
                             wrongQuantity: 'Quantidade incorreta',
+                            preExpiredProduct: 'Produto pré-vencido',
                             expiredProduct: 'Produto vencido',
                             productViolation: 'Violação de especificações do produto',
                             damagedProduct: 'Produto danificado',
                             incorrectProduct: 'Produto incorreto/trocado',
                             missingItems: 'Itens faltando na entrega',
-                            packagingIssue: 'Problema na embalagem',
+                            packagingIssue: 'Violação na embalagem',
                             qualityIssue: 'Problema de qualidade',
                             other: 'Outros'
                         }
@@ -73,17 +74,16 @@ const translations = reactive({
                         label: 'Tipo de cliente',
                         placeholder: 'Selecione seu tipo',
                         options: {
-                            hospital: 'Hospital',
-                            clinic: 'Clínica',
+                            hospitalClinic: 'Hospital/Clínica',
                             pharmacy: 'Farmácia',
                             laboratory: 'Laboratório',
-                            healthCenter: 'Posto de Saúde',
+                            distributor: 'Distribuidora',
                             individual: 'Pessoa Física',
                             other: 'Outros'
                         }
                     },
                     previousContact: {
-                        label: 'Problema já contatado?',
+                        label: 'Problema já relatado?',
                         placeholder: 'Selecione uma opção',
                         options: {
                             no: 'Não, é o primeiro contato',
@@ -99,8 +99,9 @@ const translations = reactive({
                 step2: {
                     title: 'Detalhes do Incidente',
                     date: 'Data aproximada do ocorrido',
-                    invoiceNumber: 'Número da Nota Fiscal',
-                    invoiceNumberPlaceholder: 'Digite o número da NF',
+                    invoiceNumber: 'Número da(s) Nota(s) Fiscal(is)',
+                    invoiceNumberPlaceholder: 'Digite o(s) número(s) da(s) NF(s)',
+                    invoiceNumberHelp: 'Para múltiplas notas fiscais, separe por vírgula (ex: 12345, 67890)',
                     productName: 'Nome do produto',
                     productNamePlaceholder: 'Digite o nome do produto',
                     quantity: 'Quantidade envolvida',
@@ -112,7 +113,6 @@ const translations = reactive({
                     incidentLocationPlaceholder: 'Selecione o local',
                     incidentLocationOptions: {
                         delivery: 'Na entrega',
-                        storage: 'No armazenamento',
                         usage: 'Durante o uso',
                         opening: 'Ao abrir a embalagem',
                         transport: 'No transporte',
@@ -133,7 +133,7 @@ const translations = reactive({
                     responsiblePersonPlaceholder: 'Nome do responsável',
                     description: 'Descreva detalhadamente a situação',
                     descriptionPlaceholder: 'Descreva o que aconteceu de forma completa e detalhada...',
-                    descriptionHelp: 'É importante que sua reclamação seja completa e detalhada. Não se esqueça de incluir:',
+                    descriptionHelp: 'É importante que sua reclamação seja completa e detalhada. Considere incluir:',
                     helpItems: {
                         what: 'O que aconteceu (descrição da situação)',
                         when: 'Quando (data em que aconteceu)',
@@ -149,6 +149,7 @@ const translations = reactive({
                     evidence: 'Anexar arquivos de evidência',
                     evidenceHelp: 'Clique ou arraste arquivos aqui',
                     evidenceFormats: 'Formatos aceitos: PDF, DOC, DOCX, JPG, JPEG, PNG',
+                    evidenceDisclaimer: 'Limite máximo: 5 arquivos',
                     confidenceLevel: 'Qual o seu nível de confiança neste canal?',
                     noConfidence: 'Não confia',
                     fullConfidence: 'Confia muito',
@@ -252,12 +253,13 @@ const translations = reactive({
                         options: {
                             productDefect: 'Product defect',
                             wrongQuantity: 'Wrong quantity',
+                            preExpiredProduct: 'Pre-expired product',
                             expiredProduct: 'Expired product',
                             productViolation: 'Product specification violation',
                             damagedProduct: 'Damaged product',
                             incorrectProduct: 'Incorrect/wrong product',
                             missingItems: 'Missing items in delivery',
-                            packagingIssue: 'Packaging issue',
+                            packagingIssue: 'Violation of packaging',
                             qualityIssue: 'Quality issue',
                             other: 'Others'
                         }
@@ -266,17 +268,16 @@ const translations = reactive({
                         label: 'Client type',
                         placeholder: 'Select your type',
                         options: {
-                            hospital: 'Hospital',
-                            clinic: 'Clinic',
+                            hospitalClinic: 'Hospital/Clinic',
                             pharmacy: 'Pharmacy',
                             laboratory: 'Laboratory',
-                            healthCenter: 'Health Center',
+                            distributor: 'Distributor',
                             individual: 'Individual',
                             other: 'Others'
                         }
                     },
                     previousContact: {
-                        label: 'Problem already contacted?',
+                        label: 'Problem already reported?',
                         placeholder: 'Select an option',
                         options: {
                             no: 'No, this is the first contact',
@@ -292,8 +293,9 @@ const translations = reactive({
                 step2: {
                     title: 'Incident Details',
                     date: 'Approximate date of occurrence',
-                    invoiceNumber: 'Invoice Number',
-                    invoiceNumberPlaceholder: 'Enter the invoice number',
+                    invoiceNumber: 'Invoice Number(s)',
+                    invoiceNumberPlaceholder: 'Enter the invoice number(s)',
+                    invoiceNumberHelp: 'For multiple invoices, separate with commas (e.g., 12345, 67890)',
                     productName: 'Product name',
                     productNamePlaceholder: 'Enter the product name',
                     quantity: 'Quantity involved',
@@ -326,7 +328,7 @@ const translations = reactive({
                     responsiblePersonPlaceholder: 'Name of responsible person',
                     description: 'Describe the situation in detail',
                     descriptionPlaceholder: 'Describe what happened completely and in detail...',
-                    descriptionHelp: 'It is important that your complaint is complete and detailed. Do not forget to include:',
+                    descriptionHelp: 'It is important that your complaint is complete and detailed. Consider including:',
                     helpItems: {
                         what: 'What happened (description of the situation)',
                         when: 'When (date it happened)',
@@ -342,6 +344,7 @@ const translations = reactive({
                     evidence: 'Attach evidence files',
                     evidenceHelp: 'Click or drag files here',
                     evidenceFormats: 'Accepted formats: PDF, DOC, DOCX, JPG, JPEG, PNG',
+                    evidenceDisclaimer: 'Maximum limit: 5 files',
                     confidenceLevel: 'What is your level of confidence in this channel?',
                     noConfidence: 'No confidence',
                     fullConfidence: 'Full confidence',
@@ -445,12 +448,13 @@ const translations = reactive({
                         options: {
                             productDefect: 'Defecto del producto',
                             wrongQuantity: 'Cantidad incorrecta',
+                            preExpiredProduct: 'Producto pre-vencido',
                             expiredProduct: 'Producto vencido',
                             productViolation: 'Violación de especificaciones del producto',
                             damagedProduct: 'Producto dañado',
                             incorrectProduct: 'Producto incorrecto/cambiado',
                             missingItems: 'Artículos faltantes en la entrega',
-                            packagingIssue: 'Problema en el empaque',
+                            packagingIssue: 'Violación del embalaje',
                             qualityIssue: 'Problema de calidad',
                             other: 'Otros'
                         }
@@ -459,17 +463,16 @@ const translations = reactive({
                         label: 'Tipo de cliente',
                         placeholder: 'Seleccione su tipo',
                         options: {
-                            hospital: 'Hospital',
-                            clinic: 'Clínica',
+                            hospitalClinic: 'Hospital/Clínica',
                             pharmacy: 'Farmacia',
                             laboratory: 'Laboratorio',
-                            healthCenter: 'Centro de Salud',
+                            distributor: 'Distribuidor',
                             individual: 'Persona Física',
                             other: 'Otros'
                         }
                     },
                     previousContact: {
-                        label: '¿El problema ya fue contactado?',
+                        label: '¿Ya se informó el problema?',
                         placeholder: 'Seleccione una opción',
                         options: {
                             no: 'No, es el primer contacto',
@@ -485,8 +488,9 @@ const translations = reactive({
                 step2: {
                     title: 'Detalles del Incidente',
                     date: 'Fecha aproximada de ocurrencia',
-                    invoiceNumber: 'Número de Factura',
-                    invoiceNumberPlaceholder: 'Ingrese el número de factura',
+                    invoiceNumber: 'Número(s) de Factura(s)',
+                    invoiceNumberPlaceholder: 'Ingrese el/los número(s) de la(s) factura(s)',
+                    invoiceNumberHelp: 'Para múltiples facturas, sepáralas con comas (ej.: 12345, 67890)',
                     productName: 'Nombre del producto',
                     productNamePlaceholder: 'Ingrese el nombre del producto',
                     quantity: 'Cantidad involucrada',
@@ -519,7 +523,7 @@ const translations = reactive({
                     responsiblePersonPlaceholder: 'Nombre del responsable',
                     description: 'Describa detalladamente la situación',
                     descriptionPlaceholder: 'Describa lo que pasó de forma completa y detallada...',
-                    descriptionHelp: 'Es importante que su queja sea completa y detallada. No se olvide de incluir:',
+                    descriptionHelp: 'Es importante que su queja sea completa y detallada. Considere incluir:',
                     helpItems: {
                         what: 'Qué pasó (descripción de la situación)',
                         when: 'Cuándo (fecha en que pasó)',
@@ -535,6 +539,7 @@ const translations = reactive({
                     evidence: 'Adjuntar archivos de evidencia',
                     evidenceHelp: 'Haga clic o arrastre archivos aquí',
                     evidenceFormats: 'Formatos aceptados: PDF, DOC, DOCX, JPG, JPEG, PNG',
+                    evidenceDisclaimer: 'Límite máximo: 5 archivos',
                     confidenceLevel: '¿Cuál es su nivel de confianza en este canal?',
                     noConfidence: 'No confía',
                     fullConfidence: 'Confía mucho',

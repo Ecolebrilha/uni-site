@@ -6,6 +6,8 @@
     <section class="hero-section">
       <div class="parallax-container">
         <div class="overlay"></div>
+        <h1 class="hero-title">Consulta de Status</h1>
+                <div class="hero-subtitle">Acompanhe o andamento das suas solicitações registradas em nosso sistema</div>
       </div>
     </section>
 
@@ -25,7 +27,7 @@
               <span class="radio-custom"></span>
               <div class="radio-content">
                 <i class="fas fa-shield-alt"></i>
-                <span>Relato Confidencial</span>
+                <span>Relato</span>
               </div>
             </label>
 
@@ -89,15 +91,15 @@
               </div>
 
               <div class="erro-acoes">
-                <button @click="clearError" class="retry-btn">
+                <button @click="limparFormulario" class="retry-btn">
                   <i class="fas fa-redo"></i>
                   Tentar Novamente
                 </button>
 
-                <button @click="limparFormulario" class="clear-btn">
+                <!-- <button @click="limparFormulario" class="clear-btn">
                   <i class="fas fa-eraser"></i>
                   Limpar Campos
-                </button>
+                </button> -->
               </div>
             </div>
           </div>
@@ -185,7 +187,7 @@
           <!-- Resultado da Consulta -->
           <div v-if="resultado" class="resultado-container">
             <div class="resultado-header">
-              <h3>Status {{ tipoConsulta === 'relato' ? 'do Relato Confidencial' : 'da Reclamação' }}</h3>
+              <h3>Status {{ tipoConsulta === 'relato' ? 'do Relato' : 'da Reclamação' }}</h3>
               <span class="protocolo">{{ resultado.tracking_code }}</span>
             </div>
 
@@ -358,6 +360,46 @@
     </section>
 
     <HomeFooter />
+
+    <!-- Modal de Compartilhamento -->
+    <div v-if="showShareModal" class="share-modal-overlay" @click="showShareModal = false">
+      <div class="share-modal" @click.stop>
+        <div class="share-modal-header">
+          <h3>Compartilhar Status</h3>
+          <button @click="showShareModal = false" class="close-btn">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="share-modal-content">
+          <p class="share-preview">
+            {{ getShareMessage() }}
+          </p>
+          
+          <div class="share-options">
+            <button @click="shareViaWhatsApp" class="share-btn whatsapp">
+              <i class="fab fa-whatsapp"></i>
+              WhatsApp
+            </button>
+            
+            <button @click="shareViaEmail" class="share-btn email">
+              <i class="fas fa-envelope"></i>
+              Email
+            </button>
+            
+            <button @click="shareViaSMS" class="share-btn sms">
+              <i class="fas fa-sms"></i>
+              SMS
+            </button>
+            
+            <button @click="copyToClipboard" class="share-btn copy">
+              <i class="fas fa-copy"></i>
+              Copiar Link
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -383,8 +425,9 @@ export default {
       erro: null,
       isLoading: false,
       statusHistory: [],
-    loadingHistory: false,
-    currentStatus: null
+      loadingHistory: false,
+      currentStatus: null,
+      showShareModal: false
     };
   },
   computed: {
@@ -428,7 +471,7 @@ export default {
 
     getProtocolHint() {
       return this.tipoConsulta === 'relato'
-        ? 'Protocolo do relato confidencial (formato: UNI-REL + números e letras)'
+        ? 'Protocolo do relato (formato: UNI-REL + números e letras)'
         : 'Protocolo da reclamação (formato: UNI-REC + números e letras)';
     },
 
@@ -664,21 +707,75 @@ async loadStatusHistory() {
     // Compartilhar status
     compartilharStatus() {
       if (!this.resultado) return;
+      this.showShareModal = true;
+    },
 
-      const url = `${window.location.origin}${window.location.pathname}?protocol=${this.resultado.tracking_code}&access=${this.formData.accessCode}&type=${this.tipoConsulta}`;
+    getShareUrl() {
+      return `${window.location.origin}${window.location.pathname}?protocol=${this.resultado.tracking_code}&access=${this.formData.accessCode}&type=${this.tipoConsulta}`;
+    },
 
-      if (navigator.share) {
-        navigator.share({
-          title: 'Status do ' + (this.tipoConsulta === 'relato' ? 'Relato' : 'Reclamação'),
-          text: `Status: ${this.getStatusLabel(this.resultado.status)}`,
-          url: url
-        });
-      } else {
-        // Fallback para copiar para clipboard
-        navigator.clipboard.writeText(url).then(() => {
-          alert('Link copiado para a área de transferência!');
-        });
-      }
+    getShareMessage() {
+      const tipo = this.tipoConsulta === 'relato' ? 'Relato' : 'Reclamação';
+      const status = this.getStatusLabel(this.resultado.status);
+      return `Status do ${tipo}: ${status}\nProtocolo: ${this.resultado.tracking_code}`;
+    },
+
+    shareViaWhatsApp() {
+      const message = encodeURIComponent(`${this.getShareMessage()}\n\nAcompanhe em: ${this.getShareUrl()}`);
+      window.open(`https://wa.me/?text=${message}`, '_blank');
+      this.showShareModal = false;
+    },
+
+    shareViaEmail() {
+      const subject = encodeURIComponent(`Status do ${this.tipoConsulta === 'relato' ? 'Relato' : 'Reclamação'} - ${this.resultado.tracking_code}`);
+      const body = encodeURIComponent(`${this.getShareMessage()}\n\nAcompanhe o status completo em:\n${this.getShareUrl()}`);
+      window.open(`mailto:?subject=${subject}&body=${body}`, '_blank');
+      this.showShareModal = false;
+    },
+
+    shareViaSMS() {
+      const message = encodeURIComponent(`${this.getShareMessage()}\n\n${this.getShareUrl()}`);
+      window.open(`sms:?body=${message}`, '_blank');
+      this.showShareModal = false;
+    },
+
+    copyToClipboard() {
+      const fullText = `${this.getShareMessage()}\n\n${this.getShareUrl()}`;
+      navigator.clipboard.writeText(fullText).then(() => {
+        this.showCopyNotification();
+        this.showShareModal = false;
+      }).catch(() => {
+        // Fallback para navegadores mais antigos
+        const textArea = document.createElement('textarea');
+        textArea.value = fullText;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        this.showCopyNotification();
+        this.showShareModal = false;
+      });
+    },
+
+    showCopyNotification() {
+      const notification = document.createElement('div');
+      notification.className = 'copy-notification';
+      notification.innerHTML = `
+        <i class="fas fa-check-circle"></i>
+        Copiado para a área de transferência!
+      `;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.classList.add('show');
+      }, 100);
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+          document.body.removeChild(notification);
+        }, 300);
+      }, 2000);
     },
 
     // Calcular tempo de processamento
@@ -881,17 +978,24 @@ formatDateTwo(dateString) {
 }
 
 .hero-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: fadeInUp 1.5s ease-out;
+    color: white;
 }
 
 .hero-subtitle {
-  font-size: 1.2rem;
-  opacity: 0.9;
-  max-width: 600px;
-  margin: 0 auto;
+    font-size: 1.3rem;
+    font-weight: 300;
+    position: relative;
+    z-index: 2;
+    animation: fadeInUp 1.5s ease-out 0.3s both;
+    color: white;
 }
 
 .consulta-section {
@@ -1526,9 +1630,8 @@ formatDateTwo(dateString) {
 }
 
 .erro-content i {
-  font-size: 3rem;
+  font-size: 1.6rem;
   color: #721c24;
-  margin-bottom: 15px;
 }
 
 .erro-content h3 {
@@ -2188,11 +2291,13 @@ formatDateTwo(dateString) {
 .history-message {
   margin: 15px 0;
   color: #495057;
+  font-weight: 600;
   line-height: 1.6;
   font-size: 0.95rem;
   padding: 12px;
-  background: rgba(174, 44, 42, 0.05);
+  background: #ffdada;
   border-radius: 8px;
+  border: 1px solid rgba(174, 44, 42, 0.1);
   border-left: 4px solid #AE2C2A;
   font-style: italic;
 }
@@ -2237,7 +2342,7 @@ formatDateTwo(dateString) {
   font-size: 0.9rem;
   color: #495057;
   padding: 6px 10px;
-  background: rgba(174, 44, 42, 0.05);
+  background: #ffdada;
   border-radius: 6px;
   border: 1px solid rgba(174, 44, 42, 0.1);
 }
@@ -2362,12 +2467,12 @@ formatDateTwo(dateString) {
 
 @media (max-width: 768px) {
   .hero-title {
-    font-size: 2rem;
-  }
+        font-size: 2.5rem;
+    }
 
-  .hero-subtitle {
-    font-size: 1rem;
-  }
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
 
   .consulta-container {
     padding: 20px;
@@ -2553,9 +2658,39 @@ formatDateTwo(dateString) {
     width: 100%;
     max-width: 280px;
   }
+
+  .share-modal {
+    width: 95%;
+    margin: 20px;
+  }
+  
+  .share-modal-header {
+    padding: 20px;
+  }
+  
+  .share-modal-content {
+    padding: 20px;
+  }
+  
+  .share-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .share-btn {
+    padding: 18px;
+    font-size: 1.1rem;
+  }
 }
 
 @media (max-width: 480px) {
+  .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
   .hero-section {
     padding: 60px 0 40px;
   }
@@ -2945,5 +3080,187 @@ formatDateTwo(dateString) {
     background: #f0f0f0 !important;
     color: #000 !important;
   }
+}
+/* Modal de Compartilhamento */
+.share-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.share-modal {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: slideInUp 0.4s ease;
+}
+
+.share-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 35px;
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  border-radius: 20px 20px 0 0;
+  border-bottom: none;
+}
+
+.share-modal-header h3 {
+  margin: 0;
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.share-modal-content {
+  padding: 30px;
+}
+
+.share-preview {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  border: 2px solid #AE2C2A;
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 30px;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #333;
+  white-space: pre-line;
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(174, 44, 42, 0.1);
+  position: relative;
+}
+
+.share-preview::before {
+  content: '📋';
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  background: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.share-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+}
+
+.share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: white;
+}
+
+.share-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.share-btn.whatsapp {
+  background: #25D366;
+}
+
+.share-btn.whatsapp:hover {
+  background: #128C7E;
+}
+
+.share-btn.email {
+  background: #EA4335;
+}
+
+.share-btn.email:hover {
+  background: #D33B2C;
+}
+
+.share-btn.sms {
+  background: #007AFF;
+}
+
+.share-btn.sms:hover {
+  background: #0056CC;
+}
+
+.share-btn.copy {
+  background: #6c757d;
+}
+
+.share-btn.copy:hover {
+  background: #5a6268;
+}
+
+.share-btn i {
+  font-size: 1.2rem;
+}
+
+/* Notificação de cópia */
+.copy-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #28a745;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 1001;
+  opacity: 0;
+  transform: translateX(100px);
+  transition: all 0.3s ease;
+}
+
+.copy-notification.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.copy-notification i {
+  font-size: 1.2rem;
 }
 </style>

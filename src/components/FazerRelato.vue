@@ -229,18 +229,19 @@
                                                     t('report.form.step1.area.options.administrative') }}</option>
                                                 <option value="commercial">{{
                                                     t('report.form.step1.area.options.commercial') }}</option>
+                                                <option value="direction">{{
+                                                    t('report.form.step1.area.options.direction') }}</option>
+                                                    <option value="stock">{{ t('report.form.step1.area.options.stock') }}</option>
                                                 <option value="financial">{{
                                                     t('report.form.step1.area.options.financial') }}</option>
-                                                <option value="hr">{{ t('report.form.step1.area.options.hr') }}</option>
-                                                <option value="integration">{{
-                                                    t('report.form.step1.area.options.integration') }}</option>
-                                                <option value="legal">{{ t('report.form.step1.area.options.legal') }}
-                                                </option>
-                                                <option value="ma">{{ t('report.form.step1.area.options.ma') }}</option>
-                                                <option value="operations">{{
-                                                    t('report.form.step1.area.options.operations') }}</option>
-                                                <option value="regulatory">{{
-                                                    t('report.form.step1.area.options.regulatory') }}</option>
+                                                <option value="taxAccounting">{{ t('report.form.step1.area.options.taxAccounting')
+                                                    }}</option>
+                                                    <option value="legal">{{ t('report.form.step1.area.options.legal') }}
+                                                    </option>
+                                                <option value="bidding">{{
+                                                    t('report.form.step1.area.options.bidding') }}</option>
+                                                <option value="hr">{{
+                                                    t('report.form.step1.area.options.hr') }}</option>
                                                 <option value="it">{{ t('report.form.step1.area.options.it') }}</option>
                                                 <option value="other">{{ t('report.form.step1.area.options.other') }}
                                                 </option>
@@ -270,11 +271,19 @@
                                         <div class="form-group">
                                             <label for="incidentDate">{{ t('report.form.step2.date') }} <span
                                                     class="required">*</span></label>
-                                            <input type="date" id="incidentDate" v-model="form.incidentDate" required
-                                                min="1900-01-01" :max="getCurrentDate()" @input="validateDateInput"
-                                                :class="{ 'error': errors.incidentDate }">
+                                            <div class="date-input-wrapper">
+                                                <input type="text" id="incidentDate" v-model="form.incidentDate"
+                                                    required placeholder="DD/MM/AAAA" @input="handleDateInput"
+                                                    @keydown="handleDateKeydown" maxlength="10"
+                                                    :class="{ 'error': errors.incidentDate }">
+                                                <input type="date" ref="hiddenDatePicker" @change="onDateSelected"
+                                                    style="position: absolute; opacity: 0; pointer-events: none;">
+                                                <button type="button" class="calendar-btn" @click="openCalendar">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                </button>
+                                            </div>
                                             <div v-if="errors.incidentDate" class="error-message">{{ errors.incidentDate
-                                            }}</div>
+                                                }}</div>
                                         </div>
 
                                         <div class="form-group">
@@ -288,8 +297,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="accusedName">{{ t('report.form.step2.accusedName') }} <span
-                                                    class="required">*</span></label>
+                                            <label for="accusedName">{{ t('report.form.step2.accusedName') }} </label>
                                             <input type="text" id="accusedName" v-model="form.accusedName" required
                                                 :placeholder="t('report.form.step2.accusedNamePlaceholder')"
                                                 :class="{ 'error': errors.accusedName }">
@@ -338,17 +346,6 @@
                                         <div v-if="errors.description" class="error-message">{{ errors.description }}
                                         </div>
                                     </div>
-                                </div>
-
-                                <!-- Step 3: Evidence and Additional Info -->
-                                <div class="form-step" v-show="currentStep === 3">
-                                    <h3 class="step-title">{{ t('report.form.step3.title') }}</h3>
-
-                                    <div class="form-group">
-                                        <label for="relatedReport">{{ t('report.form.step3.relatedReport') }}</label>
-                                        <input type="text" id="relatedReport" v-model="form.relatedReport"
-                                            :placeholder="t('report.form.step3.relatedReportPlaceholder')">
-                                    </div>
 
                                     <div class="form-group">
                                         <label for="evidence">{{ t('report.form.step3.evidence') }}</label>
@@ -360,6 +357,10 @@
                                                 <i class="fas fa-cloud-upload-alt"></i>
                                                 <p>{{ t('report.form.step3.evidenceHelp') }}</p>
                                                 <span>{{ t('report.form.step3.evidenceFormats') }}</span>
+                                                <div class="file-limit-disclaimer">
+                                                    <i class="fas fa-info-circle"></i>
+                                                    <small>{{ t('report.form.step3.evidenceDisclaimer') }}</small>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="uploaded-files" v-if="form.evidence.length > 0">
@@ -371,6 +372,17 @@
                                                 </button>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+
+                                <!-- Step 3: Evidence and Additional Info -->
+                                <div class="form-step" v-show="currentStep === 3">
+                                    <h3 class="step-title">{{ t('report.form.step3.title') }}</h3>
+
+                                    <div class="form-group">
+                                        <label for="relatedReport">{{ t('report.form.step3.relatedReport') }}</label>
+                                        <input type="text" id="relatedReport" v-model="form.relatedReport"
+                                            :placeholder="t('report.form.step3.relatedReportPlaceholder')">
                                     </div>
 
                                     <div class="form-group">
@@ -405,10 +417,8 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="institution">{{ t('report.form.step3.institution') }} <span
-                                                        class="required">*</span></label>
+                                                <label for="institution">{{ t('report.form.step3.institution') }}</label>
                                                 <input type="text" id="institution" v-model="form.institution"
-                                                    :required="!form.anonymous"
                                                     :placeholder="t('report.form.step3.institutionPlaceholder')"
                                                     :class="{ 'error': errors.institution }">
                                                 <div v-if="errors.institution" class="error-message">{{
@@ -483,7 +493,7 @@
 
                     <!-- Success Message -->
                     <div class="success-section" v-else>
-                        <div class="success-card" ref="successCard">
+                        <div class="success-card">
                             <div class="success-animation">
                                 <div class="success-icon">
                                     <i class="fas fa-check-circle"></i>
@@ -570,6 +580,7 @@ export default {
             reportSubmitted: false,
             submitting: false,
             submitError: '',
+            lastCursorPosition: null,
             trackingCode: '',
             accessCode: '',
             isDragOver: false,
@@ -600,24 +611,6 @@ export default {
         }
     },
     methods: {
-        // Função para scroll suave até o success-card
-        scrollToSuccess() {
-            this.$nextTick(() => {
-                if (this.$refs.successCard) {
-                    this.$refs.successCard.scrollIntoView({ 
-                        behavior: 'smooth', 
-                        block: 'center' 
-                    });
-                }
-            });
-        },
-        
-        // Função para mostrar sucesso e fazer scroll
-        showSuccessAndScroll() {
-            this.showSuccess = true;
-            this.scrollToSuccess();
-        },
-        
         acceptTerms() {
             this.termsAccepted = true
         },
@@ -685,12 +678,6 @@ export default {
                         this.t('report.validation.required')
                 }
 
-                if (!this.form.accusedName || this.form.accusedName.trim().length < 2) {
-                    this.errors.accusedName = this.form.accusedName ?
-                        this.t('report.validation.minLength').replace('{min}', '2') :
-                        this.t('report.validation.required')
-                }
-
                 if (!this.form.description || this.form.description.trim().length < 20) {
                     this.errors.description = this.form.description ?
                         this.t('report.validation.descriptionMinLength') :
@@ -704,12 +691,6 @@ export default {
                 if (!this.form.anonymous) {
                     if (!this.form.name || this.form.name.trim().length < 2) {
                         this.errors.name = this.form.name ?
-                            this.t('report.validation.minLength').replace('{min}', '2') :
-                            this.t('report.validation.required')
-                    }
-
-                    if (!this.form.institution || this.form.institution.trim().length < 2) {
-                        this.errors.institution = this.form.institution ?
                             this.t('report.validation.minLength').replace('{min}', '2') :
                             this.t('report.validation.required')
                     }
@@ -1115,8 +1096,16 @@ export default {
                 console.log('🔑 Código de Acesso:', this.accessCode)
                 console.log('📎 Arquivos enviados:', result.evidenceCount || 0)
 
-                // Scroll para o topo
-                window.scrollTo({ top: 0, behavior: 'smooth' })
+                // Scroll suave para o success-card
+                this.$nextTick(() => {
+                    const successCard = document.querySelector('.success-card');
+                    if (successCard) {
+                        successCard.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                })
 
             } catch (error) {
                 console.error('❌ Erro ao enviar relato:', error)
@@ -1126,8 +1115,8 @@ export default {
         },
 
         copyCode(event) {
-            const textToCopy = `Número do Protocolo: ${this.trackingCode}\nCódigo de Acesso: ${this.accessCode}\n\nGuarde estes códigos para consultar o status do seu relato em: ${window.location.origin}/ConsultaStatus`
-
+            const textToCopy = `Número do Protocolo: ${this.trackingCode}\nCódigo de Acesso: ${this.accessCode}`
+            
             navigator.clipboard.writeText(textToCopy).then(() => {
                 const btn = event.target.closest('.copy-btn')
                 const originalHTML = btn.innerHTML
@@ -1182,6 +1171,128 @@ export default {
 
                 // Limpar erro se a data for válida
                 this.clearFieldError('incidentDate')
+            }
+        },
+
+        handleDateInput(event) {
+            let value = event.target.value.replace(/\D/g, '')
+            let formattedValue = ''
+            
+            // Aplicar máscara DD/MM/AAAA
+            if (value.length >= 1) {
+                formattedValue = value.substring(0, 2)
+            }
+            if (value.length >= 3) {
+                formattedValue += '/' + value.substring(2, 4)
+            }
+            if (value.length >= 5) {
+                formattedValue += '/' + value.substring(4, 8)
+            }
+            
+            // Atualizar o valor formatado
+            if (formattedValue !== event.target.value) {
+                event.target.value = formattedValue
+                this.form.incidentDate = formattedValue
+            }
+            
+            // Validar se a data estiver completa
+            if (formattedValue.length === 10) {
+                this.validateFormattedDate(formattedValue)
+            } else {
+                this.clearFieldError('incidentDate')
+            }
+        },
+
+        openCalendar() {
+            this.$refs.hiddenDatePicker.showPicker()
+        },
+
+        onDateSelected(event) {
+            const selectedDate = event.target.value
+            if (selectedDate) {
+                // Converter YYYY-MM-DD para DD/MM/YYYY
+                const parts = selectedDate.split('-')
+                const formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`
+                this.form.incidentDate = formattedDate
+                this.validateFormattedDate(formattedDate)
+            }
+        },
+
+        validateFormattedDate(dateString) {
+            if (dateString.length !== 10) {
+                this.errors.incidentDate = this.t('report.validation.invalidDate')
+                return
+            }
+
+            const parts = dateString.split('/')
+            const day = parseInt(parts[0], 10)
+            const month = parseInt(parts[1], 10)
+            const year = parseInt(parts[2], 10)
+
+            // Verificar se é uma data válida
+            const date = new Date(year, month - 1, day)
+            if (date.getDate() !== day || date.getMonth() !== month - 1 || date.getFullYear() !== year) {
+                this.errors.incidentDate = this.t('report.validation.invalidDate')
+                return
+            }
+
+            // Verificar se não é futura
+            const currentDate = new Date()
+            if (date > currentDate) {
+                this.errors.incidentDate = this.t('report.validation.futureDate')
+                return
+            }
+
+            // Verificar se não é muito antiga
+            const minDate = new Date('1900-01-01')
+            if (date < minDate) {
+                this.errors.incidentDate = this.t('report.validation.invalidDate')
+                return
+            }
+
+            // Limpar erro se a data for válida
+            this.clearFieldError('incidentDate')
+        },
+
+        handleDateKeydown(event) {
+            const input = event.target
+            const key = event.key
+            
+            // Se pressionar backspace e o campo estiver vazio ou cursor no início
+            if (key === 'Backspace') {
+                const cursorPosition = input.selectionStart
+                const value = input.value
+                
+                // Se o cursor está no início do campo ou campo vazio
+                if (cursorPosition === 0 || !value) {
+                    return
+                }
+                
+                this.lastCursorPosition = cursorPosition
+            }
+        },
+
+        handleDateKeyup(event) {
+            const input = event.target
+            const key = event.key
+            
+            if (key === 'Backspace') {
+                const value = input.value
+                
+                // Se o campo foi completamente limpo, focar no início
+                if (!value) {
+                    setTimeout(() => {
+                        input.setSelectionRange(0, 0)
+                    }, 0)
+                }
+                // Se há um valor mas cursor precisa ser reposicionado
+                else if (this.lastCursorPosition !== undefined) {
+                    setTimeout(() => {
+                        // Tentar posicionar o cursor na posição anterior ao backspace
+                        const newPosition = Math.max(0, this.lastCursorPosition - 1)
+                        input.setSelectionRange(newPosition, newPosition)
+                    }, 0)
+                }
             }
         },
 
@@ -2646,6 +2757,36 @@ export default {
     font-weight: 600;
 }
 
+/* Estilo para o wrapper do campo de data */
+.date-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.date-input-wrapper input[type="text"] {
+    flex: 1;
+    padding-right: 45px;
+}
+
+.calendar-btn {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #AE2C2A;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.calendar-btn:hover {
+    background: rgba(174, 44, 42, 0.1);
+    color: #ff5555;
+}
+
 .form-error i {
     margin-right: 8px;
     font-size: 1.2em;
@@ -2670,5 +2811,32 @@ export default {
 
 input[type="tel"]:focus {
     font-family: inherit;
+}
+
+/* Disclaimer do limite de arquivos */
+.file-limit-disclaimer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+    padding: 10px 15px;
+    background: rgba(174, 44, 42, 0.1);
+    border: 1px solid rgba(174, 44, 42, 0.3);
+    border-radius: 8px;
+    color: #AE2C2A;
+}
+
+.file-limit-disclaimer i {
+    font-size: 1rem;
+    color: #AE2C2A;
+    position: relative;
+    top: 8px;
+}
+
+.file-limit-disclaimer small {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin: 0;
 }
 </style>
