@@ -1003,6 +1003,17 @@ export default {
             }, 3000)
         },
 
+        // Método para obter URL da API dinamicamente
+        getApiUrl() {
+            // Se estivermos em desenvolvimento local
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                return 'http://localhost:3000'
+            }
+            
+            // URL de produção do backend no Render
+            return 'https://unihospitalar-backend.onrender.com'
+        },
+
         generateTrackingCode() {
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 
@@ -1114,7 +1125,8 @@ export default {
                 console.log('📎 Total de arquivos:', this.form.evidence.length)
 
                 // Fazer requisição para a API
-                const response = await fetch('http://localhost:3000/api/reports', {
+                const apiUrl = this.getApiUrl()
+                const response = await fetch(`${apiUrl}/api/reports`, {
                     method: 'POST',
                     body: formData
                 })
@@ -1362,7 +1374,8 @@ export default {
 
         async checkApiConnection() {
             try {
-                const response = await fetch('http://localhost:3000/health')
+                const apiUrl = this.getApiUrl()
+                const response = await fetch(`${apiUrl}/health`)
                 const result = await response.json()
 
                 if (response.ok) {
