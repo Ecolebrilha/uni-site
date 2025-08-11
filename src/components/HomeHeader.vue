@@ -160,7 +160,7 @@
         <a href="https://www.instagram.com/unihospitalar" target="_blank" class="social-icon">
           <i class="fab fa-instagram"></i>
         </a>
-        <a href="https://www.linkedin.com/company/unihospitalar" target="_blank" class="social-icon">
+        <a href="https://www.linkedin.com/company/uni-hospitalar" target="_blank" class="social-icon">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </div>
@@ -181,7 +181,7 @@
           <a href="https://www.instagram.com/unihospitalar" target="_blank" class="social-icon">
             <i class="fab fa-instagram"></i>
           </a>
-          <a href="https://www.linkedin.com/company/unihospitalar" target="_blank" class="social-icon">
+          <a href="https://www.linkedin.com/company/uni-hospitalar" target="_blank" class="social-icon">
             <i class="fab fa-linkedin-in"></i>
           </a>
         </div>

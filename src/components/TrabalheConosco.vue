@@ -466,7 +466,7 @@
                 <span class="error-message" v-if="errors.message">{{ errors.message }}</span>
               </div>
 
-              <div class="form-group full-width">
+              <div class="form-group full-width optional-field">
                 <label for="expectations">Expectativas Salariais</label>
                 <input type="text" id="expectations" v-model="formData.expectations"
                   placeholder="Ex: R$ 3.000,00 - R$ 4.000,00 (opcional)">
@@ -2106,6 +2106,11 @@ section {
   content: ' *';
   color: #dc3545;
   font-weight: bold;
+}
+
+/* Remover asterisco de campos opcionais */
+.form-group.optional-field label::after {
+  content: none;
 }
 
 .file-upload-container label::after {

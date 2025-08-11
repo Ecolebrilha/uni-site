@@ -867,12 +867,13 @@ async loadStatusHistory() {
                 'law-violation': 'Violação de lei',
                 'product-defect': 'Defeito no produto',
                 'wrong-quantity': 'Quantidade incorreta',
+                'pre-expired-product': 'Produto pré-vencido',
                 'expired-product': 'Produto vencido',
                 'product-violation': 'Violação de especificações',
                 'damaged-product': 'Produto danificado',
                 'incorrect-product': 'Produto incorreto/trocado',
                 'missing-items': 'Itens faltando na entrega',
-                'packaging-issue': 'Problema na embalagem',
+                'packaging-issue': 'Violação na embalagem',
                 'quality-issue': 'Problema de qualidade',
                 'other': 'Outros'
             };
