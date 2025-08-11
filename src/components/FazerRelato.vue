@@ -1023,6 +1023,24 @@ export default {
             }
         },
 
+        // Método para converter data DD/MM/YYYY para YYYY-MM-DD
+        convertDateToISO(dateString) {
+            if (!dateString || dateString.length !== 10) {
+                return null
+            }
+            
+            const parts = dateString.split('/')
+            if (parts.length !== 3) {
+                return null
+            }
+            
+            const day = parts[0].padStart(2, '0')
+            const month = parts[1].padStart(2, '0')
+            const year = parts[2]
+            
+            return `${year}-${month}-${day}`
+        },
+
         async submitReport() {
             if (!this.validateCurrentStep()) {
                 this.$nextTick(() => {
@@ -1040,13 +1058,16 @@ export default {
                 // Criar FormData para enviar arquivos
                 const formData = new FormData()
 
+                // Converter data para formato ISO (YYYY-MM-DD) antes de enviar
+                const isoDate = this.convertDateToISO(this.form.incidentDate)
+
                 // Adicionar dados do formulário
                 const reportData = {
                     relationship: this.form.relationship,
                     involvement: this.form.involvement,
                     violationType: this.form.violationType,
                     area: this.form.area,
-                    incidentDate: this.form.incidentDate,
+                    incidentDate: isoDate,
                     location: this.form.location,
                     accusedName: this.form.accusedName,
                     accusedPosition: this.form.accusedPosition,
