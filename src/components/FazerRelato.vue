@@ -277,7 +277,8 @@
                                                     @keydown="handleDateKeydown" maxlength="10"
                                                     :class="{ 'error': errors.incidentDate }">
                                                 <input type="date" ref="hiddenDatePicker" @change="onDateSelected"
-                                                    style="position: absolute; opacity: 0; pointer-events: none;">
+                                                    style="position: absolute; opacity: 0; pointer-events: none;"
+                                                    min="2005-07-11" :max="getCurrentDate()">
                                                 <button type="button" class="calendar-btn" @click="openCalendar">
                                                     <i class="fas fa-calendar-alt"></i>
                                                 </button>
@@ -662,13 +663,13 @@ export default {
                     this.errors.incidentDate = this.t('report.validation.required')
                 } else {
                     const today = new Date()
-                    const incidentDate = new Date(this.form.incidentDate)
-                    const minDate = new Date('1900-01-01')
+                    const incidentDate = this.convertToDateObject(this.form.incidentDate)
+                    const minDate = new Date('2005-07-11') // 11 de julho de 2005
 
-                    if (incidentDate > today) {
+                    if (incidentDate && incidentDate > today) {
                         this.errors.incidentDate = this.t('report.validation.futureDate')
-                    } else if (incidentDate < minDate) {
-                        this.errors.incidentDate = this.t('report.validation.invalidDate')
+                    } else if (incidentDate && incidentDate < minDate) {
+                        this.errors.incidentDate = 'A data deve ser posterior a 11 de julho de 2005'
                     }
                 }
 
@@ -1023,7 +1024,25 @@ export default {
             }
         },
 
-        // Método para converter data DD/MM/YYYY para YYYY-MM-DD
+        // Método para converter data DD/MM/YYYY para objeto Date (para validações)
+        convertToDateObject(dateString) {
+            if (!dateString || dateString.length !== 10) {
+                return null
+            }
+            
+            const parts = dateString.split('/')
+            if (parts.length !== 3) {
+                return null
+            }
+            
+            const day = parseInt(parts[0], 10)
+            const month = parseInt(parts[1], 10) - 1
+            const year = parseInt(parts[2], 10)
+            
+            return new Date(year, month, day)
+        },
+
+        // Método para converter data DD/MM/YYYY para YYYY-MM-DD (apenas para backend)
         convertDateToISO(dateString) {
             if (!dateString || dateString.length !== 10) {
                 return null
@@ -1245,14 +1264,8 @@ export default {
                 return
             }
 
-            const parts = dateString.split('/')
-            const day = parseInt(parts[0], 10)
-            const month = parseInt(parts[1], 10)
-            const year = parseInt(parts[2], 10)
-
-            // Verificar se é uma data válida
-            const date = new Date(year, month - 1, day)
-            if (date.getDate() !== day || date.getMonth() !== month - 1 || date.getFullYear() !== year) {
+            const date = this.convertToDateObject(dateString)
+            if (!date) {
                 this.errors.incidentDate = this.t('report.validation.invalidDate')
                 return
             }
@@ -1265,9 +1278,9 @@ export default {
             }
 
             // Verificar se não é muito antiga
-            const minDate = new Date('1900-01-01')
+            const minDate = new Date('2005-07-11') // 11 de julho de 2005
             if (date < minDate) {
-                this.errors.incidentDate = this.t('report.validation.invalidDate')
+                this.errors.incidentDate = 'A data deve ser posterior a 11 de julho de 2005'
                 return
             }
 
