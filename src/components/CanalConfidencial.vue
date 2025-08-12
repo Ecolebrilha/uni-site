@@ -546,6 +546,8 @@ export default {
     background: #f8f9fa;
     padding: 40px 30px;
     border-radius: 15px;
+    border: 1px solid rgba(174, 44, 42, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 2px solid transparent;
@@ -572,7 +574,10 @@ export default {
 
 .principle-card h3 {
     font-size: 1.3rem;
-    color: #AE2C2A;
+    background: linear-gradient(-135deg, #2c3e50, #AE2C2A);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin-bottom: 15px;
     font-weight: 600;
 }
@@ -607,8 +612,10 @@ export default {
     padding: 40px 30px;
     border-radius: 15px;
     text-align: center;
+    border: 1px solid rgba(174, 44, 42, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     position: relative;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .step-card:hover {
@@ -631,7 +638,10 @@ export default {
 
 .step-card h3 {
     font-size: 1.3rem;
-    color: #AE2C2A;
+    background: linear-gradient(-135deg, #2c3e50, #AE2C2A);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin-bottom: 15px;
     font-weight: 600;
 }
@@ -705,7 +715,8 @@ export default {
     border-radius: 15px;
     text-align: center;
     transition: all 0.3s ease;
-    border: 2px solid transparent;
+    border: 1px solid rgba(174, 44, 42, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .category-card:hover {
@@ -729,7 +740,10 @@ export default {
 
 .category-card h3 {
     font-size: 1.2rem;
-    color: #AE2C2A;
+    background: linear-gradient(-135deg, #2c3e50, #AE2C2A);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin-bottom: 10px;
     font-weight: 600;
 }
@@ -751,7 +765,7 @@ export default {
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    border-left: 5px solid #ff9800;
+    border-left: 5px solid #AE2C2A;
     display: flex;
     gap: 20px;
 }
@@ -759,7 +773,7 @@ export default {
 .notice-icon {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #ff9800, #f57c00);
+    background: linear-gradient(-135deg, #2c3e50, #AE2C2A);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -770,10 +784,11 @@ export default {
 }
 
 .notice-content h3 {
-    color: #ff9800;
+    color: #AE2C2A;
     font-size: 1.4rem;
     margin-bottom: 15px;
     font-weight: 600;
+    text-transform: uppercase;
 }
 
 .notice-content p {
@@ -783,7 +798,10 @@ export default {
 }
 
 .redirect-info h4 {
-    color: #333;
+    background: linear-gradient(-135deg, #2c3e50, #AE2C2A);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-size: 1.1rem;
     margin-bottom: 10px;
     font-weight: 600;

@@ -105,7 +105,9 @@
               <div class="stat-icon">
                 <i class="fas fa-calendar-alt"></i>
               </div>
-              <div class="stat-number">{{ t('about.stats.experience.number') }}</div>
+              <div class="stat-number">
+                <span ref="experienceCounter" :data-target="yearsOfExperience">0</span>
+              </div>
               <div class="stat-label">{{ t('about.stats.experience.label') }}</div>
             </div>
           </ScrollReveal>
@@ -115,7 +117,9 @@
               <div class="stat-icon">
                 <i class="fas fa-handshake"></i>
               </div>
-              <div class="stat-number">{{ t('about.stats.clients.number') }}</div>
+              <div class="stat-number">
+                <span ref="clientsCounter" data-target="5000">0</span>+
+              </div>
               <div class="stat-label">{{ t('about.stats.clients.label') }}</div>
             </div>
           </ScrollReveal>
@@ -125,7 +129,9 @@
               <div class="stat-icon">
                 <i class="fas fa-boxes"></i>
               </div>
-              <div class="stat-number">{{ t('about.stats.products.number') }}</div>
+              <div class="stat-number">
+                <span ref="productsCounter" data-target="500">0</span>+
+              </div>
               <div class="stat-label">{{ t('about.stats.products.label') }}</div>
             </div>
           </ScrollReveal>
@@ -135,7 +141,9 @@
               <div class="stat-icon">
                 <i class="fas fa-map-marker-alt"></i>
               </div>
-              <div class="stat-number">{{ t('about.stats.states.number') }}</div>
+              <div class="stat-number">
+                <span ref="statesCounter" data-target="15">0</span>
+              </div>
               <div class="stat-label">{{ t('about.stats.states.label') }}</div>
             </div>
           </ScrollReveal>
@@ -213,6 +221,9 @@ export default {
   data() {
     return {
       sidebarOpen: false,
+      companyFoundingYear: 2005, // Ano de fundação da empresa
+      companyAnniversary: { month: 7, day: 11 }, // 11 de julho
+      statsAnimated: false, // Flag para controlar se as animações já foram executadas
       valorIcons: [
         'fas fa-balance-scale',   // Ética
         'fas fa-gem',             // Qualidade
@@ -234,6 +245,28 @@ export default {
       ]
     }
   },
+  computed: {
+    yearsOfExperience() {
+      const today = new Date();
+      const currentYear = today.getFullYear();
+      const currentMonth = today.getMonth() + 1;
+      const currentDay = today.getDate();
+
+      let years = currentYear - this.companyFoundingYear;
+
+      // Se ainda não passou do aniversário deste ano, subtrai 1
+      if (currentMonth < this.companyAnniversary.month ||
+        (currentMonth === this.companyAnniversary.month && currentDay < this.companyAnniversary.day)) {
+        years--;
+      }
+
+      return years;
+    }
+  },
+  mounted() {
+    // Observar quando a seção de estatísticas fica visível
+    this.observeStatsSection();
+  },
   methods: {
     toggleSidebar() {
       this.sidebarOpen = !this.sidebarOpen;
@@ -241,6 +274,79 @@ export default {
     getDifferentialDirection(index) {
       const directions = ['left', 'bottom', 'right', 'left', 'bottom', 'right'];
       return directions[index] || 'bottom';
+    },
+    observeStatsSection() {
+      // Usar Intersection Observer para detectar quando a seção está visível
+      const statsSection = document.querySelector('.stats-section');
+      if (!statsSection) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !this.statsAnimated) {
+            this.animateCounters();
+            this.statsAnimated = true;
+          }
+        });
+      }, {
+        threshold: 0.3 // Animar quando 30% da seção estiver visível
+      });
+
+      observer.observe(statsSection);
+    },
+    animateCounters() {
+      const baseDuration = 6000; // 6 segundos
+
+      const counters = [
+        { ref: this.$refs.experienceCounter, target: this.yearsOfExperience },
+        { ref: this.$refs.clientsCounter, target: 5000 },
+        { ref: this.$refs.productsCounter, target: 2500 },
+        { ref: this.$refs.statesCounter, target: 27 }
+      ];
+
+      // Resetar todos os contadores para 0
+      counters.forEach(counter => {
+        if (counter.ref) {
+          counter.ref.innerText = '0';
+          counter.current = 0;
+        }
+      });
+
+      const steps = Math.floor(baseDuration / 16); // ~60fps
+      let currentStep = 0;
+
+      const animate = () => {
+        currentStep++;
+        const progress = currentStep / steps;
+
+        counters.forEach(counter => {
+          if (counter.ref) {
+            // Easing function (ease-out cubic)
+            const easedProgress = 1 - Math.pow(1 - progress, 3);
+            const value = Math.min(
+              Math.floor(counter.target * easedProgress),
+              counter.target
+            );
+
+            if (value !== counter.current) {
+              counter.ref.innerText = value;
+              counter.current = value;
+            }
+          }
+        });
+
+        if (currentStep < steps) {
+          requestAnimationFrame(animate);
+        } else {
+          // Garantir que os valores finais sejam definidos
+          counters.forEach(counter => {
+            if (counter.ref) {
+              counter.ref.innerText = counter.target;
+            }
+          });
+        }
+      };
+
+      requestAnimationFrame(animate);
     }
   }
 }
@@ -542,7 +648,7 @@ section {
 
 .mvv-card h3 {
   font-size: 2rem;
-  color: #333;
+  color: #780000;
   margin-bottom: 25px;
   font-weight: 700;
 }
@@ -736,7 +842,10 @@ section {
 
 .differential-item h4 {
   font-size: 1.4rem;
-  color: #333;
+  background: linear-gradient(135deg, #2c3e50, #AE2C2A);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 15px;
   font-weight: 700;
 }
@@ -790,7 +899,7 @@ section {
 
 .cta-content h2 {
   font-size: 2.8rem;
-  color: #333;
+  color: #780000;
   margin-bottom: 25px;
   font-weight: 700;
 }

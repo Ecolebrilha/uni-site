@@ -778,7 +778,7 @@ nav ul li.dropdown:hover .dropdown-arrow {
 .dropdown-content {
   display: none;
   position: absolute;
-  top: calc(45% + 25px);
+  top: calc(25% + 25px);
   left: 50%;
   transform: translateX(-50%);
   min-width: 320px;

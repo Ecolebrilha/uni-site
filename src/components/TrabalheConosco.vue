@@ -1141,7 +1141,10 @@ section {
 
 .value-card h3 {
   font-size: 1.5rem;
-  color: #333;
+  background: linear-gradient(135deg, #2c3e50, #AE2C2A);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 15px;
 }
 
@@ -1930,7 +1933,10 @@ section {
 
 .no-jobs-content h3 {
   font-size: 1.8rem;
-  color: #333;
+  background: linear-gradient(135deg, #2c3e50, #AE2C2A);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 20px;
 }
 

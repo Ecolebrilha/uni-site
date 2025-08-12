@@ -753,7 +753,10 @@ section {
 
 .message-header h4 {
   font-size: 1.3rem;
-  color: #333;
+  background: linear-gradient(-135deg, #2c3e50, #AE2C2A);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin: 0;
 }
 

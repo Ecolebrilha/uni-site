@@ -85,7 +85,11 @@ const translations = reactive({
             other: 'Outro'
           },
           details: 'Detalhe da solicitação (opcional)',
-          disclaimer: 'Ao enviar este formulário, você reconhece nossa Política de Privacidade e está ciente de que seus dados pessoais serão tratados exclusivamente para fins de identificação, validação e atendimento da sua solicitação relacionada ao exercício dos seus direitos como titular de dados. As informações fornecidas serão utilizadas pelo nosso Encarregado de Proteção de Dados para processar adequadamente sua demanda, manter registro do atendimento conforme exigências legais e realizar as comunicações necessárias durante o processo.',
+          disclaimer: {
+            text: 'Ao enviar este formulário, você reconhece nossa',
+            privacyPolicy: 'Política de Privacidade',
+            continuation: 'e está ciente de que seus dados pessoais serão tratados exclusivamente para fins de identificação, validação e atendimento da sua solicitação relacionada ao exercício dos seus direitos como titular de dados. As informações fornecidas serão utilizadas pelo nosso Encarregado de Proteção de Dados para processar adequadamente sua demanda, manter registro do atendimento conforme exigências legais e realizar as comunicações necessárias durante o processo.',
+          },
           submit: 'Enviar solicitação',
           placeholders: {
             name: 'Digite seu nome completo',
@@ -187,7 +191,11 @@ const translations = reactive({
             other: 'Other'
           },
           details: 'Request details (optional)',
-          disclaimer: 'By submitting this form, you acknowledge our Privacy Policy and are aware that your personal data will be processed exclusively for identification, validation and service purposes of your request related to the exercise of your rights as a data subject. The information provided will be used by our Data Protection Officer to properly process your demand, maintain service records according to legal requirements and carry out the necessary communications during the process.',
+          disclaimer: {
+            text: 'By submitting this form, you acknowledge our',
+            privacyPolicy: 'Privacy Policy',
+            continuation: 'and are aware that your personal data will be processed exclusively for identification, validation and service purposes of your request related to the exercise of your rights as a data subject. The information provided will be used by our Data Protection Officer to properly process your demand, maintain service records according to legal requirements and carry out the necessary communications during the process.',
+          },
           submit: 'Submit request',
           placeholders: {
             name: 'Enter your full name',
@@ -289,7 +297,11 @@ const translations = reactive({
             other: 'Otro'
           },
           details: 'Detalle de la solicitud (opcional)',
-          disclaimer: 'Al enviar este formulario, usted reconoce nuestra Política de Privacidad y está consciente de que sus datos personales serán tratados exclusivamente para fines de identificación, validación y atención de su solicitud relacionada al ejercicio de sus derechos como titular de datos. Las informaciones proporcionadas serán utilizadas por nuestro Oficial de Protección de Datos para procesar adecuadamente su demanda, mantener registro de la atención conforme exigencias legales y realizar las comunicaciones necesarias durante el proceso.',
+          disclaimer: {
+            text: 'Al enviar este formulario, usted reconoce nuestra',
+            privacyPolicy: 'Política de Privacidad',
+            continuation: 'y está consciente de que sus datos personales serán tratados exclusivamente para fines de identificación, validación y atención de su solicitud relacionada al ejercicio de sus derechos como titular de datos. Las informaciones proporcionadas serán utilizadas por nuestro Oficial de Protección de Datos para procesar adecuadamente su demanda, mantener registro de la atención conforme exigencias legales y realizar las comunicaciones necesarias durante el proceso.',
+          },
           submit: 'Enviar solicitud',
           placeholders: {
             name: 'Ingrese su nombre completo',

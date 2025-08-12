@@ -94,7 +94,11 @@ const translations = reactive({
                             multiple: 'Sim, por múltiplos canais'
                         }
                     },
-                    confidentialityNotice: 'Suas informações pessoais são obrigatórias para o processamento da reclamação e serão tratadas com total segurança e confidencialidade, conforme nossa política de privacidade e a LGPD.'
+                    confidentialityNotice: {
+                        text: 'Suas informações pessoais são obrigatórias para o processamento da reclamação e serão tratadas com total segurança e confidencialidade, conforme nossa',
+                        privacyPolicy: 'Política de Privacidade',
+                        continuation: 'e a LGPD.'
+                    },
                 },
                 step2: {
                     title: 'Detalhes do Incidente',
@@ -288,7 +292,11 @@ const translations = reactive({
                             multiple: 'Yes, through multiple channels'
                         }
                     },
-                    confidentialityNotice: 'Your personal information is required for complaint processing and will be treated with complete security and confidentiality, according to our privacy policy and data protection laws.'
+                    confidentialityNotice: {
+                        text: 'Your personal information is required for complaint processing and will be treated with complete security and confidentiality, according to our privacy policy',
+                        privacyPolicy: 'Privacy Policy',
+                        continuation: 'and data protection laws.'
+                    },
                 },
                 step2: {
                     title: 'Incident Details',
@@ -483,7 +491,11 @@ const translations = reactive({
                             multiple: 'Sí, por múltiples canales'
                         }
                     },
-                    confidentialityNotice: 'Su información personal es obligatoria para el procesamiento de la queja y será tratada con total seguridad y confidencialidad, conforme a nuestra política de privacidad y las leyes de protección de datos.'
+                    confidentialityNotice: {
+                        text: 'Su información personal es obligatoria para el procesamiento de la queja y será tratada con total seguridad y confidencialidad, conforme a nuestra política de privacidad',
+                        privacyPolicy: 'Política de Privacidad',
+                        continuation: 'y las leyes de protección de datos.'
+                    },
                 },
                 step2: {
                     title: 'Detalles del Incidente',

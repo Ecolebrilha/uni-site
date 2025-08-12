@@ -224,7 +224,11 @@
                                     <div class="confidentiality-notice">
                                         <div class="notice-content">
                                             <i class="fas fa-shield-alt notice-icon"></i>
-                                            <p>{{ t('report.form.step1.confidentialityNotice') }}</p>
+                                            <p>{{ t('report.form.step1.confidentialityNotice.text') }}
+                                            <router-link to="/PoliticaPrivacidade" target="_blank" class="terms-link">{{
+                                            t('report.form.step1.confidentialityNotice.privacyPolicy') }}</router-link>
+                                            {{ t('report.form.step1.confidentialityNotice.continuation') }}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -2044,6 +2048,17 @@ export default {
     transform: translateY(-1px);
     box-shadow: 0 5px 15px rgba(174, 44, 42, 0.1);
     transition: all 0.3s ease;
+}
+
+.terms-link {
+  color: #AE2C2A;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.terms-link:hover {
+  text-decoration: underline;
+  color: #ff5555;
 }
 
 /* Mensagens de erro */

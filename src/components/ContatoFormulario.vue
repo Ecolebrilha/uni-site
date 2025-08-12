@@ -280,6 +280,7 @@ ${this.formData.message}
 
 .terms-link:hover {
   text-decoration: underline;
+  color: #ff5555;
 }
 
 /* Botão melhorado */

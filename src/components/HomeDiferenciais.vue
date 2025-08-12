@@ -491,7 +491,10 @@ section {
 
 .highlight {
   font-weight: 600;
-  color: #333;
+  background: linear-gradient(-135deg, #2c3e50, #AE2C2A);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Seção de Métricas */
@@ -637,12 +640,13 @@ section {
 
 .author-info h4 {
   margin: 0;
-  color: #333;
+  color: #780000;
   font-size: 1.1rem;
 }
 
 .author-info p {
   margin: 5px 0 0;
+  padding-top: 0;
   color: #777;
   font-size: 0.9rem;
   font-style: normal;
@@ -666,7 +670,7 @@ section {
 
 .cta-content h2 {
   font-size: 2.5rem;
-  color: #333;
+  color: #780000;
   margin-bottom: 20px;
   font-weight: 700;
 }

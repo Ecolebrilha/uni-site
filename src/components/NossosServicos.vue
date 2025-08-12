@@ -675,7 +675,10 @@ section {
 
 .benefit-card h4 {
   font-size: 1.4rem;
-  color: #333;
+  background: linear-gradient(-135deg, #2c3e50, #AE2C2A);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 20px;
   flex-shrink: 0;
   font-weight: 700;
@@ -731,7 +734,7 @@ section {
 
 .cta-content h2 {
   font-size: 2.5rem;
-  color: #333;
+  color: #780000;
   margin-bottom: 20px;
   font-weight: 700;
 }

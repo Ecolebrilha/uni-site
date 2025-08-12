@@ -172,9 +172,7 @@
               <div class="document-content">
                 <h3>{{ t('lgpd.documents.recruitmentNotice.title') }}</h3>
                 <p>{{ t('lgpd.documents.recruitmentNotice.description') }}</p>
-                <router-link to="/PoliticaPrivacidade" class="document-button">
-                  Acessar Documento
-                </router-link>
+                <a href="/aviso-privacidade-candidatos.pdf" class="document-button" target="_blank">Acessar Documento</a>
               </div>
             </div>
           </ScrollReveal>
@@ -294,7 +292,11 @@
   </div>
 
   <div class="form-disclaimer">
-    <p>{{ t('lgpd.dataSubject.form.disclaimer') }}</p>
+    <p>{{ t('lgpd.dataSubject.form.disclaimer.text') }}
+      <router-link to="/PoliticaPrivacidade" target="_blank" class="terms-link">{{
+      t('lgpd.dataSubject.form.disclaimer.privacyPolicy') }}</router-link>
+      {{ t('lgpd.dataSubject.form.disclaimer.continuation') }}
+    </p>
   </div>
 
   <button type="submit" class="submit-button" :disabled="isSubmitting">
@@ -484,7 +486,7 @@ section {
 
 .cta-content h2 {
   font-size: 2.2rem;
-  color: #333;
+  color: #780000;
   margin-bottom: 20px;
   font-weight: 700;
   line-height: 1.3;
@@ -661,7 +663,10 @@ section {
 
 .document-content h3 {
   font-size: 1.4rem;
-  color: #333;
+  background: linear-gradient(-135deg, #2c3e50, #AE2C2A);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 15px;
   font-weight: 600;
 }
@@ -935,6 +940,17 @@ section {
   line-height: 1.5;
   margin: 0;
   text-align: justify;
+}
+
+.terms-link {
+  color: #AE2C2A;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.terms-link:hover {
+  text-decoration: underline;
+  color: #ff5555;
 }
 
 .submit-button {

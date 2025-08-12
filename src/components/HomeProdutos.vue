@@ -615,7 +615,7 @@ section {
 
 .catalog-text h3 {
   font-size: 2rem;
-  color: #333;
+  color: #780000;
   margin-bottom: 15px;
 }
 
@@ -661,7 +661,7 @@ section {
 
 .cta-content h2 {
   font-size: 2.5rem;
-  color: #333;
+  color: #780000;
   margin-bottom: 20px;
   font-weight: 700;
 }

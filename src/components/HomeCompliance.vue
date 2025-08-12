@@ -850,7 +850,10 @@ section {
 
 .value-card h3 {
   font-size: 1.4rem;
-  color: #333;
+  background: linear-gradient(-135deg, #2c3e50, #AE2C2A);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 20px;
   font-weight: 700;
   flex-shrink: 0;
@@ -955,7 +958,10 @@ section {
 
 .conduct-content h3 {
   font-size: 2rem;
-  color: #AE2C2A;
+  background: linear-gradient(-135deg, #2c3e50, #AE2C2A);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 20px;
   display: flex;
   align-items: center;
@@ -1097,6 +1103,7 @@ section {
   font-weight: 600;
   display: inline-flex;
   align-items: center;
+  padding-right: 15px;
   gap: 10px;
   transition: all 0.3s ease;
   align-self: flex-start;
@@ -1132,7 +1139,10 @@ section {
 
 .corrective-content h3 {
   font-size: 1.6rem;
-  color: #AE2C2A;
+  background: linear-gradient(-135deg, #2c3e50, #AE2C2A);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 20px;
   display: flex;
   align-items: center;
