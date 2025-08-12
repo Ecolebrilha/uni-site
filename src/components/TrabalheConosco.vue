@@ -986,6 +986,7 @@ section {
   height: 70vh;
   min-height: 500px;
   overflow: hidden;
+  border-bottom: 4px solid #AE2C2A;
 }
 
 .parallax-container {
@@ -1117,7 +1118,8 @@ section {
   border-radius: 15px;
   padding: 30px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(174, 44, 42, 0.068);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 

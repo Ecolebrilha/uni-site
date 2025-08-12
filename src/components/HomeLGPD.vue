@@ -238,7 +238,52 @@
                   </div>
                 </div>
                 
-                <form @submit.prevent="submitRightsForm" class="rights-form-content">
+                <!-- Mensagem de Sucesso -->
+                <div v-if="requestSubmitted" class="success-message">
+                  <div class="success-content">
+                    <div class="success-icon">
+                      <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Solicitação Enviada com Sucesso!</h3>
+                    <p>Sua solicitação LGPD foi recebida e está sendo processada.</p>
+                    
+                    <div class="tracking-info">
+                      <div class="tracking-item">
+                        <strong>Protocolo:</strong> {{ trackingCode }}
+                      </div>
+                      <div class="tracking-item">
+                        <strong>Código de Acesso:</strong> {{ accessCode }}
+                      </div>
+                    </div>
+                    
+                    <p class="success-note">
+                      Guarde estes códigos para acompanhar o status da sua solicitação.
+                      Entraremos em contato através do e-mail fornecido em até 15 dias úteis.
+                    </p>
+                    
+                    <button @click="resetForm" class="new-request-button">
+                      <i class="fas fa-plus"></i>
+                      Nova Solicitação
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Mensagem de Erro -->
+                <div v-if="submitError" class="error-message">
+                  <div class="error-content">
+                    <div class="error-icon">
+                      <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Erro ao Enviar Solicitação</h3>
+                    <p>{{ submitError }}</p>
+                    <button @click="submitError = ''" class="close-error-button">
+                      <i class="fas fa-times"></i>
+                      Fechar
+                    </button>
+                  </div>
+                </div>
+
+                <form v-if="!requestSubmitted" @submit.prevent="submitRightsForm" class="rights-form-content">
   <div class="form-group">
     <label for="name">{{ t('lgpd.dataSubject.form.name') }}:</label>
     <input type="text" id="name" v-model="formData.name" required 
@@ -341,6 +386,10 @@ export default {
       selectedLanguage: 'pt',
       sidebarOpen: false,
       isSubmitting: false,
+      requestSubmitted: false,
+      trackingCode: '',
+      accessCode: '',
+      submitError: '',
       formData: {
         name: '',
         email: '',
@@ -362,21 +411,72 @@ export default {
     },
     async submitRightsForm() {
       this.isSubmitting = true;
+      this.submitError = '';
       
       try {
-        // Aqui você pode implementar a lógica de envio do formulário
-        console.log('Dados do formulário:', this.formData);
-        
-        // Simular envio
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        
-        alert('Solicitação enviada com sucesso! Entraremos em contato em breve.');
-        this.resetForm();
-      } catch (error) {
-        console.error('Erro ao enviar formulário:', error);
-        alert('Erro ao enviar solicitação. Tente novamente.');
-      } finally {
+        // Preparar dados da solicitação LGPD
+        const lgpdRequestData = {
+          name: this.formData.name,
+          email: this.formData.email,
+          phone: this.formData.phone,
+          relationship: this.formData.relationship,
+          requestType: this.formData.requestType,
+          details: this.formData.details,
+          submittedAt: new Date().toISOString()
+        };
+
+        console.log('📤 Enviando solicitação LGPD para API...');
+        console.log('📋 Dados:', lgpdRequestData);
+
+        // Fazer requisição para a API
+        const apiUrl = this.getApiUrl();
+        const response = await fetch(`${apiUrl}/api/lgpd-requests`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(lgpdRequestData)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || 'Erro ao enviar solicitação LGPD');
+        }
+
+        // Sucesso
+        this.trackingCode = result.trackingCode;
+        this.accessCode = result.accessCode;
+        this.requestSubmitted = true;
         this.isSubmitting = false;
+
+        console.log('✅ Solicitação LGPD enviada com sucesso!');
+        console.log('📋 Protocolo:', this.trackingCode);
+        console.log('🔑 Código de Acesso:', this.accessCode);
+
+        // Scroll suave para a seção de sucesso
+        this.$nextTick(() => {
+          const successSection = document.querySelector('.success-message');
+          if (successSection) {
+            successSection.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+
+      } catch (error) {
+        console.error('❌ Erro ao enviar solicitação LGPD:', error);
+        this.isSubmitting = false;
+        this.submitError = `Erro ao enviar solicitação: ${error.message}`;
+      }
+    },
+    getApiUrl() {
+      // Detectar ambiente
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return 'http://localhost:3000'; // Desenvolvimento
+      } else {
+        return 'https://unihospitalar-backend.onrender.com'; // Produção
       }
     },
     resetForm() {
@@ -388,6 +488,10 @@ export default {
         requestType: '',
         details: ''
       };
+      this.requestSubmitted = false;
+      this.trackingCode = '';
+      this.accessCode = '';
+      this.submitError = '';
     }
   }
 }
@@ -418,6 +522,7 @@ section {
   height: 70vh;
   min-height: 500px;
   overflow: hidden;
+  border-bottom: 4px solid #AE2C2A;
 }
 
 .parallax-container {
@@ -1111,6 +1216,41 @@ section {
     padding: 0 20px;
   }
 
+  /* Ajustes para mensagens de sucesso/erro em mobile */
+  .success-content,
+  .error-content {
+    padding: 25px 20px;
+  }
+
+  .success-icon,
+  .error-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+
+  .success-content h3,
+  .error-content h3 {
+    font-size: 1.5rem;
+  }
+
+  .tracking-info {
+    padding: 15px;
+  }
+
+  .tracking-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    text-align: left;
+  }
+
+  .new-request-button,
+  .close-error-button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
   .hero-title {
     font-size: 2rem;
   }
@@ -1426,6 +1566,168 @@ section {
 .form-group select:focus,
 .form-group textarea:focus {
   transform: translateY(-2px);
+}
+
+/* Mensagem de Sucesso */
+.success-message {
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.success-content {
+  background: linear-gradient(135deg, #d4edda, #c3e6cb);
+  border: 2px solid #28a745;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(40, 167, 69, 0.2);
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #28a745, #20c997);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 20px;
+  color: white;
+  font-size: 2.5rem;
+  box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.success-content h3 {
+  color: #155724;
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.success-content p {
+  color: #155724;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.tracking-info {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  border-left: 4px solid #28a745;
+}
+
+.tracking-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: #155724;
+}
+
+.tracking-item:last-child {
+  margin-bottom: 0;
+}
+
+.tracking-item strong {
+  color: #0f4229;
+}
+
+.success-note {
+  font-size: 0.95rem !important;
+  font-style: italic;
+  margin-top: 20px !important;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 3px solid #28a745;
+}
+
+.new-request-button {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.new-request-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+  background: linear-gradient(135deg, #218838, #1ea57a);
+}
+
+/* Mensagem de Erro */
+.error-message {
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.error-content {
+  background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+  border: 2px solid #dc3545;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(220, 53, 69, 0.2);
+}
+
+.error-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #dc3545, #e74c3c);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 20px;
+  color: white;
+  font-size: 2.5rem;
+  box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+}
+
+.error-content h3 {
+  color: #721c24;
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.error-content p {
+  color: #721c24;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.close-error-button {
+  background: linear-gradient(135deg, #dc3545, #e74c3c);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.close-error-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+  background: linear-gradient(135deg, #c82333, #dc2626);
 }
 
 /* Estilo para links dentro do texto */

@@ -1468,6 +1468,7 @@ export default {
     height: 85.3vh;
     min-height: 500px;
     overflow: hidden;
+    border-bottom: 4px solid #AE2C2A;
 }
 
 .parallax-container {
