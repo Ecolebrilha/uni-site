@@ -59,6 +59,7 @@ footer {
   border-radius: 20%;
   cursor: pointer;
   max-height: 74px;
+  transition: transform 0.3s ease;
 }
 
 .logo-image:hover {

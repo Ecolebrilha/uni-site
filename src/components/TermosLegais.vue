@@ -234,6 +234,7 @@ section {
   height: 70vh;
   min-height: 500px;
   overflow: hidden;
+  border-bottom: 4px solid #AE2C2A;
 }
 
 .parallax-container {
@@ -546,7 +547,10 @@ section {
 
 .intellectual-text h3 {
   font-size: 2rem;
-  color: #333;
+  background: linear-gradient(-135deg, #2c3e50, #AE2C2A);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 20px;
   position: relative;
   padding-bottom: 15px;
@@ -605,7 +609,7 @@ section {
 
 .cta-content h2 {
   font-size: 2.5rem;
-  color: #333;
+  color: #780000;
   margin-bottom: 20px;
   font-weight: 700;
 }

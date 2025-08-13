@@ -1801,7 +1801,10 @@ section {
 
 .cookie-text h3 {
   margin-bottom: 10px;
-  color: #333;
+  background: linear-gradient(-135deg, #2c3e50, #AE2C2A);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-top: 0;
   line-height: 1.2;
   text-align: center;
@@ -1818,6 +1821,7 @@ section {
   color: #AE2C2A;
   text-decoration: none;
   transition: all 0.2s ease;
+  font-weight: bold;
 }
 
 .cookie-text a:hover {
@@ -1935,11 +1939,12 @@ section {
 
 .cookie-settings-intro a:hover {
   text-decoration: underline;
+  color: #ff5555;
 }
 
 .cookie-settings-header h3 {
   margin: 0;
-  color: #333;
+  color: #780000;
 }
 
 .close-button {
@@ -1977,7 +1982,10 @@ section {
 
 .cookie-option-info h4 {
   margin: 0 0 5px 0;
-  color: #333;
+  background: linear-gradient(-135deg, #2c3e50, #AE2C2A);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .cookie-option-info p {
