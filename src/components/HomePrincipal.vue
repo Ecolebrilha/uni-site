@@ -1176,7 +1176,7 @@ section {
 }
 
 .service-link:hover {
-  color: #333;
+  color: #ff5555;
 }
 
 .service-link:hover i {
@@ -1294,7 +1294,10 @@ section {
 .author-name {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #333;
+  background: linear-gradient(-135deg, #2c3e50, #AE2C2A);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 5px;
 }
 
