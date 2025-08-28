@@ -157,9 +157,10 @@
               <div class="document-content">
                 <h3>{{ t('lgpd.documents.cookiesPolicy.title') }}</h3>
                 <p>{{ t('lgpd.documents.cookiesPolicy.description') }}</p>
-                <router-link to="/PoliticaPrivacidade" class="document-button">
+                <a href="/Declaração de Cookies - Uni Hospitalar.pdf"
+              target="_blank" class="document-button">
                   Acessar Documento
-                </router-link>
+              </a>
               </div>
             </div>
           </ScrollReveal>
@@ -224,7 +225,7 @@
               </div>
             </div>
           </ScrollReveal>
-
+          <br>
           <ScrollReveal direction="right" :delay="400">
             <div class="rights-form">
               <div class="form-container">
@@ -599,7 +600,7 @@ section {
 
 .cta-content p {
   font-size: 1.2rem;
-  color: #666;
+  color: #696969;
   max-width: 800px;
   margin: 0 auto;
 }
@@ -710,7 +711,7 @@ section {
 }
 
 .security-content p {
-  color: #666;
+  color: #696969;
   line-height: 1.6;
   margin: 0;
   text-align: justify;
@@ -777,7 +778,7 @@ section {
 }
 
 .document-content p {
-  color: #666;
+  color: #696969;
   margin-bottom: 25px;
   line-height: 1.6;
   flex: 1;
@@ -820,9 +821,10 @@ section {
 
 .data-subject-content {
   display: grid;
-  grid-template-columns: 1fr 500px;
-  gap: 50px;
-  align-items: start;
+  gap: 15px;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .rights-info {
@@ -933,6 +935,7 @@ section {
 
 .dpo-email:hover {
   color: #ff5555;
+  text-decoration: none !important;
   transform: translateY(-2px);
 }
 
@@ -946,7 +949,8 @@ section {
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-  max-width: 500px;
+  max-width: 800px;
+  margin: 0 auto;
   width: 100%;
 }
 
@@ -1041,7 +1045,7 @@ section {
 
 .form-disclaimer p {
   font-size: 0.85rem;
-  color: #666;
+  color: #696969;
   line-height: 1.5;
   margin: 0;
   text-align: justify;
@@ -1755,17 +1759,6 @@ section {
   .rights-info p {
     text-align: left;
   }
-}
-
-/* Estilo para seleção de texto */
-::selection {
-  background-color: rgba(174, 44, 42, 0.2);
-  color: #333;
-}
-
-::-moz-selection {
-  background-color: rgba(174, 44, 42, 0.2);
-  color: #333;
 }
 
 /* Scrollbar personalizada */

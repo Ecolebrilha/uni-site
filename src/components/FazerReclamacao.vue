@@ -1746,7 +1746,7 @@ export default {
 
 .terms-disclaimer p {
     margin: 0;
-    color: #666;
+    color: #696969;
     font-size: 0.95rem;
     line-height: 1.6;
     font-weight: 500;
@@ -1931,7 +1931,7 @@ export default {
 }
 
 .form-header p {
-    color: #666;
+    color: #696969;
     font-size: 1.1rem;
     margin: 0;
 }
@@ -2166,7 +2166,7 @@ export default {
 
 .upload-content span {
     font-size: 0.9rem;
-    color: #666;
+    color: #696969;
 }
 
 .uploaded-files {
@@ -2241,7 +2241,7 @@ export default {
     justify-content: space-between;
     margin-bottom: 15px;
     font-size: 0.9rem;
-    color: #666;
+    color: #696969;
     font-weight: 500;
 }
 
@@ -2416,7 +2416,7 @@ export default {
 }
 
 .success-card>p {
-    color: #666;
+    color: #696969;
     font-size: 1.2rem;
     margin-bottom: 40px;
     line-height: 1.6;

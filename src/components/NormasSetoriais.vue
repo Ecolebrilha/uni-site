@@ -714,7 +714,7 @@ section {
 .progress-label {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #666;
+  color: #696969;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -997,7 +997,7 @@ section {
 }
 
 .step-content p {
-  color: #666;
+  color: #696969;
   line-height: 1.7;
   font-size: 0.95rem;
   margin: 0;
@@ -1106,7 +1106,7 @@ section {
 
 .monitoring-section .section-header p {
   font-size: 1.3rem;
-  color: #666;
+  color: #696969;
   max-width: 700px;
   margin: 0 auto;
   line-height: 1.8;
@@ -1148,7 +1148,7 @@ section {
 
 .info-overview p {
   font-size: 1.2rem;
-  color: #666;
+  color: #696969;
   line-height: 1.8;
   max-width: 800px;
   margin: 0 auto;
@@ -1231,7 +1231,7 @@ section {
 }
 
 .feature-text p {
-  color: #666;
+  color: #696969;
   font-size: 1rem;
   margin: 0;
   line-height: 1.6;
@@ -1469,7 +1469,7 @@ section {
 
 .metric-label {
   font-size: 1rem;
-  color: #666;
+  color: #696969;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -1607,7 +1607,7 @@ section {
 }
 
 .certification-card p {
-  color: #666;
+  color: #696969;
   text-align: center;
   margin-bottom: 30px;
   line-height: 1.6;
@@ -1683,7 +1683,7 @@ section {
 
 .certification-item p {
   font-size: 0.9rem;
-  color: #666;
+  color: #696969;
   margin-bottom: 15px;
   line-height: 1.5;
 }

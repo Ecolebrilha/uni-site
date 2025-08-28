@@ -6,7 +6,7 @@ const translations = reactive({
   pt: {
     home: {
       hero: {
-        title: 'Respeito às relações humanas',
+        title: '<strong>Uni Hospitalar:</strong><br>Distribuindo saúde,<br>inspirando confiança.',
         subtitle: 'O nosso foco está na distribuição <br> de medicamentos hospitalares, <br> oncológicos e excepcionais.',
         scrollIndicator: 'Role para baixo'
       },
@@ -14,7 +14,8 @@ const translations = reactive({
         title: 'Nossa Trajetória em Números',
         years: 'Anos de Experiência',
         units: 'Unidades Estratégicas',
-        clients: 'Clientes Satisfeitos',
+        presence: 'Presença Nacional',
+        presenceText: 'Presente em todo território nacional',
         delivery: 'Entregas Rápidas'
       },
       services: {
@@ -71,7 +72,7 @@ const translations = reactive({
         }
       },
       partners: {
-        title: 'Nossos Parceiros',
+        title: 'Laboratórios Parceiros',
         subtitle: 'Empresas que confiam em nosso trabalho',
         button: 'VER TODOS OS PARCEIROS'
       },
@@ -102,7 +103,7 @@ const translations = reactive({
         settings: {
           title: 'Configurações de Cookies',
           intro: 'Abaixo listamos todos os cookies que podem ser utilizados pela Uni Hospitalar. É importante lembrar que você também pode gerenciar a permissão concedida para cada cookie em seu navegador. Saiba mais em nossa',
-    cookieStatement: 'Declaração de Cookies',
+          cookieStatement: 'Declaração de Cookies',
           essential: {
             title: 'Cookies Essenciais',
             description: 'Necessários para o funcionamento básico do site. Não podem ser desativados.'
@@ -123,7 +124,7 @@ const translations = reactive({
   en: {
     home: {
       hero: {
-        title: 'Respect for human relationships',
+        title: '<strong>Uni Hospitalar:</strong><br>Delivering health,<br>inspiring trust.',
         subtitle: 'Our focus is on the distribution <br> of hospital, oncological <br> and exceptional medicines.',
         scrollIndicator: 'Scroll down'
       },
@@ -131,7 +132,8 @@ const translations = reactive({
         title: 'Our Journey in Numbers',
         years: 'Years of Experience',
         units: 'Strategic Units',
-        clients: 'Satisfied Clients',
+        presence: 'National Presence',
+        presenceText: 'Present throughout the national territory',
         delivery: 'Fast Deliveries'
       },
       services: {
@@ -188,7 +190,7 @@ const translations = reactive({
         }
       },
       partners: {
-        title: 'Our Partners',
+        title: 'Partner Laboratories',
         subtitle: 'Companies that trust our work',
         button: 'VIEW ALL PARTNERS'
       },
@@ -219,7 +221,7 @@ const translations = reactive({
         settings: {
           title: 'Cookie Settings',
           intro: 'Below we list all cookies that may be used by Uni Hospitalar. It is important to remember that you can also manage the permission granted for each cookie in your browser. Learn more in our',
-    cookieStatement: 'Cookie Statement',
+          cookieStatement: 'Cookie Statement',
           essential: {
             title: 'Essential Cookies',
             description: 'Necessary for basic site functionality. Cannot be disabled.'
@@ -240,7 +242,7 @@ const translations = reactive({
   es: {
     home: {
       hero: {
-        title: 'Respeto a las relaciones humanas',
+        title: '<strong>Uni Hospitalar:</strong><br>Distribuyendo salud,<br>inspirando confianza.',
         subtitle: 'Nuestro enfoque está en la distribución <br> de medicamentos hospitalarios, <br> oncológicos y excepcionales.',
         scrollIndicator: 'Desplázate hacia abajo'
       },
@@ -248,7 +250,8 @@ const translations = reactive({
         title: 'Nuestro Recorrido en Números',
         years: 'Años de Experiencia',
         units: 'Unidades Estratégicas',
-        clients: 'Clientes Satisfechos',
+        presence: 'Presencia Nacional',
+        presenceText: 'Presente en todo el territorio nacional',
         delivery: 'Entregas Rápidas'
       },
       services: {
@@ -305,7 +308,7 @@ const translations = reactive({
         }
       },
       partners: {
-        title: 'Nuestros Socios',
+        title: 'Laboratorios asociados',
         subtitle: 'Empresas que confían en nuestro trabajo',
         button: 'VER TODOS LOS SOCIOS'
       },
@@ -336,7 +339,7 @@ const translations = reactive({
         settings: {
           title: 'Configuraciones de Cookies',
           intro: 'A continuación listamos todas las cookies que pueden ser utilizadas por Uni Hospitalar. Es importante recordar que también puedes gestionar el permiso concedido para cada cookie en tu navegador. Obtén más información en nuestra',
-    cookieStatement: 'Declaración de Cookies',
+          cookieStatement: 'Declaración de Cookies',
           essential: {
             title: 'Cookies Esenciales',
             description: 'Necesarios para el funcionamiento básico del sitio. No se pueden desactivar.'
@@ -365,11 +368,11 @@ export function useHomeTranslation() {
   const t = (key) => {
     const keys = key.split('.')
     let value = translations[currentLanguage.value]
-    
+
     for (const k of keys) {
       value = value?.[k]
     }
-    
+
     return value || key
   }
 

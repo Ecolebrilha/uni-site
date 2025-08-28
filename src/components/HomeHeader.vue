@@ -7,7 +7,7 @@
     <!-- Menu sidebar -->
     <div :class="['menu-sidebar', { 'active': sidebarOpen }]">
       <div class="sidebar-header">
-        <img src="@/assets/logo-uni2.png" alt="Logo da Uni Hospitalar" class="sidebar-logo">
+        <img src="@/assets/logo-uni10.png" alt="Logo da Uni Hospitalar" class="sidebar-logo">
         <button class="menu-close" @click="toggleSidebar">
           <i class="fas fa-times"></i>
         </button>
@@ -27,9 +27,9 @@
           <li><router-link to="/Servicos" exact-active-class="active" @click="closeSidebar">
               <i class="fas fa-cogs"></i> {{ tHeader('header.navigation.services') }}
             </router-link></li>
-          <li><router-link to="/Produtos" exact-active-class="active" @click="closeSidebar">
+          <!-- <li><router-link to="/Produtos" exact-active-class="active" @click="closeSidebar">
               <i class="fas fa-pills"></i>{{ tHeader('header.navigation.products') }}
-            </router-link></li>
+            </router-link></li> -->
 
           <!-- Compliance Dropdown -->
           <li class="sidebar-dropdown">
@@ -150,7 +150,7 @@
     </div>
     <router-link to="/" custom v-slot="{ navigate }">
       <div class="logo-container" :class="{ 'scrolled': isScrolled }" @click="navigate" role="link">
-        <img src="@/assets/logo-uni2.png" alt="Logo da Uni Hospitalar" class="logo">
+        <img :src="isScrolled ? require('@/assets/logo-uni2.png') : require('@/assets/logo-uni10.png')" alt="Logo da Uni Hospitalar" class="logo">
       </div>
     </router-link>
 
@@ -208,8 +208,8 @@
         }}</router-link></li>
         <li><router-link to="/Servicos" exact-active-class="active">{{ tHeader('header.navigation.services')
         }}</router-link></li>
-        <li><router-link to="/Produtos" exact-active-class="active">{{ tHeader('header.navigation.products') }}
-          </router-link></li>
+        <!-- <li><router-link to="/Produtos" exact-active-class="active">{{ tHeader('header.navigation.products') }}
+          </router-link></li> -->
 
         <!-- Compliance Dropdown -->
         <li class="dropdown">

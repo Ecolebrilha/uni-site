@@ -83,7 +83,7 @@
     </section>
 
     <!-- Seção de Processo de Trabalho -->
-    <section class="process-section">
+    <!-- <section class="process-section">
       <div class="container">
         <ScrollReveal direction="bottom" :delay="200">
           <div class="section-title light">
@@ -136,59 +136,98 @@
           </ScrollReveal>
         </div>
       </div>
-    </section>
+    </section> -->
 
-    <!-- Seção de Benefícios -->
+    <!-- Seção de Benefícios dos Nossos Serviços -->
     <section class="benefits-section">
       <div class="container">
         <ScrollReveal direction="bottom" :delay="200">
           <div class="section-title">
             <span class="accent-line"></span>
-            <h2>{{ t('services.benefitsTitle') }}</h2>
+            <h2>Benefícios dos Nossos Serviços</h2>
             <span class="accent-line"></span>
           </div>
+          <p class="section-subtitle">Descubra as vantagens que oferecemos para impulsionar seu sucesso</p>
         </ScrollReveal>
 
-        <div class="benefits-grid">
-          <ScrollReveal direction="bottom" :delay="300">
-            <div class="benefit-card">
-              <div class="benefit-icon">
-                <i class="fas fa-chart-line"></i>
+        <div class="benefits-balloons">
+          <ScrollReveal direction="left" :delay="300">
+            <div class="benefit-balloon">
+              <div class="balloon-icon">
+                <i class="fas fa-users"></i>
               </div>
-              <h4>{{ t('services.benefits.efficiency.title') }}</h4>
-              <p>{{ t('services.benefits.efficiency.description') }}</p>
+              <div class="balloon-content">
+                <h4>{{ t('services.processSteps.step1.title') }}</h4>
+                <p>{{ t('services.processSteps.step1.description') }}</p>
+              </div>
+              <div class="balloon-tail"></div>
             </div>
           </ScrollReveal>
 
-          <ScrollReveal direction="bottom" :delay="400">
-            <div class="benefit-card">
-              <div class="benefit-icon">
-                <i class="fas fa-shield-alt"></i>
+          <ScrollReveal direction="right" :delay="400">
+            <div class="benefit-balloon reverse">
+              <div class="balloon-content two">
+                <h4>{{ t('services.processSteps.step2.title') }}</h4>
+                <p>{{ t('services.processSteps.step2.description') }}</p>
               </div>
-              <h4>{{ t('services.benefits.security.title') }}</h4>
-              <p>{{ t('services.benefits.security.description') }}</p>
+              <div class="balloon-icon">
+                <i class="fas fa-truck-fast"></i>
+              </div>
+              <div class="balloon-tail reverse"></div>
             </div>
           </ScrollReveal>
 
-          <ScrollReveal direction="bottom" :delay="500">
-            <div class="benefit-card">
-              <div class="benefit-icon">
-                <i class="fas fa-handshake"></i>
+          <ScrollReveal direction="left" :delay="500">
+            <div class="benefit-balloon">
+              <div class="balloon-icon">
+                <i class="fas fa-vial-circle-check"></i>
               </div>
-              <h4>{{ t('services.benefits.partnerships.title') }}</h4>
-              <p>{{ t('services.benefits.partnerships.description') }}</p>
+              <div class="balloon-content">
+                <h4>{{ t('services.processSteps.step3.title') }}</h4>
+                <p>{{ t('services.processSteps.step3.description') }}</p>
+              </div>
+              <div class="balloon-tail"></div>
             </div>
           </ScrollReveal>
 
-          <ScrollReveal direction="bottom" :delay="600">
-            <div class="benefit-card">
-              <div class="benefit-icon">
-                <i class="fas fa-clock"></i>
+          <ScrollReveal direction="right" :delay="600">
+            <div class="benefit-balloon reverse">
+              <div class="balloon-content">
+                <h4>{{ t('services.processSteps.step4.title') }}</h4>
+                <p>{{ t('services.processSteps.step4.description') }}</p>
               </div>
-              <h4>{{ t('services.benefits.agility.title') }}</h4>
-              <p>{{ t('services.benefits.agility.description') }}</p>
+              <div class="balloon-icon">
+                <i class="fas fa-user-check"></i>
+              </div>
+              <div class="balloon-tail reverse"></div>
             </div>
           </ScrollReveal>
+
+          <!-- <ScrollReveal direction="left" :delay="700">
+            <div class="benefit-balloon">
+              <div class="balloon-icon">
+                <i class="fas fa-leaf"></i>
+              </div>
+              <div class="balloon-content">
+                <h4>Sustentabilidade</h4>
+                <p>Compromisso com práticas sustentáveis e responsabilidade ambiental em todos os processos produtivos e operacionais.</p>
+              </div>
+              <div class="balloon-tail"></div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="right" :delay="800">
+            <div class="benefit-balloon reverse">
+              <div class="balloon-content">
+                <h4>Suporte Técnico Especializado</h4>
+                <p>Assessoria técnica completa com profissionais qualificados para orientação sobre produtos e melhores práticas de utilização.</p>
+              </div>
+              <div class="balloon-icon">
+                <i class="fas fa-user-md"></i>
+              </div>
+              <div class="balloon-tail reverse"></div>
+            </div>
+          </ScrollReveal> -->
         </div>
       </div>
     </section>
@@ -466,7 +505,7 @@ section {
 }
 
 .service-content p {
-  color: #666;
+  color: #696969;
   margin-bottom: 20px;
   line-height: 1.7;
 }
@@ -592,10 +631,13 @@ section {
   margin: 0;
 }
 
-/* Seção de Benefícios */
+/* Seção de Benefícios dos Nossos Serviços */
 .benefits-section {
-  background: linear-gradient(135deg, #f8f9fa, #ffffff);
-  padding: 100px 0;
+  background: 
+    linear-gradient(135deg, #f1f3f6 0%, #ffffff 25%, #f8fafc 50%, #ffffff 75%, #f1f3f6 100%),
+    radial-gradient(circle at 25% 25%, rgba(174, 44, 42, 0.04) 0%, transparent 60%),
+    radial-gradient(circle at 75% 75%, rgba(174, 44, 42, 0.03) 0%, transparent 60%);
+  padding: 150px 0;
   position: relative;
   overflow: hidden;
 }
@@ -607,7 +649,8 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7z' fill='%23ae2c2a' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+  background: 
+    url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ae2c2a' fill-opacity='0.02'%3E%3Cpath d='M20 20c11.046 0 20-8.954 20-20s-8.954-20-20-20-20 8.954-20 20 8.954 20 20 20zm80 40c11.046 0 20-8.954 20-20s-8.954-20-20-20-20 8.954-20 20 8.954 20 20 20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   z-index: 0;
 }
 
@@ -616,109 +659,171 @@ section {
   z-index: 1;
 }
 
-.benefit-card {
-  background: white;
-  border-radius: 20px;
-  padding: 40px 30px;
+.section-subtitle {
+  font-size: 1.4rem;
+  color: #696969;
   text-align: center;
-  box-shadow: 0 15px 40px rgba(174, 44, 42, 0.08);
-  transition: all 0.4s ease;
-  height: 320px;
+  margin-top: 20px;
+  margin-bottom: 0;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.benefits-balloons {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  border: 1px solid rgba(174, 44, 42, 0.1);
+  gap: 60px;
+  margin-top: 80px;
+}
+
+.benefit-balloon {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.benefit-balloon.reverse {
+  flex-direction: row-reverse;
+}
+
+.balloon-icon {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #AE2C2A, #D2342C, #ff6b6b);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 3rem;
+  flex-shrink: 0;
+  box-shadow: 
+    0 20px 50px rgba(174, 44, 42, 0.4),
+    0 10px 25px rgba(0, 0, 0, 0.1),
+    inset 0 3px 6px rgba(255, 255, 255, 0.3);
+  transition: all 0.4s ease;
   position: relative;
   overflow: hidden;
 }
 
-.benefit-card::before {
+.balloon-icon::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
+  left: -100%;
   width: 100%;
-  height: 4px;
-  background: linear-gradient(135deg, #AE2C2A, #D2342C);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
 }
 
-.benefit-card:hover::before {
-  transform: scaleX(1);
+.benefit-balloon:hover .balloon-icon::before {
+  left: 100%;
 }
 
-.benefit-card:hover {
-  transform: translateY(-15px);
-  box-shadow: 0 25px 60px rgba(174, 44, 42, 0.15);
-  border-color: rgba(174, 44, 42, 0.2);
-}
-
-.benefit-icon {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #AE2C2A, #D2342C);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto 25px;
-  color: white;
-  font-size: 2.2rem;
-  flex-shrink: 0;
-  box-shadow: 0 10px 30px rgba(174, 44, 42, 0.3);
-  transition: transform 0.3s ease;
-}
-
-.benefit-card:hover .benefit-icon {
+.benefit-balloon:hover .balloon-icon {
   transform: scale(1.1);
+  box-shadow: 
+    0 25px 60px rgba(174, 44, 42, 0.5),
+    0 15px 35px rgba(0, 0, 0, 0.15),
+    inset 0 4px 8px rgba(255, 255, 255, 0.4);
 }
 
-.benefit-card h4 {
-  font-size: 1.4rem;
-  background: linear-gradient(-135deg, #2c3e50, #AE2C2A);
+.balloon-content {
+  background: 
+    linear-gradient(145deg, #ffffff 0%, #fafbfc 30%, #ffffff 70%, #f8fafc 100%),
+    radial-gradient(circle at 80% 20%, rgba(174, 44, 42, 0.02) 0%, transparent 50%);
+  border-radius: 35px;
+  padding: 40px 45px;
+  flex: 1;
+  box-shadow: 
+    0 25px 70px rgba(0, 0, 0, 0.12),
+    0 15px 35px rgba(174, 44, 42, 0.08),
+    0 8px 20px rgba(0, 0, 0, 0.06),
+    inset 0 2px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -2px 0 rgba(174, 44, 42, 0.03);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.balloon-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.8s ease;
+  z-index: 1;
+}
+
+.benefit-balloon:hover .balloon-content::before {
+  left: 100%;
+}
+
+.benefit-balloon:hover .balloon-content {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 
+    0 35px 90px rgba(0, 0, 0, 0.15),
+    0 20px 50px rgba(174, 44, 42, 0.12),
+    0 12px 30px rgba(0, 0, 0, 0.08),
+    inset 0 3px 0 rgba(255, 255, 255, 1),
+    inset 0 -3px 0 rgba(174, 44, 42, 0.05);
+  border: 3px solid rgba(174, 44, 42, 0.1);
+}
+
+.balloon-content h4 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #2c3e50, #AE2C2A, #D2342C);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 20px;
-  flex-shrink: 0;
-  font-weight: 700;
   position: relative;
+  z-index: 2;
 }
 
-.benefit-card p {
-  color: #666;
+.balloon-content p {
+  color: #555;
+  font-size: 1.15rem;
+  line-height: 1.8;
   margin: 0;
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1.7;
-  font-size: 1rem;
+  font-weight: 400;
+  position: relative;
+  z-index: 2;
 }
 
-.benefits-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
-  align-items: stretch;
-  margin-top: 60px;
+.balloon-tail {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: 
+    linear-gradient(145deg, #ffffff 0%, #fafbfc 50%, #ffffff 100%);
+  transform: rotate(45deg);
+  box-shadow: 
+    -5px -5px 15px rgba(174, 44, 42, 0.08),
+    5px 5px 15px rgba(0, 0, 0, 0.06);
+  z-index: 0;
 }
 
-.benefit-card:nth-child(1) .benefit-icon {
-  background: linear-gradient(135deg, #AE2C2A, #D2342C);
+.benefit-balloon .balloon-tail {
+  right: -15px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
 }
 
-.benefit-card:nth-child(2) .benefit-icon {
-  background: linear-gradient(135deg, #8B2220, #AE2C2A);
-}
-
-.benefit-card:nth-child(3) .benefit-icon {
-  background: linear-gradient(135deg, #D2342C, #FF4444);
-}
-
-.benefit-card:nth-child(4) .benefit-icon {
-  background: linear-gradient(135deg, #AE2C2A, #8B2220);
+.benefit-balloon.reverse .balloon-tail {
+  left: -15px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
 }
 
 /* Seção CTA */
@@ -742,7 +847,7 @@ section {
 
 .cta-content p {
   font-size: 1.2rem;
-  color: #666;
+  color: #696969;
   margin-bottom: 30px;
 }
 
@@ -770,13 +875,23 @@ section {
     padding: 0 40px;
   }
 
-  .benefits-grid {
-    grid-template-columns: 1fr 1fr;
-    row-gap: 40px;
+  .benefits-balloons {
+    gap: 50px;
   }
 
-  .benefits-section {
-    margin-bottom: 50px;
+  .benefit-balloon {
+    max-width: 800px;
+    gap: 30px;
+  }
+
+  .balloon-icon {
+    width: 100px;
+    height: 100px;
+    font-size: 2.5rem;
+  }
+
+  .balloon-content {
+    padding: 35px 40px;
   }
 }
 
@@ -813,18 +928,40 @@ section {
   }
 
   .benefits-section {
-    padding: 80px 0;
+    padding: 120px 0;
   }
 
-  .benefit-card {
-    height: 300px;
-    padding: 35px 25px;
+  .benefits-balloons {
+    gap: 40px;
   }
 
-  .benefit-icon {
-    width: 80px;
-    height: 80px;
-    font-size: 2rem;
+  .benefit-balloon {
+    flex-direction: column !important;
+    text-align: center;
+    gap: 25px;
+    max-width: 600px;
+  }
+
+  .benefit-balloon.reverse {
+    flex-direction: column-reverse !important;
+  }
+
+  .balloon-icon {
+    width: 90px;
+    height: 90px;
+    font-size: 2.3rem;
+  }
+
+  .balloon-content {
+    padding: 30px 35px;
+  }
+
+  .balloon-content.two {
+    padding: 30px 65px 30px 65px;
+  }
+
+  .balloon-tail {
+    display: none;
   }
 }
 
@@ -859,34 +996,36 @@ section {
   }
 
   .benefits-section {
-    padding: 70px 0;
+    padding: 100px 0;
   }
 
-  .benefits-grid {
-    grid-template-columns: 1fr;
-    gap: 25px;
-    margin-top: 40px;
+  .benefits-balloons {
+    gap: 35px;
+    margin-top: 60px;
   }
 
-  .benefit-card {
-    height: 280px;
-    padding: 30px 20px;
+  .benefit-balloon {
+    max-width: 500px;
+    gap: 20px;
   }
 
-  .benefit-icon {
-    width: 70px;
-    height: 70px;
-    font-size: 1.8rem;
-    margin-bottom: 20px;
+  .balloon-icon {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
   }
 
-  .benefit-card h4 {
-    font-size: 1.2rem;
+  .balloon-content {
+    padding: 25px 30px;
+  }
+
+  .balloon-content h4 {
+    font-size: 1.5rem;
     margin-bottom: 15px;
   }
 
-  .benefit-card p {
-    font-size: 0.95rem;
+  .balloon-content p {
+    font-size: 1rem;
   }
 }
 
@@ -917,28 +1056,36 @@ section {
   }
 
   .benefits-section {
-    padding: 60px 0;
+    padding: 80px 0;
   }
 
-  .benefit-card {
-    height: 260px;
-    padding: 25px 15px;
+  .benefits-balloons {
+    gap: 30px;
+    margin-top: 50px;
   }
 
-  .benefit-icon {
-    width: 60px;
-    height: 60px;
-    font-size: 1.6rem;
-    margin-bottom: 15px;
+  .benefit-balloon {
+    max-width: 400px;
+    gap: 15px;
   }
 
-  .benefit-card h4 {
-    font-size: 1.1rem;
+  .balloon-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
+  }
+
+  .balloon-content {
+    padding: 20px 25px;
+  }
+
+  .balloon-content h4 {
+    font-size: 1.3rem;
     margin-bottom: 12px;
   }
 
-  .benefit-card p {
-    font-size: 0.9rem;
+  .balloon-content p {
+    font-size: 0.95rem;
     line-height: 1.6;
   }
 }
@@ -974,14 +1121,14 @@ section {
   animation: float 3s ease-in-out infinite;
 }
 
-/* Animações adicionais para benefícios */
-@keyframes benefitFloat {
+/* Animações para balões */
+@keyframes balloonFloat {
   0% {
     transform: translateY(0px);
   }
 
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-12px);
   }
 
   100% {
@@ -989,40 +1136,73 @@ section {
   }
 }
 
-.benefit-icon {
-  animation: benefitFloat 3s ease-in-out infinite;
+@keyframes balloonPulse {
+  0% {
+    box-shadow: 
+      0 20px 50px rgba(174, 44, 42, 0.4),
+      0 10px 25px rgba(0, 0, 0, 0.1),
+      inset 0 3px 6px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    box-shadow: 
+      0 25px 60px rgba(174, 44, 42, 0.5),
+      0 15px 35px rgba(0, 0, 0, 0.15),
+      inset 0 4px 8px rgba(255, 255, 255, 0.4);
+  }
+  100% {
+    box-shadow: 
+      0 20px 50px rgba(174, 44, 42, 0.4),
+      0 10px 25px rgba(0, 0, 0, 0.1),
+      inset 0 3px 6px rgba(255, 255, 255, 0.3);
+  }
 }
 
-.benefit-card:nth-child(2) .benefit-icon {
-  animation-delay: 0.5s;
+.balloon-icon {
+  animation: balloonFloat 4s ease-in-out infinite, balloonPulse 3s ease-in-out infinite;
 }
 
-.benefit-card:nth-child(3) .benefit-icon {
-  animation-delay: 1s;
+.benefit-balloon:nth-child(1) .balloon-icon {
+  animation-delay: 0s, 0s;
 }
 
-.benefit-card:nth-child(4) .benefit-icon {
-  animation-delay: 1.5s;
+.benefit-balloon:nth-child(2) .balloon-icon {
+  animation-delay: 0.5s, 0.3s;
+}
+
+.benefit-balloon:nth-child(3) .balloon-icon {
+  animation-delay: 1s, 0.6s;
+}
+
+.benefit-balloon:nth-child(4) .balloon-icon {
+  animation-delay: 1.5s, 0.9s;
+}
+
+.benefit-balloon:nth-child(5) .balloon-icon {
+  animation-delay: 2s, 1.2s;
+}
+
+.benefit-balloon:nth-child(6) .balloon-icon {
+  animation-delay: 2.5s, 1.5s;
 }
 
 /* Efeito de hover mais suave para touch devices */
 @media (hover: none) {
-  .benefit-card:hover {
+  .benefit-balloon:hover .balloon-content {
     transform: none;
   }
 
-  .benefit-card:hover .benefit-icon {
+  .benefit-balloon:hover .balloon-icon {
     transform: none;
   }
 }
 
 /* Melhorias de acessibilidade */
 @media (prefers-reduced-motion: reduce) {
-  .benefit-icon {
+  .balloon-icon {
     animation: none;
   }
 
-  .benefit-card {
+  .benefit-balloon .balloon-content {
     transition: none;
   }
 }

@@ -422,7 +422,7 @@ section {
 }
 
 .terms-content p {
-  color: #666;
+  color: #696969;
   margin-bottom: 15px;
   line-height: 1.7;
 }
@@ -567,7 +567,7 @@ section {
 }
 
 .intellectual-text p {
-  color: #666;
+  color: #696969;
   margin-bottom: 20px;
   font-size: 1.1rem;
   line-height: 1.8;
@@ -616,7 +616,7 @@ section {
 
 .cta-content p {
   font-size: 1.2rem;
-  color: #666;
+  color: #696969;
   margin-bottom: 30px;
 }
 

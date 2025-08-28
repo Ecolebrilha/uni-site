@@ -1,7 +1,7 @@
 <template>
   <footer>
     <div class="footer-logo">
-      <a href="/"><img src="@/assets/selo-15anos-uni.png" alt="Imagem Selo do footer" class="logo-image"></a>
+      <a href="/"><img src="@/assets/selo-20anos-uni.png" alt="Imagem Selo do footer" class="logo-image"></a>
     </div>
     <div class="footer-mensagem">
       <p>{{ t('footer.copyright') }}</p>
@@ -9,7 +9,7 @@
     <div class="footer-right">
       <div class="footer-content">
         <div class="footer-links">
-          <router-link to="/TermosLegais" class="legal-terms-link">Legal terms</router-link>
+          <a href="/Termos e Condições - Uni Hospitalar.pdf" target="_blank" class="legal-terms-link">Legal terms</a>
           <span class="footer-separator">|</span>
         </div>
         <div class="footer-desenvolvedor">

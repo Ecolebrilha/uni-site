@@ -632,7 +632,7 @@ section {
 }
 
 .principle-card p {
-  color: #666;
+  color: #696969;
   line-height: 1.8;
   flex-grow: 1;
   display: flex;
@@ -1042,7 +1042,7 @@ section {
 }
 
 .timeline-content p {
-  color: #666;
+  color: #696969;
   line-height: 1.8;
   font-size: 1rem;
 }
@@ -1153,7 +1153,7 @@ section {
 }
 
 .feature-text p {
-  color: #666;
+  color: #696969;
   font-size: 1rem;
   margin: 0;
   line-height: 1.6;
@@ -1242,7 +1242,7 @@ section {
 
 .reporting-header p {
   font-size: 1.2rem;
-  color: #666;
+  color: #696969;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -1300,7 +1300,7 @@ section {
 }
 
 .channel-card p {
-  color: #666;
+  color: #696969;
   margin-bottom: 20px;
   line-height: 1.6;
 }

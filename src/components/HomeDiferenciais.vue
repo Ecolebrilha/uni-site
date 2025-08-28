@@ -20,9 +20,7 @@
             <h2>{{ t('differentials.introTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
-          <p class="intro-text">
-            {{ t('differentials.introText') }}
-          </p>
+          <p class="intro-text" v-html="t('differentials.introText')"></p>
         </ScrollReveal>
       </div>
     </section>
@@ -42,8 +40,8 @@
                 <ul class="feature-list">
                   <li><span class="highlight">{{ t('differentials.features.inventory.feature1') }}</span> {{
                     t('differentials.features.inventory.feature1Description') }}</li>
-                  <li><span class="highlight">{{ t('differentials.features.inventory.feature2') }}</span> {{
-                    t('differentials.features.inventory.feature2Description') }}</li>
+                  <!-- <li><span class="highlight">{{ t('differentials.features.inventory.feature2') }}</span> {{
+                    t('differentials.features.inventory.feature2Description') }}</li> -->
                 </ul>
               </div>
             </div>
@@ -67,7 +65,7 @@
             </div>
           </ScrollReveal>
 
-          <ScrollReveal direction="left" :delay="400">
+          <!-- <ScrollReveal direction="left" :delay="400">
             <div class="feature-card">
               <div class="feature-icon-wrapper">
                 <i class="fas fa-building"></i>
@@ -83,7 +81,7 @@
                 </ul>
               </div>
             </div>
-          </ScrollReveal>
+          </ScrollReveal> -->
 
           <ScrollReveal direction="right" :delay="500">
             <div class="feature-card">
@@ -162,7 +160,7 @@
     </section>
 
     <!-- Seção de Depoimentos -->
-    <section class="testimonials-section">
+    <!-- <section class="testimonials-section">
       <div class="container">
         <ScrollReveal direction="bottom" :delay="200">
           <div class="section-title">
@@ -210,7 +208,7 @@
           </ScrollReveal>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- Seção CTA -->
     <section class="cta-section">
@@ -382,7 +380,7 @@ section {
 
 .intro-text {
   font-size: 1.3rem;
-  max-width: 800px;
+  max-width: 850px;
   margin: 0 auto;
   color: #555;
   line-height: 1.8;
@@ -464,7 +462,7 @@ section {
 }
 
 .feature-content p {
-  color: #666;
+  color: #696969;
   margin-bottom: 20px;
   line-height: 1.7;
 }
@@ -678,7 +676,7 @@ section {
 
 .cta-content p {
   font-size: 1.2rem;
-  color: #666;
+  color: #696969;
   margin-bottom: 30px;
 }
 

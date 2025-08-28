@@ -6,9 +6,9 @@
       <div class="parallax-container">
         <div class="overlay"></div>
         <div class="hero-content">
-          <img src="@/assets/logo-uni2.png" alt="Logo Uni Hospitalar" class="logo-image">
-          <h2 class="banner-h2">{{ t('home.hero.title') }}</h2>
-          <p class="banner-p" v-html="t('home.hero.subtitle')"></p>
+          <img src="@/assets/logo-uni10.png" alt="Logo Uni Hospitalar" class="logo-image">
+          <h2 class="banner-h2" v-html="t('home.hero.title')"></h2>
+          <!-- <p class="banner-p" v-html="t('home.hero.subtitle')"></p> Oculto sub-titulo da tela principal-->
           <div class="scroll-indicator" @click="scrollToContent">
             <span>{{ t('home.hero.scrollIndicator') }}</span>
             <i class="fas fa-chevron-down"></i>
@@ -45,15 +45,6 @@
           </div>
           <div class="stat-item">
             <div class="stat-icon">
-              <i class="fas fa-users"></i>
-            </div>
-            <div class="stat-number">
-              <span ref="clientsCounter" data-target="5000">0</span>+
-            </div>
-            <div class="stat-label">{{ t('home.stats.clients') }}</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-icon">
               <i class="fas fa-truck"></i>
             </div>
             <div class="stat-number">
@@ -61,12 +52,21 @@
             </div>
             <div class="stat-label">{{ t('home.stats.delivery') }}</div>
           </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-map-marked-alt"></i>
+            </div>
+            <div class="stat-number presence-text">
+              <span>{{ t('home.stats.presenceText') }}</span>
+            </div>
+            <div class="stat-label">{{ t('home.stats.presence') }}</div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Seção de Serviços e Informações -->
-    <section class="services-section">
+    <!-- <section class="services-section">
       <div class="container">
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-header">
@@ -74,10 +74,10 @@
             <div class="section-subtitle">{{ t('home.services.subtitle') }}</div>
             <div class="accent-line"></div>
           </div>
-        </ScrollReveal>
+        </ScrollReveal> -->
 
-        <!-- Cards de serviços - Primeira linha -->
-        <div class="services-grid">
+    <!-- Cards de serviços - Primeira linha -->
+    <!-- <div class="services-grid">
           <ScrollReveal direction="left" :delay="200">
             <div class="service-card">
               <div class="service-image">
@@ -138,10 +138,10 @@
               </div>
             </div>
           </ScrollReveal>
-        </div>
+        </div> -->
 
-        <!-- Cards de serviços - Segunda linha -->
-        <div class="services-grid">
+    <!-- Cards de serviços - Segunda linha -->
+    <!-- <div class="services-grid">
           <ScrollReveal direction="left" :delay="300">
             <div class="service-card">
               <div class="service-image">
@@ -203,10 +203,10 @@
           </ScrollReveal>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- Seção de Depoimentos -->
-    <section class="testimonials-section">
+    <!-- <section class="testimonials-section">
       <div class="container">
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-header">
@@ -254,7 +254,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- Seção de Parceiros -->
     <section class="partners-section">
@@ -264,18 +264,23 @@
           <div class="section-subtitle">{{ t('home.partners.subtitle') }}</div>
           <div class="accent-line"></div>
         </div>
+
         <div class="partners-carousel">
           <div class="partners-track">
             <!-- Primeira passagem de todos os parceiros -->
             <div v-for="n in totalPartners" :key="`first-${n}`" class="partner-slide">
-              <img :src="require(`@/assets/parceiro${n}.jpg`)" :alt="`Parceiro ${n}`" @error="handleImageError">
+              <img :src="require(`@/assets/parceiro${n}.jpg`)" :alt="`Parceiro ${n}`" :class="`partner-${n}`"
+                @error="handleImageError">
             </div>
+
             <!-- Segunda passagem para criar o loop infinito -->
             <div v-for="n in totalPartners" :key="`second-${n}`" class="partner-slide">
-              <img :src="require(`@/assets/parceiro${n}.jpg`)" :alt="`Parceiro ${n}`" @error="handleImageError">
+              <img :src="require(`@/assets/parceiro${n}.jpg`)" :alt="`Parceiro ${n}`" :class="`partner-${n}`"
+                @error="handleImageError">
             </div>
           </div>
         </div>
+
         <div class="partners-action">
           <router-link to="/Parceiros">
             <button class="secondary-button">
@@ -364,8 +369,9 @@
         </div>
         <div class="cookie-text">
           <h3>{{ t('home.cookies.banner.title') }}</h3>
-          <p>{{ t('home.cookies.banner.text') }} <router-link to="/PoliticaPrivacidade">{{
-            t('home.cookies.banner.privacyPolicy') }}</router-link>.</p>
+          <p>{{ t('home.cookies.banner.text') }} <a href="/Declaração de Cookies - Uni Hospitalar.pdf"
+              target="_blank">
+              {{ t('home.cookies.banner.privacyPolicy') }}</a>.</p>
         </div>
         <div class="cookie-buttons">
           <button class="cookie-accept" @click="acceptCookies">{{ t('home.cookies.banner.accept') }}</button>
@@ -377,55 +383,58 @@
     </div>
 
     <!-- Modal de Configurações de Cookies -->
-<div id="bannerCookiesModal" class="cookie-settings-modal" v-if="showCookieSettings" @click.self="showCookieSettings = false">
-  <div class="cookie-settings-content">
-    <div class="cookie-settings-header">
-      <h3>{{ t('home.cookies.settings.title') }}</h3>
-      <button class="close-button" @click="showCookieSettings = false">
-        <i class="fas fa-times"></i>
-      </button>
+    <div id="bannerCookiesModal" class="cookie-settings-modal" v-if="showCookieSettings"
+      @click.self="showCookieSettings = false">
+      <div class="cookie-settings-content">
+        <div class="cookie-settings-header">
+          <h3>{{ t('home.cookies.settings.title') }}</h3>
+          <button class="close-button" @click="showCookieSettings = false">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="cookie-settings-body">
+          <div class="cookie-settings-intro">
+            <p><i class="fas fa-cookie-bite cookie-intro-icon"></i>
+              {{ t('home.cookies.settings.intro') }} <a href="/Declaração de Cookies - Uni Hospitalar.pdf"
+              target="_blank">
+              {{ t('home.cookies.settings.cookieStatement') }}</a>.</p>
+          </div>
+          <div class="cookie-option">
+            <div class="cookie-option-info">
+              <h4>{{ t('home.cookies.settings.essential.title') }}</h4>
+              <p>{{ t('home.cookies.settings.essential.description') }}</p>
+            </div>
+            <div class="cookie-switch disabled">
+              <input type="checkbox" checked disabled>
+              <span class="slider"></span>
+            </div>
+          </div>
+          <div class="cookie-option">
+            <div class="cookie-option-info">
+              <h4>{{ t('home.cookies.settings.analytics.title') }}</h4>
+              <p>{{ t('home.cookies.settings.analytics.description') }}</p>
+            </div>
+            <div class="cookie-switch">
+              <input type="checkbox" v-model="cookiePreferences.analytics" id="analytics-cookie">
+              <label for="analytics-cookie" class="slider"></label>
+            </div>
+          </div>
+          <div class="cookie-option">
+            <div class="cookie-option-info">
+              <h4>{{ t('home.cookies.settings.marketing.title') }}</h4>
+              <p>{{ t('home.cookies.settings.marketing.description') }}</p>
+            </div>
+            <div class="cookie-switch">
+              <input type="checkbox" v-model="cookiePreferences.marketing" id="marketing-cookie">
+              <label for="marketing-cookie" class="slider"></label>
+            </div>
+          </div>
+        </div>
+        <div class="cookie-settings-footer">
+          <button class="cookie-save" @click="saveCookiePreferences">{{ t('home.cookies.settings.save') }}</button>
+        </div>
+      </div>
     </div>
-    <div class="cookie-settings-body">
-      <div class="cookie-settings-intro">
-        <p><i class="fas fa-cookie-bite cookie-intro-icon"></i>
-          {{ t('home.cookies.settings.intro') }} <router-link to="/PoliticaPrivacidade">{{ t('home.cookies.settings.cookieStatement') }}</router-link>.</p>
-      </div>
-      <div class="cookie-option">
-        <div class="cookie-option-info">
-          <h4>{{ t('home.cookies.settings.essential.title') }}</h4>
-          <p>{{ t('home.cookies.settings.essential.description') }}</p>
-        </div>
-        <div class="cookie-switch disabled">
-          <input type="checkbox" checked disabled>
-          <span class="slider"></span>
-        </div>
-      </div>
-      <div class="cookie-option">
-        <div class="cookie-option-info">
-          <h4>{{ t('home.cookies.settings.analytics.title') }}</h4>
-          <p>{{ t('home.cookies.settings.analytics.description') }}</p>
-        </div>
-        <div class="cookie-switch">
-          <input type="checkbox" v-model="cookiePreferences.analytics" id="analytics-cookie">
-          <label for="analytics-cookie" class="slider"></label>
-        </div>
-      </div>
-      <div class="cookie-option">
-        <div class="cookie-option-info">
-          <h4>{{ t('home.cookies.settings.marketing.title') }}</h4>
-          <p>{{ t('home.cookies.settings.marketing.description') }}</p>
-        </div>
-        <div class="cookie-switch">
-          <input type="checkbox" v-model="cookiePreferences.marketing" id="marketing-cookie">
-          <label for="marketing-cookie" class="slider"></label>
-        </div>
-      </div>
-    </div>
-    <div class="cookie-settings-footer">
-      <button class="cookie-save" @click="saveCookiePreferences">{{ t('home.cookies.settings.save') }}</button>
-    </div>
-  </div>
-</div>
   </div>
 </template>
 
@@ -453,9 +462,10 @@ export default {
   },
   data() {
     return {
-      totalPartners: 26, // Total de imagens de parceiros (parceiro1.jpg até parceiro26.jpg)
+      totalPartners: 33, // Total de imagens de parceiros (parceiro1.jpg até parceiro33.jpg)
       currentTestimonial: 0,
       testimonialInterval: null,
+      partnersAnimation: null, // Para controlar a animação dos parceiros
       activeBranch: 0,
       companyFoundingYear: 2005, // Ano de fundação da empresa
       companyAnniversary: { month: 7, day: 11 }, // 11 de julho
@@ -541,10 +551,14 @@ export default {
     this.setupIntersectionObserver();
     this.checkCookieConsent();
     this.preloadJobs();
+    this.startPartnersCarousel(); // Iniciar animação do carrossel de parceiros
     document.addEventListener('keydown', this.handleEscapeKey);
   },
   beforeUnmount() {
     clearInterval(this.testimonialInterval);
+    if (this.partnersAnimation) {
+      this.partnersAnimation.cancel();
+    }
     document.removeEventListener('keydown', this.handleEscapeKey);
   },
   methods: {
@@ -576,7 +590,7 @@ export default {
       const counters = [
         { ref: this.$refs.yearsCounter, target: this.yearsOfExperience },
         { ref: this.$refs.unitsCounter, target: 3 },
-        { ref: this.$refs.clientsCounter, target: 5000 },
+        // { ref: this.$refs.clientsCounter, target: 5000 },
         { ref: this.$refs.hoursCounter, target: 48 }
       ];
 
@@ -644,7 +658,7 @@ export default {
       return this.t(branchKeys[index]) || this.branches[index].name;
     },
     handleImageError(e) {
-      e.target.src = require('@/assets/logo-uni2.png');
+      e.target.src = require('@/assets/logo-uni10.png');
     },
     setActiveBranch(index) {
       this.activeBranch = index;
@@ -770,10 +784,30 @@ export default {
     },
 
     handleEscapeKey(event) {
-    if (event.key === 'Escape' && this.showCookieSettings) {
-      this.showCookieSettings = false;
+      if (event.key === 'Escape' && this.showCookieSettings) {
+        this.showCookieSettings = false;
+      }
+    },
+
+    startPartnersCarousel() {
+      this.$nextTick(() => {
+        const track = document.querySelector('.partners-track');
+        if (!track) return;
+        
+        // Calcular a largura total do conteúdo dividido por 2
+        const contentWidth = track.scrollWidth / 2;
+        
+        // Animação contínua da direita para a esquerda
+        this.partnersAnimation = track.animate([
+          { transform: 'translateX(0px)' },
+          { transform: `translateX(-${contentWidth}px)` }
+        ], {
+          duration: 50000, // 50 segundos para completar o ciclo
+          iterations: Infinity,
+          easing: 'linear'
+        });
+      });
     }
-  }
   }
 };
 </script>
@@ -847,9 +881,8 @@ section {
 }
 
 .logo-image {
-  max-width: 64.5%;
+  max-width: 85.5%;
   max-height: 80%;
-  margin-bottom: 10px;
   animation: fadeInUp 1.5s ease-out;
 }
 
@@ -859,8 +892,9 @@ section {
   font-weight: bold;
   color: #ffffff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 0px 20px 10px 20px;
+  border-left: 4px solid rgba(255, 255, 255, 0.8);
+  border-radius: 2px;
   display: inline-block;
   letter-spacing: 1px;
   animation: fadeInUp 1.5s ease-out 0.3s both;
@@ -965,7 +999,7 @@ section {
 
 .section-subtitle {
   font-size: 1.2rem;
-  color: #666;
+  color: #696969;
   margin-bottom: 20px;
 }
 
@@ -1051,7 +1085,7 @@ section {
   z-index: 1;
   font-size: 1.2rem;
   font-weight: 600;
-  color: #666;
+  color: #696969;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -1152,7 +1186,7 @@ section {
 }
 
 .service-card p {
-  color: #666;
+  color: #696969;
   line-height: 1.6;
   margin-bottom: 20px;
   flex-grow: 1;
@@ -1303,7 +1337,7 @@ section {
 
 .author-position {
   font-size: 0.9rem;
-  color: #666;
+  color: #696969;
 }
 
 .testimonials-slides {
@@ -1402,7 +1436,7 @@ section {
   display: flex;
   gap: 30px;
   animation: scroll 60s linear infinite;
-  width: calc((180px + 30px) * 52); /* 52 slides total: 26 originais + 26 duplicados */
+  width: calc((180px + 30px) * 66); /* 66 slides total: 33 originais + 33 duplicados */
   height: 220px;
   align-items: center;
 }
@@ -1447,8 +1481,9 @@ section {
   left: 100%;
 }
 
+/* Retirado scale do hover do slide */
 .partner-slide:hover {
-  transform: translateY(-8px) scale(1.02);
+  transform: translateY(-8px);
   box-shadow: 
     0 20px 40px rgba(0, 0, 0, 0.12),
     0 8px 24px rgba(174, 44, 42, 0.15),
@@ -1456,20 +1491,67 @@ section {
   border-color: rgba(174, 44, 42, 0.3);
 }
 
+/* Escala individual aplicada na imagem */
 .partner-slide img {
-  max-width: 85%;
-  max-height: 85%;
   object-fit: contain;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), filter 0.4s ease;
   position: relative;
   z-index: 2;
+  transform: scale(var(--img-scale, 1)); /* valor base individual */
 }
 
-.partner-slide:hover img {
+/* Hover da imagem */
+.partner-slide img:hover {
   filter: grayscale(0%) brightness(1) saturate(1.1);
-  transform: scale(1.05);
+  transform: scale(calc(var(--img-scale, 1) * 1.2)); /* aumenta 20% sobre o tamanho base */
 }
 
+/* Escalas individuais dos parceiros */
+.partner-1  { --img-scale: 0.16; }
+.partner-2  { --img-scale: 0.8; }
+.partner-3  { --img-scale: 0.7; }
+.partner-4  { --img-scale: 0.4; }
+.partner-5  { --img-scale: 0.09; }
+.partner-6  { --img-scale: 0.8; }
+.partner-7  { --img-scale: 0.08; }
+.partner-8  { --img-scale: 0.5; }
+.partner-9  { --img-scale: 0.04; }
+.partner-10 { --img-scale: 0.065; }
+.partner-11 { --img-scale: 0.35; }
+.partner-12 { --img-scale: 0.065; }
+.partner-13 { --img-scale: 0.065; }
+.partner-14 { --img-scale: 0.06; }
+.partner-15 { --img-scale: 0.55; }
+.partner-16 { --img-scale: 0.3; }
+.partner-17 { --img-scale: 0.18; }
+.partner-18 { --img-scale: 0.15; }
+.partner-19 { --img-scale: 0.13; }
+.partner-20 { --img-scale: 0.13; }
+.partner-21 { --img-scale: 0.065; }
+.partner-22 { --img-scale: 0.19; }
+.partner-23 { --img-scale: 0.4; }
+.partner-24 { --img-scale: 0.5; }
+.partner-25 { --img-scale: 0.13; }
+.partner-26 { --img-scale: 0.85; }
+.partner-27 { --img-scale: 0.35; }
+.partner-28 { --img-scale: 0.075; }
+.partner-29 { --img-scale: 0.068; }
+.partner-30 { --img-scale: 0.025; }
+.partner-31 { --img-scale: 0.04; }
+.partner-32 { --img-scale: 0.6; }
+.partner-33 { --img-scale: 0.35; }
+
+/* Animação do carrossel de parceiros */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-1 * (180px + 30px) * 33));
+  }
+}
+
+/* Botão secundário */
 .partners-action {
   text-align: center;
   margin-top: 30px;
@@ -1505,16 +1587,6 @@ section {
 
 .secondary-button:hover i {
   transform: translateX(5px);
-}
-
-/* Animação do carrossel de parceiros */
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-1 * (180px + 30px) * 26));
-  }
 }
 
 /* Seção de Chamada para Ação */
@@ -1631,7 +1703,7 @@ section {
 
 .contact-info p {
   font-size: 1.1rem;
-  color: #666;
+  color: #696969;
   margin-bottom: 30px;
   line-height: 1.6;
 }
@@ -1650,7 +1722,7 @@ section {
   border-radius: 50px;
   font-weight: 600;
   font-size: 1rem;
-  color: #666;
+  color: #696969;
   cursor: pointer;
   transition: all 0.3s ease;
   flex: 1;
@@ -1722,7 +1794,6 @@ section {
   font-size: 1.1rem;
   color: #333;
   text-decoration: none;
-  transition: color 0.3s ease;
   line-height: 1.4;
 }
 
@@ -1735,7 +1806,7 @@ section {
   font-size: 1.1rem;
   color: #333;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease, padding 0.3s ease;
   position: relative;
   border-radius: 5px;
   line-height: 1.4;
@@ -1744,7 +1815,7 @@ section {
 .email-link:hover {
   color: #AE2C2A;
   background-color: rgba(174, 44, 42, 0.1);
-  transform: scale(1.05);
+  transform: translateY(-2px);
   padding: 2px 6px;
 }
 
@@ -1815,7 +1886,7 @@ section {
 
 .cookie-text p {
   margin-bottom: 10px;
-  color: #666;
+  color: #696969;
   font-size: 0.9rem;
   text-align: center;
 }
@@ -1918,7 +1989,7 @@ section {
 
 .cookie-settings-intro p {
   margin: 0;
-  color: #666;
+  color: #696969;
   font-size: 0.95rem;
   line-height: 1.5;
   text-align: justify;
@@ -1954,7 +2025,7 @@ section {
   background: none;
   border: none;
   font-size: 1.5rem;
-  color: #666;
+  color: #696969;
   cursor: pointer;
   transition: color 0.3s ease;
 }
@@ -1993,7 +2064,7 @@ section {
 
 .cookie-option-info p {
   margin: 0;
-  color: #666;
+  color: #696969;
   font-size: 0.9rem;
 }
 
@@ -2193,6 +2264,12 @@ input:checked+.slider:before {
   left: 100%;
 }
 
+.stat-number.presence-text {
+  font-size: 1.3em;
+  line-height: 1.2;
+  text-align: center;
+}
+
 /* RESPONSIVIDADE */
 
 /* Tablets e telas médias */
@@ -2287,7 +2364,7 @@ input:checked+.slider:before {
   }
 
   .logo-image {
-    max-width: 70%;
+    max-width: 85%;
   }
 
   .banner-h2 {
@@ -2405,11 +2482,11 @@ input:checked+.slider:before {
   }
 
   .logo-image {
-    max-width: 80%;
+    max-width: 85%;
   }
 
   .banner-h2 {
-    font-size: 1.8em;
+    font-size: 1.6em;
   }
 
   .banner-p {
@@ -2619,13 +2696,19 @@ input:checked+.slider:before {
   }
 
   .banner-h2 {
-    font-size: 1.5em;
+    font-size: 1.3em;
     padding: 8px 15px;
   }
 
   .banner-p {
     font-size: 1em;
     border-left: 2px solid rgba(255, 255, 255, 0.8);
+  }
+}
+
+@media (min-width: 356px) {
+  .banner-h2 {
+    white-space: nowrap;
   }
 }
 
@@ -2683,6 +2766,10 @@ input:checked+.slider:before {
 
   .cookie-text p {
     font-size: 0.8rem;
+  }
+
+  .banner-h2 {
+    font-size: 1.1rem;
   }
 }
 

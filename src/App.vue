@@ -2,14 +2,14 @@
   <div id="app">
     <div class="page-transition-overlay" :class="{ active: isTransitioning }">
       <div class="transition-logo-container" v-if="isTransitioning">
-        <img src="@/assets/logo-uni2.png" alt="Uni Hospitalar" class="transition-logo">
+        <img src="@/assets/logo-uni10.png" alt="Uni Hospitalar" class="transition-logo">
       </div>
     </div>
     <transition 
       :name="transitionName" 
       mode="out-in"
       @before-leave="startTransition"
-      @enter="endTransition"> <!-- Mudança aqui: removendo prepareEnter e usando enter diretamente -->
+      @enter="endTransition">
       <router-view :key="$route.fullPath"></router-view>
     </transition>
   </div>
@@ -30,7 +30,7 @@ export default {
       const toDepth = to.path.split('/').length
       const fromDepth = from.path.split('/').length
       
-      // Usar a transição definida na rota, se existir
+      // Usando a transição definida na rota
       if (to.meta && to.meta.transition) {
         this.transitionName = to.meta.transition;
       } else if (fromDepth < toDepth) {
@@ -40,7 +40,7 @@ export default {
         // Voltando para uma rota menos profunda
         this.transitionName = 'slide-right'
       } else {
-        // Mesmo nível, use transição padrão
+        // Mesmo nível, usando transição padrão
         this.transitionName = 'page'
       }
     }
@@ -81,20 +81,20 @@ body, html {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #AE2C2A; /* Vermelho que combina com a temática do site */
+  background-color: #AE2C2A;
   z-index: 9999;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s ease-out; /* Saída mais rápida */
+  transition: opacity 0.2s ease-out;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .page-transition-overlay.active {
-  opacity: 0.9; /* Mais opaco para destacar a logo */
+  opacity: 0.9;
   pointer-events: all;
-  transition: opacity 0.5s ease-in; /* Entrada mais lenta */
+  transition: opacity 0.5s ease-in;
 }
 
 /* Container e animação da logo */
@@ -108,7 +108,7 @@ body, html {
 .transition-logo {
   max-width: 500px;
   height: auto;
-  animation: logoAnimation 1.5s ease-in-out; /* Animação mais rápida */
+  animation: logoAnimation 1.5s ease-in-out;
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
 }
 
@@ -206,6 +206,15 @@ a {
 /* Estilo para links ativos */
 .router-link-active {
   transition: all 0.3s ease;
+}
+
+/* Estilo para seleção de texto */
+::selection {
+  background-color: rgba(174, 44, 42, 0.2);
+}
+
+::-moz-selection {
+  background-color: rgba(174, 44, 42, 0.2);
 }
 
 @media (max-width: 576px) {

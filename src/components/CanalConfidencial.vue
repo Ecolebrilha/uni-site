@@ -518,7 +518,7 @@ export default {
 }
 
 .highlight-content p {
-    color: #666;
+    color: #696969;
     line-height: 1.6;
     margin: 0;
 }
@@ -584,7 +584,7 @@ export default {
 }
 
 .principle-card p {
-    color: #666;
+    color: #696969;
     line-height: 1.6;
 }
 
@@ -648,7 +648,7 @@ export default {
 }
 
 .step-card p {
-    color: #666;
+    color: #696969;
     line-height: 1.6;
 }
 
@@ -750,7 +750,7 @@ export default {
 }
 
 .category-card p {
-    color: #666;
+    color: #696969;
     line-height: 1.5;
     font-size: 0.95rem;
 }
@@ -793,7 +793,7 @@ export default {
 }
 
 .notice-content p {
-    color: #666;
+    color: #696969;
     line-height: 1.6;
     margin-bottom: 20px;
 }
@@ -814,7 +814,7 @@ export default {
 }
 
 .redirect-info li {
-    color: #666;
+    color: #696969;
     line-height: 1.6;
     margin-bottom: 8px;
     padding-left: 20px;
@@ -844,7 +844,7 @@ export default {
 
 .action-intro p {
     font-size: 1.2rem;
-    color: #666;
+    color: #696969;
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.6;
@@ -899,7 +899,7 @@ export default {
 }
 
 .action-card p {
-    color: #666;
+    color: #696969;
     line-height: 1.6;
     margin-bottom: 30px;
 }
@@ -999,7 +999,7 @@ export default {
 }
 
 .modal-body>p {
-    color: #666;
+    color: #696969;
     line-height: 1.6;
     margin-bottom: 30px;
 }
@@ -1126,7 +1126,7 @@ export default {
 }
 
 .value {
-    color: #666;
+    color: #696969;
 }
 
 .value.status {
@@ -1160,7 +1160,7 @@ export default {
 
 .status-description p {
     margin: 0;
-    color: #666;
+    color: #696969;
     line-height: 1.6;
 }
 

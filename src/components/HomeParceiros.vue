@@ -1,7 +1,7 @@
 <template>
   <div class="parceiros">
     <HomeHeader />
-    
+
     <!-- Hero Section com Efeito Parallax -->
     <section class="hero-section">
       <div class="parallax-container">
@@ -12,42 +12,65 @@
         </div>
       </div>
     </section>
-    
+
     <!-- Seção de Estatísticas dos Parceiros -->
     <section ref="statsSection" class="partners-stats-section">
-      <div class="container">
+      <div class="stats-container">
         <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-icon">
-              <i class="fas fa-handshake"></i>
+          <ScrollReveal direction="right" :delay="200" :distance="200" :duration="1500">
+            <div class="stat-item left-aligned">
+              <div class="stat-icon">
+                <i class="fas fa-handshake"></i>
+              </div>
+              <div class="stat-content">
+                <div class="stat-number">
+                  <span ref="partnersCounter">0</span>+
+                </div>
+                <div class="stat-title">Parceiros Estratégicos</div>
+                <div class="stat-description">Construímos relacionamentos sólidos e duradouros com nossos parceiros,
+                  baseados na confiança mútua e no crescimento conjunto. Nossa rede de parceiros estratégicos nos
+                  permite oferecer soluções completas e inovadoras.</div>
+              </div>
             </div>
-            <div class="stat-number">
-              <span ref="partnersCounter">0</span>+
+          </ScrollReveal>
+
+          <ScrollReveal direction="left" :delay="400" :distance="200" :duration="1500">
+            <div class="stat-item right-aligned reverse">
+              <div class="stat-content">
+                <div class="stat-number">
+                  <span ref="statesCounter">0</span>%
+                </div>
+                <div class="stat-title">Cobertura em unidades de negócio</div>
+                <div class="stat-description">Atendemos aos Canais públicos e privados, com as linhas de medicamentos
+                  oncológicos, hospitalares e colírios. Nossa presença abrange múltiplos estados e regiões estratégicas.
+                </div>
+              </div>
+              <div class="stat-icon">
+                <i class="fas fa-globe-americas"></i>
+              </div>
             </div>
-            <div class="stat-label">{{ t('partners.stats.strategicPartners') }}</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon">
-              <i class="fas fa-globe-americas"></i>
+          </ScrollReveal>
+
+          <ScrollReveal direction="right" :delay="600" :distance="200" :duration="1500">
+            <div class="stat-item left-aligned">
+              <div class="stat-icon">
+                <i class="fas fa-award"></i>
+              </div>
+              <div class="stat-content">
+                <div class="stat-number">
+                  <span ref="yearsCounter">0</span>
+                </div>
+                <div class="stat-title">Anos de Confiança</div>
+                <div class="stat-description">Ao longo dos anos, consolidamos nossa posição no mercado através da
+                  excelência no atendimento e na qualidade dos nossos produtos. Nossa trajetória é marcada por inovação,
+                  compromisso e resultados consistentes.</div>
+              </div>
             </div>
-            <div class="stat-number">
-              <span ref="statesCounter">0</span>
-            </div>
-            <div class="stat-label">{{ t('partners.stats.statesServed') }}</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon">
-              <i class="fas fa-award"></i>
-            </div>
-            <div class="stat-number">
-              <span ref="yearsCounter">0</span>
-            </div>
-            <div class="stat-label">{{ t('partners.stats.yearsOfTrust') }}</div>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>
-    
+
     <!-- Seção Principal de Parceiros -->
     <section class="partners-showcase-section">
       <div class="container">
@@ -58,20 +81,21 @@
             <div class="accent-line"></div>
           </div>
         </ScrollReveal>
-        
+
         <!-- Grid Simples de Parceiros -->
         <ScrollReveal direction="bottom" :delay="200">
           <div class="partners-simple-grid">
-            <div v-for="n in 26" :key="`parceiro-${n}`" class="partner-logo">
-              <img :src="require(`@/assets/parceiro${n}.jpg`)" :alt="`Parceiro ${n}`" @error="handleImageError">
+            <div v-for="n in 33" :key="`parceiro-${n}`" class="partner-logo">
+              <img :src="require(`@/assets/parceiro${n}.jpg`)" :alt="`Parceiro ${n}`" :class="`partner-${n}`"
+                @error="handleImageError">
             </div>
           </div>
         </ScrollReveal>
       </div>
     </section>
-    
+
     <!-- Seção de Depoimentos de Parceiros -->
-    <section class="partners-testimonials">
+    <!-- <section class="partners-testimonials">
       <div class="container">
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-header">
@@ -121,8 +145,8 @@
           </ScrollReveal>
         </div>
       </div>
-    </section>
-    
+    </section> -->
+
     <!-- Seção de Call to Action -->
     <section class="cta-section">
       <div class="container">
@@ -136,7 +160,7 @@
         </div>
       </div>
     </section>
-    
+
     <HomeFooter />
   </div>
 </template>
@@ -153,7 +177,7 @@ export default {
   },
   setup() {
     const { t, currentLanguage } = usePartnersTranslation()
-    
+
     return {
       t,
       currentLanguage
@@ -200,7 +224,7 @@ export default {
     handleImageError(e) {
       e.target.src = require('@/assets/logo-uni2.png');
     },
-    
+
     setupIntersectionObserver() {
       const options = {
         root: null,
@@ -224,17 +248,17 @@ export default {
     },
 
     animateCounters() {
-      const baseDuration = 4000;
+      const baseDuration = 10000;
 
       const counters = [
-        { ref: this.$refs.partnersCounter, target: 26 },
-        { ref: this.$refs.statesCounter, target: 3 },
+        { ref: this.$refs.partnersCounter, target: 33 },
+        { ref: this.$refs.statesCounter, target: 100 },
         { ref: this.$refs.yearsCounter, target: this.yearsOfExperience }
       ];
 
       // Verificar se os refs existem antes de animar
       const validCounters = counters.filter(counter => counter.ref);
-      
+
       if (validCounters.length === 0) return;
 
       validCounters.forEach(counter => {
@@ -360,6 +384,7 @@ section {
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -383,57 +408,133 @@ section {
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ae2c2a' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
+.stats-container {
+  width: 100%;
+  padding: 0;
+}
+
 .stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 180px;
   position: relative;
   z-index: 1;
+  width: 100%;
+  min-height: 100vh;
 }
 
-.stat-card {
-  background: white;
-  border-radius: 20px;
-  padding: 40px 30px;
-  text-align: center;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-top: 5px solid #AE2C2A;
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  width: 90%;
+  max-width: 1200px;
+  padding: 80px 50px;
+  background: linear-gradient(145deg, #ffffff, #fafbfc);
+  border-radius: 30px;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.12),
+    0 10px 20px rgba(174, 44, 42, 0.08),
+    0 0 0 1px rgba(174, 44, 42, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background-clip: padding-box;
+  position: relative;
+  backdrop-filter: blur(10px);
 }
 
-.stat-card:hover {
-  transform: translateY(-15px);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+.stat-item.left-aligned {
+  margin-left: 5%;
+  margin-right: auto;
+}
+
+.stat-item.right-aligned {
+  margin-left: auto;
+  margin-right: 5%;
+}
+
+.stat-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 30px;
+  padding: 8px;
+  background: linear-gradient(135deg, #AE2C2A, #ff5555, #AE2C2A);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  z-index: -1;
+}
+
+.stat-item.reverse {
+  flex-direction: row-reverse;
+}
+
+.stat-item.reverse::before {
+  background: linear-gradient(135deg, #ff5555, #AE2C2A, #ff5555);
+}
+
+.stat-item:hover {
+  transform: translateY(-15px) scale(1.02);
+  box-shadow:
+    0 35px 80px rgba(0, 0, 0, 0.18),
+    0 15px 35px rgba(174, 44, 42, 0.15),
+    0 0 0 2px rgba(174, 44, 42, 0.1),
+    inset 0 2px 0 rgba(255, 255, 255, 1);
 }
 
 .stat-icon {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  width: 140px;
+  height: 140px;
+  background: linear-gradient(135deg, #AE2C2A, #ff5555, #AE2C2A);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 25px;
   color: white;
-  font-size: 2rem;
-  box-shadow: 0 10px 25px rgba(174, 44, 42, 0.3);
+  font-size: 3.5rem;
+  box-shadow:
+    0 20px 40px rgba(174, 44, 42, 0.4),
+    0 10px 20px rgba(0, 0, 0, 0.1),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-content {
+  flex: 1;
+  text-align: left;
+}
+
+.stat-item.reverse .stat-content {
+  text-align: right;
 }
 
 .stat-number {
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: 800;
   color: #AE2C2A;
   margin-bottom: 15px;
   line-height: 1;
 }
 
-.stat-label {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #666;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.stat-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.stat-description {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #696969;
+  line-height: 1.6;
 }
 
 /* Seção Principal de Parceiros */
@@ -477,7 +578,7 @@ section {
 
 .section-subtitle {
   font-size: 1.2rem;
-  color: #666;
+  color: #696969;
   margin-bottom: 20px;
 }
 
@@ -494,7 +595,7 @@ section {
 
 .partners-simple-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 45px;
   justify-items: center;
   align-items: center;
@@ -506,7 +607,7 @@ section {
   background: linear-gradient(145deg, #ffffff, #fafbfc);
   border-radius: 20px;
   padding: 30px;
-  box-shadow: 
+  box-shadow:
     0 15px 35px rgba(0, 0, 0, 0.06),
     0 8px 20px rgba(0, 0, 0, 0.04),
     0 0 0 1px rgba(174, 44, 42, 0.05),
@@ -530,12 +631,10 @@ section {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent);
   transition: left 0.7s ease;
   z-index: 1;
 }
@@ -545,8 +644,8 @@ section {
 }
 
 .partner-logo:hover {
-  transform: translateY(-12px) scale(1.03);
-  box-shadow: 
+  transform: translateY(-12px);
+  box-shadow:
     0 25px 50px rgba(0, 0, 0, 0.12),
     0 15px 30px rgba(174, 44, 42, 0.1),
     0 0 0 1px rgba(174, 44, 42, 0.15),
@@ -556,19 +655,49 @@ section {
 }
 
 .partner-logo img {
+  transform: scale(var(--img-scale, 1));
   max-width: 85%;
   max-height: 85%;
   object-fit: contain;
   filter: grayscale(60%) brightness(0.95) contrast(1.1);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), filter 0.4s cubic-bezier(0.4,0,0.2,1);
   position: relative;
   z-index: 2;
 }
 
 .partner-logo:hover img {
   filter: grayscale(0%) brightness(1) contrast(1.2) saturate(1.1);
-  transform: scale(1.05);
+  transform: scale(calc(var(--img-scale, 1) * 1.2)); /* 20% maior */
 }
+
+.partner-1  { --img-scale: 1.6; }
+.partner-2  { --img-scale: 1.1; }
+.partner-3  { --img-scale: 1; }
+.partner-6  { --img-scale: 1.3; }
+.partner-7  { --img-scale: 1.25; }
+.partner-8  { --img-scale: 0.9; }
+.partner-9  { --img-scale: 0.8; }
+.partner-10 { --img-scale: 0.9; }
+.partner-11 { --img-scale: 1; }
+.partner-13 { --img-scale: 0.8; }
+.partner-14 { --img-scale: 0.9; }
+.partner-15 { --img-scale: 1.6; }
+.partner-16 { --img-scale: 1.7; }
+.partner-17 { --img-scale: 1.1; }
+.partner-18 { --img-scale: 1.1; }
+.partner-19 { --img-scale: 1.1; }
+.partner-20 { --img-scale: 2.2; }
+.partner-21 { --img-scale: 0.8; }
+.partner-22 { --img-scale: 1; }
+.partner-23 { --img-scale: 1.4; }
+.partner-24 { --img-scale: 1.1; }
+.partner-25 { --img-scale: 0.9; }
+.partner-26 { --img-scale: 1.8; }
+.partner-27 { --img-scale: 1.2; }
+.partner-28 { --img-scale: 0.9; }
+.partner-30 { --img-scale: 1.3; }
+.partner-31 { --img-scale: 0.9; }
+.partner-32 { --img-scale: 3; }
 
 /* Seção de Depoimentos */
 .partners-testimonials {
@@ -664,7 +793,7 @@ section {
 
 .cta-content p {
   font-size: 1.2rem;
-  color: #666;
+  color: #696969;
   margin-bottom: 40px;
   max-width: 600px;
   margin-left: auto;
@@ -697,10 +826,44 @@ section {
   .container {
     padding: 0 40px;
   }
-  
+
   .partners-simple-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .stat-item {
+    width: 82%;
+    padding: 70px 40px;
+    gap: 50px;
+  }
+
+  .stat-item.left-aligned {
+    margin-left: 3%;
+  }
+
+  .stat-item.right-aligned {
+    margin-right: 3%;
+  }
+
+  .stat-icon {
+    width: 120px;
+    height: 120px;
+    font-size: 3.2rem;
+  }
+
+  .stat-number {
+    font-size: 3.5rem;
+  }
+
+  .stat-title {
+    font-size: 2rem;
+  }
+
+  .stat-description {
+    font-size: 1.2rem;
   }
 }
 
@@ -708,19 +871,65 @@ section {
   .hero-title {
     font-size: 3rem;
   }
-  
+
   .stats-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 60px;
+    min-height: auto;
   }
-  
+
+  .stat-item {
+    flex-direction: column !important;
+    text-align: center;
+    gap: 30px;
+    padding: 50px 30px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 90%;
+    max-width: 600px;
+  }
+
+  .stat-item.reverse {
+    flex-direction: column-reverse !important;
+  }
+
+  .stat-item.reverse .stat-content {
+    text-align: center;
+  }
+
+  .stat-content {
+    text-align: center;
+  }
+
+  .stat-number,
+  .stat-title {
+    text-align: center;
+  }
+
+  .stat-icon {
+    width: 120px;
+    height: 120px;
+    font-size: 3rem;
+  }
+
+  .stat-number {
+    font-size: 3.5rem;
+  }
+
+  .stat-title {
+    font-size: 2rem;
+  }
+
+  .stat-description {
+    font-size: 1.2rem;
+  }
+
   .testimonials-grid {
     grid-template-columns: 1fr;
     gap: 30px;
     width: 60%;
     margin: 0 auto;
   }
-  
+
   .partners-simple-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -731,23 +940,53 @@ section {
     height: 60vh;
     min-height: 400px;
   }
-  
+
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.3rem;
   }
-  
+
   .parallax-container {
     background-attachment: scroll;
   }
-  
+
   .section-title {
     font-size: 2rem;
   }
-  
+
+  .stats-grid {
+    gap: 40px;
+  }
+
+  .stat-item {
+    padding: 40px 25px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 95%;
+    max-width: 500px;
+  }
+
+  .stat-icon {
+    width: 100px;
+    height: 100px;
+    font-size: 2.5rem;
+  }
+
+  .stat-number {
+    font-size: 3rem;
+  }
+
+  .stat-title {
+    font-size: 1.8rem;
+  }
+
+  .stat-description {
+    font-size: 1.1rem;
+  }
+
   .partners-simple-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
@@ -756,12 +995,12 @@ section {
   .testimonials-grid {
     width: 80%;
   }
-  
+
   .partner-logo {
     height: 100px;
     padding: 20px;
   }
-  
+
   .cta-content h2 {
     font-size: 2rem;
   }
@@ -771,39 +1010,64 @@ section {
   .hero-title {
     font-size: 2rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.1rem;
   }
-  
+
   .section-title {
     font-size: 1.8rem;
   }
-  
-  .stat-card {
-    padding: 30px 20px;
+
+  .stats-grid {
+    gap: 30px;
   }
-  
+
+  .stat-item {
+    padding: 30px 20px;
+    gap: 25px;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .stat-icon {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+  }
+
+  .stat-title {
+    font-size: 1.5rem;
+  }
+
+  .stat-description {
+    font-size: 1rem;
+  }
+
   .testimonial-card {
     padding: 60px 20px;
   }
-  
+
   .partners-simple-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  
+
   .partner-logo {
     height: 80px;
     padding: 15px;
     max-width: 300px;
     margin: 0 auto;
   }
-  
+
   .cta-content h2 {
     font-size: 1.8rem;
   }
-  
+
   .cta-button {
     padding: 15px 30px;
     font-size: 1rem;
@@ -811,36 +1075,40 @@ section {
 }
 
 @media (max-width: 450px) {
+  .stat-item {
+    width: 80%;
+  }
+
   .testimonials-grid {
     width: 90%;
     margin: 0 auto;
     gap: 25px;
   }
-  
+
   .testimonial-card {
     min-height: 320px;
     padding: 30px 20px;
   }
-  
+
   .quote-icon {
     font-size: 2rem;
     margin-bottom: 20px;
   }
-  
+
   .testimonial-card p {
     font-size: 1rem;
     line-height: 1.5;
     margin-bottom: 20px;
   }
-  
+
   .testimonial-author {
     padding-top: 15px;
   }
-  
+
   .testimonial-author strong {
     font-size: 1rem;
   }
-  
+
   .testimonial-author span {
     font-size: 0.85rem;
   }
@@ -851,9 +1119,11 @@ section {
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
+
   100% {
     transform: translateY(0px);
   }

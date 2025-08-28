@@ -363,7 +363,7 @@ section {
 
 .value-content p {
   font-size: 1rem;
-  color: #666;
+  color: #696969;
   line-height: 1.6;
 }
 
@@ -453,7 +453,7 @@ section {
 
 .initiative-content p {
   font-size: 1rem;
-  color: #666;
+  color: #696969;
   line-height: 1.6;
 }
 

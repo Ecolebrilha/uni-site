@@ -1042,7 +1042,7 @@ formatDateTwo(dateString) {
 
 
 .consulta-header p {
-  color: #666;
+  color: #696969;
   font-size: 1.2rem;
   line-height: 1.6;
 }
@@ -1176,7 +1176,7 @@ formatDateTwo(dateString) {
 .input-hint {
   display: block;
   margin-top: 8px;
-  color: #666;
+  color: #696969;
   font-size: 0.95rem;
   font-style: italic;
 }
@@ -1519,7 +1519,7 @@ formatDateTwo(dateString) {
 }
 
 .timeline-content small {
-  color: #666;
+  color: #696969;
   font-size: 0.9rem;
   line-height: 1.4;
 }
@@ -1565,7 +1565,7 @@ formatDateTwo(dateString) {
 }
 
 .info-card p {
-  color: #666;
+  color: #696969;
   margin: 0;
   font-size: 0.9rem;
   line-height: 1.4;

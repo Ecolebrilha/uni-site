@@ -379,7 +379,7 @@ section {
 }
 
 .value-card p {
-  color: #666;
+  color: #696969;
   font-size: 1rem;
   flex-grow: 1;
   display: flex;

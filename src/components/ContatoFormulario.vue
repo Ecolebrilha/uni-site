@@ -269,7 +269,7 @@ ${this.formData.message}
   margin: 0;
   font-size: 0.9rem;
   line-height: 1.5;
-  color: #666;
+  color: #696969;
 }
 
 .terms-link {

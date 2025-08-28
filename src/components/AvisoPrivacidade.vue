@@ -311,7 +311,7 @@
   }
   
   .last-updated {
-    color: #666;
+    color: #696969;
     font-style: italic;
   }
   

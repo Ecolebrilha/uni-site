@@ -762,7 +762,7 @@ section {
 }
 
 .contact-message p {
-  color: #666;
+  color: #696969;
   margin-bottom: 30px;
 }
 

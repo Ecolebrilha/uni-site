@@ -420,7 +420,7 @@ section {
 }
 
 .dpo-value {
-  color: #666;
+  color: #696969;
   font-weight: 500;
 }
 
@@ -532,7 +532,7 @@ section {
 }
 
 .privacy-content p {
-  color: #666;
+  color: #696969;
   margin-bottom: 0;
   line-height: 1.7;
   font-size: 0.95rem;
@@ -747,7 +747,7 @@ section {
 
 .cta-content p {
   font-size: 1.2rem;
-  color: #666;
+  color: #696969;
   margin-bottom: 30px;
 }
 

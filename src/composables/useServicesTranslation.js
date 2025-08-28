@@ -31,8 +31,8 @@ const translations = reactive({
       processIntro: 'Conheça como trabalhamos para garantir a excelência em nossos serviços',
       processSteps: {
         step1: {
-          title: 'Equipe de vendas qualificada',
-          description: 'Venda segura com garantia de qualidade na entrega.'
+          title: 'Equipe de vendas de alta performance',
+          description: 'Profissionais especializados e antenados nas maiores tendências do mercado.'
         },
         step2: {
           title: 'Logística otimizada',
@@ -40,7 +40,7 @@ const translations = reactive({
         },
         step3: {
           title: 'Controle de qualidade rigoroso',
-          description: 'Inspeção detalhada de todos os produtos para assegurar a conformidade com os mais altos padrões.'
+          description: 'Inspeção detalhada de todos os produtos para assegurar a conformidade com a legislação sanitária.'
         },
         step4: {
           title: 'Suporte pós-venda especializado',
@@ -99,8 +99,8 @@ const translations = reactive({
       processIntro: 'Learn how we work to ensure excellence in our services',
       processSteps: {
         step1: {
-          title: 'Qualified sales team',
-          description: 'Safe sale with quality guarantee on delivery.'
+          title: 'High-performance sales team',
+          description: 'Specialized professionals who are up to date with the biggest market trends.'
         },
         step2: {
           title: 'Optimized logistics',
@@ -108,7 +108,7 @@ const translations = reactive({
         },
         step3: {
           title: 'Rigorous quality control',
-          description: 'Detailed inspection of all products to ensure compliance with the highest standards.'
+          description: 'Detailed inspection of all products to ensure compliance with health legislation.'
         },
         step4: {
           title: 'Specialized after-sales support',
@@ -167,8 +167,8 @@ const translations = reactive({
       processIntro: 'Conozca cómo trabajamos para garantizar la excelencia en nuestros servicios',
       processSteps: {
         step1: {
-          title: 'Equipo de ventas calificado',
-          description: 'Venta segura con garantía de calidad en la entrega.'
+          title: 'Equipo de ventas de alto rendimiento',
+          description: 'Profesionales especializados y actualizados con las mayores tendencias del mercado.'
         },
         step2: {
           title: 'Logística optimizada',
@@ -176,7 +176,7 @@ const translations = reactive({
         },
         step3: {
           title: 'Control de calidad riguroso',
-          description: 'Inspección detallada de todos los productos para asegurar el cumplimiento de los más altos estándares.'
+          description: 'Inspección detallada de todos los productos para garantizar el cumplimiento de la legislación sanitaria.'
         },
         step4: {
           title: 'Soporte postventa especializado',

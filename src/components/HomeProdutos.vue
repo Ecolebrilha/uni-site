@@ -476,7 +476,7 @@ section {
 }
 
 .category-content p {
-  color: #666;
+  color: #696969;
   margin-bottom: 15px;
   line-height: 1.6;
   font-size: 0.95rem;
@@ -621,7 +621,7 @@ section {
 }
 
 .catalog-text p {
-  color: #666;
+  color: #696969;
   margin-bottom: 25px;
   font-size: 1.1rem;
 }
@@ -669,7 +669,7 @@ section {
 
 .cta-content p {
   font-size: 1.2rem;
-  color: #666;
+  color: #696969;
   margin-bottom: 30px;
 }
 

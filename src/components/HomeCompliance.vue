@@ -495,7 +495,7 @@ section {
 
 .channel-subtitle {
   font-size: 1.4rem;
-  color: #666;
+  color: #696969;
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
@@ -624,7 +624,7 @@ section {
 }
 
 .action-card.secondary p {
-  color: #666;
+  color: #696969;
 }
 
 .action-button {
@@ -712,7 +712,7 @@ section {
 
 .security-guarantee {
   font-size: 1.1rem;
-  color: #666;
+  color: #696969;
   margin: 0;
   padding-top: 20px;
   border-top: 1px solid rgba(174, 44, 42, 0.1);
@@ -877,7 +877,7 @@ section {
 }
 
 .value-card p {
-  color: #666;
+  color: #696969;
   font-size: 1rem;
   line-height: 1.7;
   margin: 0;

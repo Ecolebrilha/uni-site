@@ -1151,7 +1151,7 @@ section {
 }
 
 .value-card p {
-  color: #666;
+  color: #696969;
 }
 
 /* Seção de Benefícios */
@@ -1201,7 +1201,7 @@ section {
 .benefits-list {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 32px !important;
 }
 
 .benefit-item {
@@ -1240,6 +1240,7 @@ section {
 .benefit-content h4 {
   font-size: 1.2rem;
   margin-bottom: 10px;
+  margin-top: 0;
   color: white;
 }
 
@@ -1257,7 +1258,7 @@ section {
 .jobs-intro {
   text-align: center;
   font-size: 1.1rem;
-  color: #666;
+  color: #696969;
   margin-bottom: 50px;
   max-width: 600px;
   margin-left: auto;
@@ -1386,7 +1387,7 @@ section {
   align-items: center;
   gap: 8px;
   font-size: 0.9rem;
-  color: #666;
+  color: #696969;
 }
 
 .job-detail i {
@@ -1633,7 +1634,7 @@ section {
   position: relative;
   padding-left: 20px;
   font-size: 0.9rem;
-  color: #666;
+  color: #696969;
   line-height: 1.4;
 }
 
@@ -1847,7 +1848,7 @@ section {
   padding-left: 20px;
   margin-bottom: 5px;
   font-size: 0.9rem;
-  color: #666;
+  color: #696969;
   line-height: 1.4;
 }
 
@@ -1943,7 +1944,7 @@ section {
 }
 
 .no-jobs-content p {
-  color: #666;
+  color: #696969;
   line-height: 1.6;
   margin-bottom: 30px;
 }
@@ -2025,7 +2026,7 @@ section {
   display: flex;
   align-items: center;
   gap: 5px;
-  color: #666;
+  color: #696969;
   font-size: 0.9rem;
 }
 
@@ -2035,7 +2036,7 @@ section {
 
 .form-intro {
   text-align: center;
-  color: #666;
+  color: #696969;
   margin-bottom: 40px;
   font-size: 1.1rem;
   line-height: 1.6;
@@ -2476,7 +2477,7 @@ section {
 }
 
 .faq-answer p {
-  color: #666;
+  color: #696969;
   margin: 0;
 }
 
@@ -2550,7 +2551,7 @@ section {
 }
 
 .modal-body p {
-  color: #666;
+  color: #696969;
   margin-bottom: 15px;
   line-height: 1.6;
 }
@@ -2633,6 +2634,7 @@ section {
 
 .privacy-disclaimer a:hover {
   text-decoration: underline;
+  color: #ff5555;
 }
 
 /* Responsividade */

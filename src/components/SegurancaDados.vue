@@ -404,7 +404,7 @@ section {
 
 .stat-label {
   font-size: 1rem;
-  color: #666;
+  color: #696969;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -430,7 +430,7 @@ section {
 
 .section-header p {
   font-size: 1.2rem;
-  color: #666;
+  color: #696969;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -513,7 +513,7 @@ section {
 
 .layer-content p {
   font-size: 1.1rem;
-  color: #666;
+  color: #696969;
   line-height: 1.7;
 }
 
@@ -541,7 +541,7 @@ section {
 
 .certifications-header p {
   font-size: 1.2rem;
-  color: #666;
+  color: #696969;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -602,7 +602,7 @@ section {
 }
 
 .cert-card p {
-  color: #666;
+  color: #696969;
   margin-bottom: 25px;
   line-height: 1.6;
 }
@@ -640,7 +640,7 @@ section {
 
 .tech-header p {
   font-size: 1.2rem;
-  color: #666;
+  color: #696969;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -694,7 +694,7 @@ section {
 
 .tech-category li {
   padding: 8px 0;
-  color: #666;
+  color: #696969;
   position: relative;
   padding-left: 25px;
 }
