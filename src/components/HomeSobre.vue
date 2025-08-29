@@ -59,7 +59,8 @@
         
         <ScrollReveal direction="bottom" :delay="300">
           <div class="new-timeline-container">
-            <!-- Linha da timeline estática -->
+            <div class="timeline-scroll-wrapper">
+              <!-- Linha da timeline estática -->
             <div class="timeline-line"></div>
             
             <!-- Bolinhas da timeline com anos -->
@@ -115,6 +116,7 @@
                   <div class="card-description">{{ milestone.description }}</div>
                 </div>
               </div>
+            </div>
             </div>
           </div>
         </ScrollReveal>
@@ -1507,6 +1509,160 @@ section {
   .cta-section {
     padding: 80px 0;
   }
+
+  /* CARDS INDIVIDUAIS - 480px */
+  .timeline-card[style*="--card-position: 0"] {
+    left: calc(var(--card-position) * 12.5% - 50px);
+    top: 10px;
+  }
+  .timeline-card[style*="--card-position: 1"] {
+    left: calc(var(--card-position) * 12.5% - 45px);
+    top: 260px;
+  }
+  .timeline-card[style*="--card-position: 2"] {
+    left: calc(var(--card-position) * 12.5% - 40px);
+    top: 10px;
+  }
+  .timeline-card[style*="--card-position: 3"] {
+    left: calc(var(--card-position) * 12.5% - 35px);
+    top: 260px;
+  }
+  .timeline-card[style*="--card-position: 4"] {
+    left: calc(var(--card-position) * 12.5% - 30px);
+    top: 10px;
+  }
+  .timeline-card[style*="--card-position: 5"] {
+    left: calc(var(--card-position) * 12.5% - 25px);
+    top: 260px;
+  }
+  .timeline-card[style*="--card-position: 6"] {
+    left: calc(var(--card-position) * 12.5% - 20px);
+    top: 10px;
+  }
+  .timeline-card[style*="--card-position: 7"] {
+    left: calc(var(--card-position) * 12.5% - 15px);
+    top: 260px;
+  }
+
+  /* TRAÇOS INDIVIDUAIS - 480px */
+  .card-connector[style*="--card-position: 0"] {
+    left: calc(var(--card-position) * 12.5% + 22px);
+    top: 140px;
+    height: 45px;
+  }
+  .card-connector[style*="--card-position: 1"] {
+    left: calc(var(--card-position) * 12.5% + 26px);
+    top: 210px;
+    height: 55px;
+  }
+  .card-connector[style*="--card-position: 2"] {
+    left: calc(var(--card-position) * 12.5% + 30px);
+    top: 140px;
+    height: 45px;
+  }
+  .card-connector[style*="--card-position: 3"] {
+    left: calc(var(--card-position) * 12.5% + 34px);
+    top: 210px;
+    height: 55px;
+  }
+  .card-connector[style*="--card-position: 4"] {
+    left: calc(var(--card-position) * 12.5% + 38px);
+    top: 140px;
+    height: 45px;
+  }
+  .card-connector[style*="--card-position: 5"] {
+    left: calc(var(--card-position) * 12.5% + 42px);
+    top: 210px;
+    height: 55px;
+  }
+  .card-connector[style*="--card-position: 6"] {
+    left: calc(var(--card-position) * 12.5% + 46px);
+    top: 140px;
+    height: 45px;
+  }
+  .card-connector[style*="--card-position: 7"] {
+    left: calc(var(--card-position) * 12.5% + 50px);
+    top: 210px;
+    height: 55px;
+  }
+}
+
+@media (max-width: 320px) {
+  /* CARDS INDIVIDUAIS - 320px */
+  .timeline-card[style*="--card-position: 0"] {
+    left: calc(var(--card-position) * 12.5% - 35px);
+    top: 15px;
+  }
+  .timeline-card[style*="--card-position: 1"] {
+    left: calc(var(--card-position) * 12.5% - 32px);
+    top: 220px;
+  }
+  .timeline-card[style*="--card-position: 2"] {
+    left: calc(var(--card-position) * 12.5% - 29px);
+    top: 15px;
+  }
+  .timeline-card[style*="--card-position: 3"] {
+    left: calc(var(--card-position) * 12.5% - 26px);
+    top: 220px;
+  }
+  .timeline-card[style*="--card-position: 4"] {
+    left: calc(var(--card-position) * 12.5% - 23px);
+    top: 15px;
+  }
+  .timeline-card[style*="--card-position: 5"] {
+    left: calc(var(--card-position) * 12.5% - 20px);
+    top: 220px;
+  }
+  .timeline-card[style*="--card-position: 6"] {
+    left: calc(var(--card-position) * 12.5% - 17px);
+    top: 15px;
+  }
+  .timeline-card[style*="--card-position: 7"] {
+    left: calc(var(--card-position) * 12.5% - 14px);
+    top: 220px;
+  }
+
+  /* TRAÇOS INDIVIDUAIS - 320px */
+  .card-connector[style*="--card-position: 0"] {
+    left: calc(var(--card-position) * 12.5% + 17px);
+    top: 115px;
+    height: 35px;
+  }
+  .card-connector[style*="--card-position: 1"] {
+    left: calc(var(--card-position) * 12.5% + 19px);
+    top: 170px;
+    height: 55px;
+  }
+  .card-connector[style*="--card-position: 2"] {
+    left: calc(var(--card-position) * 12.5% + 21px);
+    top: 115px;
+    height: 35px;
+  }
+  .card-connector[style*="--card-position: 3"] {
+    left: calc(var(--card-position) * 12.5% + 23px);
+    top: 170px;
+    height: 55px;
+  }
+  .card-connector[style*="--card-position: 4"] {
+    left: calc(var(--card-position) * 12.5% + 25px);
+    top: 115px;
+    height: 35px;
+  }
+  .card-connector[style*="--card-position: 5"] {
+    left: calc(var(--card-position) * 12.5% + 27px);
+    top: 170px;
+    height: 55px;
+  }
+  .card-connector[style*="--card-position: 6"] {
+    left: calc(var(--card-position) * 12.5% + 29px);
+    top: 115px;
+    height: 35px;
+  }
+  .card-connector[style*="--card-position: 7"] {
+    left: calc(var(--card-position) * 12.5% + 31px);
+    top: 170px;
+    height: 55px;
+  }
 }
 
 /* Nova Timeline Styles */
@@ -1537,6 +1693,12 @@ section {
   max-width: 1500px;
   margin: 150px auto 100px;
   padding: 60px 0;
+}
+
+.timeline-scroll-wrapper {
+  position: relative;
+  min-width: 100%;
+  width: 100%;
 }
 
 /* Linha horizontal estática */
@@ -1581,6 +1743,22 @@ section {
   box-shadow: 
     0 10px 30px rgba(174, 44, 42, 0.4),
     0 5px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.timeline-dot::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.timeline-dot:hover::before {
+  left: 100%;
 }
 
 .timeline-dot.active {
@@ -1886,6 +2064,31 @@ section {
   animation: dotPulse 2s ease-in-out infinite;
 }
 
+/* Melhorar aparência do scroll */
+.new-timeline-container {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #AE2C2A transparent;
+}
+
+.new-timeline-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.new-timeline-container::-webkit-scrollbar-track {
+  background: rgba(174, 44, 42, 0.1);
+  border-radius: 4px;
+}
+
+.new-timeline-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #AE2C2A, #D2342C);
+  border-radius: 4px;
+}
+
+.new-timeline-container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #D2342C, #FF4444);
+}
+
 /* CARD 1 (índice 0) */
 .timeline-card[style*="--card-position: 0"] {
   left: calc(var(--card-position) * 12.5% - 130px); /* Ajuste horizontal */
@@ -2003,6 +2206,29 @@ section {
   .new-timeline-container {
     margin: 80px auto;
     padding: 40px 20px;
+    overflow-x: auto;
+    cursor: grab;
+  }
+  
+  .new-timeline-container:active {
+    cursor: grabbing;
+  }
+  
+  .new-timeline-container::after {
+    content: "← Arraste para ver mais →";
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    color: #AE2C2A;
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  
+  .timeline-scroll-wrapper {
+    min-width: 800px;
+    width: 800px;
   }
 
   .timeline-dot {
@@ -2070,12 +2296,99 @@ section {
   .card-description {
     font-size: 0.9rem;
   }
+
+  /* CARDS INDIVIDUAIS - 992px */
+  .timeline-card[style*="--card-position: 0"] {
+    left: calc(var(--card-position) * 12.5% - 110px);
+    top: -20px;
+  }
+  .timeline-card[style*="--card-position: 1"] {
+    left: calc(var(--card-position) * 12.5% - 95px);
+    top: 440px;
+  }
+  .timeline-card[style*="--card-position: 2"] {
+    left: calc(var(--card-position) * 12.5% - 80px);
+    top: -20px;
+  }
+  .timeline-card[style*="--card-position: 3"] {
+    left: calc(var(--card-position) * 12.5% - 65px);
+    top: 440px;
+  }
+  .timeline-card[style*="--card-position: 4"] {
+    left: calc(var(--card-position) * 12.5% - 50px);
+    top: -20px;
+  }
+  .timeline-card[style*="--card-position: 5"] {
+    left: calc(var(--card-position) * 12.5% - 35px);
+    top: 440px;
+  }
+  .timeline-card[style*="--card-position: 6"] {
+    left: calc(var(--card-position) * 12.5% - 20px);
+    top: -20px;
+  }
+  .timeline-card[style*="--card-position: 7"] {
+    left: calc(var(--card-position) * 12.5% - 5px);
+    top: 440px;
+  }
+
+  /* TRAÇOS INDIVIDUAIS - 992px */
+  .card-connector[style*="--card-position: 0"] {
+    left: calc(var(--card-position) * 12.5% + 37px);
+    top: 220px;
+    height: 85px;
+  }
+  .card-connector[style*="--card-position: 1"] {
+    left: calc(var(--card-position) * 12.5% + 47px);
+    top: 350px;
+    height: 100px;
+  }
+  .card-connector[style*="--card-position: 2"] {
+    left: calc(var(--card-position) * 12.5% + 57px);
+    top: 220px;
+    height: 85px;
+  }
+  .card-connector[style*="--card-position: 3"] {
+    left: calc(var(--card-position) * 12.5% + 67px);
+    top: 350px;
+    height: 100px;
+  }
+  .card-connector[style*="--card-position: 4"] {
+    left: calc(var(--card-position) * 12.5% + 77px);
+    top: 220px;
+    height: 85px;
+  }
+  .card-connector[style*="--card-position: 5"] {
+    left: calc(var(--card-position) * 12.5% + 87px);
+    top: 350px;
+    height: 100px;
+  }
+  .card-connector[style*="--card-position: 6"] {
+    left: calc(var(--card-position) * 12.5% + 97px);
+    top: 220px;
+    height: 85px;
+  }
+  .card-connector[style*="--card-position: 7"] {
+    left: calc(var(--card-position) * 12.5% + 107px);
+    top: 350px;
+    height: 100px;
+  }
 }
 
 @media (max-width: 768px) {
   .new-timeline-container {
     margin: 60px auto;
     padding: 30px 15px;
+    overflow-x: auto;
+    cursor: grab;
+  }
+  
+  .new-timeline-container:active {
+    cursor: grabbing;
+  }
+  
+  .timeline-scroll-wrapper {
+    min-width: 700px;
+    width: 700px;
   }
 
   .timeline-dot {
@@ -2143,12 +2456,99 @@ section {
   .card-description {
     font-size: 0.85rem;
   }
+
+  /* CARDS INDIVIDUAIS - 768px */
+  .timeline-card[style*="--card-position: 0"] {
+    left: calc(var(--card-position) * 12.5% - 85px);
+    top: -10px;
+  }
+  .timeline-card[style*="--card-position: 1"] {
+    left: calc(var(--card-position) * 12.5% - 75px);
+    top: 360px;
+  }
+  .timeline-card[style*="--card-position: 2"] {
+    left: calc(var(--card-position) * 12.5% - 65px);
+    top: -10px;
+  }
+  .timeline-card[style*="--card-position: 3"] {
+    left: calc(var(--card-position) * 12.5% - 55px);
+    top: 360px;
+  }
+  .timeline-card[style*="--card-position: 4"] {
+    left: calc(var(--card-position) * 12.5% - 45px);
+    top: -10px;
+  }
+  .timeline-card[style*="--card-position: 5"] {
+    left: calc(var(--card-position) * 12.5% - 35px);
+    top: 360px;
+  }
+  .timeline-card[style*="--card-position: 6"] {
+    left: calc(var(--card-position) * 12.5% - 25px);
+    top: -10px;
+  }
+  .timeline-card[style*="--card-position: 7"] {
+    left: calc(var(--card-position) * 12.5% - 15px);
+    top: 360px;
+  }
+
+  /* TRAÇOS INDIVIDUAIS - 768px */
+  .card-connector[style*="--card-position: 0"] {
+    left: calc(var(--card-position) * 12.5% + 32px);
+    top: 190px;
+    height: 70px;
+  }
+  .card-connector[style*="--card-position: 1"] {
+    left: calc(var(--card-position) * 12.5% + 40px);
+    top: 300px;
+    height: 70px;
+  }
+  .card-connector[style*="--card-position: 2"] {
+    left: calc(var(--card-position) * 12.5% + 47px);
+    top: 190px;
+    height: 70px;
+  }
+  .card-connector[style*="--card-position: 3"] {
+    left: calc(var(--card-position) * 12.5% + 55px);
+    top: 300px;
+    height: 70px;
+  }
+  .card-connector[style*="--card-position: 4"] {
+    left: calc(var(--card-position) * 12.5% + 62px);
+    top: 190px;
+    height: 70px;
+  }
+  .card-connector[style*="--card-position: 5"] {
+    left: calc(var(--card-position) * 12.5% + 70px);
+    top: 300px;
+    height: 70px;
+  }
+  .card-connector[style*="--card-position: 6"] {
+    left: calc(var(--card-position) * 12.5% + 77px);
+    top: 190px;
+    height: 70px;
+  }
+  .card-connector[style*="--card-position: 7"] {
+    left: calc(var(--card-position) * 12.5% + 85px);
+    top: 300px;
+    height: 70px;
+  }
 }
 
 @media (max-width: 576px) {
   .new-timeline-container {
     margin: 40px auto;
     padding: 20px 10px;
+    overflow-x: auto;
+    cursor: grab;
+  }
+  
+  .new-timeline-container:active {
+    cursor: grabbing;
+  }
+  
+  .timeline-scroll-wrapper {
+    min-width: 600px;
+    width: 600px;
   }
 
   .timeline-dot {
@@ -2216,6 +2616,206 @@ section {
 
   .card-description {
     font-size: 0.8rem;
+  }
+
+  /* CARDS INDIVIDUAIS - 576px */
+  .timeline-card[style*="--card-position: 0"] {
+    left: calc(var(--card-position) * 12.5% - 65px);
+    top: 0px;
+  }
+  .timeline-card[style*="--card-position: 1"] {
+    left: calc(var(--card-position) * 12.5% - 58px);
+    top: 300px;
+  }
+  .timeline-card[style*="--card-position: 2"] {
+    left: calc(var(--card-position) * 12.5% - 50px);
+    top: 0px;
+  }
+  .timeline-card[style*="--card-position: 3"] {
+    left: calc(var(--card-position) * 12.5% - 43px);
+    top: 300px;
+  }
+  .timeline-card[style*="--card-position: 4"] {
+    left: calc(var(--card-position) * 12.5% - 35px);
+    top: 0px;
+  }
+  .timeline-card[style*="--card-position: 5"] {
+    left: calc(var(--card-position) * 12.5% - 28px);
+    top: 300px;
+  }
+  .timeline-card[style*="--card-position: 6"] {
+    left: calc(var(--card-position) * 12.5% - 20px);
+    top: 0px;
+  }
+  .timeline-card[style*="--card-position: 7"] {
+    left: calc(var(--card-position) * 12.5% - 13px);
+    top: 300px;
+  }
+
+  /* TRAÇOS INDIVIDUAIS - 576px */
+  .card-connector[style*="--card-position: 0"] {
+    left: calc(var(--card-position) * 12.5% + 27px);
+    top: 160px;
+    height: 55px;
+  }
+  .card-connector[style*="--card-position: 1"] {
+    left: calc(var(--card-position) * 12.5% + 33px);
+    top: 250px;
+    height: 60px;
+  }
+  .card-connector[style*="--card-position: 2"] {
+    left: calc(var(--card-position) * 12.5% + 38px);
+    top: 160px;
+    height: 55px;
+  }
+  .card-connector[style*="--card-position: 3"] {
+    left: calc(var(--card-position) * 12.5% + 44px);
+    top: 250px;
+    height: 60px;
+  }
+  .card-connector[style*="--card-position: 4"] {
+    left: calc(var(--card-position) * 12.5% + 49px);
+    top: 160px;
+    height: 55px;
+  }
+  .card-connector[style*="--card-position: 5"] {
+    left: calc(var(--card-position) * 12.5% + 55px);
+    top: 250px;
+    height: 60px;
+  }
+  .card-connector[style*="--card-position: 6"] {
+    left: calc(var(--card-position) * 12.5% + 60px);
+    top: 160px;
+    height: 55px;
+  }
+  .card-connector[style*="--card-position: 7"] {
+    left: calc(var(--card-position) * 12.5% + 66px);
+    top: 250px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .new-timeline-container {
+    margin: 30px auto;
+    padding: 15px 5px;
+    overflow-x: auto;
+    cursor: grab;
+  }
+  
+  .new-timeline-container:active {
+    cursor: grabbing;
+  }
+  
+  .timeline-scroll-wrapper {
+    min-width: 500px;
+    width: 500px;
+  }
+
+  .timeline-dot {
+    width: 35px;
+    height: 35px;
+    border: 2px solid #ffffff;
+  }
+
+  .dot-year {
+    font-size: 0.5rem;
+  }
+
+  .timeline-dot.active .dot-year {
+    font-size: 0.6rem;
+  }
+
+  .timeline-card-container {
+    margin-top: -30px;
+    min-height: 320px;
+  }
+
+  .timeline-card {
+    width: 180px;
+    min-height: 160px;
+  }
+
+  .card-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+    margin: 8px 8px 0 8px;
+  }
+
+  .card-content {
+    padding: 6px 8px 8px 8px;
+  }
+
+  .card-title {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+  }
+
+  .card-description {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .new-timeline-container {
+    margin: 20px auto;
+    padding: 10px 2px;
+    overflow-x: auto;
+    cursor: grab;
+  }
+  
+  .new-timeline-container:active {
+    cursor: grabbing;
+  }
+  
+  .timeline-scroll-wrapper {
+    min-width: 400px;
+    width: 400px;
+  }
+
+  .timeline-dot {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #ffffff;
+  }
+
+  .dot-year {
+    font-size: 0.45rem;
+  }
+
+  .timeline-dot.active .dot-year {
+    font-size: 0.5rem;
+  }
+
+  .timeline-card-container {
+    margin-top: -20px;
+    min-height: 280px;
+  }
+
+  .timeline-card {
+    width: 160px;
+    min-height: 140px;
+  }
+
+  .card-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 0.9rem;
+    margin: 6px 6px 0 6px;
+  }
+
+  .card-content {
+    padding: 4px 6px 6px 6px;
+  }
+
+  .card-title {
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+  }
+
+  .card-description {
+    font-size: 0.6rem;
   }
 }
 
