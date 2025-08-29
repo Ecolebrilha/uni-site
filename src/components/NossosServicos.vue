@@ -6,13 +6,13 @@
     <section class="hero-section">
       <div class="parallax-container">
         <div class="overlay"></div>
-        <h1 class="hero-title">{{ t('services.heroTitle') }}</h1>
-        <div class="hero-subtitle">{{ t('services.heroSubtitle') }}</div>
+        <h1 class="hero-title" v-html="t('services.heroTitle')"></h1>
+        <!-- <div class="hero-subtitle">{{ t('services.heroSubtitle') }}</div> -->
       </div>
     </section>
 
     <!-- Seção de Introdução -->
-    <section class="intro-section">
+    <!-- <section class="intro-section">
       <div class="container">
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-title">
@@ -25,7 +25,7 @@
           </p>
         </ScrollReveal>
       </div>
-    </section>
+    </section> -->
 
     <!-- Seção Principal de Serviços -->
     <section class="services-main">
@@ -37,7 +37,7 @@
             </div>
             <div class="service-content">
               <h3>{{ t('services.mainServiceTitle') }}</h3>
-              <p>{{ t('services.mainServiceText') }}</p>
+              <p v-html="t('services.mainServiceText')"></p>
             </div>
           </div>
         </ScrollReveal>
@@ -50,7 +50,7 @@
               </div>
               <div class="service-content">
                 <h3>{{ t('services.privateSegmentTitle') }}</h3>
-                <p>{{ t('services.privateSegmentText') }}</p>
+                <p v-html="t('services.privateSegmentText')"></p>
                 <ul class="service-features">
                   <li>{{ t('services.privateFeatures.feature1') }}</li>
                   <li>{{ t('services.privateFeatures.feature2') }}</li>
@@ -68,7 +68,7 @@
               </div>
               <div class="service-content">
                 <h3>{{ t('services.publicSegmentTitle') }}</h3>
-                <p>{{ t('services.publicSegmentText') }}</p>
+                <p v-html="t('services.publicSegmentText')"></p>
                 <ul class="service-features">
                   <li>{{ t('services.publicFeatures.feature1') }}</li>
                   <li>{{ t('services.publicFeatures.feature2') }}</li>
@@ -144,10 +144,10 @@
         <ScrollReveal direction="bottom" :delay="200">
           <div class="section-title">
             <span class="accent-line"></span>
-            <h2>Benefícios dos Nossos Serviços</h2>
+            <h2>{{ t('services.benefitsTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
-          <p class="section-subtitle">Descubra as vantagens que oferecemos para impulsionar seu sucesso</p>
+          <!-- <p class="section-subtitle">Descubra as vantagens que oferecemos para impulsionar seu sucesso</p> -->
         </ScrollReveal>
 
         <div class="benefits-balloons">
@@ -165,7 +165,7 @@
           </ScrollReveal>
 
           <ScrollReveal direction="right" :delay="400">
-            <div class="benefit-balloon reverse">
+            <div class="benefit-balloon">
               <div class="balloon-content two">
                 <h4>{{ t('services.processSteps.step2.title') }}</h4>
                 <p>{{ t('services.processSteps.step2.description') }}</p>
@@ -173,7 +173,7 @@
               <div class="balloon-icon">
                 <i class="fas fa-truck-fast"></i>
               </div>
-              <div class="balloon-tail reverse"></div>
+              <div class="balloon-tail tail-left"></div>
             </div>
           </ScrollReveal>
 
@@ -191,15 +191,15 @@
           </ScrollReveal>
 
           <ScrollReveal direction="right" :delay="600">
-            <div class="benefit-balloon reverse">
-              <div class="balloon-content">
+            <div class="benefit-balloon">
+              <div class="balloon-content two">
                 <h4>{{ t('services.processSteps.step4.title') }}</h4>
                 <p>{{ t('services.processSteps.step4.description') }}</p>
               </div>
               <div class="balloon-icon">
                 <i class="fas fa-user-check"></i>
               </div>
-              <div class="balloon-tail reverse"></div>
+              <div class="balloon-tail tail-left"></div>
             </div>
           </ScrollReveal>
 
@@ -342,6 +342,7 @@ section {
   position: relative;
   z-index: 2;
   text-transform: uppercase;
+  line-height: 1.1;
   letter-spacing: 2px;
   animation: fadeInUp 1.5s ease-out;
 }
@@ -633,7 +634,7 @@ section {
 
 /* Seção de Benefícios dos Nossos Serviços */
 .benefits-section {
-  background: 
+  background:
     linear-gradient(135deg, #f1f3f6 0%, #ffffff 25%, #f8fafc 50%, #ffffff 75%, #f1f3f6 100%),
     radial-gradient(circle at 25% 25%, rgba(174, 44, 42, 0.04) 0%, transparent 60%),
     radial-gradient(circle at 75% 75%, rgba(174, 44, 42, 0.03) 0%, transparent 60%);
@@ -649,7 +650,7 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background: 
+  background:
     url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ae2c2a' fill-opacity='0.02'%3E%3Cpath d='M20 20c11.046 0 20-8.954 20-20s-8.954-20-20-20-20 8.954-20 20 8.954 20 20 20zm80 40c11.046 0 20-8.954 20-20s-8.954-20-20-20-20 8.954-20 20 8.954 20 20 20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   z-index: 0;
 }
@@ -700,7 +701,7 @@ section {
   color: white;
   font-size: 3rem;
   flex-shrink: 0;
-  box-shadow: 
+  box-shadow:
     0 20px 50px rgba(174, 44, 42, 0.4),
     0 10px 25px rgba(0, 0, 0, 0.1),
     inset 0 3px 6px rgba(255, 255, 255, 0.3);
@@ -726,20 +727,20 @@ section {
 
 .benefit-balloon:hover .balloon-icon {
   transform: scale(1.1);
-  box-shadow: 
+  box-shadow:
     0 25px 60px rgba(174, 44, 42, 0.5),
     0 15px 35px rgba(0, 0, 0, 0.15),
     inset 0 4px 8px rgba(255, 255, 255, 0.4);
 }
 
 .balloon-content {
-  background: 
+  background:
     linear-gradient(145deg, #ffffff 0%, #fafbfc 30%, #ffffff 70%, #f8fafc 100%),
     radial-gradient(circle at 80% 20%, rgba(174, 44, 42, 0.02) 0%, transparent 50%);
   border-radius: 35px;
   padding: 40px 45px;
   flex: 1;
-  box-shadow: 
+  box-shadow:
     0 25px 70px rgba(0, 0, 0, 0.12),
     0 15px 35px rgba(174, 44, 42, 0.08),
     0 8px 20px rgba(0, 0, 0, 0.06),
@@ -770,7 +771,7 @@ section {
 
 .benefit-balloon:hover .balloon-content {
   transform: translateY(-10px) scale(1.02);
-  box-shadow: 
+  box-shadow:
     0 35px 90px rgba(0, 0, 0, 0.15),
     0 20px 50px rgba(174, 44, 42, 0.12),
     0 12px 30px rgba(0, 0, 0, 0.08),
@@ -786,6 +787,7 @@ section {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin-top: 10px;
   margin-bottom: 20px;
   position: relative;
   z-index: 2;
@@ -805,13 +807,20 @@ section {
   position: absolute;
   width: 30px;
   height: 30px;
-  background: 
-    linear-gradient(145deg, #ffffff 0%, #fafbfc 50%, #ffffff 100%);
+  background: linear-gradient(145deg, #ffffff 0%, #fafbfc 50%, #ffffff 100%);
   transform: rotate(45deg);
-  box-shadow: 
+  box-shadow:
     -5px -5px 15px rgba(174, 44, 42, 0.08),
     5px 5px 15px rgba(0, 0, 0, 0.06);
   z-index: 0;
+  right: -15px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.balloon-tail.tail-left {
+  left: -15px;
+  right: auto;
 }
 
 .benefit-balloon .balloon-tail {
@@ -822,6 +831,7 @@ section {
 
 .benefit-balloon.reverse .balloon-tail {
   left: -15px;
+  right: auto;
   top: 50%;
   transform: translateY(-50%) rotate(45deg);
 }
@@ -1138,19 +1148,21 @@ section {
 
 @keyframes balloonPulse {
   0% {
-    box-shadow: 
+    box-shadow:
       0 20px 50px rgba(174, 44, 42, 0.4),
       0 10px 25px rgba(0, 0, 0, 0.1),
       inset 0 3px 6px rgba(255, 255, 255, 0.3);
   }
+
   50% {
-    box-shadow: 
+    box-shadow:
       0 25px 60px rgba(174, 44, 42, 0.5),
       0 15px 35px rgba(0, 0, 0, 0.15),
       inset 0 4px 8px rgba(255, 255, 255, 0.4);
   }
+
   100% {
-    box-shadow: 
+    box-shadow:
       0 20px 50px rgba(174, 44, 42, 0.4),
       0 10px 25px rgba(0, 0, 0, 0.1),
       inset 0 3px 6px rgba(255, 255, 255, 0.3);

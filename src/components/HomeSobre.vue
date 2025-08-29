@@ -58,51 +58,61 @@
         </ScrollReveal>
         
         <ScrollReveal direction="bottom" :delay="300">
-          <div class="timeline-container" ref="timelineContainer">
-            <div class="timeline-track" ref="timelineTrack">
-              <!-- Timeline duplicada para loop contínuo -->
-              <div class="timeline-content">
-                <div v-for="(milestone, index) in timelineMilestones" :key="`original-${index}`" 
-                     class="timeline-item" 
-                     :class="{ 'top': index % 2 === 0, 'bottom': index % 2 !== 0 }">
-                  <div class="milestone-number">{{ String(index + 1).padStart(2, '0') }}</div>
-                  <div class="milestone-card" 
-                       @mouseenter="pauseAnimation" 
-                       @mouseleave="resumeAnimation">
-                    <div class="milestone-icon" :style="{ backgroundColor: milestone.color }">
-                      <i :class="milestone.icon"></i>
-                    </div>
-                    <div class="milestone-content">
-                      <div class="milestone-year">{{ milestone.year }}</div>
-                      <div class="milestone-title">{{ milestone.title }}</div>
-                      <div class="milestone-description">{{ milestone.description }}</div>
-                    </div>
-                  </div>
-                  <div class="milestone-connector" :class="{ 'top': index % 2 === 0, 'bottom': index % 2 !== 0 }"></div>
-                  <div class="milestone-line"></div>
-                </div>
+          <div class="new-timeline-container">
+            <!-- Linha da timeline estática -->
+            <div class="timeline-line"></div>
+            
+            <!-- Bolinhas da timeline com anos -->
+            <div class="timeline-dots">
+              <div 
+                v-for="(milestone, index) in timelineMilestones" 
+                :key="index"
+                class="timeline-dot"
+                :class="{ 'active': currentActiveCard === index }"
+                @mouseenter="handleDotHover(index)"
+                @mouseleave="handleDotLeave">
+                <span class="dot-year">{{ milestone.year }}</span>
               </div>
-              
-              <!-- Duplicação para loop -->
-              <div class="timeline-content">
-                <div v-for="(milestone, index) in timelineMilestones" :key="`duplicate-${index}`" 
-                     class="timeline-item" 
-                     :class="{ 'top': index % 2 === 0, 'bottom': index % 2 !== 0 }">
-                  <div class="milestone-number">{{ String(index + 1).padStart(2, '0') }}</div>
-                  <div class="milestone-card" 
-                       @mouseenter="pauseAnimation" 
-                       @mouseleave="resumeAnimation">
-                    <div class="milestone-icon" :style="{ backgroundColor: milestone.color }">
-                      <i :class="milestone.icon"></i>
-                    </div>
-                    <div class="milestone-content">
-                      <div class="milestone-year">{{ milestone.year }}</div>
-                      <div class="milestone-title">{{ milestone.title }}</div>
-                      <div class="milestone-description">{{ milestone.description }}</div>
-                    </div>
-                  </div>
-                  <div class="milestone-connector" :class="{ 'top': index % 2 === 0, 'bottom': index % 2 !== 0 }"></div>
-                  <div class="milestone-line"></div>
+            </div>
+            
+            <!-- Cards e linhas conectoras -->
+            <div class="timeline-card-container">
+              <!-- Linhas conectoras -->
+              <div 
+                v-for="(milestone, index) in timelineMilestones" 
+                :key="`connector-${index}`"
+                class="card-connector"
+                :class="{ 
+                  'active': currentActiveCard === index,
+                  'entering': enteringCard === index,
+                  'exiting': exitingCard === index,
+                  'top': index % 2 === 0,
+                  'bottom': index % 2 !== 0
+                }"
+                :style="{ '--card-position': index }"
+                v-show="currentActiveCard === index || enteringCard === index || exitingCard === index">
+              </div>
+
+              <!-- Cards -->
+              <div 
+                v-for="(milestone, index) in timelineMilestones" 
+                :key="index"
+                class="timeline-card"
+                :class="{ 
+                  'active': currentActiveCard === index,
+                  'entering': enteringCard === index,
+                  'exiting': exitingCard === index,
+                  'top': index % 2 === 0,
+                  'bottom': index % 2 !== 0
+                }"
+                :style="{ '--card-position': index }"
+                v-show="currentActiveCard === index || enteringCard === index || exitingCard === index">
+                <div class="card-icon" :style="{ backgroundColor: milestone.color }">
+                  <i :class="milestone.icon"></i>
+                </div>
+                <div class="card-content">
+                  <div class="card-title">{{ milestone.title }}</div>
+                  <div class="card-description">{{ milestone.description }}</div>
                 </div>
               </div>
             </div>
@@ -146,7 +156,7 @@
               </div>
               <h3>{{ t('about.valuesTitle') }}</h3>
               <p>{{ t('about.valuesText') }}</p>
-              <div class="values-container">
+              <!-- <div class="values-container">
                 <ScrollReveal v-for="(valor, index) in t('about.values')" :key="index" direction="fade"
                   :delay="600 + (index * 100)" customClass="value-tag">
                   <span class="value-pill">
@@ -154,7 +164,7 @@
                     {{ valor }}
                   </span>
                 </ScrollReveal>
-              </div>
+              </div> -->
             </div>
           </ScrollReveal>
         </div>
@@ -290,6 +300,11 @@ export default {
       companyAnniversary: { month: 7, day: 11 }, // 11 de julho
       statsAnimated: false, // Flag para controlar se as animações já foram executadas
       timelineAnimation: null,
+      currentActiveCard: 0,
+      enteringCard: null,
+      exitingCard: null,
+      autoRotationInterval: null,
+      isHovering: false,
       timelineMilestones: [
         {
           year: '2005',
@@ -390,13 +405,17 @@ export default {
   mounted() {
     // Observar quando a seção de estatísticas fica visível
     this.observeStatsSection();
-    // Iniciar animação da timeline
-    this.startTimelineAnimation();
+    // Iniciar rotação automática da timeline
+    this.startAutoRotation();
   },
   beforeUnmount() {
     // Limpar animação da timeline
     if (this.timelineAnimation) {
       this.timelineAnimation.cancel();
+    }
+    // Limpar intervalo de rotação automática
+    if (this.autoRotationInterval) {
+      clearInterval(this.autoRotationInterval);
     }
   },
   methods: {
@@ -481,42 +500,55 @@ export default {
       requestAnimationFrame(animate);
     },
     
-    startTimelineAnimation() {
-      this.$nextTick(() => {
-        const track = this.$refs.timelineTrack;
-        if (!track) return;
-        
-        // Calcular a largura total do conteúdo
-        const contentWidth = track.scrollWidth / 2; // Dividido por 2 porque temos conteúdo duplicado
-        
-        // Animação contínua mais lenta e suave
-        this.timelineAnimation = track.animate([
-          { 
-            transform: 'translateX(0px)',
-            opacity: 1
-          },
-          { 
-            transform: `translateX(-${contentWidth}px)`,
-            opacity: 1
-          }
-        ], {
-          duration: 80000, // 80 segundos para completar o ciclo (mais lento)
-          iterations: Infinity,
-          easing: 'cubic-bezier(0.4, 0, 0.6, 1)' // Easing mais suave
-        });
-      });
+    startAutoRotation() {
+      this.autoRotationInterval = setInterval(() => {
+        if (!this.isHovering) {
+          this.nextCard();
+        }
+      }, 10000); // 10 segundos
     },
     
-    pauseAnimation() {
-      if (this.timelineAnimation) {
-        this.timelineAnimation.pause();
-      }
+    nextCard() {
+      const nextIndex = (this.currentActiveCard + 1) % this.timelineMilestones.length;
+      
+      // Para rotação automática, usar delay de 2 segundos
+      this.exitingCard = this.currentActiveCard;
+      this.enteringCard = null;
+      
+      setTimeout(() => {
+        this.exitingCard = null;
+        setTimeout(() => {
+          this.enteringCard = nextIndex;
+          setTimeout(() => {
+            this.currentActiveCard = nextIndex;
+            this.enteringCard = null;
+          }, 400);
+        }, 1500);
+      }, 300);
     },
     
-    resumeAnimation() {
-      if (this.timelineAnimation) {
-        this.timelineAnimation.play();
-      }
+    setActiveCard(index) {
+      if (this.currentActiveCard === index) return;
+      
+      // Transição imediata para hover
+      this.currentActiveCard = index;
+    },
+    
+    handleDotHover(index) {
+      this.isHovering = true;
+      this.setActiveCard(index);
+    },
+    
+    handleDotLeave() {
+      this.isHovering = false;
+    },
+    
+    resumeAutoRotation() {
+      this.isHovering = false;
+    },
+    
+    pauseAutoRotation() {
+      this.isHovering = true;
     }
   }
 }
@@ -1470,16 +1502,12 @@ section {
   }
 }
 
-/* Seção Timeline */
+/* Nova Timeline Styles */
 .timeline-section {
-  background: 
-    linear-gradient(135deg, #f1f3f6 0%, #ffffff 25%, #f8fafc 50%, #ffffff 75%, #f1f3f6 100%),
-    radial-gradient(circle at 20% 80%, rgba(174, 44, 42, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(174, 44, 42, 0.02) 0%, transparent 50%);
   position: relative;
-  padding: 80px 0 150px 0;
+  padding: 150px 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%);
   overflow: hidden;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ae2c2a' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
 }
 
 .timeline-section::before {
@@ -1487,155 +1515,270 @@ section {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
-    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ae2c2a' fill-opacity='0.015'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  opacity: 0.6;
-}
-
-.timeline-section::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
-    radial-gradient(circle at 30% 30%, rgba(174, 44, 42, 0.02) 0%, transparent 60%),
-    radial-gradient(circle at 70% 70%, rgba(174, 44, 42, 0.015) 0%, transparent 60%);
-  z-index: 0;
-}
-
-.timeline-container {
-  position: relative;
-  width: 100%;
-  height: 1050px;
-  overflow: hidden;
-  z-index: 1;
-  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 20%, #ffffff 40%, #f5f7fa 60%, #ffffff 80%, #f8fafc 100%),
-    radial-gradient(circle at 30% 30%, rgba(174, 44, 42, 0.02) 0%, transparent 40%),
-    radial-gradient(circle at 70% 70%, rgba(174, 44, 42, 0.015) 0%, transparent 40%);
-  border-radius: 40px;
-  box-shadow: 
-    0 40px 100px rgba(0, 0, 0, 0.15),
-    0 20px 50px rgba(174, 44, 42, 0.1),
-    0 10px 25px rgba(0, 0, 0, 0.08),
-    inset 0 2px 0 rgba(255, 255, 255, 0.9),
-    inset 0 -2px 0 rgba(174, 44, 42, 0.05);
-  border: 4px solid transparent;
-  background-clip: padding-box;
-}
-
-.timeline-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 40px;
-  padding: 4px;
-  background: linear-gradient(135deg, #AE2C2A, #ff6b6b, #AE2C2A, #D2342C);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  -webkit-mask-composite: xor;
-  z-index: 5;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(174, 44, 42, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(174, 44, 42, 0.02) 0%, transparent 50%),
+    linear-gradient(45deg, transparent 49%, rgba(174, 44, 42, 0.02) 50%, transparent 51%);
+  pointer-events: none;
 }
 
-.timeline-track {
+.new-timeline-container {
   position: relative;
-  height: 100%;
-  display: flex;
-  align-items: center;
+  height: 60vh;
+  max-width: 1500px;
+  margin: 100px 100px 0px 0px auto;
+  padding: 60px 0;
 }
 
-.timeline-content {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  flex-shrink: 0;
-}
-
-.timeline-item {
-  position: relative;
-  min-width: 500px;
-  padding: 0 80px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-}
-
-.timeline-item.top {
-  justify-content: flex-start;
-  padding-top: 80px;
-  padding-bottom: 0;
-}
-
-.timeline-item.bottom {
-  justify-content: flex-end;
-  padding-bottom: 80px;
-  padding-top: 0;
-  flex-direction: column-reverse;
-}
-
-/* Deslocamento vertical adicional usando translateY */
-.timeline-item.top .milestone-card {
-  transform: translateY(20px);
-}
-
-.timeline-item.bottom .milestone-card {
-  transform: translateY(660px);
-}
-
-.milestone-number {
+/* Linha horizontal estática */
+.timeline-line {
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60px;
-  height: 60px;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #AE2C2A, #D2342C, #AE2C2A);
+  transform: translateY(-50%);
+  border-radius: 3px;
+  box-shadow: 0 3px 10px rgba(174, 44, 42, 0.3);
+  z-index: 1;
+}
+
+/* Container das bolinhas */
+.timeline-dots {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+/* Bolinhas da timeline */
+.timeline-dot {
+  position: relative;
+  width: 70px;
+  height: 70px;
   background: linear-gradient(135deg, #AE2C2A, #D2342C);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-size: 1.4rem;
-  font-weight: 800;
-  border: 8px solid #ffffff;
+  border: 6px solid #ffffff;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 
     0 10px 30px rgba(174, 44, 42, 0.4),
     0 5px 15px rgba(0, 0, 0, 0.1);
-  z-index: 10;
 }
 
-.milestone-card {
-  background: linear-gradient(145deg, #ffffff 0%, #fafbfc 30%, #ffffff 60%, #f8fafc 100%),
-  radial-gradient(circle at 80% 20%, rgba(174, 44, 42, 0.02) 0%, transparent 50%);
-  border-radius: 30px;
+.timeline-dot.active {
+  transform: scale(1.3);
+  box-shadow: 
+    0 15px 40px rgba(174, 44, 42, 0.6),
+    0 8px 25px rgba(0, 0, 0, 0.15);
+  border-width: 8px;
+}
+
+.timeline-dot:hover {
+  transform: scale(1.2);
+  box-shadow: 
+    0 12px 35px rgba(174, 44, 42, 0.5),
+    0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.dot-year {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.timeline-dot.active .dot-year {
+  font-size: 1rem;
+}
+
+/* Container dos cards e conectores */
+.timeline-card-container {
+  position: relative;
+  min-height: 750px;
+  margin-top: -100px;
+  pointer-events: none;
+}
+
+/* Linha conectora entre card e bolinha */
+.card-connector {
+  position: absolute;
+  width: 3px;
+  background: linear-gradient(180deg, #AE2C2A, #D2342C);
+  border-radius: 2px;
+  opacity: 0;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(174, 44, 42, 0.3);
+  z-index: 5;
+  left: calc(var(--card-position) * 12.5% + 33px);
+}
+
+.card-connector.top {
+  top: 250px;
+  height: 100px;
+}
+
+.card-connector.bottom {
+  top: 100px;
+  height: 300px;
+}
+
+.card-connector.active,
+.card-connector.entering {
+  opacity: 1;
+}
+
+/* Card da timeline */
+.timeline-card {
+  position: absolute;
+  background: linear-gradient(145deg, #ffffff 0%, #fafbfc 30%, #ffffff 60%, #f8fafc 100%);
+  border-radius: 20px;
   padding: 0;
   text-align: left;
-  min-width: 380px;
-  max-width: 420px;
+  width: 320px;
+  min-height: 280px;
   box-shadow: 
-  0 30px 80px rgba(0, 0, 0, 0.12),
-    0 15px 40px rgba(174, 44, 42, 0.08),
-    0 8px 20px rgba(0, 0, 0, 0.06),
+    0 20px 60px rgba(0, 0, 0, 0.12),
+    0 10px 30px rgba(174, 44, 42, 0.08),
+    0 5px 15px rgba(0, 0, 0, 0.06),
     inset 0 2px 0 rgba(255, 255, 255, 0.95),
     inset 0 -1px 0 rgba(174, 44, 42, 0.03);
-    border: 3px solid rgba(174, 44, 42, 0.08);
+  border: 2px solid rgba(174, 44, 42, 0.08);
   background-clip: padding-box;
   backdrop-filter: blur(10px);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
+  opacity: 0;
+  transform: translateY(30px) scale(0.8);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
-  cursor: pointer;
-  z-index: 4;
+  pointer-events: auto;
+  left: calc(var(--card-position) * 12.5% - 130px);
 }
 
-.milestone-card::before {
+.timeline-card.top {
+  top: -50px;
+}
+
+.timeline-card.bottom {
+  top: 500px;
+}
+
+.timeline-card.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Animações para cards acima */
+@keyframes cardEnterTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.8);
+    filter: blur(4px);
+  }
+  30% {
+    opacity: 0.3;
+    transform: translateY(-15px) scale(0.9);
+    filter: blur(2px);
+  }
+  70% {
+    opacity: 0.8;
+    transform: translateY(-3px) scale(1.02);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+@keyframes cardExitTop {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+  30% {
+    opacity: 0.7;
+    transform: translateY(-8px) scale(0.95);
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-25px) scale(0.8);
+    filter: blur(3px);
+  }
+}
+
+/* Animações para cards abaixo */
+@keyframes cardEnterBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.8);
+    filter: blur(4px);
+  }
+  30% {
+    opacity: 0.3;
+    transform: translateY(15px) scale(0.9);
+    filter: blur(2px);
+  }
+  70% {
+    opacity: 0.8;
+    transform: translateY(3px) scale(1.02);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+@keyframes cardExitBottom {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+  30% {
+    opacity: 0.7;
+    transform: translateY(8px) scale(0.95);
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(25px) scale(0.8);
+    filter: blur(3px);
+  }
+}
+
+.timeline-card.top.entering {
+  animation: cardEnterTop 0.6s ease-out forwards;
+}
+
+.timeline-card.top.exiting {
+  animation: cardExitTop 0.3s ease-in forwards;
+}
+
+.timeline-card.bottom.entering {
+  animation: cardEnterBottom 0.6s ease-out forwards;
+}
+
+.timeline-card.bottom.exiting {
+  animation: cardExitBottom 0.3s ease-in forwards;
+}
+
+/* Efeito shine no card */
+.timeline-card::before {
   content: '';
   position: absolute;
   top: 0;
@@ -1652,43 +1795,30 @@ section {
   z-index: 1;
 }
 
-.milestone-card:hover::before {
+.timeline-card.active::before {
   left: 100%;
 }
 
-.milestone-card:hover .milestone-icon::before {
-  left: 100%;
-}
-
-.milestone-card:hover {
-  transform: translateY(-15px) scale(1.03);
-  box-shadow: 
-    0 40px 100px rgba(0, 0, 0, 0.18),
-    0 25px 60px rgba(174, 44, 42, 0.12),
-    0 15px 30px rgba(0, 0, 0, 0.08),
-    inset 0 3px 0 rgba(255, 255, 255, 1),
-    inset 0 -2px 0 rgba(174, 44, 42, 0.05);
-  border-color: rgba(174, 44, 42, 0.2);
-}
-
-.milestone-icon {
-  width: 90px;
-  height: 90px;
-  border-radius: 25px;
+/* Conteúdo do card */
+.card-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 2.5rem;
-  margin: 35px 35px 0 35px;
-  box-shadow:     0 15px 35px rgba(0, 0, 0, 0.2),
+  font-size: 1.8rem;
+  margin: 20px 20px 0 20px;
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.15),
     inset 0 2px 4px rgba(255, 255, 255, 0.3);
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
 }
 
-.milestone-icon::before {
+.card-icon::before {
   content: '';
   position: absolute;
   top: 0;
@@ -1699,327 +1829,385 @@ section {
   transition: left 0.6s ease;
 }
 
-.milestone-content {
-  padding: 25px 35px 35px 35px;
+.timeline-card.active .card-icon::before {
+  left: 100%;
+}
+
+.card-content {
+  padding: 15px 20px 20px 20px;
   position: relative;
   z-index: 2;
 }
 
-.milestone-year {
-  font-size: 2.5rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #AE2C2A, #D2342C);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 15px;
-  text-shadow: 1px 1px 3px rgba(174, 44, 42, 0.1);
-  line-height: 1;
-}
-
-.milestone-title {
-  font-size: 1.5rem;
+.card-title {
+  font-size: 1.3rem;
   font-weight: 700;
   color: #2c3e50;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
   line-height: 1.3;
 }
 
-.milestone-description {
-  font-size: 1rem;
+.card-description {
+  font-size: 0.95rem;
   color: #696969;
-  line-height: 1.6;
+  line-height: 1.5;
   margin: 0;
 }
 
-.milestone-line {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 6px;
-  background: linear-gradient(90deg, #AE2C2A, #D2342C, #AE2C2A);
-  z-index: 1;
-  box-shadow: 0 2px 8px rgba(174, 44, 42, 0.2);
-}
-
-.timeline-item:first-child .milestone-line {
-  left: 50%;
-}
-
-.timeline-item:last-child .milestone-line {
-  right: 50%;
-}
-
-.milestone-connector {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 4px;
-  background: linear-gradient(180deg, #AE2C2A, #D2342C);
-  border-radius: 2px;
-  z-index: 3;
-}
-
-.milestone-connector.top {
-  bottom: calc(50% - 20px);  /* Leve ajuste para alinhar acima da linha */
-  height: 250px;
-}
-
-.milestone-connector.bottom {
-  top: calc(50% - 20px);     /* Leve ajuste para alinhar abaixo da linha */
-  height: 250px;
-}
-
-.timeline-section::before,
-.timeline-section::after,
-.timeline-container::before {
-  pointer-events: none;
-}
-
-/* Animação de pulsação para os números */
-@keyframes pulse {
+/* Animação de pulsação para bolinhas ativas */
+@keyframes dotPulse {
   0% {
-    box-shadow: 0 8px 25px rgba(174, 44, 42, 0.3);
+    box-shadow: 
+      0 10px 30px rgba(174, 44, 42, 0.4),
+      0 5px 15px rgba(0, 0, 0, 0.1);
   }
   50% {
-    box-shadow: 0 8px 25px rgba(174, 44, 42, 0.5);
+    box-shadow: 
+      0 15px 40px rgba(174, 44, 42, 0.6),
+      0 8px 25px rgba(0, 0, 0, 0.15);
   }
   100% {
-    box-shadow: 0 8px 25px rgba(174, 44, 42, 0.3);
+    box-shadow: 
+      0 10px 30px rgba(174, 44, 42, 0.4),
+      0 5px 15px rgba(0, 0, 0, 0.1);
   }
 }
 
-.milestone-number {
-  animation: pulse 2s ease-in-out infinite;
+.timeline-dot.active {
+  animation: dotPulse 2s ease-in-out infinite;
 }
 
-/* Efeito de float para ícones */
-.milestone-icon i {
-  animation: float 3s ease-in-out infinite;
+/* CARD 1 (índice 0) */
+.timeline-card[style*="--card-position: 0"] {
+  left: calc(var(--card-position) * 12.5% - 130px); /* Ajuste horizontal */
+  top: -30px; /* Ajuste vertical (card acima) */
 }
 
-/* Responsividade da Timeline */
+/* CARD 2 (índice 1) */
+.timeline-card[style*="--card-position: 1"] {
+  left: calc(var(--card-position) * 12.5% - 115px); /* Ajuste horizontal */
+  top: 520px; /* Ajuste vertical (card abaixo) */
+}
+
+/* CARD 3 (índice 2) */
+.timeline-card[style*="--card-position: 2"] {
+  left: calc(var(--card-position) * 12.5% - 100px); /* Ajuste horizontal */
+  top: -30px; /* Ajuste vertical (card acima) */
+}
+
+/* CARD 4 (índice 3) */
+.timeline-card[style*="--card-position: 3"] {
+  left: calc(var(--card-position) * 12.5% - 85px); /* Ajuste horizontal */
+  top: 520px; /* Ajuste vertical (card abaixo) */
+}
+
+/* CARD 5 (índice 4) */
+.timeline-card[style*="--card-position: 4"] {
+  left: calc(var(--card-position) * 12.5% - 70px); /* Ajuste horizontal */
+  top: -30px; /* Ajuste vertical (card acima) */
+}
+
+/* CARD 6 (índice 5) */
+.timeline-card[style*="--card-position: 5"] {
+  left: calc(var(--card-position) * 12.5% - 55px); /* Ajuste horizontal */
+  top: 520px; /* Ajuste vertical (card abaixo) */
+}
+
+/* CARD 7 (índice 6) */
+.timeline-card[style*="--card-position: 6"] {
+  left: calc(var(--card-position) * 12.5% - 40px); /* Ajuste horizontal */
+  top: -30px; /* Ajuste vertical (card acima) */
+}
+
+/* CARD 8 (índice 7) */
+.timeline-card[style*="--card-position: 7"] {
+  left: calc(var(--card-position) * 12.5% - 25px); /* Ajuste horizontal */
+  top: 520px; /* Ajuste vertical (card abaixo) */
+}
+
+/* TRAÇO DO CARD 1 (índice 0) */
+.card-connector[style*="--card-position: 0"] {
+  left: calc(var(--card-position) * 12.5% + 42px); /* Ajuste horizontal */
+  top: 250px;
+  height: 100px;
+  z-index: -1;
+}
+
+/* TRAÇO DO CARD 2 (índice 1) */
+.card-connector[style*="--card-position: 1"] {
+  left: calc(var(--card-position) * 12.5% + 54px); /* Ajuste horizontal */
+  top: 410px;
+  height: 120px;
+  z-index: -1;
+}
+
+/* TRAÇO DO CARD 3 (índice 2) */
+.card-connector[style*="--card-position: 2"] {
+  left: calc(var(--card-position) * 12.5% + 67px); /* Ajuste horizontal */
+  top: 250px;
+  height: 100px;
+  z-index: -1;
+}
+
+/* TRAÇO DO CARD 4 (índice 3) */
+.card-connector[style*="--card-position: 3"] {
+  left: calc(var(--card-position) * 12.5% + 79px); /* Ajuste horizontal */
+  top: 410px;
+  height: 120px;
+  z-index: -1;
+}
+
+/* TRAÇO DO CARD 5 (índice 4) */
+.card-connector[style*="--card-position: 4"] {
+  left: calc(var(--card-position) * 12.5% + 92px); /* Ajuste horizontal */
+  top: 250px;
+  height: 100px;
+  z-index: -1;
+}
+
+/* TRAÇO DO CARD 6 (índice 5) */
+.card-connector[style*="--card-position: 5"] {
+  left: calc(var(--card-position) * 12.5% + 105px); /* Ajuste horizontal */
+  top: 410px;
+  height: 120px;
+  z-index: -1;
+}
+
+/* TRAÇO DO CARD 7 (índice 6) */
+.card-connector[style*="--card-position: 6"] {
+  left: calc(var(--card-position) * 12.5% + 118px); /* Ajuste horizontal */
+  top: 250px;
+  height: 100px;
+  z-index: -1;
+}
+
+/* TRAÇO DO CARD 8 (índice 7) */
+.card-connector[style*="--card-position: 7"] {
+  left: calc(var(--card-position) * 12.5% + 131px); /* Ajuste horizontal */
+  top: 410px;
+  height: 120px;
+  z-index: -1;
+}
+
+/* Responsividade da Nova Timeline */
 @media (max-width: 992px) {
-  .timeline-section {
-    padding: 100px 0;
-  }
-  
-  .timeline-item {
-    min-width: 420px;
-    padding: 0 50px;
-  }
-  
-  .timeline-item.top {
-    padding-top: 60px;
-    padding-bottom: 0;
-  }
-  
-  .timeline-item.bottom {
-    padding-bottom: 60px;
-    padding-top: 0;
-  }
-  
-  .milestone-connector.top {
-    height: 150px;
-  }
-  
-  .milestone-connector.bottom {
-    height: 150px;
+  .new-timeline-container {
+    margin: 80px auto;
+    padding: 40px 20px;
   }
 
-  .timeline-item.top .milestone-card {
-  transform: translateY(80px);
-}
+  .timeline-dot {
+    width: 60px;
+    height: 60px;
+    border: 5px solid #ffffff;
+  }
 
-.timeline-item.bottom .milestone-card {
-  transform: translateY(650px);
-}
-  
-  .milestone-card {
-    min-width: 300px;
-    max-width: 320px;
+  .dot-year {
+    font-size: 0.8rem;
   }
-  
-  .milestone-icon {
-    width: 70px;
-    height: 70px;
-    font-size: 2rem;
-    margin: 25px 25px 0 25px;
+
+  .timeline-dot.active .dot-year {
+    font-size: 0.9rem;
   }
-  
-  .milestone-content {
-    padding: 15px 25px 25px 25px;
+
+  .timeline-card-container {
+    margin-top: -80px;
+    min-height: 600px;
   }
-  
-  .milestone-year {
-    font-size: 2rem;
+
+  .timeline-card {
+    width: 280px;
+    min-height: 250px;
+    left: calc(var(--card-position) * 12.5% - 140px);
   }
-  
-  .milestone-title {
-    font-size: 1.3rem;
+
+  .timeline-card.top {
+    top: 80px;
   }
-  
-  .milestone-description {
-    font-size: 0.95rem;
+
+  .timeline-card.bottom {
+    top: 350px;
   }
-  
-  .milestone-number {
-    width: 45px;
-    height: 45px;
-    font-size: 1.1rem;
+
+  .card-connector {
+    left: calc(var(--card-position) * 12.5% + 28px);
+  }
+
+  .card-connector.top {
+    top: 80px;
+    height: 80px;
+  }
+
+  .card-connector.bottom {
+    top: 80px;
+    height: 270px;
+  }
+
+  .card-icon {
+    width: 55px;
+    height: 55px;
+    font-size: 1.6rem;
+    margin: 18px 18px 0 18px;
+  }
+
+  .card-content {
+    padding: 12px 18px 18px 18px;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+  }
+
+  .card-description {
+    font-size: 0.9rem;
   }
 }
 
 @media (max-width: 768px) {
-  .timeline-section {
-    padding: 80px 0;
-  }
-  
-  .timeline-container {
-    height: 850px;
-  }
-  
-  .timeline-item {
-    min-width: 360px;
-    padding: 0 40px;
-  }
-  
-  .timeline-item.top {
-    padding-top: 50px;
-    padding-bottom: 0;
-  }
-  
-  .timeline-item.bottom {
-    padding-bottom: 50px;
-    padding-top: 0;
+  .new-timeline-container {
+    margin: 60px auto;
+    padding: 30px 15px;
   }
 
-  .timeline-item.top .milestone-card {
-  transform: translateY(20px);
-}
+  .timeline-dot {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #ffffff;
+  }
 
-.timeline-item.bottom .milestone-card {
-  transform: translateY(540px);
-}
-  
-  .milestone-connector.top {
-    height: 120px;
+  .dot-year {
+    font-size: 0.7rem;
   }
-  
-  .milestone-connector.bottom {
-    height: 120px;
+
+  .timeline-dot.active .dot-year {
+    font-size: 0.8rem;
   }
-  
-  .milestone-card {
-    min-width: 260px;
-    max-width: 280px;
+
+  .timeline-card-container {
+    margin-top: -60px;
+    min-height: 500px;
   }
-  
-  .milestone-icon {
-    width: 60px;
+
+  .timeline-card {
+    width: 250px;
+    min-height: 220px;
+    left: calc(var(--card-position) * 12.5% - 125px);
+  }
+
+  .timeline-card.top {
+    top: 60px;
+  }
+
+  .timeline-card.bottom {
+    top: 300px;
+  }
+
+  .card-connector {
+    left: calc(var(--card-position) * 12.5% + 22px);
+  }
+
+  .card-connector.top {
+    top: 60px;
     height: 60px;
-    font-size: 1.8rem;
-    margin: 20px 20px 0 20px;
   }
-  
-  .milestone-content {
-    padding: 12px 20px 20px 20px;
+
+  .card-connector.bottom {
+    top: 60px;
+    height: 240px;
   }
-  
-  .milestone-year {
-    font-size: 1.8rem;
+
+  .card-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.4rem;
+    margin: 15px 15px 0 15px;
   }
-  
-  .milestone-title {
-    font-size: 1.2rem;
+
+  .card-content {
+    padding: 10px 15px 15px 15px;
   }
-  
-  .milestone-description {
-    font-size: 0.9rem;
+
+  .card-title {
+    font-size: 1.1rem;
   }
-  
-  .milestone-number {
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
+
+  .card-description {
+    font-size: 0.85rem;
   }
 }
 
 @media (max-width: 576px) {
-  .timeline-section {
-    padding: 60px 0;
-  }
-  
-  .timeline-container {
-    height: 750px;
-  }
-  
-  .timeline-item {
-    min-width: 320px;
-    padding: 0 30px;
-  }
-  
-  .timeline-item.top {
-    padding-top: 40px;
-    padding-bottom: 0;
-  }
-  
-  .timeline-item.bottom {
-    padding-bottom: 40px;
-    padding-top: 0;
-  }
-  
-  .milestone-connector.top {
-    height: 120px;
-  }
-  
-  .milestone-connector.bottom {
-    height: 120px;
+  .new-timeline-container {
+    margin: 40px auto;
+    padding: 20px 10px;
   }
 
-  .timeline-item.top .milestone-card {
-  transform: translateY(25px);
-}
+  .timeline-dot {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #ffffff;
+  }
 
-.timeline-item.bottom .milestone-card {
-  transform: translateY(460px);
-}
-  
-  .milestone-card {
-    min-width: 240px;
-    max-width: 250px;
+  .dot-year {
+    font-size: 0.6rem;
   }
-  
-  .milestone-icon {
-    width: 50px;
-    height: 50px;
-    font-size: 1.5rem;
-    margin: 15px 15px 0 15px;
+
+  .timeline-dot.active .dot-year {
+    font-size: 0.7rem;
   }
-  
-  .milestone-content {
-    padding: 10px 15px 15px 15px;
+
+  .timeline-card-container {
+    margin-top: -40px;
+    min-height: 420px;
   }
-  
-  .milestone-year {
-    font-size: 1.6rem;
+
+  .timeline-card {
+    width: 220px;
+    min-height: 200px;
+    left: calc(var(--card-position) * 12.5% - 110px);
   }
-  
-  .milestone-title {
-    font-size: 1.1rem;
+
+  .timeline-card.top {
+    top: 40px;
   }
-  
-  .milestone-description {
-    font-size: 0.85rem;
+
+  .timeline-card.bottom {
+    top: 260px;
   }
-  
-  .milestone-number {
-    width: 35px;
-    height: 35px;
-    font-size: 0.9rem;
-    border: 4px solid #ffffff;
+
+  .card-connector {
+    left: calc(var(--card-position) * 12.5% + 17px);
+  }
+
+  .card-connector.top {
+    top: 40px;
+    height: 40px;
+  }
+
+  .card-connector.bottom {
+    top: 40px;
+    height: 220px;
+  }
+
+  .card-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+    margin: 12px 12px 0 12px;
+  }
+
+  .card-content {
+    padding: 8px 12px 12px 12px;
+  }
+
+  .card-title {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .card-description {
+    font-size: 0.8rem;
   }
 }
 
@@ -2043,7 +2231,7 @@ section {
   .mvv-card:hover,
   .differential-item:hover,
   .stat-item:hover,
-  .milestone-card:hover {
+  .timeline-dot:hover {
     transform: none;
   }
 

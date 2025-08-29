@@ -45,21 +45,21 @@
           </div>
           <div class="stat-item">
             <div class="stat-icon">
-              <i class="fas fa-truck"></i>
+              <i class="fas fa-map-marked-alt"></i>
             </div>
             <div class="stat-number">
-              <span ref="hoursCounter" data-target="48">0</span>h
+              <span ref="statesCounter" data-target="26">0</span>
             </div>
-            <div class="stat-label">{{ t('home.stats.delivery') }}</div>
+            <div class="stat-label">{{ t('home.stats.presenceText') }}</div>
           </div>
           <div class="stat-item">
             <div class="stat-icon">
-              <i class="fas fa-map-marked-alt"></i>
+              <i class="fas fa-truck"></i>
             </div>
-            <div class="stat-number presence-text">
-              <span>{{ t('home.stats.presenceText') }}</span>
+            <div class="stat-number">
+              <span ref="hoursCounter" data-target="24">0</span>h
             </div>
-            <div class="stat-label">{{ t('home.stats.presence') }}</div>
+            <div class="stat-label">{{ t('home.stats.delivery') }}</div>
           </div>
         </div>
       </div>
@@ -590,8 +590,8 @@ export default {
       const counters = [
         { ref: this.$refs.yearsCounter, target: this.yearsOfExperience },
         { ref: this.$refs.unitsCounter, target: 3 },
-        // { ref: this.$refs.clientsCounter, target: 5000 },
-        { ref: this.$refs.hoursCounter, target: 48 }
+        { ref: this.$refs.statesCounter, target: 26 },
+        { ref: this.$refs.hoursCounter, target: 24 }
       ];
 
       counters.forEach(counter => {
@@ -881,19 +881,20 @@ section {
 }
 
 .logo-image {
-  max-width: 85.5%;
-  max-height: 80%;
+  max-width: 100%;
+  max-height: 75%;
   animation: fadeInUp 1.5s ease-out;
 }
 
 .banner-h2 {
-  font-size: 2.5em;
-  margin: 0px 0px 0.5em 0px;
+  font-size: 1.7em;
+  margin: 0px 45px 0.5em 0px;
   font-weight: bold;
   color: #ffffff;
+  position: relative;
+  bottom: 40px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  padding: 0px 20px 10px 20px;
-  border-left: 4px solid rgba(255, 255, 255, 0.8);
+  padding: 0px 20px 2px 20px;
   border-radius: 2px;
   display: inline-block;
   letter-spacing: 1px;
@@ -1083,7 +1084,7 @@ section {
 .stat-label {
   position: relative;
   z-index: 1;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: #696969;
   text-transform: uppercase;
@@ -2364,11 +2365,11 @@ input:checked+.slider:before {
   }
 
   .logo-image {
-    max-width: 85%;
+    max-width: 95%;
   }
 
   .banner-h2 {
-    font-size: 2.2em;
+    font-size: 1.35em;
   }
 
   .banner-p {
@@ -2482,11 +2483,11 @@ input:checked+.slider:before {
   }
 
   .logo-image {
-    max-width: 85%;
+    max-width: 100%;
   }
 
   .banner-h2 {
-    font-size: 1.6em;
+    font-size: 1.3em;
   }
 
   .banner-p {
@@ -2692,12 +2693,12 @@ input:checked+.slider:before {
   }
 
   .logo-image {
-    max-width: 90%;
+    max-width: 100%;
   }
 
   .banner-h2 {
-    font-size: 1.3em;
-    padding: 8px 15px;
+    font-size: 0.9em;
+    padding: 0 0 0 10px;
   }
 
   .banner-p {
@@ -2768,8 +2769,13 @@ input:checked+.slider:before {
     font-size: 0.8rem;
   }
 
+  .logo-image {
+    max-width: 100%;
+  }
+
   .banner-h2 {
-    font-size: 1.1rem;
+    font-size: 0.9em;
+    padding: 0 0 0 10px;
   }
 }
 

@@ -15,8 +15,8 @@ const translations = reactive({
       missionText: 'Tornar medicamentos acessíveis em todo o Brasil com integridade, agilidade e cuidado humano, atuando como ponte entre qualidade e pessoas e combinando inovação operacional com um atendimento caloroso que inspira confiança em clientes, parceiros e colaboradores.',
       visionTitle: 'Visão',
       visionText: 'Ser reconhecida como a distribuidora de medicamentos que faz a diferença no Norte e Nordeste do Brasil, guiada por ética, integridade, inovação e excelência, crescendo de forma responsável e cuidando de cada pessoa que toca nossa jornada.',
-      valuesTitle: 'Valores',
-      valuesText: 'Nosso trabalho é guiado pelos seguintes valores fundamentais:',
+      valuesTitle: 'No que acreditamos',
+      valuesText: 'Nosso compromisso é promover a saúde com ética e integridade, inspirando confiança por meio da inovação e da qualidade.',
       values: [
         'Ética',
         'Qualidade',
@@ -112,8 +112,8 @@ const translations = reactive({
       missionText: 'To make medications accessible throughout Brazil with integrity, agility, and human care, acting as a bridge between quality and people, and combining operational innovation with warm service that inspires trust in clients, partners, and collaborators.',
       visionTitle: 'Vision',
       visionText: 'To be recognized as the pharmaceutical distributor that makes a difference in the North and Northeast of Brazil, guided by ethics, integrity, innovation, and excellence, growing responsibly and caring for every person who is part of our journey.',
-      valuesTitle: 'Values',
-      valuesText: 'Our work is guided by the following fundamental values:',
+      valuesTitle: 'What we believe',
+      valuesText: 'Our commitment is to promote health with ethics and integrity, inspiring trust through innovation and quality.',
       values: [
         'Ethics',
         'Quality',
@@ -209,8 +209,8 @@ const translations = reactive({
       missionText: 'Hacer que los medicamentos sean accesibles en todo Brasil con integridad, agilidad y cuidado humano, actuando como un puente entre la calidad y las personas, y combinando innovación operativa con una atención cálida que inspire confianza en clientes, socios y colaboradores.',
       visionTitle: 'Visión',
       visionText: 'Ser reconocida como la distribuidora de medicamentos que marca la diferencia en el Norte y Nordeste de Brasil, guiada por la ética, la integridad, la innovación y la excelencia, creciendo de forma responsable y cuidando a cada persona que forma parte de nuestro camino.',
-      valuesTitle: 'Valores',
-      valuesText: 'Nuestro trabajo está guiado por los siguientes valores fundamentales:',
+      valuesTitle: 'Lo que creemos',
+      valuesText: 'Nuestro compromiso es promover la salud con ética e integridad, inspirando confianza a través de la innovación y la calidad.',
       values: [
         'Ética',
         'Calidad',

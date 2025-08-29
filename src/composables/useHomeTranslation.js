@@ -6,7 +6,7 @@ const translations = reactive({
   pt: {
     home: {
       hero: {
-        title: '<strong>Uni Hospitalar:</strong><br>Distribuindo saúde,<br>inspirando confiança.',
+        title: 'Distribuindo saúde, inspirando confiança.',
         subtitle: 'O nosso foco está na distribuição <br> de medicamentos hospitalares, <br> oncológicos e excepcionais.',
         scrollIndicator: 'Role para baixo'
       },
@@ -15,7 +15,7 @@ const translations = reactive({
         years: 'Anos de Experiência',
         units: 'Unidades Estratégicas',
         presence: 'Presença Nacional',
-        presenceText: 'Presente em todo território nacional',
+        presenceText: 'estados atendidos e DF',
         delivery: 'Entregas Rápidas'
       },
       services: {
@@ -133,7 +133,7 @@ const translations = reactive({
         years: 'Years of Experience',
         units: 'Strategic Units',
         presence: 'National Presence',
-        presenceText: 'Present throughout the national territory',
+        presenceText: 'states served and FD',
         delivery: 'Fast Deliveries'
       },
       services: {
@@ -251,7 +251,7 @@ const translations = reactive({
         years: 'Años de Experiencia',
         units: 'Unidades Estratégicas',
         presence: 'Presencia Nacional',
-        presenceText: 'Presente en todo el territorio nacional',
+        presenceText: 'estados atendidos y DF',
         delivery: 'Entregas Rápidas'
       },
       services: {
