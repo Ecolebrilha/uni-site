@@ -30,7 +30,7 @@
         <ScrollReveal direction="bottom" :delay="200">
           <div class="card-container">
             <div class="info-card">
-              <div class="card-icon">
+              <div class="card-icon-two">
                 <i class="fas fa-users"></i>
               </div>
               <h3>{{ t('about.whoWeAreTitle') }}</h3>
@@ -805,7 +805,7 @@ section {
   box-shadow: 0 30px 80px rgba(174, 44, 42, 0.15);
 }
 
-.card-icon {
+.card-icon-two {
   width: 90px;
   height: 90px;
   border-radius: 50%;
@@ -1396,7 +1396,7 @@ section {
   }
 
   50% {
-    transform: translateY(-15px);
+    transform: translateY(-10px);
   }
 
   100% {
@@ -1404,8 +1404,15 @@ section {
   }
 }
 
-.card-icon i,
 .mvv-icon i {
+  animation: float 4s ease-in-out infinite;
+}
+
+.card-icon i {
+  animation: float 4s ease-in-out infinite;
+}
+
+.card-icon-two i {
   animation: float 4s ease-in-out infinite;
 }
 
@@ -1528,7 +1535,7 @@ section {
   position: relative;
   height: 60vh;
   max-width: 1500px;
-  margin: 100px 100px 0px 0px auto;
+  margin: 150px auto 100px;
   padding: 60px 0;
 }
 
@@ -1804,6 +1811,7 @@ section {
   width: 60px;
   height: 60px;
   border-radius: 15px;
+  background: linear-gradient(135deg, #AE2C2A, #D2342C);
   display: flex;
   align-items: center;
   justify-content: center;
