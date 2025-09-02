@@ -145,7 +145,7 @@
                   <i class="fas fa-calendar-check"></i>
                   <div>
                     <strong>Prazo de Resposta</strong>
-                    <p>O prazo médio para análise e resposta é de 5 a 15 dias úteis, dependendo da complexidade do caso.
+                    <p>O prazo médio para análise e resposta é de 5 a 30 dias úteis, contado a partir da atualização do status da solicitação, podendo variar conforme a complexidade do caso.
                     </p>
                   </div>
                 </div>
@@ -168,16 +168,16 @@
               <h4>Tempo Médio de Processamento</h4>
               <div class="stats-grid">
                 <div class="stat-item">
-                  <div class="stat-number">2-3</div>
+                  <div class="stat-number">5</div>
                   <div class="stat-label">dias úteis para análise inicial</div>
                 </div>
                 <div class="stat-item">
-                  <div class="stat-number">5-7</div>
+                  <div class="stat-number">30</div>
                   <div class="stat-label">dias úteis para resolução</div>
                 </div>
                 <div class="stat-item">
-                  <div class="stat-number">24h</div>
-                  <div class="stat-label">para casos urgentes</div>
+                  <div class="stat-number">15</div>
+                  <div class="stat-label">dias úteis para reavaliações</div>
                 </div>
               </div>
             </div>
@@ -845,8 +845,11 @@ async loadStatusHistory() {
 
     getViolationTypeLabel(category) {
             const labels = {
-                'sexual-harassment': 'Assédio sexual',
-                'moral-harassment': 'Assédio moral',
+                'threat': 'Ameaça',
+                'financial-harassment': 'Assédio Financeiro',
+                'moral-harassment': 'Assédio Moral',
+                'psychological-harassment': 'Assédio psicológico',
+                'sexual-harassment': 'Assédio Sexual',
                 'physical-aggression': 'Agressão física',
                 'unfair-competition': 'Concorrência desleal',
                 'inappropriate-behavior': 'Comportamento inadequado',
@@ -2056,7 +2059,7 @@ formatDateTwo(dateString) {
 }
 
 .stat-item:nth-child(3) .stat-number {
-  color: #AE2C2A;
+  color: #EF6C00;
 }
 
 .stat-item:nth-child(1):hover .stat-number {
@@ -2068,7 +2071,7 @@ formatDateTwo(dateString) {
 }
 
 .stat-item:nth-child(3):hover .stat-number {
-  color: #D2342C;
+  color: #F57C00;
 }
 
 /* Animação de entrada */

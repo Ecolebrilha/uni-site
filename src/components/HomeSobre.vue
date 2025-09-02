@@ -63,60 +63,54 @@
               <!-- Linha da timeline estática -->
             <div class="timeline-line"></div>
             
-            <!-- Bolinhas da timeline com anos -->
+            <!-- Bolinhas da timeline com anos e traços integrados -->
             <div class="timeline-dots">
               <div 
                 v-for="(milestone, index) in timelineMilestones" 
                 :key="index"
-                class="timeline-dot"
-                :class="{ 'active': currentActiveCard === index }"
-                @mouseenter="handleDotHover(index)"
-                @mouseleave="handleDotLeave">
-                <span class="dot-year">{{ milestone.year }}</span>
+                class="timeline-dot-wrapper"
+                :style="{ '--dot-index': index }">
+                <div 
+                  class="timeline-dot"
+                  :class="{ 'active': currentActiveCard === index }"
+                  @mouseenter="handleDotHover(index)"
+                  @mouseleave="handleDotLeave">
+                  <span class="dot-year">{{ milestone.year }}</span>
+                </div>
+                <!-- Traço conectivo fixo para cada dot com card integrado -->
+                <div 
+                  class="dot-connector"
+                  :class="{ 
+                    'active': currentActiveCard === index,
+                    'entering': enteringCard === index,
+                    'exiting': exitingCard === index,
+                    'bottom': index % 2 === 0,
+                    'top': index % 2 !== 0
+                  }"
+                  v-show="currentActiveCard === index || enteringCard === index || exitingCard === index">
+                  <!-- Card integrado no final do traço -->
+                  <div 
+                    class="timeline-card"
+                    :class="{ 
+                      'active': currentActiveCard === index,
+                      'entering': enteringCard === index,
+                      'exiting': exitingCard === index,
+                      'bottom': index % 2 === 0,
+                      'top': index % 2 !== 0
+                    }">
+                    <div class="card-icon" :style="{ backgroundColor: milestone.color }">
+                      <i :class="milestone.icon"></i>
+                    </div>
+                    <div class="card-content">
+                      <div class="card-title">{{ milestone.title }}</div>
+                      <div class="card-description">{{ milestone.description }}</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             
-            <!-- Cards e linhas conectoras -->
-            <div class="timeline-card-container">
-              <!-- Linhas conectoras -->
-              <div 
-                v-for="(milestone, index) in timelineMilestones" 
-                :key="`connector-${index}`"
-                class="card-connector"
-                :class="{ 
-                  'active': currentActiveCard === index,
-                  'entering': enteringCard === index,
-                  'exiting': exitingCard === index,
-                  'top': index % 2 === 0,
-                  'bottom': index % 2 !== 0
-                }"
-                :style="{ '--card-position': index }"
-                v-show="currentActiveCard === index || enteringCard === index || exitingCard === index">
-              </div>
 
-              <!-- Cards -->
-              <div 
-                v-for="(milestone, index) in timelineMilestones" 
-                :key="index"
-                class="timeline-card"
-                :class="{ 
-                  'active': currentActiveCard === index,
-                  'entering': enteringCard === index,
-                  'exiting': exitingCard === index,
-                  'top': index % 2 === 0,
-                  'bottom': index % 2 !== 0
-                }"
-                :style="{ '--card-position': index }"
-                v-show="currentActiveCard === index || enteringCard === index || exitingCard === index">
-                <div class="card-icon" :style="{ backgroundColor: milestone.color }">
-                  <i :class="milestone.icon"></i>
-                </div>
-                <div class="card-content">
-                  <div class="card-title">{{ milestone.title }}</div>
-                  <div class="card-description">{{ milestone.description }}</div>
-                </div>
-              </div>
-            </div>
             </div>
           </div>
         </ScrollReveal>
@@ -507,38 +501,24 @@ export default {
         if (!this.isHovering) {
           this.nextCard();
         }
-      }, 10000); // 10 segundos
+      }, 5000); // 10 segundos
     },
     
     nextCard() {
       const nextIndex = (this.currentActiveCard + 1) % this.timelineMilestones.length;
-      
-      // Para rotação automática, usar delay de 2 segundos
-      this.exitingCard = this.currentActiveCard;
-      this.enteringCard = null;
-      
-      setTimeout(() => {
-        this.exitingCard = null;
-        setTimeout(() => {
-          this.enteringCard = nextIndex;
-          setTimeout(() => {
-            this.currentActiveCard = nextIndex;
-            this.enteringCard = null;
-          }, 400);
-        }, 1500);
-      }, 300);
+      this.currentActiveCard = nextIndex;
     },
     
     setActiveCard(index) {
       if (this.currentActiveCard === index) return;
-      
-      // Transição imediata para hover
       this.currentActiveCard = index;
     },
     
     handleDotHover(index) {
       this.isHovering = true;
-      this.setActiveCard(index);
+      this.exitingCard = null;
+      this.enteringCard = null;
+      this.currentActiveCard = index;
     },
     
     handleDotLeave() {
@@ -566,7 +546,7 @@ export default {
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 1650px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -1220,20 +1200,6 @@ section {
 }
 
 /* Responsividade */
-@media (max-width: 1200px) {
-  .container {
-    padding: 0 40px;
-  }
-
-  .differentials-grid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
-
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (max-width: 992px) {
   .hero-title {
     font-size: 3.5rem;
@@ -1509,160 +1475,6 @@ section {
   .cta-section {
     padding: 80px 0;
   }
-
-  /* CARDS INDIVIDUAIS - 480px */
-  .timeline-card[style*="--card-position: 0"] {
-    left: calc(var(--card-position) * 12.5% - 50px);
-    top: 10px;
-  }
-  .timeline-card[style*="--card-position: 1"] {
-    left: calc(var(--card-position) * 12.5% - 45px);
-    top: 260px;
-  }
-  .timeline-card[style*="--card-position: 2"] {
-    left: calc(var(--card-position) * 12.5% - 40px);
-    top: 10px;
-  }
-  .timeline-card[style*="--card-position: 3"] {
-    left: calc(var(--card-position) * 12.5% - 35px);
-    top: 260px;
-  }
-  .timeline-card[style*="--card-position: 4"] {
-    left: calc(var(--card-position) * 12.5% - 30px);
-    top: 10px;
-  }
-  .timeline-card[style*="--card-position: 5"] {
-    left: calc(var(--card-position) * 12.5% - 25px);
-    top: 260px;
-  }
-  .timeline-card[style*="--card-position: 6"] {
-    left: calc(var(--card-position) * 12.5% - 20px);
-    top: 10px;
-  }
-  .timeline-card[style*="--card-position: 7"] {
-    left: calc(var(--card-position) * 12.5% - 15px);
-    top: 260px;
-  }
-
-  /* TRAÇOS INDIVIDUAIS - 480px */
-  .card-connector[style*="--card-position: 0"] {
-    left: calc(var(--card-position) * 12.5% + 22px);
-    top: 140px;
-    height: 45px;
-  }
-  .card-connector[style*="--card-position: 1"] {
-    left: calc(var(--card-position) * 12.5% + 26px);
-    top: 210px;
-    height: 55px;
-  }
-  .card-connector[style*="--card-position: 2"] {
-    left: calc(var(--card-position) * 12.5% + 30px);
-    top: 140px;
-    height: 45px;
-  }
-  .card-connector[style*="--card-position: 3"] {
-    left: calc(var(--card-position) * 12.5% + 34px);
-    top: 210px;
-    height: 55px;
-  }
-  .card-connector[style*="--card-position: 4"] {
-    left: calc(var(--card-position) * 12.5% + 38px);
-    top: 140px;
-    height: 45px;
-  }
-  .card-connector[style*="--card-position: 5"] {
-    left: calc(var(--card-position) * 12.5% + 42px);
-    top: 210px;
-    height: 55px;
-  }
-  .card-connector[style*="--card-position: 6"] {
-    left: calc(var(--card-position) * 12.5% + 46px);
-    top: 140px;
-    height: 45px;
-  }
-  .card-connector[style*="--card-position: 7"] {
-    left: calc(var(--card-position) * 12.5% + 50px);
-    top: 210px;
-    height: 55px;
-  }
-}
-
-@media (max-width: 320px) {
-  /* CARDS INDIVIDUAIS - 320px */
-  .timeline-card[style*="--card-position: 0"] {
-    left: calc(var(--card-position) * 12.5% - 35px);
-    top: 15px;
-  }
-  .timeline-card[style*="--card-position: 1"] {
-    left: calc(var(--card-position) * 12.5% - 32px);
-    top: 220px;
-  }
-  .timeline-card[style*="--card-position: 2"] {
-    left: calc(var(--card-position) * 12.5% - 29px);
-    top: 15px;
-  }
-  .timeline-card[style*="--card-position: 3"] {
-    left: calc(var(--card-position) * 12.5% - 26px);
-    top: 220px;
-  }
-  .timeline-card[style*="--card-position: 4"] {
-    left: calc(var(--card-position) * 12.5% - 23px);
-    top: 15px;
-  }
-  .timeline-card[style*="--card-position: 5"] {
-    left: calc(var(--card-position) * 12.5% - 20px);
-    top: 220px;
-  }
-  .timeline-card[style*="--card-position: 6"] {
-    left: calc(var(--card-position) * 12.5% - 17px);
-    top: 15px;
-  }
-  .timeline-card[style*="--card-position: 7"] {
-    left: calc(var(--card-position) * 12.5% - 14px);
-    top: 220px;
-  }
-
-  /* TRAÇOS INDIVIDUAIS - 320px */
-  .card-connector[style*="--card-position: 0"] {
-    left: calc(var(--card-position) * 12.5% + 17px);
-    top: 115px;
-    height: 35px;
-  }
-  .card-connector[style*="--card-position: 1"] {
-    left: calc(var(--card-position) * 12.5% + 19px);
-    top: 170px;
-    height: 55px;
-  }
-  .card-connector[style*="--card-position: 2"] {
-    left: calc(var(--card-position) * 12.5% + 21px);
-    top: 115px;
-    height: 35px;
-  }
-  .card-connector[style*="--card-position: 3"] {
-    left: calc(var(--card-position) * 12.5% + 23px);
-    top: 170px;
-    height: 55px;
-  }
-  .card-connector[style*="--card-position: 4"] {
-    left: calc(var(--card-position) * 12.5% + 25px);
-    top: 115px;
-    height: 35px;
-  }
-  .card-connector[style*="--card-position: 5"] {
-    left: calc(var(--card-position) * 12.5% + 27px);
-    top: 170px;
-    height: 55px;
-  }
-  .card-connector[style*="--card-position: 6"] {
-    left: calc(var(--card-position) * 12.5% + 29px);
-    top: 115px;
-    height: 35px;
-  }
-  .card-connector[style*="--card-position: 7"] {
-    left: calc(var(--card-position) * 12.5% + 31px);
-    top: 170px;
-    height: 55px;
-  }
 }
 
 /* Nova Timeline Styles */
@@ -1685,14 +1497,6 @@ section {
     radial-gradient(circle at 80% 80%, rgba(174, 44, 42, 0.02) 0%, transparent 50%),
     linear-gradient(45deg, transparent 49%, rgba(174, 44, 42, 0.02) 50%, transparent 51%);
   pointer-events: none;
-}
-
-.new-timeline-container {
-  position: relative;
-  height: 60vh;
-  max-width: 1500px;
-  margin: 150px auto 100px;
-  padding: 60px 0;
 }
 
 .timeline-scroll-wrapper {
@@ -1727,6 +1531,14 @@ section {
   z-index: 10;
 }
 
+/* Wrapper para cada dot com seu traço */
+.timeline-dot-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* Bolinhas da timeline */
 .timeline-dot {
   position: relative;
@@ -1744,6 +1556,7 @@ section {
     0 10px 30px rgba(174, 44, 42, 0.4),
     0 5px 15px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  z-index: 999;
 }
 
 .timeline-dot::before {
@@ -1785,6 +1598,44 @@ section {
 
 .timeline-dot.active .dot-year {
   font-size: 1rem;
+}
+
+/* Traços conectores integrados aos dots */
+.dot-connector {
+  position: absolute;
+  width: 3px;
+  background: linear-gradient(180deg, #AE2C2A, #D2342C);
+  border-radius: 2px;
+  opacity: 0;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(174, 44, 42, 0.3);
+  z-index: 15;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.dot-connector.top {
+  flex-direction: column;
+  justify-content: flex-end;
+  top: 100%;
+  height: 180px;
+}
+
+.dot-connector.bottom {
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  bottom: 100%;
+  height: 180px;
+}
+
+.dot-connector.active,
+.dot-connector.entering {
+  opacity: 1;
+  background: linear-gradient(180deg, #D2342C, #AE2C2A);
 }
 
 /* Container dos cards e conectores */
@@ -1842,19 +1693,115 @@ section {
   background-clip: padding-box;
   backdrop-filter: blur(10px);
   opacity: 0;
-  transform: translateY(30px) scale(0.8);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(80px) scale(0.5);
+  transition: none;
   overflow: hidden;
+  /* Cards agora integrados aos traços - posicionamento relativo */
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none;
+  transform-origin: center;
   pointer-events: auto;
-  left: calc(var(--card-position) * 12.5% - 130px);
+  margin-top: 10px;
+  filter: blur(3px);
 }
 
-.timeline-card.top {
-  top: -50px;
+/* Estados de animação */
+.timeline-card.entering {
+  opacity: 0 !important;
+  transform: translateY(150px) scale(0.1) rotateX(-60deg) rotateY(-30deg) rotateZ(-20deg) !important;
+  filter: blur(20px) saturate(0.3) contrast(0.6) !important;
+  animation: cardFlipZoomIn 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards !important;
+  transition: none !important;
 }
 
-.timeline-card.bottom {
-  top: 500px;
+.timeline-card.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0px) saturate(1.1) contrast(1.05) brightness(1.02);
+  animation: cardPulseGlow 3s ease-in-out infinite;
+}
+
+.timeline-card.active::before {
+  left: 150%;
+  opacity: 1;
+}
+
+.timeline-card.active::after {
+  opacity: 1;
+}
+
+.timeline-card.exiting {
+  opacity: 1;
+  animation: cardFlipZoomOut 0.8s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+}
+
+/* Animações dos cards */
+@keyframes cardSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(60px) scale(0.5) rotateX(-20deg);
+    filter: blur(8px);
+  }
+  30% {
+    opacity: 0.3;
+    transform: translateY(40px) scale(0.75) rotateX(-10deg);
+    filter: blur(5px);
+  }
+  60% {
+    opacity: 0.7;
+    transform: translateY(15px) scale(0.95) rotateX(-3deg);
+    filter: blur(2px);
+  }
+  85% {
+    opacity: 0.95;
+    transform: translateY(2px) scale(1.02) rotateX(0deg);
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg);
+    filter: blur(0px);
+  }
+}
+
+@keyframes cardActivate {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 10px 30px rgba(174, 44, 42, 0.2);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+@keyframes cardSlideOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+  30% {
+    opacity: 0.8;
+    transform: translateY(20px) scale(0.9);
+    filter: blur(2px);
+  }
+  60% {
+    opacity: 0.4;
+    transform: translateY(40px) scale(0.7);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(60px) scale(0.5);
+    filter: blur(6px);
+  }
 }
 
 .timeline-card.active {
@@ -2069,6 +2016,11 @@ section {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: #AE2C2A transparent;
+  position: relative;
+  height: 100%;
+  max-width: 1650px;
+  margin: 550px auto 450px;
+  padding: 60px 100px;
 }
 
 .new-timeline-container::-webkit-scrollbar {
@@ -2089,146 +2041,121 @@ section {
   background: linear-gradient(90deg, #D2342C, #FF4444);
 }
 
-/* CARD 1 (índice 0) */
-.timeline-card[style*="--card-position: 0"] {
-  left: calc(var(--card-position) * 12.5% - 130px); /* Ajuste horizontal */
-  top: -30px; /* Ajuste vertical (card acima) */
+/* Posicionamento responsivo dos cards */
+.timeline-card {
+  left: calc(var(--card-index) * 12.5% + 35px - 160px) !important;
 }
 
-/* CARD 2 (índice 1) */
-.timeline-card[style*="--card-position: 1"] {
-  left: calc(var(--card-position) * 12.5% - 115px); /* Ajuste horizontal */
-  top: 520px; /* Ajuste vertical (card abaixo) */
+.timeline-card.top {
+  top: 260px !important;
+  left: 155px !important;
 }
 
-/* CARD 3 (índice 2) */
-.timeline-card[style*="--card-position: 2"] {
-  left: calc(var(--card-position) * 12.5% - 100px); /* Ajuste horizontal */
-  top: -30px; /* Ajuste vertical (card acima) */
+.timeline-card.bottom {
+  top: -260px !important;
+  left: 155px !important;
 }
 
-/* CARD 4 (índice 3) */
-.timeline-card[style*="--card-position: 3"] {
-  left: calc(var(--card-position) * 12.5% - 85px); /* Ajuste horizontal */
-  top: 520px; /* Ajuste vertical (card abaixo) */
-}
-
-/* CARD 5 (índice 4) */
-.timeline-card[style*="--card-position: 4"] {
-  left: calc(var(--card-position) * 12.5% - 70px); /* Ajuste horizontal */
-  top: -30px; /* Ajuste vertical (card acima) */
-}
-
-/* CARD 6 (índice 5) */
-.timeline-card[style*="--card-position: 5"] {
-  left: calc(var(--card-position) * 12.5% - 55px); /* Ajuste horizontal */
-  top: 520px; /* Ajuste vertical (card abaixo) */
-}
-
-/* CARD 7 (índice 6) */
-.timeline-card[style*="--card-position: 6"] {
-  left: calc(var(--card-position) * 12.5% - 40px); /* Ajuste horizontal */
-  top: -30px; /* Ajuste vertical (card acima) */
-}
-
-/* CARD 8 (índice 7) */
-.timeline-card[style*="--card-position: 7"] {
-  left: calc(var(--card-position) * 12.5% - 25px); /* Ajuste horizontal */
-  top: 520px; /* Ajuste vertical (card abaixo) */
-}
-
-/* TRAÇO DO CARD 1 (índice 0) */
-.card-connector[style*="--card-position: 0"] {
-  left: calc(var(--card-position) * 12.5% + 42px); /* Ajuste horizontal */
-  top: 250px;
-  height: 100px;
-  z-index: -1;
-}
-
-/* TRAÇO DO CARD 2 (índice 1) */
-.card-connector[style*="--card-position: 1"] {
-  left: calc(var(--card-position) * 12.5% + 54px); /* Ajuste horizontal */
-  top: 410px;
-  height: 120px;
-  z-index: -1;
-}
-
-/* TRAÇO DO CARD 3 (índice 2) */
-.card-connector[style*="--card-position: 2"] {
-  left: calc(var(--card-position) * 12.5% + 67px); /* Ajuste horizontal */
-  top: 250px;
-  height: 100px;
-  z-index: -1;
-}
-
-/* TRAÇO DO CARD 4 (índice 3) */
-.card-connector[style*="--card-position: 3"] {
-  left: calc(var(--card-position) * 12.5% + 79px); /* Ajuste horizontal */
-  top: 410px;
-  height: 120px;
-  z-index: -1;
-}
-
-/* TRAÇO DO CARD 5 (índice 4) */
-.card-connector[style*="--card-position: 4"] {
-  left: calc(var(--card-position) * 12.5% + 92px); /* Ajuste horizontal */
-  top: 250px;
-  height: 100px;
-  z-index: -1;
-}
-
-/* TRAÇO DO CARD 6 (índice 5) */
-.card-connector[style*="--card-position: 5"] {
-  left: calc(var(--card-position) * 12.5% + 105px); /* Ajuste horizontal */
-  top: 410px;
-  height: 120px;
-  z-index: -1;
-}
-
-/* TRAÇO DO CARD 7 (índice 6) */
-.card-connector[style*="--card-position: 6"] {
-  left: calc(var(--card-position) * 12.5% + 118px); /* Ajuste horizontal */
-  top: 250px;
-  height: 100px;
-  z-index: -1;
-}
-
-/* TRAÇO DO CARD 8 (índice 7) */
-.card-connector[style*="--card-position: 7"] {
-  left: calc(var(--card-position) * 12.5% + 131px); /* Ajuste horizontal */
-  top: 410px;
-  height: 120px;
-  z-index: -1;
-}
-
-/* Responsividade da Nova Timeline */
-@media (max-width: 992px) {
+@media (max-width: 1650px) {
   .new-timeline-container {
-    margin: 80px auto;
-    padding: 40px 20px;
+    padding: 60px 180px !important;
+    margin: 0px auto;
     overflow-x: auto;
+    overflow-y: hidden;
     cursor: grab;
   }
   
   .new-timeline-container:active {
     cursor: grabbing;
   }
-  
-  .new-timeline-container::after {
+
+  .timeline-scroll-wrapper {
+    height: 120vh;
+    padding: 10px 380px;
+  }
+
+  .intro-text::after {
     content: "← Arraste para ver mais →";
     position: absolute;
-    bottom: -30px;
+    bottom: -80px;
     left: 50%;
+    font-weight: 600;
     transform: translateX(-50%);
     font-size: 0.8rem;
     color: #AE2C2A;
-    opacity: 0.7;
+    white-space: nowrap;
     pointer-events: none;
   }
-  
+}
+
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 40px;
+  }
+
+  .new-timeline-container {
+    padding: 60px 160px !important;
+  }
+
   .timeline-scroll-wrapper {
-    min-width: 800px;
-    width: 800px;
+    padding: 10px 480px;
+  }
+
+  .timeline-card {
+  left: calc(var(--card-index) * 12.5% + 35px - 160px) !important;
+  width: 280px !important;
+  min-height: 250px !important;
+}
+
+.timeline-card.top {
+  top: 240px !important;
+  left: 135px !important;
+}
+
+.timeline-card.bottom {
+  top: -240px !important;
+  left: 135px !important;
+}
+
+  .card-icon {
+    width: 45px !important;
+    height: 45px !important;
+    font-size: 1.5rem !important;
+  }
+
+  .card-title {
+    font-size: 1.2rem !important;
+  }
+
+  .card-description {
+    font-size: 0.9rem !important;
+  }
+
+  .differentials-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .new-timeline-container {
+    padding: 50px 160px !important;
+    margin: 0px auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    cursor: grab;
+  }
+  
+  .new-timeline-container:active {
+    cursor: grabbing;
+  }
+
+  .timeline-scroll-wrapper {
+    height: 120vh;
+    padding: 10px 580px;
   }
 
   .timeline-dot {
@@ -2243,11 +2170,6 @@ section {
 
   .timeline-dot.active .dot-year {
     font-size: 0.9rem;
-  }
-
-  .timeline-card-container {
-    margin-top: -80px;
-    min-height: 600px;
   }
 
   .timeline-card {
@@ -2296,113 +2218,16 @@ section {
   .card-description {
     font-size: 0.9rem;
   }
-
-  /* CARDS INDIVIDUAIS - 992px */
-  .timeline-card[style*="--card-position: 0"] {
-    left: calc(var(--card-position) * 12.5% - 110px);
-    top: -20px;
-  }
-  .timeline-card[style*="--card-position: 1"] {
-    left: calc(var(--card-position) * 12.5% - 95px);
-    top: 440px;
-  }
-  .timeline-card[style*="--card-position: 2"] {
-    left: calc(var(--card-position) * 12.5% - 80px);
-    top: -20px;
-  }
-  .timeline-card[style*="--card-position: 3"] {
-    left: calc(var(--card-position) * 12.5% - 65px);
-    top: 440px;
-  }
-  .timeline-card[style*="--card-position: 4"] {
-    left: calc(var(--card-position) * 12.5% - 50px);
-    top: -20px;
-  }
-  .timeline-card[style*="--card-position: 5"] {
-    left: calc(var(--card-position) * 12.5% - 35px);
-    top: 440px;
-  }
-  .timeline-card[style*="--card-position: 6"] {
-    left: calc(var(--card-position) * 12.5% - 20px);
-    top: -20px;
-  }
-  .timeline-card[style*="--card-position: 7"] {
-    left: calc(var(--card-position) * 12.5% - 5px);
-    top: 440px;
-  }
-
-  /* TRAÇOS INDIVIDUAIS - 992px */
-  .card-connector[style*="--card-position: 0"] {
-    left: calc(var(--card-position) * 12.5% + 37px);
-    top: 220px;
-    height: 85px;
-  }
-  .card-connector[style*="--card-position: 1"] {
-    left: calc(var(--card-position) * 12.5% + 47px);
-    top: 350px;
-    height: 100px;
-  }
-  .card-connector[style*="--card-position: 2"] {
-    left: calc(var(--card-position) * 12.5% + 57px);
-    top: 220px;
-    height: 85px;
-  }
-  .card-connector[style*="--card-position: 3"] {
-    left: calc(var(--card-position) * 12.5% + 67px);
-    top: 350px;
-    height: 100px;
-  }
-  .card-connector[style*="--card-position: 4"] {
-    left: calc(var(--card-position) * 12.5% + 77px);
-    top: 220px;
-    height: 85px;
-  }
-  .card-connector[style*="--card-position: 5"] {
-    left: calc(var(--card-position) * 12.5% + 87px);
-    top: 350px;
-    height: 100px;
-  }
-  .card-connector[style*="--card-position: 6"] {
-    left: calc(var(--card-position) * 12.5% + 97px);
-    top: 220px;
-    height: 85px;
-  }
-  .card-connector[style*="--card-position: 7"] {
-    left: calc(var(--card-position) * 12.5% + 107px);
-    top: 350px;
-    height: 100px;
-  }
 }
 
 @media (max-width: 768px) {
   .new-timeline-container {
-    margin: 60px auto;
     padding: 30px 15px;
-    overflow-x: auto;
     cursor: grab;
   }
   
   .new-timeline-container:active {
     cursor: grabbing;
-  }
-  
-  .timeline-scroll-wrapper {
-    min-width: 700px;
-    width: 700px;
-  }
-
-  .timeline-dot {
-    width: 50px;
-    height: 50px;
-    border: 4px solid #ffffff;
-  }
-
-  .dot-year {
-    font-size: 0.7rem;
-  }
-
-  .timeline-dot.active .dot-year {
-    font-size: 0.8rem;
   }
 
   .timeline-card-container {
@@ -2456,123 +2281,33 @@ section {
   .card-description {
     font-size: 0.85rem;
   }
-
-  /* CARDS INDIVIDUAIS - 768px */
-  .timeline-card[style*="--card-position: 0"] {
-    left: calc(var(--card-position) * 12.5% - 85px);
-    top: -10px;
-  }
-  .timeline-card[style*="--card-position: 1"] {
-    left: calc(var(--card-position) * 12.5% - 75px);
-    top: 360px;
-  }
-  .timeline-card[style*="--card-position: 2"] {
-    left: calc(var(--card-position) * 12.5% - 65px);
-    top: -10px;
-  }
-  .timeline-card[style*="--card-position: 3"] {
-    left: calc(var(--card-position) * 12.5% - 55px);
-    top: 360px;
-  }
-  .timeline-card[style*="--card-position: 4"] {
-    left: calc(var(--card-position) * 12.5% - 45px);
-    top: -10px;
-  }
-  .timeline-card[style*="--card-position: 5"] {
-    left: calc(var(--card-position) * 12.5% - 35px);
-    top: 360px;
-  }
-  .timeline-card[style*="--card-position: 6"] {
-    left: calc(var(--card-position) * 12.5% - 25px);
-    top: -10px;
-  }
-  .timeline-card[style*="--card-position: 7"] {
-    left: calc(var(--card-position) * 12.5% - 15px);
-    top: 360px;
-  }
-
-  /* TRAÇOS INDIVIDUAIS - 768px */
-  .card-connector[style*="--card-position: 0"] {
-    left: calc(var(--card-position) * 12.5% + 32px);
-    top: 190px;
-    height: 70px;
-  }
-  .card-connector[style*="--card-position: 1"] {
-    left: calc(var(--card-position) * 12.5% + 40px);
-    top: 300px;
-    height: 70px;
-  }
-  .card-connector[style*="--card-position: 2"] {
-    left: calc(var(--card-position) * 12.5% + 47px);
-    top: 190px;
-    height: 70px;
-  }
-  .card-connector[style*="--card-position: 3"] {
-    left: calc(var(--card-position) * 12.5% + 55px);
-    top: 300px;
-    height: 70px;
-  }
-  .card-connector[style*="--card-position: 4"] {
-    left: calc(var(--card-position) * 12.5% + 62px);
-    top: 190px;
-    height: 70px;
-  }
-  .card-connector[style*="--card-position: 5"] {
-    left: calc(var(--card-position) * 12.5% + 70px);
-    top: 300px;
-    height: 70px;
-  }
-  .card-connector[style*="--card-position: 6"] {
-    left: calc(var(--card-position) * 12.5% + 77px);
-    top: 190px;
-    height: 70px;
-  }
-  .card-connector[style*="--card-position: 7"] {
-    left: calc(var(--card-position) * 12.5% + 85px);
-    top: 300px;
-    height: 70px;
-  }
 }
 
 @media (max-width: 576px) {
   .new-timeline-container {
-    margin: 40px auto;
-    padding: 20px 10px;
+    padding: 10px 160px !important;
     overflow-x: auto;
+    overflow-y: hidden;
     cursor: grab;
   }
   
   .new-timeline-container:active {
     cursor: grabbing;
-  }
+  } 
   
   .timeline-scroll-wrapper {
     min-width: 600px;
     width: 600px;
   }
 
-  .timeline-dot {
-    width: 40px;
-    height: 40px;
-    border: 3px solid #ffffff;
-  }
-
-  .dot-year {
-    font-size: 0.6rem;
-  }
-
-  .timeline-dot.active .dot-year {
-    font-size: 0.7rem;
-  }
-
   .timeline-card-container {
     margin-top: -40px;
-    min-height: 420px;
+    min-height: 120px;
   }
 
   .timeline-card {
     width: 220px;
-    min-height: 200px;
+    min-height: 70px;
     left: calc(var(--card-position) * 12.5% - 110px);
   }
 
@@ -2599,14 +2334,18 @@ section {
   }
 
   .card-icon {
-    width: 45px;
-    height: 45px;
+    width: 55px !important;
+    height: 55px !important;
     font-size: 1.2rem;
     margin: 12px 12px 0 12px;
   }
 
+  .card-icon i {
+    font-size: 1.8rem !important;
+  }
+
   .card-content {
-    padding: 8px 12px 12px 12px;
+    padding: 25px 12px 12px 12px;
   }
 
   .card-title {
@@ -2617,88 +2356,11 @@ section {
   .card-description {
     font-size: 0.8rem;
   }
-
-  /* CARDS INDIVIDUAIS - 576px */
-  .timeline-card[style*="--card-position: 0"] {
-    left: calc(var(--card-position) * 12.5% - 65px);
-    top: 0px;
-  }
-  .timeline-card[style*="--card-position: 1"] {
-    left: calc(var(--card-position) * 12.5% - 58px);
-    top: 300px;
-  }
-  .timeline-card[style*="--card-position: 2"] {
-    left: calc(var(--card-position) * 12.5% - 50px);
-    top: 0px;
-  }
-  .timeline-card[style*="--card-position: 3"] {
-    left: calc(var(--card-position) * 12.5% - 43px);
-    top: 300px;
-  }
-  .timeline-card[style*="--card-position: 4"] {
-    left: calc(var(--card-position) * 12.5% - 35px);
-    top: 0px;
-  }
-  .timeline-card[style*="--card-position: 5"] {
-    left: calc(var(--card-position) * 12.5% - 28px);
-    top: 300px;
-  }
-  .timeline-card[style*="--card-position: 6"] {
-    left: calc(var(--card-position) * 12.5% - 20px);
-    top: 0px;
-  }
-  .timeline-card[style*="--card-position: 7"] {
-    left: calc(var(--card-position) * 12.5% - 13px);
-    top: 300px;
-  }
-
-  /* TRAÇOS INDIVIDUAIS - 576px */
-  .card-connector[style*="--card-position: 0"] {
-    left: calc(var(--card-position) * 12.5% + 27px);
-    top: 160px;
-    height: 55px;
-  }
-  .card-connector[style*="--card-position: 1"] {
-    left: calc(var(--card-position) * 12.5% + 33px);
-    top: 250px;
-    height: 60px;
-  }
-  .card-connector[style*="--card-position: 2"] {
-    left: calc(var(--card-position) * 12.5% + 38px);
-    top: 160px;
-    height: 55px;
-  }
-  .card-connector[style*="--card-position: 3"] {
-    left: calc(var(--card-position) * 12.5% + 44px);
-    top: 250px;
-    height: 60px;
-  }
-  .card-connector[style*="--card-position: 4"] {
-    left: calc(var(--card-position) * 12.5% + 49px);
-    top: 160px;
-    height: 55px;
-  }
-  .card-connector[style*="--card-position: 5"] {
-    left: calc(var(--card-position) * 12.5% + 55px);
-    top: 250px;
-    height: 60px;
-  }
-  .card-connector[style*="--card-position: 6"] {
-    left: calc(var(--card-position) * 12.5% + 60px);
-    top: 160px;
-    height: 55px;
-  }
-  .card-connector[style*="--card-position: 7"] {
-    left: calc(var(--card-position) * 12.5% + 66px);
-    top: 250px;
-    height: 60px;
-  }
 }
 
 @media (max-width: 480px) {
   .new-timeline-container {
-    margin: 30px auto;
-    padding: 15px 5px;
+    padding: 10px 160px !important;
     overflow-x: auto;
     cursor: grab;
   }
@@ -2712,39 +2374,29 @@ section {
     width: 500px;
   }
 
-  .timeline-dot {
-    width: 35px;
-    height: 35px;
-    border: 2px solid #ffffff;
-  }
-
-  .dot-year {
-    font-size: 0.5rem;
-  }
-
-  .timeline-dot.active .dot-year {
-    font-size: 0.6rem;
-  }
-
   .timeline-card-container {
     margin-top: -30px;
     min-height: 320px;
   }
 
   .timeline-card {
-    width: 180px;
-    min-height: 160px;
+    width: 200px;
+    min-height: 140px;
   }
 
   .card-icon {
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
-    margin: 8px 8px 0 8px;
+    width: 55px !important;
+    height: 55px !important;
+    font-size: 1.2rem;
+    margin: 12px 12px 0 12px;
+  }
+
+  .card-icon i {
+    font-size: 1.8rem !important;
   }
 
   .card-content {
-    padding: 6px 8px 8px 8px;
+    padding: 25px 12px 12px 12px;
   }
 
   .card-title {
@@ -2757,7 +2409,7 @@ section {
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 360px) {
   .new-timeline-container {
     margin: 20px auto;
     padding: 10px 2px;
@@ -2775,17 +2427,17 @@ section {
   }
 
   .timeline-dot {
-    width: 30px;
-    height: 30px;
-    border: 2px solid #ffffff;
+    width: 60px;
+    height: 60px;
+    border: 3px solid #ffffff;
   }
 
   .dot-year {
-    font-size: 0.45rem;
+    font-size: 0.7rem;
   }
 
   .timeline-dot.active .dot-year {
-    font-size: 0.5rem;
+    font-size: 0.75rem;
   }
 
   .timeline-card-container {
@@ -2794,8 +2446,7 @@ section {
   }
 
   .timeline-card {
-    width: 160px;
-    min-height: 140px;
+    min-height: 240px !important;
   }
 
   .card-icon {
@@ -2806,7 +2457,7 @@ section {
   }
 
   .card-content {
-    padding: 4px 6px 6px 6px;
+    padding: 20px 15px 0px 15px;
   }
 
   .card-title {
@@ -2831,6 +2482,287 @@ section {
     animation: none !important;
   }
 }
+
+/* Animação com flip e zoom mais visível */
+@keyframes cardFlipZoomIn {
+  0% {
+    opacity: 0;
+    transform: rotateY(-180deg) scale(0.2) translateY(100px);
+    filter: blur(10px);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+  25% {
+    opacity: 0.3;
+    transform: rotateY(-90deg) scale(0.6) translateY(40px);
+    filter: blur(6px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: rotateY(-45deg) scale(0.9) translateY(10px);
+    filter: blur(3px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15), 0 15px 30px rgba(174, 44, 42, 0.1);
+  }
+  75% {
+    opacity: 0.9;
+    transform: rotateY(15deg) scale(1.1) translateY(-10px);
+    filter: blur(1px);
+    box-shadow: 
+      0 40px 80px rgba(0, 0, 0, 0.18), 
+      0 25px 50px rgba(174, 44, 42, 0.15),
+      0 0 30px rgba(174, 44, 42, 0.2);
+  }
+  90% {
+    opacity: 0.98;
+    transform: rotateY(-5deg) scale(1.05) translateY(-5px);
+    filter: blur(0px);
+    box-shadow: 
+      0 45px 90px rgba(0, 0, 0, 0.2), 
+      0 30px 60px rgba(174, 44, 42, 0.18);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateY(0deg) scale(1) translateY(0px);
+    filter: blur(0px) saturate(1.1) contrast(1.05) brightness(1.02);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.18), 0 25px 60px rgba(174, 44, 42, 0.15);
+  }
+}
+
+@keyframes cardFlipZoomOut {
+  0% {
+    opacity: 1;
+    transform: rotateY(0deg) scale(1) translateY(0px);
+    filter: blur(0px);
+  }
+  25% {
+    opacity: 0.8;
+    transform: rotateY(45deg) scale(1.1) translateY(-15px);
+    filter: blur(1px);
+    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.15);
+  }
+  50% {
+    opacity: 0.5;
+    transform: rotateY(90deg) scale(0.8) translateY(20px);
+    filter: blur(4px);
+  }
+  75% {
+    opacity: 0.2;
+    transform: rotateY(135deg) scale(0.4) translateY(60px);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 0;
+    transform: rotateY(180deg) scale(0.1) translateY(120px);
+    filter: blur(15px);
+  }
+}
+
+@keyframes cardGrandEntranceWithBounce {
+  0% {
+    opacity: 0;
+    transform: translateY(150px) scale(0.1) rotateX(-60deg) rotateY(-30deg) rotateZ(-20deg);
+    filter: blur(20px) saturate(0.3) contrast(0.6);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  }
+  20% {
+    opacity: 0.2;
+    transform: translateY(80px) scale(0.5) rotateX(-35deg) rotateY(-18deg) rotateZ(-12deg);
+    filter: blur(12px) saturate(0.6) contrast(0.8);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  }
+  45% {
+    opacity: 0.6;
+    transform: translateY(20px) scale(0.85) rotateX(-15deg) rotateY(-8deg) rotateZ(-5deg);
+    filter: blur(6px) saturate(0.85) contrast(0.92);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 10px 25px rgba(174, 44, 42, 0.08);
+  }
+  /* PRIMEIRO BOUNCE ELÁSTICO */
+  65% {
+    opacity: 0.8;
+    transform: translateY(-30px) scale(1.15) rotateX(8deg) rotateY(4deg) rotateZ(3deg);
+    filter: blur(3px) saturate(1.05) contrast(1.02);
+    box-shadow: 0 50px 100px rgba(0, 0, 0, 0.18), 0 25px 50px rgba(174, 44, 42, 0.15);
+  }
+  /* SEGUNDO BOUNCE MAIS ALTO */
+  75% {
+    opacity: 0.9;
+    transform: translateY(-60px) scale(1.35) rotateX(15deg) rotateY(8deg) rotateZ(5deg);
+    filter: blur(1px) saturate(1.12) contrast(1.08);
+    box-shadow: 
+      0 70px 140px rgba(0, 0, 0, 0.25), 
+      0 40px 80px rgba(174, 44, 42, 0.2),
+      0 0 50px 10px rgba(174, 44, 42, 0.15);
+  }
+  /* TERCEIRO BOUNCE MENOR */
+  85% {
+    opacity: 0.95;
+    transform: translateY(-20px) scale(1.12) rotateX(5deg) rotateY(2deg) rotateZ(1deg);
+    filter: blur(0.5px) saturate(1.08) contrast(1.05);
+    box-shadow: 0 45px 90px rgba(0, 0, 0, 0.2), 0 25px 50px rgba(174, 44, 42, 0.15);
+  }
+  /* QUARTO BOUNCE MÍNIMO */
+  92% {
+    opacity: 0.98;
+    transform: translateY(-8px) scale(1.04) rotateX(2deg) rotateY(1deg) rotateZ(0.5deg);
+    filter: blur(0px) saturate(1.05) contrast(1.03);
+  }
+  /* PEQUENO OVERSHOOT */
+  97% {
+    opacity: 1;
+    transform: translateY(5px) scale(0.98) rotateX(-1deg) rotateY(-0.5deg) rotateZ(-0.2deg);
+    filter: blur(0px) saturate(1.08) contrast(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    filter: blur(0px) saturate(1.1) contrast(1.05) brightness(1.02);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.18), 0 25px 60px rgba(174, 44, 42, 0.15);
+  }
+}
+
+@keyframes cardPulseGlow {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    box-shadow: 
+      0 40px 100px rgba(0, 0, 0, 0.18),
+      0 25px 60px rgba(174, 44, 42, 0.15),
+      0 0 0 0 rgba(174, 44, 42, 0);
+  }
+  25% {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 
+      0 50px 120px rgba(0, 0, 0, 0.22),
+      0 35px 80px rgba(174, 44, 42, 0.2),
+      0 0 40px 8px rgba(174, 44, 42, 0.12);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 
+      0 60px 140px rgba(0, 0, 0, 0.25),
+      0 45px 100px rgba(174, 44, 42, 0.25),
+      0 0 60px 15px rgba(174, 44, 42, 0.18),
+      0 0 80px 20px rgba(210, 52, 44, 0.1);
+  }
+  75% {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 
+      0 50px 120px rgba(0, 0, 0, 0.22),
+      0 35px 80px rgba(174, 44, 42, 0.2),
+      0 0 40px 8px rgba(174, 44, 42, 0.12);
+  }
+}
+
+@keyframes cardGrandExitWithBounce {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    filter: blur(0px) saturate(1.1) contrast(1.05);
+  }
+  /* DUPLO PULO PARA CIMA ANTES DE SAIR */
+  12% {
+    opacity: 0.95;
+    transform: translateY(-20px) scale(1.08) rotateX(5deg) rotateY(2deg) rotateZ(2deg);
+    filter: blur(0.5px) saturate(1.08) contrast(1.03);
+    box-shadow: 0 45px 90px rgba(0, 0, 0, 0.18), 0 25px 50px rgba(174, 44, 42, 0.15);
+  }
+  20% {
+    opacity: 0.9;
+    transform: translateY(-40px) scale(1.2) rotateX(10deg) rotateY(5deg) rotateZ(4deg);
+    filter: blur(1px) saturate(1.1) contrast(1.05);
+    box-shadow: 
+      0 60px 120px rgba(0, 0, 0, 0.22), 
+      0 35px 70px rgba(174, 44, 42, 0.18),
+      0 0 40px 8px rgba(174, 44, 42, 0.12);
+  }
+  35% {
+    opacity: 0.75;
+    transform: translateY(20px) scale(0.92) rotateX(-8deg) rotateY(-3deg) rotateZ(3deg);
+    filter: blur(3px) saturate(0.9) contrast(0.95);
+  }
+  55% {
+    opacity: 0.5;
+    transform: translateY(70px) scale(0.75) rotateX(-25deg) rotateY(-12deg) rotateZ(8deg);
+    filter: blur(7px) saturate(0.7) contrast(0.85);
+  }
+  75% {
+    opacity: 0.2;
+    transform: translateY(120px) scale(0.5) rotateX(-40deg) rotateY(-20deg) rotateZ(12deg);
+    filter: blur(12px) saturate(0.5) contrast(0.75);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(180px) scale(0.1) rotateX(-70deg) rotateY(-35deg) rotateZ(20deg);
+    filter: blur(25px) saturate(0.2) contrast(0.5);
+  }
+}
+
+/* Shimmer effect para cards ativos */
+.timeline-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 10%,
+    rgba(255, 255, 255, 0.6) 30%,
+    rgba(174, 44, 42, 0.15) 50%,
+    rgba(255, 255, 255, 0.6) 70%,
+    rgba(255, 255, 255, 0.1) 90%,
+    transparent 100%
+  );
+  transition: left 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 1;
+  opacity: 0;
+}
+
+/* Borda brilhante animada */
+.timeline-card::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(174, 44, 42, 0.4) 25%,
+    rgba(210, 52, 44, 0.3) 50%,
+    rgba(174, 44, 42, 0.4) 75%,
+    transparent 100%
+  );
+  background-size: 300% 300%;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 1s ease;
+  z-index: -1;
+  animation: borderGlow 4s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+  0%, 100% {
+    background-position: 0% 50%;
+    opacity: 0.3;
+  }
+  25% {
+    background-position: 25% 50%;
+    opacity: 0.6;
+  }
+  50% {
+    background-position: 100% 50%;
+    opacity: 0.8;
+  }
+  75% {
+    background-position: 75% 50%;
+    opacity: 0.6;
+  }
+}
+
+
 
 /* Efeitos de hover mais suaves para touch devices */
 @media (hover: none) {

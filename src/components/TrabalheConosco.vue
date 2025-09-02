@@ -86,7 +86,7 @@
     </section>
 
     <!-- Seção de Benefícios -->
-    <section class="benefits-section">
+    <!-- <section class="benefits-section">
       <div class="container">
         <ScrollReveal direction="bottom" :delay="200">
           <div class="section-title light">
@@ -148,7 +148,7 @@
           </ScrollReveal>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- Seção de Vagas Disponíveis -->
     <section class="jobs-section">

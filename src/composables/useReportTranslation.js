@@ -71,9 +71,12 @@ const translations = reactive({
                         label: 'Tipo do relato',
                         placeholder: 'Selecione o tipo de violação',
                         options: {
-                            sexualHarassment: 'Assédio sexual',
-                            moralHarassment: 'Assédio moral',
                             physicalAggression: 'Agressão física',
+                            threat: 'Ameaça',
+                            financialHarassment: 'Assédio financeiro',
+                            moralHarassment: 'Assédio moral',
+                            psychologicalHarassment: 'Assédio psicológico',
+                            sexualHarassment: 'Assédio sexual',
                             unfairCompetition: 'Concorrência desleal',
                             inappropriateBehavior: 'Comportamento inadequado',
                             conflictInterest: 'Conflito de Interesses',
@@ -108,6 +111,7 @@ const translations = reactive({
                             bidding: 'Licitação',
                             hr: 'Recursos Humanos',
                             it: 'TI',
+                            outsideCompany: 'Fora da Empresa',
                             other: 'Outras'
                         }
                     },
@@ -299,6 +303,7 @@ const translations = reactive({
                             bidding: 'Licitação',
                             hr: 'Human Resources',
                             it: 'IT',
+                            outsideCompany: 'Outside the company',
                             other: 'Others'
                         }
                     },
@@ -490,6 +495,7 @@ const translations = reactive({
                             bidding: 'Ofertas',
                             hr: 'Recursos Humanos',
                             it: 'TI',
+                            outsideCompany: 'Fuera de la empresa',
                             other: 'Otros'
                         }
                     },

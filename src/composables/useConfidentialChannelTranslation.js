@@ -8,7 +8,7 @@ const translations = reactive({
       heroTitle: 'Canal Confidencial',
       heroSubtitle: 'Um ambiente seguro para relatos éticos e transparentes',
       introTitle: 'Nosso Compromisso com a Ética e Transparência',
-      introText: 'O Canal Confidencial da Uni Hospitalar é uma ferramenta essencial para manter os mais altos padrões éticos em nossa organização. Oferecemos um ambiente seguro e confidencial onde colaboradores, parceiros e terceiros podem reportar situações que violem nossos valores e políticas internas.',
+      introText: 'O Canal Confidencial da Uni Hospitalar é uma ferramenta essencial para manter os mais altos padrões éticos em nossa organização. Oferecemos um ambiente seguro e confidencial onde colaboradores, parceiros e terceiros podem reportar situações que violem a legislação vigente, valores e as políticas internas.',
       highlight: {
         title: 'Ambiente Seguro e Protegido',
         text: 'Garantimos total confidencialidade e proteção contra retaliações para todos que utilizarem nosso canal de forma responsável e de boa-fé.'
@@ -179,7 +179,7 @@ const translations = reactive({
       heroTitle: 'Confidential Channel',
       heroSubtitle: 'A safe environment for ethical and transparent reports',
       introTitle: 'Our Commitment to Ethics and Transparency',
-      introText: 'Uni Hospitalar\'s Confidential Channel is an essential tool to maintain the highest ethical standards in our organization. We offer a safe and confidential environment where employees, partners and third parties can report situations that violate our values and internal policies.',
+      introText: 'Uni Hospitalar\'s Confidential Channel is an essential tool for maintaining the highest ethical standards within our organization. We offer a safe and confidential environment where employees, partners, and third parties can report situations that violate current legislation, values, and internal policies.',
       highlight: {
         title: 'Safe and Protected Environment',
         text: 'We guarantee total confidentiality and protection against retaliation for all who use our channel responsibly and in good faith.'
@@ -350,7 +350,7 @@ const translations = reactive({
       heroTitle: 'Canal Confidencial',
       heroSubtitle: 'Un ambiente seguro para reportes éticos y transparentes',
       introTitle: 'Nuestro Compromiso con la Ética y Transparencia',
-      introText: 'El Canal Confidencial de Uni Hospitalar es una herramienta esencial para mantener los más altos estándares éticos en nuestra organización. Ofrecemos un ambiente seguro y confidencial donde colaboradores, socios y terceros pueden reportar situaciones que violen nuestros valores y políticas internas.',
+      introText: 'El Canal Confidencial de Uni Hospitalar es una herramienta esencial para mantener los más altos estándares éticos dentro de nuestra organización. Ofrecemos un entorno seguro y confidencial donde empleados, socios y terceros pueden reportar situaciones que vulneren la legislación vigente, los valores y las políticas internas.',
       highlight: {
         title: 'Ambiente Seguro y Protegido',
         text: 'Garantizamos total confidencialidad y protección contra represalias para todos los que utilicen nuestro canal de forma responsable y de buena fe.'

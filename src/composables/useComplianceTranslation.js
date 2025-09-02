@@ -55,7 +55,7 @@ const translations = reactive({
       policiesIntro: 'Acesse nossas políticas que reforçam o compromisso com a conformidade e a ética.',
       policies: {
         regularTraining: {
-          title: 'Treinamentos Regulares',
+          title: 'Treinamentos',
           description: 'Promovemos capacitação contínua de nossos colaboradores em práticas éticas e conformidade regulatória.'
         },
         antiBribery: {
@@ -71,7 +71,7 @@ const translations = reactive({
       correctiveSectionTitle: 'Como Aplicamos Nossas Políticas',
       correctiveText: 'Conheça como implementamos e monitoramos nossas políticas de compliance na prática, garantindo efetividade e transparência em todos os processos.',
       correctiveLinks: {
-        regularTraining: 'Treinamentos Regulares',
+        regularTraining: 'Treinamentos',
         antiBribery: 'Monitoramento Antissuborno',
         sectorCompliance: 'Auditoria de Normas Setoriais'
       },
@@ -131,7 +131,7 @@ const translations = reactive({
       policiesIntro: 'Access our policies that reinforce our commitment to compliance and ethics.',
       policies: {
         regularTraining: {
-          title: 'Regular Training',
+          title: 'Training',
           description: 'We promote continuous training of our employees in ethical practices and regulatory compliance.'
         },
         antiBribery: {
@@ -147,7 +147,7 @@ const translations = reactive({
       correctiveSectionTitle: 'How We Apply Our Policies',
       correctiveText: 'Learn how we implement and monitor our compliance policies in practice, ensuring effectiveness and transparency in all processes.',
       correctiveLinks: {
-        regularTraining: 'Regular Training',
+        regularTraining: 'Training',
         antiBribery: 'Anti-Bribery Monitoring',
         sectorCompliance: 'Sector Standards Audit'
       },
@@ -207,7 +207,7 @@ const translations = reactive({
       policiesIntro: 'Acceda a nuestras políticas que refuerzan el compromiso con la conformidad y la ética.',
       policies: {
         regularTraining: {
-          title: 'Entrenamientos Regulares',
+          title: 'Entrenamientos',
           description: 'Promovemos la capacitación continua de nuestros colaboradores en prácticas éticas y conformidad regulatoria.'
         },
         antiBribery: {
@@ -223,7 +223,7 @@ const translations = reactive({
       correctiveSectionTitle: 'Cómo Aplicamos Nuestras Políticas',
       correctiveText: 'Conozca cómo implementamos y monitoreamos nuestras políticas de compliance en la práctica, garantizando efectividad y transparencia en todos los procesos.',
       correctiveLinks: {
-        regularTraining: 'Entrenamientos regulares',
+        regularTraining: 'Entrenamientos',
         antiBribery: 'Monitoreo Antisoborno',
         sectorCompliance: 'Auditoría de Normas Sectoriales'
       },

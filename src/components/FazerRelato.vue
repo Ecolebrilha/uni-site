@@ -110,7 +110,8 @@
                                     <div class="form-grid">
                                         <div class="form-group">
                                             <label for="relationship">{{ t('report.form.step1.relationship.label') }}
-                                                <span class="required">*</span></label>
+                                                <!-- <span class="required">*</span> -->
+                                            </label>
                                             <select id="relationship" v-model="form.relationship" required
                                                 :class="{ 'error': errors.relationship }">
                                                 <option value="" disabled>{{
@@ -157,14 +158,23 @@
                                                 :class="{ 'error': errors.violationType }">
                                                 <option value="" disabled>{{
                                                     t('report.form.step1.violationType.placeholder') }}</option>
-                                                <option value="sexual-harassment">{{
-                                                    t('report.form.step1.violationType.options.sexualHarassment') }}
+                                                <option value="physical-aggression">{{
+                                                        t('report.form.step1.violationType.options.physicalAggression') }}
+                                                </option>
+                                                <option value="threat">{{
+                                                    t('report.form.step1.violationType.options.threat') }}
+                                                </option>
+                                                <option value="financial-harassment">{{
+                                                    t('report.form.step1.violationType.options.financialHarassment') }}
                                                 </option>
                                                 <option value="moral-harassment">{{
                                                     t('report.form.step1.violationType.options.moralHarassment') }}
                                                 </option>
-                                                <option value="physical-aggression">{{
-                                                    t('report.form.step1.violationType.options.physicalAggression') }}
+                                                <option value="psychological-harassment">{{
+                                                    t('report.form.step1.violationType.options.psychologicalHarassment') }}
+                                                </option>
+                                                <option value="sexual-harassment">{{
+                                                    t('report.form.step1.violationType.options.sexualHarassment') }}
                                                 </option>
                                                 <option value="unfair-competition">{{
                                                     t('report.form.step1.violationType.options.unfairCompetition') }}
@@ -243,6 +253,7 @@
                                                 <option value="hr">{{
                                                     t('report.form.step1.area.options.hr') }}</option>
                                                 <option value="it">{{ t('report.form.step1.area.options.it') }}</option>
+                                                <option value="outsideCompany">{{ t('report.form.step1.area.options.outsideCompany') }}</option>
                                                 <option value="other">{{ t('report.form.step1.area.options.other') }}
                                                 </option>
                                             </select>
@@ -298,7 +309,8 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="accusedName">{{ t('report.form.step2.accusedName') }} </label>
+                                            <label for="accusedName">{{ t('report.form.step2.accusedName') }} <span
+                                                class="required">*</span></label>
                                             <input type="text" id="accusedName" v-model="form.accusedName" required
                                                 :placeholder="t('report.form.step2.accusedNamePlaceholder')"
                                                 :class="{ 'error': errors.accusedName }">
@@ -308,9 +320,12 @@
 
                                         <div class="form-group">
                                             <label for="accusedPosition">{{ t('report.form.step2.accusedPosition')
-                                                }}</label>
-                                            <input type="text" id="accusedPosition" v-model="form.accusedPosition"
-                                                :placeholder="t('report.form.step2.accusedPositionPlaceholder')">
+                                                }} <span class="required">*</span></label>
+                                            <input type="text" id="accusedPosition" v-model="form.accusedPosition" required
+                                                :placeholder="t('report.form.step2.accusedPositionPlaceholder')"
+                                                :class="{ 'error': errors.accusedPosition }">
+                                            <div v-if="errors.accusedPosition" class="error-message">{{ errors.accusedPosition
+                                                }}</div>
                                         </div>
 
                                         <div class="form-group">
@@ -643,9 +658,9 @@ export default {
             this.errors = {} // Limpar erros anteriores
 
             if (this.currentStep === 1) {
-                if (!this.form.relationship) {
-                    this.errors.relationship = this.t('report.validation.required')
-                }
+                // if (!this.form.relationship) {
+                //     this.errors.relationship = this.t('report.validation.required')
+                // }
                 if (!this.form.involvement) {
                     this.errors.involvement = this.t('report.validation.required')
                 }
@@ -675,6 +690,18 @@ export default {
 
                 if (!this.form.location || this.form.location.trim().length < 3) {
                     this.errors.location = this.form.location ?
+                        this.t('report.validation.minLength').replace('{min}', '3') :
+                        this.t('report.validation.required')
+                }
+                
+                if (!this.form.accusedName || this.form.accusedName.trim().length < 3) {
+                    this.errors.accusedName = this.form.accusedName ?
+                        this.t('report.validation.minLength').replace('{min}', '3') :
+                        this.t('report.validation.required')
+                }
+
+                if (!this.form.accusedPosition || this.form.accusedPosition.trim().length < 3) {
+                    this.errors.accusedPosition = this.form.accusedPosition ?
                         this.t('report.validation.minLength').replace('{min}', '3') :
                         this.t('report.validation.required')
                 }
@@ -1432,6 +1459,9 @@ export default {
         },
         'form.accusedName'() {
             this.clearFieldError('accusedName')
+        },
+        'form.accusedPosition'() {
+            this.clearFieldError('accusedPosition')
         },
         'form.description'() {
             this.clearFieldError('description')
