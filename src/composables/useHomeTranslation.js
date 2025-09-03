@@ -6,7 +6,7 @@ const translations = reactive({
   pt: {
     home: {
       hero: {
-        title: 'Distribuindo saúde, inspirando confiança.',
+        title: 'Valorizando pessoas, inspirando confiança.',
         subtitle: 'O nosso foco está na distribuição <br> de medicamentos hospitalares, <br> oncológicos e excepcionais.',
         scrollIndicator: 'Role para baixo'
       },
@@ -124,7 +124,7 @@ const translations = reactive({
   en: {
     home: {
       hero: {
-        title: '<strong>Uni Hospitalar:</strong><br>Delivering health,<br>inspiring trust.',
+        title: 'Valuing people, inspiring confidence',
         subtitle: 'Our focus is on the distribution <br> of hospital, oncological <br> and exceptional medicines.',
         scrollIndicator: 'Scroll down'
       },
@@ -242,7 +242,7 @@ const translations = reactive({
   es: {
     home: {
       hero: {
-        title: '<strong>Uni Hospitalar:</strong><br>Distribuyendo salud,<br>inspirando confianza.',
+        title: 'Valorar a las personas, inspirar confianza',
         subtitle: 'Nuestro enfoque está en la distribución <br> de medicamentos hospitalarios, <br> oncológicos y excepcionales.',
         scrollIndicator: 'Desplázate hacia abajo'
       },
