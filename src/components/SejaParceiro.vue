@@ -174,7 +174,7 @@
     </section>
 
     <!-- Seção de Benefícios -->
-    <section class="benefits-section">
+    <!-- <section class="benefits-section">
       <div class="container">
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-title light">
@@ -246,7 +246,7 @@
           </ScrollReveal>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <HomeFooter />
   </div>

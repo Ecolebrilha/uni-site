@@ -64,53 +64,55 @@
             <div class="timeline-line"></div>
             
             <!-- Bolinhas da timeline com anos e traços integrados -->
-            <div class="timeline-dots">
-              <div 
-                v-for="(milestone, index) in timelineMilestones" 
-                :key="index"
-                class="timeline-dot-wrapper"
-                :style="{ '--dot-index': index }">
-                <div 
-                  class="timeline-dot"
-                  :class="{ 'active': currentActiveCard === index }"
-                  @mouseenter="handleDotHover(index)"
-                  @mouseleave="handleDotLeave">
-                  <span class="dot-year">{{ milestone.year }}</span>
-                </div>
-                <!-- Traço conectivo fixo para cada dot com card integrado -->
-                <div 
-                  class="dot-connector"
-                  :class="{ 
-                    'active': currentActiveCard === index,
-                    'entering': enteringCard === index,
-                    'exiting': exitingCard === index,
-                    'bottom': index % 2 === 0,
-                    'top': index % 2 !== 0
-                  }"
-                  v-show="currentActiveCard === index || enteringCard === index || exitingCard === index">
-                  <!-- Card integrado no final do traço -->
-                  <div 
-                    class="timeline-card"
-                    :class="{ 
-                      'active': currentActiveCard === index,
-                      'entering': enteringCard === index,
-                      'exiting': exitingCard === index,
-                      'bottom': index % 2 === 0,
-                      'top': index % 2 !== 0
-                    }">
-                    <div class="card-icon" :style="{ backgroundColor: milestone.color }">
-                      <i :class="milestone.icon"></i>
-                    </div>
-                    <div class="card-content">
-                      <div class="card-title">{{ milestone.title }}</div>
-                      <div class="card-description">{{ milestone.description }}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
+<div class="timeline-dots">
+  <div 
+    v-for="(milestone, index) in timelineMilestones" 
+    :key="index"
+    class="timeline-dot-wrapper"
+    :style="{ '--dot-index': index }">
+    
+    <!-- Timeline Dot -->
+    <div 
+      class="timeline-dot"
+      :class="{ 'active': currentActiveCard === index }"
+      @mouseenter="handleDotHover(index)"
+      @mouseleave="handleDotLeave">
+      <span class="dot-year">{{ milestone.year }}</span>
+    </div>
 
+    <!-- Conector e card integrados -->
+    <div 
+      class="dot-connector"
+      :class="{ 
+        'active': currentActiveCard === index,
+        'entering': enteringCard === index,
+        'exiting': exitingCard === index,
+        'bottom': index % 2 === 0,
+        'top': index % 2 !== 0
+      }"
+      v-show="currentActiveCard === index || enteringCard === index || exitingCard === index">
+
+      <!-- Card -->
+      <div 
+        class="timeline-card"
+        :class="{ 
+          'active': currentActiveCard === index,
+          'entering': enteringCard === index,
+          'exiting': exitingCard === index,
+          'bottom': index % 2 === 0,
+          'top': index % 2 !== 0
+        }">
+        <div class="card-icon" :style="{ backgroundColor: milestone.color }">
+          <i :class="milestone.icon"></i>
+        </div>
+        <div class="card-content">
+          <div class="card-title">{{ milestone.title }}</div>
+          <div class="card-description">{{ milestone.description }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
             </div>
           </div>
         </ScrollReveal>
@@ -497,17 +499,55 @@ export default {
     },
     
     startAutoRotation() {
-      this.autoRotationInterval = setInterval(() => {
-        if (!this.isHovering) {
-          this.nextCard();
-        }
-      }, 5000); // 10 segundos
-    },
+  this.autoRotationInterval = setInterval(() => {
+    if (!this.isHovering) {
+      this.nextCard();
+    }
+  }, 8000); // 8 segundos
+},
     
-    nextCard() {
-      const nextIndex = (this.currentActiveCard + 1) % this.timelineMilestones.length;
-      this.currentActiveCard = nextIndex;
-    },
+nextCard() {
+  const nextIndex = (this.currentActiveCard + 1) % this.timelineMilestones.length;
+
+  if (this.currentActiveCard === nextIndex || this.enteringCard !== null || this.exitingCard !== null) {
+    return; // Não troca o card se já está na posição certa ou se há uma animação em andamento.
+  }
+
+  // Inicia a animação de saída do card atual
+  this.exitingCard = this.currentActiveCard;
+  this.enteringCard = nextIndex;
+
+  // Após a animação de saída, atualiza o card ativo
+  this.$nextTick(() => {
+    const cardSelector = `.timeline-card.exiting`;
+    const exitingCardElement = this.$el.querySelector(cardSelector);
+
+    if (!exitingCardElement) {
+      // Se a animação de saída não foi encontrada, troca imediatamente
+      this.finishAnimationSwitch(nextIndex);
+      return;
+    }
+
+    const onAnimationEnd = (event) => {
+      // Verifica se a animação de saída terminou
+      if (event.animationName.startsWith('cardExit')) {
+        exitingCardElement.removeEventListener('animationend', onAnimationEnd);
+        this.finishAnimationSwitch(nextIndex);
+      }
+    };
+
+    // Adiciona o evento de término da animação para garantir que o próximo card só seja ativado após a animação de saída
+    exitingCardElement.addEventListener('animationend', onAnimationEnd);
+  });
+},
+
+finishAnimationSwitch(newIndex) {
+  // Atualiza o card ativo
+  this.currentActiveCard = newIndex;
+  // Limpa as flags de animação
+  this.exitingCard = null;
+  this.enteringCard = null;
+},
     
     setActiveCard(index) {
       if (this.currentActiveCard === index) return;
@@ -515,15 +555,57 @@ export default {
     },
     
     handleDotHover(index) {
-      this.isHovering = true;
-      this.exitingCard = null;
-      this.enteringCard = null;
-      this.currentActiveCard = index;
+    this.isHovering = true;
+
+    // Se é o mesmo card que já está ativo, não faz nada
+    if (this.currentActiveCard === index) {
+    return;
+    }
+
+    // Se não há card ativo, apenas ativa o novo
+    if (this.currentActiveCard === null) {
+        this.currentActiveCard = index;
+        return;
+      }
+
+      // Se há um card diferente ativo, inicia transição igual à rotação automática
+    if (this.currentActiveCard !== index && this.enteringCard === null && this.exitingCard === null) {
+      this.exitingCard = this.currentActiveCard;
+    this.enteringCard = index;
+
+        // Usa o mesmo padrão da rotação automática
+      this.$nextTick(() => {
+        const cardSelector = '.timeline-card.exiting';
+          const exitingCardElement = this.$el.querySelector(cardSelector);
+          
+          if (!exitingCardElement) {
+            this.finishAnimationSwitch(index);
+            return;
+          }
+
+          const onAnimationEnd = (event) => {
+            if (event.animationName.startsWith('cardExit')) {
+              exitingCardElement.removeEventListener('animationend', onAnimationEnd);
+              this.finishAnimationSwitch(index);
+            }
+          };
+
+          exitingCardElement.addEventListener('animationend', onAnimationEnd);
+        });
+      }
     },
-    
+
     handleDotLeave() {
       this.isHovering = false;
+      // Não remove o card imediatamente, deixa a rotação automática continuar
     },
+
+handleCardAnimationEnd(index) {
+  // Se o card saindo terminou sua animação, limpamos o estado
+  if (this.exitingCard === index) {
+    this.exitingCard = null;
+  }
+},
     
     resumeAutoRotation() {
       this.isHovering = false;
@@ -548,7 +630,7 @@ export default {
 .container {
   max-width: 1650px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0;
 }
 
 section {
@@ -1285,10 +1367,6 @@ section {
 }
 
 @media (max-width: 576px) {
-  .container {
-    padding: 0 20px;
-  }
-
   .hero-title {
     font-size: 2.2rem;
     letter-spacing: 1px;
@@ -1600,14 +1678,14 @@ section {
   font-size: 1rem;
 }
 
-/* Traços conectores integrados aos dots */
+/* Conector da timeline */
 .dot-connector {
   position: absolute;
   width: 3px;
   background: linear-gradient(180deg, #AE2C2A, #D2342C);
   border-radius: 2px;
   opacity: 0;
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: none; /* Remove transição para evitar conflitos */
   box-shadow: 0 2px 8px rgba(174, 44, 42, 0.3);
   z-index: 15;
   left: 50%;
@@ -1622,20 +1700,31 @@ section {
   flex-direction: column;
   justify-content: flex-end;
   top: 100%;
-  height: 180px;
+  height: 100px;
 }
 
 .dot-connector.bottom {
   flex-direction: column-reverse;
   justify-content: flex-end;
   bottom: 100%;
-  height: 180px;
+  height: 100px;
 }
 
-.dot-connector.active,
 .dot-connector.entering {
+  opacity: 0; /* Mantém invisível até a animação começar */
+  animation: connectAnimation 1.2s ease-out 0.3s forwards; /* Animação com delay */
+}
+
+.dot-connector.active {
   opacity: 1;
   background: linear-gradient(180deg, #D2342C, #AE2C2A);
+  animation: connectAnimation 1.2s ease-out forwards; /* Animação sem delay para hover */
+}
+
+.dot-connector.exiting {
+  opacity: 1;
+  background: linear-gradient(180deg, #D2342C, #AE2C2A);
+  animation: disconnectAnimation 0.8s ease-in forwards; /* Animação de saída */
 }
 
 /* Container dos cards e conectores */
@@ -1696,24 +1785,24 @@ section {
   transform: translateY(80px) scale(0.5);
   transition: none;
   overflow: hidden;
-  /* Cards agora integrados aos traços - posicionamento relativo */
-  position: relative !important;
-  left: auto !important;
-  top: auto !important;
+  position: relative ;
+  left: auto ;
+  top: auto ;
   transform: none;
   transform-origin: center;
   pointer-events: auto;
   margin-top: 10px;
   filter: blur(3px);
+  animation: cardSlideIn 1s ease-out forwards;
 }
 
 /* Estados de animação */
 .timeline-card.entering {
-  opacity: 0 !important;
-  transform: translateY(150px) scale(0.1) rotateX(-60deg) rotateY(-30deg) rotateZ(-20deg) !important;
-  filter: blur(20px) saturate(0.3) contrast(0.6) !important;
-  animation: cardFlipZoomIn 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards !important;
-  transition: none !important;
+  opacity: 0 ;
+  transform: translateY(150px) scale(0.1) rotateX(-60deg) rotateY(-30deg) rotateZ(-20deg) ;
+  filter: blur(20px) saturate(0.3) contrast(0.6) ;
+  animation: cardFlipZoomIn 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards ;
+  transition: none ;
 }
 
 .timeline-card.active {
@@ -1735,6 +1824,38 @@ section {
 .timeline-card.exiting {
   opacity: 1;
   animation: cardFlipZoomOut 0.8s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+}
+
+/* Animação do conector */
+@keyframes connectAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scaleY(0); /* A posição inicial do conector */
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(25px) scaleY(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scaleY(1); /* A posição final do conector */
+  }
+}
+
+/* Animação de saída do conector */
+@keyframes disconnectAnimation {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scaleY(1); /* A posição inicial do conector */
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(25px) scaleY(0.5);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(50px) scaleY(0); /* A posição final do conector */
+  }
 }
 
 /* Animações dos cards */
@@ -1809,104 +1930,42 @@ section {
   transform: translateY(0) scale(1);
 }
 
-/* Animações para cards acima */
-@keyframes cardEnterTop {
+/* Animação de entrada */
+@keyframes cardEnter {
   0% {
+    transform: scale(0.5) translateY(80px);
     opacity: 0;
-    transform: translateY(-40px) scale(0.8);
     filter: blur(4px);
   }
-  30% {
-    opacity: 0.3;
-    transform: translateY(-15px) scale(0.9);
-    filter: blur(2px);
-  }
-  70% {
-    opacity: 0.8;
-    transform: translateY(-3px) scale(1.02);
-    filter: blur(0px);
-  }
   100% {
+    transform: scale(1) translateY(0);
     opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0px);
+    filter: none;
   }
 }
 
-@keyframes cardExitTop {
+/* Animação de saída */
+@keyframes cardExit {
   0% {
+    transform: scale(1) translateY(0);
     opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0px);
-  }
-  30% {
-    opacity: 0.7;
-    transform: translateY(-8px) scale(0.95);
-    filter: blur(1px);
+    filter: none;
   }
   100% {
+    transform: scale(0.5) translateY(80px);
     opacity: 0;
-    transform: translateY(-25px) scale(0.8);
-    filter: blur(3px);
-  }
-}
-
-/* Animações para cards abaixo */
-@keyframes cardEnterBottom {
-  0% {
-    opacity: 0;
-    transform: translateY(40px) scale(0.8);
     filter: blur(4px);
   }
-  30% {
-    opacity: 0.3;
-    transform: translateY(15px) scale(0.9);
-    filter: blur(2px);
-  }
-  70% {
-    opacity: 0.8;
-    transform: translateY(3px) scale(1.02);
-    filter: blur(0px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0px);
-  }
 }
 
-@keyframes cardExitBottom {
-  0% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0px);
-  }
-  30% {
-    opacity: 0.7;
-    transform: translateY(8px) scale(0.95);
-    filter: blur(1px);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(25px) scale(0.8);
-    filter: blur(3px);
-  }
+.timeline-card.entering {
+  animation: cardEnter 0.6s ease forwards;
+  z-index: 10;
 }
 
-.timeline-card.top.entering {
-  animation: cardEnterTop 0.6s ease-out forwards;
-}
-
-.timeline-card.top.exiting {
-  animation: cardExitTop 0.3s ease-in forwards;
-}
-
-.timeline-card.bottom.entering {
-  animation: cardEnterBottom 0.6s ease-out forwards;
-}
-
-.timeline-card.bottom.exiting {
-  animation: cardExitBottom 0.3s ease-in forwards;
+.timeline-card.exiting {
+  animation: cardExit 0.6s ease forwards;
+  z-index: 5;
 }
 
 /* Efeito shine no card */
@@ -2019,7 +2078,7 @@ section {
   position: relative;
   height: 100%;
   max-width: 1650px;
-  margin: 550px auto 450px;
+  margin: 0px auto;
   padding: 60px 100px;
 }
 
@@ -2043,22 +2102,22 @@ section {
 
 /* Posicionamento responsivo dos cards */
 .timeline-card {
-  left: calc(var(--card-index) * 12.5% + 35px - 160px) !important;
+  left: calc(var(--card-index) * 12.5% + 35px - 160px) ;
 }
 
 .timeline-card.top {
-  top: 260px !important;
-  left: 155px !important;
+  top: 260px ;
+  left: 155px ;
 }
 
 .timeline-card.bottom {
-  top: -260px !important;
-  left: 155px !important;
+  top: -260px ;
+  left: 155px ;
 }
 
-@media (max-width: 1650px) {
+/* @media (max-width: 1650px) {
   .new-timeline-container {
-    padding: 60px 180px !important;
+    padding: 60px 180px ;
     margin: 0px auto;
     overflow-x: auto;
     overflow-y: hidden;
@@ -2086,15 +2145,11 @@ section {
     white-space: nowrap;
     pointer-events: none;
   }
-}
+} */
 
-@media (max-width: 1200px) {
-  .container {
-    padding: 0 40px;
-  }
-
+/* @media (max-width: 1200px) {
   .new-timeline-container {
-    padding: 60px 160px !important;
+    padding: 60px 160px ;
   }
 
   .timeline-scroll-wrapper {
@@ -2102,33 +2157,33 @@ section {
   }
 
   .timeline-card {
-  left: calc(var(--card-index) * 12.5% + 35px - 160px) !important;
-  width: 280px !important;
-  min-height: 250px !important;
+  left: calc(var(--card-index) * 12.5% + 35px - 160px) ;
+  width: 280px ;
+  min-height: 250px ;
 }
 
 .timeline-card.top {
-  top: 240px !important;
-  left: 135px !important;
+  top: 240px ;
+  left: 135px ;
 }
 
 .timeline-card.bottom {
-  top: -240px !important;
-  left: 135px !important;
+  top: -240px ;
+  left: 135px ;
 }
 
   .card-icon {
-    width: 45px !important;
-    height: 45px !important;
-    font-size: 1.5rem !important;
+    width: 45px ;
+    height: 45px ;
+    font-size: 1.5rem ;
   }
 
   .card-title {
-    font-size: 1.2rem !important;
+    font-size: 1.2rem ;
   }
 
   .card-description {
-    font-size: 0.9rem !important;
+    font-size: 0.9rem ;
   }
 
   .differentials-grid {
@@ -2138,11 +2193,11 @@ section {
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-}
+} */
 
-@media (max-width: 992px) {
+/* @media (max-width: 992px) {
   .new-timeline-container {
-    padding: 50px 160px !important;
+    padding: 50px 160px ;
     margin: 0px auto;
     overflow-x: auto;
     overflow-y: hidden;
@@ -2218,9 +2273,9 @@ section {
   .card-description {
     font-size: 0.9rem;
   }
-}
+} */
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .new-timeline-container {
     padding: 30px 15px;
     cursor: grab;
@@ -2281,11 +2336,11 @@ section {
   .card-description {
     font-size: 0.85rem;
   }
-}
+} */
 
-@media (max-width: 576px) {
+/* @media (max-width: 576px) {
   .new-timeline-container {
-    padding: 10px 160px !important;
+    padding: 10px 160px ;
     overflow-x: auto;
     overflow-y: hidden;
     cursor: grab;
@@ -2334,14 +2389,14 @@ section {
   }
 
   .card-icon {
-    width: 55px !important;
-    height: 55px !important;
+    width: 55px ;
+    height: 55px ;
     font-size: 1.2rem;
     margin: 12px 12px 0 12px;
   }
 
   .card-icon i {
-    font-size: 1.8rem !important;
+    font-size: 1.8rem ;
   }
 
   .card-content {
@@ -2360,7 +2415,7 @@ section {
 
 @media (max-width: 480px) {
   .new-timeline-container {
-    padding: 10px 160px !important;
+    padding: 10px 160px ;
     overflow-x: auto;
     cursor: grab;
   }
@@ -2385,14 +2440,14 @@ section {
   }
 
   .card-icon {
-    width: 55px !important;
-    height: 55px !important;
+    width: 55px ;
+    height: 55px ;
     font-size: 1.2rem;
     margin: 12px 12px 0 12px;
   }
 
   .card-icon i {
-    font-size: 1.8rem !important;
+    font-size: 1.8rem ;
   }
 
   .card-content {
@@ -2407,9 +2462,9 @@ section {
   .card-description {
     font-size: 0.7rem;
   }
-}
+} */
 
-@media (max-width: 360px) {
+/* @media (max-width: 360px) {
   .new-timeline-container {
     margin: 20px auto;
     padding: 10px 2px;
@@ -2446,7 +2501,7 @@ section {
   }
 
   .timeline-card {
-    min-height: 240px !important;
+    min-height: 240px ;
   }
 
   .card-icon {
@@ -2468,18 +2523,413 @@ section {
   .card-description {
     font-size: 0.6rem;
   }
+} */
+
+/* RESPONSIVIDADE BASEADA NA ALTURA DA TELA */
+@media (min-height: 900px) and (min-width: 1650px){
+  .new-timeline-container {
+    padding: 60px 170px;
+  }
+
+  .timeline-scroll-wrapper {
+    margin: 380px 0;
+    padding-bottom: 40px;
+  }
+
+  .timeline-dot {
+    width: 85.5px;
+    height: 85.5px;
+    border-width: 4px;
+  }
+
+  .dot-year {
+    font-size: 1.25rem;
+  }
+
+  .timeline-dot.active .dot-year {
+    font-size: 1.5rem;
+  }
+  
+  .timeline-dot.active {
+    transform: scale(1.2);
+    border-width: 6px;
+  }
+
+  .dot-connector.top,
+  .dot-connector.bottom {
+    height: 90px;
+    width: 3.6px;
+  }
+  
+  .timeline-card {
+    width: 300px;
+    min-height: 270px;
+  }
+
+  .card-icon {
+    width: 55px;
+    height: 50px;
+  }
+
+  .card-title {
+    font-size: 1.3rem;
+  }
+  
+  .card-description {
+    font-size: 1rem;
+  }
 }
+
+/* RESPONSIVIDADE BASEADA NA ALTURA DA TELA */
+@media (min-height: 750px) and (min-width: 1200px){
+  .new-timeline-container {
+    padding: 60px 170px;
+  }
+
+  .timeline-scroll-wrapper {
+    margin: 380px 0;
+    padding-bottom: 40px;
+  }
+
+  .timeline-dot {
+    width: 70px;
+    height: 70px;
+    border-width: 4px;
+  }
+
+  .dot-year {
+    font-size: 1.15rem;
+  }
+
+  .timeline-dot.active .dot-year {
+    font-size: 1.35rem;
+  }
+  
+  .timeline-dot.active {
+    transform: scale(1.2);
+    border-width: 6px;
+  }
+
+  .dot-connector.top,
+  .dot-connector.bottom {
+    height: 70px;
+  }
+  
+  .timeline-card {
+    width: 260px;
+    min-height: 240px;
+  }
+
+  .card-icon {
+    margin-top: 10px;
+    width: 45px;
+    height: 40px;
+  }
+
+  .card-icon i {
+    font-size: 1.4rem;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+  }
+  
+  .card-description {
+    font-size: 1rem;
+  }
+
+  .timeline-card.top {
+    top: 220px ;
+    left: 135px ;
+  }
+
+  .timeline-card.bottom {
+    top: -220px ;
+    left: 135px;
+  }
+}
+
+/* RESPONSIVIDADE BASEADA NA ALTURA DA TELA */
+@media (min-height: 600px) {
+  .new-timeline-container {
+    padding: 60px 145px;
+  }
+
+  .timeline-scroll-wrapper {
+    margin: 380px 0;
+    padding-bottom: 40px;
+  }
+
+  .timeline-dot {
+    width: 50px;
+    height: 50px;
+    border-width: 4px;
+  }
+
+  .dot-year {
+    font-size: 0.80rem;
+  }
+
+  .timeline-dot.active .dot-year {
+    font-size: 1rem;
+  }
+  
+  .timeline-dot.active {
+    transform: scale(1.2);
+    border-width: 6px;
+  }
+
+  .dot-connector.top,
+  .dot-connector.bottom {
+    height: 45px;
+  }
+  
+  .timeline-card {
+    width: 310px;
+    min-height: 180px;
+  }
+
+  .card-content {
+    padding: 10px 15px;
+  }
+
+  .card-icon {
+    margin: 10px 10px 0px 10px;
+    width: 45px;
+    height: 40px;
+  }
+
+  .card-icon i {
+    font-size: 1.4rem;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+  
+  .card-description {
+    font-size: 0.85rem;
+  }
+
+  .timeline-card.top {
+    top: 185px;
+    left: 155px;
+  }
+
+  .timeline-card.bottom {
+    top: -185px;
+    left: 155px;
+  }
+}
+
+/* RESPONSIVIDADE BASEADA NA ALTURA DA TELA */
+/* @media (max-height: 1100px) and (min-height: 800px) and (min-width: 992px){
+  .new-timeline-container {
+    padding: 60px 120px ;
+  }
+
+  .timeline-scroll-wrapper {
+    height: 120vh;
+    padding: 0px 0px;
+  }
+
+  .timeline-dot {
+    width: 7.5vh;
+    height: 7.5vh;
+    border-width: 4px;
+  }
+  
+  .timeline-dot.active {
+    transform: scale(1.2);
+    border-width: 6px;
+  }
+  
+  .dot-connector.top,
+  .dot-connector.bottom {
+    height: 8vh;
+  }
+  
+  .timeline-card {
+    width: 250px ;
+    min-height: 27vh ;
+  }
+
+  .card-icon {
+    width: 40px ;
+    height: 40px ;
+  }
+
+  .card-icon i {
+    font-size: 1.2rem ;
+  }
+
+  .card-title {
+    font-size: 1rem ;
+  }
+  
+  .card-description {
+    font-size: 0.8rem ;
+  }
+
+  .timeline-card.top {
+    top: 220px ;
+    left: 125px ;
+  }
+
+  .timeline-card.bottom {
+    top: -220px ;
+    left: 125px;
+  }
+} */
+
+/* RESPONSIVIDADE BASEADA NA ALTURA DA TELA */
+/* @media (max-height: 1100px) and (min-height: 800px) and (min-width: 768px){
+  .new-timeline-container {
+    padding: 60px 100px ;
+  }
+
+  .timeline-scroll-wrapper {
+    height: 120vh;
+    padding: 0px;
+  }
+
+  .timeline-dot {
+    width: 5.5vh;
+    height: 5.5vh;
+    border-width: 4px;
+  }
+
+  .dot-year {
+    font-size: 0.6rem;
+  }
+
+  .timeline-dot.active .dot-year {
+    font-size: 0.7rem;
+  }
+  
+  .timeline-dot.active {
+    transform: scale(1.2);
+    border-width: 6px;
+  }
+  
+  .dot-connector.top,
+  .dot-connector.bottom {
+    height: 8vh;
+  }
+  
+  .timeline-card {
+    width: 200px ;
+    min-height: 24vh ;
+  }
+
+  .card-icon {
+    width: 40px ;
+    height: 40px ;
+  }
+
+  .card-icon i {
+    font-size: 1.2rem ;
+  }
+
+  .card-title {
+    font-size: 0.85rem ;
+  }
+  
+  .card-description {
+    font-size: 0.7rem ;
+  }
+
+  .timeline-card.top {
+    top: 190px ;
+    left: 100px ;
+  }
+
+  .timeline-card.bottom {
+    top: -190px ;
+    left: 100px ;
+  }
+}
+
+@media (max-height: 800px) and (min-height: 600px) {
+  .new-timeline-container {
+    padding: 60px 120px ;
+  }
+
+  .timeline-scroll-wrapper {
+    height: 120vh;
+    padding: 0px 0px;
+  }
+  
+  .timeline-dot {
+    width: 9.5vh;
+    height: 9.5vh;
+    border-width: 3px;
+  }
+  
+  .timeline-dot.active {
+    transform: scale(1.15);
+    border-width: 5px;
+  }
+  
+  .dot-year {
+    font-size: 0.85rem;
+  }
+
+  .timeline-card {
+    width: 260px;
+    min-height: 28vh;
+  }
+
+  .timeline-card.top {
+    top: 170px ;
+    left: 130px ;
+  }
+
+  .timeline-card.bottom {
+    top: -170px ;
+    left: 130px ;
+  }
+  
+  .dot-connector.top,
+  .dot-connector.bottom {
+    height: 8vh;
+  }
+
+  .card-content {
+    padding: 10px 15px;
+  }
+
+  .card-icon {
+    margin-top: 8px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .card-icon i {
+    font-size: 1.2rem;
+  }
+  
+  .card-title {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+  }
+  
+  .card-description {
+    font-size: 0.75rem;
+    line-height: 1.3;
+  }
+} */
 
 /* Melhorias de acessibilidade */
 @media (prefers-reduced-motion: reduce) {
   * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms ;
+    animation-iteration-count: 1 ;
+    transition-duration: 0.01ms ;
   }
   
   .timeline-track {
-    animation: none !important;
+    animation: none ;
   }
 }
 
@@ -2761,8 +3211,6 @@ section {
     opacity: 0.6;
   }
 }
-
-
 
 /* Efeitos de hover mais suaves para touch devices */
 @media (hover: none) {

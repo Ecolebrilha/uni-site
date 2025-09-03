@@ -32,7 +32,7 @@ const translations = reactive({
       processSteps: {
         step1: {
           title: 'Equipe de vendas de alta performance',
-          description: 'Profissionais especializados e antenados nas maiores tendências do mercado.'
+          description: 'Profissionais especializados e conectados nas maiores tendências do mercado.'
         },
         step2: {
           title: 'Logística otimizada',
@@ -100,7 +100,7 @@ const translations = reactive({
       processSteps: {
         step1: {
           title: 'High-performance sales team',
-          description: 'Specialized professionals who are up to date with the biggest market trends.'
+          description: 'Specialized professionals connected to the biggest market trends.'
         },
         step2: {
           title: 'Optimized logistics',
@@ -168,7 +168,7 @@ const translations = reactive({
       processSteps: {
         step1: {
           title: 'Equipo de ventas de alto rendimiento',
-          description: 'Profesionales especializados y actualizados con las mayores tendencias del mercado.'
+          description: 'Profesionales especializados conectados con las mayores tendencias del mercado.'
         },
         step2: {
           title: 'Logística optimizada',
