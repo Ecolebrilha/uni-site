@@ -61,9 +61,9 @@
                   <span ref="yearsCounter">0</span>
                 </div>
                 <div class="stat-title">Anos de Confiança</div>
-                <div class="stat-description">Ao longo dos anos, consolidamos nossa posição no mercado através da
-                  excelência no atendimento e na qualidade dos nossos produtos. Nossa trajetória é marcada por inovação,
-                  compromisso e resultados consistentes.</div>
+                <div class="stat-description">Cada capítulo da nossa história foi escrito com dedicação, ética e cuidado. 
+                  Consolidamos nossa presença no mercado unindo inovação, qualidade e respeitando às relações humanas, sempre
+                  com o compromisso de gerar resultados sólidos e duradouros.</div>
               </div>
             </div>
           </ScrollReveal>

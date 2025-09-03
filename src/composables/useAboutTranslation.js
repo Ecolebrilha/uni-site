@@ -16,7 +16,7 @@ const translations = reactive({
       visionTitle: 'Visão',
       visionText: 'Ser reconhecida como a distribuidora de medicamentos que faz a diferença no Norte e Nordeste do Brasil, guiada por ética, integridade, inovação e excelência, crescendo de forma responsável e cuidando de cada pessoa que toca nossa jornada.',
       valuesTitle: 'No que acreditamos',
-      valuesText: 'Nosso compromisso é promover a saúde com ética e integridade, inspirando confiança por meio da inovação e da qualidade.',
+      valuesText: 'Acreditamos que, guiados pela ética e integridade, trabalhamos com inovação e qualidade para inspirar confiança e construir relações duradouras.',
       values: [
         'Ética',
         'Qualidade',
@@ -113,7 +113,7 @@ const translations = reactive({
       visionTitle: 'Vision',
       visionText: 'To be recognized as the pharmaceutical distributor that makes a difference in the North and Northeast of Brazil, guided by ethics, integrity, innovation, and excellence, growing responsibly and caring for every person who is part of our journey.',
       valuesTitle: 'What we believe',
-      valuesText: 'Our commitment is to promote health with ethics and integrity, inspiring trust through innovation and quality.',
+      valuesText: 'We believe that, guided by ethics and integrity, we work with innovation and quality to inspire trust and build lasting relationships.',
       values: [
         'Ethics',
         'Quality',
@@ -210,7 +210,7 @@ const translations = reactive({
       visionTitle: 'Visión',
       visionText: 'Ser reconocida como la distribuidora de medicamentos que marca la diferencia en el Norte y Nordeste de Brasil, guiada por la ética, la integridad, la innovación y la excelencia, creciendo de forma responsable y cuidando a cada persona que forma parte de nuestro camino.',
       valuesTitle: 'Lo que creemos',
-      valuesText: 'Nuestro compromiso es promover la salud con ética e integridad, inspirando confianza a través de la innovación y la calidad.',
+      valuesText: 'Creemos que, guiados por la ética y la integridad, trabajamos con innovación y calidad para inspirar confianza y construir relaciones duraderas.',
       values: [
         'Ética',
         'Calidad',
