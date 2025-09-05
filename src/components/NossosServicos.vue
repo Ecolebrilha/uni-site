@@ -51,12 +51,12 @@
               <div class="service-content">
                 <h3>{{ t('services.privateSegmentTitle') }}</h3>
                 <p v-html="t('services.privateSegmentText')"></p>
-                <ul class="service-features">
+                <!-- <ul class="service-features">
                   <li>{{ t('services.privateFeatures.feature1') }}</li>
                   <li>{{ t('services.privateFeatures.feature2') }}</li>
                   <li>{{ t('services.privateFeatures.feature3') }}</li>
                   <li>{{ t('services.privateFeatures.feature4') }}</li>
-                </ul>
+                </ul> -->
               </div>
             </div>
           </ScrollReveal>
@@ -69,12 +69,12 @@
               <div class="service-content">
                 <h3>{{ t('services.publicSegmentTitle') }}</h3>
                 <p v-html="t('services.publicSegmentText')"></p>
-                <ul class="service-features">
+                <!-- <ul class="service-features">
                   <li>{{ t('services.publicFeatures.feature1') }}</li>
                   <li>{{ t('services.publicFeatures.feature2') }}</li>
                   <li>{{ t('services.publicFeatures.feature3') }}</li>
                   <li>{{ t('services.publicFeatures.feature4') }}</li>
-                </ul>
+                </ul> -->
               </div>
             </div>
           </ScrollReveal>

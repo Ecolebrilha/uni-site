@@ -1132,26 +1132,10 @@ export default {
 
         // Fazer requisição para a API
         const apiUrl = this.getApiUrl()
-        const fullUrl = `${apiUrl}/api/partners`
-        
-        console.log('🌐 URL da API:', fullUrl)
-        console.log('🔧 Método getApiUrl() retornou:', apiUrl)
-        
-        const response = await fetch(fullUrl, {
+        const response = await fetch(`${apiUrl}/api/partners`, {
           method: 'POST',
           body: formData
         })
-
-        console.log('📡 Status da resposta:', response.status)
-        console.log('📋 Headers da resposta:', Object.fromEntries(response.headers.entries()))
-        
-        // Verificar se a resposta é JSON
-        const contentType = response.headers.get('content-type')
-        if (!contentType || !contentType.includes('application/json')) {
-          const textResponse = await response.text()
-          console.error('❌ Resposta não é JSON:', textResponse.substring(0, 200))
-          throw new Error(`Servidor retornou ${response.status}: ${response.statusText}. Resposta: ${textResponse.substring(0, 100)}`)
-        }
 
         const result = await response.json()
 
