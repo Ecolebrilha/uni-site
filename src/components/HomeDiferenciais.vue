@@ -40,8 +40,8 @@
                 <ul class="feature-list">
                   <li><span class="highlight">{{ t('differentials.features.inventory.feature1') }}</span> {{
                     t('differentials.features.inventory.feature1Description') }}</li>
-                  <!-- <li><span class="highlight">{{ t('differentials.features.inventory.feature2') }}</span> {{
-                    t('differentials.features.inventory.feature2Description') }}</li> -->
+                  <li><span class="highlight">{{ t('differentials.features.inventory.feature2') }}</span> {{
+                    t('differentials.features.inventory.feature2Description') }}</li>
                 </ul>
               </div>
             </div>

@@ -3073,32 +3073,32 @@ section {
 @keyframes cardPulseGlow {
   0%, 100% {
     transform: translateY(0) scale(1);
-    box-shadow: 
+    /* box-shadow: 
       0 40px 100px rgba(0, 0, 0, 0.18),
       0 25px 60px rgba(174, 44, 42, 0.15),
-      0 0 0 0 rgba(174, 44, 42, 0);
+      0 0 0 0 rgba(174, 44, 42, 0); */
   }
   25% {
     transform: translateY(-4px) scale(1.02);
-    box-shadow: 
+    /* box-shadow: 
       0 50px 120px rgba(0, 0, 0, 0.22),
       0 35px 80px rgba(174, 44, 42, 0.2),
-      0 0 40px 8px rgba(174, 44, 42, 0.12);
+      0 0 40px 8px rgba(174, 44, 42, 0.12); */
   }
   50% {
     transform: translateY(-8px) scale(1.05);
-    box-shadow: 
+    /* box-shadow: 
       0 60px 140px rgba(0, 0, 0, 0.25),
       0 45px 100px rgba(174, 44, 42, 0.25),
       0 0 60px 15px rgba(174, 44, 42, 0.18),
-      0 0 80px 20px rgba(210, 52, 44, 0.1);
+      0 0 80px 20px rgba(210, 52, 44, 0.1); */
   }
   75% {
     transform: translateY(-4px) scale(1.02);
-    box-shadow: 
+    /* box-shadow: 
       0 50px 120px rgba(0, 0, 0, 0.22),
       0 35px 80px rgba(174, 44, 42, 0.2),
-      0 0 40px 8px rgba(174, 44, 42, 0.12);
+      0 0 40px 8px rgba(174, 44, 42, 0.12); */
   }
 }
 

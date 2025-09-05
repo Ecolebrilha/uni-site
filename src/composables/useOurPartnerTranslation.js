@@ -104,6 +104,17 @@ const translations = reactive({
           cnpjNotFound: 'Não foi possível consultar o CNPJ. Verifique sua conexão ou tente novamente.',
           cnpjServiceUnavailable: 'Serviço de consulta CNPJ temporariamente indisponível. Preencha o endereço manualmente.',
           phoneRequired: 'Por favor, preencha pelo menos um telefone de contato (celular ou fixo).'
+        },
+        documents: {
+          title: 'Documentos Obrigatórios',
+          cnpj: 'Comprovante de CNPJ',
+          razaoSocial: 'Comprovante de Razão Social',
+          estadual: 'Inscrição Estadual',
+          municipal: 'Inscrição Municipal',
+          alvara: 'Alvará de Funcionamento',
+          contratoSocial: 'Contrato Social',
+          info: 'Anexe os documentos correspondentes a cada campo. Formatos aceitos: PDF, DOC, DOCX, JPG, JPEG, PNG. Máximo 10MB por arquivo.',
+          error: 'Todos os documentos são obrigatórios para completar o cadastro.'
         }
       },
       benefits: {
@@ -242,6 +253,17 @@ const translations = reactive({
           cnpjNotFound: 'Unable to query Tax ID. Check your connection or try again.',
           cnpjServiceUnavailable: 'Tax ID query service temporarily unavailable. Please fill in the address manually.',
           phoneRequired: 'Please fill in at least one contact phone (mobile or landline).'
+        },
+        documents: {
+          title: 'Required Documents',
+          cnpj: 'Tax ID (CNPJ) Certificate',
+          razaoSocial: 'Corporate Name Certificate',
+          estadual: 'State Registration',
+          municipal: 'Municipal Registration',
+          alvara: 'Operating License',
+          contratoSocial: 'Articles of Association',
+          info: 'Attach the documents corresponding to each field. Accepted formats: PDF, DOC, DOCX, JPG, JPEG, PNG. Maximum 10MB per file.',
+          error: 'All documents are required to complete the registration.'
         }
       },
       benefits: {
@@ -380,6 +402,17 @@ const translations = reactive({
           cnpjNotFound: 'No fue posible consultar el CNPJ. Verifique su conexión o inténtelo de nuevo.',
           cnpjServiceUnavailable: 'Servicio de consulta CNPJ temporalmente no disponible. Complete la dirección manualmente.',
           phoneRequired: 'Por favor, complete al menos un teléfono de contacto (móvil o fijo).'
+        },
+        documents: {
+          title: 'Documentos Obligatorios',
+          cnpj: 'Certificado de CNPJ',
+          razaoSocial: 'Certificado de Razón Social',
+          estadual: 'Inscripción Estadual',
+          municipal: 'Inscripción Municipal',
+          alvara: 'Licencia de Funcionamiento',
+          contratoSocial: 'Contrato Social',
+          info: 'Adjunte los documentos correspondientes a cada campo. Formatos aceptados: PDF, DOC, DOCX, JPG, JPEG, PNG. Máximo 10MB por archivo.',
+          error: 'Todos los documentos son obligatorios para completar el registro.'
         }
       },
       benefits: {

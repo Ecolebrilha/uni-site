@@ -10,9 +10,9 @@ const translations = reactive({
       introTitle: 'Como podemos ajudar',
       introText: 'A Uni Hospitalar oferece soluções integradas para o setor de saúde, com foco em eficiência, qualidade e atendimento personalizado. Nossos serviços são projetados para atender às necessidades específicas de cada segmento do mercado.',
       mainServiceTitle: 'Nosso Foco',
-      mainServiceText: 'A Uni Hospitalar reúne eficiência, qualidade e atendimento humano para entregar saúde com confiança. Nossas áreas de atuação<strong>— Medicamentos Oncológicos, Hospitalares e Colírios —</strong> refletem nosso compromisso em oferecer soluções completas para diferentes demandas do setor.',
+      mainServiceText: 'Combinando eficiência, qualidade e um atendimento verdadeiramente humano, a Uni Hospitalar se consolida como parceira estratégica nos segmentos público e privado. Nossa atuação em Medicamentos Oncológicos e Hospitalares reflete a dedicação em entregar soluções completas, que geram impacto real no setor.',
       privateSegmentTitle: 'Segmento Privado',
-      privateSegmentText: 'Nossa estrutura de vendas combina a força de um <strong>televendas interno</strong> com a atuação estratégica de <strong>um time externo</strong>. Essa integração garante não apenas agilidade, mas também um atendimento humano e especializado para superar as expectativas dos nossos clientes.',
+      privateSegmentText: 'Nossa estrutura combina tecnologia de ponta e automações inteligentes à dedicação de um time especializado. Esse equilíbrio garante <strong>respostas rápidas e eficazes</strong>, assegurando uma experiência completa e de alta qualidade, com o <strong>cuidado humano</strong> como nosso principal diferencial.',
       privateFeatures: {
         feature1: 'Atendimento personalizado',
         feature2: 'Consultoria especializada',
@@ -20,7 +20,7 @@ const translations = reactive({
         feature4: 'Equipe dedicada'
       },
       publicSegmentTitle: 'Segmento Público',
-      publicSegmentText: 'Nosso segmento público é conduzido por um <strong>Setor de Licitações</strong> formado por profissionais qualificados, responsáveis por analisar e acompanhar editais de forma criteriosa, garantindo a conformidade legal e a participação eficiente nos processos oficiais. Essa atuação é fortalecida por uma equipe preparada para atender às exigências normativas e assegurar qualidade em cada etapa do processo.',
+      publicSegmentText: 'O Setor de Licitações da Uni Hospitalar conta com uma equipe robusta e altamente qualificada, sempre atualizada com as tendências do mercado e em total conformidade com a legislação vigente. Aliando expertise técnica a tecnologias de ponta, conduzimos os processos licitatórios com agilidade, precisão e transparência. Essa integração garante eficiência em cada etapa e reafirma nosso compromisso em entregar soluções que geram valor para o mercado.',
       publicFeatures: {
         feature1: 'Especialização em processos licitatórios',
         feature2: 'Monitoramento e análise de editais',
@@ -78,9 +78,9 @@ const translations = reactive({
       introTitle: 'How we can help',
       introText: 'Uni Hospitalar offers integrated solutions for the healthcare sector, focusing on efficiency, quality and personalized service. Our services are designed to meet the specific needs of each market segment.',
       mainServiceTitle: 'Our Focus',
-      mainServiceText: 'Uni Hospitalar combines efficiency, quality, and humane service to deliver healthcare with confidence. Our areas of activity <strong>— Oncology Medications, Hospital Medications, and Eye Drops —</strong> reflect our commitment to offering comprehensive solutions for a variety of healthcare needs.',
+      mainServiceText: 'Combining efficiency, quality, and truly humane service, Uni Hospitalar has established itself as a strategic partner in both the public and private sectors. Our work in Oncology and Hospital Medications reflects our dedication to delivering comprehensive solutions that generate a real impact on the sector.',
       privateSegmentTitle: 'Private Segment',
-      privateSegmentText: 'Our sales structure combines the strength of an <strong>internal telesales</strong> with the strategic work of <strong>an external team</strong>. This integration ensures not only agility but also a humanized and specialized service that exceeds our customers expectations.',
+      privateSegmentText: 'Our structure combines cutting-edge technology and smart automation with the dedication of a specialized team. This balance ensures <strong>fast and effective responses</strong>, delivering a complete, high-quality experience with <strong>human care</strong> as our main differentiator.',
       privateFeatures: {
         feature1: 'Personalized service',
         feature2: 'Specialized consulting',
@@ -88,7 +88,7 @@ const translations = reactive({
         feature4: 'Dedicated team'
       },
       publicSegmentTitle: 'Public Segment',
-      publicSegmentText: 'Our public sector is led by a <strong>Bidding Department</strong> comprised of qualified professionals responsible for carefully analyzing and monitoring bidding documents, ensuring legal compliance and efficient participation in official processes. This work is reinforced by a team prepared to meet regulatory requirements and ensure quality at every stage of the process.',
+      publicSegmentText: 'Uni Hospitalar\'s Bidding Department boasts a robust and highly qualified team, always up-to-date with market trends and fully compliant with current legislation. Combining technical expertise with cutting-edge technologies, we conduct bidding processes with agility, precision, and transparency. This integration ensures efficiency at every stage and reaffirms our commitment to delivering solutions that generate value for the market.',
       publicFeatures: {
         feature1: 'Specialization in bidding processes',
         feature2: 'Monitoring and analysis of notices',
@@ -146,9 +146,9 @@ const translations = reactive({
       introTitle: 'Cómo podemos ayudar',
       introText: 'Uni Hospitalar ofrece soluciones integradas para el sector sanitario, con enfoque en eficiencia, calidad y atención personalizada. Nuestros servicios están diseñados para satisfacer las necesidades específicas de cada segmento del mercado.',
       mainServiceTitle: 'Nuestro enfoque',
-      mainServiceText: 'Uni Hospitalar combina eficiencia, calidad y un servicio humano para brindar atención médica con confianza. Nuestras áreas de actividad <strong>— Medicamentos Oncológicos, Medicamentos Hospitalarios y Gotas Oftálmicas —</strong> reflejan nuestro compromiso de ofrecer soluciones integrales para diversas necesidades de atención médica.',
+      mainServiceText: 'Combinando eficiencia, calidad y un servicio verdaderamente humano, Uni Hospitalar se ha consolidado como un socio estratégico tanto en el sector público como en el privado. Nuestra labor en Oncología y Medicamentos Hospitalarios refleja nuestra dedicación a brindar soluciones integrales que generen un impacto real en el sector.',
       privateSegmentTitle: 'Segmento Privado',
-      privateSegmentText: 'Nuestra estructura de ventas combina la fuerza de un <strong>televenta interna</strong> con la actuación estratégica de <strong>un equipo externo</strong>. Esta integración garantiza no solo agilidad, sino también una atención humana y especializada que supera las expectativas de nuestros clientes.',
+      privateSegmentText: 'Nuestra estructura combina tecnología de punta y automatizaciones inteligentes con la dedicación de un equipo especializado. Este equilibrio garantiza <strong>respuestas rápidas y eficaces</strong>, asegurando una experiencia completa y de alta calidad, con el <strong>cuidado humano</strong> como nuestro principal diferencial.',
       privateFeatures: {
         feature1: 'Atención personalizada',
         feature2: 'Consultoría especializada',
@@ -156,7 +156,7 @@ const translations = reactive({
         feature4: 'Equipo dedicado'
       },
       publicSegmentTitle: 'Segmento Público',
-      publicSegmentText: 'Nuestro sector público está liderado por un <strong>Departamento de Licitaciones</strong>, compuesto por profesionales cualificados, responsables de analizar y supervisar minuciosamente los pliegos de licitación, garantizando el cumplimiento legal y una participación eficiente en los procesos oficiales. Esta labor se ve reforzada por un equipo preparado para cumplir con los requisitos regulatorios y garantizar la calidad en cada etapa del proceso.',
+      publicSegmentText: 'El Departamento de Licitaciones de Uni Hospitalar cuenta con un equipo sólido y altamente cualificado, siempre al día con las tendencias del mercado y en total cumplimiento de la legislación vigente. Combinando experiencia técnica con tecnologías de vanguardia, llevamos a cabo los procesos de licitación con agilidad, precisión y transparencia. Esta integración garantiza la eficiencia en cada etapa y reafirma nuestro compromiso de ofrecer soluciones que generen valor para el mercado.',
       publicFeatures: {
         feature1: 'Especialización en procesos de licitación',
         feature2: 'Seguimiento y análisis de avisos',

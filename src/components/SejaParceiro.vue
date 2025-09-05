@@ -35,7 +35,7 @@
                 <h3>{{ t('partner.form.title') }}</h3>
               </div>
 
-              <form @submit.prevent="submitForm" class="partner-form">
+              <form @submit.prevent="submitForm" class="partner-form" v-if="!partnerSubmitted">
                 <div class="form-grid">
 
                   <!-- CNPJ -->
@@ -77,20 +77,35 @@
                     </div>
                   </div>
 
+                  <!-- Tipo de Parceiro -->
+                  <div class="form-group">
+                    <label for="tipoParceiro">Tipo de Parceiro</label>
+                    <div class="input-clip">
+                      <select id="tipoParceiro" v-model="formData.tipoParceiro" class="form-control" required @change="resetRamoAtuacao">
+                        <option value="" disabled selected>Selecione o tipo de parceiro</option>
+                        <option value="TRANSPORTADORA">Transportadora</option>
+                        <option value="CLIENTE">Cliente</option>
+                        <option value="FORNECEDOR">Fornecedor</option>
+                      </select>
+                    </div>
+                  </div>
+
                   <!-- Ramo de Atuação -->
                   <div class="form-group">
                     <label for="ramoAtuacao">{{ t('partner.form.fields.businessArea.label') }}</label>
                     <div class="input-clip">
-                      <select id="ramoAtuacao" v-model="formData.ramoAtuacao" class="form-control" required>
-                        <option value="" disabled selected>{{ t('partner.form.fields.businessArea.placeholder') }}
+                      <select id="ramoAtuacao" v-model="formData.ramoAtuacao" class="form-control"
+                        :class="{ 'readonly-style': !formData.tipoParceiro }"
+                        :disabled="!formData.tipoParceiro" required>
+                        <option value="" disabled selected>
+                          {{ formData.tipoParceiro ? t('partner.form.fields.businessArea.placeholder') : 'Selecione primeiro o tipo de parceiro' }}
                         </option>
-                        <option v-for="ramo in ramosAtuacao" :key="ramo" :value="ramo">
+                        <option v-for="ramo in ramosAtuacaoFiltrados" :key="ramo" :value="ramo">
                           {{ ramo }}
                         </option>
                       </select>
                     </div>
                   </div>
-
 
                   <!-- Email -->
                   <div class="form-group">
@@ -133,6 +148,121 @@
                       {{ t('partner.form.fields.address.help') }}
                     </small>
                   </div>
+
+                  <!-- Seção de Upload de Documentos -->
+                  <div class="form-group full-width">
+                    <label>{{ t('partner.form.documents.title') }} <span class="required"></span></label>
+                    <div class="upload-info">
+                        <i class="fas fas fa-paperclip"></i>
+                        <small>{{ t('partner.form.documents.info') }}</small>
+                      </div>
+                    <div class="file-upload-area documents-upload">
+                      <!-- Inputs de arquivo ocultos -->
+                      <input type="file" ref="cnpjFileInput" @change="handleDocumentUpload('cnpj', $event)" 
+                        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display: none;">
+                      <input type="file" ref="razaoSocialFileInput" @change="handleDocumentUpload('razaoSocial', $event)" 
+                        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display: none;">
+                      <input type="file" ref="estadualFileInput" @change="handleDocumentUpload('estadual', $event)" 
+                        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display: none;">
+                      <input type="file" ref="municipalFileInput" @change="handleDocumentUpload('municipal', $event)" 
+                        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display: none;">
+                      <input type="file" ref="alvaraFileInput" @change="handleDocumentUpload('alvara', $event)" 
+                        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display: none;">
+                      <input type="file" ref="contratoSocialFileInput" @change="handleDocumentUpload('contratoSocial', $event)" 
+                        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display: none;">
+
+                      <div class="upload-buttons-grid">
+                        <div class="document-upload-button" 
+                          :class="{ 'uploaded': documents.cnpj, 'error': errors.cnpj }"
+                          @click="triggerDocumentUpload('cnpj')">
+                          <div class="button-content">
+                            <i class="fas fa-file-alt"></i>
+                            <span class="button-label">{{ t('partner.form.documents.cnpj') }}</span>
+                            <span v-if="documents.cnpj" class="file-name">{{ documents.cnpj.name }}</span>
+                          </div>
+                          <button v-if="documents.cnpj" type="button" @click.stop="removeDocument('cnpj')" 
+                            class="remove-doc-btn">
+                            <i class="fas fa-times"></i>
+                          </button>
+                        </div>
+
+                        <div class="document-upload-button" 
+                          :class="{ 'uploaded': documents.razaoSocial, 'error': errors.razaoSocial }"
+                          @click="triggerDocumentUpload('razaoSocial')">
+                          <div class="button-content">
+                            <i class="fas fa-building"></i>
+                            <span class="button-label">{{ t('partner.form.documents.razaoSocial') }}</span>
+                            <span v-if="documents.razaoSocial" class="file-name">{{ documents.razaoSocial.name }}</span>
+                          </div>
+                          <button v-if="documents.razaoSocial" type="button" @click.stop="removeDocument('razaoSocial')" 
+                            class="remove-doc-btn">
+                            <i class="fas fa-times"></i>
+                          </button>
+                        </div>
+
+                        <div class="document-upload-button" 
+                          :class="{ 'uploaded': documents.estadual, 'error': errors.estadual }"
+                          @click="triggerDocumentUpload('estadual')">
+                          <div class="button-content">
+                            <i class="fas fa-certificate"></i>
+                            <span class="button-label">{{ t('partner.form.documents.estadual') }}</span>
+                            <span v-if="documents.estadual" class="file-name">{{ documents.estadual.name }}</span>
+                          </div>
+                          <button v-if="documents.estadual" type="button" @click.stop="removeDocument('estadual')" 
+                            class="remove-doc-btn">
+                            <i class="fas fa-times"></i>
+                          </button>
+                        </div>
+
+                        <div class="document-upload-button" 
+                          :class="{ 'uploaded': documents.municipal, 'error': errors.municipal }"
+                          @click="triggerDocumentUpload('municipal')">
+                          <div class="button-content">
+                            <i class="fas fa-city"></i>
+                            <span class="button-label">{{ t('partner.form.documents.municipal') }}</span>
+                            <span v-if="documents.municipal" class="file-name">{{ documents.municipal.name }}</span>
+                          </div>
+                          <button v-if="documents.municipal" type="button" @click.stop="removeDocument('municipal')" 
+                            class="remove-doc-btn">
+                            <i class="fas fa-times"></i>
+                          </button>
+                        </div>
+
+                        <div class="document-upload-button" 
+                          :class="{ 'uploaded': documents.alvara, 'error': errors.alvara }"
+                          @click="triggerDocumentUpload('alvara')">
+                          <div class="button-content">
+                            <i class="fas fa-gavel"></i>
+                            <span class="button-label">{{ t('partner.form.documents.alvara') }}</span>
+                            <span v-if="documents.alvara" class="file-name">{{ documents.alvara.name }}</span>
+                          </div>
+                          <button v-if="documents.alvara" type="button" @click.stop="removeDocument('alvara')" 
+                            class="remove-doc-btn">
+                            <i class="fas fa-times"></i>
+                          </button>
+                        </div>
+
+                        <div class="document-upload-button" 
+                          :class="{ 'uploaded': documents.contratoSocial, 'error': errors.contratoSocial }"
+                          @click="triggerDocumentUpload('contratoSocial')">
+                          <div class="button-content">
+                            <i class="fas fa-handshake"></i>
+                            <span class="button-label">{{ t('partner.form.documents.contratoSocial') }}</span>
+                            <span v-if="documents.contratoSocial" class="file-name">{{ documents.contratoSocial.name }}</span>
+                          </div>
+                          <button v-if="documents.contratoSocial" type="button" @click.stop="removeDocument('contratoSocial')" 
+                            class="remove-doc-btn">
+                            <i class="fas fa-times"></i>
+                          </button>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div v-if="hasDocumentErrors" class="error-message">
+                    <i class="fas fa-exclamation-circle animated-icon"></i>
+                    {{ t('partner.form.documents.error') }}
+                  </div>
+                  </div>
                 </div>
 
                 <!-- Aviso de Termos -->
@@ -160,11 +290,128 @@
                 </div>
               </form>
 
-              <div v-if="showSuccessMessage" class="alert alert-success">
-                <i class="fas fa-check-circle"></i> {{ t('partner.form.messages.success') }}
+              <!-- Success Section -->
+              <div v-if="partnerSubmitted" class="success-section">
+                <div class="success-card">
+                  <div class="success-animation">
+                    <div class="success-icon">
+                      <i class="fas fa-check-circle"></i>
+                    </div>
+                  </div>
+
+                  <h2>{{ t('partner.form.messages.success') }}</h2>
+
+                  <div class="submission-details">
+                    <h3><i class="fas fa-clipboard-check"></i> Detalhes da Solicitação</h3>
+                    
+                    <div class="details-grid">
+                      <div class="detail-item">
+                        <div class="detail-icon">
+                          <i class="fas fa-building"></i>
+                        </div>
+                        <div class="detail-content">
+                          <span class="detail-label">Empresa</span>
+                          <span class="detail-value">{{ submissionData.companyName }}</span>
+                        </div>
+                      </div>
+
+                      <div class="detail-item">
+                        <div class="detail-icon">
+                          <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="detail-content">
+                          <span class="detail-label">CNPJ</span>
+                          <span class="detail-value">{{ submissionData.cnpj }}</span>
+                        </div>
+                      </div>
+
+                      <div class="detail-item">
+                        <div class="detail-icon">
+                          <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="detail-content">
+                          <span class="detail-label">Email</span>
+                          <span class="detail-value">{{ submissionData.email }}</span>
+                        </div>
+                      </div>
+
+                      <div class="detail-item">
+                        <div class="detail-icon">
+                          <i class="fas fa-paperclip"></i>
+                        </div>
+                        <div class="detail-content">
+                          <span class="detail-label">Documentos</span>
+                          <span class="detail-value">{{ submissionData.documentsCount }} documento(s) enviado(s)</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="next-steps">
+                    <h3><i class="fas fa-route"></i> Próximos Passos</h3>
+                    <div class="steps-grid">
+                      <div class="step-item">
+                        <div class="step-icon">
+                          <i class="fas fa-search"></i>
+                        </div>
+                        <div class="step-content">
+                          <span class="step-title">Análise</span>
+                          <span class="step-description">Nossa equipe comercial analisará sua solicitação</span>
+                        </div>
+                      </div>
+
+                      <div class="step-item">
+                        <div class="step-icon">
+                          <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="step-content">
+                          <span class="step-title">Contato</span>
+                          <span class="step-description">Entraremos em contato em até <strong>72 horas úteis</strong></span>
+                        </div>
+                      </div>
+
+                      <div class="step-item">
+                        <div class="step-icon">
+                          <i class="fas fa-envelope-open"></i>
+                        </div>
+                        <div class="step-content">
+                          <span class="step-title">Atualizações</span>
+                          <span class="step-description">Você receberá todas as atualizações por email</span>
+                        </div>
+                      </div>
+
+                      <div class="step-item">
+                        <div class="step-icon">
+                          <i class="fas fa-user-check"></i>
+                        </div>
+                        <div class="step-content">
+                          <span class="step-title">Dados Atualizados</span>
+                          <span class="step-description">Mantenha seus dados de contato atualizados</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="contact-info">
+                    <div class="info-icon">
+                      <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="info-content">
+                      <h4>Importante</h4>
+                      <p>Todas as comunicações sobre o processo de parceria serão enviadas para o email informado. Verifique regularmente sua caixa de entrada e pasta de spam.</p>
+                    </div>
+                  </div>
+
+                  <div class="success-actions">
+                    <router-link to="/" class="btn-primary">
+                      <i class="fas fa-home"></i>
+                      Página Inicial
+                    </router-link>
+                  </div>
+                </div>
               </div>
 
-              <div v-if="showErrorMessage" class="alert alert-danger">
+              <div v-else-if="showErrorMessage" class="alert alert-danger">
                 <i class="fas fa-exclamation-circle"></i> {{ t('partner.form.messages.error') }}
               </div>
             </div>
@@ -276,6 +523,7 @@ export default {
       formData: {
         nomeRazaoSocial: '',
         uf: '',
+        tipoParceiro: '',
         ramoAtuacao: '',
         cnpj: '',
         email: '',
@@ -283,11 +531,23 @@ export default {
         telefoneFixo: '',
         endereco: ''
       },
+      documents: {
+        cnpj: null,
+        razaoSocial: null,
+        estadual: null,
+        municipal: null,
+        alvara: null,
+        contratoSocial: null
+      },
+      errors: {},
+      maxFileSize: 10 * 1024 * 1024, // 10MB
       isSubmitting: false,
       showSuccessMessage: false,
       showErrorMessage: false,
       isLoadingCNPJ: false,
-      cnpjError: ''
+      cnpjError: '',
+      partnerSubmitted: false,
+      submissionData: {}
     };
   },
   computed: {
@@ -296,9 +556,59 @@ export default {
     },
     ramosAtuacao() {
       return this.t('partner.form.businessAreas') || []
+    },
+    ramosAtuacaoFiltrados() {
+      if (!this.formData.tipoParceiro) {
+        return []
+      }
+      
+      const ramosPorTipo = {
+        'TRANSPORTADORA': [
+          'Transporte de Cargas',
+          'Logística',
+          'Transporte Expresso',
+          'Transporte Refrigerado',
+          'Transporte de Veículos',
+          'Mudanças e Fretes'
+        ],
+        'CLIENTE': [
+          'Hospital',
+          'Clínica',
+          'Laboratório',
+          'Farmácia',
+          'Distribuidora',
+          'Órgão Público',
+          'Empresa Privada',
+          'ONG',
+          'Cooperativa'
+        ],
+        'FORNECEDOR': [
+          'Equipamentos Médicos',
+          'Medicamentos',
+          'Material Hospitalar',
+          'Tecnologia da Informação',
+          'Serviços de Manutenção',
+          'Consultoria',
+          'Alimentos e Bebidas',
+          'Produtos de Limpeza'
+        ]
+      }
+      
+      return ramosPorTipo[this.formData.tipoParceiro] || []
+    },
+    hasDocumentErrors() {
+      return this.errors.cnpj || this.errors.razaoSocial || this.errors.estadual || 
+             this.errors.municipal || this.errors.alvara || this.errors.contratoSocial
+    },
+    allDocumentsUploaded() {
+      return Object.values(this.documents).every(doc => doc !== null)
     }
   },
   methods: {
+    resetRamoAtuacao() {
+      // Reseta o campo de ramo de atuação quando o tipo de parceiro muda
+      this.formData.ramoAtuacao = '';
+    },
     getBrazilianTimeNative() {
       return new Date().toLocaleString('pt-BR', {
         timeZone: 'America/Sao_Paulo',
@@ -375,6 +685,148 @@ export default {
       }
 
       this.formData.telefoneFixo = value;
+    },
+
+    // Métodos para upload de documentos
+    triggerDocumentUpload(documentType) {
+      // Se já tem documento, não permite upload de novo (só remoção)
+      if (this.documents[documentType]) {
+        return
+      }
+      
+      const inputRef = `${documentType}FileInput`
+      this.$refs[inputRef].click()
+    },
+
+    handleDocumentUpload(documentType, event) {
+      const file = event.target.files[0]
+      if (!file) return
+
+      // Validar arquivo
+      if (!this.validateFile(file)) {
+        event.target.value = '' // Limpar input
+        return
+      }
+
+      // Armazenar documento
+      this.documents[documentType] = file
+      
+      // Limpar erro se existir
+      if (this.errors[documentType]) {
+        delete this.errors[documentType]
+      }
+
+      // Mostrar feedback de sucesso
+      this.showUploadSuccess(documentType, file.name)
+      
+      // Limpar input
+      event.target.value = ''
+    },
+
+    removeDocument(documentType) {
+      const fileName = this.documents[documentType]?.name
+      this.documents[documentType] = null
+      
+      if (fileName) {
+        this.showRemoveSuccess(documentType, fileName)
+      }
+    },
+
+    validateFile(file) {
+      const validTypes = [
+        'application/pdf',
+        'application/msword', 
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'image/jpeg',
+        'image/jpg', 
+        'image/png'
+      ]
+
+      // Verificar tipo de arquivo
+      if (!validTypes.includes(file.type)) {
+        alert(`Arquivo ${file.name} não é um tipo válido. Use PDF, DOC, DOCX, JPG, JPEG ou PNG.`)
+        return false
+      }
+
+      // Verificar tamanho do arquivo
+      if (file.size > this.maxFileSize) {
+        alert(`Arquivo ${file.name} é muito grande. Máximo 10MB.`)
+        return false
+      }
+
+      return true
+    },
+
+    showUploadSuccess(documentType, fileName) {
+      const documentLabels = {
+        cnpj: 'CNPJ',
+        razaoSocial: 'Razão Social', 
+        estadual: 'Inscrição Estadual',
+        municipal: 'Inscrição Municipal',
+        alvara: 'Alvará',
+        contratoSocial: 'Contrato Social'
+      }
+      
+      const message = `Documento "${documentLabels[documentType]}" (${fileName}) anexado com sucesso!`
+
+      const notification = document.createElement('div')
+      notification.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 10000;
+            font-weight: 600;
+            animation: slideInRight 0.3s ease-out;
+            max-width: 400px;
+            word-wrap: break-word;
+        ">
+            <i class="fas fa-check-circle"></i> ${message}
+        </div>
+      `
+
+      document.body.appendChild(notification)
+      setTimeout(() => notification.remove(), 3000)
+    },
+
+    showRemoveSuccess(documentType, fileName) {
+      const documentLabels = {
+        cnpj: 'CNPJ',
+        razaoSocial: 'Razão Social',
+        estadual: 'Inscrição Estadual', 
+        municipal: 'Inscrição Municipal',
+        alvara: 'Alvará',
+        contratoSocial: 'Contrato Social'
+      }
+      
+      const message = `Documento "${documentLabels[documentType]}" (${fileName}) removido com sucesso!`
+
+      const notification = document.createElement('div')
+      notification.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 10000;
+            font-weight: 600;
+            animation: slideInRight 0.3s ease-out;
+        ">
+            <i class="fas fa-trash-alt"></i> ${message}
+        </div>
+      `
+
+      document.body.appendChild(notification)
+      setTimeout(() => notification.remove(), 3000)
     },
 
     // Valida se o CNPJ tem formato correto
@@ -545,62 +997,185 @@ export default {
       }
     },
 
-    async submitForm() {
+        // Função para obter ícone do arquivo
+        getFileIcon(filename) {
+            if (!filename) return 'fas fa-file';
+
+            const extension = filename.split('.').pop().toLowerCase();
+
+            switch (extension) {
+                case 'pdf':
+                    return 'fas fa-file-pdf';
+                case 'doc':
+                case 'docx':
+                    return 'fas fa-file-word';
+                case 'jpg':
+                case 'jpeg':
+                case 'png':
+                    return 'fas fa-file-image';
+                default:
+                    return 'fas fa-file';
+            }
+        },
+
+        // Função para formatar tamanho do arquivo
+        formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        },
+
+    validateFormData() {
+      this.errors = {}
+
+      // Validar campos obrigatórios do formulário
+      if (!this.formData.cnpj) {
+        this.errors.formCnpj = 'CNPJ é obrigatório'
+      }
+      if (!this.formData.nomeRazaoSocial) {
+        this.errors.formNomeRazaoSocial = 'Nome/Razão Social é obrigatório'
+      }
+      if (!this.formData.uf) {
+        this.errors.formUf = 'UF é obrigatório'
+      }
+      if (!this.formData.ramoAtuacao) {
+        this.errors.formRamoAtuacao = 'Ramo de Atuação é obrigatório'
+      }
+      if (!this.formData.email) {
+        this.errors.formEmail = 'Email é obrigatório'
+      }
       if (!this.formData.celular && !this.formData.telefoneFixo) {
-        alert(this.t('partner.form.messages.phoneRequired'));
-        return;
+        this.errors.formCelular = 'Celular ou Telefone Fixo é obrigatório'
+        this.errors.formTelefoneFixo = 'Celular ou Telefone Fixo é obrigatório'
       }
 
-      this.isSubmitting = true;
-      this.showSuccessMessage = false;
-      this.showErrorMessage = false;
+      // Validar documentos - todos obrigatórios
+      Object.keys(this.documents).forEach(docType => {
+        if (!this.documents[docType]) {
+          this.errors[docType] = 'Documento obrigatório'
+        }
+      })
+
+      return Object.keys(this.errors).length === 0
+    },
+
+    // Método para obter URL da API dinamicamente
+    getApiUrl() {
+      // Se estivermos em desenvolvimento local
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return 'http://localhost:3000'
+      }
+      
+      // URL de produção do backend no Render
+      return 'https://unihospitalar-backend.onrender.com'
+    },
+
+    // Método removido - não mais necessário
+    // copyCode(event) {
+    //   navigator.clipboard.writeText(textToCopy).then(() => {
+    //     const btn = event.target.closest('.copy-btn')
+    //     const originalHTML = btn.innerHTML
+    //     btn.innerHTML = '<i class="fas fa-check"></i>'
+    //     btn.style.background = '#28a745'
+
+    //     setTimeout(() => {
+    //       btn.innerHTML = originalHTML
+    //       btn.style.background = ''
+    //     }, 2000)
+    //   })
+    // },
+
+    async submitForm() {
+      // Validar formulário completo
+      if (!this.validateFormData()) {
+        this.$nextTick(() => {
+          const firstError = document.querySelector('.error')
+          if (firstError) {
+            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' })
+          }
+        })
+        return
+      }
+
+      this.isSubmitting = true
 
       try {
-        // Usar Formspree
-        const response = await fetch('https://formspree.io/f/xzzrnbbo', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: this.formData.nomeRazaoSocial,
-            email: this.formData.email,
-            telefone: this.formData.celular || this.formData.telefoneFixo,
-            empresa: `${this.formData.ramoAtuacao} - CNPJ: ${this.formData.cnpj}`,
-            uf: this.formData.uf,
-            endereco: this.formData.endereco,
-            ramo_atuacao: this.formData.ramoAtuacao,
-            cnpj: this.formData.cnpj,
-            message: `🤝 SOLICITAÇÃO DE PARCERIA - Uni Hospitalar
+        // Criar FormData para enviar arquivos
+        const formData = new FormData()
 
-📋 DADOS DA EMPRESA:
-• Nome/Razão Social: ${this.formData.nomeRazaoSocial}
-• UF: ${this.formData.uf}
-• Ramo de Atuação: ${this.formData.ramoAtuacao}
-• CNPJ: ${this.formData.cnpj}
-• E-mail: ${this.formData.email}
-• Celular: ${this.formData.celular || 'Não informado'}
-• Telefone Fixo: ${this.formData.telefoneFixo || 'Não informado'}
-• Endereço: ${this.formData.endereco || 'Não informado'}
-
-📅 Data: ${this.getBrazilianTimeNative()}
-🌐 Origem: Formulário "Seja Nosso Parceiro" - Site Uni Hospitalar
-✅ AÇÃO REQUERIDA: Análise de Parceria (Responder em até 48h)`,
-            _subject: `🤝 Nova Solicitação de Parceria - ${this.formData.nomeRazaoSocial}`
-          }),
-        });
-
-        if (response.ok) {
-          this.showSuccessMessage = true;
-          this.resetForm();
-        } else {
-          this.showErrorMessage = true;
+        // Adicionar dados do formulário
+        const partnerData = {
+          nomeRazaoSocial: this.formData.nomeRazaoSocial,
+          uf: this.formData.uf,
+          ramoAtuacao: this.formData.ramoAtuacao,
+          cnpj: this.formData.cnpj,
+          email: this.formData.email,
+          celular: this.formData.celular || null,
+          telefoneFixo: this.formData.telefoneFixo || null,
+          endereco: this.formData.endereco || null
         }
+
+        // Adicionar dados como JSON
+        formData.append('partnerData', JSON.stringify(partnerData))
+
+        // Adicionar documentos
+        Object.keys(this.documents).forEach(docType => {
+          if (this.documents[docType]) {
+            formData.append(docType, this.documents[docType])
+          }
+        })
+
+        console.log('📤 Enviando solicitação de parceria para API...')
+        console.log('📎 Total de documentos:', Object.keys(this.documents).filter(key => this.documents[key]).length)
+
+        // Fazer requisição para a API
+        const apiUrl = this.getApiUrl()
+        const response = await fetch(`${apiUrl}/api/partners`, {
+          method: 'POST',
+          body: formData
+        })
+
+        const result = await response.json()
+
+        if (!response.ok) {
+          throw new Error(result.error || 'Erro ao enviar solicitação')
+        }
+
+        // Sucesso
+        this.submissionData = {
+          companyName: result.companyName,
+          cnpj: result.cnpj,
+          email: result.email,
+          documentsCount: result.documentsCount
+        }
+        this.partnerSubmitted = true
+        this.isSubmitting = false
+
+        console.log('✅ Solicitação de parceria enviada com sucesso!')
+        console.log('🏢 Empresa:', result.companyName)
+        console.log('📄 CNPJ:', result.cnpj)
+        console.log('📎 Documentos enviados:', result.documentsCount || 0)
+
+        // Scroll suave para o success-card
+        this.$nextTick(() => {
+          const successCard = document.querySelector('.success-card');
+          if (successCard) {
+            successCard.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        })
+
       } catch (error) {
-        console.error('Erro ao enviar formulário:', error);
-        this.showErrorMessage = true;
-      } finally {
-        this.isSubmitting = false;
+        console.error('❌ Erro ao enviar solicitação de parceria:', error)
+        this.isSubmitting = false
+        this.showErrorMessage = true
+        setTimeout(() => {
+          this.showErrorMessage = false
+        }, 5000)
       }
     },
 
@@ -832,7 +1407,7 @@ section {
   border-radius: 8px;
   background-image: url('@/assets/clipes-uni-background.png');
   background-repeat: repeat;
-  background-size: 365px;
+  background-size: 410px;
   background-color: rgba(255, 255, 255, 0.9);
   padding: 2px;
   border: 1px solid #AE2C2A;
@@ -843,8 +1418,8 @@ section {
 
 /* Estilo para loading no CNPJ */
 .input-clip.loading {
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  border-color: #AE2C2A;
+  box-shadow: 0 0 0 2px rgba(174, 44, 42, 0.25);
 }
 
 .loading-spinner {
@@ -852,7 +1427,7 @@ section {
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
-  color: #007bff;
+  color: #AE2C2A;
   font-size: 1.2rem;
 }
 
@@ -906,28 +1481,31 @@ select.form-control {
 
 .field-help {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
-  color: #6c757d;
+  color: #842029;
   font-size: 0.85rem;
   margin-top: 5px;
   padding: 8px 12px;
-  background-color: #e9ecef;
-  border: 1px solid #dee2e6;
+  background-color: #f8d7da;
+  border: 1px solid #f5c2c7;
   border-radius: 4px;
+  letter-spacing: 0.05rem;
 }
 
 .field-help i {
-  color: #007bff;
+  color: #dc3545;
+  margin-top: 4.5px;
 }
 
 /* Aviso de Termos */
 .terms-notice {
-  margin: 30px 0 20px 0;
+  margin: 20px 0;
   background: linear-gradient(135deg, rgba(174, 44, 42, 0.05), rgba(174, 44, 42, 0.02));
   border: 1px solid rgba(174, 44, 42, 0.2);
   border-radius: 10px;
   padding: 20px;
+  border-left: 4px solid #AE2C2A;
 }
 
 .notice-content {
@@ -1217,8 +1795,18 @@ select.form-control {
     padding: 6px 10px;
   }
 
+  .upload-info {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .upload-info i {
+    margin: 10px auto;
+  }
+
   .notice-content {
     flex-direction: column;
+    align-items: center;
     gap: 10px;
   }
 
@@ -1316,6 +1904,13 @@ select.form-control {
   cursor: not-allowed;
 }
 
+/* Estilo visual semelhante a campos readonly */
+.readonly-style {
+  background-color: #f8f9fa !important;
+  opacity: 2;
+  cursor: not-allowed;
+}
+
 /* Melhorias visuais para o loading */
 .input-clip.loading::after {
   content: '';
@@ -1384,5 +1979,733 @@ select.form-control {
 /* Remove o asterisco dos campos opcionais */
 .form-group.optional label::after {
   content: ' (opcional)';
+}
+
+/* Estilos para os botões de upload de documentos */
+.documents-upload {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.upload-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+  border: 3px dashed #AE2C2A;
+  border-radius: 12px;
+  padding: 25px;
+  background-color: #fdf2f2;
+}
+
+.document-upload-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  border: 2px solid #f3d1d1;
+  border-radius: 8px;
+  background: #fffafa;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  min-height: 70px;
+}
+
+.document-upload-button:hover {
+  border-color: #AE2C2A;
+  background: #fae6e6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(174, 44, 42, 0.1);
+}
+
+.document-upload-button.uploaded {
+  border-color: #62c976;
+  background: #e7f6eb;
+  cursor: default;
+}
+
+.document-upload-button.uploaded:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.document-upload-button.error {
+  border-color: #dc3545;
+  background: #f8d7da;
+}
+
+.button-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  flex: 1;
+}
+
+.button-content i {
+  font-size: 1.5rem;
+  color: #6c757d;
+  margin-bottom: 5px;
+}
+
+.document-upload-button.uploaded .button-content i {
+  color: #28a745;
+}
+
+.document-upload-button.error .button-content i {
+  color: #dc3545;
+}
+
+.button-label {
+  font-weight: 600;
+  color: #495057;
+  font-size: 0.95rem;
+}
+
+.document-upload-button.uploaded .button-label {
+  color: #155724;
+}
+
+.document-upload-button.error .button-label {
+  color: #721c24;
+}
+
+.file-name {
+  font-size: 0.8rem;
+  color: #6c757d;
+  font-style: italic;
+  word-break: break-all;
+  max-width: 200px;
+}
+
+.document-upload-button.uploaded .file-name {
+  color: #155724;
+}
+
+.remove-doc-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  padding-left: 7px;
+}
+
+.remove-doc-btn:hover {
+  background: #c82333;
+  transform: scale(1.1);
+}
+
+.remove-doc-btn i {
+  font-size: 0.9rem;
+}
+
+.upload-info {
+  display: flex;
+  align-items: flex-start;
+  background: rgba(255, 85, 85, 0.08);
+  padding: 15px 18px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(255, 85, 85, 0.15);
+  border-left: 4px solid #ff5555;
+}
+
+.upload-info > *:not(:first-child) {
+  margin-left: 7px;
+}
+
+.upload-info i {
+  color: #ff5555;
+  font-size: 1.1rem;
+  margin-top: 2px;
+}
+
+.upload-info small {
+  color: #cc3333;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  letter-spacing: 0.05rem;
+  font-weight: 500;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #842029;
+  border: 1px solid #f5c2c7;
+  border-left: 4px solid #dc3545;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Ícone de alerta com animação */
+.animated-icon {
+  color: #dc3545;
+  font-size: 1.2rem;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+/* Animação de pulsar leve */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsividade para os botões de documentos */
+@media (max-width: 768px) {
+  .upload-buttons-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .document-upload-button {
+    padding: 12px 15px;
+    min-height: 60px;
+  }
+  
+  .button-content i {
+    font-size: 1.3rem;
+  }
+  
+  .button-label {
+    font-size: 0.9rem;
+  }
+  
+  .file-name {
+    font-size: 0.75rem;
+    max-width: 150px;
+  }
+  
+  .remove-doc-btn {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 576px) {
+  .document-upload-button {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    text-align: center;
+  }
+  
+  .button-content {
+    align-items: center;
+  }
+  
+  .remove-doc-btn {
+    align-self: center;
+  }
+}
+
+/* Success Section - Baseado no FazerReclamacao.vue */
+.success-section {
+  padding: 0;
+}
+
+/* Novos estilos para a seção de sucesso */
+.submission-details {
+  background: linear-gradient(135deg, #ffffff, #f8f9fa);
+  padding: 35px;
+  border-radius: 20px;
+  margin: 30px 0;
+  border: 1px solid rgba(174, 44, 42, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.submission-details::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #AE2C2A, #ff5555, #AE2C2A);
+}
+
+.submission-details h3 {
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;;
+  font-weight: 700;
+  margin-bottom: 30px;
+  font-size: 1.5rem;
+  text-align: center;
+  position: relative;
+  padding-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.submission-details h3 i {
+  color: #AE2C2A;
+}
+
+.submission-details h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #AE2C2A, #ff5555);
+  border-radius: 2px;
+}
+
+.details-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.detail-item {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(174, 44, 42, 0.08);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.detail-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(174, 44, 42, 0.1);
+  border-color: rgba(174, 44, 42, 0.15);
+}
+
+.detail-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(174, 44, 42, 0.2);
+}
+
+.detail-content {
+  flex: 1;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #780000;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.detail-value {
+  color: #2d3748;
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.next-steps {
+  background: linear-gradient(135deg, #ffffff, #fef9f9);
+  padding: 35px;
+  border-radius: 20px;
+  margin: 30px 0;
+  border: 1px solid rgba(174, 44, 42, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.next-steps::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #ff5555, #AE2C2A, #ff5555);
+}
+
+.next-steps h3 {
+  color: #2d3748;
+  font-weight: 700;
+  margin-bottom: 30px;
+  font-size: 1.5rem;
+  text-align: center;
+  position: relative;
+  padding-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.next-steps h3 i {
+  color: #AE2C2A;
+}
+
+.next-steps h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #ff5555, #AE2C2A);
+  border-radius: 2px;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.step-item {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(174, 44, 42, 0.08);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.step-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #AE2C2A, #ff5555);
+}
+
+.step-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(174, 44, 42, 0.12);
+  border-color: rgba(174, 44, 42, 0.15);
+}
+
+.step-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px rgba(174, 44, 42, 0.25);
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-title {
+  font-weight: 700;
+  color: #2d3748;
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.step-description {
+  color: #4a5568;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.contact-info {
+  background: linear-gradient(135deg, #fff7ed, #fed7aa);
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid rgba(251, 146, 60, 0.2);
+  margin: 30px 0;
+  text-align: left;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  box-shadow: 0 8px 32px rgba(251, 146, 60, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-info::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #fb923c, #f97316, #fb923c);
+}
+
+.info-icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f97316, #fb923c);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.25);
+}
+
+.info-content {
+  flex: 1;
+}
+
+.info-content h4 {
+  color: #9a3412;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
+}
+
+.info-content p {
+  color: #9a3412;
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.success-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  padding: 60px 40px;
+  text-align: center;
+  border: 1px solid #e9ecef;
+}
+
+.success-animation {
+  margin-bottom: 30px;
+}
+
+.success-icon {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, #28a745, #20c997);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  font-size: 3rem;
+  color: white;
+  animation: successPulse 2s infinite;
+}
+
+@keyframes successPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 20px rgba(40, 167, 69, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
+  }
+}
+
+.success-card h2 {
+  color: #28a745;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.success-card > p {
+  color: #696969;
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.tracking-code-section {
+  background: #f8f9fa;
+  padding: 30px;
+  border-radius: 15px;
+  margin: 30px 0;
+  border: 2px solid #e9ecef;
+}
+
+.tracking-code-section label {
+  display: block;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.codes-container {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  border: 2px solid #AE2C2A;
+}
+
+.code-item {
+  margin-bottom: 20px;
+}
+
+.code-item:last-of-type {
+  margin-bottom: 25px;
+}
+
+.code-label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.code-display {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.code {
+  font-family: 'Courier New', monospace;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #AE2C2A;
+  letter-spacing: 1px;
+}
+
+.copy-btn {
+  background: #AE2C2A;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.copy-btn:hover {
+  background: #ff5555;
+  transform: scale(1.05);
+}
+
+.important-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  background: #fff3cd;
+  padding: 20px;
+  border-radius: 12px;
+  border-left: 4px solid #ffc107;
+  margin: 30px 0;
+  text-align: left;
+}
+
+.important-notice i {
+  color: #856404;
+  font-size: 1.5rem;
+  margin-top: 2px;
+}
+
+.important-notice p {
+  color: #856404;
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.success-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  min-width: 180px;
+  justify-content: center;
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(174, 44, 42, 0.3);
+  color: white;
+  text-decoration: none;
 }
 </style>

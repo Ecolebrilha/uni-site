@@ -13,10 +13,10 @@ const translations = reactive({
         inventory: {
           title: 'Gestão de Estoque Inovadora',
           description: 'Gestão inteligente de estoque, garantindo disponibilidade contínua e evitando rupturas, com controle rigoroso das condições de armazenamento, conforme determina a legislação sanitária brasileira vigente, utilizando tecnologia de ponta e automações para evitar desperdícios e aumentar a eficiência operacional.',
-          feature1: 'Tecnologia Avançada:',
-          feature1Description: 'Sistema de WMS e monitoramento em tempo real.',
-          feature2: 'Automação:',
-          feature2Description: 'Redução de erros humanos e aumento da eficiência.'
+          feature1: 'Tecnologia de Ponta:',
+          feature1Description: 'Nossa infraestrutura conta com um sistema de climatização avançado, que assegura um controle preciso e constante da temperatura, monitoramento em tempo real e sistema de WMS',
+          feature2: 'Operação sem Falhas:',
+          feature2Description: 'Com gerador de emergência para todas as áreas, a continuidade das operações é garantida, sem comprometer a qualidade do seu armazenamento.'
         },
         logistics: {
           title: 'Logística Ágil e Eficiente',
@@ -92,10 +92,10 @@ const translations = reactive({
         inventory: {
           title: 'Innovative Inventory Management',
           description: 'Intelligent inventory management ensures continuous availability and prevents stockouts, with strict control over storage conditions, as determined by current Brazilian health legislation, using cutting-edge technology and automation to avoid waste and increase operational efficiency.',
-          feature1: 'Advanced Technology:',
-          feature1Description: 'WMS system and real-time monitoring.',
-          feature2: 'Automation:',
-          feature2Description: 'Reduction of human errors and increased efficiency.'
+          feature1: 'Cutting-edge Technology:',
+          feature1Description: 'Our infrastructure has an advanced air conditioning system, which ensures precise and constant temperature control, real-time monitoring and a WMS system.',
+          feature2: 'Flawless Operation:',
+          feature2Description: 'With an emergency generator for all areas, the continuity of operations is guaranteed, without compromising the quality of your storage.'
         },
         logistics: {
           title: 'Agile and Efficient Logistics',
@@ -171,10 +171,10 @@ const translations = reactive({
         inventory: {
           title: 'Gestión de Inventario Innovadora',
           description: 'La gestión inteligente de inventarios garantiza la disponibilidad continua y evita el desabastecimiento, con un estricto control de las condiciones de almacenamiento, conforme a lo determinado por la legislación sanitaria brasileña vigente, utilizando tecnología de punta y automatización para evitar desperdicios y aumentar la eficiencia operativa.',
-          feature1: 'Tecnología Avanzada:',
-          feature1Description: 'Sistema WMS y monitorización en tiempo real.',
-          feature2: 'Automatización:',
-          feature2Description: 'Reducción de errores humanos y aumento de la eficiencia.'
+          feature1: 'Tecnología de Vanguardia',
+          feature1Description: 'Nuestra infraestructura cuenta con un avanzado sistema de aire acondicionado, que asegura un control preciso y constante de la temperatura, monitoreo en tiempo real y un sistema WMS.',
+          feature2: 'Funcionamiento impecable:',
+          feature2Description: 'Con un generador de emergencia para todas las áreas, se garantiza la continuidad de las operaciones, sin comprometer la calidad de su almacenamiento.'
         },
         logistics: {
           title: 'Logística Ágil y Eficiente',

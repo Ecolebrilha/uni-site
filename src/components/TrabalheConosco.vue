@@ -21,10 +21,13 @@
             <span class="accent-line"></span>
           </div>
           <p class="intro-text">
-            Na Uni Hospitalar, acreditamos que nossos colaboradores são o nosso maior ativo.
-            Estamos sempre em busca de talentos que compartilhem nossos valores e queiram
-            fazer a diferença no setor de saúde. Conheça nossas oportunidades e faça parte
-            do nosso time.
+            Na Uni Hospitalar, acreditamos que nossos colaboradores são o principal pilar da 
+            nossa trajetória. Aqui, cada talento encontra a oportunidade única de trilhar seu
+            próprio caminho e crescer em um ambiente de apoio, colaboração e diversidade. Nossa
+            força está nas pessoas que compartilham nossos valores e nos ajudam a transformar a
+            distribuição de medicamentos com ética, integridade, inovação e qualidade.<br><br>
+            <span class="intro-text-two">Se você busca fazer a diferença e desenvolver seu potencial em uma cultura que 
+            valoriza o crescimento pessoal e profissional, venha fazer parte do nosso time.</span>
           </p>
         </ScrollReveal>
       </div>
@@ -32,55 +35,55 @@
 
     <!-- Seção de Valores da Empresa -->
     <section class="values-section">
-      <div class="container">
-        <ScrollReveal direction="bottom" :delay="200">
-          <div class="section-title">
-            <span class="accent-line"></span>
-            <h2>Nossos Valores</h2>
-            <span class="accent-line"></span>
+  <div class="container">
+    <ScrollReveal direction="bottom" :delay="200">
+      <div class="section-title">
+        <span class="accent-line"></span>
+        <h2>Nossos Valores</h2>
+        <span class="accent-line"></span>
+      </div>
+    </ScrollReveal>
+
+    <div class="values-grid">
+      <ScrollReveal direction="bottom" :delay="300">
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-handshake"></i>
           </div>
-        </ScrollReveal>
+          <h3>Integridade</h3>
+          <p>Agimos com ética, transparência e responsabilidade em todas as nossas relações.</p>
+        </div>
+      </ScrollReveal>
 
-        <div class="values-grid">
-          <ScrollReveal direction="bottom" :delay="300">
-            <div class="value-card">
-              <div class="value-icon">
-                <i class="fas fa-handshake"></i>
-              </div>
-              <h3>Integridade</h3>
-              <p>Agimos com ética, transparência e responsabilidade em todas as nossas relações.</p>
-            </div>
-          </ScrollReveal>
+      <ScrollReveal direction="bottom" :delay="400">
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>Colaboração</h3>
+          <p>Trabalhamos juntos, valorizando sempre a diversidade, a inclusão e o respeito mútuo.</p>
+        </div>
+      </ScrollReveal>
 
-          <ScrollReveal direction="bottom" :delay="400">
-            <div class="value-card">
-              <div class="value-icon">
-                <i class="fas fa-users"></i>
-              </div>
-              <h3>Colaboração</h3>
-              <p>Trabalhamos juntos, valorizando sempre a diversidade, a inclusão e o respeito mútuo.</p>
-            </div>
-          </ScrollReveal>
+      <ScrollReveal direction="bottom" :delay="500">
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <h3>Inovação</h3>
+          <p>Reinventar-se é parte da nossa jornada. Unimos resiliência e criatividade para desenvolver soluções que fortalecem a distribuição de medicamentos e criam novas oportunidades de crescimento.</p>
+        </div>
+      </ScrollReveal>
 
-          <ScrollReveal direction="bottom" :delay="500">
-            <div class="value-card">
-              <div class="value-icon">
-                <i class="fas fa-lightbulb"></i>
-              </div>
-              <h3>Inovação</h3>
-              <p>Buscamos constantemente novas soluções e melhores práticas para o setor de saúde.</p>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="bottom" :delay="600">
-            <div class="value-card">
-              <div class="value-icon">
-                <i class="fas fa-chart-line"></i>
-              </div>
-              <h3>Excelência</h3>
-              <p>Comprometemo-nos com a qualidade e a melhoria contínua em tudo o que fazemos.</p>
-            </div>
-          </ScrollReveal>
+      <ScrollReveal direction="bottom" :delay="600">
+        <div class="value-card">
+          <div class="value-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3>Excelência</h3>
+          <p>A excelência guia nossas ações: buscamos sempre ir além, transformando dedicação e atenção aos detalhes em resultados extraordinários.</p>
+        </div>
+      </ScrollReveal>
         </div>
       </div>
     </section>
@@ -472,9 +475,9 @@
                   placeholder="Ex: R$ 3.000,00 - R$ 4.000,00 (opcional)">
               </div>
 
-              <div class="form-group full-width">
+              <div class="form-group full-width optional-field">
                 <div class="checkbox-group">
-                  <input type="checkbox" id="privacy" v-model="formData.privacy" required>
+                  <input type="checkbox" id="privacy" v-model="formData.privacy">
                   <label for="privacy">
                     Autorizo a Uni Hospitalar a manter em seu banco de talentos
                     meus dados pessoais fornecidos durante a candidatura e
@@ -833,10 +836,6 @@ export default {
         this.errors.message = 'Apresentação pessoal é obrigatória.';
       }
 
-      if (!this.formData.privacy) {
-        this.errors.privacy = 'Você deve concordar com a política de privacidade.';
-      }
-
       return Object.keys(this.errors).length === 0;
     },
 
@@ -859,7 +858,7 @@ export default {
 
         // Adicionar dados do formulário
         Object.keys(this.formData).forEach(key => {
-          if (key !== 'resume' && key !== 'privacy') {
+          if (key !== 'resume') {
             formData.append(key, this.formData[key]);
           }
         });
@@ -1091,9 +1090,21 @@ section {
   line-height: 1.8;
 }
 
+.intro-text-two {
+  font-size: 1.3rem;
+  max-width: 800px;
+  margin: 0 auto;
+  color: #555;
+  line-height: 1.8;
+  margin-top: 20px;
+}
+
 /* Seção de Valores */
 .values-section {
   background-color: #ffffff;
+  position: relative;
+  padding: 60px 0;
+  margin-bottom: 100px;
 }
 
 .values-section::before {
@@ -1104,30 +1115,40 @@ section {
   width: 100%;
   height: 100%;
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ae2c2a' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  opacity: 0.5;
+  opacity: 0.05;
+  z-index: 0;
 }
 
+/* Grid responsivo */
 .values-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 100px;
+  position: relative;
+  z-index: 1;
 }
 
+/* Card de valor */
 .value-card {
   background: #f9f9f9;
   border-radius: 15px;
   padding: 30px;
   text-align: center;
   border: 1px solid rgba(174, 44, 42, 0.068);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
 }
 
 .value-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-8px);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
 }
 
+/* Ícone dentro do card */
 .value-icon {
   width: 80px;
   height: 80px;
@@ -1141,17 +1162,21 @@ section {
   font-size: 2rem;
 }
 
+/* Título do valor */
 .value-card h3 {
   font-size: 1.5rem;
+  margin-bottom: 15px;
   background: linear-gradient(135deg, #2c3e50, #AE2C2A);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 15px;
 }
 
+/* Texto do card */
 .value-card p {
   color: #696969;
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 /* Seção de Benefícios */
