@@ -1226,7 +1226,7 @@ section {
 .benefits-list {
   display: flex;
   flex-direction: column;
-  gap: 32px !important;
+  gap: 32px;
 }
 
 .benefit-item {
