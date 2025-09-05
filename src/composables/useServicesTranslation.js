@@ -12,7 +12,7 @@ const translations = reactive({
       mainServiceTitle: 'Nosso Foco',
       mainServiceText: 'Combinando eficiência, qualidade e um atendimento verdadeiramente humano, a Uni Hospitalar se consolida como parceira estratégica nos segmentos público e privado. Nossa atuação em Medicamentos Oncológicos e Hospitalares reflete a dedicação em entregar soluções completas, que geram impacto real no setor.',
       privateSegmentTitle: 'Segmento Privado',
-      privateSegmentText: 'Nossa estrutura combina tecnologia de ponta e automações inteligentes à dedicação de um time especializado. Esse equilíbrio garante <strong>respostas rápidas e eficazes</strong>, assegurando uma experiência completa e de alta qualidade, com o <strong>cuidado humano</strong> como nosso principal diferencial.',
+      privateSegmentText: 'Nossa estrutura combina tecnologia de ponta e automações inteligentes à dedicação de um time especializado. Esse equilíbrio garante respostas rápidas e eficazes, assegurando uma experiência completa e de alta qualidade, com o cuidado humano como nosso principal diferencial.',
       privateFeatures: {
         feature1: 'Atendimento personalizado',
         feature2: 'Consultoria especializada',
@@ -80,7 +80,7 @@ const translations = reactive({
       mainServiceTitle: 'Our Focus',
       mainServiceText: 'Combining efficiency, quality, and truly humane service, Uni Hospitalar has established itself as a strategic partner in both the public and private sectors. Our work in Oncology and Hospital Medications reflects our dedication to delivering comprehensive solutions that generate a real impact on the sector.',
       privateSegmentTitle: 'Private Segment',
-      privateSegmentText: 'Our structure combines cutting-edge technology and smart automation with the dedication of a specialized team. This balance ensures <strong>fast and effective responses</strong>, delivering a complete, high-quality experience with <strong>human care</strong> as our main differentiator.',
+      privateSegmentText: 'Our structure combines cutting-edge technology and smart automation with the dedication of a specialized team. This balance ensures fast and effective responses, delivering a complete, high-quality experience with human care as our main differentiator.',
       privateFeatures: {
         feature1: 'Personalized service',
         feature2: 'Specialized consulting',
@@ -148,7 +148,7 @@ const translations = reactive({
       mainServiceTitle: 'Nuestro enfoque',
       mainServiceText: 'Combinando eficiencia, calidad y un servicio verdaderamente humano, Uni Hospitalar se ha consolidado como un socio estratégico tanto en el sector público como en el privado. Nuestra labor en Oncología y Medicamentos Hospitalarios refleja nuestra dedicación a brindar soluciones integrales que generen un impacto real en el sector.',
       privateSegmentTitle: 'Segmento Privado',
-      privateSegmentText: 'Nuestra estructura combina tecnología de punta y automatizaciones inteligentes con la dedicación de un equipo especializado. Este equilibrio garantiza <strong>respuestas rápidas y eficaces</strong>, asegurando una experiencia completa y de alta calidad, con el <strong>cuidado humano</strong> como nuestro principal diferencial.',
+      privateSegmentText: 'Nuestra estructura combina tecnología de punta y automatizaciones inteligentes con la dedicación de un equipo especializado. Este equilibrio garantiza respuestas rápidas y eficaces, asegurando una experiencia completa y de alta calidad, con el cuidado humano como nuestro principal diferencial.',
       privateFeatures: {
         feature1: 'Atención personalizada',
         feature2: 'Consultoría especializada',

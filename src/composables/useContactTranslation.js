@@ -53,7 +53,7 @@ const translations = reactive({
       locationsTitle: 'Nossas Localizações',
       branches: {
         recife: {
-          name: 'Uni Hospitalar LTDA',
+          name: 'Uni Hospitalar',
           city: 'Recife - PE',
           address: 'Rua Alagoas, 253 - Ipsep, Recife - PE',
           cep: '51350-000',
@@ -62,7 +62,7 @@ const translations = reactive({
           hours: 'Segunda a Sexta: 8h às 18h'
         },
         fortaleza: {
-          name: 'Uni Hospitalar Ceará LTDA',
+          name: 'Uni Hospitalar Ceará',
           city: 'Fortaleza - CE',
           address: 'Rua Flôres, 38 - Cajazeiras, Fortaleza - CE',
           cep: '60864-520',
@@ -71,7 +71,7 @@ const translations = reactive({
           hours: 'Segunda a Sexta: 8h às 18h'
         },
         saopaulo: {
-          name: 'SP Hospitalar LTDA',
+          name: 'SP Hospitalar',
           city: 'Cotia - SP',
           address: 'R. Pinhal, 165 - Jardim Sabiá, Cotia - SP',
           cep: '06716-575',
@@ -147,7 +147,7 @@ const translations = reactive({
       locationsTitle: 'Our Locations',
       branches: {
         recife: {
-          name: 'Uni Hospitalar LTDA',
+          name: 'Uni Hospitalar',
           city: 'Recife - PE',
           address: 'Rua Alagoas, 253 - Ipsep, Recife - PE',
           cep: '51350-000',
@@ -156,7 +156,7 @@ const translations = reactive({
           hours: 'Monday to Friday: 8am to 6pm'
         },
         fortaleza: {
-          name: 'Uni Hospitalar Ceará LTDA',
+          name: 'Uni Hospitalar Ceará',
           city: 'Fortaleza - CE',
           address: 'Rua Flôres, 38 - Cajazeiras, Fortaleza - CE',
           cep: '60864-520',
@@ -165,7 +165,7 @@ const translations = reactive({
           hours: 'Monday to Friday: 8am to 6pm'
         },
         saopaulo: {
-          name: 'SP Hospitalar LTDA',
+          name: 'SP Hospitalar',
           city: 'Cotia - SP',
           address: 'R. Pinhal, 165 - Jardim Sabiá, Cotia - SP',
           cep: '06716-575',
@@ -241,7 +241,7 @@ const translations = reactive({
       locationsTitle: 'Nuestras Ubicaciones',
       branches: {
         recife: {
-          name: 'Uni Hospitalar LTDA',
+          name: 'Uni Hospitalar',
           city: 'Recife - PE',
           address: 'Rua Alagoas, 253 - Ipsep, Recife - PE',
           cep: '51350-000',
@@ -250,7 +250,7 @@ const translations = reactive({
           hours: 'Lunes a Viernes: 8h a 18h'
         },
         fortaleza: {
-          name: 'Uni Hospitalar Ceará LTDA',
+          name: 'Uni Hospitalar Ceará',
           city: 'Fortaleza - CE',
           address: 'Rua Flôres, 38 - Cajazeiras, Fortaleza - CE',
           cep: '60864-520',
@@ -259,7 +259,7 @@ const translations = reactive({
           hours: 'Lunes a Viernes: 8h a 18h'
         },
         saopaulo: {
-          name: 'SP Hospitalar LTDA',
+          name: 'SP Hospitalar',
           city: 'Cotia - SP',
           address: 'R. Pinhal, 165 - Jardim Sabiá, Cotia - SP',
           cep: '06716-575',

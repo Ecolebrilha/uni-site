@@ -42,7 +42,7 @@
                 </div>
                 <div class="stat-title">Cobertura em unidades de negócio</div>
                 <div class="stat-description">Atendemos aos Canais públicos e privados, com as linhas de medicamentos
-                  oncológicos, hospitalares e colírios. Nossa presença abrange múltiplos estados e regiões estratégicas.
+                  oncológicos e hospitalares. Nossa presença abrange múltiplos estados e regiões estratégicas.
                 </div>
               </div>
               <div class="stat-icon">

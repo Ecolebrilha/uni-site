@@ -476,7 +476,7 @@ export default {
       dragThreshold: 50,
       branches: [
         {
-          name: 'Uni Hospitalar LTDA',
+          name: 'Uni Hospitalar',
           phone: '+55 (81) 3472-7201',
           email: 'contato@unihospitalar.com.br',
           address: 'R. Alagoas, 253 - Ipsep, Recife - PE, 51350-560',
@@ -484,7 +484,7 @@ export default {
           mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d246.91!2d-34.8951233!3d-8.0623376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab1be2a5d9b3d7%3A0x123456789!2sR.%20Alagoas%2C%20253%20-%20Ipsep%2C%20Recife%20-%20PE%2C%2051350-560%2C%20Brasil!5e0!3m2!1spt-BR!2sbr!4v1699999999999!5m2!1spt-BR!2sbr'
         },
         {
-          name: 'Uni Hospitalar Ceará LTDA',
+          name: 'Uni Hospitalar Ceará',
           phone: '+55 (85) 3289-3722',
           email: 'contato@uniceara.com.br',
           address: 'Rua Flôres, 38 - Cajazeiras, Fortaleza - CE, 60864-520',
@@ -492,7 +492,7 @@ export default {
           mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124.37358531027889!2d-38.58232312426936!3d-3.8271872440876074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c74c7a7a7a7a7a7%3A0x9e3e5b0d8d3d8d3d!2sR.%20Fl%C3%B4res%2C%2038%20-%20Cajazeiras%2C%20Fortaleza%20-%20CE%2C%2060864-510!5e0!3m2!1spt-BR!2sbr!4v1625151234567!5m2!1spt-BR!2sbr'
         },
         {
-          name: 'SP Hospitalar LTDA',
+          name: 'SP Hospitalar',
           phone: '+55 (11) 4777-2159',
           email: 'contato@sphospitalar.com.br',
           address: 'R. Pinhal, 165 - Jardim Sabiá, Cotia - SP, 06716-575',

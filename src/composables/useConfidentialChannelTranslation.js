@@ -20,16 +20,16 @@ const translations = reactive({
           text: 'Asseguramos total anonimato e confidencialidade dos relatos. Nenhum colaborador da Uni Hospitalar tem acesso à identidade dos relatores que optarem pelo anonimato.'
         },
         independence: {
-          title: 'Independência na Investigação',
-          text: 'Todo processo investigativo é conduzido de forma sigilosa e exclusivamente pela área de Compliance, atuando com imparcialidade e isonomia.'
+          title: 'Independência na Apuração',
+          text: 'Todo processo é conduzido de forma sigilosa e exclusivamente pela área de Compliance, atuando com imparcialidade e isonomia.'
         },
         confidentiality: {
           title: 'Confidencialidade das Informações',
-          text: 'Nossa área de Compliance mantém o compromisso de preservar todas as informações relacionadas às investigações de forma segura e confidencial.'
+          text: 'Nossa área de Compliance mantém o compromisso de preservar todas as informações relacionadas às apurações de forma segura e confidencial.'
         },
         noRetaliation: {
           title: 'Política de Não Retaliação',
-          text: 'A Uni Hospitalar garante um ambiente seguro onde nenhum relator de boa-fé será punido ou retaliado, independentemente do cargo ou resultado da investigação.'
+          text: 'A Uni Hospitalar garante um ambiente seguro onde nenhum relator será punido ou retaliado, independentemente do cargo ou resultado da apuração.'
         },
         agility: {
           title: 'Agilidade no Tratamento',
@@ -37,7 +37,7 @@ const translations = reactive({
         },
         transparency: {
           title: 'Transparência e Justiça',
-          text: 'Conduzimos todas as investigações com transparência nos processos e aplicação justa de medidas corretivas, sempre baseadas em evidências e análises imparciais.'
+          text: 'Conduzimos todas as apurações de denúncias com transparência nos processos e aplicação justa de medidas corretivas, sempre baseadas em evidências e análises imparciais'
         }
       },
       howItWorksTitle: 'Como Funciona o Processo',
@@ -48,15 +48,15 @@ const translations = reactive({
         },
         receipt: {
           title: 'Recebimento',
-          text: 'Você receberá um código único para acompanhar o andamento da investigação.'
+          text: 'Você receberá um código único para acompanhar o andamento da apuração.'
         },
         investigation: {
-          title: 'Investigação',
-          text: 'Nossa equipe de Compliance conduzirá uma investigação imparcial e sigilosa.'
+          title: 'Apuração',
+          text: 'Nossa equipe de Compliance conduzirá uma apuração imparcial e sigilosa.'
         },
         resolution: {
           title: 'Resolução',
-          text: 'Medidas apropriadas serão tomadas conforme os resultados da investigação.'
+          text: 'Medidas apropriadas serão tomadas conforme os resultados da apuração.'
         }
       },
       whatToReportTitle: 'Situações que Devem ser Reportadas',
@@ -191,16 +191,16 @@ const translations = reactive({
           text: 'We ensure total anonymity and confidentiality of reports. No Uni Hospitalar employee has access to the identity of reporters who choose anonymity.'
         },
         independence: {
-          title: 'Investigation Independence',
-          text: 'Every investigative process is conducted confidentially and exclusively by the Compliance area, acting with impartiality and equality.'
+          title: 'Independence in Assessment',
+          text: 'All processes are conducted confidentially and exclusively by the Compliance department, acting with impartiality and fairness.'
         },
         confidentiality: {
           title: 'Information Confidentiality',
-          text: 'Our Compliance area maintains the commitment to preserve all information related to investigations in a secure and confidential manner.'
+          text: 'Our Compliance area maintains the commitment to preserve all information related to assessments in a secure and confidential manner.'
         },
         noRetaliation: {
           title: 'Non-Retaliation Policy',
-          text: 'Uni Hospitalar guarantees a safe environment where no good faith reporter will be punished or retaliated against, regardless of position or investigation outcome.'
+          text: 'Uni Hospitalar guarantees a safe environment where no reporter will be punished or retaliated against, regardless of position or assessment outcome.'
         },
         agility: {
           title: 'Treatment Agility',
@@ -208,7 +208,7 @@ const translations = reactive({
         },
         transparency: {
           title: 'Transparency and Justice',
-          text: 'We conduct all investigations with transparency in processes and fair application of corrective measures, always based on evidence and impartial analysis.'
+          text: 'We conduct all reports assessments with transparency in the processes and fair application of corrective measures, always based on evidence and impartial analysis.'
         }
       },
       howItWorksTitle: 'How the Process Works',
@@ -219,15 +219,15 @@ const translations = reactive({
         },
         receipt: {
           title: 'Receipt',
-          text: 'You will receive a unique code to track the investigation progress.'
+          text: 'You will receive a unique code to track the assessment progress.'
         },
         investigation: {
-          title: 'Investigation',
-          text: 'Our Compliance team will conduct an impartial and confidential investigation.'
+          title: 'Assessment',
+          text: 'Our Compliance team will conduct an impartial and confidential assessment.'
         },
         resolution: {
           title: 'Resolution',
-          text: 'Appropriate measures will be taken according to the investigation results.'
+          text: 'Appropriate measures will be taken according to the assessment results.'
         }
       },
       whatToReportTitle: 'Situations That Should Be Reported',
@@ -362,16 +362,16 @@ const translations = reactive({
           text: 'Aseguramos total anonimato y confidencialidad de los reportes. Ningún colaborador de Uni Hospitalar tiene acceso a la identidad de los reportadores que opten por el anonimato.'
         },
         independence: {
-          title: 'Independencia en la Investigación',
-          text: 'Todo proceso investigativo es conducido de forma sigilosa y exclusivamente por el área de Compliance, actuando con imparcialidad e igualdad.'
+          title: 'Independencia en la Evaluación',
+          text: 'Todos los procesos se llevan a cabo de forma confidencial y exclusivamente por el área de Cumplimiento, actuando con imparcialidad e igualdad.'
         },
         confidentiality: {
           title: 'Confidencialidad de las Informaciones',
-          text: 'Nuestra área de Compliance mantiene el compromiso de preservar todas las informaciones relacionadas a las investigaciones de forma segura y confidencial.'
+          text: 'Nuestra área de Compliance mantiene el compromiso de preservar todas las informaciones relacionadas a las evaluaciones de forma segura y confidencial.'
         },
         noRetaliation: {
           title: 'Política de No Represalia',
-          text: 'Uni Hospitalar garantiza un ambiente seguro donde ningún reportador de buena fe será castigado o represaliado, independientemente del cargo o resultado de la investigación.'
+          text: 'Uni Hospitalar garantiza un ambiente seguro donde ningún reportador será castigado o represaliado, independientemente del cargo o resultado de la evaluación.'
         },
         agility: {
           title: 'Agilidad en el Tratamiento',
@@ -379,7 +379,7 @@ const translations = reactive({
         },
         transparency: {
           title: 'Transparencia y Justicia',
-          text: 'Conducimos todas las investigaciones con transparencia en los procesos y aplicación justa de medidas correctivas, siempre basadas en evidencias y análisis imparciales.'
+          text: 'Conducimos todas las evaluaciones de denuncias con transparencia en los procesos y aplicación justa de medidas correctivas, siempre basadas en evidencias y análisis imparciales.'
         }
       },
       howItWorksTitle: 'Cómo Funciona el Proceso',
@@ -390,15 +390,15 @@ const translations = reactive({
         },
         receipt: {
           title: 'Recepción',
-          text: 'Recibirá un código único para acompañar el progreso de la investigación.'
+          text: 'Recibirá un código único para acompañar el progreso de la evaluación.'
         },
         investigation: {
-          title: 'Investigación',
-          text: 'Nuestro equipo de Compliance conducirá una investigación imparcial y sigilosa.'
+          title: 'Evaluación',
+          text: 'Nuestro equipo de Compliance conducirá una evaluación imparcial y sigilosa.'
         },
         resolution: {
           title: 'Resolución',
-          text: 'Se tomarán medidas apropiadas conforme a los resultados de la investigación.'
+          text: 'Se tomarán medidas apropiadas conforme a los resultados de la evaluación.'
         }
       },
       whatToReportTitle: 'Situaciones que Deben ser Reportadas',

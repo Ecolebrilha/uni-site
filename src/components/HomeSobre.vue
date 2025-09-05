@@ -52,9 +52,9 @@
             <h2>Linha do tempo</h2>
             <span class="accent-line"></span>
           </div>
-          <p class="intro-text">
+          <!-- <p class="intro-text">
             {{ t('about.introText') }}
-          </p>
+          </p> -->
         </ScrollReveal>
         
         <ScrollReveal direction="bottom" :delay="300">
@@ -1685,7 +1685,7 @@ section {
   background: linear-gradient(180deg, #AE2C2A, #D2342C);
   border-radius: 2px;
   opacity: 0;
-  transition: none; /* Remove transição para evitar conflitos */
+  transition: none;
   box-shadow: 0 2px 8px rgba(174, 44, 42, 0.3);
   z-index: 15;
   left: 50%;
@@ -1711,20 +1711,20 @@ section {
 }
 
 .dot-connector.entering {
-  opacity: 0; /* Mantém invisível até a animação começar */
-  animation: connectAnimation 1.2s ease-out 0.3s forwards; /* Animação com delay */
+  opacity: 0;
+  /* animation: connectAnimation 1.2s ease-out 0.3s forwards; */
 }
 
 .dot-connector.active {
   opacity: 1;
   background: linear-gradient(180deg, #D2342C, #AE2C2A);
-  animation: connectAnimation 1.2s ease-out forwards; /* Animação sem delay para hover */
+  /* animation: connectAnimation 1.2s ease-out forwards; */
 }
 
 .dot-connector.exiting {
   opacity: 1;
   background: linear-gradient(180deg, #D2342C, #AE2C2A);
-  animation: disconnectAnimation 0.8s ease-in forwards; /* Animação de saída */
+  animation: disconnectAnimation 0.4s ease-in forwards;
 }
 
 /* Container dos cards e conectores */
@@ -1783,7 +1783,7 @@ section {
   backdrop-filter: blur(10px);
   opacity: 0;
   transform: translateY(80px) scale(0.5);
-  transition: none;
+  transition: background 0.3s ease;
   overflow: hidden;
   position: relative ;
   left: auto ;
@@ -1794,6 +1794,29 @@ section {
   margin-top: 10px;
   filter: blur(3px);
   animation: cardSlideIn 1s ease-out forwards;
+}
+
+/* Efeito de borda quando ativo */
+.timeline-card.active::after,
+.timeline-card:hover::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(174, 44, 42, 0.4) 25%,
+    rgba(210, 52, 44, 0.3) 50%,
+    rgba(174, 44, 42, 0.4) 75%,
+    transparent 100%
+  );
+  background-size: 300% 300%;
+  border-radius: inherit;
+  z-index: -1;
+  animation: borderGlow 2s ease-in-out forwards;
 }
 
 /* Estados de animação */
@@ -1959,12 +1982,12 @@ section {
 }
 
 .timeline-card.entering {
-  animation: cardEnter 0.6s ease forwards;
+  animation: cardEnter 0.25s ease-out forwards;
   z-index: 10;
 }
 
 .timeline-card.exiting {
-  animation: cardExit 0.6s ease forwards;
+  animation: cardExit 0.25s ease-out forwards;
   z-index: 5;
 }
 
@@ -3169,46 +3192,39 @@ section {
   opacity: 0;
 }
 
-/* Borda brilhante animada */
-.timeline-card::after {
+/* Borda de destaque (ativa só por 2s) */
+.timeline-card.highlight::after {
   content: '';
   position: absolute;
   top: -3px;
   left: -3px;
   right: -3px;
   bottom: -3px;
+  border-radius: inherit;
   background: linear-gradient(
     45deg,
-    transparent 0%,
-    rgba(174, 44, 42, 0.4) 25%,
-    rgba(210, 52, 44, 0.3) 50%,
-    rgba(174, 44, 42, 0.4) 75%,
-    transparent 100%
+    rgba(174, 44, 42, 0.6),
+    rgba(210, 52, 44, 0.6),
+    rgba(174, 44, 42, 0.6)
   );
-  background-size: 300% 300%;
-  border-radius: inherit;
-  opacity: 0;
-  transition: opacity 1s ease;
-  z-index: -1;
-  animation: borderGlow 4s ease-in-out infinite;
+  background-size: 200% 200%;
+  animation: borderGlow 2s ease forwards; /* anima só 1 vez */
+  z-index: 1;
 }
 
+/* animação curta */
 @keyframes borderGlow {
-  0%, 100% {
+  0% {
     background-position: 0% 50%;
     opacity: 0.3;
-  }
-  25% {
-    background-position: 25% 50%;
-    opacity: 0.6;
   }
   50% {
     background-position: 100% 50%;
     opacity: 0.8;
   }
-  75% {
-    background-position: 75% 50%;
-    opacity: 0.6;
+  100% {
+    background-position: 0% 50%;
+    opacity: 0;
   }
 }
 
