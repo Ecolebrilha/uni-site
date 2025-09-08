@@ -42,85 +42,85 @@
     </section>
 
     <!-- Seção de Segurança da Informação -->
-<section class="security-section">
-  <div class="container">
-    <ScrollReveal direction="bottom" :delay="100">
-      <div class="section-title">
-        <span class="accent-line"></span>
-        <h2>{{ t('lgpd.security.title') }}</h2>
-        <span class="accent-line"></span>
+    <section class="security-section">
+      <div class="container">
+        <ScrollReveal direction="bottom" :delay="100">
+          <div class="section-title">
+            <span class="accent-line"></span>
+            <h2>{{ t('lgpd.security.title') }}</h2>
+            <span class="accent-line"></span>
+          </div>
+        </ScrollReveal>
+
+        <div class="security-grid">
+          <ScrollReveal direction="left" :delay="200">
+            <div class="security-card">
+              <div class="security-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <div class="security-content">
+                <p>{{ t('lgpd.security.card1.text') }}</p>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="right" :delay="300">
+            <div class="security-card">
+              <div class="security-icon">
+                <i class="fas fa-lock"></i>
+              </div>
+              <div class="security-content">
+                <p>{{ t('lgpd.security.card2.text') }}</p>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="left" :delay="400">
+            <div class="security-card">
+              <div class="security-icon">
+                <i class="fas fa-users-cog"></i>
+              </div>
+              <div class="security-content">
+                <p>{{ t('lgpd.security.card3.text') }}</p>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="right" :delay="500">
+            <div class="security-card">
+              <div class="security-icon">
+                <i class="fas fa-user-shield"></i>
+              </div>
+              <div class="security-content">
+                <p>{{ t('lgpd.security.card4.text') }}</p>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="left" :delay="600">
+            <div class="security-card">
+              <div class="security-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <div class="security-content">
+                <p>{{ t('lgpd.security.card5.text') }}</p>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal direction="right" :delay="700">
+            <div class="security-card">
+              <div class="security-icon">
+                <i class="fas fa-handshake"></i>
+              </div>
+              <div class="security-content">
+                <p>{{ t('lgpd.security.card6.text') }}</p>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
       </div>
-    </ScrollReveal>
-
-    <div class="security-grid">
-      <ScrollReveal direction="left" :delay="200">
-        <div class="security-card">
-          <div class="security-icon">
-            <i class="fas fa-shield-alt"></i>
-          </div>
-          <div class="security-content">
-            <p>{{ t('lgpd.security.card1.text') }}</p>
-          </div>
-        </div>
-      </ScrollReveal>
-
-      <ScrollReveal direction="right" :delay="300">
-        <div class="security-card">
-          <div class="security-icon">
-            <i class="fas fa-lock"></i>
-          </div>
-          <div class="security-content">
-            <p>{{ t('lgpd.security.card2.text') }}</p>
-          </div>
-        </div>
-      </ScrollReveal>
-
-      <ScrollReveal direction="left" :delay="400">
-        <div class="security-card">
-          <div class="security-icon">
-            <i class="fas fa-users-cog"></i>
-          </div>
-          <div class="security-content">
-            <p>{{ t('lgpd.security.card3.text') }}</p>
-          </div>
-        </div>
-      </ScrollReveal>
-
-      <ScrollReveal direction="right" :delay="500">
-        <div class="security-card">
-          <div class="security-icon">
-            <i class="fas fa-user-shield"></i>
-          </div>
-          <div class="security-content">
-            <p>{{ t('lgpd.security.card4.text') }}</p>
-          </div>
-        </div>
-      </ScrollReveal>
-
-      <ScrollReveal direction="left" :delay="600">
-        <div class="security-card">
-          <div class="security-icon">
-            <i class="fas fa-chart-line"></i>
-          </div>
-          <div class="security-content">
-            <p>{{ t('lgpd.security.card5.text') }}</p>
-          </div>
-        </div>
-      </ScrollReveal>
-
-      <ScrollReveal direction="right" :delay="700">
-        <div class="security-card">
-          <div class="security-icon">
-            <i class="fas fa-handshake"></i>
-          </div>
-          <div class="security-content">
-            <p>{{ t('lgpd.security.card6.text') }}</p>
-          </div>
-        </div>
-      </ScrollReveal>
-    </div>
-  </div>
-</section>
+    </section>
 
     <!-- Seção de Documentos -->
     <section class="documents-section">
@@ -157,10 +157,9 @@
               <div class="document-content">
                 <h3>{{ t('lgpd.documents.cookiesPolicy.title') }}</h3>
                 <p>{{ t('lgpd.documents.cookiesPolicy.description') }}</p>
-                <a href="/Declaração de Cookies - Uni Hospitalar.pdf"
-              target="_blank" class="document-button">
+                <a href="/Declaração de Cookies - Uni Hospitalar.pdf" target="_blank" class="document-button">
                   Acessar Documento
-              </a>
+                </a>
               </div>
             </div>
           </ScrollReveal>
@@ -173,7 +172,8 @@
               <div class="document-content">
                 <h3>{{ t('lgpd.documents.recruitmentNotice.title') }}</h3>
                 <p>{{ t('lgpd.documents.recruitmentNotice.description') }}</p>
-                <a href="/aviso-privacidade-candidatos.pdf" class="document-button" target="_blank">Acessar Documento</a>
+                <a href="/aviso-privacidade-candidatos.pdf" class="document-button" target="_blank">Acessar
+                  Documento</a>
               </div>
             </div>
           </ScrollReveal>
@@ -199,10 +199,10 @@
               <h3>{{ t('lgpd.dataSubject.rightsTitle') }}</h3>
               <p>{{ t('lgpd.dataSubject.rightsText') }}</p>
               <p>{{ t('lgpd.dataSubject.rightsText2') }}</p>
-              
+
               <h4>{{ t('lgpd.dataSubject.exerciseTitle') }}</h4>
               <p>{{ t('lgpd.dataSubject.exerciseText') }}</p>
-              
+
               <!-- Contato do DPO -->
               <div class="dpo-contact">
                 <div class="dpo-info">
@@ -238,7 +238,7 @@
                     <p>{{ t('lgpd.dataSubject.formSubtitle') }}</p>
                   </div>
                 </div>
-                
+
                 <!-- Mensagem de Sucesso -->
                 <div v-if="requestSubmitted" class="success-message">
                   <div class="success-content">
@@ -246,22 +246,29 @@
                       <i class="fas fa-check-circle"></i>
                     </div>
                     <h3>Solicitação Enviada com Sucesso!</h3>
-                    <p>Sua solicitação LGPD foi recebida e está sendo processada.</p>
-                    
-                    <div class="tracking-info">
-                      <div class="tracking-item">
-                        <strong>Protocolo:</strong> {{ trackingCode }}
+                    <p>Sua solicitação LGPD foi recebida e está sendo processada por nossa equipe de Proteção de Dados.
+                    </p>
+
+                    <div class="response-info">
+                      <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <span><strong>Prazo de Resposta:</strong> Até 15 dias úteis</span>
                       </div>
-                      <div class="tracking-item">
-                        <strong>Código de Acesso:</strong> {{ accessCode }}
+                      <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <span><strong>Email de Contato:</strong> {{ formData.email }}</span>
+                      </div>
+                      <div class="info-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span><strong>DPO:</strong> Ítalo Morais</span>
                       </div>
                     </div>
-                    
+
                     <p class="success-note">
-                      Guarde estes códigos para acompanhar o status da sua solicitação.
-                      Entraremos em contato através do e-mail fornecido em até 15 dias úteis.
+                      Entraremos em contato através do e-mail fornecido conforme estabelecido pela LGPD.
+                      Sua privacidade e proteção de dados são nossa prioridade.
                     </p>
-                    
+
                     <button @click="resetForm" class="new-request-button">
                       <i class="fas fa-plus"></i>
                       Nova Solicitação
@@ -285,72 +292,78 @@
                 </div>
 
                 <form v-if="!requestSubmitted" @submit.prevent="submitRightsForm" class="rights-form-content">
-  <div class="form-group">
-    <label for="name">{{ t('lgpd.dataSubject.form.name') }}:</label>
-    <input type="text" id="name" v-model="formData.name" required 
-           :placeholder="t('lgpd.dataSubject.form.placeholders.name')">
-  </div>
+                  <div class="form-group">
+                    <label for="name">{{ t('lgpd.dataSubject.form.name') }}<span class="required"> *</span></label>
+                    <input type="text" id="name" v-model="formData.name" required
+                      :placeholder="t('lgpd.dataSubject.form.placeholders.name')">
+                  </div>
 
-  <div class="form-group">
-    <label for="email">{{ t('lgpd.dataSubject.form.email') }}:</label>
-    <input type="email" id="email" v-model="formData.email" required
-           :placeholder="t('lgpd.dataSubject.form.placeholders.email')">
-  </div>
+                  <div class="form-group">
+                    <label for="email">{{ t('lgpd.dataSubject.form.email') }}<span class="required"> *</span></label>
+                    <input type="email" id="email" v-model="formData.email" required
+                      :placeholder="t('lgpd.dataSubject.form.placeholders.email')">
+                  </div>
 
-  <div class="form-group">
-    <label for="phone">{{ t('lgpd.dataSubject.form.phone') }}:</label>
-    <input type="tel" id="phone" v-model="formData.phone" required
-           :placeholder="t('lgpd.dataSubject.form.placeholders.phone')">
-  </div>
+                  <div class="form-group">
+                    <label for="phone">{{ t('lgpd.dataSubject.form.phone') }}<span class="required"> *</span></label>
+                    <input type="tel" id="phone" v-model="formData.phone" required
+                      :placeholder="t('lgpd.dataSubject.form.placeholders.phone')" @input="formatPhone"
+                      @blur="validatePhone" maxlength="15" class="form-control">
+                    <span v-if="phoneError" class="error-message">Telefone inválido. Por favor, corrija antes de enviar.</span>
+                  </div>
 
-  <div class="form-group">
-    <label for="relationship">{{ t('lgpd.dataSubject.form.relationship') }}:</label>
-    <select id="relationship" v-model="formData.relationship" required>
-      <option value="">{{ t('lgpd.dataSubject.form.placeholders.relationship') }}</option>
-      <option value="client">{{ t('lgpd.dataSubject.form.relationshipOptions.client') }}</option>
-      <option value="employee">{{ t('lgpd.dataSubject.form.relationshipOptions.employee') }}</option>
-      <option value="exEmployee">{{ t('lgpd.dataSubject.form.relationshipOptions.exEmployee') }}</option>
-      <option value="supplier">{{ t('lgpd.dataSubject.form.relationshipOptions.supplier') }}</option>
-      <option value="candidate">{{ t('lgpd.dataSubject.form.relationshipOptions.candidate') }}</option>
-      <option value="other">{{ t('lgpd.dataSubject.form.relationshipOptions.other') }}</option>
-    </select>
-  </div>
+                  <div class="form-group">
+                    <label for="relationship">{{ t('lgpd.dataSubject.form.relationship') }}<span class="required">
+                        *</span></label>
+                    <select id="relationship" v-model="formData.relationship" required>
+                      <option value="">{{ t('lgpd.dataSubject.form.placeholders.relationship') }}</option>
+                      <option value="client">{{ t('lgpd.dataSubject.form.relationshipOptions.client') }}</option>
+                      <option value="employee">{{ t('lgpd.dataSubject.form.relationshipOptions.employee') }}</option>
+                      <option value="exEmployee">{{ t('lgpd.dataSubject.form.relationshipOptions.exEmployee') }}
+                      </option>
+                      <option value="supplier">{{ t('lgpd.dataSubject.form.relationshipOptions.supplier') }}</option>
+                      <option value="candidate">{{ t('lgpd.dataSubject.form.relationshipOptions.candidate') }}</option>
+                      <option value="other">{{ t('lgpd.dataSubject.form.relationshipOptions.other') }}</option>
+                    </select>
+                  </div>
 
-  <div class="form-group">
-    <label for="requestType">{{ t('lgpd.dataSubject.form.requestType') }}:</label>
-    <select id="requestType" v-model="formData.requestType" required>
-      <option value="">{{ t('lgpd.dataSubject.form.placeholders.requestType') }}</option>
-      <option value="confirm">{{ t('lgpd.dataSubject.form.requestTypeOptions.confirm') }}</option>
-      <option value="access">{{ t('lgpd.dataSubject.form.requestTypeOptions.access') }}</option>
-      <option value="portability">{{ t('lgpd.dataSubject.form.requestTypeOptions.portability') }}</option>
-      <option value="deletion">{{ t('lgpd.dataSubject.form.requestTypeOptions.deletion') }}</option>
-      <option value="correction">{{ t('lgpd.dataSubject.form.requestTypeOptions.correction') }}</option>
-      <option value="sharing">{{ t('lgpd.dataSubject.form.requestTypeOptions.sharing') }}</option>
-      <option value="revoke">{{ t('lgpd.dataSubject.form.requestTypeOptions.revoke') }}</option>
-      <option value="other">{{ t('lgpd.dataSubject.form.requestTypeOptions.other') }}</option>
-    </select>
-  </div>
+                  <div class="form-group">
+                    <label for="requestType">{{ t('lgpd.dataSubject.form.requestType') }}<span class="required">
+                        *</span></label>
+                    <select id="requestType" v-model="formData.requestType" required>
+                      <option value="">{{ t('lgpd.dataSubject.form.placeholders.requestType') }}</option>
+                      <option value="confirm">{{ t('lgpd.dataSubject.form.requestTypeOptions.confirm') }}</option>
+                      <option value="access">{{ t('lgpd.dataSubject.form.requestTypeOptions.access') }}</option>
+                      <option value="portability">{{ t('lgpd.dataSubject.form.requestTypeOptions.portability') }}
+                      </option>
+                      <option value="deletion">{{ t('lgpd.dataSubject.form.requestTypeOptions.deletion') }}</option>
+                      <option value="correction">{{ t('lgpd.dataSubject.form.requestTypeOptions.correction') }}</option>
+                      <option value="sharing">{{ t('lgpd.dataSubject.form.requestTypeOptions.sharing') }}</option>
+                      <option value="revoke">{{ t('lgpd.dataSubject.form.requestTypeOptions.revoke') }}</option>
+                      <option value="other">{{ t('lgpd.dataSubject.form.requestTypeOptions.other') }}</option>
+                    </select>
+                  </div>
 
-  <div class="form-group">
-    <label for="details">{{ t('lgpd.dataSubject.form.details') }}:</label>
-    <textarea id="details" v-model="formData.details" rows="4"
-              :placeholder="t('lgpd.dataSubject.form.placeholders.details')"></textarea>
-  </div>
+                  <div class="form-group">
+                    <label for="details">{{ t('lgpd.dataSubject.form.details') }}</label>
+                    <textarea id="details" v-model="formData.details" rows="4"
+                      :placeholder="t('lgpd.dataSubject.form.placeholders.details')"></textarea>
+                  </div>
 
-  <div class="form-disclaimer">
-    <p>{{ t('lgpd.dataSubject.form.disclaimer.text') }}
-      <router-link to="/PoliticaPrivacidade" target="_blank" class="terms-link">{{
-      t('lgpd.dataSubject.form.disclaimer.privacyPolicy') }}</router-link>
-      {{ t('lgpd.dataSubject.form.disclaimer.continuation') }}
-    </p>
-  </div>
+                  <div class="form-disclaimer">
+                    <p>{{ t('lgpd.dataSubject.form.disclaimer.text') }}
+                      <router-link to="/PoliticaPrivacidade" target="_blank" class="terms-link">{{
+                        t('lgpd.dataSubject.form.disclaimer.privacyPolicy') }}</router-link>
+                      {{ t('lgpd.dataSubject.form.disclaimer.continuation') }}
+                    </p>
+                  </div>
 
-  <button type="submit" class="submit-button" :disabled="isSubmitting">
-    <i class="fas fa-paper-plane" v-if="!isSubmitting"></i>
-    <i class="fas fa-spinner fa-spin" v-else></i>
-    {{ isSubmitting ? 'Enviando...' : t('lgpd.dataSubject.form.submit') }}
-  </button>
-</form>
+                  <button type="submit" class="submit-button" :disabled="isSubmitting">
+                    <i class="fas fa-paper-plane" v-if="!isSubmitting"></i>
+                    <i class="fas fa-spinner fa-spin" v-else></i>
+                    {{ isSubmitting ? 'Enviando...' : t('lgpd.dataSubject.form.submit') }}
+                  </button>
+                </form>
               </div>
             </div>
           </ScrollReveal>
@@ -388,8 +401,6 @@ export default {
       sidebarOpen: false,
       isSubmitting: false,
       requestSubmitted: false,
-      trackingCode: '',
-      accessCode: '',
       submitError: '',
       formData: {
         name: '',
@@ -398,7 +409,8 @@ export default {
         relationship: '',
         requestType: '',
         details: ''
-      }
+      },
+      phoneError: false
     }
   },
   methods: {
@@ -413,7 +425,13 @@ export default {
     async submitRightsForm() {
       this.isSubmitting = true;
       this.submitError = '';
-      
+      this.validatePhone();
+
+if (this.phoneError) {
+  this.isSubmitting = false;
+  return;
+}
+
       try {
         // Preparar dados da solicitação LGPD
         const lgpdRequestData = {
@@ -422,8 +440,7 @@ export default {
           phone: this.formData.phone,
           relationship: this.formData.relationship,
           requestType: this.formData.requestType,
-          details: this.formData.details,
-          submittedAt: new Date().toISOString()
+          details: this.formData.details
         };
 
         console.log('📤 Enviando solicitação LGPD para API...');
@@ -445,15 +462,12 @@ export default {
           throw new Error(result.error || 'Erro ao enviar solicitação LGPD');
         }
 
-        // Sucesso
-        this.trackingCode = result.trackingCode;
-        this.accessCode = result.accessCode;
+        // Sucesso - não há códigos de protocolo para LGPD
         this.requestSubmitted = true;
         this.isSubmitting = false;
 
         console.log('✅ Solicitação LGPD enviada com sucesso!');
-        console.log('📋 Protocolo:', this.trackingCode);
-        console.log('🔑 Código de Acesso:', this.accessCode);
+        console.log('📧 Confirmação enviada para:', this.formData.email);
 
         // Scroll suave para a seção de sucesso
         this.$nextTick(() => {
@@ -480,6 +494,39 @@ export default {
         return 'https://unihospitalar-backend.onrender.com'; // Produção
       }
     },
+
+    formatPhone(event) {
+    let value = event.target.value.replace(/\D/g, '');
+
+    if (value.length > 11) {
+      value = value.substring(0, 11);
+    }
+
+    if (value.length <= 2) {
+      // apenas DDD
+    } else if (value.length <= 6) {
+      value = value.replace(/(\d{2})(\d+)/, '($1) $2');
+    } else if (value.length <= 10) {
+      // Telefone fixo: (XX) XXXX-XXXX
+      value = value.replace(/(\d{2})(\d{4})(\d+)/, '($1) $2-$3');
+    } else {
+      // Celular: (XX) XXXXX-XXXX
+      value = value.replace(/(\d{2})(\d{5})(\d+)/, '($1) $2-$3');
+    }
+
+    this.formData.phone = value;
+  },
+
+  validatePhone() {
+    const phone = this.formData.phone;
+
+    // Regex: (XX) XXXX-XXXX ou (XX) XXXXX-XXXX
+    const regexFixo = /^\(\d{2}\) \d{4}-\d{4}$/;
+    const regexCelular = /^\(\d{2}\) \d{5}-\d{4}$/;
+
+    this.phoneError = !(regexFixo.test(phone) || regexCelular.test(phone));
+  },
+
     resetForm() {
       this.formData = {
         name: '',
@@ -489,12 +536,24 @@ export default {
         requestType: '',
         details: ''
       };
+      this.phoneError = false;
       this.requestSubmitted = false;
-      this.trackingCode = '';
-      this.accessCode = '';
       this.submitError = '';
     }
+  },
+  watch: {
+  'formData.phone'(newVal) {
+    // Se estiver vazio, limpa o erro
+    if (!newVal) {
+      this.phoneError = false;
+      return;
+    }
+
+    const regexFixo = /^\(\d{2}\) \d{4}-\d{4}$/;
+    const regexCelular = /^\(\d{2}\) \d{5}-\d{4}$/;
+    this.phoneError = !(regexFixo.test(newVal) || regexCelular.test(newVal));
   }
+}
 }
 </script>
 
@@ -577,6 +636,7 @@ section {
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -946,12 +1006,16 @@ section {
 /* Formulário de Direitos */
 .rights-form {
   background: white;
-  border-radius: 15px;
-  overflow: hidden;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
   max-width: 800px;
+  border-radius: 15px;
   margin: 0 auto;
   width: 100%;
+}
+
+.required {
+  color: #dc3545;
+  font-weight: bold;
 }
 
 .form-container {
@@ -965,6 +1029,8 @@ section {
   display: flex;
   align-items: center;
   gap: 20px;
+  border-top-left-radius: 13px;
+  border-top-right-radius: 13px;
 }
 
 .form-icon {
@@ -1238,15 +1304,21 @@ section {
     font-size: 1.5rem;
   }
 
-  .tracking-info {
-    padding: 15px;
+  .response-info {
+    padding: 20px;
   }
 
-  .tracking-item {
+  .info-item {
     flex-direction: column;
     align-items: flex-start;
-    gap: 5px;
+    gap: 8px;
     text-align: left;
+    padding: 12px;
+  }
+
+  .info-item i {
+    margin-right: 0;
+    margin-bottom: 5px;
   }
 
   .new-request-button,
@@ -1320,9 +1392,11 @@ section {
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
+
   100% {
     transform: translateY(0px);
   }
@@ -1338,9 +1412,11 @@ section {
   0% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0.7);
   }
+
   70% {
     box-shadow: 0 0 0 10px rgba(174, 44, 42, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(174, 44, 42, 0);
   }
@@ -1559,6 +1635,7 @@ section {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1582,6 +1659,8 @@ section {
   background: linear-gradient(135deg, #d4edda, #c3e6cb);
   border: 2px solid #28a745;
   border-radius: 15px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
   padding: 30px;
   text-align: center;
   box-shadow: 0 10px 30px rgba(40, 167, 69, 0.2);
@@ -1614,29 +1693,50 @@ section {
   font-size: 1.1rem;
 }
 
-.tracking-info {
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 10px;
-  padding: 20px;
+/* Informações de resposta LGPD */
+.response-info {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 25px;
   margin: 20px 0;
   border-left: 4px solid #28a745;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.1);
 }
 
-.tracking-item {
+.info-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
-  font-size: 1.1rem;
+  margin-bottom: 15px;
+  font-size: 1rem;
   color: #155724;
+  padding: 10px 15px;
+  background: rgba(40, 167, 69, 0.05);
+  border-radius: 8px;
+  border-left: 3px solid #28a745;
 }
 
-.tracking-item:last-child {
+.info-item:last-child {
   margin-bottom: 0;
 }
 
-.tracking-item strong {
+.info-item i {
+  color: #28a745;
+  font-size: 1.2rem;
+  margin-right: 12px;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.info-item span {
+  color: #155724;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.info-item strong {
   color: #0f4229;
+  font-weight: 700;
 }
 
 .success-note {
@@ -1675,6 +1775,10 @@ section {
 .error-message {
   padding: 0;
   margin-bottom: 20px;
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 4px;
+  display: block;
 }
 
 .error-content {
