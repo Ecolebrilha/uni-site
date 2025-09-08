@@ -1230,7 +1230,7 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('@/assets/header-parceria.jpg');
+  background-image: url('@/assets/header-parceria.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

@@ -334,7 +334,7 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('@/assets/header-parceiros2.jpg');
+  background-image: url('@/assets/header-parceiros.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

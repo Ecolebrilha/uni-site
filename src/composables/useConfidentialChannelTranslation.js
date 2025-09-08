@@ -71,7 +71,7 @@ const translations = reactive({
         },
         harassment: {
           title: 'Assédio',
-          text: 'Assédio moral, sexual ou qualquer forma de intimidação'
+          text: 'Assédio moral, sexual, psicológico e financeiro ou qualquer forma de intimidação'
         },
         discrimination: {
           title: 'Discriminação',
@@ -116,11 +116,15 @@ const translations = reactive({
         redirectTitle: 'Para situações específicas, utilize:',
         redirect1: {
           title: 'Emergências Médicas:',
-          text: 'Contate imediatamente o setor de emergência ou segurança da unidade.'
+          text: 'Contate imediatamente o serviço de emergência médica da sua localidade.'
         },
         redirect2: {
           title: 'Questões Trabalhistas:',
           text: 'Procure o departamento de Recursos Humanos para orientações específicas.'
+        },
+        redirect3: {
+          title: 'Ocorrências Policiais:',
+          text: 'Em caso de ameaça, violência ou atividade suspeita, entre em contato imediatamente com as autoridades policiais locais.'
         }
       },
       actionIntro: {
@@ -242,7 +246,7 @@ const translations = reactive({
         },
         harassment: {
           title: 'Harassment',
-          text: 'Moral, sexual harassment or any form of intimidation'
+          text: 'Moral, sexual, psychological, and financial harassment, or any form of intimidation'
         },
         discrimination: {
           title: 'Discrimination',
@@ -283,15 +287,19 @@ const translations = reactive({
       },
       notice: {
         title: 'Important',
-        text: 'This channel does not replace official channels for medical emergencies or situations requiring immediate action. In urgent cases, use the institution\'s standard procedures.',
+        text: 'This channel does not replace official channels for medical emergencies or situations requiring immediate action. In urgent cases, follow the institution’s standard procedures.',
         redirectTitle: 'For specific situations, use:',
         redirect1: {
           title: 'Medical Emergencies:',
-          text: 'Immediately contact the emergency or security sector of the unit.'
+          text: 'Immediately contact the local emergency medical service.'
         },
         redirect2: {
-          title: 'Labor Issues:',
+          title: 'Workplace Issues:',
           text: 'Contact the Human Resources department for specific guidance.'
+        },
+        redirect3: {
+          title: 'Police Matters:',
+          text: 'In case of threats, violence, or suspicious activity, immediately contact local law enforcement authorities.'
         }
       },
       actionIntro: {
@@ -413,7 +421,7 @@ const translations = reactive({
         },
         harassment: {
           title: 'Acoso',
-          text: 'Acoso moral, sexual o cualquier forma de intimidación'
+          text: 'Acoso moral, sexual, psicológico y financiero, o cualquier forma de intimidación'
         },
         discrimination: {
           title: 'Discriminación',
@@ -454,15 +462,19 @@ const translations = reactive({
       },
       notice: {
         title: 'Importante',
-        text: 'Este canal no sustituye los canales oficiales para emergencias médicas o situaciones que requieran acción inmediata. En casos urgentes, utilice los procedimientos estándar de la institución.',
+        text: 'Este canal no reemplaza los canales oficiales para emergencias médicas o situaciones que requieran acción inmediata. En casos urgentes, siga los procedimientos estándar de la institución.',
         redirectTitle: 'Para situaciones específicas, utilice:',
         redirect1: {
           title: 'Emergencias Médicas:',
-          text: 'Contacte inmediatamente el sector de emergencia o seguridad de la unidad.'
+          text: 'Contacte de inmediato al servicio médico de emergencia local.'
         },
         redirect2: {
-          title: 'Cuestiones Laborales:',
-          text: 'Busque el departamento de Recursos Humanos para orientaciones específicas.'
+          title: 'Asuntos Laborales:',
+          text: 'Consulte con el departamento de Recursos Humanos para recibir orientación específica.'
+        },
+        redirect3: {
+          title: 'Asuntos Policiales:',
+          text: 'En caso de amenazas, violencia o actividad sospechosa, comuníquese de inmediato con las autoridades policiales locales.'
         }
       },
       actionIntro: {

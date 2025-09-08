@@ -253,6 +253,8 @@
                                     t('confidential.notice.redirect1.text') }}</li>
                                 <li><strong>{{ t('confidential.notice.redirect2.title') }}</strong> {{
                                     t('confidential.notice.redirect2.text') }}</li>
+                                <li><strong>{{ t('confidential.notice.redirect3.title') }}</strong> {{
+                                    t('confidential.notice.redirect3.text') }}</li>
                             </ul>
                         </div>
                     </div>

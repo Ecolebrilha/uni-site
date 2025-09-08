@@ -8,11 +8,11 @@ const translations = reactive({
       heroTitle: 'Nossos Diferenciais',
       heroSubtitle: 'O que nos torna únicos no mercado',
       introTitle: 'Por que escolher a Uni Hospitalar',
-      introText: '<strong>Na Uni Hospitalar, nossa trajetória é guiada por princípios que fazem a diferença.</strong><br />Com ética, inovação e responsabilidade, entregamos soluções com qualidade, agilidade e transparência. Nosso compromisso com a integridade e a objetividade garante confiança em cada atendimento. Conheça os diferenciais que tornam a Uni Hospitalar a escolha certa para quem valoriza excelência com propósito.',
+      introText: 'Na Uni Hospitalar, nossa trajetória é guiada por princípios que fazem a diferença.<br />Com ética, inovação e responsabilidade, entregamos soluções com qualidade, agilidade e transparência. Nosso compromisso com a integridade e a objetividade garante confiança em cada atendimento.<br /><br /> Conheça os diferenciais que tornam a Uni Hospitalar a escolha certa para quem valoriza excelência com propósito.',
       features: {
         inventory: {
           title: 'Gestão de Estoque Inovadora',
-          description: 'Gestão inteligente de estoque, garantindo disponibilidade contínua e evitando rupturas, com controle rigoroso das condições de armazenamento, conforme determina a legislação sanitária brasileira vigente, utilizando tecnologia de ponta e automações para evitar desperdícios e aumentar a eficiência operacional.',
+          description: 'Gestão inteligente de estoque, garantindo disponibilidade contínua e evitando rupturas, com controle rigoroso das condições de armazenamento, conforme determina a legislação sanitária brasileira vigente, utilizando tecnologia de ponta e automações para melhorar a produtividade e aumentar a eficiência operacional.',
           feature1: 'Tecnologia de Ponta:',
           feature1Description: 'Nossa infraestrutura conta com um sistema de climatização avançado, que assegura um controle preciso e constante da temperatura, monitoramento em tempo real e sistema de WMS',
           feature2: 'Operação sem Falhas:',
@@ -87,11 +87,11 @@ const translations = reactive({
       heroTitle: 'Our Differentials',
       heroSubtitle: 'What makes us unique in the market',
       introTitle: 'Why choose Uni Hospitalar',
-      introText: '<strong>At Uni Hospitalar, our journey is guided by principles that make a difference.</strong><br />With ethics, innovation, and responsibility, we deliver solutions with quality, agility, and transparency. Our commitment to integrity and objectivity ensures trust in every service. Discover the differentiators that make Uni Hospitalar the right choice for those who value excellence with purpose.',
+      introText: 'At Uni Hospitalar, our journey is guided by principles that make a difference.<br />With ethics, innovation, and responsibility, we deliver solutions with quality, agility, and transparency. Our commitment to integrity and objectivity ensures trust in every service.<br /><br /> Discover the differentiators that make Uni Hospitalar the right choice for those who value excellence with purpose.',
       features: {
         inventory: {
           title: 'Innovative Inventory Management',
-          description: 'Intelligent inventory management ensures continuous availability and prevents stockouts, with strict control over storage conditions, as determined by current Brazilian health legislation, using cutting-edge technology and automation to avoid waste and increase operational efficiency.',
+          description: 'Intelligent inventory management ensures continuous availability and prevents stockouts, with strict control over storage conditions, as determined by current Brazilian health legislation, using cutting-edge technology and automation to improve productivity and increase operational efficiency.',
           feature1: 'Cutting-edge Technology:',
           feature1Description: 'Our infrastructure has an advanced air conditioning system, which ensures precise and constant temperature control, real-time monitoring and a WMS system.',
           feature2: 'Flawless Operation:',
@@ -166,11 +166,11 @@ const translations = reactive({
       heroTitle: 'Nuestros Diferenciales',
       heroSubtitle: 'Lo que nos hace únicos en el mercado',
       introTitle: 'Por qué elegir Uni Hospitalar',
-      introText: '<strong>En Uni Hospitalar, nuestra trayectoria está guiada por principios que marcan la diferencia.</strong><br />Con ética, innovación y responsabilidad, ofrecemos soluciones con calidad, agilidad y transparencia. Nuestro compromiso con la integridad y la objetividad garantiza confianza en cada atención. Conozca los diferenciales que hacen de Uni Hospitalar la elección correcta para quienes valoran la excelencia con propósito.',
+      introText: 'En Uni Hospitalar, nuestra trayectoria está guiada por principios que marcan la diferencia.<br />Con ética, innovación y responsabilidad, ofrecemos soluciones con calidad, agilidad y transparencia. Nuestro compromiso con la integridad y la objetividad garantiza confianza en cada atención.<br /><br /> Conozca los diferenciales que hacen de Uni Hospitalar la elección correcta para quienes valoran la excelencia con propósito.',
       features: {
         inventory: {
           title: 'Gestión de Inventario Innovadora',
-          description: 'La gestión inteligente de inventarios garantiza la disponibilidad continua y evita el desabastecimiento, con un estricto control de las condiciones de almacenamiento, conforme a lo determinado por la legislación sanitaria brasileña vigente, utilizando tecnología de punta y automatización para evitar desperdicios y aumentar la eficiencia operativa.',
+          description: 'La gestión inteligente de inventarios garantiza la disponibilidad continua y evita el desabastecimiento, con un estricto control de las condiciones de almacenamiento, conforme a lo determinado por la legislación sanitaria brasileña vigente, utilizando tecnología de punta y automatizaciones para mejorar la productividad y aumentar la eficiencia operativa.',
           feature1: 'Tecnología de Vanguardia',
           feature1Description: 'Nuestra infraestructura cuenta con un avanzado sistema de aire acondicionado, que asegura un control preciso y constante de la temperatura, monitoreo en tiempo real y un sistema WMS.',
           feature2: 'Funcionamiento impecable:',
