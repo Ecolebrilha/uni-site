@@ -81,7 +81,8 @@
                   <div class="form-group">
                     <label for="tipoParceiro">Tipo de Parceiro</label>
                     <div class="input-clip">
-                      <select id="tipoParceiro" v-model="formData.tipoParceiro" class="form-control" required @change="resetRamoAtuacao">
+                      <select id="tipoParceiro" v-model="formData.tipoParceiro" class="form-control" required
+                        @change="resetRamoAtuacao">
                         <option value="" disabled selected>Selecione o tipo de parceiro</option>
                         <option value="TRANSPORTADORA">Transportadora</option>
                         <option value="CLIENTE">Cliente</option>
@@ -95,8 +96,8 @@
                     <label for="ramoAtuacao">{{ t('partner.form.fields.businessArea.label') }}</label>
                     <div class="input-clip">
                       <select id="ramoAtuacao" v-model="formData.ramoAtuacao" class="form-control"
-                        :class="{ 'readonly-style': !formData.tipoParceiro }"
-                        :disabled="!formData.tipoParceiro" required>
+                        :class="{ 'readonly-style': !formData.tipoParceiro }" :disabled="!formData.tipoParceiro"
+                        required>
                         <option value="" disabled selected>
                           {{ formData.tipoParceiro ? t('partner.form.fields.businessArea.placeholder') : 'Selecione primeiro o tipo de parceiro' }}
                         </option>
@@ -150,29 +151,36 @@
                   </div>
 
                   <!-- Seção de Upload de Documentos -->
-                  <div class="form-group full-width">
+                  <div class="form-group full-width" v-if="formData.tipoParceiro === 'CLIENTE'">
                     <label>{{ t('partner.form.documents.title') }} <span class="required"></span></label>
                     <div class="upload-info">
-                        <i class="fas fas fa-paperclip"></i>
-                        <small>{{ t('partner.form.documents.info') }}</small>
-                      </div>
+                      <i class="fas fas fa-paperclip"></i>
+                      <small>{{ t('partner.form.documents.info') }}</small>
+                    </div>
+                    <div class="upload-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>{{ t('partner.form.documents.warning') }}</span>
+                    </div>
                     <div class="file-upload-area documents-upload">
                       <!-- Inputs de arquivo ocultos -->
-                      <input type="file" ref="cnpjFileInput" @change="handleDocumentUpload('cnpj', $event)" 
+                      <input type="file" ref="cnpjFileInput" @change="handleDocumentUpload('cnpj', $event)"
                         accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display: none;">
-                      <input type="file" ref="razaoSocialFileInput" @change="handleDocumentUpload('razaoSocial', $event)" 
+                      <input type="file" ref="crfFileInput" @change="handleDocumentUpload('crf', $event)"
                         accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display: none;">
-                      <input type="file" ref="estadualFileInput" @change="handleDocumentUpload('estadual', $event)" 
+                      <input type="file" ref="contatoCompradorFileInput"
+                        @change="handleDocumentUpload('contatoComprador', $event)"
                         accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display: none;">
-                      <input type="file" ref="municipalFileInput" @change="handleDocumentUpload('municipal', $event)" 
+                      <input type="file" ref="contatoFinanceiroFileInput"
+                        @change="handleDocumentUpload('contatoFinanceiro', $event)"
                         accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display: none;">
-                      <input type="file" ref="alvaraFileInput" @change="handleDocumentUpload('alvara', $event)" 
+                      <input type="file" ref="alvaraFileInput" @change="handleDocumentUpload('alvara', $event)"
                         accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display: none;">
-                      <input type="file" ref="contratoSocialFileInput" @change="handleDocumentUpload('contratoSocial', $event)" 
+                      <input type="file" ref="contratoSocialFileInput"
+                        @change="handleDocumentUpload('contratoSocial', $event)"
                         accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display: none;">
 
                       <div class="upload-buttons-grid">
-                        <div class="document-upload-button" 
+                        <div class="document-upload-button"
                           :class="{ 'uploaded': documents.cnpj, 'error': errors.cnpj }"
                           @click="triggerDocumentUpload('cnpj')">
                           <div class="button-content">
@@ -180,55 +188,56 @@
                             <span class="button-label">{{ t('partner.form.documents.cnpj') }}</span>
                             <span v-if="documents.cnpj" class="file-name">{{ documents.cnpj.name }}</span>
                           </div>
-                          <button v-if="documents.cnpj" type="button" @click.stop="removeDocument('cnpj')" 
+                          <button v-if="documents.cnpj" type="button" @click.stop="removeDocument('cnpj')"
                             class="remove-doc-btn">
                             <i class="fas fa-times"></i>
                           </button>
                         </div>
 
-                        <div class="document-upload-button" 
-                          :class="{ 'uploaded': documents.razaoSocial, 'error': errors.razaoSocial }"
-                          @click="triggerDocumentUpload('razaoSocial')">
+                        <div class="document-upload-button" :class="{ 'uploaded': documents.crf, 'error': errors.crf }"
+                          @click="triggerDocumentUpload('crf')">
                           <div class="button-content">
-                            <i class="fas fa-building"></i>
-                            <span class="button-label">{{ t('partner.form.documents.razaoSocial') }}</span>
-                            <span v-if="documents.razaoSocial" class="file-name">{{ documents.razaoSocial.name }}</span>
+                            <i class="fas fa-file-contract"></i>
+                            <span class="button-label">{{ t('partner.form.documents.crf') }}</span>
+                            <span v-if="documents.crf" class="file-name">{{ documents.crf.name }}</span>
                           </div>
-                          <button v-if="documents.razaoSocial" type="button" @click.stop="removeDocument('razaoSocial')" 
+                          <button v-if="documents.crf" type="button" @click.stop="removeDocument('crf')"
                             class="remove-doc-btn">
                             <i class="fas fa-times"></i>
                           </button>
                         </div>
 
-                        <div class="document-upload-button" 
-                          :class="{ 'uploaded': documents.estadual, 'error': errors.estadual }"
-                          @click="triggerDocumentUpload('estadual')">
+                        <div class="document-upload-button"
+                          :class="{ 'uploaded': documents.contatoComprador, 'error': errors.contatoComprador }"
+                          @click="triggerDocumentUpload('contatoComprador')">
                           <div class="button-content">
-                            <i class="fas fa-certificate"></i>
-                            <span class="button-label">{{ t('partner.form.documents.estadual') }}</span>
-                            <span v-if="documents.estadual" class="file-name">{{ documents.estadual.name }}</span>
+                            <i class="fas fa-user-tie"></i>
+                            <span class="button-label">{{ t('partner.form.documents.contatoComprador') }}</span>
+                            <span v-if="documents.contatoComprador" class="file-name">{{ documents.contatoComprador.name
+                              }}</span>
                           </div>
-                          <button v-if="documents.estadual" type="button" @click.stop="removeDocument('estadual')" 
-                            class="remove-doc-btn">
+                          <button v-if="documents.contatoComprador" type="button"
+                            @click.stop="removeDocument('contatoComprador')" class="remove-doc-btn">
                             <i class="fas fa-times"></i>
                           </button>
                         </div>
 
-                        <div class="document-upload-button" 
-                          :class="{ 'uploaded': documents.municipal, 'error': errors.municipal }"
-                          @click="triggerDocumentUpload('municipal')">
+                        <div class="document-upload-button"
+                          :class="{ 'uploaded': documents.contatoFinanceiro, 'error': errors.contatoFinanceiro }"
+                          @click="triggerDocumentUpload('contatoFinanceiro')">
                           <div class="button-content">
-                            <i class="fas fa-city"></i>
-                            <span class="button-label">{{ t('partner.form.documents.municipal') }}</span>
-                            <span v-if="documents.municipal" class="file-name">{{ documents.municipal.name }}</span>
+                            <i class="fas fa-coins"></i>
+                            <span class="button-label">{{ t('partner.form.documents.contatoFinanceiro') }}</span>
+                            <span v-if="documents.contatoFinanceiro" class="file-name">{{
+                              documents.contatoFinanceiro.name }}</span>
                           </div>
-                          <button v-if="documents.municipal" type="button" @click.stop="removeDocument('municipal')" 
-                            class="remove-doc-btn">
+                          <button v-if="documents.contatoFinanceiro" type="button"
+                            @click.stop="removeDocument('contatoFinanceiro')" class="remove-doc-btn">
                             <i class="fas fa-times"></i>
                           </button>
                         </div>
 
-                        <div class="document-upload-button" 
+                        <div class="document-upload-button"
                           :class="{ 'uploaded': documents.alvara, 'error': errors.alvara }"
                           @click="triggerDocumentUpload('alvara')">
                           <div class="button-content">
@@ -236,22 +245,23 @@
                             <span class="button-label">{{ t('partner.form.documents.alvara') }}</span>
                             <span v-if="documents.alvara" class="file-name">{{ documents.alvara.name }}</span>
                           </div>
-                          <button v-if="documents.alvara" type="button" @click.stop="removeDocument('alvara')" 
+                          <button v-if="documents.alvara" type="button" @click.stop="removeDocument('alvara')"
                             class="remove-doc-btn">
                             <i class="fas fa-times"></i>
                           </button>
                         </div>
 
-                        <div class="document-upload-button" 
+                        <div class="document-upload-button"
                           :class="{ 'uploaded': documents.contratoSocial, 'error': errors.contratoSocial }"
                           @click="triggerDocumentUpload('contratoSocial')">
                           <div class="button-content">
                             <i class="fas fa-handshake"></i>
                             <span class="button-label">{{ t('partner.form.documents.contratoSocial') }}</span>
-                            <span v-if="documents.contratoSocial" class="file-name">{{ documents.contratoSocial.name }}</span>
+                            <span v-if="documents.contratoSocial" class="file-name">{{ documents.contratoSocial.name
+                              }}</span>
                           </div>
-                          <button v-if="documents.contratoSocial" type="button" @click.stop="removeDocument('contratoSocial')" 
-                            class="remove-doc-btn">
+                          <button v-if="documents.contratoSocial" type="button"
+                            @click.stop="removeDocument('contratoSocial')" class="remove-doc-btn">
                             <i class="fas fa-times"></i>
                           </button>
                         </div>
@@ -259,9 +269,9 @@
 
                     </div>
                     <div v-if="hasDocumentErrors" class="error-message">
-                    <i class="fas fa-exclamation-circle animated-icon"></i>
-                    {{ t('partner.form.documents.error') }}
-                  </div>
+                      <i class="fas fa-exclamation-circle animated-icon"></i>
+                      {{ t('partner.form.documents.error') }}
+                    </div>
                   </div>
                 </div>
 
@@ -303,7 +313,7 @@
 
                   <div class="submission-details">
                     <h3><i class="fas fa-clipboard-check"></i> Detalhes da Solicitação</h3>
-                    
+
                     <div class="details-grid">
                       <div class="detail-item">
                         <div class="detail-icon">
@@ -366,7 +376,8 @@
                         </div>
                         <div class="step-content">
                           <span class="step-title">Contato</span>
-                          <span class="step-description">Entraremos em contato em até <strong>72 horas úteis</strong></span>
+                          <span class="step-description">Entraremos em contato em até <strong>72 horas
+                              úteis</strong></span>
                         </div>
                       </div>
 
@@ -398,7 +409,8 @@
                     </div>
                     <div class="info-content">
                       <h4>Importante</h4>
-                      <p>Todas as comunicações sobre o processo de parceria serão enviadas para o email informado. Verifique regularmente sua caixa de entrada e pasta de spam.</p>
+                      <p>Todas as comunicações sobre o processo de parceria serão enviadas para o email informado.
+                        Verifique regularmente sua caixa de entrada e pasta de spam.</p>
                     </div>
                   </div>
 
@@ -533,9 +545,9 @@ export default {
       },
       documents: {
         cnpj: null,
-        razaoSocial: null,
-        estadual: null,
-        municipal: null,
+        crf: null,
+        contatoComprador: null,
+        contatoFinanceiro: null,
         alvara: null,
         contratoSocial: null
       },
@@ -561,7 +573,7 @@ export default {
       if (!this.formData.tipoParceiro) {
         return []
       }
-      
+
       const ramosPorTipo = {
         'TRANSPORTADORA': [
           'Transporte de Cargas',
@@ -593,12 +605,12 @@ export default {
           'Produtos de Limpeza'
         ]
       }
-      
+
       return ramosPorTipo[this.formData.tipoParceiro] || []
     },
     hasDocumentErrors() {
-      return this.errors.cnpj || this.errors.razaoSocial || this.errors.estadual || 
-             this.errors.municipal || this.errors.alvara || this.errors.contratoSocial
+      return this.errors.cnpj || this.errors.crf || this.errors.contatoComprador ||
+        this.errors.contatoFinanceiro || this.errors.alvara || this.errors.contratoSocial
     },
     allDocumentsUploaded() {
       return Object.values(this.documents).every(doc => doc !== null)
@@ -693,7 +705,7 @@ export default {
       if (this.documents[documentType]) {
         return
       }
-      
+
       const inputRef = `${documentType}FileInput`
       this.$refs[inputRef].click()
     },
@@ -710,7 +722,7 @@ export default {
 
       // Armazenar documento
       this.documents[documentType] = file
-      
+
       // Limpar erro se existir
       if (this.errors[documentType]) {
         delete this.errors[documentType]
@@ -718,7 +730,7 @@ export default {
 
       // Mostrar feedback de sucesso
       this.showUploadSuccess(documentType, file.name)
-      
+
       // Limpar input
       event.target.value = ''
     },
@@ -726,7 +738,7 @@ export default {
     removeDocument(documentType) {
       const fileName = this.documents[documentType]?.name
       this.documents[documentType] = null
-      
+
       if (fileName) {
         this.showRemoveSuccess(documentType, fileName)
       }
@@ -735,10 +747,10 @@ export default {
     validateFile(file) {
       const validTypes = [
         'application/pdf',
-        'application/msword', 
+        'application/msword',
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         'image/jpeg',
-        'image/jpg', 
+        'image/jpg',
         'image/png'
       ]
 
@@ -759,14 +771,14 @@ export default {
 
     showUploadSuccess(documentType, fileName) {
       const documentLabels = {
-        cnpj: 'CNPJ',
-        razaoSocial: 'Razão Social', 
-        estadual: 'Inscrição Estadual',
-        municipal: 'Inscrição Municipal',
-        alvara: 'Alvará',
+        cnpj: 'Cartão CNPJ',
+        crf: 'Certificado de Regularidade do FGTS',
+        contatoComprador: 'Contato do Comprador',
+        contatoFinanceiro: 'Contato do Financeiro',
+        alvara: 'Alvará de Funcionamento',
         contratoSocial: 'Contrato Social'
       }
-      
+
       const message = `Documento "${documentLabels[documentType]}" (${fileName}) anexado com sucesso!`
 
       const notification = document.createElement('div')
@@ -796,14 +808,14 @@ export default {
 
     showRemoveSuccess(documentType, fileName) {
       const documentLabels = {
-        cnpj: 'CNPJ',
-        razaoSocial: 'Razão Social',
-        estadual: 'Inscrição Estadual', 
-        municipal: 'Inscrição Municipal',
-        alvara: 'Alvará',
+        cnpj: 'Cartão CNPJ',
+        crf: 'Certificado de Regularidade do FGTS',
+        contatoComprador: 'Contato do Comprador',
+        contatoFinanceiro: 'Contato do Financeiro',
+        alvara: 'Alvará de Funcionamento',
         contratoSocial: 'Contrato Social'
       }
-      
+
       const message = `Documento "${documentLabels[documentType]}" (${fileName}) removido com sucesso!`
 
       const notification = document.createElement('div')
@@ -997,35 +1009,35 @@ export default {
       }
     },
 
-        // Função para obter ícone do arquivo
-        getFileIcon(filename) {
-            if (!filename) return 'fas fa-file';
+    // Função para obter ícone do arquivo
+    getFileIcon(filename) {
+      if (!filename) return 'fas fa-file';
 
-            const extension = filename.split('.').pop().toLowerCase();
+      const extension = filename.split('.').pop().toLowerCase();
 
-            switch (extension) {
-                case 'pdf':
-                    return 'fas fa-file-pdf';
-                case 'doc':
-                case 'docx':
-                    return 'fas fa-file-word';
-                case 'jpg':
-                case 'jpeg':
-                case 'png':
-                    return 'fas fa-file-image';
-                default:
-                    return 'fas fa-file';
-            }
-        },
+      switch (extension) {
+        case 'pdf':
+          return 'fas fa-file-pdf';
+        case 'doc':
+        case 'docx':
+          return 'fas fa-file-word';
+        case 'jpg':
+        case 'jpeg':
+        case 'png':
+          return 'fas fa-file-image';
+        default:
+          return 'fas fa-file';
+      }
+    },
 
-        // Função para formatar tamanho do arquivo
-        formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        },
+    // Função para formatar tamanho do arquivo
+    formatFileSize(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    },
 
     validateFormData() {
       this.errors = {}
@@ -1067,7 +1079,7 @@ export default {
       if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
         return 'http://localhost:3000'
       }
-      
+
       // URL de produção do backend no Render
       return 'https://unihospitalar-backend.onrender.com'
     },
@@ -2109,6 +2121,25 @@ select.form-control {
   font-size: 0.9rem;
 }
 
+.upload-warning {
+  display: flex;
+  align-items: center;
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.upload-warning i {
+  margin-right: 8px;
+  margin-bottom: 2.5px;
+  font-size: 16px;
+}
+
 .upload-info {
   display: flex;
   align-items: flex-start;
@@ -2120,7 +2151,7 @@ select.form-control {
   border-left: 4px solid #ff5555;
 }
 
-.upload-info > *:not(:first-child) {
+.upload-info>*:not(:first-child) {
   margin-left: 7px;
 }
 
@@ -2165,10 +2196,12 @@ select.form-control {
     transform: scale(1);
     opacity: 1;
   }
+
   50% {
     transform: scale(1.2);
     opacity: 0.75;
   }
+
   100% {
     transform: scale(1);
     opacity: 1;
@@ -2181,25 +2214,25 @@ select.form-control {
     grid-template-columns: 1fr;
     gap: 12px;
   }
-  
+
   .document-upload-button {
     padding: 12px 15px;
     min-height: 60px;
   }
-  
+
   .button-content i {
     font-size: 1.3rem;
   }
-  
+
   .button-label {
     font-size: 0.9rem;
   }
-  
+
   .file-name {
     font-size: 0.75rem;
     max-width: 150px;
   }
-  
+
   .remove-doc-btn {
     width: 28px;
     height: 28px;
@@ -2213,11 +2246,11 @@ select.form-control {
     gap: 10px;
     text-align: center;
   }
-  
+
   .button-content {
     align-items: center;
   }
-  
+
   .remove-doc-btn {
     align-self: center;
   }
@@ -2256,7 +2289,8 @@ select.form-control {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  color: transparent;;
+  color: transparent;
+  ;
   font-weight: 700;
   margin-bottom: 30px;
   font-size: 1.5rem;
@@ -2524,7 +2558,10 @@ select.form-control {
 
 .success-card {
   background: white;
-  border-radius: 20px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
   padding: 60px 40px;
   text-align: center;
@@ -2554,10 +2591,12 @@ select.form-control {
     transform: scale(1);
     box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7);
   }
+
   70% {
     transform: scale(1.05);
     box-shadow: 0 0 0 20px rgba(40, 167, 69, 0);
   }
+
   100% {
     transform: scale(1);
     box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
@@ -2571,7 +2610,7 @@ select.form-control {
   font-weight: 700;
 }
 
-.success-card > p {
+.success-card>p {
   color: #696969;
   font-size: 1.2rem;
   margin-bottom: 40px;

@@ -107,13 +107,14 @@ const translations = reactive({
         },
         documents: {
           title: 'Documentos Obrigatórios',
-          cnpj: 'Comprovante de CNPJ',
-          razaoSocial: 'Comprovante de Razão Social',
-          estadual: 'Inscrição Estadual',
-          municipal: 'Inscrição Municipal',
+          cnpj: 'Cartão CNPJ',
+          crf: 'Certificado de Regularidade do FGTS',
+          contatoComprador: 'Contato do Comprador',
+          contatoFinanceiro: 'Contato do Financeiro',
           alvara: 'Alvará de Funcionamento',
           contratoSocial: 'Contrato Social',
           info: 'Anexe os documentos correspondentes a cada campo. Formatos aceitos: PDF, DOC, DOCX, JPG, JPEG, PNG. Máximo 10MB por arquivo.',
+          warning: 'Todos os documentos anexados devem pertencer ao mesmo CNPJ informado no cadastro.',
           error: 'Todos os documentos são obrigatórios para completar o cadastro.'
         }
       },
@@ -256,13 +257,14 @@ const translations = reactive({
         },
         documents: {
           title: 'Required Documents',
-          cnpj: 'Tax ID (CNPJ) Certificate',
-          razaoSocial: 'Corporate Name Certificate',
-          estadual: 'State Registration',
-          municipal: 'Municipal Registration',
+          cnpj: 'CNPJ Card',
+          crf: 'FGTS Regularity Certificate',
+          contatoComprador: 'Buyer Contact',
+          contatoFinanceiro: 'Finance Contact',
           alvara: 'Operating License',
           contratoSocial: 'Articles of Association',
           info: 'Attach the documents corresponding to each field. Accepted formats: PDF, DOC, DOCX, JPG, JPEG, PNG. Maximum 10MB per file.',
+          warning: 'All attached documents must belong to the same CNPJ informed in the registration.',
           error: 'All documents are required to complete the registration.'
         }
       },
@@ -405,13 +407,14 @@ const translations = reactive({
         },
         documents: {
           title: 'Documentos Obligatorios',
-          cnpj: 'Certificado de CNPJ',
-          razaoSocial: 'Certificado de Razón Social',
-          estadual: 'Inscripción Estadual',
-          municipal: 'Inscripción Municipal',
+          cnpj: 'Tarjeta CNPJ',
+          crf: 'Certificado de Regularidad del FGTS',
+          contatoComprador: 'Contacto del Comprador',
+          contatoFinanceiro: 'Contacto del Financiero',
           alvara: 'Licencia de Funcionamiento',
           contratoSocial: 'Contrato Social',
           info: 'Adjunte los documentos correspondientes a cada campo. Formatos aceptados: PDF, DOC, DOCX, JPG, JPEG, PNG. Máximo 10MB por archivo.',
+          warning: 'Todos los documentos adjuntos deben pertenecer al mismo CNPJ informado en el registro.',
           error: 'Todos los documentos son obligatorios para completar el registro.'
         }
       },
