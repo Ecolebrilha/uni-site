@@ -609,6 +609,10 @@ export default {
       return ramosPorTipo[this.formData.tipoParceiro] || []
     },
     hasDocumentErrors() {
+      // Só mostra erros de documentos se for CLIENTE
+      if (this.formData.tipoParceiro !== 'CLIENTE') {
+        return false
+      }
       return this.errors.cnpj || this.errors.crf || this.errors.contatoComprador ||
         this.errors.contatoFinanceiro || this.errors.alvara || this.errors.contratoSocial
     },
@@ -1063,12 +1067,19 @@ export default {
         this.errors.formTelefoneFixo = 'Celular ou Telefone Fixo é obrigatório'
       }
 
-      // Validar documentos - todos obrigatórios
-      Object.keys(this.documents).forEach(docType => {
-        if (!this.documents[docType]) {
-          this.errors[docType] = 'Documento obrigatório'
-        }
-      })
+      if (!this.formData.tipoParceiro) {
+        this.errors.formTipoParceiro = 'Tipo de Parceiro é obrigatório'
+      }
+
+      // Validar documentos APENAS se tipoParceiro for CLIENTE
+      // Transportadoras e Fornecedores NÃO precisam anexar documentos
+      if (this.formData.tipoParceiro === 'CLIENTE') {
+        Object.keys(this.documents).forEach(docType => {
+          if (!this.documents[docType]) {
+            this.errors[docType] = 'Documento obrigatório'
+          }
+        })
+      }
 
       return Object.keys(this.errors).length === 0
     },
@@ -1117,7 +1128,7 @@ export default {
         // Criar FormData para enviar arquivos
         const formData = new FormData()
 
-        // Adicionar dados do formulário
+        // Adicionar dados do formulário incluindo o tipo de parceiro
         const partnerData = {
           nomeRazaoSocial: this.formData.nomeRazaoSocial,
           uf: this.formData.uf,
@@ -1126,13 +1137,14 @@ export default {
           email: this.formData.email,
           celular: this.formData.celular || null,
           telefoneFixo: this.formData.telefoneFixo || null,
-          endereco: this.formData.endereco || null
+          endereco: this.formData.endereco || null,
+          tipoParceiro: this.formData.tipoParceiro
         }
 
         // Adicionar dados como JSON
         formData.append('partnerData', JSON.stringify(partnerData))
 
-        // Adicionar documentos
+        // Adicionar documentos apenas se existirem (só para CLIENTE)
         Object.keys(this.documents).forEach(docType => {
           if (this.documents[docType]) {
             formData.append(docType, this.documents[docType])
@@ -1140,6 +1152,7 @@ export default {
         })
 
         console.log('📤 Enviando solicitação de parceria para API...')
+        console.log('👥 Tipo de parceiro:', this.formData.tipoParceiro)
         console.log('📎 Total de documentos:', Object.keys(this.documents).filter(key => this.documents[key]).length)
 
         // Fazer requisição para a API
@@ -1160,7 +1173,7 @@ export default {
           companyName: result.companyName,
           cnpj: result.cnpj,
           email: result.email,
-          documentsCount: result.documentsCount
+          documentsCount: result.documentsCount || 0
         }
         this.partnerSubmitted = true
         this.isSubmitting = false
@@ -1168,6 +1181,7 @@ export default {
         console.log('✅ Solicitação de parceria enviada com sucesso!')
         console.log('🏢 Empresa:', result.companyName)
         console.log('📄 CNPJ:', result.cnpj)
+        console.log('👥 Tipo:', this.formData.tipoParceiro)
         console.log('📎 Documentos enviados:', result.documentsCount || 0)
 
         // Scroll suave para o success-card
