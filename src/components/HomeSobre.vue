@@ -52,9 +52,9 @@
             <h2>Linha do tempo</h2>
             <span class="accent-line"></span>
           </div>
-          <!-- <p class="intro-text">
-            {{ t('about.introText') }}
-          </p> -->
+          <p class="intro-text">
+            <!-- {{ t('about.introText') }} -->
+          </p>
         </ScrollReveal>
         
         <ScrollReveal direction="bottom" :delay="300">
@@ -1311,6 +1311,34 @@ section {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
   }
+
+  .intro-text::after {
+    content: "← Arraste para ver mais →";
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    font-weight: 600;
+    transform: translateX(-50%);
+    font-size: 1.4rem;
+    color: #AE2C2A;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .new-timeline-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    cursor: grab;
+  }
+  
+  .new-timeline-container:active {
+    cursor: grabbing;
+  }
+
+  .timeline-scroll-wrapper {
+    padding: 10px 120px;
+    margin: 0;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1363,6 +1391,10 @@ section {
 
   .differentials-grid {
     grid-template-columns: 1fr;
+  }
+
+  .timeline-scroll-wrapper {
+    padding: 10px 300px;
   }
 }
 
@@ -1432,6 +1464,10 @@ section {
     width: 80px;
     height: 80px;
     font-size: 2rem;
+  }
+
+  .timeline-scroll-wrapper {
+    padding: 10px 400px;
   }
 }
 
