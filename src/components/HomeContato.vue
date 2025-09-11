@@ -773,6 +773,7 @@ section {
   position: relative;
   overflow: hidden;
   padding: 80px 0;
+  z-index: -1;
 }
 
 .location-section::before {

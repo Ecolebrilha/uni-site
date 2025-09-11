@@ -1,83 +1,153 @@
 <template>
-  <form @submit.prevent="handleSubmit">
-    <div class="form-row">
-      <div class="form-group">
-        <label for="name">Nome:</label>
-        <input v-model="formData.name" type="text" id="name" placeholder="Seu nome completo" required>
+  <div class="contact-form-wrapper">
+    <form @submit.prevent="handleSubmit" v-if="!formSubmitted">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Nome <span class="required">*</span></label>
+          <input v-model="formData.name" type="text" id="name" placeholder="Seu nome completo" required 
+            :class="{ 'error': errors.name }">
+          <div v-if="errors.name" class="error-message">{{ errors.name }}</div>
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail <span class="required">*</span></label>
+          <input v-model="formData.email" type="email" id="email" placeholder="Seu e-mail" required 
+            :class="{ 'error': errors.email }">
+          <div v-if="errors.email" class="error-message">{{ errors.email }}</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="telefone">Telefone <span class="required">*</span></label>
+          <input
+            v-model="formData.telefone"
+            @input="formatPhone"
+            id="telefone"
+            name="telefone"
+            type="text"
+            placeholder="Seu telefone"
+            required
+            maxlength="15"
+            :class="{ 'error': errors.telefone }"
+          />
+          <div v-if="errors.telefone" class="error-message">{{ errors.telefone }}</div>
+        </div>
+        <div class="form-group">
+          <label for="empresa">Empresa <span class="required">*</span></label>
+          <input v-model="formData.empresa" type="text" id="empresa" placeholder="Sua empresa" required 
+            :class="{ 'error': errors.empresa }">
+          <div v-if="errors.empresa" class="error-message">{{ errors.empresa }}</div>
+        </div>
       </div>
       <div class="form-group">
-        <label for="email">E-mail:</label>
-        <input v-model="formData.email" type="email" id="email" placeholder="Seu e-mail" required>
+        <label for="message">Mensagem <span class="required">*</span></label>
+        <textarea v-model="formData.message" id="message" rows="5" placeholder="Sua mensagem" required
+          :class="{ 'error': errors.message }"></textarea>
+        <div v-if="errors.message" class="error-message">{{ errors.message }}</div>
       </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label for="telefone">Telefone:</label>
-        <input
-          v-model="formData.telefone"
-          @input="formatPhone"
-          id="telefone"
-          name="telefone"
-          type="text"
-          placeholder="Seu telefone"
-          required
-          maxlength="15"
-        />
+      
+      <!-- Aviso de Termos -->
+      <div class="terms-notice">
+        <div class="notice-content">
+          <i class="fas fa-info-circle notice-icon"></i>
+          <p>
+            {{ t('contact.form.termsNotice.text') }}
+            <router-link to="/PoliticaPrivacidade" target="_blank" class="terms-link">{{
+              t('contact.form.termsNotice.privacyPolicy') }}</router-link>
+            {{ t('contact.form.termsNotice.continuation') }}
+          </p>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="empresa">Empresa:</label>
-        <input v-model="formData.empresa" type="text" id="empresa" placeholder="Sua empresa" required>
+      
+      <!-- Botão com loading -->
+      <button 
+        type="submit" 
+        class="submit-btn"
+        :disabled="isSubmitting"
+      >
+        <span v-if="isSubmitting">
+          <i class="fas fa-spinner fa-spin"></i> Enviando...
+        </span>
+        <span v-else>
+          <i class="fas fa-paper-plane"></i> Enviar mensagem
+        </span>
+      </button>
+      
+      <!-- Mensagem de erro -->
+      <div v-if="showErrorMessage" class="alert alert-danger">
+        <i class="fas fa-exclamation-circle"></i> {{ errorMessage }}
       </div>
-    </div>
-    <div class="form-group">
-      <label for="message">Mensagem:</label>
-      <textarea v-model="formData.message" id="message" rows="5" placeholder="Sua mensagem" required></textarea>
-    </div>
-    
-    <!-- Aviso de Termos -->
-    <div class="terms-notice">
-  <div class="notice-content">
-    <i class="fas fa-info-circle notice-icon"></i>
-    <p>
-      {{ t('contact.form.termsNotice.text') }}
-      <router-link to="/PoliticaPrivacidade" target="_blank" class="terms-link">{{
-        t('contact.form.termsNotice.privacyPolicy') }}</router-link>
-      {{ t('contact.form.termsNotice.continuation') }}
-    </p>
+    </form>
+
+    <!-- Modal de Sucesso -->
+    <Teleport to="body">
+      <div v-if="formSubmitted" class="success-modal-overlay">
+        <div class="success-modal" @click.stop>
+        <div class="success-animation">
+          <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
+        </div>
+        
+        <h2>Mensagem Enviada com Sucesso!</h2>
+        <p>Sua mensagem foi recebida por nossa equipe. Retornaremos em breve!</p>
+        
+        <div class="contact-summary">
+          <h3><i class="fas fa-thumbtack pin-icon"></i> Resumo do seu contato:</h3>
+  <div class="summary-item">
+    <strong>Nome:</strong> <span class="summary-value">{{ submittedData.name }}</span>
+  </div>
+  <div class="summary-item">
+    <strong>Email:</strong> <span class="summary-value">{{ submittedData.email }}</span>
+  </div>
+  <div class="summary-item">
+    <strong>Telefone:</strong> <span class="summary-value">{{ submittedData.phone }}</span>
+  </div>
+  <div class="summary-item">
+    <strong>Empresa:</strong> <span class="summary-value">{{ submittedData.company }}</span>
+  </div>
+  <div class="summary-item">
+    <strong>Mensagem:</strong> <span class="summary-value">{{ submittedData.message }}</span>
   </div>
 </div>
-    
-    <!-- Botão com loading -->
-    <button 
-      type="submit" 
-      class="submit-btn"
-      :disabled="isSubmitting"
-    >
-      <span v-if="isSubmitting">
-        <i class="fas fa-spinner fa-spin"></i> Enviando...
-      </span>
-      <span v-else>
-        <i class="fas fa-paper-plane"></i> Enviar mensagem
-      </span>
-    </button>
-    
-    <!-- Mensagens de sucesso e erro -->
-    <div v-if="showSuccessMessage" class="alert alert-success">
-      <i class="fas fa-check-circle"></i> Sua mensagem foi enviada com sucesso! Entraremos em contato em breve.
-    </div>
-    
-    <div v-if="showErrorMessage" class="alert alert-danger">
-      <i class="fas fa-exclamation-circle"></i> Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente.
-    </div>
-  </form>
+        
+        <div class="response-info">
+          <div class="info-box">
+            <i class="fas fa-clock"></i>
+            <span><strong>Prazo de resposta:</strong> até 24 horas úteis</span>
+          </div>
+          <div class="info-box">
+            <i class="fas fa-envelope"></i>
+            <span><strong>Email de confirmação:</strong> enviado para {{ submittedData.email }}</span>
+          </div>
+        </div>
+        
+        <div class="modal-actions">
+          <button @click="closeModal" class="btn-close">
+            <i class="fas fa-check"></i>
+            Entendido
+          </button>
+          <button @click="sendAnotherMessage" class="btn-new-message">
+            <i class="fas fa-plus"></i>
+            Enviar nova mensagem
+          </button>
+        </div>
+        </div>
+      </div>
+    </Teleport>
+  </div>
 </template>
 
 <script>
 import { useContactTranslation } from '@/composables/useContactTranslation.js';
-import API_CONFIG from '@/config/api.js';
 
 export default {
   name: 'ContatoFormulario',
+  props: {
+    activeSection: {
+      type: String,
+      default: 'SAC'
+    }
+  },
   data() {
     return {
       formData: {
@@ -88,8 +158,11 @@ export default {
         message: ''
       },
       isSubmitting: false,
-      showSuccessMessage: false,
-      showErrorMessage: false
+      showErrorMessage: false,
+      errorMessage: '',
+      errors: {},
+      formSubmitted: false,
+      submittedData: {}
     };
   },
   setup() {
@@ -101,17 +174,44 @@ export default {
     }
   },
   methods: {
-    getBrazilianTimeNative() {
-      return new Date().toLocaleString('pt-BR', {
-        timeZone: 'America/Sao_Paulo',
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-      });
+    // Método para obter URL da API dinamicamente
+    getApiUrl() {
+      // Se estivermos em desenvolvimento local
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return 'http://localhost:3000'
+      }
+      
+      // URL de produção do backend no Render
+      return 'https://unihospitalar-backend.onrender.com'
     },
+
+    validateForm() {
+      this.errors = {};
+
+      if (!this.formData.name || this.formData.name.trim().length < 2) {
+        this.errors.name = 'Nome deve ter pelo menos 2 caracteres';
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!this.formData.email || !emailRegex.test(this.formData.email)) {
+        this.errors.email = 'Email inválido';
+      }
+
+      if (!this.formData.telefone || !this.validatePhoneNumber(this.formData.telefone)) {
+        this.errors.telefone = 'Telefone inválido. Use o formato (xx) xxxxx-xxxx';
+      }
+
+      if (!this.formData.empresa || this.formData.empresa.trim().length < 2) {
+        this.errors.empresa = 'Nome da empresa deve ter pelo menos 2 caracteres';
+      }
+
+      if (!this.formData.message || this.formData.message.trim().length < 10) {
+        this.errors.message = 'Mensagem deve ter pelo menos 10 caracteres';
+      }
+
+      return Object.keys(this.errors).length === 0;
+    },
+
     formatPhone(event) {
       const input = event.target;
       let value = input.value
@@ -124,6 +224,11 @@ export default {
       
       input.value = formattedValue;
       this.formData.telefone = formattedValue;
+      
+      // Limpar erro ao digitar
+      if (this.errors.telefone) {
+        delete this.errors.telefone;
+      }
     },
     
     validatePhoneNumber(phone) {
@@ -132,96 +237,171 @@ export default {
     },
     
     async handleSubmit() {
-      if (!this.validatePhoneNumber(this.formData.telefone)) {
-        alert('Número de telefone inválido. Formato esperado: (xx) xxxxx-xxxx');
+      if (!this.validateForm()) {
+        this.$nextTick(() => {
+          const firstError = this.$el.querySelector('.error');
+          if (firstError) {
+            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        });
         return;
       }
 
       this.isSubmitting = true;
-      this.showSuccessMessage = false;
       this.showErrorMessage = false;
+      this.errorMessage = '';
 
       try {
-        // Usar Formspree
-        const response = await fetch(`${API_CONFIG.BASE_URL}/send-email`, {
+        const apiUrl = this.getApiUrl();
+        
+        // Preparar dados para envio
+        const contactData = {
+          name: this.formData.name.trim(),
+          email: this.formData.email.trim(),
+          phone: this.formData.telefone.trim(),
+          company: this.formData.empresa.trim(),
+          message: this.formData.message.trim(),
+          activeSection: this.activeSection
+        };
+
+        console.log('📤 Enviando contato para API...');
+        console.log('📧 Dados:', contactData);
+
+        const response = await fetch(`${apiUrl}/api/contacts`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            name: this.formData.name,
-            email: this.formData.email,
-            telefone: this.formData.telefone,
-            empresa: this.formData.empresa,
-            message: `📧 CONTATO - Uni Hospitalar
-
-👤 DADOS DO CONTATO:
-• Nome: ${this.formData.name}
-• E-mail: ${this.formData.email}
-• Telefone: ${this.formData.telefone}
-• Empresa: ${this.formData.empresa}
-
-💬 MENSAGEM:
-${this.formData.message}
-
-📅 Data: ${this.getBrazilianTimeNative()}
-🌐 Origem: Formulário de Contato - Site Uni Hospitalar
-
-📞 AÇÃO REQUERIDA: Responder Contato (Responder em até 24h)`,
-            section: 'Contato - Geral', // ← ADICIONAR SEÇÃO
-            _subject: `📧 Novo Contato - ${this.formData.name}`
-          }),
+          body: JSON.stringify(contactData)
         });
 
-        if (response.ok) {
-          this.showSuccessMessage = true;
-          // Limpar formulário após sucesso
-          this.formData = {
-            name: '',
-            email: '',
-            telefone: '',
-            empresa: '',
-            message: ''
-          };
-        } else {
-          this.showErrorMessage = true;
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || 'Erro ao enviar contato');
         }
+
+        console.log('✅ Contato enviado com sucesso!');
+        
+        // Guardar dados para exibir no modal
+        this.submittedData = {
+          name: contactData.name,
+          email: contactData.email,
+          phone: contactData.phone,
+          company: contactData.company,
+          message: contactData.message
+        };
+        
+        // Mostrar modal de sucesso
+        this.formSubmitted = true;
+        this.isSubmitting = false;
+        
+        // Scroll imediato para o topo
+        window.scrollTo({ top: 0, behavior: 'auto' });
+        
+        // Desabilitar scroll do body
+        document.body.classList.add('modal-open');
+
       } catch (error) {
-        console.error('Erro ao enviar o email:', error);
+        console.error('❌ Erro ao enviar contato:', error);
         this.showErrorMessage = true;
-      } finally {
+        this.errorMessage = error.message;
         this.isSubmitting = false;
       }
+    },
+
+    closeModal() {
+      this.formSubmitted = false;
+      this.submittedData = {};
+      
+      // Reabilitar scroll do body
+      document.body.classList.remove('modal-open');
+      
+      // Resetar formulário
+      this.formData = {
+        name: '',
+        email: '',
+        telefone: '',
+        empresa: '',
+        message: ''
+      };
+    },
+
+    sendAnotherMessage() {
+      this.formSubmitted = false;
+      this.submittedData = {};
+      
+      // Reabilitar scroll do body
+      document.body.classList.remove('modal-open');
+      
+      // Manter dados do formulário para nova mensagem
+      this.formData.message = '';
     }
+  },
+
+  // Watchers para limpar erros
+  watch: {
+    'formData.name'() {
+      if (this.errors.name) delete this.errors.name;
+    },
+    'formData.email'() {
+      if (this.errors.email) delete this.errors.email;
+    },
+    'formData.empresa'() {
+      if (this.errors.empresa) delete this.errors.empresa;
+    },
+    'formData.message'() {
+      if (this.errors.message) delete this.errors.message;
+    }
+  },
+
+  // Limpar classe modal-open quando componente for destruído
+  beforeUnmount() {
+    document.body.classList.remove('modal-open');
   }
 };
 </script>
 
 <style scoped>
+/* Desabilitar scroll quando modal está aberto */
+:global(body.modal-open) {
+  overflow: hidden !important;
+}
+
 .success {
   color: green;
 }
 .error {
   color: red;
 }
+
 .form-row {
   display: flex;
   justify-content: space-between;
   gap: 20px;
 }
+
 .form-group {
   flex: 1;
   margin-right: 10px;
 }
+
 .form-group:last-child {
   margin-right: 0;
 }
+
 .form-group label {
   display: block;
   margin-bottom: 10px;
   margin-top: 10px;
   font-weight: bold;
 }
+
+.required {
+  color: #dc3545;
+  font-weight: bold;
+}
+
 .form-group input,
 .form-group textarea {
   width: 100%;
@@ -232,10 +412,34 @@ ${this.formData.message}
   box-sizing: border-box;
   font-size: 1em;
 }
+
+.form-group input.error,
+.form-group textarea.error {
+  border-color: #dc3545;
+  background-color: #fff5f5;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 5px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.error-message::before {
+  content: '⚠';
+  font-size: 1rem;
+}
+
 #message {
   font-size: 1.1em;
   width: 101.5%;
 }
+
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
@@ -303,7 +507,7 @@ ${this.formData.message}
   gap: 10px;
 }
 
-.submit-btn:hover {
+.submit-btn:hover:not(:disabled) {
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(174, 44, 42, 0.4);
 }
@@ -339,23 +543,308 @@ ${this.formData.message}
   font-size: 1.5rem;
 }
 
-.alert-success {
-  background-color: #d4edda;
-  color: #155724;
-  border-left: 5px solid #28a745;
-}
-
 .alert-danger {
   background-color: #f8d7da;
   color: #721c24;
   border-left: 5px solid #dc3545;
 }
 
+/* Modal de Sucesso */
+.success-modal-overlay {
+    position: fixed !important;
+    z-index: 999999 !important;
+    left: 0 !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: rgba(0, 0, 0, 0.9) !important;
+    backdrop-filter: blur(8px) !important;
+    animation: fadeIn 0.3s ease-out;
+    overflow: hidden !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.success-modal {
+    background-color: #fefefe !important;
+    margin: 2% auto !important;
+    padding: 10px 40px 40px 40px !important;
+    border: none !important;
+    width: 90% !important;
+    max-width: 600px !important;
+    max-height: 95vh !important;
+    border-radius: 20px !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+    animation: slideIn 0.3s ease-out !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow-y: auto !important;
+    text-align: center !important;
+    position: relative !important;
+}
+
+.success-animation {
+  padding: 40px 30px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  min-width: 120px;     /* Impede encolhimento horizontal */
+  min-height: 120px;    /* Impede encolhimento vertical */
+  flex-shrink: 0;       /* Impede encolhimento se dentro de flex container */
+}
+
+.success-icon {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, #28a745, #20c997);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  font-size: 3rem;
+  color: white;
+  animation: successPulse 2s infinite;
+}
+
+@keyframes successPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 20px rgba(40, 167, 69, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
+  }
+}
+
+.success-modal h2 {
+  color: #28a745;
+  font-size: 2rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.success-modal > p {
+  color: #6c757d;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.contact-summary {
+  background-color: #f8f9fa;
+  padding: 25px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  border-left: 4px solid #AE2C2A;
+  text-align: left;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  font-size: 0.95rem;
+}
+
+.pin-icon {
+  color: #AE2C2A;
+  margin-right: 8px;
+  transform: rotate(-45deg);
+}
+
+.contact-summary h3 {
+  color: #AE2C2A;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #AE2C2A;
+}
+
+.summary-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #dee2e6;
+  line-height: 1.5;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.summary-item:last-child {
+  border-bottom: none;
+}
+
+.summary-item strong {
+  width: 120px;
+  color: #343a40;
+  font-weight: 600;
+}
+
+.summary-item::after {
+  content: '';
+  flex-grow: 1;
+}
+
+.summary-value {
+  font-weight: 500;
+  background-color: #ffecec;
+  color: #AE2C2A;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+  display: inline-block;
+  max-width: 100%;
+  word-break: break-word;
+  box-shadow: inset 0 0 0 1px #dee2e6;
+}
+
+.response-info {
+  background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+  padding: 20px;
+  border-radius: 12px;
+  border-left: 4px solid #28a745;
+  word-break: break-word;
+}
+
+.info-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+  color: #155724;
+}
+
+.info-box:last-child {
+  margin-bottom: 0;
+}
+
+.info-box i {
+  color: #28a745;
+  font-size: 1.2rem;
+  width: 20px;
+  text-align: center;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.btn-close,
+.btn-new-message {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+}
+
+.btn-close {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+}
+
+.btn-close:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3);
+}
+
+.btn-new-message {
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  color: white;
+}
+
+.btn-new-message:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(174, 44, 42, 0.3);
+}
+
+/* Scrollbar personalizada para o modal */
+.success-modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.success-modal::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.success-modal::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+.success-modal::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #ff5555, #AE2C2A);
+}
+
+/* Para Firefox */
+.success-modal {
+  scrollbar-width: thin;
+  scrollbar-color: #AE2C2A #f1f1f1;
+}
+
+/* Modal responsivo - evita scroll em telas maiores */
+@media (min-height: 800px) {
+  .success-modal {
+    max-height: 700px;
+    overflow-y: visible;
+  }
+}
+
+@media (min-height: 900px) {
+  .success-modal {
+    max-height: 800px;
+    overflow-y: visible;
+  }
+}
+
+@media (max-height: 650px) {
+  .success-modal {
+    max-height: 75vh;
+    overflow-y: auto;
+  }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Animações */
 @keyframes slideInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -396,6 +885,36 @@ ${this.formData.message}
     flex-direction: column;
     gap: 10px;
   }
+
+  .success-modal {
+    padding: 30px 20px;
+    margin: 20px;
+  }
+
+  .success-modal h2 {
+    font-size: 1.7rem;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .btn-close,
+  .btn-new-message {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 578px) {
+  .summary-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .summary-value {
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 512px) {
@@ -407,6 +926,21 @@ ${this.formData.message}
   .submit-btn {
     padding: 10px 25px;
     font-size: 0.9rem;
+  }
+
+  .success-modal {
+    padding: 25px 15px;
+    border-radius: 15px;
+  }
+
+  .success-icon {
+    width: 80px;
+    height: 80px;
+    font-size: 2.5rem;
+  }
+
+  .success-modal h2 {
+    font-size: 1.5rem;
   }
 }
 
@@ -430,6 +964,7 @@ ${this.formData.message}
   flex: 1;
   min-width: 0;
 }
+
 .contact-form .form-row:nth-child(2) .form-group {
   flex: 1;
   min-width: 0;
