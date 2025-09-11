@@ -5,31 +5,32 @@
         <img src="@/assets/logo-uni10.png" alt="Uni Hospitalar" class="transition-logo">
       </div>
     </div>
-    <transition 
-      :name="transitionName" 
-      mode="out-in"
-      @before-leave="startTransition"
-      @enter="endTransition">
+    <transition :name="transitionName" mode="out-in" @before-leave="startTransition" @enter="endTransition">
       <router-view :key="$route.fullPath"></router-view>
     </transition>
   </div>
 </template>
 
-<script>  
+<script>
 export default {
   name: 'App',
   data() {
     return {
       transitionName: 'page',
-      isTransitioning: false
+      isTransitioning: false,
+      preloadedImages: []
     }
+  },
+  mounted() {
+    // Pré-carregamento de todas as imagens de banner
+    this.preloadImages();
   },
   watch: {
     '$route'(to, from) {
       // Determinar a direção da transição
       const toDepth = to.path.split('/').length
       const fromDepth = from.path.split('/').length
-      
+
       // Usando a transição definida na rota
       if (to.meta && to.meta.transition) {
         this.transitionName = to.meta.transition;
@@ -52,14 +53,46 @@ export default {
     endTransition() {
       // Desativa o overlay imediatamente quando a nova página começa a entrar
       this.isTransitioning = false;
+    },
+    preloadImages() {
+      // Lista de todas as imagens de banner usadas nos componentes
+      const bannerImages = [
+        require('@/assets/fundo-logo-uni.png'),
+        require('@/assets/header-conduta-etica2.jpg'),
+        require('@/assets/logo-uni2.png'),
+        require('@/assets/header-contato2.jpg'),
+        require('@/assets/header-diferenciais2.jpg'),
+        require('@/assets/header-lgpd.png'),
+        require('@/assets/header-parceiros.png'),
+        require('@/assets/banner-inicio.jpg'),
+        require('@/assets/header-produtos.jpg'),
+        require('@/assets/header-sobre.jpg'),
+        require('@/assets/header-normas-setoriais2.jpg'),
+        require('@/assets/header-servicos.jpg'),
+        require('@/assets/header-politica-privacidade.jpg'),
+        require('@/assets/header-praticas-antissuborno.jpg'),
+        require('@/assets/header-responsabilidade-social2.jpg'),
+        require('@/assets/header-seguranca-dados.jpg'),
+        require('@/assets/clipes-uni-background.png'),
+        require('@/assets/header-parceria.png'),
+        require('@/assets/header-termos-legais2.jpg'),
+        require('@/assets/header_trabalhe_conosco.png'),
+      ];
+
+      // Pré-carrega cada imagem
+      bannerImages.forEach(imageSrc => {
+        const img = new Image();
+        img.src = imageSrc;
+        this.preloadedImages.push(img);
+      });
     }
   }
 };
 </script>
 
 <style>
-
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -117,10 +150,12 @@ body, html {
     opacity: 0;
     transform: scale(0.8);
   }
+
   50% {
     opacity: 1;
     transform: scale(1.1);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
@@ -218,14 +253,14 @@ a {
 }
 
 @media (max-width: 576px) {
-    .transition-logo {
-      max-width: 350px;
-    }
+  .transition-logo {
+    max-width: 350px;
   }
+}
 
 @media (max-width: 400px) {
-    .transition-logo {
-      max-width: 270px;
-    }
+  .transition-logo {
+    max-width: 270px;
   }
+}
 </style>
