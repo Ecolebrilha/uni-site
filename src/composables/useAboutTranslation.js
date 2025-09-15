@@ -11,6 +11,7 @@ const translations = reactive({
       introText: 'A Uni Hospitalar é referência nacional na distribuição de medicamentos e produtos para saúde, combinando excelência operacional com um profundo compromisso com a saúde dos brasileiros. Nossa jornada de mais de duas décadas é marcada por inovação, qualidade e relacionamentos duradouros com clientes e parceiros.',
       whoWeAreTitle: 'Quem Somos',
       whoWeAreText: 'Há mais de 20 anos, a Uni Hospitalar vem construindo uma trajetória marcada por confiança, dedicação e compromisso com a vida. Nosso papel vai além da distribuição de medicamentos: unimos ética, integridade, inovação e qualidade para gerar impacto positivo. Com uma visão estratégica e profunda do mercado farmacêutico, entregamos produtos de alto padrão, sempre fortalecendo parcerias que fazem a diferença.',
+      timelineTitle: 'Linha do Tempo',
       missionTitle: 'Missão',
       missionText: 'Tornar medicamentos acessíveis em todo o Brasil com integridade, agilidade e cuidado humano, atuando como ponte entre qualidade e pessoas e combinando inovação operacional com um atendimento caloroso que inspira confiança em clientes, parceiros e colaboradores.',
       visionTitle: 'Visão',
@@ -97,7 +98,44 @@ const translations = reactive({
       },
       ctaTitle: 'Faça parte da nossa história',
       ctaText: 'Entre em contato conosco e descubra como podemos trabalhar juntos.',
-      ctaButton: 'Fale Conosco'
+      ctaButton: 'Fale Conosco',
+      timeline: {
+        dragText: '← Arraste para ver mais →',
+        milestones: [
+          {
+            title: 'Fundação da Empresa',
+            description: 'Início das atividades com foco em medicamentos hospitalares. Estabelecimento da sede e primeiras operações comerciais.'
+          },
+          {
+            title: 'Expansão Regional',
+            description: 'Ampliação para novos estados e diversificação do portfólio. Crescimento da equipe e abertura de novos canais de distribuição.'
+          },
+          {
+            title: 'Certificações Importantes',
+            description: 'Obtenção de certificações de qualidade e boas práticas. Reconhecimento pelos órgãos reguladores e melhoria dos processos.'
+          },
+          {
+            title: 'Parceria Estratégica',
+            description: 'Estabelecimento de parcerias com grandes laboratórios. Fortalecimento da cadeia de suprimentos e ampliação do portfólio.'
+          },
+          {
+            title: 'Linha Oncológica',
+            description: 'Lançamento de medicamentos especializados em oncologia. Investimento em produtos de alta complexidade e valor agregado.'
+          },
+          {
+            title: 'Inovação Digital',
+            description: 'Implementação de tecnologias digitais e e-commerce. Modernização dos processos e criação de novos canais de venda.'
+          },
+          {
+            title: 'Sustentabilidade',
+            description: 'Programas de responsabilidade social e ambiental. Compromisso com o desenvolvimento sustentável e impacto positivo.'
+          },
+          {
+            title: 'Liderança Nacional',
+            description: 'Consolidação como referência no mercado farmacêutico. Posicionamento entre as principais empresas do setor no Brasil.'
+          }
+        ]
+      }
     }
   },
   en: {
@@ -108,6 +146,7 @@ const translations = reactive({
       introText: 'Uni Hospitalar is a national leader in the distribution of medicines and healthcare products, combining operational excellence with a deep commitment to the health of Brazilians. Our journey spanning more than two decades is marked by innovation, quality, and strong relationships with customers and partners.',
       whoWeAreTitle: 'Who We Are',
       whoWeAreText: 'For over 20 years, Uni Hospitalar has built a trajectory marked by trust, dedication, and commitment to life. Our role goes beyond distributing medications: we combine ethics, integrity, innovation, and quality to generate a positive impact. With a strategic and in-depth vision of the pharmaceutical market, we deliver high-quality products, always strengthening partnerships that make a difference.',
+      timelineTitle: 'Timeline',
       missionTitle: 'Mission',
       missionText: 'To make medications accessible throughout Brazil with integrity, agility, and human care, acting as a bridge between quality and people, and combining operational innovation with warm service that inspires trust in clients, partners, and collaborators.',
       visionTitle: 'Vision',
@@ -194,7 +233,44 @@ const translations = reactive({
       },
       ctaTitle: 'Be part of our story',
       ctaText: 'Contact us and discover how we can work together.',
-      ctaButton: 'Contact Us'
+      ctaButton: 'Contact Us',
+      timeline: {
+        dragText: '← Drag to see more →',
+        milestones: [
+          {
+            title: 'Company Foundation',
+            description: 'Beginning of activities focused on hospital medicines. Establishment of headquarters and first commercial operations.'
+          },
+          {
+            title: 'Regional Expansion',
+            description: 'Expansion to new states and portfolio diversification. Team growth and opening of new distribution channels.'
+          },
+          {
+            title: 'Important Certifications',
+            description: 'Obtaining quality certifications and good practices. Recognition by regulatory agencies and process improvement.'
+          },
+          {
+            title: 'Strategic Partnership',
+            description: 'Establishment of partnerships with major laboratories. Strengthening supply chain and portfolio expansion.'
+          },
+          {
+            title: 'Oncology Line',
+            description: 'Launch of specialized oncology medicines. Investment in high complexity and added value products.'
+          },
+          {
+            title: 'Digital Innovation',
+            description: 'Implementation of digital technologies and e-commerce. Process modernization and creation of new sales channels.'
+          },
+          {
+            title: 'Sustainability',
+            description: 'Social and environmental responsibility programs. Commitment to sustainable development and positive impact.'
+          },
+          {
+            title: 'National Leadership',
+            description: 'Consolidation as a reference in the pharmaceutical market. Positioning among the main companies in the sector in Brazil.'
+          }
+        ]
+      }
     }
   },
   es: {
@@ -205,6 +281,7 @@ const translations = reactive({
       introText: 'Uni Hospitalar es líder nacional en la distribución de medicamentos y productos sanitarios, combinando la excelencia operativa con un profundo compromiso con la salud de los brasileños. Nuestra trayectoria de más de dos décadas se caracteriza por la innovación, la calidad y la sólida relación con clientes y socios.',
       whoWeAreTitle: 'Quiénes Somos',
       whoWeAreText: 'Durante más de 20 años, Uni Hospitalar ha forjado una trayectoria marcada por la confianza, la dedicación y el compromiso con la vida. Nuestro rol va más allá de la distribución de medicamentos: combinamos ética, integridad, innovación y calidad para generar un impacto positivo. Con una visión estratégica y profunda del mercado farmacéutico, ofrecemos productos de alta calidad, fortaleciendo siempre alianzas que marcan la diferencia.',
+      timelineTitle: 'Línea de tiempo',
       missionTitle: 'Misión',
       missionText: 'Hacer que los medicamentos sean accesibles en todo Brasil con integridad, agilidad y cuidado humano, actuando como un puente entre la calidad y las personas, y combinando innovación operativa con una atención cálida que inspire confianza en clientes, socios y colaboradores.',
       visionTitle: 'Visión',
@@ -291,7 +368,44 @@ const translations = reactive({
       },
       ctaTitle: 'Forma parte de nuestra historia',
       ctaText: 'Contáctanos y descubre cómo podemos trabajar juntos.',
-      ctaButton: 'Contáctanos'
+      ctaButton: 'Contáctanos',
+      timeline: {
+        dragText: '← Arrastra para ver más →',
+        milestones: [
+          {
+            title: 'Fundación de la Empresa',
+            description: 'Inicio de actividades con enfoque en medicamentos hospitalarios. Establecimiento de la sede y primeras operaciones comerciales.'
+          },
+          {
+            title: 'Expansión Regional',
+            description: 'Ampliación a nuevos estados y diversificación del portafolio. Crecimiento del equipo y apertura de nuevos canales de distribución.'
+          },
+          {
+            title: 'Certificaciones Importantes',
+            description: 'Obtención de certificaciones de calidad y buenas prácticas. Reconocimiento por los órganos reguladores y mejora de procesos.'
+          },
+          {
+            title: 'Asociación Estratégica',
+            description: 'Establecimiento de asociaciones con grandes laboratorios. Fortalecimiento de la cadena de suministros y ampliación del portafolio.'
+          },
+          {
+            title: 'Línea Oncológica',
+            description: 'Lanzamiento de medicamentos especializados en oncología. Inversión en productos de alta complejidad y valor agregado.'
+          },
+          {
+            title: 'Innovación Digital',
+            description: 'Implementación de tecnologías digitales y e-commerce. Modernización de procesos y creación de nuevos canales de venta.'
+          },
+          {
+            title: 'Sustentabilidad',
+            description: 'Programas de responsabilidad social y ambiental. Compromiso con el desarrollo sostenible e impacto positivo.'
+          },
+          {
+            title: 'Liderazgo Nacional',
+            description: 'Consolidación como referencia en el mercado farmacéutico. Posicionamiento entre las principales empresas del sector en Brasil.'
+          }
+        ]
+      }
     }
   }
 })

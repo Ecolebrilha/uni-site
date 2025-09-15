@@ -352,6 +352,8 @@ import { useConfidentialChannelTranslation } from '@/composables/useConfidential
 import { useReportTranslation } from '@/composables/useReportTranslation';
 import { useComplaintTranslation } from '@/composables/useComplaintTranslation';
 import { usePrivacyNoticeTranslation } from '@/composables/usePrivacyNoticeTranslation';
+import { useCheckStatusTranslation } from '@/composables/useCheckStatusTranslation';
+import { useWorkWithUsTranslation } from '@/composables/useWorkWithUsTranslation.js';
 
 export default {
   name: 'HomeHeader',
@@ -378,6 +380,8 @@ export default {
     const { setLanguage: setReportLanguage } = useReportTranslation();
     const { setLanguage: setComplaintLanguage } = useComplaintTranslation();
     const { setLanguage: setPrivacyNoticeLanguage } = usePrivacyNoticeTranslation();
+    const { setLanguage: setCheckStatusLanguage } = useCheckStatusTranslation();
+    const { setLanguage: setWorkWithUsLanguage } = useWorkWithUsTranslation();
     const { t: tHeader, setLanguage: setHeaderFooterLanguage } = useHeaderFooterTranslation();
 
     return {
@@ -406,6 +410,8 @@ export default {
       setReportLanguage,
       setComplaintLanguage,
       setPrivacyNoticeLanguage,
+      setCheckStatusLanguage,
+      setWorkWithUsLanguage,
       setHeaderFooterLanguage,
     };
   },
@@ -456,6 +462,8 @@ export default {
       this.setReportLanguage(lang);
       this.setComplaintLanguage(lang);
       this.setPrivacyNoticeLanguage(lang);
+      this.setCheckStatusLanguage(lang);
+      this.setWorkWithUsLanguage(lang);
       this.setHeaderFooterLanguage(lang);
     },
     handleScroll() {

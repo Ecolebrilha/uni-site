@@ -49,10 +49,10 @@
         <ScrollReveal direction="bottom" :delay="200">
           <div class="section-title">
             <span class="accent-line"></span>
-            <h2>Linha do tempo</h2>
+            <h2>{{ t('about.timelineTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
-          <p class="intro-text">
+          <p class="intro-text" :style="{ '--drag-text': `'${dragText}'` }">
             <!-- {{ t('about.introText') }} -->
           </p>
         </ScrollReveal>
@@ -303,64 +303,7 @@ export default {
       exitingCard: null,
       autoRotationInterval: null,
       isHovering: false,
-      timelineMilestones: [
-        {
-          year: '2005',
-          title: 'Fundação da Empresa',
-          description: 'Início das atividades com foco em medicamentos hospitalares. Estabelecimento da sede e primeiras operações comerciais.',
-          icon: 'fas fa-rocket',
-          color: '#3498db'
-        },
-        {
-          year: '2008',
-          title: 'Expansão Regional',
-          description: 'Ampliação para novos estados e diversificação do portfólio. Crescimento da equipe e abertura de novos canais de distribuição.',
-          icon: 'fas fa-expand-arrows-alt',
-          color: '#e74c3c'
-        },
-        {
-          year: '2012',
-          title: 'Certificações Importantes',
-          description: 'Obtenção de certificações de qualidade e boas práticas. Reconhecimento pelos órgãos reguladores e melhoria dos processos.',
-          icon: 'fas fa-certificate',
-          color: '#f39c12'
-        },
-        {
-          year: '2015',
-          title: 'Parceria Estratégica',
-          description: 'Estabelecimento de parcerias com grandes laboratórios. Fortalecimento da cadeia de suprimentos e ampliação do portfólio.',
-          icon: 'fas fa-handshake',
-          color: '#9b59b6'
-        },
-        {
-          year: '2018',
-          title: 'Linha Oncológica',
-          description: 'Lançamento de medicamentos especializados em oncologia. Investimento em produtos de alta complexidade e valor agregado.',
-          icon: 'fas fa-microscope',
-          color: '#1abc9c'
-        },
-        {
-          year: '2020',
-          title: 'Inovação Digital',
-          description: 'Implementação de tecnologias digitais e e-commerce. Modernização dos processos e criação de novos canais de venda.',
-          icon: 'fas fa-laptop-code',
-          color: '#34495e'
-        },
-        {
-          year: '2022',
-          title: 'Sustentabilidade',
-          description: 'Programas de responsabilidade social e ambiental. Compromisso com o desenvolvimento sustentável e impacto positivo.',
-          icon: 'fas fa-leaf',
-          color: '#27ae60'
-        },
-        {
-          year: '2024',
-          title: 'Liderança Nacional',
-          description: 'Consolidação como referência no mercado farmacêutico. Posicionamento entre as principais empresas do setor no Brasil.',
-          icon: 'fas fa-crown',
-          color: '#f1c40f'
-        }
-      ],
+
       valorIcons: [
         'fas fa-balance-scale',   // Ética
         'fas fa-gem',             // Qualidade
@@ -383,6 +326,22 @@ export default {
     }
   },
   computed: {
+    timelineMilestones() {
+      const years = ['2005', '2008', '2012', '2015', '2018', '2020', '2022', '2025'];
+      const icons = ['fas fa-rocket', 'fas fa-expand-arrows-alt', 'fas fa-certificate', 'fas fa-handshake', 'fas fa-microscope', 'fas fa-laptop-code', 'fas fa-leaf', 'fas fa-crown'];
+      const colors = ['#3498db', '#e74c3c', '#f39c12', '#9b59b6', '#1abc9c', '#34495e', '#27ae60', '#f1c40f'];
+      
+      return this.t('about.timeline.milestones').map((milestone, index) => ({
+        year: years[index],
+        title: milestone.title,
+        description: milestone.description,
+        icon: icons[index],
+        color: colors[index]
+      }));
+    },
+    dragText() {
+      return this.t('about.timeline.dragText');
+    },
     yearsOfExperience() {
       const today = new Date();
       const currentYear = today.getFullYear();
@@ -1313,7 +1272,7 @@ section {
   }
 
   .intro-text::after {
-    content: "← Arraste para ver mais →";
+    content: var(--drag-text, "← Arraste para ver mais →");
     position: absolute;
     bottom: -80px;
     left: 50%;

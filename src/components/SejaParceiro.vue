@@ -79,14 +79,14 @@
 
                   <!-- Tipo de Parceiro -->
                   <div class="form-group">
-                    <label for="tipoParceiro">Tipo de Parceiro</label>
+                    <label for="tipoParceiro">{{ t('partner.form.partnerType.label') }}</label>
                     <div class="input-clip">
                       <select id="tipoParceiro" v-model="formData.tipoParceiro" class="form-control" required
                         @change="resetRamoAtuacao">
-                        <option value="" disabled selected>Selecione o tipo de parceiro</option>
-                        <option value="TRANSPORTADORA">Transportadora</option>
-                        <option value="CLIENTE">Cliente</option>
-                        <option value="FORNECEDOR">Fornecedor</option>
+                        <option value="" disabled selected>{{ t('partner.form.partnerType.placeholder') }}</option>
+                        <option value="TRANSPORTADORA">{{ t('partner.form.partnerType.options.transportadora') }}</option>
+                        <option value="CLIENTE">{{ t('partner.form.partnerType.options.cliente') }}</option>
+                        <option value="FORNECEDOR">{{ t('partner.form.partnerType.options.fornecedor') }}</option>
                       </select>
                     </div>
                   </div>
@@ -309,10 +309,10 @@
                     </div>
                   </div>
 
-                  <h2>{{ t('partner.form.messages.success') }}</h2>
+                  <h2>{{ t('partner.form.success.title') }}</h2>
 
                   <div class="submission-details">
-                    <h3><i class="fas fa-clipboard-check"></i> Detalhes da Solicitação</h3>
+                    <h3><i class="fas fa-clipboard-check"></i> {{ t('partner.form.success.detailsTitle') }}</h3>
 
                     <div class="details-grid">
                       <div class="detail-item">
@@ -320,7 +320,7 @@
                           <i class="fas fa-building"></i>
                         </div>
                         <div class="detail-content">
-                          <span class="detail-label">Empresa</span>
+                          <span class="detail-label">{{ t('partner.form.success.labels.company') }}</span>
                           <span class="detail-value">{{ submissionData.companyName }}</span>
                         </div>
                       </div>
@@ -330,7 +330,7 @@
                           <i class="fas fa-file-alt"></i>
                         </div>
                         <div class="detail-content">
-                          <span class="detail-label">CNPJ</span>
+                          <span class="detail-label">{{ t('partner.form.success.labels.cnpj') }}</span>
                           <span class="detail-value">{{ submissionData.cnpj }}</span>
                         </div>
                       </div>
@@ -340,7 +340,7 @@
                           <i class="fas fa-envelope"></i>
                         </div>
                         <div class="detail-content">
-                          <span class="detail-label">Email</span>
+                          <span class="detail-label">{{ t('partner.form.success.labels.email') }}</span>
                           <span class="detail-value">{{ submissionData.email }}</span>
                         </div>
                       </div>
@@ -350,23 +350,23 @@
                           <i class="fas fa-paperclip"></i>
                         </div>
                         <div class="detail-content">
-                          <span class="detail-label">Documentos</span>
-                          <span class="detail-value">{{ submissionData.documentsCount }} documento(s) enviado(s)</span>
+                          <span class="detail-label">{{ t('partner.form.success.labels.documents') }}</span>
+                          <span class="detail-value">{{ submissionData.documentsCount }} {{ t('partner.form.success.labels.documentsCount') }}</span>
                         </div>
                       </div>
                     </div>
                   </div>
 
                   <div class="next-steps">
-                    <h3><i class="fas fa-route"></i> Próximos Passos</h3>
+                    <h3><i class="fas fa-route"></i> {{ t('partner.form.success.nextStepsTitle') }}</h3>
                     <div class="steps-grid">
                       <div class="step-item">
                         <div class="step-icon">
                           <i class="fas fa-search"></i>
                         </div>
                         <div class="step-content">
-                          <span class="step-title">Análise</span>
-                          <span class="step-description">Nossa equipe comercial analisará sua solicitação</span>
+                          <span class="step-title">{{ t('partner.form.success.steps.analysis.title') }}</span>
+                          <span class="step-description">{{ t('partner.form.success.steps.analysis.description') }}</span>
                         </div>
                       </div>
 
@@ -375,9 +375,8 @@
                           <i class="fas fa-clock"></i>
                         </div>
                         <div class="step-content">
-                          <span class="step-title">Contato</span>
-                          <span class="step-description">Entraremos em contato em até <strong>72 horas
-                              úteis</strong></span>
+                          <span class="step-title">{{ t('partner.form.success.steps.contact.title') }}</span>
+                          <span class="step-description" v-html="t('partner.form.success.steps.contact.description')"></span>
                         </div>
                       </div>
 
@@ -386,8 +385,8 @@
                           <i class="fas fa-envelope-open"></i>
                         </div>
                         <div class="step-content">
-                          <span class="step-title">Atualizações</span>
-                          <span class="step-description">Você receberá todas as atualizações por email</span>
+                          <span class="step-title">{{ t('partner.form.success.steps.updates.title') }}</span>
+                          <span class="step-description">{{ t('partner.form.success.steps.updates.description') }}</span>
                         </div>
                       </div>
 
@@ -396,8 +395,8 @@
                           <i class="fas fa-user-check"></i>
                         </div>
                         <div class="step-content">
-                          <span class="step-title">Dados Atualizados</span>
-                          <span class="step-description">Mantenha seus dados de contato atualizados</span>
+                          <span class="step-title">{{ t('partner.form.success.steps.keepUpdated.title') }}</span>
+                          <span class="step-description">{{ t('partner.form.success.steps.keepUpdated.description') }}</span>
                         </div>
                       </div>
                     </div>
@@ -408,16 +407,15 @@
                       <i class="fas fa-exclamation-triangle"></i>
                     </div>
                     <div class="info-content">
-                      <h4>Importante</h4>
-                      <p>Todas as comunicações sobre o processo de parceria serão enviadas para o email informado.
-                        Verifique regularmente sua caixa de entrada e pasta de spam.</p>
+                      <h4>{{ t('partner.form.success.important.title') }}</h4>
+                      <p>{{ t('partner.form.success.important.description') }}</p>
                     </div>
                   </div>
 
                   <div class="success-actions">
                     <router-link to="/" class="btn-primary">
                       <i class="fas fa-home"></i>
-                      Página Inicial
+                      {{ t('partner.form.success.homeButton') }}
                     </router-link>
                   </div>
                 </div>
@@ -574,38 +572,7 @@ export default {
         return []
       }
 
-      const ramosPorTipo = {
-        'TRANSPORTADORA': [
-          'Transporte de Cargas',
-          'Logística',
-          'Transporte Expresso',
-          'Transporte Refrigerado',
-          'Transporte de Veículos',
-          'Mudanças e Fretes'
-        ],
-        'CLIENTE': [
-          'Hospital',
-          'Clínica',
-          'Laboratório',
-          'Farmácia',
-          'Distribuidora',
-          'Órgão Público',
-          'Empresa Privada',
-          'ONG',
-          'Cooperativa'
-        ],
-        'FORNECEDOR': [
-          'Equipamentos Médicos',
-          'Medicamentos',
-          'Material Hospitalar',
-          'Tecnologia da Informação',
-          'Serviços de Manutenção',
-          'Consultoria',
-          'Alimentos e Bebidas',
-          'Produtos de Limpeza'
-        ]
-      }
-
+      const ramosPorTipo = this.t('partner.form.businessAreasByType')
       return ramosPorTipo[this.formData.tipoParceiro] || []
     },
     hasDocumentErrors() {
@@ -760,13 +727,13 @@ export default {
 
       // Verificar tipo de arquivo
       if (!validTypes.includes(file.type)) {
-        alert(`Arquivo ${file.name} não é um tipo válido. Use PDF, DOC, DOCX, JPG, JPEG ou PNG.`)
+        alert(this.t('partner.form.validation.invalidFileType', { fileName: file.name }))
         return false
       }
 
       // Verificar tamanho do arquivo
       if (file.size > this.maxFileSize) {
-        alert(`Arquivo ${file.name} é muito grande. Máximo 10MB.`)
+        alert(this.t('partner.form.validation.fileTooLarge', { fileName: file.name }))
         return false
       }
 
@@ -775,15 +742,18 @@ export default {
 
     showUploadSuccess(documentType, fileName) {
       const documentLabels = {
-        cnpj: 'Cartão CNPJ',
-        crf: 'Certificado de Regularidade do FGTS',
-        contatoComprador: 'Contato do Comprador',
-        contatoFinanceiro: 'Contato do Financeiro',
-        alvara: 'Alvará de Funcionamento',
-        contratoSocial: 'Contrato Social'
+        cnpj: this.t('partner.form.documents.cnpj'),
+        crf: this.t('partner.form.documents.crf'),
+        contatoComprador: this.t('partner.form.documents.contatoComprador'),
+        contatoFinanceiro: this.t('partner.form.documents.contatoFinanceiro'),
+        alvara: this.t('partner.form.documents.alvara'),
+        contratoSocial: this.t('partner.form.documents.contratoSocial')
       }
 
-      const message = `Documento "${documentLabels[documentType]}" (${fileName}) anexado com sucesso!`
+      const message = this.t('partner.form.notifications.uploadSuccess', { 
+        documentName: documentLabels[documentType], 
+        fileName: fileName 
+      })
 
       const notification = document.createElement('div')
       notification.innerHTML = `
@@ -812,15 +782,18 @@ export default {
 
     showRemoveSuccess(documentType, fileName) {
       const documentLabels = {
-        cnpj: 'Cartão CNPJ',
-        crf: 'Certificado de Regularidade do FGTS',
-        contatoComprador: 'Contato do Comprador',
-        contatoFinanceiro: 'Contato do Financeiro',
-        alvara: 'Alvará de Funcionamento',
-        contratoSocial: 'Contrato Social'
+        cnpj: this.t('partner.form.documents.cnpj'),
+        crf: this.t('partner.form.documents.crf'),
+        contatoComprador: this.t('partner.form.documents.contatoComprador'),
+        contatoFinanceiro: this.t('partner.form.documents.contatoFinanceiro'),
+        alvara: this.t('partner.form.documents.alvara'),
+        contratoSocial: this.t('partner.form.documents.contratoSocial')
       }
 
-      const message = `Documento "${documentLabels[documentType]}" (${fileName}) removido com sucesso!`
+      const message = this.t('partner.form.notifications.removeSuccess', { 
+        documentName: documentLabels[documentType], 
+        fileName: fileName 
+      })
 
       const notification = document.createElement('div')
       notification.innerHTML = `
@@ -1048,27 +1021,27 @@ export default {
 
       // Validar campos obrigatórios do formulário
       if (!this.formData.cnpj) {
-        this.errors.formCnpj = 'CNPJ é obrigatório'
+        this.errors.formCnpj = this.t('partner.form.validation.cnpjRequired')
       }
       if (!this.formData.nomeRazaoSocial) {
-        this.errors.formNomeRazaoSocial = 'Nome/Razão Social é obrigatório'
+        this.errors.formNomeRazaoSocial = this.t('partner.form.validation.companyNameRequired')
       }
       if (!this.formData.uf) {
-        this.errors.formUf = 'UF é obrigatório'
+        this.errors.formUf = this.t('partner.form.validation.stateRequired')
       }
       if (!this.formData.ramoAtuacao) {
-        this.errors.formRamoAtuacao = 'Ramo de Atuação é obrigatório'
+        this.errors.formRamoAtuacao = this.t('partner.form.validation.businessFieldRequired')
       }
       if (!this.formData.email) {
-        this.errors.formEmail = 'Email é obrigatório'
+        this.errors.formEmail = this.t('partner.form.validation.emailRequired')
       }
       if (!this.formData.celular && !this.formData.telefoneFixo) {
-        this.errors.formCelular = 'Celular ou Telefone Fixo é obrigatório'
-        this.errors.formTelefoneFixo = 'Celular ou Telefone Fixo é obrigatório'
+        this.errors.formCelular = this.t('partner.form.validation.phoneRequired')
+        this.errors.formTelefoneFixo = this.t('partner.form.validation.phoneRequired')
       }
 
       if (!this.formData.tipoParceiro) {
-        this.errors.formTipoParceiro = 'Tipo de Parceiro é obrigatório'
+        this.errors.formTipoParceiro = this.t('partner.form.validation.partnerTypeRequired')
       }
 
       // Validar documentos APENAS se tipoParceiro for CLIENTE
@@ -1076,7 +1049,7 @@ export default {
       if (this.formData.tipoParceiro === 'CLIENTE') {
         Object.keys(this.documents).forEach(docType => {
           if (!this.documents[docType]) {
-            this.errors[docType] = 'Documento obrigatório'
+            this.errors[docType] = this.t('partner.form.validation.documentRequired')
           }
         })
       }

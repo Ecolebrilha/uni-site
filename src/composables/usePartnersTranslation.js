@@ -11,8 +11,11 @@ const translations = reactive({
       },
       stats: {
         strategicPartners: 'Parceiros Estratégicos',
-        statesServed: 'Estados Atendidos',
-        yearsOfTrust: 'Anos de Confiança'
+        strategicPartnersDescription: 'Construímos relacionamentos sólidos e duradouros com nossos parceiros, baseados na confiança mútua e no crescimento conjunto. Nossa rede de parceiros estratégicos nos permite oferecer soluções completas e inovadoras.',
+        businessUnits: 'Cobertura em unidades de negócio',
+        businessUnitsDescription: 'Atendemos aos Canais públicos e privados, com as linhas de medicamentos oncológicos e hospitalares. Nossa presença abrange múltiplos estados e regiões estratégicas.',
+        yearsOfTrust: 'Anos de Confiança',
+        yearsOfTrustDescription: 'Cada capítulo da nossa história foi escrito com dedicação, ética e cuidado. Consolidamos nossa presença no mercado unindo inovação, qualidade e respeitando às relações humanas, sempre com o compromisso de gerar resultados sólidos e duradouros.'
       },
       showcase: {
         title: 'Parceiros de Confiança',
@@ -51,8 +54,11 @@ const translations = reactive({
       },
       stats: {
         strategicPartners: 'Strategic Partners',
-        statesServed: 'States Served',
-        yearsOfTrust: 'Years of Trust'
+        strategicPartnersDescription: 'We build solid and lasting relationships with our partners, based on mutual trust and joint growth. Our strategic partner network allows us to offer complete and innovative solutions.',
+        businessUnits: 'Business Units Coverage',
+        businessUnitsDescription: 'We serve public and private channels, with oncological and hospital medication lines. Our presence covers multiple states and strategic regions.',
+        yearsOfTrust: 'Years of Trust',
+        yearsOfTrustDescription: 'Each chapter of our history was written with dedication, ethics and care. We consolidated our market presence by combining innovation, quality and respecting human relationships, always with the commitment to generate solid and lasting results.'
       },
       showcase: {
         title: 'Trusted Partners',
@@ -91,8 +97,11 @@ const translations = reactive({
       },
       stats: {
         strategicPartners: 'Socios Estratégicos',
-        statesServed: 'Estados Atendidos',
-        yearsOfTrust: 'Años de Confianza'
+        strategicPartnersDescription: 'Construimos relaciones sólidas y duraderas con nuestros socios, basadas en la confianza mutua y el crecimiento conjunto. Nuestra red de socios estratégicos nos permite ofrecer soluciones completas e innovadoras.',
+        businessUnits: 'Cobertura en unidades de negocio',
+        businessUnitsDescription: 'Atendemos a los canales públicos y privados, con las líneas de medicamentos oncológicos y hospitalarios. Nuestra presencia abarca múltiples estados y regiones estratégicas.',
+        yearsOfTrust: 'Años de Confianza',
+        yearsOfTrustDescription: 'Cada capítulo de nuestra historia fue escrito con dedicación, ética y cuidado. Consolidamos nuestra presencia en el mercado uniendo innovación, calidad y respetando las relaciones humanas, siempre con el compromiso de generar resultados sólidos y duraderos.'
       },
       showcase: {
         title: 'Socios de Confianza',

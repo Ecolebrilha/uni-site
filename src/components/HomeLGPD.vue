@@ -143,7 +143,7 @@
                 <h3>{{ t('lgpd.documents.privacyPolicy.title') }}</h3>
                 <p>{{ t('lgpd.documents.privacyPolicy.description') }}</p>
                 <router-link to="/PoliticaPrivacidade" class="document-button">
-                  Acessar Documento
+                  {{ t('lgpd.buttons.accessDocument') }}
                 </router-link>
               </div>
             </div>
@@ -158,7 +158,7 @@
                 <h3>{{ t('lgpd.documents.cookiesPolicy.title') }}</h3>
                 <p>{{ t('lgpd.documents.cookiesPolicy.description') }}</p>
                 <a href="/Declaração de Cookies - Uni Hospitalar.pdf" target="_blank" class="document-button">
-                  Acessar Documento
+                  {{ t('lgpd.buttons.accessDocument') }}
                 </a>
               </div>
             </div>
@@ -172,8 +172,9 @@
               <div class="document-content">
                 <h3>{{ t('lgpd.documents.recruitmentNotice.title') }}</h3>
                 <p>{{ t('lgpd.documents.recruitmentNotice.description') }}</p>
-                <a href="/aviso-privacidade-candidatos.pdf" class="document-button" target="_blank">Acessar
-                  Documento</a>
+                <a href="/aviso-privacidade-candidatos.pdf" class="document-button" target="_blank">
+                  {{ t('lgpd.buttons.accessDocument') }}
+                </a>
               </div>
             </div>
           </ScrollReveal>
@@ -245,33 +246,31 @@
                     <div class="success-icon">
                       <i class="fas fa-check-circle"></i>
                     </div>
-                    <h3>Solicitação Enviada com Sucesso!</h3>
-                    <p>Sua solicitação LGPD foi recebida e está sendo processada por nossa equipe de Proteção de Dados.
-                    </p>
+                    <h3>{{ t('lgpd.dataSubject.messages.success.title') }}</h3>
+                    <p>{{ t('lgpd.dataSubject.messages.success.description') }}</p>
 
                     <div class="response-info">
                       <div class="info-item">
                         <i class="fas fa-clock"></i>
-                        <span><strong>Prazo de Resposta:</strong> Até 15 dias úteis</span>
+                        <span><strong>{{ t('lgpd.dataSubject.messages.success.responseTime') }}</strong> {{ t('lgpd.dataSubject.messages.success.responseTimeValue') }}</span>
                       </div>
                       <div class="info-item">
                         <i class="fas fa-envelope"></i>
-                        <span><strong>Email de Contato:</strong> {{ formData.email }}</span>
+                        <span><strong>{{ t('lgpd.dataSubject.messages.success.contactEmail') }}</strong> {{ formData.email }}</span>
                       </div>
                       <div class="info-item">
                         <i class="fas fa-shield-alt"></i>
-                        <span><strong>DPO:</strong> Ítalo Morais</span>
+                        <span><strong>{{ t('lgpd.dataSubject.messages.success.dpoLabel') }}</strong> {{ t('lgpd.dataSubject.messages.success.dpoValue') }}</span>
                       </div>
                     </div>
 
                     <p class="success-note">
-                      Entraremos em contato através do e-mail fornecido conforme estabelecido pela LGPD.
-                      Sua privacidade e proteção de dados são nossa prioridade.
+                      {{ t('lgpd.dataSubject.messages.success.note') }}
                     </p>
 
                     <button @click="resetForm" class="new-request-button">
                       <i class="fas fa-plus"></i>
-                      Nova Solicitação
+                      {{ t('lgpd.dataSubject.messages.success.newRequestButton') }}
                     </button>
                   </div>
                 </div>
@@ -282,11 +281,11 @@
                     <div class="error-icon">
                       <i class="fas fa-exclamation-triangle"></i>
                     </div>
-                    <h3>Erro ao Enviar Solicitação</h3>
+                    <h3>{{ t('lgpd.dataSubject.messages.error.title') }}</h3>
                     <p>{{ submitError }}</p>
                     <button @click="submitError = ''" class="close-error-button">
                       <i class="fas fa-times"></i>
-                      Fechar
+                      {{ t('lgpd.dataSubject.messages.error.closeButton') }}
                     </button>
                   </div>
                 </div>
@@ -309,7 +308,7 @@
                     <input type="tel" id="phone" v-model="formData.phone" required
                       :placeholder="t('lgpd.dataSubject.form.placeholders.phone')" @input="formatPhone"
                       @blur="validatePhone" maxlength="15" class="form-control">
-                    <span v-if="phoneError" class="error-message">Telefone inválido. Por favor, corrija antes de enviar.</span>
+                    <span v-if="phoneError" class="error-message">{{ t('lgpd.dataSubject.messages.phoneError') }}</span>
                   </div>
 
                   <div class="form-group">
@@ -361,7 +360,7 @@
                   <button type="submit" class="submit-button" :disabled="isSubmitting">
                     <i class="fas fa-paper-plane" v-if="!isSubmitting"></i>
                     <i class="fas fa-spinner fa-spin" v-else></i>
-                    {{ isSubmitting ? 'Enviando...' : t('lgpd.dataSubject.form.submit') }}
+                    {{ isSubmitting ? t('lgpd.dataSubject.messages.submitting') : t('lgpd.dataSubject.form.submit') }}
                   </button>
                 </form>
               </div>

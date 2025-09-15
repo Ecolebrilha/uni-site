@@ -89,6 +89,65 @@ const translations = reactive({
         directions: 'Como Chegar'
       },
       form: {
+        fields: {
+          name: {
+            label: 'Nome',
+            placeholder: 'Seu nome completo'
+          },
+          email: {
+            label: 'E-mail',
+            placeholder: 'Seu e-mail'
+          },
+          phone: {
+            label: 'Telefone',
+            placeholder: 'Seu telefone'
+          },
+          company: {
+            label: 'Empresa',
+            placeholder: 'Sua empresa'
+          },
+          message: {
+            label: 'Mensagem',
+            placeholder: 'Sua mensagem'
+          }
+        },
+        buttons: {
+          submit: 'Enviar mensagem',
+          submitting: 'Enviando...'
+        },
+        validation: {
+          name: 'Nome deve ter pelo menos 2 caracteres',
+          email: 'Email inválido',
+          phone: 'Telefone inválido. Use o formato (xx) xxxxx-xxxx',
+          company: 'Nome da empresa deve ter pelo menos 2 caracteres',
+          message: 'Mensagem deve ter pelo menos 10 caracteres'
+        },
+        success: {
+          title: 'Mensagem Enviada com Sucesso!',
+          subtitle: 'Sua mensagem foi recebida por nossa equipe. Retornaremos em breve!',
+          summary: {
+            title: 'Resumo do seu contato:',
+            name: 'Nome:',
+            email: 'Email:',
+            phone: 'Telefone:',
+            company: 'Empresa:',
+            message: 'Mensagem:'
+          },
+          responseInfo: {
+            responseTime: {
+              label: 'Prazo de resposta:',
+              value: 'até 24 horas úteis'
+            },
+            confirmationEmail: {
+              label: 'Email de confirmação:',
+              value: 'enviado para {email}'
+            }
+          },
+          buttons: {
+            understood: 'Entendido',
+            sendAnother: 'Enviar nova mensagem'
+          }
+        },
         termsNotice: {
           text: 'Ao enviar este formulário, você reconhece nossa',
           privacyPolicy: 'Política de Privacidade',
@@ -183,6 +242,65 @@ const translations = reactive({
         directions: 'Get Directions'
       },
       form: {
+        fields: {
+          name: {
+            label: 'Name',
+            placeholder: 'Your full name'
+          },
+          email: {
+            label: 'Email',
+            placeholder: 'Your email'
+          },
+          phone: {
+            label: 'Phone',
+            placeholder: 'Your phone'
+          },
+          company: {
+            label: 'Company',
+            placeholder: 'Your company'
+          },
+          message: {
+            label: 'Message',
+            placeholder: 'Your message'
+          }
+        },
+        buttons: {
+          submit: 'Send message',
+          submitting: 'Sending...'
+        },
+        validation: {
+          name: 'Name must have at least 2 characters',
+          email: 'Invalid email',
+          phone: 'Invalid phone. Use format (xx) xxxxx-xxxx',
+          company: 'Company name must have at least 2 characters',
+          message: 'Message must have at least 10 characters'
+        },
+        success: {
+          title: 'Message Sent Successfully!',
+          subtitle: 'Your message has been received by our team. We will get back to you soon!',
+          summary: {
+            title: 'Summary of your contact:',
+            name: 'Name:',
+            email: 'Email:',
+            phone: 'Phone:',
+            company: 'Company:',
+            message: 'Message:'
+          },
+          responseInfo: {
+            responseTime: {
+              label: 'Response time:',
+              value: 'up to 24 business hours'
+            },
+            confirmationEmail: {
+              label: 'Confirmation email:',
+              value: 'sent to {email}'
+            }
+          },
+          buttons: {
+            understood: 'Understood',
+            sendAnother: 'Send new message'
+          }
+        },
         termsNotice: {
           text: 'By submitting this form, you acknowledge our',
           privacyPolicy: 'Privacy Policy',
@@ -277,6 +395,65 @@ const translations = reactive({
         directions: 'Cómo Llegar'
       },
       form: {
+        fields: {
+          name: {
+            label: 'Nombre',
+            placeholder: 'Su nombre completo'
+          },
+          email: {
+            label: 'Correo',
+            placeholder: 'Su correo electrónico'
+          },
+          phone: {
+            label: 'Teléfono',
+            placeholder: 'Su teléfono'
+          },
+          company: {
+            label: 'Empresa',
+            placeholder: 'Su empresa'
+          },
+          message: {
+            label: 'Mensaje',
+            placeholder: 'Su mensaje'
+          }
+        },
+        buttons: {
+          submit: 'Enviar mensaje',
+          submitting: 'Enviando...'
+        },
+        validation: {
+          name: 'El nombre debe tener al menos 2 caracteres',
+          email: 'Correo inválido',
+          phone: 'Teléfono inválido. Use el formato (xx) xxxxx-xxxx',
+          company: 'El nombre de la empresa debe tener al menos 2 caracteres',
+          message: 'El mensaje debe tener al menos 10 caracteres'
+        },
+        success: {
+          title: '¡Mensaje Enviado Exitosamente!',
+          subtitle: '¡Su mensaje ha sido recibido por nuestro equipo. Le responderemos pronto!',
+          summary: {
+            title: 'Resumen de su contacto:',
+            name: 'Nombre:',
+            email: 'Correo:',
+            phone: 'Teléfono:',
+            company: 'Empresa:',
+            message: 'Mensaje:'
+          },
+          responseInfo: {
+            responseTime: {
+              label: 'Tiempo de respuesta:',
+              value: 'hasta 24 horas hábiles'
+            },
+            confirmationEmail: {
+              label: 'Correo de confirmación:',
+              value: 'enviado a {email}'
+            }
+          },
+          buttons: {
+            understood: 'Entendido',
+            sendAnother: 'Enviar nuevo mensaje'
+          }
+        },
         termsNotice: {
           text: 'Al enviar este formulario, reconoces nuestra',
           privacyPolicy: 'Política de Privacidad',
@@ -293,7 +470,7 @@ export function useContactTranslation() {
     localStorage.setItem('language', lang)
   }
 
-  const t = (key) => {
+  const t = (key, params = {}) => {
     const keys = key.split('.')
     let value = translations[currentLanguage.value]
     
@@ -301,7 +478,12 @@ export function useContactTranslation() {
       value = value?.[k]
     }
     
-    return value || key
+    if (!value) return key
+    
+    // Interpolação de parâmetros
+    return value.replace(/\{(\w+)\}/g, (match, paramName) => {
+      return params[paramName] || match
+    })
   }
 
   // Inicializar com idioma salvo

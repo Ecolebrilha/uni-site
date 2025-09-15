@@ -3,28 +3,28 @@
     <form @submit.prevent="handleSubmit" v-if="!formSubmitted">
       <div class="form-row">
         <div class="form-group">
-          <label for="name">Nome <span class="required">*</span></label>
-          <input v-model="formData.name" type="text" id="name" placeholder="Seu nome completo" required 
+          <label for="name">{{ t('contact.form.fields.name.label') }} <span class="required">*</span></label>
+          <input v-model="formData.name" type="text" id="name" :placeholder="t('contact.form.fields.name.placeholder')" required 
             :class="{ 'error': errors.name }">
           <div v-if="errors.name" class="error-message">{{ errors.name }}</div>
         </div>
         <div class="form-group">
-          <label for="email">E-mail <span class="required">*</span></label>
-          <input v-model="formData.email" type="email" id="email" placeholder="Seu e-mail" required 
+          <label for="email">{{ t('contact.form.fields.email.label') }} <span class="required">*</span></label>
+          <input v-model="formData.email" type="email" id="email" :placeholder="t('contact.form.fields.email.placeholder')" required 
             :class="{ 'error': errors.email }">
           <div v-if="errors.email" class="error-message">{{ errors.email }}</div>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label for="telefone">Telefone <span class="required">*</span></label>
+          <label for="telefone">{{ t('contact.form.fields.phone.label') }} <span class="required">*</span></label>
           <input
             v-model="formData.telefone"
             @input="formatPhone"
             id="telefone"
             name="telefone"
             type="text"
-            placeholder="Seu telefone"
+            :placeholder="t('contact.form.fields.phone.placeholder')"
             required
             maxlength="15"
             :class="{ 'error': errors.telefone }"
@@ -32,15 +32,15 @@
           <div v-if="errors.telefone" class="error-message">{{ errors.telefone }}</div>
         </div>
         <div class="form-group">
-          <label for="empresa">Empresa <span class="required">*</span></label>
-          <input v-model="formData.empresa" type="text" id="empresa" placeholder="Sua empresa" required 
+          <label for="empresa">{{ t('contact.form.fields.company.label') }} <span class="required">*</span></label>
+          <input v-model="formData.empresa" type="text" id="empresa" :placeholder="t('contact.form.fields.company.placeholder')" required 
             :class="{ 'error': errors.empresa }">
           <div v-if="errors.empresa" class="error-message">{{ errors.empresa }}</div>
         </div>
       </div>
       <div class="form-group">
-        <label for="message">Mensagem <span class="required">*</span></label>
-        <textarea v-model="formData.message" id="message" rows="5" placeholder="Sua mensagem" required
+        <label for="message">{{ t('contact.form.fields.message.label') }} <span class="required">*</span></label>
+        <textarea v-model="formData.message" id="message" rows="5" :placeholder="t('contact.form.fields.message.placeholder')" required
           :class="{ 'error': errors.message }"></textarea>
         <div v-if="errors.message" class="error-message">{{ errors.message }}</div>
       </div>
@@ -65,10 +65,10 @@
         :disabled="isSubmitting"
       >
         <span v-if="isSubmitting">
-          <i class="fas fa-spinner fa-spin"></i> Enviando...
+          <i class="fas fa-spinner fa-spin"></i> {{ t('contact.form.buttons.submitting') }}
         </span>
         <span v-else>
-          <i class="fas fa-paper-plane"></i> Enviar mensagem
+          <i class="fas fa-paper-plane"></i> {{ t('contact.form.buttons.submit') }}
         </span>
       </button>
       
@@ -88,47 +88,47 @@
           </div>
         </div>
         
-        <h2>Mensagem Enviada com Sucesso!</h2>
-        <p>Sua mensagem foi recebida por nossa equipe. Retornaremos em breve!</p>
+        <h2>{{ t('contact.form.success.title') }}</h2>
+        <p>{{ t('contact.form.success.subtitle') }}</p>
         
         <div class="contact-summary">
-          <h3><i class="fas fa-thumbtack pin-icon"></i> Resumo do seu contato:</h3>
+          <h3><i class="fas fa-thumbtack pin-icon"></i> {{ t('contact.form.success.summary.title') }}</h3>
   <div class="summary-item">
-    <strong>Nome:</strong> <span class="summary-value">{{ submittedData.name }}</span>
+    <strong>{{ t('contact.form.success.summary.name') }}</strong> <span class="summary-value">{{ submittedData.name }}</span>
   </div>
   <div class="summary-item">
-    <strong>Email:</strong> <span class="summary-value">{{ submittedData.email }}</span>
+    <strong>{{ t('contact.form.success.summary.email') }}</strong> <span class="summary-value">{{ submittedData.email }}</span>
   </div>
   <div class="summary-item">
-    <strong>Telefone:</strong> <span class="summary-value">{{ submittedData.phone }}</span>
+    <strong>{{ t('contact.form.success.summary.phone') }}</strong> <span class="summary-value">{{ submittedData.phone }}</span>
   </div>
   <div class="summary-item">
-    <strong>Empresa:</strong> <span class="summary-value">{{ submittedData.company }}</span>
+    <strong>{{ t('contact.form.success.summary.company') }}</strong> <span class="summary-value">{{ submittedData.company }}</span>
   </div>
   <div class="summary-item">
-    <strong>Mensagem:</strong> <span class="summary-value">{{ submittedData.message }}</span>
+    <strong>{{ t('contact.form.success.summary.message') }}</strong> <span class="summary-value">{{ submittedData.message }}</span>
   </div>
 </div>
         
         <div class="response-info">
           <div class="info-box">
             <i class="fas fa-clock"></i>
-            <span><strong>Prazo de resposta:</strong> até 24 horas úteis</span>
+            <span><strong>{{ t('contact.form.success.responseInfo.responseTime.label') }}</strong> {{ t('contact.form.success.responseInfo.responseTime.value') }}</span>
           </div>
           <div class="info-box">
             <i class="fas fa-envelope"></i>
-            <span><strong>Email de confirmação:</strong> enviado para {{ submittedData.email }}</span>
+            <span><strong>{{ t('contact.form.success.responseInfo.confirmationEmail.label') }}</strong> {{ t('contact.form.success.responseInfo.confirmationEmail.value', { email: submittedData.email }) }}</span>
           </div>
         </div>
         
         <div class="modal-actions">
           <button @click="closeModal" class="btn-close">
             <i class="fas fa-check"></i>
-            Entendido
+            {{ t('contact.form.success.buttons.understood') }}
           </button>
           <button @click="sendAnotherMessage" class="btn-new-message">
             <i class="fas fa-plus"></i>
-            Enviar nova mensagem
+            {{ t('contact.form.success.buttons.sendAnother') }}
           </button>
         </div>
         </div>
@@ -189,24 +189,24 @@ export default {
       this.errors = {};
 
       if (!this.formData.name || this.formData.name.trim().length < 2) {
-        this.errors.name = 'Nome deve ter pelo menos 2 caracteres';
+        this.errors.name = this.t('contact.form.validation.name');
       }
 
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!this.formData.email || !emailRegex.test(this.formData.email)) {
-        this.errors.email = 'Email inválido';
+        this.errors.email = this.t('contact.form.validation.email');
       }
 
       if (!this.formData.telefone || !this.validatePhoneNumber(this.formData.telefone)) {
-        this.errors.telefone = 'Telefone inválido. Use o formato (xx) xxxxx-xxxx';
+        this.errors.telefone = this.t('contact.form.validation.phone');
       }
 
       if (!this.formData.empresa || this.formData.empresa.trim().length < 2) {
-        this.errors.empresa = 'Nome da empresa deve ter pelo menos 2 caracteres';
+        this.errors.empresa = this.t('contact.form.validation.company');
       }
 
       if (!this.formData.message || this.formData.message.trim().length < 10) {
-        this.errors.message = 'Mensagem deve ter pelo menos 10 caracteres';
+        this.errors.message = this.t('contact.form.validation.message');
       }
 
       return Object.keys(this.errors).length === 0;

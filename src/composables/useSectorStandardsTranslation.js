@@ -30,7 +30,7 @@ const translations = reactive({
       },
         },
         training: {
-          number: '500+',
+          number: '90+',
           label: 'Funcionários Treinados'
         }
       },
@@ -240,7 +240,7 @@ const translations = reactive({
       },
         },
         training: {
-          number: '500+',
+          number: '90+',
           label: 'Trained Employees'
         }
       },
@@ -450,7 +450,7 @@ const translations = reactive({
       },
         },
         training: {
-          number: '500+',
+          number: '90+',
           label: 'Empleados Capacitados'
         }
       },

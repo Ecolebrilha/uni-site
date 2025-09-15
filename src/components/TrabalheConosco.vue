@@ -6,8 +6,8 @@
     <section class="hero-section">
       <div class="parallax-container">
         <div class="overlay"></div>
-        <h1 class="hero-title">Trabalhe Conosco</h1>
-        <div class="hero-subtitle">Faça parte do nosso time</div>
+        <h1 class="hero-title">{{ t('career.heroTitle') }}</h1>
+        <div class="hero-subtitle">{{ t('career.heroSubtitle') }}</div>
       </div>
     </section>
 
@@ -17,17 +17,12 @@
         <ScrollReveal direction="bottom" :delay="100">
           <div class="section-title">
             <span class="accent-line"></span>
-            <h2>Junte-se à Nossa Equipe</h2>
+            <h2>{{ t('career.introTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
           <p class="intro-text">
-            Na Uni Hospitalar, acreditamos que nossos colaboradores são o principal pilar da 
-            nossa trajetória. Aqui, cada talento encontra a oportunidade única de trilhar seu
-            próprio caminho e crescer em um ambiente de apoio, colaboração e diversidade. Nossa
-            força está nas pessoas que compartilham nossos valores e nos ajudam a transformar a
-            distribuição de medicamentos com ética, integridade, inovação e qualidade.<br><br>
-            <span class="intro-text-two">Se você busca fazer a diferença e desenvolver seu potencial em uma cultura que 
-            valoriza o crescimento pessoal e profissional, venha fazer parte do nosso time.</span>
+            {{ t('career.introText') }}<br><br>
+            <span class="intro-text-two">{{ t('career.introText2') }}</span>
           </p>
         </ScrollReveal>
       </div>
@@ -39,7 +34,7 @@
     <ScrollReveal direction="bottom" :delay="200">
       <div class="section-title">
         <span class="accent-line"></span>
-        <h2>Nossos Valores</h2>
+        <h2>{{ t('career.values.title') }}</h2>
         <span class="accent-line"></span>
       </div>
     </ScrollReveal>
@@ -50,8 +45,8 @@
           <div class="value-icon">
             <i class="fas fa-handshake"></i>
           </div>
-          <h3>Integridade</h3>
-          <p>Agimos com ética, transparência e responsabilidade em todas as nossas relações.</p>
+          <h3>{{ t('career.values.integrity.title') }}</h3>
+          <p>{{ t('career.values.integrity.description') }}</p>
         </div>
       </ScrollReveal>
 
@@ -60,8 +55,8 @@
           <div class="value-icon">
             <i class="fas fa-users"></i>
           </div>
-          <h3>Colaboração</h3>
-          <p>Trabalhamos juntos, valorizando sempre a diversidade, a inclusão e o respeito mútuo.</p>
+          <h3>{{ t('career.values.collaboration.title') }}</h3>
+          <p>{{ t('career.values.collaboration.description') }}</p>
         </div>
       </ScrollReveal>
 
@@ -70,8 +65,8 @@
           <div class="value-icon">
             <i class="fas fa-lightbulb"></i>
           </div>
-          <h3>Inovação</h3>
-          <p>Reinventar-se é parte da nossa jornada. Unimos resiliência e criatividade para desenvolver soluções que fortalecem a distribuição de medicamentos e criam novas oportunidades de crescimento.</p>
+          <h3>{{ t('career.values.innovation.title') }}</h3>
+          <p>{{ t('career.values.innovation.description') }}</p>
         </div>
       </ScrollReveal>
 
@@ -80,8 +75,8 @@
           <div class="value-icon">
             <i class="fas fa-chart-line"></i>
           </div>
-          <h3>Excelência</h3>
-          <p>A excelência guia nossas ações: buscamos sempre ir além, transformando dedicação e atenção aos detalhes em resultados extraordinários.</p>
+          <h3>{{ t('career.values.excellence.title') }}</h3>
+          <p>{{ t('career.values.excellence.description') }}</p>
         </div>
       </ScrollReveal>
         </div>
@@ -159,11 +154,11 @@
         <ScrollReveal direction="bottom" :delay="200">
           <div class="section-title">
             <span class="accent-line"></span>
-            <h2>Vagas Disponíveis</h2>
+            <h2>{{ t('career.jobs.title') }}</h2>
             <span class="accent-line"></span>
           </div>
           <p class="jobs-intro">
-            Confira nossas oportunidades atuais e candidate-se à vaga que mais combina com seu perfil.
+            {{ t('career.jobs.intro') }}
           </p>
         </ScrollReveal>
 
@@ -172,7 +167,7 @@
           <div class="loading-spinner">
             <i class="fas fa-spinner fa-spin"></i>
           </div>
-          <p>Carregando vagas disponíveis...</p>
+          <p>{{ t('career.jobs.loading') }}</p>
         </div>
 
         <!-- Lista de vagas -->
@@ -213,7 +208,7 @@
 
                 <!-- Seção de Descrição (Resumida + Completa) -->
                 <div class="job-description-section" v-if="job.shortDescription || job.description">
-                  <h4>Descrição da Vaga:</h4>
+                  <h4>{{ t('career.jobs.sections.description') }}</h4>
 
                   <!-- Sempre mostra a descrição resumida se existir -->
                   <div v-if="job.shortDescription" class="short-description">
@@ -228,21 +223,21 @@
                   <!-- Descrição completa - só aparece quando expandida E quando existe shortDescription -->
                   <div v-if="job.description && job.shortDescription && expandedSections[`desc-${job.id}`]"
                     class="complete-description">
-                    <h5 class="complete-description-title">Descrição Detalhada:</h5>
+                    <h5 class="complete-description-title">{{ t('career.jobs.sections.detailedDescription') }}</h5>
                     <p class="job-description-complete">{{ job.description }}</p>
                   </div>
 
                   <!-- Botão para expandir - só aparece se tiver AMBAS as descrições -->
                   <button v-if="job.description && job.shortDescription" @click.stop="toggleSection(`desc-${job.id}`)"
                     class="expand-button">
-                    {{ expandedSections[`desc-${job.id}`] ? 'Ver menos detalhes' : 'Ver descrição completa' }}
+                    {{ expandedSections[`desc-${job.id}`] ? t('career.jobs.expandButtons.seeLessDetails') : t('career.jobs.expandButtons.seeComplete') }}
                     <i :class="expandedSections[`desc-${job.id}`] ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
                   </button>
                 </div>
 
                 <!-- Requisitos Principais -->
                 <div class="job-requirements" v-if="job.mainRequirements && job.mainRequirements.length > 0">
-                  <h4>Requisitos Principais:</h4>
+                  <h4>{{ t('career.jobs.sections.mainRequirements') }}</h4>
                   <div class="expandable-content" :class="{ 'expanded': expandedSections[`main-req-${job.id}`] }">
                     <ul class="requirements-list">
                       <li v-for="(requirement, idx) in job.mainRequirements" :key="idx"
@@ -252,8 +247,7 @@
                     </ul>
                     <button v-if="job.mainRequirements.length > 3" @click.stop="toggleSection(`main-req-${job.id}`)"
                       class="expand-button">
-                      {{ expandedSections[`main-req-${job.id}`] ? 'Ver menos' : `Ver mais ${job.mainRequirements.length
-                        - 3} requisitos` }}
+                      {{ expandedSections[`main-req-${job.id}`] ? t('career.jobs.expandButtons.seeLess') : `${t('career.jobs.expandButtons.seeMore')} ${job.mainRequirements.length - 3} ${t('career.jobs.expandButtons.moreRequirements')}` }}
                       <i
                         :class="expandedSections[`main-req-${job.id}`] ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
                     </button>
@@ -263,7 +257,7 @@
                 <!-- Requisitos Adicionais -->
                 <div class="job-additional-requirements"
                   v-if="job.additionalRequirements && job.additionalRequirements.length > 0">
-                  <h4>Requisitos Adicionais:</h4>
+                  <h4>{{ t('career.jobs.sections.additionalRequirements') }}</h4>
                   <div class="expandable-content" :class="{ 'expanded': expandedSections[`add-req-${job.id}`] }">
                     <ul class="additional-requirements-list">
                       <li v-for="(requirement, idx) in job.additionalRequirements" :key="idx"
@@ -273,8 +267,7 @@
                     </ul>
                     <button v-if="job.additionalRequirements.length > 2"
                       @click.stop="toggleSection(`add-req-${job.id}`)" class="expand-button">
-                      {{ expandedSections[`add-req-${job.id}`] ? 'Ver menos' : `Ver mais
-                      ${job.additionalRequirements.length - 2} requisitos` }}
+                      {{ expandedSections[`add-req-${job.id}`] ? t('career.jobs.expandButtons.seeLess') : `${t('career.jobs.expandButtons.seeMore')} ${job.additionalRequirements.length - 2} ${t('career.jobs.expandButtons.moreRequirements')}` }}
                       <i
                         :class="expandedSections[`add-req-${job.id}`] ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
                     </button>
@@ -283,7 +276,7 @@
 
                 <!-- Benefícios -->
                 <div class="job-benefits-preview" v-if="job.benefits && job.benefits.length > 0">
-                  <h4>Benefícios:</h4>
+                  <h4>{{ t('career.jobs.sections.benefits') }}</h4>
                   <div class="expandable-content" :class="{ 'expanded': expandedSections[`benefits-${job.id}`] }">
                     <ul class="benefits-list">
                       <li v-for="(benefit, idx) in job.benefits" :key="idx"
@@ -293,8 +286,7 @@
                     </ul>
                     <button v-if="job.benefits.length > 3" @click.stop="toggleSection(`benefits-${job.id}`)"
                       class="expand-button">
-                      {{ expandedSections[`benefits-${job.id}`] ? 'Ver menos' : `Ver mais ${job.benefits.length - 3}
-                      benefícios` }}
+                      {{ expandedSections[`benefits-${job.id}`] ? t('career.jobs.expandButtons.seeLess') : `${t('career.jobs.expandButtons.seeMore')} ${job.benefits.length - 3} ${t('career.jobs.expandButtons.moreBenefits')}` }}
                       <i
                         :class="expandedSections[`benefits-${job.id}`] ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
                     </button>
@@ -305,7 +297,7 @@
               <div class="job-footer">
                 <button class="apply-button">
                   <i class="fas fa-paper-plane"></i>
-                  Candidatar-se
+                  {{ t('career.jobs.applyButton') }}
                 </button>
               </div>
             </div>
@@ -319,14 +311,13 @@
               <div class="no-jobs-icon">
                 <i class="fas fa-search"></i>
               </div>
-              <h3>Nenhuma vaga disponível no momento</h3>
+              <h3>{{ t('career.jobs.noJobs.title') }}</h3>
               <p>
-                Não temos vagas abertas atualmente, mas você pode enviar seu currículo para nosso banco de talentos.
-                Entraremos em contato quando surgir uma oportunidade compatível com seu perfil.
+                {{ t('career.jobs.noJobs.description') }}
               </p>
               <button @click="showTalentBankForm" class="talent-bank-button">
                 <i class="fas fa-database"></i>
-                Cadastrar no Banco de Talentos
+                {{ t('career.jobs.noJobs.talentBankButton') }}
               </button>
             </div>
           </ScrollReveal>
@@ -340,8 +331,8 @@
         <ScrollReveal direction="bottom" :delay="200">
           <div class="section-title">
             <span class="accent-line"></span>
-            <h2 v-if="selectedJob">Candidatar-se para: {{ selectedJob.title }}</h2>
-            <h2 v-else>Banco de Talentos</h2>
+            <h2 v-if="selectedJob">{{ t('career.form.applicationTitle') }} {{ selectedJob.title }}</h2>
+            <h2 v-else>{{ t('career.form.talentBankTitle') }}</h2>
             <span class="accent-line"></span>
           </div>
           <div class="selected-job-info" v-if="selectedJob">
@@ -350,7 +341,7 @@
                 <h3>{{ selectedJob.title }}</h3>
                 <button @click="backToJobs" class="back-button">
                   <i class="fas fa-arrow-left"></i>
-                  Voltar às vagas
+                  {{ t('career.form.backToJobs') }}
                 </button>
               </div>
               <div class="job-summary-details">
@@ -362,12 +353,10 @@
             </div>
           </div>
           <p class="form-intro" v-if="selectedJob">
-            Preencha o formulário abaixo para se candidatar a esta vaga.
-            Anexe seu currículo e nos conte um pouco sobre você e suas expectativas.
+            {{ t('career.form.applicationIntro') }}
           </p>
           <p class="form-intro" v-else>
-            Preencha o formulário abaixo para fazer parte do nosso banco de talentos.
-            Entraremos em contato quando surgir uma oportunidade compatível com seu perfil.
+            {{ t('career.form.talentBankIntro') }}
           </p>
         </ScrollReveal>
 
@@ -377,85 +366,85 @@
               <div class="form-icon">
                 <i class="fas fa-briefcase"></i>
               </div>
-              <h3 v-if="selectedJob">Candidatar-se para: {{ selectedJob.title }}</h3>
-              <h3 v-else>Banco de Talentos</h3>
+              <h3 v-if="selectedJob">{{ t('career.form.applicationTitle') }} {{ selectedJob.title }}</h3>
+              <h3 v-else>{{ t('career.form.talentBankTitle') }}</h3>
             </div>
             <form @submit.prevent="submitForm" class="career-form">
               <div class="form-grid">
                 <div class="form-group">
-                  <label for="name">Nome Completo</label>
-                  <input type="text" id="name" v-model="formData.name" required placeholder="Seu nome completo">
+                  <label for="name">{{ t('career.form.fields.name.label') }}</label>
+                  <input type="text" id="name" v-model="formData.name" required :placeholder="t('career.form.fields.name.placeholder')">
                   <span class="error-message" v-if="errors.name">{{ errors.name }}</span>
                 </div>
 
                 <div class="form-group">
-                  <label for="email">E-mail</label>
-                  <input type="email" id="email" v-model="formData.email" required placeholder="seu.email@exemplo.com">
+                  <label for="email">{{ t('career.form.fields.email.label') }}</label>
+                  <input type="email" id="email" v-model="formData.email" required :placeholder="t('career.form.fields.email.placeholder')">
                   <span class="error-message" v-if="errors.email">{{ errors.email }}</span>
                 </div>
 
                 <div class="form-group">
-                  <label for="phone">Telefone</label>
-                  <input type="tel" id="phone" v-model="formData.phone" required placeholder="(00) 00000-0000"
+                  <label for="phone">{{ t('career.form.fields.phone.label') }}</label>
+                  <input type="tel" id="phone" v-model="formData.phone" required :placeholder="t('career.form.fields.phone.placeholder')"
                     @input="formatPhone" maxlength="15">
                   <span class="error-message" v-if="errors.phone">{{ errors.phone }}</span>
                 </div>
 
                 <div class="form-group" v-if="!selectedJob">
-                  <label for="position">Área de Interesse</label>
+                  <label for="position">{{ t('career.form.fields.position.label') }}</label>
                   <select id="position" v-model="formData.position" required>
-                    <option value="" disabled selected>Selecione uma área</option>
-                    <option value="Administrativo">Administrativo</option>
-                    <option value="Comercial">Comercial</option>
-                    <option value="Estoque">Estoque</option>
-                    <option value="Financeiro">Financeiro</option>
-                    <option value="Fiscal">Fiscal</option>
-                    <option value="Licitação">Licitação</option>
-                    <option value="Logística">Logística</option>
-                    <option value="TI">TI</option>
-                    <option value="Outro">Outro</option>
+                    <option value="" disabled selected>{{ t('career.form.fields.position.placeholder') }}</option>
+                    <option value="Administrativo">{{ t('career.form.fields.position.options.administrative') }}</option>
+                    <option value="Comercial">{{ t('career.form.fields.position.options.commercial') }}</option>
+                    <option value="Estoque">{{ t('career.form.fields.position.options.inventory') }}</option>
+                    <option value="Financeiro">{{ t('career.form.fields.position.options.financial') }}</option>
+                    <option value="Fiscal">{{ t('career.form.fields.position.options.fiscal') }}</option>
+                    <option value="Licitação">{{ t('career.form.fields.position.options.bidding') }}</option>
+                    <option value="Logística">{{ t('career.form.fields.position.options.logistics') }}</option>
+                    <option value="TI">{{ t('career.form.fields.position.options.it') }}</option>
+                    <option value="Outro">{{ t('career.form.fields.position.options.other') }}</option>
                   </select>
                   <span class="error-message" v-if="errors.position">{{ errors.position }}</span>
                 </div>
 
                 <div class="form-group">
-                  <label for="education">Formação Acadêmica</label>
+                  <label for="education">{{ t('career.form.fields.education.label') }}</label>
                   <select id="education" v-model="formData.education" required>
-                    <option value="" disabled selected>Selecione sua formação</option>
-                    <option value="Ensino Médio">Ensino Médio</option>
-                    <option value="Ensino Técnico">Ensino Técnico</option>
-                    <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
-                    <option value="Ensino Superior Completo">Ensino Superior Completo</option>
-                    <option value="Pós-graduação">Pós-graduação</option>
-                    <option value="Mestrado">Mestrado</option>
-                    <option value="Doutorado">Doutorado</option>
+                    <option value="" disabled selected>{{ t('career.form.fields.education.placeholder') }}</option>
+                    <option value="Ensino Médio">{{ t('career.form.fields.education.options.highSchool') }}</option>
+                    <option value="Ensino Técnico">{{ t('career.form.fields.education.options.technical') }}</option>
+                    <option value="Ensino Superior Incompleto">{{ t('career.form.fields.education.options.universityIncomplete') }}</option>
+                    <option value="Ensino Superior Completo">{{ t('career.form.fields.education.options.universityComplete') }}</option>
+                    <option value="Pós-graduação">{{ t('career.form.fields.education.options.postGrad') }}</option>
+                    <option value="Mestrado">{{ t('career.form.fields.education.options.masters') }}</option>
+                    <option value="Doutorado">{{ t('career.form.fields.education.options.doctorate') }}</option>
                   </select>
                   <span class="error-message" v-if="errors.education">{{ errors.education }}</span>
                 </div>
 
                 <div class="form-group">
-                  <label for="experience">Experiência Profissional</label>
+                  <label for="experience">{{ t('career.form.fields.experience.label') }}</label>
                   <select id="experience" v-model="formData.experience" required>
-                    <option value="" disabled selected>Selecione sua experiência</option>
-                    <option value="Sem experiência">Sem experiência</option>
-                    <option value="Até 1 ano">Até 1 ano</option>
-                    <option value="1 a 3 anos">1 a 3 anos</option>
-                    <option value="3 a 5 anos">3 a 5 anos</option>
-                    <option value="5 a 10 anos">5 a 10 anos</option>
-                    <option value="Mais de 10 anos">Mais de 10 anos</option>
+                    <option value="" disabled selected>{{ t('career.form.fields.experience.placeholder') }}</option>
+                    <option value="Sem experiência">{{ t('career.form.fields.experience.options.noExperience') }}</option>
+                    <option value="Até 1 ano">{{ t('career.form.fields.experience.options.upTo1Year') }}</option>
+                    <option value="1 a 3 anos">{{ t('career.form.fields.experience.options.from1To3Years') }}</option>
+                    <option value="3 a 5 anos">{{ t('career.form.fields.experience.options.from3To5Years') }}</option>
+                    <option value="5 a 10 anos">{{ t('career.form.fields.experience.options.from5To10Years') }}</option>
+                    <option value="Mais de 10 anos">{{ t('career.form.fields.experience.options.moreThan10Years') }}</option>
                   </select>
                   <span class="error-message" v-if="errors.experience">{{ errors.experience }}</span>
                 </div>
               </div>
 
               <div class="form-group full-width">
-                <label for="resume">Currículo (PDF)</label>
+                <label for="resume">{{ t('career.form.fields.resume.label') }}</label>
                 <div class="file-upload-container">
                   <input type="file" id="resume" ref="resumeFile" @change="handleFileUpload" accept=".pdf" required
                     class="file-input">
                   <label for="resume" class="file-upload-label">
                     <i class="fas fa-cloud-upload-alt"></i>
-                    <span v-if="!formData.resume">Clique para anexar seu currículo (PDF)</span>
+                    <span v-if="!formData.resume">{{ t('career.form.fields.resume.placeholder') }}</span>
                     <span v-else>{{ formData.resume.name }}</span>
                   </label>
                 </div>
@@ -463,48 +452,38 @@
               </div>
 
               <div class="form-group full-width">
-                <label for="message">Apresentação Pessoal</label>
+                <label for="message">{{ t('career.form.fields.message.label') }}</label>
                 <textarea id="message" v-model="formData.message" required rows="6"
-                  placeholder="Conte-nos um pouco sobre você, suas experiências, motivações e por que gostaria de trabalhar na Uni Hospitalar..."></textarea>
+                  :placeholder="t('career.form.fields.message.placeholder')"></textarea>
                 <span class="error-message" v-if="errors.message">{{ errors.message }}</span>
               </div>
 
               <div class="form-group full-width optional-field">
-                <label for="expectations">Expectativas Salariais</label>
+                <label for="expectations">{{ t('career.form.fields.expectations.label') }}</label>
                 <input type="text" id="expectations" v-model="formData.expectations"
-                  placeholder="Ex: R$ 3.000,00 - R$ 4.000,00 (opcional)">
+                  :placeholder="t('career.form.fields.expectations.placeholder')">
               </div>
 
               <div class="form-group full-width optional-field">
                 <div class="checkbox-group">
                   <input type="checkbox" id="privacy" v-model="formData.privacy">
                   <label for="privacy">
-                    Autorizo a Uni Hospitalar a manter em seu banco de talentos
-                    meus dados pessoais fornecidos durante a candidatura e
-                    processo seletivo, permitindo que eu seja considerado para
-                    futuras oportunidades compatíveis com meu perfil
-                    profissional.
+                    {{ t('career.form.fields.privacy.label') }}
                   </label>
                 </div>
                 <div class="privacy-disclaimer">
                   <div class="notice-content">
                     <i class="fas fa-info-circle notice-icon"></i>
                     <p>
-                      Se você optar por não autorizar, utilizaremos seus dados apenas
-                      para esta candidatura específica. Após a conclusão do processo
-                      seletivo, seus dados serão eliminados, preservando somente as
-                      informações necessárias para registro histórico e cumprimento de
-                      obrigações legais. Você pode revogar esta autorização a qualquer
-                      momento através de contato com o nosso DPO.
+                      {{ t('career.form.fields.privacy.disclaimer1') }}
                     </p>
                   </div>
 
                   <div class="notice-content">
                     <i class="fas fa-external-link-alt notice-icon"></i>
                     <p>
-                      Para mais informações sobre como tratamos seus dados pessoais,
-                      acesse nosso
-                      <a href="/aviso-privacidade-candidatos.pdf" target="_blank">Aviso de Privacidade</a>.
+                      {{ t('career.form.fields.privacy.disclaimer2') }}
+                      <a href="/aviso-privacidade-candidatos.pdf" target="_blank">{{ t('career.form.fields.privacy.privacyNoticeLink') }}</a>.
                     </p>
                   </div>
                 </div>
@@ -514,12 +493,12 @@
               <div class="form-actions">
                 <button type="button" @click="backToJobs" class="cancel-button">
                   <i class="fas fa-times"></i>
-                  Cancelar
+                  {{ t('career.form.buttons.cancel') }}
                 </button>
                 <button type="submit" class="submit-button" :disabled="isSubmitting">
                   <i class="fas fa-paper-plane" v-if="!isSubmitting"></i>
                   <i class="fas fa-spinner fa-spin" v-else></i>
-                  {{ isSubmitting ? 'Enviando...' : 'Enviar Candidatura' }}
+                  {{ isSubmitting ? t('career.form.buttons.submitting') : t('career.form.buttons.submit') }}
                 </button>
               </div>
             </form>
@@ -543,8 +522,8 @@
         </div>
 
         <div class="success-content">
-          <h2 class="success-title">{{ successTitle }}</h2>
-          <p class="success-message">{{ successMessage }}</p>
+          <h2 class="success-title">{{ selectedJob ? t('career.success.applicationTitle') : t('career.success.talentBankTitle') }}</h2>
+          <p class="success-message">{{ selectedJob ? t('career.success.applicationMessage') : t('career.success.talentBankMessage') }}</p>
 
           <div class="success-details" v-if="selectedJob">
             <div class="job-applied">
@@ -552,11 +531,11 @@
               <span>{{ selectedJob.title }}</span>
             </div>
             <div class="next-steps">
-              <h4>Próximos passos:</h4>
+              <h4>{{ t('career.success.nextSteps.title') }}</h4>
               <ul>
-                <li><i class="fas fa-envelope"></i> Você receberá um e-mail de confirmação</li>
-                <li><i class="fas fa-search"></i> Nossa equipe analisará seu perfil</li>
-                <li><i class="fas fa-phone"></i> Entraremos em contato em breve</li>
+                <li><i class="fas fa-envelope"></i> {{ t('career.success.nextSteps.application.confirmation') }}</li>
+                <li><i class="fas fa-search"></i> {{ t('career.success.nextSteps.application.analysis') }}</li>
+                <li><i class="fas fa-phone"></i> {{ t('career.success.nextSteps.application.contact') }}</li>
               </ul>
             </div>
           </div>
@@ -564,14 +543,14 @@
           <div class="success-details" v-else>
             <div class="talent-bank">
               <i class="fas fa-database"></i>
-              <span>Banco de Talentos</span>
+              <span>{{ t('career.form.talentBankTitle') }}</span>
             </div>
             <div class="next-steps">
-              <h4>O que acontece agora:</h4>
+              <h4>{{ t('career.success.nextSteps.talentBank.title') }}</h4>
               <ul>
-                <li><i class="fas fa-save"></i> Seu perfil foi salvo em nosso sistema</li>
-                <li><i class="fas fa-bell"></i> Você será notificado sobre novas oportunidades</li>
-                <li><i class="fas fa-heart"></i> Manteremos contato para futuras vagas</li>
+                <li><i class="fas fa-save"></i> {{ t('career.success.nextSteps.talentBank.saved') }}</li>
+                <li><i class="fas fa-bell"></i> {{ t('career.success.nextSteps.talentBank.notifications') }}</li>
+                <li><i class="fas fa-heart"></i> {{ t('career.success.nextSteps.talentBank.contact') }}</li>
               </ul>
             </div>
           </div>
@@ -580,11 +559,11 @@
         <div class="success-actions">
           <button @click="closeSuccessModal" class="success-button">
             <i class="fas fa-home"></i>
-            Voltar ao Início
+            {{ t('career.success.buttons.backHome') }}
           </button>
           <button @click="viewMoreJobs" class="secondary-button" v-if="selectedJob">
             <i class="fas fa-search"></i>
-            Ver Mais Vagas
+            {{ t('career.success.buttons.viewMoreJobs') }}
           </button>
         </div>
       </div>
@@ -599,6 +578,7 @@ import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
 import ScrollReveal from '@/components/ScrollReveal.vue';
 import { useJobsStore } from '@/composables/useJobsStore.js'
+import { useWorkWithUsTranslation } from '@/composables/useWorkWithUsTranslation.js';
 import API_CONFIG from '@/config/api.js';
 
 export default {
@@ -610,7 +590,14 @@ export default {
   },
   setup() {
     const { jobsStore, loadJobs } = useJobsStore()
-    return { jobsStore, loadJobsFromStore: loadJobs }
+    const { t, currentLanguage } = useWorkWithUsTranslation()
+    
+    return { 
+      jobsStore, 
+      loadJobsFromStore: loadJobs,
+      t,
+      currentLanguage
+    }
   },
   data() {
     return {
@@ -785,11 +772,11 @@ export default {
       const file = event.target.files[0];
       if (file) {
         if (file.type !== 'application/pdf') {
-          this.errors.resume = 'Por favor, selecione apenas arquivos PDF.';
+          this.errors.resume = this.t('career.form.validation.pdfOnly');
           return;
         }
         if (file.size > 5 * 1024 * 1024) { // 5MB
-          this.errors.resume = 'O arquivo deve ter no máximo 5MB.';
+          this.errors.resume = this.t('career.form.validation.fileSize');
           return;
         }
         this.formData.resume = file;
@@ -803,37 +790,37 @@ export default {
       this.errors = {};
 
       if (!this.formData.name.trim()) {
-        this.errors.name = 'Nome é obrigatório.';
+        this.errors.name = this.t('career.form.validation.nameRequired');
       }
 
       if (!this.formData.email.trim()) {
-        this.errors.email = 'E-mail é obrigatório.';
+        this.errors.email = this.t('career.form.validation.emailRequired');
       } else if (!/\S+@\S+\.\S+/.test(this.formData.email)) {
-        this.errors.email = 'E-mail inválido.';
+        this.errors.email = this.t('career.form.validation.emailInvalid');
       }
 
       if (!this.formData.phone.trim()) {
-        this.errors.phone = 'Telefone é obrigatório.';
+        this.errors.phone = this.t('career.form.validation.phoneRequired');
       }
 
       if (!this.selectedJob && !this.formData.position) {
-        this.errors.position = 'Área de interesse é obrigatória.';
+        this.errors.position = this.t('career.form.validation.positionRequired');
       }
 
       if (!this.formData.education) {
-        this.errors.education = 'Formação acadêmica é obrigatória.';
+        this.errors.education = this.t('career.form.validation.educationRequired');
       }
 
       if (!this.formData.experience) {
-        this.errors.experience = 'Experiência profissional é obrigatória.';
+        this.errors.experience = this.t('career.form.validation.experienceRequired');
       }
 
       if (!this.formData.resume) {
-        this.errors.resume = 'Currículo é obrigatório.';
+        this.errors.resume = this.t('career.form.validation.resumeRequired');
       }
 
       if (!this.formData.message.trim()) {
-        this.errors.message = 'Apresentação pessoal é obrigatória.';
+        this.errors.message = this.t('career.form.validation.messageRequired');
       }
 
       return Object.keys(this.errors).length === 0;
@@ -885,11 +872,11 @@ export default {
 
           // Mostrar modal de sucesso personalizado
           if (this.selectedJob) {
-            this.successTitle = 'Candidatura Enviada com Sucesso!';
-            this.successMessage = `Sua candidatura para a vaga "${this.selectedJob.title}" foi enviada com sucesso. Nossa equipe de RH analisará seu perfil e entraremos em contato em breve.`;
+            this.successTitle = this.t('career.success.applicationTitle');
+            this.successMessage = this.t('career.success.applicationMessage');
           } else {
-            this.successTitle = 'Perfil Adicionado com Sucesso!';
-            this.successMessage = 'Seu currículo foi adicionado ao nosso banco de talentos com sucesso! Entraremos em contato quando surgir uma oportunidade compatível com seu perfil.';
+            this.successTitle = this.t('career.success.talentBankTitle');
+            this.successMessage = this.t('career.success.talentBankMessage');
           }
 
           this.showSuccessModal = true;
@@ -907,14 +894,14 @@ export default {
         console.error('❌ Erro ao enviar candidatura:', error);
 
         // Mensagem de erro mais específica
-        let errorMessage = 'Erro ao enviar candidatura. ';
+        let errorMessage = this.t('career.form.errors.submitError');
 
         if (error.message.includes('Failed to fetch')) {
-          errorMessage += 'Verifique sua conexão com a internet e tente novamente.';
+          errorMessage += this.t('career.form.errors.connectionError');
         } else if (error.message.includes('PDF')) {
-          errorMessage += 'Problema com o arquivo PDF. Verifique se o arquivo não está corrompido.';
+          errorMessage += this.t('career.form.errors.pdfError');
         } else {
-          errorMessage += error.message || 'Tente novamente em alguns instantes.';
+          errorMessage += error.message || this.t('career.form.errors.genericError');
         }
 
         alert(errorMessage);

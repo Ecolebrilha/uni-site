@@ -6,8 +6,8 @@
     <section class="hero-section">
       <div class="parallax-container">
         <div class="overlay"></div>
-        <h1 class="hero-title">Consulta de Status</h1>
-                <div class="hero-subtitle">Acompanhe o andamento das suas solicitações registradas em nosso sistema</div>
+        <h1 class="hero-title">{{ t('consultaStatus.heroTitle') }}</h1>
+        <div class="hero-subtitle">{{ t('consultaStatus.heroSubtitle') }}</div>
       </div>
     </section>
 
@@ -17,8 +17,8 @@
         <div class="consulta-container">
           <div v-show="!resultado" class="consulta-form-content">
           <div class="consulta-header">
-            <h2>Consultar Status</h2>
-            <p>Digite os códigos fornecidos quando você fez seu relato ou reclamação</p>
+            <h2>{{ t('consultaStatus.consultarTitle') }}</h2>
+            <p>{{ t('consultaStatus.consultarDescription') }}</p>
           </div>
 
           <div class="tipo-consulta">
@@ -27,7 +27,7 @@
               <span class="radio-custom"></span>
               <div class="radio-content">
                 <i class="fas fa-shield-alt"></i>
-                <span>Relato</span>
+                <span>{{ t('consultaStatus.tipoRelato') }}</span>
               </div>
             </label>
 
@@ -36,7 +36,7 @@
               <span class="radio-custom"></span>
               <div class="radio-content">
                 <i class="fas fa-exclamation-triangle"></i>
-                <span>Reclamação</span>
+                <span>{{ t('consultaStatus.tipoReclamacao') }}</span>
               </div>
             </label>
           </div>
@@ -44,10 +44,10 @@
           <form @submit.prevent="consultarStatus" class="consulta-form">
             <div class="form-group">
               <label for="trackingCode">
-                Número do Protocolo <span class="required">*</span>
+                {{ t('consultaStatus.numeroProtocolo') }} <span class="required">*</span>
               </label>
               <input type="text" id="trackingCode" v-model="formData.trackingCode" required
-                :placeholder="getProtocolPlaceholder()" :disabled="isLoading" @input="clearResults" @paste="handlePaste"
+                :placeholder="getProtocolPlaceholder()" :disabled="isLoading" @input="clearResults" maxlength="15" @paste="handlePaste"
                 class="protocol-input">
               <small class="input-hint">
                 {{ getProtocolHint() }}
@@ -56,19 +56,19 @@
 
             <div class="form-group">
               <label for="accessCode">
-                Código de Acesso <span class="required">*</span>
+                {{ t('consultaStatus.codigoAcesso') }} <span class="required">*</span>
               </label>
-              <input type="text" id="accessCode" v-model="formData.accessCode" required placeholder="Ex: ABC123"
+              <input type="text" id="accessCode" v-model="formData.accessCode" required :placeholder="t('consultaStatus.codigoAcessoPlaceholder')"
                 :disabled="isLoading" @input="clearResults" maxlength="6" class="access-input">
               <small class="input-hint">
-                Código de 6 caracteres fornecido no envio
+                {{ t('consultaStatus.codigoAcessoHint') }}
               </small>
             </div>
 
             <button type="submit" class="consultar-btn" :disabled="isLoading || !canSubmit">
               <i class="fas fa-search" v-if="!isLoading"></i>
               <i class="fas fa-spinner fa-spin" v-else></i>
-              {{ isLoading ? 'Consultando...' : 'Consultar Status' }}
+              {{ isLoading ? t('consultaStatus.consultandoButton') : t('consultaStatus.consultarButton') }}
             </button>
           </form>
 
@@ -81,19 +81,19 @@
 
               <!-- Sugestões de erro -->
               <div class="erro-sugestoes">
-                <h5>Possíveis soluções:</h5>
+                <h5>{{ t('consultaStatus.possiveisSolucoes') }}</h5>
                 <ul>
-                  <li>Verifique se o número do protocolo está correto</li>
-                  <li>Confirme se o código de acesso tem 6 caracteres</li>
-                  <li>Certifique-se de ter selecionado o tipo correto (Relato ou Reclamação)</li>
-                  <li>Verifique se não há espaços extras nos códigos</li>
+                  <li>{{ t('consultaStatus.solucao1') }}</li>
+                  <li>{{ t('consultaStatus.solucao2') }}</li>
+                  <li>{{ t('consultaStatus.solucao3') }}</li>
+                  <li>{{ t('consultaStatus.solucao4') }}</li>
                 </ul>
               </div>
 
               <div class="erro-acoes">
                 <button @click="limparFormulario" class="retry-btn">
                   <i class="fas fa-redo"></i>
-                  Tentar Novamente
+                  {{ t('consultaStatus.tentarNovamente') }}
                 </button>
 
                 <!-- <button @click="limparFormulario" class="clear-btn">
@@ -107,55 +107,53 @@
           <!-- Dicas de uso -->
           <div v-if="!resultado && !erro && !isLoading" class="dicas-container">
             <div class="dicas-content">
-              <h4><i class="fas fa-lightbulb"></i> Dicas importantes:</h4>
+              <h4><i class="fas fa-lightbulb"></i> {{ t('consultaStatus.dicasImportantes') }}</h4>
               <div class="dicas-grid">
                 <div class="dica-item">
                   <i class="fas fa-key"></i>
                   <div>
-                    <strong>Códigos de Acesso</strong>
-                    <p>Guarde sempre o número do protocolo e código de acesso em local seguro</p>
+                    <strong>{{ t('consultaStatus.dicas.codigosAcesso.title') }}</strong>
+                    <p>{{ t('consultaStatus.dicas.codigosAcesso.description') }}</p>
                   </div>
                 </div>
 
                 <div class="dica-item">
                   <i class="fas fa-envelope"></i>
                   <div>
-                    <strong>Email de Confirmação</strong>
-                    <p>Os códigos são enviados por email após o envio. Verifique sua caixa de spam</p>
+                    <strong>{{ t('consultaStatus.dicas.emailConfirmacao.title') }}</strong>
+                    <p>{{ t('consultaStatus.dicas.emailConfirmacao.description') }}</p>
                   </div>
                 </div>
 
                 <div class="dica-item">
                   <i class="fas fa-user-shield"></i>
                   <div>
-                    <strong>Confidencialidade</strong>
-                    <p>Não compartilhe seus códigos de acesso com terceiros</p>
+                    <strong>{{ t('consultaStatus.dicas.confidencialidade.title') }}</strong>
+                    <p>{{ t('consultaStatus.dicas.confidencialidade.description') }}</p>
                   </div>
                 </div>
 
                 <div class="dica-item">
                   <i class="fas fa-sync-alt"></i>
                   <div>
-                    <strong>Atualizações</strong>
-                    <p>O status é atualizado conforme o andamento da análise</p>
+                    <strong>{{ t('consultaStatus.dicas.atualizacoes.title') }}</strong>
+                    <p>{{ t('consultaStatus.dicas.atualizacoes.description') }}</p>
                   </div>
                 </div>
 
                 <div class="dica-item">
                   <i class="fas fa-calendar-check"></i>
                   <div>
-                    <strong>Prazo de Resposta</strong>
-                    <p>O prazo médio para análise e resposta é de 5 a 30 dias úteis, contado a partir da atualização do status da solicitação, podendo variar conforme a complexidade do caso.
-                    </p>
+                    <strong>{{ t('consultaStatus.dicas.prazoResposta.title') }}</strong>
+                    <p>{{ t('consultaStatus.dicas.prazoResposta.description') }}</p>
                   </div>
                 </div>
 
                 <div class="dica-item">
                   <i class="fas fa-lock"></i>
                   <div>
-                    <strong>Confidencialidade Garantida</strong>
-                    <p>Todas as consultas são tratadas com absoluto sigilo. Seus dados pessoais são protegidos conforme
-                      a LGPD.</p>
+                    <strong>{{ t('consultaStatus.dicas.confidencialidadeGarantida.title') }}</strong>
+                    <p>{{ t('consultaStatus.dicas.confidencialidadeGarantida.description') }}</p>
                   </div>
                 </div>
               </div>
@@ -165,19 +163,19 @@
           <!-- Estatísticas gerais (opcional) -->
           <div v-if="!resultado && !erro && !isLoading" class="stats-container">
             <div class="stats-content">
-              <h4>Tempo Médio de Processamento</h4>
+              <h4>{{ t('consultaStatus.tempoMedioProcessamento') }}</h4>
               <div class="stats-grid">
                 <div class="stat-item">
                   <div class="stat-number">5</div>
-                  <div class="stat-label">dias úteis para análise inicial</div>
+                  <div class="stat-label">{{ t('consultaStatus.stats.analiseInicial') }}</div>
                 </div>
                 <div class="stat-item">
                   <div class="stat-number">30</div>
-                  <div class="stat-label">dias úteis para resolução</div>
+                  <div class="stat-label">{{ t('consultaStatus.stats.resolucao') }}</div>
                 </div>
                 <div class="stat-item">
                   <div class="stat-number">15</div>
-                  <div class="stat-label">dias úteis para reavaliações</div>
+                  <div class="stat-label">{{ t('consultaStatus.stats.reavaliacoes') }}</div>
                 </div>
               </div>
             </div>
@@ -187,7 +185,7 @@
           <!-- Resultado da Consulta -->
           <div v-if="resultado" class="resultado-container">
             <div class="resultado-header">
-              <h3>Status {{ tipoConsulta === 'relato' ? 'do Relato' : 'da Reclamação' }}</h3>
+              <h3>{{ tipoConsulta === 'relato' ? t('consultaStatus.statusDoRelato') : t('consultaStatus.statusDaReclamacao') }}</h3>
               <span class="protocolo">{{ resultado.tracking_code }}</span>
             </div>
 
@@ -199,23 +197,23 @@
 
               <div class="status-details">
   <div class="detail-item strong">
-    <strong>Data de Criação:</strong>
+    <strong>{{ t('consultaStatus.dataCriacao') }}</strong>
     {{ formatDate(resultado.created_at) }}
   </div>
   <div class="detail-item strong">
-    <strong>Última Atualização:</strong>
+    <strong>{{ t('consultaStatus.ultimaAtualizacao') }}</strong>
     {{ formatDate(resultado.updated_at) }}
   </div>
   <div v-if="resultado.status_message" class="detail-item strong feedback">
-    <strong>Último Feedback:</strong>
+    <strong>{{ t('consultaStatus.ultimoFeedback') }}</strong>
     <p class="status-message">{{ resultado.status_message }}</p>
   </div>
   <div v-if="resultado.category" class="detail-item">
-    <strong>Tipo de Violação:</strong>
+    <strong>{{ t('consultaStatus.tipoViolacao') }}</strong>
     {{ getViolationTypeLabel(resultado.category) }}
   </div>
   <div v-if="resultado.description" class="detail-item-description">
-  <strong>Descrição {{ tipoConsulta === 'relato' ? 'do Relato' : 'da Reclamação' }}:</strong>
+  <strong>{{ tipoConsulta === 'relato' ? t('consultaStatus.descricaoDoRelato') : t('consultaStatus.descricaoDaReclamacao') }}</strong>
   <p class="report-description">{{ resultado.description }}</p>
 </div>
 </div>
@@ -224,7 +222,7 @@
             <div class="status-timeline">
   <!-- Histórico dinâmico do banco de dados -->
   <div v-if="statusHistory.length > 0" class="timeline-database">
-    <h4><i class="fas fa-clipboard-list"></i> Histórico de Atualizações Detalhado</h4>
+    <h4><i class="fas fa-clipboard-list"></i> {{ t('consultaStatus.historicoAtualizacoes') }}</h4>
     <div class="timeline-history">
       <div 
         v-for="(entry, index) in statusHistory" 
@@ -243,21 +241,21 @@
               {{ getStatusLabel(entry.status) }}
             </span>
             <span v-if="entry.status === currentStatus" class="current-indicator">
-              <i class="fas fa-star"></i> Atual
+              <i class="fas fa-star"></i> {{ t('consultaStatus.atual') }}
             </span>
             <span v-if="entry.is_creation" class="creation-indicator">
-              <i class="fas fa-plus"></i> Criação
+              <i class="fas fa-plus"></i> {{ t('consultaStatus.criacao') }}
             </span>
           </div>
           
           <div class="history-message">
-            {{ entry.message || 'Nenhuma observação informada' }}
+            {{ entry.message || t('consultaStatus.nenhumaObservacao') }}
           </div>
           
           <div class="history-footer">
             <span class="history-admin">
               <i class="fas fa-user"></i>
-              {{ entry.admin_name || 'Sistema' }}
+              {{ entry.admin_name || t('consultaStatus.sistema') }}
             </span>
             <span class="history-date">
     <i class="fas fa-clock"></i>
@@ -272,7 +270,7 @@
   <!-- Loading do histórico -->
   <div v-else-if="loadingHistory" class="loading-history">
     <i class="fas fa-spinner fa-spin"></i>
-    <p>Carregando histórico detalhado...</p>
+    <p>{{ t('consultaStatus.carregandoHistorico') }}</p>
   </div>
 
   <!-- Timeline estática (fallback) -->
@@ -281,9 +279,9 @@
     <div class="timeline-item" :class="{ active: true }">
       <div class="timeline-dot"></div>
       <div class="timeline-content">
-        <h5>Recebido</h5>
+        <h5>{{ t('consultaStatus.timeline.recebido') }}</h5>
         <p>{{ formatDate(resultado.created_at) }}</p>
-        <small>{{ tipoConsulta === 'relato' ? 'Relato' : 'Reclamação' }} registrado no sistema</small>
+        <small>{{ tipoConsulta === 'relato' ? t('consultaStatus.timeline.relatoRegistrado') : t('consultaStatus.timeline.reclamacaoRegistrada') }}</small>
       </div>
     </div>
 
@@ -291,33 +289,33 @@
       :class="{ active: isStatusReached('investigating') || isStatusReached('in-progress') }">
       <div class="timeline-dot"></div>
       <div class="timeline-content">
-        <h5>Em Análise</h5>
+        <h5>{{ t('consultaStatus.timeline.emAnalise') }}</h5>
         <p v-if="isStatusReached('investigating') || isStatusReached('in-progress')">
           {{ formatDate(resultado.updated_at) }}
         </p>
-        <small>Equipe responsável está analisando</small>
+        <small>{{ t('consultaStatus.timeline.equipeAnalisando') }}</small>
       </div>
     </div>
 
     <div class="timeline-item" :class="{ active: isStatusReached('resolved') }">
       <div class="timeline-dot"></div>
       <div class="timeline-content">
-        <h5>Resolvido</h5>
+        <h5>{{ t('consultaStatus.timeline.resolvido') }}</h5>
         <p v-if="isStatusReached('resolved')">
           {{ formatDate(resultado.updated_at) }}
         </p>
-        <small>Questão foi solucionada</small>
+        <small>{{ t('consultaStatus.timeline.questaoSolucionada') }}</small>
       </div>
     </div>
 
     <div class="timeline-item" :class="{ active: isStatusReached('closed') }">
       <div class="timeline-dot"></div>
       <div class="timeline-content">
-        <h5>Finalizado</h5>
+        <h5>{{ t('consultaStatus.timeline.finalizado') }}</h5>
         <p v-if="isStatusReached('closed')">
           {{ formatDate(resultado.updated_at) }}
         </p>
-        <small>Caso encerrado</small>
+        <small>{{ t('consultaStatus.timeline.casoEncerrado') }}</small>
       </div>
     </div>
   </div>
@@ -328,7 +326,7 @@
               <div class="info-card">
                 <i class="fas fa-clock"></i>
                 <div>
-                  <h5>Tempo de Processamento</h5>
+                  <h5>{{ t('consultaStatus.tempoProcessamento') }}</h5>
                   <p>{{ getTempoProcessamento() }}</p>
                 </div>
               </div>
@@ -336,7 +334,7 @@
               <div class="info-card">
                 <i class="fas fa-bell"></i>
                 <div>
-                  <h5>Próxima Atualização</h5>
+                  <h5>{{ t('consultaStatus.proximaAtualizacao') }}</h5>
                   <p>{{ getProximaAtualizacao() }}</p>
                 </div>
               </div>
@@ -346,12 +344,12 @@
             <div class="nova-consulta">
               <button @click="novaConsulta" class="nova-consulta-btn">
                 <i class="fas fa-redo"></i>
-                Nova Consulta
+                {{ t('consultaStatus.novaConsulta') }}
               </button>
 
               <button @click="compartilharStatus" class="compartilhar-btn">
                 <i class="fas fa-share-alt"></i>
-                Compartilhar Status
+                {{ t('consultaStatus.compartilharStatus') }}
               </button>
             </div>
           </div>
@@ -365,36 +363,34 @@
     <div v-if="showShareModal" class="share-modal-overlay" @click="showShareModal = false">
       <div class="share-modal" @click.stop>
         <div class="share-modal-header">
-          <h3>Compartilhar Status</h3>
+          <h3>{{ t('consultaStatus.shareModal.title') }}</h3>
           <button @click="showShareModal = false" class="close-btn">
             <i class="fas fa-times"></i>
           </button>
         </div>
         
         <div class="share-modal-content">
-          <p class="share-preview">
-            {{ getShareMessage() }}
-          </p>
+          <p class="share-preview" v-html="getShareMessage()"></p>
           
           <div class="share-options">
             <button @click="shareViaWhatsApp" class="share-btn whatsapp">
               <i class="fab fa-whatsapp"></i>
-              WhatsApp
+              {{ t('consultaStatus.shareModal.whatsapp') }}
             </button>
             
             <button @click="shareViaEmail" class="share-btn email">
               <i class="fas fa-envelope"></i>
-              Email
+              {{ t('consultaStatus.shareModal.email') }}
             </button>
             
             <button @click="shareViaSMS" class="share-btn sms">
               <i class="fas fa-sms"></i>
-              SMS
+              {{ t('consultaStatus.shareModal.sms') }}
             </button>
             
             <button @click="copyToClipboard" class="share-btn copy">
               <i class="fas fa-copy"></i>
-              Copiar Link
+              {{ t('consultaStatus.shareModal.copiarLink') }}
             </button>
           </div>
         </div>
@@ -407,12 +403,17 @@
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
 import API_CONFIG from '@/config/api.js';
+import { useCheckStatusTranslation } from '@/composables/useCheckStatusTranslation.js';
 
 export default {
   name: 'ConsultaStatus',
   components: {
     HomeHeader,
     HomeFooter
+  },
+  setup() {
+    const { t } = useCheckStatusTranslation()
+    return { t }
   },
   data() {
     return {
@@ -466,13 +467,13 @@ export default {
 
     // Placeholders dinâmicos
     getProtocolPlaceholder() {
-      return this.tipoConsulta === 'relato' ? 'Ex: UNI-REL12345' : 'Ex: UNI-REC54321';
+      return this.tipoConsulta === 'relato' ? this.t('consultaStatus.placeholders.protocoloRelato') : this.t('consultaStatus.placeholders.protocoloReclamacao');
     },
 
     getProtocolHint() {
       return this.tipoConsulta === 'relato'
-        ? 'Protocolo do relato (formato: UNI-REL + números e letras)'
-        : 'Protocolo da reclamação (formato: UNI-REC + números e letras)';
+        ? this.t('consultaStatus.hints.protocoloRelato')
+        : this.t('consultaStatus.hints.protocoloReclamacao');
     },
 
     // Manipular colagem de texto
@@ -656,8 +657,8 @@ async loadStatusHistory() {
 
       if (!codigo.startsWith(expectedPrefix)) {
         this.showError(
-          'Formato inválido',
-          `O protocolo deve começar com "${expectedPrefix}". Verifique se você selecionou o tipo correto.`
+          this.t('consultaStatus.errors.formatoInvalido'),
+          this.t('consultaStatus.errors.protocoloDeveComecardCom', { expectedPrefix })
         );
         return false;
       }
@@ -715,10 +716,36 @@ async loadStatusHistory() {
     },
 
     getShareMessage() {
-      const tipo = this.tipoConsulta === 'relato' ? 'Relato' : 'Reclamação';
-      const status = this.getStatusLabel(this.resultado.status);
-      return `Status do ${tipo}: ${status}\nProtocolo: ${this.resultado.tracking_code}`;
-    },
+  const tipo = this.tipoConsulta === 'relato' ? 'Relato' : 'Reclamação';
+  const status = this.resultado.status;
+  const statusLabel = this.getStatusLabel(status);
+  const protocolo = this.resultado.tracking_code;
+
+  const statusColors = {
+    new: '#7b1fa2',
+    pending: '#e65100',
+    'in-progress': '#0097A7',
+    resolved: '#1b5e20',
+    closed: '#b71c1c'
+  };
+
+  const statusColor = statusColors[status] || '#333'; // cor padrão se status desconhecido
+
+  return `
+    <div class="linha">
+      <strong>Status do ${tipo}:</strong>
+      <span style="color: ${statusColor}; font-size: 1rem; font-weight: bold; text-transform: uppercase;">
+        ${statusLabel}
+      </span>
+    </div>
+    <div class="linha">
+      <strong>Protocolo:</strong>
+      <span style="color: #780000; font-weight: bold; font-family: 'Courier New', monospace; font-size: 0.95rem; letter-spacing: 0.09rem;">
+        ${protocolo}
+      </span>
+    </div>
+  `;
+},
 
     shareViaWhatsApp() {
       const message = encodeURIComponent(`${this.getShareMessage()}\n\nAcompanhe em: ${this.getShareUrl()}`);
@@ -834,13 +861,13 @@ async loadStatusHistory() {
 
     getStatusLabel(status) {
       const labels = {
-        'new': 'Novo',
-        'pending': 'Pendente',
-        'in-progress': 'Em Análise',
-        'resolved': 'Resolvido',
-        'closed': 'Finalizado'
+        'new': this.t('consultaStatus.status.new'),
+        'pending': this.t('consultaStatus.status.pending'),
+        'in-progress': this.t('consultaStatus.status.inProgress'),
+        'resolved': this.t('consultaStatus.status.resolved'),
+        'closed': this.t('consultaStatus.status.closed')
       };
-      return labels[status] || 'Pendente';
+      return labels[status] || this.t('consultaStatus.status.pending');
     },
 
     getViolationTypeLabel(category) {
@@ -1160,6 +1187,15 @@ formatDateTwo(dateString) {
   text-transform: uppercase;
   background: #fafafa;
   box-sizing: border-box;
+  color: #AE2C2A;
+  font-weight: bold;
+  letter-spacing: 0.085rem;
+}
+
+.form-group input::placeholder {
+  color: #696969e3;
+  font-weight: normal;
+  letter-spacing: 0.035rem;
 }
 
 .form-group input:focus {
@@ -1174,6 +1210,13 @@ formatDateTwo(dateString) {
   background: #f1f3f4;
   cursor: not-allowed;
   opacity: 0.7;
+}
+
+.form-group .access-input {
+  color: #780000;
+  font-weight: 500;
+  letter-spacing: 0.09rem;
+  text-transform: uppercase;
 }
 
 .input-hint {
@@ -3160,10 +3203,24 @@ formatDateTwo(dateString) {
   font-size: 1rem;
   line-height: 1.8;
   color: #333;
-  white-space: pre-line;
   font-weight: 500;
+  white-space: normal;
   box-shadow: 0 4px 15px rgba(174, 44, 42, 0.1);
   position: relative;
+}
+
+.share-preview .linha {
+  margin-bottom: 10px;
+}
+
+.share-preview strong {
+  color: #AE2C2A;
+  font-weight: bold;
+}
+
+.share-preview .valor {
+  color: #222;
+  font-weight: 500;
 }
 
 .share-preview::before {
@@ -3171,11 +3228,12 @@ formatDateTwo(dateString) {
   position: absolute;
   top: -10px;
   left: 20px;
-  background: white;
+  background: linear-gradient(135deg, #AE2C2A, #ff5555);
   padding: 5px 10px;
   border-radius: 20px;
   font-size: 1.2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid #ff5555;
 }
 
 .share-options {

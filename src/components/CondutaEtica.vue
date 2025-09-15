@@ -217,7 +217,7 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('@/assets/header-conduta-etica2.jpg');
+  background-image: url('@/assets/header-conduta-etica.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

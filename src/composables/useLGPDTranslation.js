@@ -98,8 +98,30 @@ const translations = reactive({
             relationship: 'Selecione sua relação com a empresa',
             requestType: 'Selecione o tipo de solicitação',
             details: 'Descreva detalhadamente sua solicitação...'
+          }
+        },
+        messages: {
+          success: {
+            title: 'Solicitação Enviada com Sucesso!',
+            description: 'Sua solicitação LGPD foi recebida e está sendo processada por nossa equipe de Proteção de Dados.',
+            responseTime: 'Prazo de Resposta:',
+            responseTimeValue: 'Até 15 dias úteis',
+            contactEmail: 'Email de Contato:',
+            dpoLabel: 'DPO:',
+            dpoValue: 'Ítalo Morais',
+            note: 'Entraremos em contato através do e-mail fornecido conforme estabelecido pela LGPD. Sua privacidade e proteção de dados são nossa prioridade.',
+            newRequestButton: 'Nova Solicitação'
           },
+          error: {
+            title: 'Erro ao Enviar Solicitação',
+            closeButton: 'Fechar'
+          },
+          submitting: 'Enviando...',
+          phoneError: 'Telefone inválido. Por favor, corrija antes de enviar.'
         }
+      },
+      buttons: {
+        accessDocument: 'Acessar Documento'
       },
       ctaTitle: 'Na Uni Hospitalar, reconhecemos a importância fundamental da proteção de dados no setor de saúde.',
       ctaText: 'Como distribuidora no segmento B2B de medicamentos, estamos comprometidos em construir relacionamentos transparentes e seguros com nossos parceiros comerciais.',
@@ -204,8 +226,30 @@ const translations = reactive({
             relationship: 'Select your relationship with the company',
             requestType: 'Select the type of request',
             details: 'Describe your request in detail...'
+          }
+        },
+        messages: {
+          success: {
+            title: 'Request Sent Successfully!',
+            description: 'Your LGPD request has been received and is being processed by our Data Protection team.',
+            responseTime: 'Response Time:',
+            responseTimeValue: 'Up to 15 business days',
+            contactEmail: 'Contact Email:',
+            dpoLabel: 'DPO:',
+            dpoValue: 'Ítalo Morais',
+            note: 'We will contact you through the provided email as established by LGPD. Your privacy and data protection are our priority.',
+            newRequestButton: 'New Request'
           },
+          error: {
+            title: 'Error Sending Request',
+            closeButton: 'Close'
+          },
+          submitting: 'Sending...',
+          phoneError: 'Invalid phone. Please correct before submitting.'
         }
+      },
+      buttons: {
+        accessDocument: 'Access Document'
       },
       ctaTitle: 'At Uni Hospitalar, we recognize the fundamental importance of data protection in the healthcare sector.',
       ctaText: 'As a distributor in the B2B pharmaceutical segment, we are committed to building transparent and secure relationships with our commercial partners.',
@@ -311,7 +355,29 @@ const translations = reactive({
             requestType: 'Seleccione el tipo de solicitud',
             details: 'Describa su solicitud en detalle...'
           }
+        },
+        messages: {
+          success: {
+            title: '¡Solicitud Enviada Exitosamente!',
+            description: 'Su solicitud LGPD ha sido recibida y está siendo procesada por nuestro equipo de Protección de Datos.',
+            responseTime: 'Tiempo de Respuesta:',
+            responseTimeValue: 'Hasta 15 días hábiles',
+            contactEmail: 'Correo de Contacto:',
+            dpoLabel: 'DPO:',
+            dpoValue: 'Ítalo Morais',
+            note: 'Le contactaremos a través del correo proporcionado según establecido por la LGPD. Su privacidad y protección de datos son nuestra prioridad.',
+            newRequestButton: 'Nueva Solicitud'
+          },
+          error: {
+            title: 'Error al Enviar Solicitud',
+            closeButton: 'Cerrar'
+          },
+          submitting: 'Enviando...',
+          phoneError: 'Teléfono inválido. Por favor, corrija antes de enviar.'
         }
+      },
+      buttons: {
+        accessDocument: 'Acceder Documento'
       },
       ctaTitle: 'En Uni Hospitalar, reconocemos la importancia fundamental de la protección de datos en el sector de salud.',
       ctaText: 'Como distribuidora en el segmento B2B de medicamentos, estamos comprometidos en construir relaciones transparentes y seguras con nuestros socios comerciales.',
@@ -329,7 +395,7 @@ export function useLGPDTranslation() {
     localStorage.setItem('language', lang)
   }
 
-  const t = (key) => {
+  const t = (key, params = {}) => {
     const keys = key.split('.')
     let value = translations[currentLanguage.value]
     
@@ -337,7 +403,12 @@ export function useLGPDTranslation() {
       value = value?.[k]
     }
     
-    return value || key
+    if (!value) return key
+    
+    // Interpolação de parâmetros
+    return value.replace(/\{(\w+)\}/g, (match, paramName) => {
+      return params[paramName] || match
+    })
   }
 
   // Inicializar com idioma salvo

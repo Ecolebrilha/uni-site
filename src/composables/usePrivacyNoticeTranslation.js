@@ -83,6 +83,10 @@ const translations = reactive({
           phone: 'Telefone:',
           address: 'Endereço:'
         },
+
+        address: {
+          description: ' Rua Alagoas, 253 - Ipsep, Recife - PE, 51350-000'
+        },
         
         changes: {
           title: '9. Alterações neste Aviso',
@@ -174,6 +178,10 @@ const translations = reactive({
           phone: 'Phone:',
           address: 'Address:'
         },
+
+        address: {
+          description: ' 253 Alagoas Street – Ipsep, Recife – PE, 51350-000, Brazil'
+        },
         
         changes: {
           title: '9. Changes to this Notice',
@@ -264,6 +272,10 @@ const translations = reactive({
           email: 'Correo electrónico:',
           phone: 'Teléfono:',
           address: 'Dirección:'
+        },
+
+        address: {
+          description: ' Calle Alagoas 253 – Ipsep, Recife – PE, 51350-000, Brasil'
         },
         
         changes: {

@@ -478,7 +478,7 @@
 
                                 <!-- Navigation Buttons -->
                                 <div class="form-navigation">
-                                    <button type="button" @click="previousStep" v-if="currentStep > 1"
+                                    <button type="button" @click="previousStep" v-if="currentStep >= 1"
                                         class="btn-previous">
                                         <i class="fas fa-arrow-left"></i>
                                         {{ t('report.form.navigation.previous') }}
@@ -650,7 +650,13 @@ export default {
         },
 
         previousStep() {
-            this.currentStep--
+            if (this.currentStep === 1) {
+                // Se estiver no step 1, voltar para a tela de termos
+                this.termsAccepted = false
+            } else {
+                // Nos outros steps, apenas voltar um step
+                this.currentStep--
+            }
             this.errors = {} // Limpar erros ao voltar
         },
 
@@ -706,7 +712,7 @@ export default {
                         this.t('report.validation.required')
                 }
 
-                if (!this.form.description || this.form.description.trim().length < 20) {
+                if (!this.form.description || this.form.description.trim().length < 30) {
                     this.errors.description = this.form.description ?
                         this.t('report.validation.descriptionMinLength') :
                         this.t('report.validation.required')

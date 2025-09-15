@@ -58,9 +58,10 @@ export default {
       // Lista de todas as imagens de banner usadas nos componentes
       const bannerImages = [
         require('@/assets/fundo-logo-uni.png'),
-        require('@/assets/header-conduta-etica2.jpg'),
+        require('@/assets/header-conduta-etica.png'),
         require('@/assets/logo-uni2.png'),
-        require('@/assets/header-contato2.jpg'),
+        require('@/assets/logo-uni10.png'),
+        require('@/assets/header-contato.png'),
         require('@/assets/header-diferenciais2.jpg'),
         require('@/assets/header-lgpd.png'),
         require('@/assets/header-parceiros.png'),
@@ -71,7 +72,7 @@ export default {
         require('@/assets/header-servicos.jpg'),
         require('@/assets/header-politica-privacidade.jpg'),
         require('@/assets/header-praticas-antissuborno.jpg'),
-        require('@/assets/header-responsabilidade-social2.jpg'),
+        require('@/assets/header-responsabilidade-social.png'),
         require('@/assets/header-seguranca-dados.jpg'),
         require('@/assets/clipes-uni-background.png'),
         require('@/assets/header-parceria.png'),

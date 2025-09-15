@@ -307,6 +307,7 @@ section {
   height: 60vh;
   min-height: 400px;
   overflow: hidden;
+  border-bottom: 4px solid #AE2C2A;
 }
 
 .parallax-container {

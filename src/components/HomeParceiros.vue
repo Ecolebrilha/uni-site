@@ -26,10 +26,8 @@
                 <div class="stat-number">
                   <span ref="partnersCounter">0</span>+
                 </div>
-                <div class="stat-title">Parceiros Estratégicos</div>
-                <div class="stat-description">Construímos relacionamentos sólidos e duradouros com nossos parceiros,
-                  baseados na confiança mútua e no crescimento conjunto. Nossa rede de parceiros estratégicos nos
-                  permite oferecer soluções completas e inovadoras.</div>
+                <div class="stat-title">{{ t('partners.stats.strategicPartners') }}</div>
+                <div class="stat-description">{{ t('partners.stats.strategicPartnersDescription') }}</div>
               </div>
             </div>
           </ScrollReveal>
@@ -40,10 +38,8 @@
                 <div class="stat-number">
                   <span ref="statesCounter">0</span>%
                 </div>
-                <div class="stat-title">Cobertura em unidades de negócio</div>
-                <div class="stat-description">Atendemos aos Canais públicos e privados, com as linhas de medicamentos
-                  oncológicos e hospitalares. Nossa presença abrange múltiplos estados e regiões estratégicas.
-                </div>
+                <div class="stat-title">{{ t('partners.stats.businessUnits') }}</div>
+                <div class="stat-description">{{ t('partners.stats.businessUnitsDescription') }}</div>
               </div>
               <div class="stat-icon">
                 <i class="fas fa-globe-americas"></i>
@@ -60,10 +56,8 @@
                 <div class="stat-number">
                   <span ref="yearsCounter">0</span>
                 </div>
-                <div class="stat-title">Anos de Confiança</div>
-                <div class="stat-description">Cada capítulo da nossa história foi escrito com dedicação, ética e cuidado. 
-                  Consolidamos nossa presença no mercado unindo inovação, qualidade e respeitando às relações humanas, sempre
-                  com o compromisso de gerar resultados sólidos e duradouros.</div>
+                <div class="stat-title">{{ t('partners.stats.yearsOfTrust') }}</div>
+                <div class="stat-description">{{ t('partners.stats.yearsOfTrustDescription') }}</div>
               </div>
             </div>
           </ScrollReveal>

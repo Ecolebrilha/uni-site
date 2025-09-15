@@ -105,6 +105,22 @@ const translations = reactive({
           cnpjServiceUnavailable: 'Serviço de consulta CNPJ temporariamente indisponível. Preencha o endereço manualmente.',
           phoneRequired: 'Por favor, preencha pelo menos um telefone de contato (celular ou fixo).'
         },
+        validation: {
+          invalidFileType: 'Arquivo {fileName} não é um tipo válido. Use PDF, DOC, DOCX, JPG, JPEG ou PNG.',
+          fileTooLarge: 'Arquivo {fileName} é muito grande. Máximo 10MB.',
+          cnpjRequired: 'CNPJ é obrigatório',
+          companyNameRequired: 'Nome/Razão Social é obrigatório',
+          stateRequired: 'UF é obrigatório',
+          businessFieldRequired: 'Ramo de Atuação é obrigatório',
+          emailRequired: 'Email é obrigatório',
+          phoneRequired: 'Celular ou Telefone Fixo é obrigatório',
+          partnerTypeRequired: 'Tipo de Parceiro é obrigatório',
+          documentRequired: 'Documento obrigatório'
+        },
+        notifications: {
+          uploadSuccess: 'Documento "{documentName}" ({fileName}) anexado com sucesso!',
+          removeSuccess: 'Documento "{documentName}" ({fileName}) removido com sucesso!'
+        },
         documents: {
           title: 'Documentos Obrigatórios',
           cnpj: 'Cartão CNPJ',
@@ -116,6 +132,81 @@ const translations = reactive({
           info: 'Anexe os documentos correspondentes a cada campo. Formatos aceitos: PDF, DOC, DOCX, JPG, JPEG, PNG. Máximo 10MB por arquivo.',
           warning: 'Todos os documentos anexados devem pertencer ao mesmo CNPJ informado no cadastro.',
           error: 'Todos os documentos são obrigatórios para completar o cadastro.'
+        },
+        partnerType: {
+          label: 'Tipo de Parceiro',
+          placeholder: 'Selecione o tipo de parceiro',
+          options: {
+            transportadora: 'Transportadora',
+            cliente: 'Cliente',
+            fornecedor: 'Fornecedor'
+          }
+        },
+        businessAreasByType: {
+          TRANSPORTADORA: [
+            'Transporte de Cargas',
+            'Logística',
+            'Transporte Expresso',
+            'Transporte Refrigerado',
+            'Transporte de Veículos',
+            'Mudanças e Fretes'
+          ],
+          CLIENTE: [
+            'Hospital',
+            'Clínica',
+            'Laboratório',
+            'Farmácia',
+            'Distribuidora',
+            'Órgão Público',
+            'Empresa Privada',
+            'ONG',
+            'Cooperativa'
+          ],
+          FORNECEDOR: [
+            'Equipamentos Médicos',
+            'Medicamentos',
+            'Material Hospitalar',
+            'Tecnologia da Informação',
+            'Serviços de Manutenção',
+            'Consultoria',
+            'Alimentos e Bebidas',
+            'Produtos de Limpeza'
+          ]
+        },
+        success: {
+          title: 'Sua solicitação foi enviada com sucesso!',
+          detailsTitle: 'Detalhes da Solicitação',
+          nextStepsTitle: 'Próximos Passos',
+          labels: {
+            company: 'Empresa',
+            cnpj: 'CNPJ',
+            email: 'Email',
+            documents: 'Documentos',
+            documentsCount: 'documento(s) enviado(s)'
+          },
+          steps: {
+            analysis: {
+              title: 'Análise',
+              description: 'Nossa equipe comercial analisará sua solicitação'
+            },
+            contact: {
+              title: 'Contato',
+              description: 'Entraremos em contato em até <strong>72 horas úteis</strong>'
+            },
+            updates: {
+              title: 'Atualizações',
+              description: 'Você receberá todas as atualizações por email'
+            },
+            keepUpdated: {
+              title: 'Dados Atualizados',
+              description: 'Mantenha seus dados de contato atualizados'
+            }
+          },
+          important: {
+            title: 'Importante',
+            description: 'Todas as comunicações sobre o processo de parceria serão enviadas para o email informado. Verifique regularmente sua caixa de entrada e pasta de spam.'
+          },
+          homeButton: 'Página Inicial'
         }
       },
       benefits: {
@@ -255,6 +346,22 @@ const translations = reactive({
           cnpjServiceUnavailable: 'Tax ID query service temporarily unavailable. Please fill in the address manually.',
           phoneRequired: 'Please fill in at least one contact phone (mobile or landline).'
         },
+        validation: {
+          invalidFileType: 'File {fileName} is not a valid type. Use PDF, DOC, DOCX, JPG, JPEG or PNG.',
+          fileTooLarge: 'File {fileName} is too large. Maximum 10MB.',
+          cnpjRequired: 'CNPJ is required',
+          companyNameRequired: 'Name/Company Name is required',
+          stateRequired: 'State is required',
+          businessFieldRequired: 'Business Area is required',
+          emailRequired: 'Email is required',
+          phoneRequired: 'Mobile Phone or Landline Phone is required',
+          partnerTypeRequired: 'Partner Type is required',
+          documentRequired: 'Document is required'
+        },
+        notifications: {
+          uploadSuccess: 'Document "{documentName}" ({fileName}) uploaded successfully!',
+          removeSuccess: 'Document "{documentName}" ({fileName}) removed successfully!'
+        },
         documents: {
           title: 'Required Documents',
           cnpj: 'CNPJ Card',
@@ -266,6 +373,81 @@ const translations = reactive({
           info: 'Attach the documents corresponding to each field. Accepted formats: PDF, DOC, DOCX, JPG, JPEG, PNG. Maximum 10MB per file.',
           warning: 'All attached documents must belong to the same CNPJ informed in the registration.',
           error: 'All documents are required to complete the registration.'
+        },
+        partnerType: {
+          label: 'Partner Type',
+          placeholder: 'Select partner type',
+          options: {
+            transportadora: 'Transportation Company',
+            cliente: 'Client',
+            fornecedor: 'Supplier'
+          }
+        },
+        businessAreasByType: {
+          TRANSPORTADORA: [
+            'Cargo Transportation',
+            'Logistics',
+            'Express Transportation',
+            'Refrigerated Transportation',
+            'Vehicle Transportation',
+            'Moving and Freight'
+          ],
+          CLIENTE: [
+            'Hospital',
+            'Clinic',
+            'Laboratory',
+            'Pharmacy',
+            'Distributor',
+            'Public Agency',
+            'Private Company',
+            'NGO',
+            'Cooperative'
+          ],
+          FORNECEDOR: [
+            'Medical Equipment',
+            'Medicines',
+            'Hospital Supplies',
+            'Information Technology',
+            'Maintenance Services',
+            'Consulting',
+            'Food and Beverages',
+            'Cleaning Products'
+          ]
+        },
+        success: {
+          title: 'Your request has been sent successfully!',
+          detailsTitle: 'Request Details',
+          nextStepsTitle: 'Next Steps',
+          labels: {
+            company: 'Company',
+            cnpj: 'CNPJ',
+            email: 'Email',
+            documents: 'Documents',
+            documentsCount: 'document(s) sent'
+          },
+          steps: {
+            analysis: {
+              title: 'Analysis',
+              description: 'Our commercial team will analyze your request'
+            },
+            contact: {
+              title: 'Contact',
+              description: 'We will contact you within <strong>72 business hours</strong>'
+            },
+            updates: {
+              title: 'Updates',
+              description: 'You will receive all updates via email'
+            },
+            keepUpdated: {
+              title: 'Updated Data',
+              description: 'Keep your contact information updated'
+            }
+          },
+          important: {
+            title: 'Important',
+            description: 'All communications about the partnership process will be sent to the informed email. Check your inbox and spam folder regularly.'
+          },
+          homeButton: 'Home Page'
         }
       },
       benefits: {
@@ -405,6 +587,22 @@ const translations = reactive({
           cnpjServiceUnavailable: 'Servicio de consulta CNPJ temporalmente no disponible. Complete la dirección manualmente.',
           phoneRequired: 'Por favor, complete al menos un teléfono de contacto (móvil o fijo).'
         },
+        validation: {
+          invalidFileType: 'Archivo {fileName} no es un tipo válido. Use PDF, DOC, DOCX, JPG, JPEG o PNG.',
+          fileTooLarge: 'Archivo {fileName} es muy grande. Máximo 10MB.',
+          cnpjRequired: 'CNPJ es obligatorio',
+          companyNameRequired: 'Nombre/Razón Social es obligatorio',
+          stateRequired: 'Estado es obligatorio',
+          businessFieldRequired: 'Área de Negocio es obligatorio',
+          emailRequired: 'Correo electrónico es obligatorio',
+          phoneRequired: 'Teléfono móvil o fijo es obligatorio',
+          partnerTypeRequired: 'Tipo de Socio es obligatorio',
+          documentRequired: 'Documento es obligatorio'
+        },
+        notifications: {
+          uploadSuccess: 'Documento "{documentName}" ({fileName}) cargado con éxito!',
+          removeSuccess: 'Documento "{documentName}" ({fileName}) eliminado con éxito!'
+        },
         documents: {
           title: 'Documentos Obligatorios',
           cnpj: 'Tarjeta CNPJ',
@@ -416,6 +614,81 @@ const translations = reactive({
           info: 'Adjunte los documentos correspondientes a cada campo. Formatos aceptados: PDF, DOC, DOCX, JPG, JPEG, PNG. Máximo 10MB por archivo.',
           warning: 'Todos los documentos adjuntos deben pertenecer al mismo CNPJ informado en el registro.',
           error: 'Todos los documentos son obligatorios para completar el registro.'
+        },
+        partnerType: {
+          label: 'Tipo de Socio',
+          placeholder: 'Seleccione el tipo de socio',
+          options: {
+            transportadora: 'Empresa de Transporte',
+            cliente: 'Cliente',
+            fornecedor: 'Proveedor'
+          }
+        },
+        businessAreasByType: {
+          TRANSPORTADORA: [
+            'Transporte de Cargas',
+            'Logística',
+            'Transporte Expreso',
+            'Transporte Refrigerado',
+            'Transporte de Vehículos',
+            'Mudanzas y Fletes'
+          ],
+          CLIENTE: [
+            'Hospital',
+            'Clínica',
+            'Laboratorio',
+            'Farmacia',
+            'Distribuidora',
+            'Órgano Público',
+            'Empresa Privada',
+            'ONG',
+            'Cooperativa'
+          ],
+          FORNECEDOR: [
+            'Equipos Médicos',
+            'Medicamentos',
+            'Material Hospitalario',
+            'Tecnología de la Información',
+            'Servicios de Mantenimiento',
+            'Consultoría',
+            'Alimentos y Bebidas',
+            'Productos de Limpieza'
+          ]
+        },
+        success: {
+          title: '¡Su solicitud ha sido enviada con éxito!',
+          detailsTitle: 'Detalles de la Solicitud',
+          nextStepsTitle: 'Próximos Pasos',
+          labels: {
+            company: 'Empresa',
+            cnpj: 'CNPJ',
+            email: 'Correo',
+            documents: 'Documentos',
+            documentsCount: 'documento(s) enviado(s)'
+          },
+          steps: {
+            analysis: {
+              title: 'Análisis',
+              description: 'Nuestro equipo comercial analizará su solicitud'
+            },
+            contact: {
+              title: 'Contacto',
+              description: 'Nos pondremos en contacto en hasta <strong>72 horas hábiles</strong>'
+            },
+            updates: {
+              title: 'Actualizaciones',
+              description: 'Recibirá todas las actualizaciones por correo'
+            },
+            keepUpdated: {
+              title: 'Datos Actualizados',
+              description: 'Mantenga sus datos de contacto actualizados'
+            }
+          },
+          important: {
+            title: 'Importante',
+            description: 'Todas las comunicaciones sobre el proceso de asociación serán enviadas al correo informado. Verifique regularmente su bandeja de entrada y carpeta de spam.'
+          },
+          homeButton: 'Página de Inicio'
         }
       },
       benefits: {
@@ -461,7 +734,7 @@ export function useOurPartnerTranslation() {
     localStorage.setItem('language', lang)
   }
 
-  const t = (key) => {
+  const t = (key, params = {}) => {
     const keys = key.split('.')
     let value = translations[currentLanguage.value]
     
@@ -469,7 +742,12 @@ export function useOurPartnerTranslation() {
       value = value?.[k]
     }
     
-    return value || key
+    if (!value) return key
+    
+    // Interpolação de parâmetros
+    return value.replace(/\{(\w+)\}/g, (match, paramName) => {
+      return params[paramName] || match
+    })
   }
 
   // Inicializar com idioma salvo

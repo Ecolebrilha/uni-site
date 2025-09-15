@@ -162,7 +162,7 @@
               <i class="fas fa-map-marker-alt"></i>
               <div>
                 <strong>{{ t('privacyNotice.sections.contact.address') }}</strong>
-                <span> Rua Alagoas, 253 - Ipsep, Recife - PE, 51350-000</span>
+                <span> {{ t('privacyNotice.sections.address.description') }}</span>
               </div>
             </div>
           </div>
@@ -245,6 +245,7 @@
   height: 85.3vh;
   min-height: 500px;
   overflow: hidden;
+  border-bottom: 4px solid #AE2C2A;
 }
 
 .parallax-container {
