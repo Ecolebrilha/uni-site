@@ -737,17 +737,22 @@ export function useOurPartnerTranslation() {
   const t = (key, params = {}) => {
     const keys = key.split('.')
     let value = translations[currentLanguage.value]
-    
+
     for (const k of keys) {
       value = value?.[k]
     }
-    
+
     if (!value) return key
-    
-    // Interpolação de parâmetros
-    return value.replace(/\{(\w+)\}/g, (match, paramName) => {
-      return params[paramName] || match
-    })
+
+    // Só realiza interpolação se for uma string
+    if (typeof value === 'string') {
+      return value.replace(/\{(\w+)\}/g, (match, paramName) => {
+        return params[paramName] || match
+      })
+    }
+
+    // Retorna o valor bruto se não for string
+    return value
   }
 
   // Inicializar com idioma salvo
