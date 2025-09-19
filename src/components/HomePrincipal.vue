@@ -3,27 +3,22 @@
     <HomeHeader />
     <!-- Hero Section com Efeito Parallax -->
     <section class="hero-section">
-  <!-- Loading enquanto o banner não carrega -->
-  <div v-if="!bannerLoaded" class="banner-loading">
-    Carregando...
-  </div>
-
-  <div
-  v-else
-  class="parallax-container"
-  :style="{ backgroundImage: `url(${bannerImage})`, opacity: bannerLoaded ? 1 : 0 }">
->
-    <div class="overlay"></div>
-    <div class="hero-content">
-      <img src="@/assets/logo-uni10.png" alt="Logo Uni Hospitalar" class="logo-image">
-      <h2 class="banner-h2" v-html="t('home.hero.title')"></h2>
-      <div class="scroll-indicator" @click="scrollToContent">
-        <span>{{ t('home.hero.scrollIndicator') }}</span>
-        <i class="fas fa-chevron-down"></i>
+    <div
+      class="parallax-container"
+      :style="{ backgroundImage: 'url(/assets/banner-inicio.jpg)' }"
+    >
+      <div class="overlay"></div>
+      <div class="hero-content">
+        <img src="/assets/logo-uni10.png" alt="Logo Uni Hospitalar" class="logo-image">
+        <h2 class="banner-h2" v-html="t('home.hero.title')"></h2>
+        <!-- <p class="banner-p" v-html="t('home.hero.subtitle')"></p> Oculto sub-titulo da tela principal-->
+        <div class="scroll-indicator" @click="scrollToContent">
+          <span>{{ t('home.hero.scrollIndicator') }}</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
     <!-- Seção de Estatísticas -->
     <section class="stats-section" ref="statsSection">
@@ -75,194 +70,194 @@
 
     <!-- Seção de Serviços e Informações -->
     <!-- <section class="services-section">
-      <div class="container">
-        <ScrollReveal direction="bottom" :delay="100">
-          <div class="section-header">
-            <h2 class="section-title">{{ t('home.services.title') }}</h2>
-            <div class="section-subtitle">{{ t('home.services.subtitle') }}</div>
-            <div class="accent-line"></div>
-          </div>
-        </ScrollReveal> -->
+       <div class="container">
+         <ScrollReveal direction="bottom" :delay="100">
+           <div class="section-header">
+             <h2 class="section-title">{{ t('home.services.title') }}</h2>
+             <div class="section-subtitle">{{ t('home.services.subtitle') }}</div>
+             <div class="accent-line"></div>
+           </div>
+         </ScrollReveal> -->
 
     <!-- Cards de serviços - Primeira linha -->
     <!-- <div class="services-grid">
-          <ScrollReveal direction="left" :delay="200">
-            <div class="service-card">
-              <div class="service-image">
-                <img src="@/assets/estoque.jpg" alt="Estoque" @error="handleImageError($event, 'estoque')">
-                <div class="service-overlay"></div>
-              </div>
-              <div class="service-content">
-                <div class="service-icon">
-                  <i class="fas fa-warehouse"></i>
-                </div>
-                <h3>{{ t('home.services.storage.title') }}</h3>
-                <p>{{ t('home.services.storage.description') }}</p>
-                <router-link to="/Diferenciais" class="service-link">
-                  <span>{{ t('home.services.storage.link') }}</span>
-                  <i class="fas fa-long-arrow-alt-right"></i>
-                </router-link>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="bottom" :delay="300">
-            <div class="service-card">
-              <div class="service-image">
-                <img src="@/assets/diferenciais.jpg" alt="Diferenciais"
-                  @error="handleImageError($event, 'diferenciais')">
-                <div class="service-overlay"></div>
-              </div>
-              <div class="service-content">
-                <div class="service-icon">
-                  <i class="fas fa-award"></i>
-                </div>
-                <h3>{{ t('home.services.differentials.title') }}</h3>
-                <p>{{ t('home.services.differentials.description') }}</p>
-                <router-link to="/Diferenciais" class="service-link">
-                  <span>{{ t('home.services.differentials.link') }}</span>
-                  <i class="fas fa-long-arrow-alt-right"></i>
-                </router-link>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="right" :delay="200">
-            <div class="service-card">
-              <div class="service-image">
-                <img src="@/assets/logistica.jpg" alt="Logística" @error="handleImageError($event, 'logistica')">
-                <div class="service-overlay"></div>
-              </div>
-              <div class="service-content">
-                <div class="service-icon">
-                  <i class="fas fa-truck-loading"></i>
-                </div>
-                <h3>{{ t('home.services.logistics.title') }}</h3>
-                <p>{{ t('home.services.logistics.description') }}</p>
-                <router-link to="/Diferenciais" class="service-link">
-                  <span>{{ t('home.services.logistics.link') }}</span>
-                  <i class="fas fa-long-arrow-alt-right"></i>
-                </router-link>
-              </div>
-            </div>
-          </ScrollReveal>
-        </div> -->
+           <ScrollReveal direction="left" :delay="200">
+             <div class="service-card">
+               <div class="service-image">
+                 <img src="@/assets/estoque.jpg" alt="Estoque" @error="handleImageError($event, 'estoque')">
+                 <div class="service-overlay"></div>
+               </div>
+               <div class="service-content">
+                 <div class="service-icon">
+                   <i class="fas fa-warehouse"></i>
+                 </div>
+                 <h3>{{ t('home.services.storage.title') }}</h3>
+                 <p>{{ t('home.services.storage.description') }}</p>
+                 <router-link to="/Diferenciais" class="service-link">
+                   <span>{{ t('home.services.storage.link') }}</span>
+                   <i class="fas fa-long-arrow-alt-right"></i>
+                 </router-link>
+               </div>
+             </div>
+           </ScrollReveal>
+  
+           <ScrollReveal direction="bottom" :delay="300">
+             <div class="service-card">
+               <div class="service-image">
+                 <img src="@/assets/diferenciais.jpg" alt="Diferenciais"
+                   @error="handleImageError($event, 'diferenciais')">
+                 <div class="service-overlay"></div>
+               </div>
+               <div class="service-content">
+                 <div class="service-icon">
+                   <i class="fas fa-award"></i>
+                 </div>
+                 <h3>{{ t('home.services.differentials.title') }}</h3>
+                 <p>{{ t('home.services.differentials.description') }}</p>
+                 <router-link to="/Diferenciais" class="service-link">
+                   <span>{{ t('home.services.differentials.link') }}</span>
+                   <i class="fas fa-long-arrow-alt-right"></i>
+                 </router-link>
+               </div>
+             </div>
+           </ScrollReveal>
+  
+           <ScrollReveal direction="right" :delay="200">
+             <div class="service-card">
+               <div class="service-image">
+                 <img src="@/assets/logistica.jpg" alt="Logística" @error="handleImageError($event, 'logistica')">
+                 <div class="service-overlay"></div>
+               </div>
+               <div class="service-content">
+                 <div class="service-icon">
+                   <i class="fas fa-truck-loading"></i>
+                 </div>
+                 <h3>{{ t('home.services.logistics.title') }}</h3>
+                 <p>{{ t('home.services.logistics.description') }}</p>
+                 <router-link to="/Diferenciais" class="service-link">
+                   <span>{{ t('home.services.logistics.link') }}</span>
+                   <i class="fas fa-long-arrow-alt-right"></i>
+                 </router-link>
+               </div>
+             </div>
+           </ScrollReveal>
+         </div> -->
 
     <!-- Cards de serviços - Segunda linha -->
     <!-- <div class="services-grid">
-          <ScrollReveal direction="left" :delay="300">
-            <div class="service-card">
-              <div class="service-image">
-                <img src="@/assets/unidade-de-negocios.jpg" alt="Unidade de Negócios">
-                <div class="service-overlay"></div>
-              </div>
-              <div class="service-content">
-                <div class="service-icon">
-                  <i class="fas fa-building"></i>
-                </div>
-                <h3>{{ t('home.services.businessUnit.title') }}</h3>
-                <p>{{ t('home.services.businessUnit.description') }}</p>
-                <router-link to="/Diferenciais" class="service-link">
-                  <span>{{ t('home.services.businessUnit.link') }}</span>
-                  <i class="fas fa-long-arrow-alt-right"></i>
-                </router-link>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="bottom" :delay="400">
-            <div class="service-card">
-              <div class="service-image">
-                <img src="@/assets/principais-clientes.jpg" alt="Principais Clientes">
-                <div class="service-overlay"></div>
-              </div>
-              <div class="service-content">
-                <div class="service-icon">
-                  <i class="fas fa-users"></i>
-                </div>
-                <h3>{{ t('home.services.mainClients.title') }}</h3>
-                <p>{{ t('home.services.mainClients.description') }}</p>
-                <router-link to="/Parceiros" class="service-link">
-                  <span>{{ t('home.services.mainClients.link') }}</span>
-                  <i class="fas fa-long-arrow-alt-right"></i>
-                </router-link>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal direction="right" :delay="300">
-            <div class="service-card">
-              <div class="service-image">
-                <img src="@/assets/principais-produtos.jpg" alt="Principais Produtos">
-                <div class="service-overlay"></div>
-              </div>
-              <div class="service-content">
-                <div class="service-icon">
-                  <i class="fas fa-pills"></i>
-                </div>
-                <h3>{{ t('home.services.mainProducts.title') }}</h3>
-                <p>{{ t('home.services.mainProducts.description') }}</p>
-                <router-link to="/Produtos" class="service-link">
-                  <span>{{ t('home.services.mainProducts.link') }}</span>
-                  <i class="fas fa-long-arrow-alt-right"></i>
-                </router-link>
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </div>
-    </section> -->
+           <ScrollReveal direction="left" :delay="300">
+             <div class="service-card">
+               <div class="service-image">
+                 <img src="@/assets/unidade-de-negocios.jpg" alt="Unidade de Negócios">
+                 <div class="service-overlay"></div>
+               </div>
+               <div class="service-content">
+                 <div class="service-icon">
+                   <i class="fas fa-building"></i>
+                 </div>
+                 <h3>{{ t('home.services.businessUnit.title') }}</h3>
+                 <p>{{ t('home.services.businessUnit.description') }}</p>
+                 <router-link to="/Diferenciais" class="service-link">
+                   <span>{{ t('home.services.businessUnit.link') }}</span>
+                   <i class="fas fa-long-arrow-alt-right"></i>
+                 </router-link>
+               </div>
+             </div>
+           </ScrollReveal>
+  
+           <ScrollReveal direction="bottom" :delay="400">
+             <div class="service-card">
+               <div class="service-image">
+                 <img src="@/assets/principais-clientes.jpg" alt="Principais Clientes">
+                 <div class="service-overlay"></div>
+               </div>
+               <div class="service-content">
+                 <div class="service-icon">
+                   <i class="fas fa-users"></i>
+                 </div>
+                 <h3>{{ t('home.services.mainClients.title') }}</h3>
+                 <p>{{ t('home.services.mainClients.description') }}</p>
+                 <router-link to="/Parceiros" class="service-link">
+                   <span>{{ t('home.services.mainClients.link') }}</span>
+                   <i class="fas fa-long-arrow-alt-right"></i>
+                 </router-link>
+               </div>
+             </div>
+           </ScrollReveal>
+  
+           <ScrollReveal direction="right" :delay="300">
+             <div class="service-card">
+               <div class="service-image">
+                 <img src="@/assets/principais-produtos.jpg" alt="Principais Produtos">
+                 <div class="service-overlay"></div>
+               </div>
+               <div class="service-content">
+                 <div class="service-icon">
+                   <i class="fas fa-pills"></i>
+                 </div>
+                 <h3>{{ t('home.services.mainProducts.title') }}</h3>
+                 <p>{{ t('home.services.mainProducts.description') }}</p>
+                 <router-link to="/Produtos" class="service-link">
+                   <span>{{ t('home.services.mainProducts.link') }}</span>
+                   <i class="fas fa-long-arrow-alt-right"></i>
+                 </router-link>
+               </div>
+             </div>
+           </ScrollReveal>
+         </div>
+       </div>
+     </section> -->
 
     <!-- Seção de Depoimentos -->
     <!-- <section class="testimonials-section">
-      <div class="container">
-        <ScrollReveal direction="bottom" :delay="100">
-          <div class="section-header">
-            <h2 class="section-title">{{ t('home.testimonials.title') }}</h2>
-            <div class="section-subtitle">{{ t('home.testimonials.subtitle') }}</div>
-            <div class="accent-line"></div>
-          </div>
-        </ScrollReveal>
-        <div class="testimonials-slider">
-          <div class="testimonials-slides" @touchstart="handleTouchStart" @touchmove="handleTouchMove"
-            @touchend="handleTouchEnd" @mousedown="handleMouseDown" @mousemove="handleMouseMove"
-            @mouseup="handleMouseUp" @mouseleave="handleMouseUp" :style="{ transform: `translateX(${slideOffset}px)` }">
-            <div v-for="(testimonial, index) in testimonials" :key="index" class="testimonial-slide"
-              :class="{ active: currentTestimonial === index }">
-              <div class="testimonial-content">
-                <div class="quote-icon">
-                  <i class="fas fa-quote-left"></i>
-                </div>
-                <p class="testimonial-text">{{ testimonial.text }}</p>
-                <div class="testimonial-author">
-                  <div class="author-avatar">
-                    <i :class="getAuthorIcon(index)"></i>
-                  </div>
-                  <div class="author-info">
-                    <div class="author-name">{{ testimonial.author }}</div>
-                    <div class="author-position">{{ testimonial.position }}</div>
-                  </div>
-                </div>
-
-                <div class="testimonial-controls">
-                  <button class="control-prev" @click="prevTestimonial">
-                    <i class="fas fa-chevron-left"></i>
-                  </button>
-                  <div class="control-indicators">
-                    <span v-for="(testimonialItem, indicatorIndex) in testimonials" :key="indicatorIndex"
-                      class="indicator" :class="{ active: currentTestimonial === indicatorIndex }"
-                      @click="setTestimonial(indicatorIndex)"></span>
-                  </div>
-                  <button class="control-next" @click="nextTestimonial">
-                    <i class="fas fa-chevron-right"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section> -->
+       <div class="container">
+         <ScrollReveal direction="bottom" :delay="100">
+           <div class="section-header">
+             <h2 class="section-title">{{ t('home.testimonials.title') }}</h2>
+             <div class="section-subtitle">{{ t('home.testimonials.subtitle') }}</div>
+             <div class="accent-line"></div>
+           </div>
+         </ScrollReveal>
+         <div class="testimonials-slider">
+           <div class="testimonials-slides" @touchstart="handleTouchStart" @touchmove="handleTouchMove"
+             @touchend="handleTouchEnd" @mousedown="handleMouseDown" @mousemove="handleMouseMove"
+             @mouseup="handleMouseUp" @mouseleave="handleMouseUp" :style="{ transform: `translateX(${slideOffset}px)` }">
+             <div v-for="(testimonial, index) in testimonials" :key="index" class="testimonial-slide"
+               :class="{ active: currentTestimonial === index }">
+               <div class="testimonial-content">
+                 <div class="quote-icon">
+                   <i class="fas fa-quote-left"></i>
+                 </div>
+                 <p class="testimonial-text">{{ testimonial.text }}</p>
+                 <div class="testimonial-author">
+                   <div class="author-avatar">
+                     <i :class="getAuthorIcon(index)"></i>
+                   </div>
+                   <div class="author-info">
+                     <div class="author-name">{{ testimonial.author }}</div>
+                     <div class="author-position">{{ testimonial.position }}</div>
+                   </div>
+                 </div>
+  
+                 <div class="testimonial-controls">
+                   <button class="control-prev" @click="prevTestimonial">
+                     <i class="fas fa-chevron-left"></i>
+                   </button>
+                   <div class="control-indicators">
+                     <span v-for="(testimonialItem, indicatorIndex) in testimonials" :key="indicatorIndex"
+                       class="indicator" :class="{ active: currentTestimonial === indicatorIndex }"
+                       @click="setTestimonial(indicatorIndex)"></span>
+                   </div>
+                   <button class="control-next" @click="nextTestimonial">
+                     <i class="fas fa-chevron-right"></i>
+                   </button>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </section> -->
 
     <!-- Seção de Parceiros -->
     <section class="partners-section">
@@ -377,8 +372,7 @@
         </div>
         <div class="cookie-text">
           <h3>{{ t('home.cookies.banner.title') }}</h3>
-          <p>{{ t('home.cookies.banner.text') }} <a href="/Declaração de Cookies - Uni Hospitalar.pdf"
-              target="_blank">
+          <p>{{ t('home.cookies.banner.text') }} <a href="/Declaração de Cookies - Uni Hospitalar.pdf" target="_blank">
               {{ t('home.cookies.banner.privacyPolicy') }}</a>.</p>
         </div>
         <div class="cookie-buttons">
@@ -404,8 +398,8 @@
           <div class="cookie-settings-intro">
             <p><i class="fas fa-cookie-bite cookie-intro-icon"></i>
               {{ t('home.cookies.settings.intro') }} <a href="/Declaração de Cookies - Uni Hospitalar.pdf"
-              target="_blank">
-              {{ t('home.cookies.settings.cookieStatement') }}</a>.</p>
+                target="_blank">
+                {{ t('home.cookies.settings.cookieStatement') }}</a>.</p>
           </div>
           <div class="cookie-option">
             <div class="cookie-option-info">
@@ -450,8 +444,7 @@
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
 import { useHomeTranslation } from '@/composables/useHomeTranslation.js';
-import { useJobsStore } from '@/composables/useJobsStore.js';
-import bannerImage from '@/assets/banner-inicio.jpg';
+import { useJobsStore } from '@/composables/useJobsStore.js'
 
 export default {
   name: 'HomePrincipal',
@@ -511,8 +504,6 @@ export default {
       ],
       showCookieBanner: false,
       showCookieSettings: false,
-      bannerImage,
-      bannerLoaded: false,
       cookiePreferences: {
         essential: true,
         analytics: false,
@@ -564,11 +555,6 @@ export default {
     this.preloadJobs();
     this.startPartnersCarousel(); // Iniciar animação do carrossel de parceiros
     document.addEventListener('keydown', this.handleEscapeKey);
-    const img = new Image();
-    img.src = require('@/assets/banner-inicio.jpg');
-    img.onload = () => {
-      this.bannerLoaded = true; // quando carregar, atualiza a flag
-    };
   },
   beforeUnmount() {
     clearInterval(this.testimonialInterval);
@@ -809,10 +795,10 @@ export default {
       this.$nextTick(() => {
         const track = document.querySelector('.partners-track');
         if (!track) return;
-        
+
         // Calcular a largura total do conteúdo dividido por 2
         const contentWidth = track.scrollWidth / 2;
-        
+
         // Animação contínua da direita para a esquerda
         this.partnersAnimation = track.animate([
           { transform: 'translateX(0px)' },
@@ -857,28 +843,6 @@ section {
   border-bottom: 4px solid #AE2C2A;
 }
 
-.banner-loading {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 20px;
-}
-
-.parallax-container[v-cloak] {
-  opacity: 0;
-}
-
-.parallax-container[v-show] {
-  opacity: 1;
-}
-
 .parallax-container {
   position: absolute;
   top: 0;
@@ -887,11 +851,9 @@ section {
   height: 100%;
   background-size: cover;
   background-position: center;
-  background-attachment: scroll;
+  background-attachment: fixed;
   display: flex;
   flex-direction: column;
-  opacity: 0;
-  transition: opacity 0.5s ease-in;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -1476,7 +1438,8 @@ section {
   display: flex;
   gap: 30px;
   animation: scroll 60s linear infinite;
-  width: calc((180px + 30px) * 66); /* 66 slides total: 33 originais + 33 duplicados */
+  width: calc((180px + 30px) * 66);
+  /* 66 slides total: 33 originais + 33 duplicados */
   height: 220px;
   align-items: center;
 }
@@ -1490,7 +1453,7 @@ section {
   justify-content: center;
   background: #ffffff;
   border-radius: 16px;
-  box-shadow: 
+  box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.06),
     0 4px 16px rgba(0, 0, 0, 0.03),
     0 0 0 1px rgba(174, 44, 42, 0.08);
@@ -1508,12 +1471,10 @@ section {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.4),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent);
   transition: left 0.6s ease;
 }
 
@@ -1524,7 +1485,7 @@ section {
 /* Retirado scale do hover do slide */
 .partner-slide:hover {
   transform: translateY(-8px);
-  box-shadow: 
+  box-shadow:
     0 20px 40px rgba(0, 0, 0, 0.12),
     0 8px 24px rgba(174, 44, 42, 0.15),
     0 0 0 1px rgba(174, 44, 42, 0.2);
@@ -1537,55 +1498,156 @@ section {
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), filter 0.4s ease;
   position: relative;
   z-index: 2;
-  transform: scale(var(--img-scale, 1)); /* valor base individual */
+  transform: scale(var(--img-scale, 1));
+  /* valor base individual */
 }
 
 /* Hover da imagem */
 .partner-slide img:hover {
   filter: grayscale(0%) brightness(1) saturate(1.1);
-  transform: scale(calc(var(--img-scale, 1) * 1.2)); /* aumenta 20% sobre o tamanho base */
+  transform: scale(calc(var(--img-scale, 1) * 1.2));
+  /* aumenta 20% sobre o tamanho base */
 }
 
 /* Escalas individuais dos parceiros */
-.partner-1  { --img-scale: 0.16; }
-.partner-2  { --img-scale: 0.8; }
-.partner-3  { --img-scale: 0.7; }
-.partner-4  { --img-scale: 0.4; }
-.partner-5  { --img-scale: 0.09; }
-.partner-6  { --img-scale: 0.8; }
-.partner-7  { --img-scale: 0.08; }
-.partner-8  { --img-scale: 0.5; }
-.partner-9  { --img-scale: 0.04; }
-.partner-10 { --img-scale: 0.065; }
-.partner-11 { --img-scale: 0.35; }
-.partner-12 { --img-scale: 0.065; }
-.partner-13 { --img-scale: 0.065; }
-.partner-14 { --img-scale: 0.06; }
-.partner-15 { --img-scale: 0.55; }
-.partner-16 { --img-scale: 0.3; }
-.partner-17 { --img-scale: 0.18; }
-.partner-18 { --img-scale: 0.15; }
-.partner-19 { --img-scale: 0.13; }
-.partner-20 { --img-scale: 0.13; }
-.partner-21 { --img-scale: 0.065; }
-.partner-22 { --img-scale: 0.19; }
-.partner-23 { --img-scale: 0.4; }
-.partner-24 { --img-scale: 0.5; }
-.partner-25 { --img-scale: 0.13; }
-.partner-26 { --img-scale: 0.85; }
-.partner-27 { --img-scale: 0.35; }
-.partner-28 { --img-scale: 0.075; }
-.partner-29 { --img-scale: 0.068; }
-.partner-30 { --img-scale: 0.025; }
-.partner-31 { --img-scale: 0.04; }
-.partner-32 { --img-scale: 0.6; }
-.partner-33 { --img-scale: 0.35; }
+.partner-1 {
+  --img-scale: 0.16;
+}
+
+.partner-2 {
+  --img-scale: 0.8;
+}
+
+.partner-3 {
+  --img-scale: 0.7;
+}
+
+.partner-4 {
+  --img-scale: 0.4;
+}
+
+.partner-5 {
+  --img-scale: 0.09;
+}
+
+.partner-6 {
+  --img-scale: 0.8;
+}
+
+.partner-7 {
+  --img-scale: 0.08;
+}
+
+.partner-8 {
+  --img-scale: 0.5;
+}
+
+.partner-9 {
+  --img-scale: 0.04;
+}
+
+.partner-10 {
+  --img-scale: 0.065;
+}
+
+.partner-11 {
+  --img-scale: 0.35;
+}
+
+.partner-12 {
+  --img-scale: 0.065;
+}
+
+.partner-13 {
+  --img-scale: 0.065;
+}
+
+.partner-14 {
+  --img-scale: 0.06;
+}
+
+.partner-15 {
+  --img-scale: 0.55;
+}
+
+.partner-16 {
+  --img-scale: 0.3;
+}
+
+.partner-17 {
+  --img-scale: 0.18;
+}
+
+.partner-18 {
+  --img-scale: 0.15;
+}
+
+.partner-19 {
+  --img-scale: 0.13;
+}
+
+.partner-20 {
+  --img-scale: 0.13;
+}
+
+.partner-21 {
+  --img-scale: 0.065;
+}
+
+.partner-22 {
+  --img-scale: 0.19;
+}
+
+.partner-23 {
+  --img-scale: 0.4;
+}
+
+.partner-24 {
+  --img-scale: 0.5;
+}
+
+.partner-25 {
+  --img-scale: 0.13;
+}
+
+.partner-26 {
+  --img-scale: 0.85;
+}
+
+.partner-27 {
+  --img-scale: 0.35;
+}
+
+.partner-28 {
+  --img-scale: 0.075;
+}
+
+.partner-29 {
+  --img-scale: 0.068;
+}
+
+.partner-30 {
+  --img-scale: 0.025;
+}
+
+.partner-31 {
+  --img-scale: 0.04;
+}
+
+.partner-32 {
+  --img-scale: 0.6;
+}
+
+.partner-33 {
+  --img-scale: 0.35;
+}
 
 /* Animação do carrossel de parceiros */
 @keyframes scroll {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(calc(-1 * (180px + 30px) * 33));
   }
@@ -2833,6 +2895,7 @@ input:checked+.slider:before {
 
 /* Print styles */
 @media print {
+
   .cookie-banner,
   .cookie-settings-modal,
   .scroll-indicator,
