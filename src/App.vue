@@ -201,25 +201,6 @@ html {
   transform: translateX(-80px);
 }
 
-/* Transição deslizante para a direita - mais suave */
-.slide-right-enter-active {
-  transition: all 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-.slide-right-leave-active {
-  transition: all 1s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-.slide-right-enter {
-  opacity: 0;
-  transform: translateX(-80px);
-}
-
-.slide-right-leave-to {
-  opacity: 0;
-  transform: translateX(80px);
-}
-
 /* Transição de fade - mais suave */
 .fade-enter-active {
   transition: opacity 1.2s ease;

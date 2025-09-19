@@ -3103,10 +3103,10 @@ formatDateTwo(dateString) {
   background: #D2342C;
 }
 
-/* Transições suaves */
-* {
+/* Transições suaves - Oculto por agora para evitar problemas na transição do overlay do componente para outro */
+/* * {
   transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
+} */
 
 /* Print styles */
 @media print {

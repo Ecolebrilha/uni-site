@@ -3,19 +3,27 @@
     <HomeHeader />
     <!-- Hero Section com Efeito Parallax -->
     <section class="hero-section">
-      <div class="parallax-container">
-        <div class="overlay"></div>
-        <div class="hero-content">
-          <img src="@/assets/logo-uni10.png" alt="Logo Uni Hospitalar" class="logo-image">
-          <h2 class="banner-h2" v-html="t('home.hero.title')"></h2>
-          <!-- <p class="banner-p" v-html="t('home.hero.subtitle')"></p> Oculto sub-titulo da tela principal-->
-          <div class="scroll-indicator" @click="scrollToContent">
-            <span>{{ t('home.hero.scrollIndicator') }}</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-        </div>
+  <!-- Loading enquanto o banner não carrega -->
+  <div v-if="!bannerLoaded" class="banner-loading">
+    Carregando...
+  </div>
+
+  <div
+  v-else
+  class="parallax-container"
+  :style="{ backgroundImage: `url(${bannerImage})`, opacity: bannerLoaded ? 1 : 0 }">
+>
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <img src="@/assets/logo-uni10.png" alt="Logo Uni Hospitalar" class="logo-image">
+      <h2 class="banner-h2" v-html="t('home.hero.title')"></h2>
+      <div class="scroll-indicator" @click="scrollToContent">
+        <span>{{ t('home.hero.scrollIndicator') }}</span>
+        <i class="fas fa-chevron-down"></i>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
     <!-- Seção de Estatísticas -->
     <section class="stats-section" ref="statsSection">
@@ -442,7 +450,8 @@
 import HomeHeader from '@/components/HomeHeader.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
 import { useHomeTranslation } from '@/composables/useHomeTranslation.js';
-import { useJobsStore } from '@/composables/useJobsStore.js'
+import { useJobsStore } from '@/composables/useJobsStore.js';
+import bannerImage from '@/assets/banner-inicio.jpg';
 
 export default {
   name: 'HomePrincipal',
@@ -502,6 +511,8 @@ export default {
       ],
       showCookieBanner: false,
       showCookieSettings: false,
+      bannerImage,
+      bannerLoaded: false,
       cookiePreferences: {
         essential: true,
         analytics: false,
@@ -553,6 +564,11 @@ export default {
     this.preloadJobs();
     this.startPartnersCarousel(); // Iniciar animação do carrossel de parceiros
     document.addEventListener('keydown', this.handleEscapeKey);
+    const img = new Image();
+    img.src = require('@/assets/banner-inicio.jpg');
+    img.onload = () => {
+      this.bannerLoaded = true; // quando carregar, atualiza a flag
+    };
   },
   beforeUnmount() {
     clearInterval(this.testimonialInterval);
@@ -841,18 +857,41 @@ section {
   border-bottom: 4px solid #AE2C2A;
 }
 
+.banner-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+}
+
+.parallax-container[v-cloak] {
+  opacity: 0;
+}
+
+.parallax-container[v-show] {
+  opacity: 1;
+}
+
 .parallax-container {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('@/assets/banner-inicio.jpg');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  background-attachment: scroll;
   display: flex;
   flex-direction: column;
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
   justify-content: center;
   align-items: center;
   text-align: center;

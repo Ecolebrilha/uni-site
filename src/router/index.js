@@ -203,19 +203,13 @@ const router = createRouter({
   }
 });
 
-// Adicionar hook de navegação para preparar transições
+// Hook de navegação para preparar transições
 router.beforeEach((to, from, next) => {
-  // Você pode adicionar lógica personalizada aqui se necessário
-  // Por exemplo, mostrar um indicador de carregamento
-  
-  // Continue a navegação
   next();
 });
 
 // Hook após a navegação
 router.afterEach(() => {
-  // Você pode adicionar lógica personalizada aqui se necessário
-  // Por exemplo, ocultar um indicador de carregamento ou rastrear análises
 });
 
 export default router;
