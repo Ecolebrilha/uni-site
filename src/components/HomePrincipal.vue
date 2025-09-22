@@ -11,7 +11,7 @@
       <div class="hero-content">
         <img src="/assets/logo-uni10.png" alt="Logo Uni Hospitalar" class="logo-image">
         <h2 class="banner-h2" v-html="t('home.hero.title')"></h2>
-        <!-- <p class="banner-p" v-html="t('home.hero.subtitle')"></p> Oculto sub-titulo da tela principal-->
+        <!-- <p class="banner-p" v-html="t('home.hero.subtitle')"></p> Oculto sub-titulo da tela principal -->
         <div class="scroll-indicator" @click="scrollToContent">
           <span>{{ t('home.hero.scrollIndicator') }}</span>
           <i class="fas fa-chevron-down"></i>
