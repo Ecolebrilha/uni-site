@@ -150,7 +150,7 @@
     </div>
     <router-link to="/" custom v-slot="{ navigate }">
       <div class="logo-container" :class="{ 'scrolled': isScrolled }" @click="navigate" role="link">
-        <img :src="isScrolled ? require('@/assets/logo-uni2.png') : require('@/assets/logo-uni10.png')" alt="Logo da Uni Hospitalar" class="logo">
+        <img :src="isScrolled ? '/assets/logo-uni2.png' : '/assets/logo-uni10.png'" alt="Logo da Uni Hospitalar" class="logo">
       </div>
     </router-link>
 
