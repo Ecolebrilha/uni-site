@@ -859,119 +859,132 @@ export default {
     },
 
     async buscarCNPJ() {
-  if (!this.formData.cnpj || this.formData.cnpj.length !== 18) {
-    return;
-  }
-
-  const cnpjLimpo = this.formData.cnpj.replace(/[^\d]+/g, '');
-
-  if (!this.validarCNPJ(cnpjLimpo)) {
-    this.cnpjError = this.t('partner.form.messages.cnpjError');
-    this.formData.endereco = '';
-    this.formData.nomeRazaoSocial = '';
-    return;
-  }
-
-  this.cnpjError = '';
-  this.isLoadingCNPJ = true;
-
-  try {
-    let response = await fetch(`https://brasilapi.com.br/api/cnpj/v1/${cnpjLimpo}`);
-    if (!response.ok) {
-      response = await fetch(`https://www.receitaws.com.br/v1/cnpj/${cnpjLimpo}`);
-    }
-
-    if (response.ok) {
-      const data = await response.json();
-
-      if (data.status && data.status !== 'OK') {
-        this.cnpjError = this.t('partner.form.messages.cnpjInactive');
+      if (!this.formData.cnpj || this.formData.cnpj.length !== 18) {
+        return;
       }
 
-      if (data.company_name || data.nome || data.razao_social) {
-        this.formData.nomeRazaoSocial = data.company_name || data.nome || data.razao_social;
+      // Remove formatação para validação e consulta
+      const cnpjLimpo = this.formData.cnpj.replace(/[^\d]+/g, '');
+
+      // Valida CNPJ
+      if (!this.validarCNPJ(cnpjLimpo)) {
+        this.cnpjError = this.t('partner.form.messages.cnpjError');
+        this.formData.endereco = '';
+        this.formData.nomeRazaoSocial = '';
+        return;
       }
 
-      let endereco = '';
-      if (data.street || data.logradouro) {
-        endereco += (data.street || data.logradouro);
-        if (data.number || data.numero) {
-          endereco += `, ${data.number || data.numero}`;
+      this.cnpjError = '';
+      this.isLoadingCNPJ = true;
+
+      try {
+        // Primeira tentativa: API BrasilAPI
+        let response = await fetch(`https://brasilapi.com.br/api/cnpj/v1/${cnpjLimpo}`);
+        if (!response.ok) {
+          // Segunda tentativa: API ReceitaWS (backup)
+          response = await fetch(`https://www.receitaws.com.br/v1/cnpj/${cnpjLimpo}`);
         }
-        if (data.complement || data.complemento) {
-          endereco += `, ${data.complement || data.complemento}`;
-        }
-        if (data.neighborhood || data.bairro) {
-          endereco += `, ${data.neighborhood || data.bairro}`;
-        }
-        if (data.city || data.municipio) {
-          endereco += `, ${data.city || data.municipio}`;
-        }
-        if (data.state || data.uf) {
-          endereco += ` - ${data.state || data.uf}`;
-          if (!this.formData.uf) {
-            this.formData.uf = data.state || data.uf;
+
+        if (response.ok) {
+          const data = await response.json();
+
+          // Verifica se a empresa está ativa
+          if (data.status && data.status !== 'OK') {
+            this.cnpjError = this.t('partner.form.messages.cnpjInactive');
           }
-        }
-        if (data.zip_code || data.cep) {
-          endereco += `, CEP: ${data.zip_code || data.cep}`;
-        }
-      }
 
-      this.formData.endereco = endereco;
+          // Preenche os dados automaticamente
+          if (data.company_name || data.nome || data.razao_social) {
+            this.formData.nomeRazaoSocial = data.company_name || data.nome || data.razao_social;
+          }
 
-      this.$nextTick(() => {
-        const enderecoInput = document.getElementById('endereco');
-        if (enderecoInput) {
-          enderecoInput.style.backgroundColor = '#d4edda';
-          enderecoInput.style.borderColor = '#28a745';
-          setTimeout(() => {
-            enderecoInput.style.backgroundColor = '';
-            enderecoInput.style.borderColor = '';
-          }, 2000);
-        }
-      });
-    } else {
-      throw new Error('Erro na consulta');
-    }
-  } catch (_) {
-    try {
-      const response = await fetch(`https://publica.cnpj.ws/cnpj/${cnpjLimpo}`);
-      if (response.ok) {
-        const data = await response.json();
-        if (data.razao_social) {
-          this.formData.nomeRazaoSocial = data.razao_social;
-        }
-
-        let endereco = '';
-        if (data.estabelecimento) {
-          const est = data.estabelecimento;
-          if (est.logradouro) {
-            endereco += est.logradouro;
-            if (est.numero) endereco += `, ${est.numero}`;
-            if (est.complemento) endereco += `, ${est.complemento}`;
-            if (est.bairro) endereco += `, ${est.bairro}`;
-            if (est.cidade && est.cidade.nome) endereco += `, ${est.cidade.nome}`;
-            if (est.estado && est.estado.sigla) {
-              endereco += ` - ${est.estado.sigla}`;
+          // Monta o endereço completo
+          let endereco = '';
+          // Para BrasilAPI
+          if (data.street || data.logradouro) {
+            endereco += (data.street || data.logradouro);
+            if (data.number || data.numero) {
+              endereco += `, ${data.number || data.numero}`;
+            }
+            if (data.complement || data.complemento) {
+              endereco += `, ${data.complement || data.complemento}`;
+            }
+            if (data.neighborhood || data.bairro) {
+              endereco += `, ${data.neighborhood || data.bairro}`;
+            }
+            if (data.city || data.municipio) {
+              endereco += `, ${data.city || data.municipio}`;
+            }
+            if (data.state || data.uf) {
+              endereco += ` - ${data.state || data.uf}`;
+              // Atualiza o UF automaticamente se não estiver preenchido
               if (!this.formData.uf) {
-                this.formData.uf = est.estado.sigla;
+                this.formData.uf = data.state || data.uf;
               }
             }
-            if (est.cep) endereco += `, CEP: ${est.cep}`;
+            if (data.zip_code || data.cep) {
+              endereco += `, CEP: ${data.zip_code || data.cep}`;
+            }
           }
+
+          this.formData.endereco = endereco;
+
+          // Feedback visual de sucesso
+          this.$nextTick(() => {
+            const enderecoInput = document.getElementById('endereco');
+            if (enderecoInput) {
+              enderecoInput.style.backgroundColor = '#d4edda';
+              enderecoInput.style.borderColor = '#28a745';
+              setTimeout(() => {
+                enderecoInput.style.backgroundColor = '';
+                enderecoInput.style.borderColor = '';
+              }, 2000);
+            }
+          });
+        } else {
+          throw new Error('Erro na consulta');
         }
-        this.formData.endereco = endereco;
-      } else {
-        this.cnpjError = this.t('partner.form.messages.cnpjNotFound');
+      } catch (error) {
+        console.error('Erro ao buscar CNPJ:', error);
+        // Terceira tentativa: API alternativa
+        try {
+          const response = await fetch(`https://publica.cnpj.ws/cnpj/${cnpjLimpo}`);
+          if (response.ok) {
+            const data = await response.json();
+            if (data.razao_social) {
+              this.formData.nomeRazaoSocial = data.razao_social;
+            }
+
+            let endereco = '';
+            if (data.estabelecimento) {
+              const est = data.estabelecimento;
+              if (est.logradouro) {
+                endereco += est.logradouro;
+                if (est.numero) endereco += `, ${est.numero}`;
+                if (est.complemento) endereco += `, ${est.complemento}`;
+                if (est.bairro) endereco += `, ${est.bairro}`;
+                if (est.cidade && est.cidade.nome) endereco += `, ${est.cidade.nome}`;
+                if (est.estado && est.estado.sigla) {
+                  endereco += ` - ${est.estado.sigla}`;
+                  if (!this.formData.uf) {
+                    this.formData.uf = est.estado.sigla;
+                  }
+                }
+                if (est.cep) endereco += `, CEP: ${est.cep}`;
+              }
+            }
+            this.formData.endereco = endereco;
+          } else {
+            this.cnpjError = this.t('partner.form.messages.cnpjNotFound');
+          }
+        } catch (secondError) {
+          console.error('Erro na segunda tentativa:', secondError);
+          this.cnpjError = this.t('partner.form.messages.cnpjServiceUnavailable');
+        }
+      } finally {
+        this.isLoadingCNPJ = false;
       }
-    } catch (_) {
-      this.cnpjError = this.t('partner.form.messages.cnpjServiceUnavailable');
-    }
-  } finally {
-    this.isLoadingCNPJ = false;
-  }
-},
+    },
 
     // Função para obter ícone do arquivo
     getFileIcon(filename) {
@@ -1071,88 +1084,99 @@ export default {
     // },
 
     async submitForm() {
-  // Validar formulário completo
-  if (!this.validateFormData()) {
-    this.$nextTick(() => {
-      const firstError = document.querySelector('.error')
-      if (firstError) {
-        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' })
-      }
-    })
-    return
-  }
-
-  this.isSubmitting = true
-
-  try {
-    // Criar FormData para enviar arquivos
-    const formData = new FormData()
-
-    // Adicionar dados do formulário incluindo o tipo de parceiro
-    const partnerData = {
-      nomeRazaoSocial: this.formData.nomeRazaoSocial,
-      uf: this.formData.uf,
-      ramoAtuacao: this.formData.ramoAtuacao,
-      cnpj: this.formData.cnpj,
-      email: this.formData.email,
-      celular: this.formData.celular || null,
-      telefoneFixo: this.formData.telefoneFixo || null,
-      endereco: this.formData.endereco || null,
-      tipoParceiro: this.formData.tipoParceiro
-    }
-
-    // Adicionar dados como JSON
-    formData.append('partnerData', JSON.stringify(partnerData))
-
-    // Adicionar documentos apenas se existirem (só para CLIENTE)
-    Object.keys(this.documents).forEach(docType => {
-      if (this.documents[docType]) {
-        formData.append(docType, this.documents[docType])
-      }
-    })
-
-    // Fazer requisição para a API
-    const apiUrl = this.getApiUrl()
-    const response = await fetch(`${apiUrl}/api/partners`, {
-      method: 'POST',
-      body: formData
-    })
-
-    const result = await response.json()
-
-    if (!response.ok) {
-      throw new Error(result.error || 'Erro ao enviar solicitação')
-    }
-
-    // Sucesso
-    this.submissionData = {
-      companyName: result.companyName,
-      cnpj: result.cnpj,
-      email: result.email,
-      documentsCount: result.documentsCount || 0
-    }
-    this.partnerSubmitted = true
-    this.isSubmitting = false
-
-    // Scroll suave para o success-card
-    this.$nextTick(() => {
-      const successCard = document.querySelector('.success-card')
-      if (successCard) {
-        successCard.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+      // Validar formulário completo
+      if (!this.validateFormData()) {
+        this.$nextTick(() => {
+          const firstError = document.querySelector('.error')
+          if (firstError) {
+            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' })
+          }
         })
+        return
       }
-    })
 
-  } catch (error) {
-    this.isSubmitting = false
-    this.showErrorMessage = true
-    setTimeout(() => {
-      this.showErrorMessage = false
-    }, 5000)
-  }
-},
+      this.isSubmitting = true
+
+      try {
+        // Criar FormData para enviar arquivos
+        const formData = new FormData()
+
+        // Adicionar dados do formulário incluindo o tipo de parceiro
+        const partnerData = {
+          nomeRazaoSocial: this.formData.nomeRazaoSocial,
+          uf: this.formData.uf,
+          ramoAtuacao: this.formData.ramoAtuacao,
+          cnpj: this.formData.cnpj,
+          email: this.formData.email,
+          celular: this.formData.celular || null,
+          telefoneFixo: this.formData.telefoneFixo || null,
+          endereco: this.formData.endereco || null,
+          tipoParceiro: this.formData.tipoParceiro
+        }
+
+        // Adicionar dados como JSON
+        formData.append('partnerData', JSON.stringify(partnerData))
+
+        // Adicionar documentos apenas se existirem (só para CLIENTE)
+        Object.keys(this.documents).forEach(docType => {
+          if (this.documents[docType]) {
+            formData.append(docType, this.documents[docType])
+          }
+        })
+
+        console.log('📤 Enviando solicitação de parceria para API...')
+        console.log('👥 Tipo de parceiro:', this.formData.tipoParceiro)
+        console.log('📎 Total de documentos:', Object.keys(this.documents).filter(key => this.documents[key]).length)
+
+        // Fazer requisição para a API
+        const apiUrl = this.getApiUrl()
+        const response = await fetch(`${apiUrl}/api/partners`, {
+          method: 'POST',
+          body: formData
+        })
+
+        const result = await response.json()
+
+        if (!response.ok) {
+          throw new Error(result.error || 'Erro ao enviar solicitação')
+        }
+
+        // Sucesso
+        this.submissionData = {
+          companyName: result.companyName,
+          cnpj: result.cnpj,
+          email: result.email,
+          documentsCount: result.documentsCount || 0
+        }
+        this.partnerSubmitted = true
+        this.isSubmitting = false
+
+        console.log('✅ Solicitação de parceria enviada com sucesso!')
+        console.log('🏢 Empresa:', result.companyName)
+        console.log('📄 CNPJ:', result.cnpj)
+        console.log('👥 Tipo:', this.formData.tipoParceiro)
+        console.log('📎 Documentos enviados:', result.documentsCount || 0)
+
+        // Scroll suave para o success-card
+        this.$nextTick(() => {
+          const successCard = document.querySelector('.success-card');
+          if (successCard) {
+            successCard.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        })
+
+      } catch (error) {
+        console.error('❌ Erro ao enviar solicitação de parceria:', error)
+        this.isSubmitting = false
+        this.showErrorMessage = true
+        setTimeout(() => {
+          this.showErrorMessage = false
+        }, 5000)
+      }
+    },
 
     resetForm() {
       this.formData = {

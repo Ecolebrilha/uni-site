@@ -416,68 +416,75 @@ export default {
     changeLanguage(event) {
       const value = typeof event === 'string' ? event : event.target.value;
       this.selectedLanguage = value;
+      console.log(`Idioma selecionado: ${value}`);
     },
     toggleSidebar() {
       this.sidebarOpen = !this.sidebarOpen;
     },
     async submitRightsForm() {
-  this.isSubmitting = true;
-  this.submitError = '';
-  this.validatePhone();
+      this.isSubmitting = true;
+      this.submitError = '';
+      this.validatePhone();
 
-  if (this.phoneError) {
-    this.isSubmitting = false;
-    return;
-  }
+if (this.phoneError) {
+  this.isSubmitting = false;
+  return;
+}
 
-  try {
-    // Preparar dados da solicitação LGPD
-    const lgpdRequestData = {
-      name: this.formData.name,
-      email: this.formData.email,
-      phone: this.formData.phone,
-      relationship: this.formData.relationship,
-      requestType: this.formData.requestType,
-      details: this.formData.details
-    };
+      try {
+        // Preparar dados da solicitação LGPD
+        const lgpdRequestData = {
+          name: this.formData.name,
+          email: this.formData.email,
+          phone: this.formData.phone,
+          relationship: this.formData.relationship,
+          requestType: this.formData.requestType,
+          details: this.formData.details
+        };
 
-    // Fazer requisição para a API
-    const apiUrl = this.getApiUrl();
-    const response = await fetch(`${apiUrl}/api/lgpd-requests`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(lgpdRequestData)
-    });
+        console.log('📤 Enviando solicitação LGPD para API...');
+        console.log('📋 Dados:', lgpdRequestData);
 
-    const result = await response.json();
-
-    if (!response.ok) {
-      throw new Error(result.error || 'Erro ao enviar solicitação LGPD');
-    }
-
-    // Sucesso - não há códigos de protocolo para LGPD
-    this.requestSubmitted = true;
-    this.isSubmitting = false;
-
-    // Scroll suave para a seção de sucesso
-    this.$nextTick(() => {
-      const successSection = document.querySelector('.success-message');
-      if (successSection) {
-        successSection.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+        // Fazer requisição para a API
+        const apiUrl = this.getApiUrl();
+        const response = await fetch(`${apiUrl}/api/lgpd-requests`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(lgpdRequestData)
         });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || 'Erro ao enviar solicitação LGPD');
+        }
+
+        // Sucesso - não há códigos de protocolo para LGPD
+        this.requestSubmitted = true;
+        this.isSubmitting = false;
+
+        console.log('✅ Solicitação LGPD enviada com sucesso!');
+        console.log('📧 Confirmação enviada para:', this.formData.email);
+
+        // Scroll suave para a seção de sucesso
+        this.$nextTick(() => {
+          const successSection = document.querySelector('.success-message');
+          if (successSection) {
+            successSection.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+
+      } catch (error) {
+        console.error('❌ Erro ao enviar solicitação LGPD:', error);
+        this.isSubmitting = false;
+        this.submitError = `Erro ao enviar solicitação: ${error.message}`;
       }
-    });
-
-  } catch (error) {
-    this.isSubmitting = false;
-    this.submitError = `Erro ao enviar solicitação: ${error.message}`;
-  }
-},
-
+    },
     getApiUrl() {
       // Detectar ambiente
       if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {

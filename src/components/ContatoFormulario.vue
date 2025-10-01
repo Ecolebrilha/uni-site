@@ -237,72 +237,78 @@ export default {
     },
     
     async handleSubmit() {
-  if (!this.validateForm()) {
-    this.$nextTick(() => {
-      const firstError = this.$el.querySelector('.error');
-      if (firstError) {
-        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (!this.validateForm()) {
+        this.$nextTick(() => {
+          const firstError = this.$el.querySelector('.error');
+          if (firstError) {
+            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        });
+        return;
       }
-    });
-    return;
-  }
 
-  this.isSubmitting = true;
-  this.showErrorMessage = false;
-  this.errorMessage = '';
+      this.isSubmitting = true;
+      this.showErrorMessage = false;
+      this.errorMessage = '';
 
-  try {
-    const apiUrl = this.getApiUrl();
-    
-    // Preparar dados para envio
-    const contactData = {
-      name: this.formData.name.trim(),
-      email: this.formData.email.trim(),
-      phone: this.formData.telefone.trim(),
-      company: this.formData.empresa.trim(),
-      message: this.formData.message.trim(),
-      activeSection: this.activeSection
-    };
+      try {
+        const apiUrl = this.getApiUrl();
+        
+        // Preparar dados para envio
+        const contactData = {
+          name: this.formData.name.trim(),
+          email: this.formData.email.trim(),
+          phone: this.formData.telefone.trim(),
+          company: this.formData.empresa.trim(),
+          message: this.formData.message.trim(),
+          activeSection: this.activeSection
+        };
 
-    const response = await fetch(`${apiUrl}/api/contacts`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(contactData)
-    });
+        console.log('📤 Enviando contato para API...');
+        console.log('📧 Dados:', contactData);
 
-    const result = await response.json();
+        const response = await fetch(`${apiUrl}/api/contacts`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(contactData)
+        });
 
-    if (!response.ok) {
-      throw new Error(result.error || 'Erro ao enviar contato');
-    }
+        const result = await response.json();
 
-    // Guardar dados para exibir no modal
-    this.submittedData = {
-      name: contactData.name,
-      email: contactData.email,
-      phone: contactData.phone,
-      company: contactData.company,
-      message: contactData.message
-    };
-    
-    // Mostrar modal de sucesso
-    this.formSubmitted = true;
-    this.isSubmitting = false;
-    
-    // Scroll imediato para o topo
-    window.scrollTo({ top: 0, behavior: 'auto' });
-    
-    // Desabilitar scroll do body
-    document.body.classList.add('modal-open');
+        if (!response.ok) {
+          throw new Error(result.error || 'Erro ao enviar contato');
+        }
 
-  } catch (error) {
-    this.showErrorMessage = true;
-    this.errorMessage = error.message;
-    this.isSubmitting = false;
-  }
-},
+        console.log('✅ Contato enviado com sucesso!');
+        
+        // Guardar dados para exibir no modal
+        this.submittedData = {
+          name: contactData.name,
+          email: contactData.email,
+          phone: contactData.phone,
+          company: contactData.company,
+          message: contactData.message
+        };
+        
+        // Mostrar modal de sucesso
+        this.formSubmitted = true;
+        this.isSubmitting = false;
+        
+        // Scroll imediato para o topo
+        window.scrollTo({ top: 0, behavior: 'auto' });
+        
+        // Desabilitar scroll do body
+        document.body.classList.add('modal-open');
+
+      } catch (error) {
+        console.error('❌ Erro ao enviar contato:', error);
+        this.showErrorMessage = true;
+        this.errorMessage = error.message;
+        this.isSubmitting = false;
+      }
+    },
 
     closeModal() {
       this.formSubmitted = false;
