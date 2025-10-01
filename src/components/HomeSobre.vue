@@ -44,7 +44,7 @@
     </section>
 
     <!-- Seção Timeline -->
-    <!-- <section class="timeline-section">
+    <section class="timeline-section">
       <div class="container">
         <ScrollReveal direction="bottom" :delay="200">
           <div class="section-title">
@@ -60,10 +60,9 @@
         <ScrollReveal direction="bottom" :delay="300">
           <div class="new-timeline-container">
             <div class="timeline-scroll-wrapper">
-               Linha da timeline estática 
+    
             <div class="timeline-line"></div>
             
-             Bolinhas da timeline com anos e traços integrados 
 <div class="timeline-dots">
   <div 
     v-for="(milestone, index) in timelineMilestones" 
@@ -71,7 +70,6 @@
     class="timeline-dot-wrapper"
     :style="{ '--dot-index': index }">
     
-     Timeline Dot 
     <div 
       class="timeline-dot"
       :class="{ 'active': currentActiveCard === index }"
@@ -80,7 +78,6 @@
       <span class="dot-year">{{ milestone.year }}</span>
     </div>
 
-     Conector e card integrados 
     <div 
       class="dot-connector"
       :class="{ 
@@ -92,7 +89,6 @@
       }"
       v-show="currentActiveCard === index || enteringCard === index || exitingCard === index">
 
-       Card 
       <div 
         class="timeline-card"
         :class="{ 
@@ -117,7 +113,7 @@
           </div>
         </ScrollReveal>
       </div>
-    </section> -->
+    </section>
 
     <!-- Seção Missão, Visão e Valores -->
     <section class="mvv-section">
