@@ -1050,93 +1050,92 @@ export default {
         },
 
         async submitReport() {
-            if (!this.validateCurrentStep()) {
-                this.$nextTick(() => {
-                    const firstError = document.querySelector('.error')
-                    if (firstError) {
-                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' })
-                    }
-                })
-                return
-            }
+  if (!this.validateCurrentStep()) {
+    this.$nextTick(() => {
+      const firstError = document.querySelector('.error')
+      if (firstError) {
+        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }
+    })
+    return
+  }
 
-            this.submitting = true
+  this.submitting = true
 
-            try {
-                // Criar FormData para enviar arquivos
-                const formData = new FormData()
+  try {
+    // Criar FormData para enviar arquivos
+    const formData = new FormData()
 
-                // Converter data para formato ISO (YYYY-MM-DD) antes de enviar
-                const isoDate = this.convertDateToISO(this.form.incidentDate)
+    // Converter data para formato ISO (YYYY-MM-DD) antes de enviar
+    const isoDate = this.convertDateToISO(this.form.incidentDate)
 
-                // Adicionar dados do formulário
-                const complaintData = {
-                    relationship: this.form.relationship,
-                    violationType: this.form.violationType,
-                    clientType: this.form.clientType,
-                    previousContact: this.form.previousContact,
-                    incidentDate: isoDate,
-                    invoiceNumber: this.form.invoiceNumber,
-                    productName: this.form.productName,
-                    quantity: this.form.quantity,
-                    supplier: this.form.supplier,
-                    incidentLocation: this.form.incidentLocation,
-                    actionsTaken: this.form.actionsTaken,
-                    responsiblePerson: this.form.responsiblePerson,
-                    description: this.form.description,
-                    relatedReport: this.form.relatedReport,
-                    confidenceLevel: this.form.confidenceLevel,
-                    anonymous: this.form.anonymous || false,
-                    name: this.form.anonymous ? null : this.form.name,
-                    institution: this.form.anonymous ? null : this.form.institution,
-                    email: this.form.anonymous ? null : this.form.email,
-                    phone: this.form.anonymous ? null : this.form.phone
-                }
+    // Adicionar dados do formulário
+    const complaintData = {
+      relationship: this.form.relationship,
+      violationType: this.form.violationType,
+      clientType: this.form.clientType,
+      previousContact: this.form.previousContact,
+      incidentDate: isoDate,
+      invoiceNumber: this.form.invoiceNumber,
+      productName: this.form.productName,
+      quantity: this.form.quantity,
+      supplier: this.form.supplier,
+      incidentLocation: this.form.incidentLocation,
+      actionsTaken: this.form.actionsTaken,
+      responsiblePerson: this.form.responsiblePerson,
+      description: this.form.description,
+      relatedReport: this.form.relatedReport,
+      confidenceLevel: this.form.confidenceLevel,
+      anonymous: this.form.anonymous || false,
+      name: this.form.anonymous ? null : this.form.name,
+      institution: this.form.anonymous ? null : this.form.institution,
+      email: this.form.anonymous ? null : this.form.email,
+      phone: this.form.anonymous ? null : this.form.phone
+    }
 
-                // Adicionar dados como JSON
-                formData.append('complaintData', JSON.stringify(complaintData))
+    // Adicionar dados como JSON
+    formData.append('complaintData', JSON.stringify(complaintData))
 
-                // Adicionar arquivos de evidência
-                this.form.evidence.forEach((file) => {
-                    formData.append('evidence', file)
-                })
+    // Adicionar arquivos de evidência
+    this.form.evidence.forEach((file) => {
+      formData.append('evidence', file)
+    })
 
-                // Fazer requisição para a API
-                const apiUrl = this.getApiUrl()
-                const response = await fetch(`${apiUrl}/api/complaints`, {
-                    method: 'POST',
-                    body: formData
-                })
+    // Fazer requisição para a API
+    const apiUrl = this.getApiUrl()
+    const response = await fetch(`${apiUrl}/api/complaints`, {
+      method: 'POST',
+      body: formData
+    })
 
-                const result = await response.json()
+    const result = await response.json()
 
-                if (!response.ok) {
-                    throw new Error(result.error || 'Erro ao enviar reclamação')
-                }
+    if (!response.ok) {
+      throw new Error(result.error || 'Erro ao enviar reclamação')
+    }
 
-                // Sucesso
-                this.trackingCode = result.trackingCode
-                this.accessCode = result.accessCode
-                this.reportSubmitted = true
-                this.submitting = false
+    // Sucesso
+    this.trackingCode = result.trackingCode
+    this.accessCode = result.accessCode
+    this.reportSubmitted = true
+    this.submitting = false
 
-                // Scroll suave para o success-card
-                this.$nextTick(() => {
-                    const successCard = document.querySelector('.success-card');
-                    if (successCard) {
-                        successCard.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                })
+    // Scroll suave para o success-card
+    this.$nextTick(() => {
+      const successCard = document.querySelector('.success-card');
+      if (successCard) {
+        successCard.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    })
 
-            } catch (error) {
-
-                this.submitting = false
-                this.submitError = `Erro ao enviar reclamação: ${error.message}`
-            }
-        },
+  } catch (error) {
+    this.submitting = false
+    this.submitError = `Erro ao enviar reclamação: ${error.message}`
+  }
+},
 
         copyCode(event) {
             const textToCopy = `Protocolo: ${this.trackingCode}\nCódigo de Acesso: ${this.accessCode}`

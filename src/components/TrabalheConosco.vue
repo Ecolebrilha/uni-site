@@ -644,46 +644,35 @@ export default {
     },
     // Carregar vagas do backend
     async loadJobs() {
-      this.loadingJobs = true;
-      try {
-
-        const response = await fetch(`${API_CONFIG.BASE_URL}/api/jobs`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          }
-        });
-
-        if (response.ok) {
-          const jobs = await response.json();
-
-          this.availableJobs = jobs;
-
-          if (jobs.length === 0) {
-            console.log('📋 Nenhuma vaga cadastrada no sistema');
-          }
-        } else {
-          const errorText = await response.text();
-
-          throw new Error(`HTTP ${response.status}: ${errorText}`);
-        }
-      } catch (error) {
-
-        // Mostrar erro específico
-        if (error.message.includes('Failed to fetch')) {
-
-          alert('Erro de conexão com o servidor. Verifique sua conexão com a internet.');
-        } else {
-          alert(`Erro ao carregar vagas: ${error.message}`);
-        }
-
-        // Não usar dados simulados - mostrar que não há vagas
-        this.availableJobs = [];
-      } finally {
-        this.loadingJobs = false;
+  this.loadingJobs = true;
+  try {
+    const response = await fetch(`${API_CONFIG.BASE_URL}/api/jobs`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       }
-    },
+    });
+
+    if (response.ok) {
+      const jobs = await response.json();
+      this.availableJobs = jobs;
+    } else {
+      const errorText = await response.text();
+      throw new Error(`HTTP ${response.status}: ${errorText}`);
+    }
+  } catch (error) {
+    if (error.message.includes('Failed to fetch')) {
+      alert('Erro de conexão com o servidor. Verifique sua conexão com a internet.');
+    } else {
+      alert(`Erro ao carregar vagas: ${error.message}`);
+    }
+
+    this.availableJobs = [];
+  } finally {
+    this.loadingJobs = false;
+  }
+},
 
     // Selecionar vaga e mostrar formulário
     selectJob(job) {
@@ -781,124 +770,119 @@ export default {
 
     // Validar formulário
     validateForm() {
+  this.errors = {};
 
-      this.errors = {};
+  if (!this.formData.name.trim()) {
+    this.errors.name = this.t('career.form.validation.nameRequired');
+  }
 
-      if (!this.formData.name.trim()) {
-        this.errors.name = this.t('career.form.validation.nameRequired');
-      }
+  if (!this.formData.email.trim()) {
+    this.errors.email = this.t('career.form.validation.emailRequired');
+  } else if (!/\S+@\S+\.\S+/.test(this.formData.email)) {
+    this.errors.email = this.t('career.form.validation.emailInvalid');
+  }
 
-      if (!this.formData.email.trim()) {
-        this.errors.email = this.t('career.form.validation.emailRequired');
-      } else if (!/\S+@\S+\.\S+/.test(this.formData.email)) {
-        this.errors.email = this.t('career.form.validation.emailInvalid');
-      }
+  if (!this.formData.phone.trim()) {
+    this.errors.phone = this.t('career.form.validation.phoneRequired');
+  }
 
-      if (!this.formData.phone.trim()) {
-        this.errors.phone = this.t('career.form.validation.phoneRequired');
-      }
+  if (!this.selectedJob && !this.formData.position) {
+    this.errors.position = this.t('career.form.validation.positionRequired');
+  }
 
-      if (!this.selectedJob && !this.formData.position) {
-        this.errors.position = this.t('career.form.validation.positionRequired');
-      }
+  if (!this.formData.education) {
+    this.errors.education = this.t('career.form.validation.educationRequired');
+  }
 
-      if (!this.formData.education) {
-        this.errors.education = this.t('career.form.validation.educationRequired');
-      }
+  if (!this.formData.experience) {
+    this.errors.experience = this.t('career.form.validation.experienceRequired');
+  }
 
-      if (!this.formData.experience) {
-        this.errors.experience = this.t('career.form.validation.experienceRequired');
-      }
+  if (!this.formData.resume) {
+    this.errors.resume = this.t('career.form.validation.resumeRequired');
+  }
 
-      if (!this.formData.resume) {
-        this.errors.resume = this.t('career.form.validation.resumeRequired');
-      }
+  if (!this.formData.message.trim()) {
+    this.errors.message = this.t('career.form.validation.messageRequired');
+  }
 
-      if (!this.formData.message.trim()) {
-        this.errors.message = this.t('career.form.validation.messageRequired');
-      }
-
-      return Object.keys(this.errors).length === 0;
-    },
+  return Object.keys(this.errors).length === 0;
+},
 
     // Enviar formulário
     async submitForm() {
+  if (!this.validateForm()) {
+    return;
+  }
 
-      if (!this.validateForm()) {
+  this.isSubmitting = true;
 
-        return;
+  try {
+    const formData = new FormData();
+
+    // Adicionar dados do formulário
+    Object.keys(this.formData).forEach(key => {
+      if (key !== 'resume') {
+        formData.append(key, this.formData[key]);
+      }
+    });
+
+    // Adicionar arquivo
+    if (this.formData.resume) {
+      formData.append('resume', this.formData.resume);
+    }
+
+    // Adicionar informações da vaga se selecionada
+    if (this.selectedJob) {
+      formData.append('jobId', this.selectedJob.id);
+      formData.append('jobTitle', this.selectedJob.title);
+    }
+
+    // Tentar enviar para o backend real primeiro
+    const response = await fetch(`${API_CONFIG.BASE_URL}/api/job-applications`, {
+      method: 'POST',
+      body: formData
+    });
+
+    if (response.ok) {
+      await response.json();
+
+      // Mostrar modal de sucesso personalizado
+      if (this.selectedJob) {
+        this.successTitle = this.t('career.success.applicationTitle');
+        this.successMessage = this.t('career.success.applicationMessage');
+      } else {
+        this.successTitle = this.t('career.success.talentBankTitle');
+        this.successMessage = this.t('career.success.talentBankMessage');
       }
 
-      this.isSubmitting = true;
+      this.showSuccessModal = true;
+    } else {
+      const error = await response.json();
+      throw new Error(error.error || 'Erro ao enviar candidatura');
+    }
 
-      try {
-        const formData = new FormData();
+    // Resetar formulário e voltar
+    this.resetForm();
+    this.backToJobs();
 
-        // Adicionar dados do formulário
-        Object.keys(this.formData).forEach(key => {
-          if (key !== 'resume') {
-            formData.append(key, this.formData[key]);
-          }
-        });
+  } catch (error) {
+    // Mensagem de erro mais específica
+    let errorMessage = this.t('career.form.errors.submitError');
 
-        // Adicionar arquivo
-        if (this.formData.resume) {
-          formData.append('resume', this.formData.resume);
-        }
+    if (error.message.includes('Failed to fetch')) {
+      errorMessage += this.t('career.form.errors.connectionError');
+    } else if (error.message.includes('PDF')) {
+      errorMessage += this.t('career.form.errors.pdfError');
+    } else {
+      errorMessage += error.message || this.t('career.form.errors.genericError');
+    }
 
-        // Adicionar informações da vaga se selecionada
-        if (this.selectedJob) {
-          formData.append('jobId', this.selectedJob.id);
-          formData.append('jobTitle', this.selectedJob.title);
-        }
-
-        // Tentar enviar para o backend real primeiro
-        const response = await fetch(`${API_CONFIG.BASE_URL}/api/job-applications`, {
-          method: 'POST',
-          body: formData
-        });
-
-        if (response.ok) {
-          const result = await response.json();
-
-          // Mostrar modal de sucesso personalizado
-          if (this.selectedJob) {
-            this.successTitle = this.t('career.success.applicationTitle');
-            this.successMessage = this.t('career.success.applicationMessage');
-          } else {
-            this.successTitle = this.t('career.success.talentBankTitle');
-            this.successMessage = this.t('career.success.talentBankMessage');
-          }
-
-          this.showSuccessModal = true;
-          console.log('✅ Candidatura enviada via API:', result);
-        } else {
-          const error = await response.json();
-          throw new Error(error.error || 'Erro ao enviar candidatura');
-        }
-
-        // Resetar formulário e voltar
-        this.resetForm();
-        this.backToJobs();
-
-      } catch (error) {
-
-        // Mensagem de erro mais específica
-        let errorMessage = this.t('career.form.errors.submitError');
-
-        if (error.message.includes('Failed to fetch')) {
-          errorMessage += this.t('career.form.errors.connectionError');
-        } else if (error.message.includes('PDF')) {
-          errorMessage += this.t('career.form.errors.pdfError');
-        } else {
-          errorMessage += error.message || this.t('career.form.errors.genericError');
-        }
-
-        alert(errorMessage);
-      } finally {
-        this.isSubmitting = false;
-      }
-    },
+    alert(errorMessage);
+  } finally {
+    this.isSubmitting = false;
+  }
+},
 
     // Fechar modal de sucesso
     closeSuccessModal() {

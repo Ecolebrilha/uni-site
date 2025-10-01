@@ -507,7 +507,7 @@ export default {
     const accessCode = this.formData.accessCode.trim().toUpperCase();
 
     let response;
-    
+
     if (this.tipoConsulta === 'relato') {
       // Para relatos: usar endpoint /status (POST)
       response = await fetch(`${API_CONFIG.BASE_URL}/api/reports/status`, {
@@ -527,7 +527,7 @@ export default {
 
     if (response.ok) {
       const data = await response.json();
-      
+
       if (this.tipoConsulta === 'relato') {
         // Para relatos: estrutura direta
         this.resultado = data;
@@ -541,7 +541,7 @@ export default {
             status: data.currentStatus,
             ...data, // Inclui todos os outros campos (description, category, etc.)
           };
-          
+
           // Histórico já vem na resposta
           this.statusHistory = data.history || [];
           this.currentStatus = data.currentStatus;
@@ -549,14 +549,14 @@ export default {
           throw new Error(data.error || 'Resposta inválida do servidor');
         }
       }
-      
+
       this.$nextTick(() => {
         const resultElement = document.querySelector('.resultado-container');
         if (resultElement) {
           resultElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
-      
+
     } else if (response.status === 404) {
       this.showError(
         'Registro não encontrado',
@@ -572,7 +572,6 @@ export default {
       throw new Error(`Erro ${response.status}: ${response.statusText}`);
     }
   } catch (error) {
-
     this.showError(
       'Erro de conexão',
       'Não foi possível consultar o status. Verifique sua conexão com a internet e tente novamente.'
@@ -584,7 +583,6 @@ export default {
 
 async loadStatusHistory() {
   if (!this.formData.trackingCode || !this.formData.accessCode) {
-
     return;
   }
 
@@ -593,36 +591,31 @@ async loadStatusHistory() {
   try {
     const trackingCode = this.formData.trackingCode.trim().toUpperCase();
     const accessCode = this.formData.accessCode.trim().toUpperCase();
-    
+
     const endpoint = this.tipoConsulta === 'relato' ? 'reports' : 'complaints';
-    
+
     const response = await fetch(
       `${API_CONFIG.BASE_URL}/api/${endpoint}/${trackingCode}/history?accessCode=${accessCode}`
     );
 
     if (response.ok) {
       const data = await response.json();
-      
+
       if (data.success && Array.isArray(data.history)) {
         this.statusHistory = data.history;
         this.currentStatus = data.currentStatus;
-        
       } else {
-
         this.statusHistory = [];
       }
-      
-    } else if (response.status === 404) {
 
+    } else if (response.status === 404) {
       this.statusHistory = [];
     } else {
       const errorData = await response.json();
-
       throw new Error(errorData.message || 'Erro ao carregar histórico');
     }
-    
+
   } catch (error) {
-  
     this.statusHistory = [];
   } finally {
     this.loadingHistory = false;
@@ -907,7 +900,7 @@ async loadStatusHistory() {
     const date = new Date(dateString);
     // Subtrai 3 horas para ajustar o fuso horário
     date.setHours(date.getHours());
-    
+
     return date.toLocaleString('pt-BR', {
       day: '2-digit',
       month: '2-digit',
@@ -916,8 +909,7 @@ async loadStatusHistory() {
       minute: '2-digit',
       second: '2-digit'
     });
-  } catch (error) {
-  
+  } catch {
     return 'Data inválida';
   }
 },
@@ -929,7 +921,7 @@ formatDateTwo(dateString) {
     const date = new Date(dateString);
     // Subtrai 3 horas para ajustar o fuso horário
     date.setHours(date.getHours());
-    
+
     return date.toLocaleString('pt-BR', {
       day: '2-digit',
       month: '2-digit',
@@ -938,8 +930,7 @@ formatDateTwo(dateString) {
       minute: '2-digit',
       second: '2-digit'
     });
-  } catch (error) {
- 
+  } catch {
     return 'Data inválida';
   }
 }

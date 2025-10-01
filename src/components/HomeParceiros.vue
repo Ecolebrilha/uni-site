@@ -210,7 +210,6 @@ export default {
     changeLanguage(event) {
       const value = typeof event === 'string' ? event : event.target.value;
       this.selectedLanguage = value;
-
     },
     toggleSidebar() {
       this.sidebarOpen = !this.sidebarOpen;

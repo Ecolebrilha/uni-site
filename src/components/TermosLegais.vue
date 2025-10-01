@@ -197,15 +197,14 @@ export default {
     }
   },
   methods: {
-    changeLanguage(event) {
-      const value = typeof event === 'string' ? event : event.target.value;
-      this.selectedLanguage = value;
-
-    },
-    toggleSidebar() {
-      this.sidebarOpen = !this.sidebarOpen;
-    }
+  changeLanguage(event) {
+    const value = typeof event === 'string' ? event : event.target.value;
+    this.selectedLanguage = value;
+  },
+  toggleSidebar() {
+    this.sidebarOpen = !this.sidebarOpen;
   }
+}
 }
 </script>
 
