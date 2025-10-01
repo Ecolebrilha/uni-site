@@ -661,7 +661,7 @@ export default {
           this.availableJobs = jobs;
 
           if (jobs.length === 0) {
-
+            console.log('📋 Nenhuma vaga cadastrada no sistema');
           }
         } else {
           const errorText = await response.text();

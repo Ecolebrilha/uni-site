@@ -1211,10 +1211,7 @@ export default {
 
                 // Mostrar notificação adicional
                 this.showCopyNotification()
-            }).catch(err => {
-
-                alert('Erro ao copiar códigos. Anote-os manualmente.')
-            })
+            }).catch(alert('Erro ao copiar códigos. Anote-os manualmente.'))
         },
 
         // Obter data atual no formato YYYY-MM-DD

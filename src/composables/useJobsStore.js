@@ -31,11 +31,13 @@ export function useJobsStore() {
         const jobs = await response.json()
         jobsStore.jobs = jobs
         jobsStore.loaded = true
+
         return jobs
       } else {
         throw new Error(`HTTP ${response.status}`)
       }
     } catch (error) {
+
       jobsStore.error = error.message
       jobsStore.jobs = []
       return []

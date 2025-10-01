@@ -622,7 +622,7 @@ async loadStatusHistory() {
     }
     
   } catch (error) {
-
+  
     this.statusHistory = [];
   } finally {
     this.loadingHistory = false;
@@ -917,7 +917,7 @@ async loadStatusHistory() {
       second: '2-digit'
     });
   } catch (error) {
-
+  
     return 'Data inválida';
   }
 },
@@ -939,7 +939,7 @@ formatDateTwo(dateString) {
       second: '2-digit'
     });
   } catch (error) {
-
+ 
     return 'Data inválida';
   }
 }
