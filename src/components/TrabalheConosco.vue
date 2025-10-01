@@ -646,7 +646,6 @@ export default {
     async loadJobs() {
       this.loadingJobs = true;
       try {
-        console.log('🔍 Carregando vagas de:', `${API_CONFIG.BASE_URL}/api/jobs`);
 
         const response = await fetch(`${API_CONFIG.BASE_URL}/api/jobs`, {
           method: 'GET',
@@ -656,28 +655,24 @@ export default {
           }
         });
 
-        console.log('📡 Status da resposta:', response.status);
-
         if (response.ok) {
           const jobs = await response.json();
-          console.log('✅ Vagas recebidas:', jobs);
 
           this.availableJobs = jobs;
 
           if (jobs.length === 0) {
-            console.log('📋 Nenhuma vaga cadastrada no sistema');
+
           }
         } else {
           const errorText = await response.text();
-          console.error('❌ Erro HTTP:', response.status, errorText);
+
           throw new Error(`HTTP ${response.status}: ${errorText}`);
         }
       } catch (error) {
-        console.error('❌ Erro ao carregar vagas:', error);
 
         // Mostrar erro específico
         if (error.message.includes('Failed to fetch')) {
-          console.error('🌐 Possível problema de CORS ou rede');
+
           alert('Erro de conexão com o servidor. Verifique sua conexão com a internet.');
         } else {
           alert(`Erro ao carregar vagas: ${error.message}`);
@@ -786,7 +781,7 @@ export default {
 
     // Validar formulário
     validateForm() {
-      console.log('🔍 Validando formulário...');
+
       this.errors = {};
 
       if (!this.formData.name.trim()) {
@@ -828,15 +823,11 @@ export default {
 
     // Enviar formulário
     async submitForm() {
-      console.log('🔄 submitForm chamado');
-      console.log('📋 Dados do formulário:', this.formData);
 
       if (!this.validateForm()) {
-        console.log('❌ Validação falhou:', this.errors);
+
         return;
       }
-
-      console.log('✅ Validação passou, enviando formulário...');
 
       this.isSubmitting = true;
 
@@ -880,7 +871,7 @@ export default {
           }
 
           this.showSuccessModal = true;
-          console.log('✅ Candidatura enviada via API:', result);
+
         } else {
           const error = await response.json();
           throw new Error(error.error || 'Erro ao enviar candidatura');
@@ -891,7 +882,6 @@ export default {
         this.backToJobs();
 
       } catch (error) {
-        console.error('❌ Erro ao enviar candidatura:', error);
 
         // Mensagem de erro mais específica
         let errorMessage = this.t('career.form.errors.submitError');

@@ -416,7 +416,7 @@ export default {
     changeLanguage(event) {
       const value = typeof event === 'string' ? event : event.target.value;
       this.selectedLanguage = value;
-      console.log(`Idioma selecionado: ${value}`);
+
     },
     toggleSidebar() {
       this.sidebarOpen = !this.sidebarOpen;
@@ -442,9 +442,6 @@ if (this.phoneError) {
           details: this.formData.details
         };
 
-        console.log('📤 Enviando solicitação LGPD para API...');
-        console.log('📋 Dados:', lgpdRequestData);
-
         // Fazer requisição para a API
         const apiUrl = this.getApiUrl();
         const response = await fetch(`${apiUrl}/api/lgpd-requests`, {
@@ -465,9 +462,6 @@ if (this.phoneError) {
         this.requestSubmitted = true;
         this.isSubmitting = false;
 
-        console.log('✅ Solicitação LGPD enviada com sucesso!');
-        console.log('📧 Confirmação enviada para:', this.formData.email);
-
         // Scroll suave para a seção de sucesso
         this.$nextTick(() => {
           const successSection = document.querySelector('.success-message');
@@ -480,7 +474,7 @@ if (this.phoneError) {
         });
 
       } catch (error) {
-        console.error('❌ Erro ao enviar solicitação LGPD:', error);
+
         this.isSubmitting = false;
         this.submitError = `Erro ao enviar solicitação: ${error.message}`;
       }

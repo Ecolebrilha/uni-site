@@ -505,11 +505,6 @@ export default {
   try {
     const trackingCode = this.formData.trackingCode.trim().toUpperCase();
     const accessCode = this.formData.accessCode.trim().toUpperCase();
-    
-    console.log(`🔍 Consultando ${this.tipoConsulta} com:`, {
-      tracking_code: trackingCode,
-      access_code: accessCode
-    });
 
     let response;
     
@@ -530,12 +525,8 @@ export default {
       response = await fetch(`${API_CONFIG.BASE_URL}/api/complaints/${trackingCode}/history?accessCode=${accessCode}`);
     }
 
-    console.log('📡 Response status:', response.status);
-
     if (response.ok) {
       const data = await response.json();
-      
-      console.log('✅ Dados recebidos:', data);
       
       if (this.tipoConsulta === 'relato') {
         // Para relatos: estrutura direta
@@ -559,10 +550,6 @@ export default {
         }
       }
       
-      console.log('✅ Resultado processado:', this.resultado);
-      console.log('📝 Descrição:', this.resultado.description);
-      console.log('📝 Todos os campos:', Object.keys(this.resultado));
-      
       this.$nextTick(() => {
         const resultElement = document.querySelector('.resultado-container');
         if (resultElement) {
@@ -585,7 +572,7 @@ export default {
       throw new Error(`Erro ${response.status}: ${response.statusText}`);
     }
   } catch (error) {
-    console.error('❌ Erro na consulta:', error);
+
     this.showError(
       'Erro de conexão',
       'Não foi possível consultar o status. Verifique sua conexão com a internet e tente novamente.'
@@ -597,12 +584,11 @@ export default {
 
 async loadStatusHistory() {
   if (!this.formData.trackingCode || !this.formData.accessCode) {
-    console.log('❌ Códigos não disponíveis para carregar histórico');
+
     return;
   }
 
   this.loadingHistory = true;
-  console.log('🔄 Carregando histórico...');
 
   try {
     const trackingCode = this.formData.trackingCode.trim().toUpperCase();
@@ -614,8 +600,6 @@ async loadStatusHistory() {
       `${API_CONFIG.BASE_URL}/api/${endpoint}/${trackingCode}/history?accessCode=${accessCode}`
     );
 
-    console.log('📡 Response histórico status:', response.status);
-
     if (response.ok) {
       const data = await response.json();
       
@@ -623,27 +607,22 @@ async loadStatusHistory() {
         this.statusHistory = data.history;
         this.currentStatus = data.currentStatus;
         
-        console.log('✅ Histórico carregado:', {
-          total_entries: this.statusHistory.length,
-          current_status: this.currentStatus,
-          history_data: this.statusHistory
-        });
       } else {
-        console.error('❌ Dados do histórico inválidos:', data);
+
         this.statusHistory = [];
       }
       
     } else if (response.status === 404) {
-      console.log('⚠️ Histórico não encontrado');
+
       this.statusHistory = [];
     } else {
       const errorData = await response.json();
-      console.error('❌ Erro na resposta:', errorData);
+
       throw new Error(errorData.message || 'Erro ao carregar histórico');
     }
     
   } catch (error) {
-    console.error('❌ Erro ao carregar histórico:', error);
+
     this.statusHistory = [];
   } finally {
     this.loadingHistory = false;
@@ -938,7 +917,7 @@ async loadStatusHistory() {
       second: '2-digit'
     });
   } catch (error) {
-    console.error('Erro ao formatar data:', error);
+
     return 'Data inválida';
   }
 },
@@ -960,7 +939,7 @@ formatDateTwo(dateString) {
       second: '2-digit'
     });
   } catch (error) {
-    console.error('Erro ao formatar data:', error);
+
     return 'Data inválida';
   }
 }

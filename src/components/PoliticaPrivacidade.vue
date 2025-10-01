@@ -211,7 +211,7 @@ export default {
     changeLanguage(event) {
       const value = typeof event === 'string' ? event : event.target.value;
       this.selectedLanguage = value;
-      console.log(`Idioma selecionado: ${value}`);
+
     },
     toggleSidebar() {
       this.sidebarOpen = !this.sidebarOpen;

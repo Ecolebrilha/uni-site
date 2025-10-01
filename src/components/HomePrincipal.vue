@@ -711,15 +711,11 @@ export default {
 
     applyUserPreferences() {
       if (this.cookiePreferences.analytics) {
-        console.log('Analytics cookies enabled');
       } else {
-        console.log('Analytics cookies disabled');
       }
 
       if (this.cookiePreferences.marketing) {
-        console.log('Marketing cookies enabled');
       } else {
-        console.log('Marketing cookies disabled');
       }
     },
     handleTouchStart(e) {

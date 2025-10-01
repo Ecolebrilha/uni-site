@@ -264,9 +264,6 @@ export default {
           activeSection: this.activeSection
         };
 
-        console.log('📤 Enviando contato para API...');
-        console.log('📧 Dados:', contactData);
-
         const response = await fetch(`${apiUrl}/api/contacts`, {
           method: 'POST',
           headers: {
@@ -280,8 +277,6 @@ export default {
         if (!response.ok) {
           throw new Error(result.error || 'Erro ao enviar contato');
         }
-
-        console.log('✅ Contato enviado com sucesso!');
         
         // Guardar dados para exibir no modal
         this.submittedData = {
@@ -303,7 +298,7 @@ export default {
         document.body.classList.add('modal-open');
 
       } catch (error) {
-        console.error('❌ Erro ao enviar contato:', error);
+
         this.showErrorMessage = true;
         this.errorMessage = error.message;
         this.isSubmitting = false;

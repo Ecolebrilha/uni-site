@@ -945,7 +945,7 @@ export default {
           throw new Error('Erro na consulta');
         }
       } catch (error) {
-        console.error('Erro ao buscar CNPJ:', error);
+
         // Terceira tentativa: API alternativa
         try {
           const response = await fetch(`https://publica.cnpj.ws/cnpj/${cnpjLimpo}`);
@@ -978,7 +978,7 @@ export default {
             this.cnpjError = this.t('partner.form.messages.cnpjNotFound');
           }
         } catch (secondError) {
-          console.error('Erro na segunda tentativa:', secondError);
+
           this.cnpjError = this.t('partner.form.messages.cnpjServiceUnavailable');
         }
       } finally {
@@ -1124,10 +1124,6 @@ export default {
           }
         })
 
-        console.log('📤 Enviando solicitação de parceria para API...')
-        console.log('👥 Tipo de parceiro:', this.formData.tipoParceiro)
-        console.log('📎 Total de documentos:', Object.keys(this.documents).filter(key => this.documents[key]).length)
-
         // Fazer requisição para a API
         const apiUrl = this.getApiUrl()
         const response = await fetch(`${apiUrl}/api/partners`, {
@@ -1151,12 +1147,6 @@ export default {
         this.partnerSubmitted = true
         this.isSubmitting = false
 
-        console.log('✅ Solicitação de parceria enviada com sucesso!')
-        console.log('🏢 Empresa:', result.companyName)
-        console.log('📄 CNPJ:', result.cnpj)
-        console.log('👥 Tipo:', this.formData.tipoParceiro)
-        console.log('📎 Documentos enviados:', result.documentsCount || 0)
-
         // Scroll suave para o success-card
         this.$nextTick(() => {
           const successCard = document.querySelector('.success-card');
@@ -1169,7 +1159,7 @@ export default {
         })
 
       } catch (error) {
-        console.error('❌ Erro ao enviar solicitação de parceria:', error)
+
         this.isSubmitting = false
         this.showErrorMessage = true
         setTimeout(() => {

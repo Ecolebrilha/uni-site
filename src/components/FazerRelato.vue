@@ -1154,9 +1154,6 @@ export default {
                     formData.append('evidence', file)
                 })
 
-                console.log('📤 Enviando relato com arquivos para API...')
-                console.log('📎 Total de arquivos:', this.form.evidence.length)
-
                 // Fazer requisição para a API
                 const apiUrl = this.getApiUrl()
                 const response = await fetch(`${apiUrl}/api/reports`, {
@@ -1176,11 +1173,6 @@ export default {
                 this.reportSubmitted = true
                 this.submitting = false
 
-                console.log('✅ Relato enviado com sucesso!')
-                console.log('📋 Protocolo:', this.trackingCode)
-                console.log('🔑 Código de Acesso:', this.accessCode)
-                console.log('📎 Arquivos enviados:', result.evidenceCount || 0)
-
                 // Scroll suave para o success-card
                 this.$nextTick(() => {
                     const successCard = document.querySelector('.success-card');
@@ -1193,7 +1185,7 @@ export default {
                 })
 
             } catch (error) {
-                console.error('❌ Erro ao enviar relato:', error)
+
                 this.submitting = false
                 this.submitError = `Erro ao enviar relato: ${error.message}`
             }
@@ -1220,7 +1212,7 @@ export default {
                 // Mostrar notificação adicional
                 this.showCopyNotification()
             }).catch(err => {
-                console.error('Erro ao copiar códigos:', err)
+
                 alert('Erro ao copiar códigos. Anote-os manualmente.')
             })
         },
@@ -1412,14 +1404,14 @@ export default {
                 const result = await response.json()
 
                 if (response.ok) {
-                    console.log('✅ Conexão com API estabelecida:', result.message)
+
                     return true
                 } else {
-                    console.error('❌ API não está respondendo corretamente')
+
                     return false
                 }
             } catch (error) {
-                console.error('❌ Erro de conexão com API:', error)
+
                 return false
             }
         },
@@ -1430,7 +1422,7 @@ export default {
             // Verificar conexão com API
             const apiConnected = await this.checkApiConnection()
             if (!apiConnected) {
-                console.warn('⚠️ Aviso: API pode não estar disponível')
+
                 // Não bloquear o formulário, apenas avisar no console
             }
         },

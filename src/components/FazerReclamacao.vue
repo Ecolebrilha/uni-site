@@ -1101,9 +1101,6 @@ export default {
                     formData.append('evidence', file)
                 })
 
-                console.log('📤 Enviando reclamação com arquivos para API...')
-                console.log('📎 Total de arquivos:', this.form.evidence.length)
-
                 // Fazer requisição para a API
                 const apiUrl = this.getApiUrl()
                 const response = await fetch(`${apiUrl}/api/complaints`, {
@@ -1123,11 +1120,6 @@ export default {
                 this.reportSubmitted = true
                 this.submitting = false
 
-                console.log('✅ Reclamação enviada com sucesso!')
-                console.log('📋 Protocolo:', this.trackingCode)
-                console.log('🔑 Código de Acesso:', this.accessCode)
-                console.log('📎 Arquivos enviados:', result.evidenceCount || 0)
-
                 // Scroll suave para o success-card
                 this.$nextTick(() => {
                     const successCard = document.querySelector('.success-card');
@@ -1140,7 +1132,7 @@ export default {
                 })
 
             } catch (error) {
-                console.error('❌ Erro ao enviar reclamação:', error)
+
                 this.submitting = false
                 this.submitError = `Erro ao enviar reclamação: ${error.message}`
             }
