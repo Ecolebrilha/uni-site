@@ -871,7 +871,7 @@ export default {
           }
 
           this.showSuccessModal = true;
-
+          console.log('✅ Candidatura enviada via API:', result);
         } else {
           const error = await response.json();
           throw new Error(error.error || 'Erro ao enviar candidatura');

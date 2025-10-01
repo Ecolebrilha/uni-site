@@ -1401,7 +1401,7 @@ export default {
                 const result = await response.json()
 
                 if (response.ok) {
-
+                    console.log('✅ Conexão com API estabelecida:', result.message)
                     return true
                 } else {
 
