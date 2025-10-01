@@ -1105,115 +1105,125 @@ export default {
         },
 
         async submitReport() {
-  if (!this.validateCurrentStep()) {
-    this.$nextTick(() => {
-      const firstError = document.querySelector('.error')
-      if (firstError) {
-        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' })
-      }
-    })
-    return
-  }
+            if (!this.validateCurrentStep()) {
+                this.$nextTick(() => {
+                    const firstError = document.querySelector('.error')
+                    if (firstError) {
+                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' })
+                    }
+                })
+                return
+            }
 
-  this.submitting = true
+            this.submitting = true
 
-  try {
-    // Criar FormData para enviar arquivos
-    const formData = new FormData()
+            try {
+                // Criar FormData para enviar arquivos
+                const formData = new FormData()
 
-    // Converter data para formato ISO (YYYY-MM-DD) antes de enviar
-    const isoDate = this.convertDateToISO(this.form.incidentDate)
+                // Converter data para formato ISO (YYYY-MM-DD) antes de enviar
+                const isoDate = this.convertDateToISO(this.form.incidentDate)
 
-    // Adicionar dados do formulário
-    const reportData = {
-      relationship: this.form.relationship,
-      involvement: this.form.involvement,
-      violationType: this.form.violationType,
-      area: this.form.area,
-      incidentDate: isoDate,
-      location: this.form.location,
-      accusedName: this.form.accusedName,
-      accusedPosition: this.form.accusedPosition,
-      witnesses: this.form.witnesses,
-      hrContact: this.form.hrContact,
-      description: this.form.description,
-      relatedReport: this.form.relatedReport,
-      confidenceLevel: this.form.confidenceLevel,
-      anonymous: this.form.anonymous,
-      name: this.form.anonymous ? null : this.form.name,
-      institution: this.form.anonymous ? null : this.form.institution,
-      email: this.form.anonymous ? null : this.form.email,
-      phone: this.form.anonymous ? null : this.form.phone
-    }
+                // Adicionar dados do formulário
+                const reportData = {
+                    relationship: this.form.relationship,
+                    involvement: this.form.involvement,
+                    violationType: this.form.violationType,
+                    area: this.form.area,
+                    incidentDate: isoDate,
+                    location: this.form.location,
+                    accusedName: this.form.accusedName,
+                    accusedPosition: this.form.accusedPosition,
+                    witnesses: this.form.witnesses,
+                    hrContact: this.form.hrContact,
+                    description: this.form.description,
+                    relatedReport: this.form.relatedReport,
+                    confidenceLevel: this.form.confidenceLevel,
+                    anonymous: this.form.anonymous,
+                    name: this.form.anonymous ? null : this.form.name,
+                    institution: this.form.anonymous ? null : this.form.institution,
+                    email: this.form.anonymous ? null : this.form.email,
+                    phone: this.form.anonymous ? null : this.form.phone
+                }
 
-    // Adicionar dados como JSON
-    formData.append('reportData', JSON.stringify(reportData))
+                // Adicionar dados como JSON
+                formData.append('reportData', JSON.stringify(reportData))
 
-    // Adicionar arquivos de evidência
-    this.form.evidence.forEach((file) => {
-      formData.append('evidence', file)
-    })
+                // Adicionar arquivos de evidência
+                this.form.evidence.forEach((file) => {
+                    formData.append('evidence', file)
+                })
 
-    // Fazer requisição para a API
-    const apiUrl = this.getApiUrl()
-    const response = await fetch(`${apiUrl}/api/reports`, {
-      method: 'POST',
-      body: formData
-    })
+                console.log('📤 Enviando relato com arquivos para API...')
+                console.log('📎 Total de arquivos:', this.form.evidence.length)
 
-    const result = await response.json()
+                // Fazer requisição para a API
+                const apiUrl = this.getApiUrl()
+                const response = await fetch(`${apiUrl}/api/reports`, {
+                    method: 'POST',
+                    body: formData
+                })
 
-    if (!response.ok) {
-      throw new Error(result.error || 'Erro ao enviar relato')
-    }
+                const result = await response.json()
 
-    // Sucesso
-    this.trackingCode = result.trackingCode
-    this.accessCode = result.accessCode
-    this.reportSubmitted = true
-    this.submitting = false
+                if (!response.ok) {
+                    throw new Error(result.error || 'Erro ao enviar relato')
+                }
 
-    // Scroll suave para o success-card
-    this.$nextTick(() => {
-      const successCard = document.querySelector('.success-card')
-      if (successCard) {
-        successCard.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        })
-      }
-    })
+                // Sucesso
+                this.trackingCode = result.trackingCode
+                this.accessCode = result.accessCode
+                this.reportSubmitted = true
+                this.submitting = false
 
-  } catch (error) {
-    this.submitting = false
-    this.submitError = `Erro ao enviar relato: ${error.message}`
-  }
-},
+                console.log('✅ Relato enviado com sucesso!')
+                console.log('📋 Protocolo:', this.trackingCode)
+                console.log('🔑 Código de Acesso:', this.accessCode)
+                console.log('📎 Arquivos enviados:', result.evidenceCount || 0)
 
-copyCode(event) {
-  const textToCopy = `Número do Protocolo: ${this.trackingCode}\nCódigo de Acesso: ${this.accessCode}`
+                // Scroll suave para o success-card
+                this.$nextTick(() => {
+                    const successCard = document.querySelector('.success-card');
+                    if (successCard) {
+                        successCard.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                })
 
-  navigator.clipboard.writeText(textToCopy).then(() => {
-    const btn = event.target.closest('.copy-btn')
-    const originalHTML = btn.innerHTML
+            } catch (error) {
+                console.error('❌ Erro ao enviar relato:', error)
+                this.submitting = false
+                this.submitError = `Erro ao enviar relato: ${error.message}`
+            }
+        },
 
-    // Feedback visual de sucesso
-    btn.innerHTML = '<i class="fas fa-check"></i> Códigos Copiados!'
-    btn.style.background = '#28a745'
-    btn.style.transform = 'scale(1.05)'
+        copyCode(event) {
+            const textToCopy = `Número do Protocolo: ${this.trackingCode}\nCódigo de Acesso: ${this.accessCode}`
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const btn = event.target.closest('.copy-btn')
+                const originalHTML = btn.innerHTML
 
-    setTimeout(() => {
-      btn.innerHTML = originalHTML
-      btn.style.background = ''
-      btn.style.transform = ''
-    }, 3000)
+                // Feedback visual de sucesso
+                btn.innerHTML = '<i class="fas fa-check"></i> Códigos Copiados!'
+                btn.style.background = '#28a745'
+                btn.style.transform = 'scale(1.05)'
 
-    // Mostrar notificação adicional
-    this.showCopyNotification()
-  }).catch(() => {
-    alert('Erro ao copiar códigos. Anote-os manualmente.')
-  })
-},
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML
+                    btn.style.background = ''
+                    btn.style.transform = ''
+                }, 3000)
+
+                // Mostrar notificação adicional
+                this.showCopyNotification()
+            }).catch(err => {
+                console.error('Erro ao copiar códigos:', err)
+                alert('Erro ao copiar códigos. Anote-os manualmente.')
+            })
+        },
 
         // Obter data atual no formato YYYY-MM-DD
         getCurrentDate() {
@@ -1396,29 +1406,34 @@ copyCode(event) {
         },
 
         async checkApiConnection() {
-  try {
-    const apiUrl = this.getApiUrl()
-    const response = await fetch(`${apiUrl}/health`)
-    await response.json()
+            try {
+                const apiUrl = this.getApiUrl()
+                const response = await fetch(`${apiUrl}/health`)
+                const result = await response.json()
 
-    if (response.ok) {
-      return true
-    } else {
-      return false
-    }
-  } catch {
-    return false
-  }
-},
+                if (response.ok) {
+                    console.log('✅ Conexão com API estabelecida:', result.message)
+                    return true
+                } else {
+                    console.error('❌ API não está respondendo corretamente')
+                    return false
+                }
+            } catch (error) {
+                console.error('❌ Erro de conexão com API:', error)
+                return false
+            }
+        },
 
-async mounted() {
-  window.scrollTo(0, 0)
+        async mounted() {
+            window.scrollTo(0, 0)
 
-  const apiConnected = await this.checkApiConnection()
-  if (!apiConnected) {
-    // API pode não estar disponível, mas não bloqueia o formulário
-  }
-},
+            // Verificar conexão com API
+            const apiConnected = await this.checkApiConnection()
+            if (!apiConnected) {
+                console.warn('⚠️ Aviso: API pode não estar disponível')
+                // Não bloquear o formulário, apenas avisar no console
+            }
+        },
 
         // Método para limpar erros quando o usuário começar a digitar
         clearFieldError(fieldName) {
